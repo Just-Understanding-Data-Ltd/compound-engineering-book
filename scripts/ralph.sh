@@ -58,8 +58,8 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Calculate max runtime in seconds
-MAX_SECONDS=$((MAX_HOURS * 3600))
+# Calculate max runtime in seconds (supports decimal hours like 0.5 for 30 min)
+MAX_SECONDS=$(echo "$MAX_HOURS * 3600" | bc | cut -d'.' -f1)
 START_TIME=$(date +%s)
 
 cd "$PROJECT_DIR"
@@ -160,7 +160,7 @@ run_initializer_agent() {
 
     local MASTER_PROMPT=$(get_master_prompt)
 
-    claude --print "
+    claude --dangerously-skip-permissions --print "
 # MASTER CONTEXT (CLAUDE.md)
 $MASTER_PROMPT
 
@@ -229,7 +229,7 @@ run_coding_agent() {
     local PRD_INDEX=$(get_prd_index)
     local TASK_SUMMARY=$(get_task_summary)
 
-    claude --print "
+    claude --dangerously-skip-permissions --print "
 # MASTER CONTEXT (CLAUDE.md)
 $MASTER_PROMPT
 
@@ -327,7 +327,7 @@ run_review_agents() {
     # Agent 1: Anti-AI Slop Checker
     echo ""
     echo "--- Review Agent 1: Anti-AI Slop Checker ---"
-    claude --print "
+    claude --dangerously-skip-permissions --print "
 # MASTER CONTEXT (CLAUDE.md)
 $MASTER_PROMPT
 
@@ -361,7 +361,7 @@ Commit your review file.
     # Agent 2: Diagram Opportunity Checker
     echo ""
     echo "--- Review Agent 2: Diagram Opportunity Checker ---"
-    claude --print "
+    claude --dangerously-skip-permissions --print "
 # MASTER CONTEXT (CLAUDE.md)
 $MASTER_PROMPT
 
@@ -403,7 +403,7 @@ Commit your review file.
     # Agent 3: Technical Accuracy Reviewer
     echo ""
     echo "--- Review Agent 3: Technical Accuracy Reviewer ---"
-    claude --print "
+    claude --dangerously-skip-permissions --print "
 # MASTER CONTEXT (CLAUDE.md)
 $MASTER_PROMPT
 
@@ -431,7 +431,7 @@ Commit your review file.
     # Agent 4: Cross-Reference Validator
     echo ""
     echo "--- Review Agent 4: Cross-Reference Validator ---"
-    claude --print "
+    claude --dangerously-skip-permissions --print "
 # MASTER CONTEXT (CLAUDE.md)
 $MASTER_PROMPT
 
@@ -473,7 +473,7 @@ Commit your review file.
     # Agent 5: Progress & Quality Summary
     echo ""
     echo "--- Review Agent 5: Progress & Quality Summary ---"
-    claude --print "
+    claude --dangerously-skip-permissions --print "
 # MASTER CONTEXT (CLAUDE.md)
 $MASTER_PROMPT
 
