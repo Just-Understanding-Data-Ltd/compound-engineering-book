@@ -52,6 +52,85 @@ Every session, run these steps FIRST:
 
 ---
 
+## Context Recovery After Compaction
+
+When context is compacted, the RALPH loop re-injects:
+1. **Full CLAUDE.md** - All project instructions
+2. **PRD Index** - Status of all PRDs from features.json
+3. **Task Queue** - First 10 incomplete tasks from TASKS.md
+
+This means you always have what you need to continue, even after compaction.
+
+### What to Read on Each Iteration
+
+```
+1. pwd                           # Confirm directory
+2. claude-progress.txt           # What happened recently
+3. features.json                 # Detailed milestone status
+4. git log --oneline -5          # Recent commits
+5. The relevant PRD              # If working on a chapter
+```
+
+---
+
+## Completion Criteria
+
+### PRD Completion
+
+A PRD is **COMPLETE** when:
+- Status in `features.json.prds[chXX].status` = "complete"
+- The .md file exists in `prds/`
+- All required sections are filled out per `prds/index.md` structure:
+  1. Overview (1 paragraph)
+  2. Learning Objectives (3-5 bullet points)
+  3. Source Articles (list)
+  4. Detailed Outline (sections and subsections)
+  5. Key Examples (what code/scenarios to include)
+  6. Diagrams Needed (with descriptions)
+  7. Exercises (2-3 "Try It Yourself" activities)
+  8. Cross-References (links to other chapters)
+  9. Word Count Target
+  10. Status: Draft/Review/Complete
+
+### Chapter Completion
+
+A chapter is **COMPLETE** when all milestones in `features.json.chapters[chXX].milestones` are true:
+
+| Milestone | Criteria |
+|-----------|----------|
+| `prd_complete` | PRD exists and is finalized |
+| `first_draft` | Content written to `chapters/chXX-title.md` |
+| `reviewed` | Passed review (no AI slop, technical accuracy) |
+| `diagrams_complete` | All required diagrams created in `assets/diagrams/` |
+| `exercises_added` | 2-3 "Try It Yourself" exercises included |
+| `final` | Ready for Leanpub publishing |
+
+### How to Update features.json
+
+When completing a milestone:
+```json
+// Before
+"milestones": {
+  "prd_complete": true,
+  "first_draft": false,  // <- Change this
+  ...
+}
+
+// After
+"milestones": {
+  "prd_complete": true,
+  "first_draft": true,   // <- Updated
+  ...
+}
+```
+
+Also update:
+- `wordCount`: Actual word count of chapter
+- `status`: "not_started" | "in_progress" | "draft" | "review" | "complete"
+- `stats`: Aggregate counts at bottom of features.json
+
+---
+
 ## Progress Tracking System
 
 ### claude-progress.txt (Primary State File)

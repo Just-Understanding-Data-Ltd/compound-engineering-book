@@ -7,10 +7,11 @@
 #
 # Key innovations:
 # 1. Two-phase approach: Initializer agent (first run) + Coding agent (subsequent)
-# 2. Sub-agent review critique every N iterations
-# 3. Configurable maximum runtime
-# 4. Progress tracking with claude-progress.txt
-# 5. Feature list with pass/fail status
+# 2. Master prompt (CLAUDE.md) injected into EVERY agent invocation
+# 3. PRD index traversal on each iteration
+# 4. Sub-agent review critique every N iterations
+# 5. Configurable maximum runtime
+# 6. Progress tracking with claude-progress.txt compaction
 #
 # Usage:
 #   ./scripts/ralph.sh                     # Run with defaults (3 hours, infinite iterations, review every 6)
@@ -99,6 +100,54 @@ count_incomplete_tasks() {
 }
 
 # ==============================================================================
+# Master Prompt Injection
+# ==============================================================================
+# Every agent invocation gets CLAUDE.md injected as context.
+# This ensures consistent behavior across compaction boundaries.
+
+get_master_prompt() {
+    if [ -f "CLAUDE.md" ]; then
+        cat "CLAUDE.md"
+    else
+        echo "# No CLAUDE.md found - using minimal instructions"
+        echo "Complete tasks from TASKS.md one at a time."
+    fi
+}
+
+get_prd_index() {
+    # Generate a summary of all PRDs and their status from features.json
+    if [ -f "features.json" ]; then
+        echo "## PRD Index (from features.json)"
+        echo ""
+        echo "| Chapter | Title | PRD Status | Chapter Status | Word Count |"
+        echo "|---------|-------|------------|----------------|------------|"
+
+        # Use jq if available, otherwise basic parsing
+        if command -v jq &> /dev/null; then
+            jq -r '.chapters | to_entries[] | "| \(.key) | \(.value.title) | \(if .value.milestones.prd_complete then "✅" else "⬜" end) | \(.value.status) | \(.value.wordCount)/\(.value.targetWordCount[0])-\(.value.targetWordCount[1]) |"' features.json 2>/dev/null || echo "| Error parsing features.json |"
+        else
+            echo "| (install jq for detailed PRD index) |"
+        fi
+        echo ""
+    else
+        echo "## No features.json found"
+        echo "PRD tracking not initialized. Run initializer agent first."
+    fi
+}
+
+get_task_summary() {
+    if [ -f "TASKS.md" ]; then
+        echo "## Current Task Queue"
+        echo ""
+        # Get first 10 incomplete tasks
+        grep "- \[ \]" TASKS.md | head -10
+        echo ""
+        TOTAL=$(grep -c "- \[ \]" TASKS.md 2>/dev/null || echo "0")
+        echo "($TOTAL total incomplete tasks)"
+    fi
+}
+
+# ==============================================================================
 # Initializer Agent (First Run Only)
 # ==============================================================================
 
@@ -109,57 +158,63 @@ run_initializer_agent() {
     echo "Setting up environment for long-running work"
     echo "========================================"
 
+    local MASTER_PROMPT=$(get_master_prompt)
+
     claude --print "
+# MASTER CONTEXT (CLAUDE.md)
+$MASTER_PROMPT
+
+---
+
+# INITIALIZER AGENT INSTRUCTIONS
+
 You are the INITIALIZER AGENT for a long-running book writing project.
 Your job is to set up the environment so that future CODING AGENTS can work effectively.
 
+## Context Recovery After Compaction
+
+This prompt is injected fresh on every iteration. If you've been running for a while
+and context was compacted, you have everything you need above to continue.
+
 ## Your Tasks
 
-1. **Read CLAUDE.md** to understand the project structure and conventions.
+1. **Verify CLAUDE.md is read** - The master context above contains all project instructions.
 
 2. **Create/update claude-progress.txt** with this structure:
-   - Current status summary
-   - What has been completed
-   - What is in progress
-   - Blockers or issues
-   - Next recommended actions
+   \`\`\`
+   # Compound Engineering Book - Progress Log
 
-3. **Verify TASKS.md exists** and has proper structure:
-   - Tasks should be marked with [ ] (incomplete) or [x] (complete)
-   - Tasks should be ordered by priority
-   - Each task should be specific and completable in one session
+   ## Current Status (Updated: $(date '+%Y-%m-%d %H:%M'))
+   - Phase: PRD Completion
+   - Active Chapter: None yet
+   - Last Completed: Initial setup
+   - Blockers: None
 
-4. **Create init.sh** if it doesn't exist:
-   - Script to verify environment is ready
-   - Check that all required files exist
-   - Validate markdown formatting tools are available
+   ## Recent Activity (Last 10 Entries)
+   ### $(date '+%Y-%m-%d %H:%M') - Environment Initialization
+   - What: Set up project structure and tracking
+   - Files: claude-progress.txt, features.json
+   - Outcome: Success
+   - Next: Begin chapter writing with ch01
 
-5. **Read the PRDs** and create a features.json file tracking:
-   - Each chapter's completion status
-   - Key milestones (PRD done, first draft, reviewed, diagrams complete)
-   - Use this structure:
-   \`\`\`json
-   {
-     \"chapters\": [
-       {
-         \"id\": \"ch01\",
-         \"title\": \"The Compound Systems Engineer\",
-         \"milestones\": {
-           \"prd_complete\": true,
-           \"first_draft\": false,
-           \"reviewed\": false,
-           \"diagrams_complete\": false
-         }
-       }
-     ]
-   }
+   ## Compacted History
+   (No history yet - this is the first entry)
    \`\`\`
 
-6. **Make an initial git commit** documenting your setup work.
+3. **Verify features.json exists** - It should already exist with PRD status.
+   If not, create it following the structure in CLAUDE.md.
 
-7. **Update claude-progress.txt** with what you did.
+4. **Verify TASKS.md has proper structure** with [ ] markers.
 
-Remember: You are setting up the environment for future agents. Be thorough and document everything.
+5. **Create init.sh** if missing (environment verification script).
+
+6. **Read prds/index.md** to understand the book structure.
+
+7. **Git commit** your setup work.
+
+8. **Update claude-progress.txt** with what you did.
+
+Remember: You are setting up for future agents. Be thorough.
 "
 }
 
@@ -170,50 +225,84 @@ Remember: You are setting up the environment for future agents. Be thorough and 
 run_coding_agent() {
     local iteration=$1
 
+    local MASTER_PROMPT=$(get_master_prompt)
+    local PRD_INDEX=$(get_prd_index)
+    local TASK_SUMMARY=$(get_task_summary)
+
     claude --print "
+# MASTER CONTEXT (CLAUDE.md)
+$MASTER_PROMPT
+
+---
+
+# PRD STATUS
+$PRD_INDEX
+
+---
+
+# TASK QUEUE
+$TASK_SUMMARY
+
+---
+
+# CODING AGENT INSTRUCTIONS - Iteration $iteration
+
 You are a CODING AGENT working on a long-running book writing project.
 This is iteration $iteration. Previous agents have done work before you.
 
-## Getting Up to Speed (Do This First)
+## Context Recovery After Compaction
 
-1. Run \`pwd\` to confirm you're in the right directory.
-2. Read \`claude-progress.txt\` to see what was recently worked on.
-3. Read \`TASKS.md\` to see the task queue.
-4. Run \`git log --oneline -10\` to see recent commits.
-5. If \`features.json\` exists, read it to understand milestone status.
+If context was compacted, everything you need is above:
+- CLAUDE.md contains all project instructions and conventions
+- PRD STATUS shows which chapters need work
+- TASK QUEUE shows what to do next
+
+## Getting Up to Speed Protocol
+
+1. Run \`pwd\` to confirm directory
+2. Read \`claude-progress.txt\` for recent activity
+3. Read \`features.json\` to see detailed milestone status
+4. Run \`git log --oneline -5\` for recent commits
+
+## PRD Completion Criteria
+
+A PRD is considered COMPLETE when:
+- Status in features.json is 'complete'
+- The .md file exists in prds/
+- All required sections are filled out (check prds/index.md for structure)
+
+## Chapter Completion Criteria
+
+A chapter is COMPLETE when all milestones in features.json are true:
+- \`first_draft\`: Content written to chapters/chXX-title.md
+- \`reviewed\`: Passed review (no AI slop, technical accuracy)
+- \`diagrams_complete\`: All required diagrams created
+- \`exercises_added\`: 2-3 'Try It Yourself' exercises included
+- \`final\`: Ready for Leanpub publishing
 
 ## Your Workflow
 
-1. **Choose ONE incomplete task** from TASKS.md (the first [ ] item).
-2. **Read relevant source material** from @kb/ (the knowledge base symlink).
-3. **Complete the task** following project conventions:
-   - No em dashes (use periods or commas instead)
-   - Practical examples for every concept
-   - Progressive complexity
-4. **Verify your work**:
-   - Check word count if writing a chapter
-   - Validate markdown formatting
-   - Ensure cross-references are correct
-5. **Update status**:
-   - Mark task complete in TASKS.md (change [ ] to [x])
-   - Update features.json if a milestone was reached
-   - Add entry to claude-progress.txt
-6. **Commit your work** with a descriptive message.
+1. **Choose FIRST incomplete task** from TASKS.md
+2. **If task is chapter writing**:
+   - Read the corresponding PRD (e.g., prds/ch01.md for Chapter 1)
+   - Read source articles from @kb/ as listed in PRD
+   - Write to chapters/chXX-title.md
+   - Update features.json milestones
+3. **Complete the single task**
+4. **Verify work** (word count, formatting, no em dashes)
+5. **Update tracking**:
+   - Mark task [x] in TASKS.md
+   - Update features.json if milestone reached
+   - Add entry to claude-progress.txt (compact if >10 entries)
+6. **Git commit** with descriptive message
 
 ## Important Rules
 
-- Complete exactly ONE task per session
-- Leave the environment clean for the next agent
-- Document any blockers in TASKS.md under 'Blockers & Notes'
-- If you encounter an issue you can't resolve, document it and move to the next task
-- Never remove or modify existing completed work without explicit need
-
-## Quality Standards
-
-- Chapters: 2,500-4,000 words
-- No AI slop: varied sentence structure, no em dashes
-- Every concept needs a concrete example
-- Cross-references to other chapters
+- **ONE task per session**
+- **Always read the PRD** before writing a chapter
+- **Update features.json** when milestones change
+- **Compact progress.txt** when adding 11th entry (move oldest to Compacted History)
+- **Document blockers** in TASKS.md and move to next task
 
 Now begin by getting up to speed, then complete one task.
 "
@@ -226,159 +315,207 @@ Now begin by getting up to speed, then complete one task.
 run_review_agents() {
     local iteration=$1
 
+    local MASTER_PROMPT=$(get_master_prompt)
+    local PRD_INDEX=$(get_prd_index)
+
     echo ""
     echo "========================================"
     echo "REVIEW CYCLE - Iteration $iteration"
     echo "Running 5 specialized review sub-agents"
     echo "========================================"
 
-    # Run all 5 review agents
+    # Agent 1: Anti-AI Slop Checker
     echo ""
     echo "--- Review Agent 1: Anti-AI Slop Checker ---"
     claude --print "
-You are the ANTI-AI-SLOP reviewer for a book project.
+# MASTER CONTEXT (CLAUDE.md)
+$MASTER_PROMPT
 
-## Your Task
+---
 
-Scan all content in chapters/ and prds/ for AI-generated text tells:
+# SLOP CHECKER AGENT
 
-1. **Em dashes (—)**: Find and report all instances. These must be replaced with periods or commas.
-2. **Overused phrases**: Look for 'delve', 'crucial', 'pivotal', 'robust', 'cutting-edge', 'game-changer', 'leverage' (as verb).
-3. **Repetitive sentence starters**: 'Additionally', 'Furthermore', 'Moreover', 'It's important to note'.
-4. **Passive voice overuse**: Identify passages with excessive passive constructions.
-5. **Generic hedging**: 'It could be argued', 'One might say', 'In many ways'.
+You are the ANTI-AI-SLOP reviewer. Your job is to find AI-generated text patterns.
 
-## Output Format
+## What to Scan
+- All files in chapters/
+- All files in prds/ (check for AI slop in PRD content too)
 
-Create a file: reviews/slop-check-$(date +%Y%m%d-%H%M).md
+## Detection Patterns (from CLAUDE.md AI Slop Blacklist)
+1. Em dashes (—) - CRITICAL, must fix
+2. 'delve', 'crucial', 'pivotal', 'robust'
+3. 'cutting-edge', 'game-changer', 'leverage' (as verb)
+4. 'Additionally', 'Furthermore', 'Moreover'
+5. 'It's important to note', 'It could be argued'
+6. Passive voice clusters (3+ in a row)
 
-Structure:
-- File path
-- Line number
-- Issue type
-- Specific text
-- Suggested fix
+## Output
+Create: reviews/slop-check-$(date +%Y%m%d-%H%M).md
 
-If no issues found, still create the file noting the clean scan.
+Format:
+| File | Line | Pattern | Text | Suggested Fix |
+
 Commit your review file.
 "
 
+    # Agent 2: Diagram Opportunity Checker
     echo ""
     echo "--- Review Agent 2: Diagram Opportunity Checker ---"
     claude --print "
-You are the DIAGRAM REVIEWER for a book project.
+# MASTER CONTEXT (CLAUDE.md)
+$MASTER_PROMPT
 
-## Your Task
+---
 
-Review all chapters/ content and identify where diagrams would improve comprehension.
+# PRD STATUS
+$PRD_INDEX
 
-Look for:
-1. **Process flows** - Steps that happen in sequence (RALPH loop, verification ladder)
-2. **Architecture diagrams** - Components and relationships (harness layers, sub-agents)
-3. **Hierarchies** - Nested structures (CLAUDE.md files, context patterns)
-4. **Comparisons** - Before/after, tradeoffs
-5. **Mental models** - Abstract concepts needing visualization
+---
 
-## Output Format
+# DIAGRAM REVIEWER AGENT
 
-Create a file: reviews/diagram-opportunities-$(date +%Y%m%d-%H%M).md
+You are the DIAGRAM REVIEWER. Identify where diagrams would improve comprehension.
 
-For each opportunity:
+## What to Review
+- All chapter content in chapters/
+- Check features.json for diagramsRequired vs diagramsComplete
+
+## Diagram Triggers
+1. Process flows (3+ sequential steps)
+2. Architecture layers
+3. Decision trees
+4. Hierarchies
+
+## Output
+Create: reviews/diagram-opportunities-$(date +%Y%m%d-%H%M).md
+
+Include:
 - Chapter and section
-- Concept that needs visualization
-- Diagram type (flowchart, architecture, hierarchy, comparison)
-- Draft Mermaid code if possible
-- Priority (must-have, should-have, nice-to-have)
+- Concept needing visualization
+- Diagram type
+- Draft Mermaid code
+- Priority (must-have/should-have/nice-to-have)
 
-Update TASKS.md with any must-have diagrams not yet in the task list.
+Update TASKS.md with must-have diagrams.
 Commit your review file.
 "
 
+    # Agent 3: Technical Accuracy Reviewer
     echo ""
     echo "--- Review Agent 3: Technical Accuracy Reviewer ---"
     claude --print "
-You are the TECHNICAL ACCURACY reviewer for a book about AI-assisted development.
+# MASTER CONTEXT (CLAUDE.md)
+$MASTER_PROMPT
 
-## Your Task
+---
 
-Review chapters/ for technical correctness:
+# TECHNICAL ACCURACY AGENT
 
-1. **Code examples**: Are they syntactically correct? Would they run?
-2. **Tool references**: Are Claude Code tool names accurate (Read, Write, Edit, Glob, Grep, Bash)?
-3. **API accuracy**: Are any API references current?
-4. **Consistent terminology**: Is the same concept called the same thing throughout?
-5. **Version accuracy**: Are version numbers mentioned still relevant?
+You are the TECHNICAL ACCURACY reviewer.
 
-## Output Format
+## What to Validate
+- Code examples in chapters/ - syntax correctness
+- Claude Code tool names (Read, Write, Edit, Glob, Grep, Bash, Task)
+- API references
+- Terminology consistency
 
-Create a file: reviews/tech-accuracy-$(date +%Y%m%d-%H%M).md
+## Output
+Create: reviews/tech-accuracy-$(date +%Y%m%d-%H%M).md
 
-For each issue:
-- File and line
-- Issue description
-- Severity (critical, important, minor)
-- Suggested correction
+Format:
+| File | Line | Issue | Severity | Fix |
 
 Commit your review file.
 "
 
+    # Agent 4: Cross-Reference Validator
     echo ""
     echo "--- Review Agent 4: Cross-Reference Validator ---"
     claude --print "
-You are the CROSS-REFERENCE validator for a book project.
+# MASTER CONTEXT (CLAUDE.md)
+$MASTER_PROMPT
 
-## Your Task
+---
 
-Validate all internal references across the book:
+# PRD STATUS
+$PRD_INDEX
 
-1. **Chapter references**: Do 'See Chapter X' references point to correct content?
-2. **Section references**: Do internal section links work?
-3. **PRD to chapter alignment**: Does each chapter cover what its PRD specified?
-4. **Orphan content**: Is there any content not referenced from anywhere?
-5. **Circular dependencies**: Are there any circular reference issues?
+---
 
-## Output Format
+# CROSS-REFERENCE VALIDATOR AGENT
 
-Create a file: reviews/cross-refs-$(date +%Y%m%d-%H%M).md
+You are the CROSS-REFERENCE validator.
 
-List:
-- Broken references (file:line -> missing target)
-- Misaligned references (claims X, actually Y)
+## What to Check
+1. Chapter references ('See Chapter X')
+2. PRD to chapter alignment (does chapter cover PRD requirements?)
+3. Orphan content (not referenced anywhere)
+4. Broken internal links
+
+## PRD Alignment Check
+For each chapter with first_draft=true in features.json:
+- Read the PRD
+- Read the chapter
+- Verify all PRD sections are covered
+
+## Output
+Create: reviews/cross-refs-$(date +%Y%m%d-%H%M).md
+
+Include:
+- Broken references
 - PRD coverage gaps
 - Orphan sections
 
-Update TASKS.md with any critical fixes needed.
+Update TASKS.md with critical fixes.
 Commit your review file.
 "
 
+    # Agent 5: Progress & Quality Summary
     echo ""
     echo "--- Review Agent 5: Progress & Quality Summary ---"
     claude --print "
-You are the PROGRESS & QUALITY summarizer for a book project.
+# MASTER CONTEXT (CLAUDE.md)
+$MASTER_PROMPT
 
-## Your Task
+---
 
-Create a comprehensive status report:
+# PRD STATUS
+$PRD_INDEX
 
-1. **Read all review files** from this cycle in reviews/
-2. **Check features.json** for milestone completion
-3. **Analyze TASKS.md** for progress and blockers
-4. **Read claude-progress.txt** for recent activity
+---
 
-## Output Format
+# PROGRESS SUMMARIZER AGENT
 
-Create a file: reviews/summary-$(date +%Y%m%d-%H%M).md
+You are the PROGRESS & QUALITY summarizer.
+
+## Data Sources
+1. reviews/ - All review files from this cycle
+2. features.json - Milestone status for all chapters
+3. TASKS.md - Task queue
+4. claude-progress.txt - Recent activity
+5. git log - Commit history
+
+## Metrics to Calculate
+- Completion %: draftsComplete / totalChapters
+- Quality score: issues found / content written
+- Velocity: tasks per iteration (from progress.txt)
+- Estimated iterations to completion
+
+## Output
+Create: reviews/summary-$(date +%Y%m%d-%H%M).md
 
 Include:
 - Overall completion percentage
-- Chapters status (draft/reviewed/complete)
-- Top 5 issues to address (from other reviews)
-- Velocity estimate (tasks completed per iteration)
-- Recommended priority for next 5 iterations
-- Any systemic issues observed
+- Chapter-by-chapter status table
+- Top 5 priority actions (aggregated from other reviews)
+- Velocity estimate
+- Blockers
 
-Update claude-progress.txt with this summary.
-Commit your review and update.
+## Actions
+1. Update claude-progress.txt with summary
+2. Compact progress.txt if >10 recent entries
+3. Update features.json stats if changed
+4. Commit all updates
 "
 
     echo ""
@@ -435,7 +572,10 @@ while true; do
 
     echo ""
     echo "========================================"
-    echo "Iteration $iteration / $MAX_ITERATIONS"
+    echo "Iteration $iteration"
+    if [ "$MAX_ITERATIONS" -gt 0 ]; then
+        echo "Progress: $iteration / $MAX_ITERATIONS iterations"
+    fi
     echo "Elapsed: $(get_elapsed_hours) hours / $MAX_HOURS hours"
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo "========================================"
@@ -454,7 +594,7 @@ while true; do
         exit 0
     fi
 
-    # Run coding agent
+    # Run coding agent (with master prompt injection)
     run_coding_agent $iteration
 
     # Run review cycle every N iterations
