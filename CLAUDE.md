@@ -2,117 +2,361 @@
 
 > A comprehensive guide to AI-assisted software development: from beginner to expert with Claude Code.
 
-## Project Overview
+**Source**: [Anthropic Long-Running Agent Harness](https://anthropic.com/engineering/effective-harnesses-for-long-running-agents) | [Geoffrey Huntley's RALPH](https://ghuntley.com/ralph)
 
-**Goal**: Compile James Phoenix's 90+ context engineering articles into a publishable Leanpub book.
+---
 
-**Target Audience**: Software engineers transitioning to AI-assisted development, from beginners who've never used Claude Code to experts building production agent systems.
+## Agent Operating Instructions
 
-**Source Material**: `/Users/jamesaphoenix/Desktop/knowledge-base/01-Compound-Engineering/`
+This project uses a **two-phase agent harness** for long-running work:
 
-## Structure
+1. **Initializer Agent** (first run): Sets up environment, creates tracking files
+2. **Coding Agent** (each iteration): Makes incremental progress, commits, updates tracking
+
+### Getting Up to Speed Protocol
+
+Every session, run these steps FIRST:
+
+```
+1. pwd                              # Confirm directory
+2. Read claude-progress.txt         # Recent work summary
+3. Read TASKS.md                    # Task queue
+4. git log --oneline -10            # Recent commits
+5. Read features.json               # Milestone status
+```
+
+### Session Workflow
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  1. Get up to speed (protocol above)                        │
+│  2. Choose FIRST incomplete task from TASKS.md              │
+│  3. Read relevant source from @kb/                          │
+│  4. Complete the single task                                │
+│  5. Verify work (word count, formatting, examples)          │
+│  6. Update TASKS.md (mark [x])                              │
+│  7. Update claude-progress.txt (add entry)                  │
+│  8. Update features.json if milestone reached               │
+│  9. Git commit with descriptive message                     │
+│  10. Exit cleanly for fresh context                         │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Critical Rules
+
+- **ONE task per session**. No more.
+- **Leave environment clean**. Next agent should be able to start immediately.
+- **Document blockers**. If stuck, write it down and move on.
+- **Never delete completed work** without explicit reason.
+- **Commit after every task**. Memory lives in git.
+
+---
+
+## Progress Tracking System
+
+### claude-progress.txt (Primary State File)
+
+This file is the **single source of truth** for what's happening. It uses a compaction strategy to prevent unbounded growth.
+
+**Structure:**
+
+```
+# Compound Engineering Book - Progress Log
+
+## Current Status (Updated: YYYY-MM-DD HH:MM)
+- Phase: [PRD Completion | Chapter Writing | Diagrams | Review | Polish]
+- Active Chapter: ch07
+- Last Completed: ch06.md first draft
+- Blockers: None
+
+## Recent Activity (Last 10 Entries)
+[Keep only the 10 most recent entries here]
+
+### YYYY-MM-DD HH:MM - [Task Title]
+- What: [Brief description]
+- Files: [Changed files]
+- Outcome: [Success/Partial/Blocked]
+- Next: [Recommended next action]
+
+## Compacted History
+[Summarized older entries, grouped by week or milestone]
+
+### Week of YYYY-MM-DD
+- Completed: 5 chapter PRDs, 2 first drafts
+- Issues resolved: X, Y
+- Key decisions: Z
+```
+
+**Compaction Rules:**
+
+1. Keep detailed entries for the **last 10 sessions**
+2. When adding entry #11, compact oldest entry into weekly summary
+3. Weekly summaries live in "Compacted History" section
+4. Monthly: Compact weekly summaries into monthly summary
+
+### features.json (Milestone Tracking)
+
+```json
+{
+  "lastUpdated": "2026-01-26T22:00:00Z",
+  "chapters": [
+    {
+      "id": "ch01",
+      "title": "The Compound Systems Engineer",
+      "milestones": {
+        "prd_complete": true,
+        "first_draft": false,
+        "reviewed": false,
+        "diagrams_complete": false,
+        "final": false
+      },
+      "wordCount": 0,
+      "issues": []
+    }
+  ],
+  "stats": {
+    "totalChapters": 12,
+    "prdsComplete": 12,
+    "draftsComplete": 0,
+    "reviewed": 0,
+    "diagramsComplete": 0
+  }
+}
+```
+
+### TASKS.md (Task Queue)
+
+Task format:
+```
+- [ ] [Task description] (Est: X sessions)
+- [x] [Completed task] (Completed: YYYY-MM-DD)
+```
+
+Priority order:
+1. Blockers and fixes first
+2. Then sequential chapter work
+3. Then improvements and polish
+
+---
+
+## Project Structure
 
 ```
 compound-engineering-book/
-├── CLAUDE.md              # This file - agent instructions
-├── TASKS.md               # Current task queue for RALPH loop
-├── LEARNINGS.md           # Accumulated insights from iterations
+├── CLAUDE.md              # This file (agent instructions)
+├── TASKS.md               # Task queue
+├── LEARNINGS.md           # Accumulated insights
+├── claude-progress.txt    # Progress state (with compaction)
+├── features.json          # Milestone tracking
+├── init.sh                # Environment verification script
+├── @kb -> knowledge-base  # Symlink to source material
 ├── prds/
-│   ├── index.md           # Master PRD with book vision
+│   ├── index.md           # Master PRD
 │   ├── toc.md             # Table of contents
-│   ├── ch01.md            # Part I: Foundations (beginner)
-│   ├── ch02.md            # Part I: Getting Started with Claude Code
-│   ├── ch03.md            # Part I: Your First CLAUDE.md
-│   ├── ch04.md            # Part II: Agent Architecture
-│   ├── ch05.md            # Part II: The Verification Ladder
-│   ├── ch06.md            # Part II: Quality Gates
-│   ├── ch07.md            # Part III: Context Engineering
-│   ├── ch08.md            # Part III: The RALPH Loop
-│   ├── ch09.md            # Part III: Sub-Agent Patterns
-│   ├── ch10.md            # Part IV: Production Systems
-│   ├── ch11.md            # Part IV: The Meta-Engineer
-│   └── ch12.md            # Appendices & Reference
-├── chapters/              # Actual book content (Markdown)
-├── assets/
-│   └── diagrams/          # Mermaid/Excalidraw diagrams
+│   └── ch01-ch12.md       # Chapter PRDs
+├── chapters/              # Actual book content
+├── assets/diagrams/       # Mermaid/Excalidraw diagrams
+├── reviews/               # Review agent outputs
 ├── scripts/
-│   └── ralph.sh           # The RALPH loop runner
+│   └── ralph.sh           # RALPH loop runner
 └── prompts/
     ├── writer.md          # Chapter writing prompt
-    ├── reviewer.md        # Chapter review prompt
-    ├── diagram-check.md   # Diagram opportunity checker
-    └── leanpub-format.md  # Leanpub formatting guide
+    ├── reviewer.md        # Review prompt
+    ├── diagram-check.md   # Diagram checker
+    └── leanpub-format.md  # Leanpub formatting
 ```
+
+---
 
 ## Source Knowledge Base
 
-**Symlink**: `@kb` points to `/Users/jamesaphoenix/Desktop/knowledge-base`
+**Symlink**: `@kb` -> `/Users/jamesaphoenix/Desktop/knowledge-base`
 
-Key source directories:
+Key directories:
 - `@kb/01-Compound-Engineering/context-engineering/` - 90+ articles
 - `@kb/01-Compound-Engineering/my-doctrine.md` - Core philosophy
-- `@kb/01-Compound-Engineering/infrastructure-principles.md` - Engineering principles
+- `@kb/01-Compound-Engineering/index.md` - Topic overview
+
+---
 
 ## Writing Conventions
 
-1. **No em dashes** - Use periods or commas instead (em dashes are a tell for AI text)
-2. **Practical examples** - Every concept needs runnable code
-3. **Progressive complexity** - Start simple, build to advanced
-4. **Real production context** - Reference actual ~350K LOC codebase experience
-5. **Leanpub format** - Use Markua markdown dialect
+### Style
 
-## RALPH Loop Protocol
+1. **No em dashes (—)** - Use periods or commas. Em dashes are AI-text tells.
+2. **Active voice** - "Claude reads the file" not "The file is read"
+3. **Second person** - Address reader as "you"
+4. **Varied sentence structure** - Mix short and long sentences
+5. **Concrete examples** - Every concept needs runnable code
 
-Each iteration should:
-1. Read `TASKS.md` for the next incomplete task
-2. Read relevant source articles from `@kb/`
-3. Complete ONE task (write one section, review one chapter, etc.)
-4. Run quality checks (lint, word count, structure)
-5. Update `TASKS.md` with completion status
-6. Add learnings to `LEARNINGS.md`
-7. Exit cleanly for fresh context
+### AI Slop Blacklist
+
+Never use these words/phrases:
+- "delve", "crucial", "pivotal", "robust"
+- "cutting-edge", "game-changer", "leverage" (as verb)
+- "Additionally", "Furthermore", "Moreover"
+- "It's important to note", "It could be argued"
+- "In many ways", "One might say"
+
+### Chapter Standards
+
+- **Word count**: 2,500-4,000 words per chapter
+- **Code examples**: 3-5 per chapter, syntactically correct
+- **Diagrams**: 2-4 per chapter
+- **Exercises**: 2-3 "Try It Yourself" per chapter
+- **Cross-references**: Link to related chapters
+
+---
+
+## Custom Subagents
+
+### Review Agents (Run Every 5 Iterations)
+
+These agents run in the review cycle to catch issues early.
+
+#### slop-checker
+Scans for AI-generated text tells:
+- Em dashes
+- Blacklisted phrases
+- Passive voice overuse
+- Repetitive patterns
+
+#### diagram-reviewer
+Identifies diagram opportunities:
+- Process flows
+- Architecture diagrams
+- Hierarchies and comparisons
+- Generates Mermaid drafts
+
+#### tech-accuracy-reviewer
+Validates technical correctness:
+- Code syntax
+- Tool name accuracy
+- API references
+- Terminology consistency
+
+#### cross-ref-validator
+Checks internal references:
+- Chapter links
+- PRD alignment
+- Orphan content
+- Section references
+
+#### progress-summarizer
+Creates status reports:
+- Completion percentage
+- Velocity metrics
+- Issue aggregation
+- Priority recommendations
+
+---
+
+## RALPH Loop Commands
+
+```bash
+# Default: 3 hours, infinite iterations, review every 6
+./scripts/ralph.sh
+
+# Run overnight (8 hours)
+./scripts/ralph.sh --max-hours 8
+
+# Quick sprint (1 hour, review every 3)
+./scripts/ralph.sh --max-hours 1 --review-every 3
+
+# Limit iterations (0 = infinite, default)
+./scripts/ralph.sh --max-iterations 50
+
+# Full overnight session
+./scripts/ralph.sh --max-hours 10 --review-every 8
+
+# Environment variables also work
+MAX_HOURS=12 REVIEW_EVERY=10 ./scripts/ralph.sh
+```
+
+---
 
 ## Quality Gates
 
 Before marking a chapter complete:
+
+- [ ] Word count in range (2,500-4,000)
 - [ ] All code examples tested
+- [ ] No em dashes (grep for "—")
+- [ ] No blacklisted AI phrases
 - [ ] Diagrams created for complex concepts
-- [ ] Cross-references to other chapters added
-- [ ] Leanpub formatting validated
-- [ ] Word count within target (2000-4000 per chapter)
+- [ ] Cross-references added
+- [ ] Exercises included
+- [ ] Proofread for flow
 
-## Diagram Workflow
+---
 
-When a concept would benefit from a diagram:
-1. Create Mermaid diagram in `assets/diagrams/`
-2. Include in chapter with `![Description](assets/diagrams/name.png)`
-3. Log in chapter PRD which diagrams are needed/completed
+## Git Conventions
 
-## Commands
+Commit message format:
+```
+[chapter/prd/review/infra]: Brief description
 
-```bash
-# Run RALPH loop
-./scripts/ralph.sh
+- Detailed change 1
+- Detailed change 2
 
-# Check word counts
-wc -w chapters/*.md
-
-# Validate Leanpub format
-# (Use Leanpub's manuscript validator)
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
 ```
 
-## Related Projects
+Examples:
+```
+[chapter]: Add first draft of ch07 context engineering
 
-- [O'Reilly Book: Prompt Engineering for LLMs](https://www.oreilly.com/library/view/prompt-engineering-for/9781098156145/) - Author's previous work
-- [Udemy Course](https://www.udemy.com/course/chatgpt-and-langchain-the-complete-developers-masterclass/) - 304K+ learners
+- 3,200 words covering information theory foundations
+- 4 code examples for progressive disclosure
+- Mermaid diagram for context window anatomy
 
-## Agent Instructions
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+```
 
-When working on this book:
-1. Always check `TASKS.md` first
-2. Read source articles before writing
-3. Maintain consistent voice and style
-4. Add practical Claude Code examples throughout
-5. Target developers who want to 10x their productivity
-6. Include "Try it yourself" exercises
-7. Reference the knowledge base but write fresh content
+---
+
+## Failure Recovery
+
+### If agent gets stuck:
+1. Document the blocker in TASKS.md under "Blockers & Notes"
+2. Move to the next task
+3. Create a specific task to resolve the blocker later
+
+### If environment is broken:
+1. Run `git status` to see uncommitted changes
+2. If needed, `git stash` or `git checkout .` to reset
+3. Read `claude-progress.txt` for last known good state
+4. Resume from there
+
+### If progress.txt is corrupted:
+1. Reconstruct from `git log`
+2. Read `features.json` for milestone status
+3. Create fresh progress.txt with current state
+
+---
+
+## External References
+
+- [Anthropic: Effective Harnesses for Long-Running Agents](https://anthropic.com/engineering/effective-harnesses-for-long-running-agents)
+- [Geoffrey Huntley: RALPH Technique](https://ghuntley.com/ralph)
+- [Claude Code Documentation](https://code.claude.com/docs/llms.txt)
+- [Leanpub Manual](https://leanpub.com/help/manual)
+
+---
+
+## Book Details
+
+**Title**: Compound Engineering: Master AI-Assisted Development with Claude Code
+
+**Target Audience**: Software engineers transitioning to AI-assisted development
+
+**Structure**:
+- Part I: Foundations (Ch 1-3) - Beginner
+- Part II: Core Techniques (Ch 4-6) - Intermediate
+- Part III: Advanced Patterns (Ch 7-9) - Advanced
+- Part IV: Production Systems (Ch 10-12) - Expert
+- Appendices A-D
+
+**Word Count Target**: 45,000-57,000 words
+
+**Publishing**: Leanpub (Markua format)
