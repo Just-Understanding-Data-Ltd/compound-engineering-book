@@ -1,0 +1,31 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Leanpub build artifacts
+manuscript/
+*.epub
+*.mobi
+*.pdf
+
+# Temporary files
+*.tmp
+*.bak
+
+# Node modules (if using any build tools)
+node_modules/
+
+# Generated diagrams (keep source, ignore generated)
+assets/diagrams/*.png
+!assets/diagrams/.gitkeep
+
+# Logs
+*.log
+ralph-output.log
