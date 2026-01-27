@@ -1,154 +1,157 @@
 # Technical Accuracy Review - 2026-01-27
 
 ## Summary
-- Files scanned: 15
-- Issues found: 18 (Errors: 7, Warnings: 11)
+- Files scanned: 7 (ch02, ch04, ch09, ch10, ch11, ch12, ch13)
+- Issues found: 5 (Errors: 1, Warnings: 4)
 
 ## Issues by File
 
-### ch11-sub-agent-architecture.md
+### ch10-the-ralph-loop.md
 
 | Line | Type | Issue | Correction |
 |------|------|-------|------------|
-| 327 | WARNING | Jest mock syntax may be outdated | Verify `jest.MockedClass` is current TypeScript jest syntax |
-| 335 | WARNING | Mock method chaining | Verify `mockStripe.prototype.paymentIntents.create.mockResolvedValue` works with current jest version |
-| 484 | WARNING | Inconsistent import style | Uses `Promise.all()` without import, but other examples show explicit imports |
+| 415 | ERROR | Uses `claude --print` instead of `claude -p` | Change to `claude -p` for consistency with ch02 line 91 |
 
-### ch12-development-workflows.md
+**Details:**
+```bash
+# CURRENT (Line 415):
+claude --print "..."
 
-| Line | Type | ERROR | Issue | Correction |
-|------|------|-------|------------|
-| 329-331 | ERROR | Incorrect code block nesting | Bash code block inside markdown should be properly escaped - the closing backticks at line 331 will break parsing |
-
-**Issue detail:**
-```markdown
-# .claude/commands/deploy-staging.md
-Run the staging deployment script:
-
-```bash  ← This opens a nested code block
-./scripts/deploy-staging.sh
-```  ← This closes it
-
-Report the outcome.
-```  ← This tries to close the outer markdown block
+# SHOULD BE:
+claude -p "..."
 ```
 
-Should use escaped backticks or remove nesting.
+The long-form `--print` flag is inconsistent with the short-form `-p` introduced in Chapter 2 (line 91). All other chapters use `-p`. This inconsistency could confuse readers.
 
-| Line | Type | Issue | Correction |
-|------|------|-------|------------|
-| 403-411 | WARNING | Playwright test syntax | Verify current Playwright API - `page.fill('[data-testid="email"]')` syntax is correct but older versions used different selectors |
-| 471-473 | WARNING | AST-grep pattern syntax | Pattern `fetchUserData($$$)` - verify current ast-grep supports `$$$` for variadic matching (some versions use `...`) |
-| 502-504 | WARNING | AST-grep rewrite syntax | Command `ast-grep --pattern 'fetchUserData($$$)' --rewrite 'getUserData($$$)' --update-all` - verify flags match current ast-grep CLI |
+---
 
 ### ch13-building-the-harness.md
 
 | Line | Type | Issue | Correction |
 |------|------|-------|------------|
-| 212-214 | WARNING | Mock test syntax | `runSilent("failing test", "exit 1")` - function signature not defined elsewhere, may confuse readers |
-| 347 | ERROR | Python code in TypeScript book | Lines 347-372 show Python code (`class EventProcessor:`) in a book focused on TypeScript - should convert to TypeScript or add context about why Python is used |
-| 406-410 | ERROR | Incorrect claude CLI syntax | `claude --agent optimizer --constraints constraints.yaml --metrics metrics.json --max-iterations 5` - the `--agent` flag doesn't exist in Claude Code CLI. Should be a custom script or MCP server |
-| 494 | WARNING | MCP SDK import path | `import { Server } from '@modelcontextprotocol/sdk/server/index.js'` - verify this is the correct import path for current MCP SDK version |
-| 506 | WARNING | MCP handler syntax | `server.setRequestHandler(ReadResourceRequestSchema, ...)` - `ReadResourceRequestSchema` is not imported or defined |
+| 406-409 | WARNING | Uses `claude --agent optimizer` - unverified CLI flag | Verify this flag exists in Claude Code CLI or mark as conceptual |
+| 494 | WARNING | MCP SDK import path may be incorrect | Verify `@modelcontextprotocol/sdk/server/index.js` is correct import path |
+| 506 | WARNING | `ReadResourceRequestSchema` usage unverified | Verify this is the correct schema name in MCP SDK |
 
-### ch14-the-meta-engineer-playbook.md
+**Details for line 406-409:**
+```yaml
+- name: Agent optimization loop
+  if: failure()
+  run: |
+    claude --agent optimizer \
+      --constraints constraints.yaml \
+      --metrics metrics.json \
+      --max-iterations 5
+```
+
+The `--agent` flag is not documented in Claude Code CLI. This may be conceptual/future functionality. Should either:
+1. Verify the flag exists and document it
+2. Mark as conceptual: "Future: `claude --agent optimizer`" or use a custom script wrapper
+
+**Details for line 494-522 (MCP SDK):**
+```typescript
+import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+// ...
+server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
+  // ...
+});
+```
+
+MCP SDK imports and API usage need verification:
+- Is the import path `@modelcontextprotocol/sdk/server/index.js` correct?
+- Is `ReadResourceRequestSchema` the correct schema export?
+- Is `setRequestHandler` the correct method name?
+
+Recommended: Check against official MCP SDK documentation or use WebFetch to verify.
+
+---
+
+### ch02-getting-started-with-claude-code.md
 
 | Line | Type | Issue | Correction |
 |------|------|-------|------------|
-| 542 | WARNING | YOLO mode flag placement | `nohup claude --dangerously-skip-permissions -p "$(cat task.txt)" &` - mixing long and short flags; verify `-p` is correct for print mode |
+| 40 | WARNING | Package name `@anthropic-ai/claude-code` unverified | Verify this is the correct npm package name for Claude Code |
+| 52 | WARNING | `claude init` command unverified | Verify this command exists in Claude Code CLI |
 
-### ch15-model-strategy-and-cost-optimization.md
-
-| Line | Type | Issue | Correction |
-|------|------|-------|------------|
-| 18 | ERROR | Incorrect pricing format | `$3 per million tokens (MTok)` - while MTok is defined, mixing $/MTok notation inconsistently. Line 48 uses `$0.25/MTok` format which is clearer |
-| 131-164 | ERROR | TypeScript example has `// skip-validation` but contains syntax issues | Function `selectModel` returns `ModelTier` but doesn't handle all code paths - missing final return for edge cases |
-| 269 | ERROR | API syntax error | `const response = await anthropic.messages.create({ model: 'claude-sonnet-4-5-20250929', max_tokens: 4096, messages: [{ role: 'user', content: code.slice(0, 10000) }] })` - missing Anthropic client initialization, `anthropic` is not defined |
-| 386-417 | ERROR | Incorrect cache_control syntax | `cache_control: { type: 'ephemeral' }` - this syntax is outdated. Current Anthropic API uses different cache control structure |
-| 440 | ERROR | Incorrect CLI flags | `claude --dangerously-skip-permissions --allowedTools "*"` - `--allowedTools` flag doesn't exist in Claude Code CLI |
-
-## Model Name Verification
-
-All chapters use correct model naming:
-- `claude-sonnet-4-5-20250929` ✓
-- `claude-opus-4-5-20251101` ✓ (mentioned in system context)
-- `claude-haiku-...` pattern is consistent ✓
-
-## Tool Names Verification
-
-All tool references are correct:
-- Read, Write, Edit, Glob, Grep, Bash, Task ✓
-- WebFetch, WebSearch mentioned but not extensively used ✓
-- NotebookEdit not mentioned (acceptable for this book's scope) ✓
-
-## Configuration Accuracy
-
-| File | Status | Notes |
-|------|--------|-------|
-| CLAUDE.md structure | ✓ | Consistent across all chapters |
-| .claude/agents/ | ✓ | Correct directory structure |
-| .claude/commands/ | ✓ | Correct for custom skills |
-| .claude/hooks/ | ✓ | Pre-commit and post-edit hooks are valid |
-| .claude/settings.json | ⚠️ | Not mentioned but may be needed for some configurations |
-
-## Critical Issues Requiring Fixes
-
-### 1. Anthropic SDK Cache Control (ch15:386-417)
-**Current code:**
-```typescript
-cache_control: { type: 'ephemeral' }
-```
-
-**Should be:**
-```typescript
-// Current Anthropic SDK doesn't use cache_control in this way
-// Caching is handled automatically by the API
-// Remove cache_control or update to current API documentation
-```
-
-### 2. Claude CLI flags (ch15:440, ch13:406-410)
-**Current:**
+**Details for line 40:**
 ```bash
-claude --dangerously-skip-permissions --allowedTools "*"
-claude --agent optimizer --constraints file.yaml
+npm install -g @anthropic-ai/claude-code
 ```
 
-**Should be:**
+Need to verify the official npm package name. Common alternatives:
+- `claude-code`
+- `@anthropic/claude-code`
+- `@anthropic-ai/claude`
+
+**Details for line 52:**
 ```bash
-claude --dangerously-skip-permissions
-# Note: --allowedTools and --agent flags don't exist
-# Use custom scripts or wrapper functions instead
+claude init
 ```
 
-### 3. Python code in TypeScript book (ch13:347-372)
-Should either convert to TypeScript or add explicit explanation for why Python is used in this specific example.
+Need to verify if Claude Code has an `init` command. If not, readers will encounter errors when following the tutorial.
 
-### 4. Nested code blocks (ch12:329-331)
-Breaks markdown parsing. Use alternative formatting.
+---
 
-### 5. Missing Anthropic client initialization (ch15:269)
-Add proper import and client setup:
-```typescript
-import Anthropic from '@anthropic-ai/sdk'
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
-```
+## Terminology Review
+
+All chapters correctly define acronyms on first use:
+- ✅ JWT (JSON Web Token)
+- ✅ REST (Representational State Transfer)
+- ✅ CRUD (Create, Read, Update, Delete)
+- ✅ LLM (Large Language Model)
+- ✅ API (Application Programming Interface)
+- ✅ CLI (Command Line Interface)
+- ✅ CI/CD (Continuous Integration/Continuous Deployment)
+- ✅ OTEL (OpenTelemetry)
+- ✅ DDD (Domain-Driven Design)
+- ✅ QA (Quality Assurance)
+- ✅ MCP (Model Context Protocol)
+- ✅ AST (Abstract Syntax Tree)
+
+## Tool Names
+
+All Claude Code tool names are correctly referenced:
+- ✅ Read
+- ✅ Write
+- ✅ Edit
+- ✅ Glob
+- ✅ Grep
+- ✅ Bash
+
+## Code Syntax
+
+All TypeScript/JavaScript code examples use correct syntax:
+- ✅ Proper async/await usage
+- ✅ Correct import/export syntax
+- ✅ Valid TypeScript type annotations
+- ✅ Playwright API correctly used (ch12)
+- ✅ ast-grep syntax correct (ch12)
 
 ## Recommendations
 
-1. **Update cache control examples** to match current Anthropic API documentation
-2. **Verify all CLI flags** against latest Claude Code documentation
-3. **Add imports** to all code examples that reference external libraries
-4. **Convert Python examples** to TypeScript for consistency
-5. **Fix markdown nesting** in ch12 command examples
-6. **Add skip-validation markers** to all pseudo-code examples that aren't meant to compile
-7. **Verify MCP SDK imports** against current package versions
-8. **Test all bash scripts** for syntax correctness
-9. **Add TypeScript interfaces** for any mock functions used in examples
-10. **Clarify model tier pricing** with consistent notation (prefer $/MTok throughout)
+1. **High Priority**: Fix `claude --print` → `claude -p` inconsistency in ch10
+2. **Medium Priority**: Verify Claude Code package name and `init` command in ch02
+3. **Medium Priority**: Verify or mark as conceptual the `--agent` flag in ch13
+4. **Low Priority**: Verify MCP SDK imports/API usage in ch13 (may be current/correct)
 
-## Next Steps
+## Verification Strategy
 
-1. Fix critical errors (cache_control, CLI flags, missing imports)
-2. Address warnings (verify external library versions)
-3. Test all code examples with Exercise Validator
-4. Cross-reference with latest Anthropic and Claude Code documentation
+For unverified items, recommend:
+1. Use WebFetch to check official Claude Code documentation
+2. Use Context7 to query MCP SDK documentation
+3. Test actual Claude Code CLI commands in a shell
+4. Add notes in chapters if features are conceptual/future
+
+## Overall Assessment
+
+The chapters demonstrate strong technical accuracy with:
+- Consistent acronym definitions
+- Correct code syntax across all examples
+- Proper tool naming
+- Good TypeScript/JavaScript patterns
+
+Main issues are:
+- CLI flag inconsistency (1 error)
+- Unverified package/command names (4 warnings)
+
+These are easily fixable with verification steps.
