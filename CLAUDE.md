@@ -347,6 +347,45 @@ When you discover new work items (from reviews, errors, or observations), add th
 - Code that needs testing
 - Diagrams mentioned in chapters but not yet created
 
+### Task Queries (jq commands)
+
+Use these to quickly find work:
+
+```bash
+# Count all incomplete tasks
+jq '[.chapters[].milestones | to_entries[] | select(.value == false)] | length' features.json
+
+# List pending KB articles
+jq '.tasks.kbArticlesToCreate[] | select(.status == "pending") | .title' features.json
+
+# Find incomplete milestones for a chapter
+jq '.chapters.ch05.milestones | to_entries[] | select(.value == false) | .key' features.json
+
+# List all pending tasks across all sections
+jq '[.tasks.kbArticlesToCreate[]?, .tasks.appendices[]?, .tasks.crossRefFixes[]?, .tasks.generalReview[]? | select(.status == "pending")] | length' features.json
+
+# Find chapters needing code testing
+jq '.chapters | to_entries[] | select(.value.milestones.code_written == true and .value.milestones.code_tested == false) | .key' features.json
+
+# List high-priority diagrams for a chapter
+jq '.diagramTasks.highPriority.ch05' features.json
+
+# Find blockers
+jq '.tasks.blockers[]?' features.json
+```
+
+### Task Compaction
+
+When completed task arrays get long (>10 items), compact them:
+
+```bash
+# Move completed KB articles to compacted section
+jq '.tasks.completed.kbArticles += [.tasks.kbArticlesToCreate[] | select(.status == "complete") | {id, title, completedAt: now | todate}] | .tasks.kbArticlesToCreate = [.tasks.kbArticlesToCreate[] | select(.status == "pending")]' features.json
+```
+
+**Compaction preserves:** id, title, completedAt (timestamp)
+**Details preserved in:** git history
+
 ### @LEARNINGS.md (Accumulated Insights)
 
 Every 5 iterations, capture learnings:
@@ -368,7 +407,6 @@ Reference: @LEARNINGS.md
 ```
 compound-engineering-book/
 ├── CLAUDE.md              # This file (agent instructions)
-├── TASKS.md               # Task queue
 ├── LEARNINGS.md           # Accumulated insights
 ├── claude-progress.txt    # Progress state (with compaction)
 ├── features.json          # Milestone tracking

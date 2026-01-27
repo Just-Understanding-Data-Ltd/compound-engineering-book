@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T18:00:00Z",
+  "lastUpdated": "2026-01-28T21:00:00Z",
   "structureNote": "Updated to 15-chapter structure. Old chapter numbers in prds section preserved for reference. New chapters added with descriptive filenames. See toc.md for canonical ordering.",
   "prds": {
     "index": {
@@ -172,7 +172,10 @@
         "final": false
       },
       "wordCount": 2573,
-      "targetWordCount": [2500, 3500],
+      "targetWordCount": [
+        2500,
+        3500
+      ],
       "diagramsRequired": 4,
       "diagramsComplete": 0,
       "codeExamplesRequired": 3,
@@ -195,7 +198,10 @@
         "final": false
       },
       "wordCount": 2588,
-      "targetWordCount": [2500, 3500],
+      "targetWordCount": [
+        2500,
+        3500
+      ],
       "diagramsRequired": 3,
       "diagramsComplete": 0,
       "codeExamplesRequired": 5,
@@ -219,7 +225,10 @@
         "final": false
       },
       "wordCount": 2568,
-      "targetWordCount": [2500, 3500],
+      "targetWordCount": [
+        2500,
+        3500
+      ],
       "diagramsRequired": 4,
       "diagramsComplete": 0,
       "codeExamplesRequired": 4,
@@ -242,7 +251,10 @@
         "final": false
       },
       "wordCount": 2766,
-      "targetWordCount": [2500, 3500],
+      "targetWordCount": [
+        2500,
+        3500
+      ],
       "diagramsRequired": 4,
       "diagramsComplete": 0,
       "codeExamplesRequired": 4,
@@ -265,7 +277,10 @@
         "final": false
       },
       "wordCount": 2499,
-      "targetWordCount": [3000, 4500],
+      "targetWordCount": [
+        3000,
+        4500
+      ],
       "diagramsRequired": 8,
       "diagramsComplete": 0,
       "codeExamplesRequired": 12,
@@ -288,7 +303,10 @@
         "final": false
       },
       "wordCount": 2816,
-      "targetWordCount": [3000, 4500],
+      "targetWordCount": [
+        3000,
+        4500
+      ],
       "diagramsRequired": 6,
       "diagramsComplete": 0,
       "codeExamplesRequired": 8,
@@ -311,7 +329,10 @@
         "final": false
       },
       "wordCount": 2838,
-      "targetWordCount": [3000, 4500],
+      "targetWordCount": [
+        3000,
+        4500
+      ],
       "diagramsRequired": 5,
       "diagramsComplete": 0,
       "codeExamplesRequired": 6,
@@ -335,7 +356,10 @@
         "final": false
       },
       "wordCount": 3133,
-      "targetWordCount": [3000, 4000],
+      "targetWordCount": [
+        3000,
+        4000
+      ],
       "diagramsRequired": 5,
       "diagramsComplete": 0,
       "codeExamplesRequired": 5,
@@ -358,7 +382,10 @@
         "final": false
       },
       "wordCount": 2673,
-      "targetWordCount": [3500, 5000],
+      "targetWordCount": [
+        3500,
+        5000
+      ],
       "diagramsRequired": 6,
       "diagramsComplete": 0,
       "codeExamplesRequired": 5,
@@ -381,7 +408,10 @@
         "final": false
       },
       "wordCount": 2974,
-      "targetWordCount": [3000, 4500],
+      "targetWordCount": [
+        3000,
+        4500
+      ],
       "diagramsRequired": 4,
       "diagramsComplete": 0,
       "codeExamplesRequired": 6,
@@ -404,7 +434,10 @@
         "final": false
       },
       "wordCount": 3294,
-      "targetWordCount": [3500, 5000],
+      "targetWordCount": [
+        3500,
+        5000
+      ],
       "diagramsRequired": 5,
       "diagramsComplete": 0,
       "codeExamplesRequired": 8,
@@ -428,7 +461,10 @@
         "final": false
       },
       "wordCount": 3043,
-      "targetWordCount": [3000, 4000],
+      "targetWordCount": [
+        3000,
+        4000
+      ],
       "diagramsRequired": 5,
       "diagramsComplete": 0,
       "codeExamplesRequired": 6,
@@ -451,7 +487,10 @@
         "final": false
       },
       "wordCount": 3316,
-      "targetWordCount": [4000, 5500],
+      "targetWordCount": [
+        4000,
+        5500
+      ],
       "diagramsRequired": 6,
       "diagramsComplete": 0,
       "codeExamplesRequired": 10,
@@ -474,7 +513,10 @@
         "final": false
       },
       "wordCount": 3511,
-      "targetWordCount": [3500, 5000],
+      "targetWordCount": [
+        3500,
+        5000
+      ],
       "diagramsRequired": 5,
       "diagramsComplete": 0,
       "codeExamplesRequired": 5,
@@ -498,7 +540,10 @@
         "final": false
       },
       "wordCount": 3667,
-      "targetWordCount": [3500, 4500],
+      "targetWordCount": [
+        3500,
+        4500
+      ],
       "diagramsRequired": 5,
       "diagramsComplete": 0,
       "codeExamplesRequired": 6,
@@ -515,90 +560,385 @@
     "diagramsRequired": 75,
     "diagramsComplete": 0,
     "totalWordCount": 44262,
-    "targetWordCount": [53000, 72000]
+    "targetWordCount": [
+      53000,
+      72000
+    ]
   },
   "tasks": {
     "kbArticlesToCreate": [
-      {"id": "kb-01", "title": "ci-cd-agent-patterns.md", "description": "GitHub Actions patterns for agent verification", "status": "complete"},
-      {"id": "kb-02", "title": "mutual-information-context.md", "description": "Measuring context effectiveness", "status": "complete"},
-      {"id": "kb-03", "title": "token-budgeting-strategies.md", "description": "Allocating context by information density", "status": "complete"},
-      {"id": "kb-04", "title": "lost-in-the-middle-mitigation.md", "description": "Preventing context window degradation", "status": "complete"},
-      {"id": "kb-05", "title": "checkpoint-commit-patterns.md", "description": "Git commit strategies for AI workflows", "status": "pending"},
-      {"id": "kb-06", "title": "batch-api-patterns.md", "description": "Batch processing for cost reduction", "status": "pending"},
-      {"id": "kb-07", "title": "prompt-injection-prevention.md", "description": "Security considerations in prompting", "status": "pending"}
+      {
+        "id": "kb-01",
+        "title": "ci-cd-agent-patterns.md",
+        "description": "GitHub Actions patterns for agent verification",
+        "status": "complete"
+      },
+      {
+        "id": "kb-02",
+        "title": "mutual-information-context.md",
+        "description": "Measuring context effectiveness",
+        "status": "complete"
+      },
+      {
+        "id": "kb-03",
+        "title": "token-budgeting-strategies.md",
+        "description": "Allocating context by information density",
+        "status": "complete"
+      },
+      {
+        "id": "kb-04",
+        "title": "lost-in-the-middle-mitigation.md",
+        "description": "Preventing context window degradation",
+        "status": "complete"
+      },
+      {
+        "id": "kb-05",
+        "title": "checkpoint-commit-patterns.md",
+        "description": "Git commit strategies for AI workflows",
+        "status": "complete"
+      },
+      {
+        "id": "kb-06",
+        "title": "batch-api-patterns.md",
+        "description": "Batch processing for cost reduction",
+        "status": "pending"
+      },
+      {
+        "id": "kb-07",
+        "title": "prompt-injection-prevention.md",
+        "description": "Security considerations in prompting",
+        "status": "pending"
+      }
     ],
     "appendices": [
-      {"id": "app-a", "title": "Appendix A: CLAUDE.md Templates", "status": "pending"},
-      {"id": "app-b", "title": "Appendix B: Prompt Library", "status": "pending"},
-      {"id": "app-c", "title": "Appendix C: Troubleshooting", "status": "pending"},
-      {"id": "app-d", "title": "Appendix D: Further Reading", "status": "pending"}
+      {
+        "id": "app-a",
+        "title": "Appendix A: CLAUDE.md Templates",
+        "status": "pending"
+      },
+      {
+        "id": "app-b",
+        "title": "Appendix B: Prompt Library",
+        "status": "pending"
+      },
+      {
+        "id": "app-c",
+        "title": "Appendix C: Troubleshooting",
+        "status": "pending"
+      },
+      {
+        "id": "app-d",
+        "title": "Appendix D: Further Reading",
+        "status": "pending"
+      }
     ],
     "crossRefFixes": [
-      {"id": "xref-01", "file": "ch01", "line": 359, "issue": "Fix ch07 reference to ch09 (Context Engineering)", "status": "pending"},
-      {"id": "xref-02", "file": "ch01", "line": 360, "issue": "Fix ch08 reference to ch10 (RALPH Loop)", "status": "pending"},
-      {"id": "xref-03", "file": "ch01", "line": 361, "issue": "Fix ch10 reference to ch13 (Building the Harness)", "status": "pending"},
-      {"id": "xref-04", "file": "ch03", "line": 496, "issue": "Update ch09 reference", "status": "pending"}
+      {
+        "id": "xref-01",
+        "file": "ch01",
+        "line": 359,
+        "issue": "Fix ch07 reference to ch09 (Context Engineering)",
+        "status": "pending"
+      },
+      {
+        "id": "xref-02",
+        "file": "ch01",
+        "line": 360,
+        "issue": "Fix ch08 reference to ch10 (RALPH Loop)",
+        "status": "pending"
+      },
+      {
+        "id": "xref-03",
+        "file": "ch01",
+        "line": 361,
+        "issue": "Fix ch10 reference to ch13 (Building the Harness)",
+        "status": "pending"
+      },
+      {
+        "id": "xref-04",
+        "file": "ch03",
+        "line": 496,
+        "issue": "Update ch09 reference",
+        "status": "pending"
+      }
     ],
     "termIntroFixes": {
       "critical": [
-        {"file": "ch01", "terms": ["CRUD", "CI/CD", "DDD", "OTEL"], "lines": [73, 76, 86, 88]},
-        {"file": "ch01", "terms": ["Terraform", "Docker", "Kubernetes"], "line": 89},
-        {"file": "ch03", "terms": ["LLM"], "line": 3},
-        {"file": "ch08", "terms": ["Claude Opus/Sonnet model tiers"], "line": 222},
-        {"file": "ch14", "terms": ["K8s"], "line": 536},
-        {"file": "ch15", "terms": ["Haiku/Sonnet/Opus", "MTok"], "lines": [48, 50, 65]}
+        {
+          "file": "ch01",
+          "terms": [
+            "CRUD",
+            "CI/CD",
+            "DDD",
+            "OTEL"
+          ],
+          "lines": [
+            73,
+            76,
+            86,
+            88
+          ]
+        },
+        {
+          "file": "ch01",
+          "terms": [
+            "Terraform",
+            "Docker",
+            "Kubernetes"
+          ],
+          "line": 89
+        },
+        {
+          "file": "ch03",
+          "terms": [
+            "LLM"
+          ],
+          "line": 3
+        },
+        {
+          "file": "ch08",
+          "terms": [
+            "Claude Opus/Sonnet model tiers"
+          ],
+          "line": 222
+        },
+        {
+          "file": "ch14",
+          "terms": [
+            "K8s"
+          ],
+          "line": 536
+        },
+        {
+          "file": "ch15",
+          "terms": [
+            "Haiku/Sonnet/Opus",
+            "MTok"
+          ],
+          "lines": [
+            48,
+            50,
+            65
+          ]
+        }
       ],
       "medium": [
-        {"file": "ch02", "terms": ["JSDoc", "JWT"]},
-        {"file": "ch05", "terms": ["DAG"]},
-        {"file": "ch06", "terms": ["TLA+", "Z3", "fast-check", "Hypothesis", "Zod", "io-ts"]},
-        {"file": "ch11", "terms": ["hexagonal architecture", "Result type", "JWT"]},
-        {"file": "ch12", "terms": ["AST", "slash command"]},
-        {"file": "ch15", "terms": ["YOLO mode"]}
+        {
+          "file": "ch02",
+          "terms": [
+            "JSDoc",
+            "JWT"
+          ]
+        },
+        {
+          "file": "ch05",
+          "terms": [
+            "DAG"
+          ]
+        },
+        {
+          "file": "ch06",
+          "terms": [
+            "TLA+",
+            "Z3",
+            "fast-check",
+            "Hypothesis",
+            "Zod",
+            "io-ts"
+          ]
+        },
+        {
+          "file": "ch11",
+          "terms": [
+            "hexagonal architecture",
+            "Result type",
+            "JWT"
+          ]
+        },
+        {
+          "file": "ch12",
+          "terms": [
+            "AST",
+            "slash command"
+          ]
+        },
+        {
+          "file": "ch15",
+          "terms": [
+            "YOLO mode"
+          ]
+        }
       ]
     },
     "generalReview": [
-      {"id": "review-01", "task": "Technical review all chapters", "status": "pending"},
-      {"id": "review-02", "task": "Style consistency pass", "status": "pending"},
-      {"id": "review-03", "task": "Validate all code examples", "status": "pending"},
-      {"id": "review-04", "task": "Cross-reference check", "status": "pending"},
-      {"id": "review-05", "task": "Final proofread", "status": "pending"}
+      {
+        "id": "review-01",
+        "task": "Technical review all chapters",
+        "status": "pending"
+      },
+      {
+        "id": "review-02",
+        "task": "Style consistency pass",
+        "status": "pending"
+      },
+      {
+        "id": "review-03",
+        "task": "Validate all code examples",
+        "status": "pending"
+      },
+      {
+        "id": "review-04",
+        "task": "Cross-reference check",
+        "status": "pending"
+      },
+      {
+        "id": "review-05",
+        "task": "Final proofread",
+        "status": "pending"
+      }
     ],
-    "blockers": []
+    "blockers": [],
+    "completed": {
+      "summary": "Compacted completed tasks - details preserved in git history",
+      "kbArticles": [],
+      "fixes": [],
+      "reviews": []
+    },
+    "compactionRules": {
+      "trigger": "When any task array has > 10 completed items",
+      "action": "Move completed items to .tasks.completed with summary",
+      "preserve": [
+        "id",
+        "title",
+        "completedAt"
+      ]
+    }
   },
   "diagramTasks": {
     "highPriority": {
-      "ch01": ["three-levels-pyramid", "portfolio-vs-single-bet", "constraint-feedback-loop"],
-      "ch02": ["agent-vs-chat", "tool-ecosystem-radial", "two-mode-mental-model"],
-      "ch03": ["prompt-anatomy", "constraint-funnel"],
-      "ch04": ["why-what-how-framework", "hierarchical-claude-md"],
-      "ch05": ["reliability-cascade", "four-turn-framework", "12-factors-overview"],
-      "ch06": ["verification-ladder-stack", "verification-sandwich"],
-      "ch07": ["state-space-reduction", "compounding-formula", "six-gate-architecture"],
-      "ch08": ["error-classification-pie", "context-debugging-hierarchy"],
-      "ch09": ["context-window-anatomy", "progressive-disclosure"],
-      "ch10": ["ralph-loop-cycle", "memory-architecture"],
-      "ch11": ["sub-agent-team-org", "context-hierarchy-tree", "actor-critic-loop"],
-      "ch12": ["plan-mode-phases", "git-worktrees-parallel"],
-      "ch13": ["four-layer-harness", "closed-loop-optimization"],
-      "ch14": ["skill-atrophy-ladder", "six-waves-timeline", "four-automation-levels", "fleet-model-evolution"],
-      "ch15": ["three-tier-model-hierarchy", "progressive-model-escalation", "multi-layer-timeout"]
+      "ch01": [
+        "three-levels-pyramid",
+        "portfolio-vs-single-bet",
+        "constraint-feedback-loop"
+      ],
+      "ch02": [
+        "agent-vs-chat",
+        "tool-ecosystem-radial",
+        "two-mode-mental-model"
+      ],
+      "ch03": [
+        "prompt-anatomy",
+        "constraint-funnel"
+      ],
+      "ch04": [
+        "why-what-how-framework",
+        "hierarchical-claude-md"
+      ],
+      "ch05": [
+        "reliability-cascade",
+        "four-turn-framework",
+        "12-factors-overview"
+      ],
+      "ch06": [
+        "verification-ladder-stack",
+        "verification-sandwich"
+      ],
+      "ch07": [
+        "state-space-reduction",
+        "compounding-formula",
+        "six-gate-architecture"
+      ],
+      "ch08": [
+        "error-classification-pie",
+        "context-debugging-hierarchy"
+      ],
+      "ch09": [
+        "context-window-anatomy",
+        "progressive-disclosure"
+      ],
+      "ch10": [
+        "ralph-loop-cycle",
+        "memory-architecture"
+      ],
+      "ch11": [
+        "sub-agent-team-org",
+        "context-hierarchy-tree",
+        "actor-critic-loop"
+      ],
+      "ch12": [
+        "plan-mode-phases",
+        "git-worktrees-parallel"
+      ],
+      "ch13": [
+        "four-layer-harness",
+        "closed-loop-optimization"
+      ],
+      "ch14": [
+        "skill-atrophy-ladder",
+        "six-waves-timeline",
+        "four-automation-levels",
+        "fleet-model-evolution"
+      ],
+      "ch15": [
+        "three-tier-model-hierarchy",
+        "progressive-model-escalation",
+        "multi-layer-timeout"
+      ]
     },
     "mediumPriority": {
-      "ch01": ["builder-metabuilder", "cost-curve-levels"],
-      "ch03": ["chain-of-thought-flow", "few-shot-accuracy"],
-      "ch04": ["context-relevance", "instruction-degradation"],
-      "ch05": ["reliability-stack", "agent-loop"],
-      "ch06": ["test-driven-search-space"],
-      "ch07": ["hook-workflow"],
-      "ch08": ["learning-loop", "clean-slate-recovery"],
-      "ch09": ["signal-degradation", "entropy-reduction"],
-      "ch10": ["four-phase-pie", "multi-agent-coordination"],
-      "ch11": ["parallel-vs-sequential"],
-      "ch12": ["incremental-development"],
-      "ch13": ["linear-vs-exponential", "mcp-query-flow"],
-      "ch14": ["leverage-stack", "roi-calculation"],
-      "ch15": ["yolo-safety-hierarchy", "model-selection-tree", "prompt-caching-structure"]
+      "ch01": [
+        "builder-metabuilder",
+        "cost-curve-levels"
+      ],
+      "ch03": [
+        "chain-of-thought-flow",
+        "few-shot-accuracy"
+      ],
+      "ch04": [
+        "context-relevance",
+        "instruction-degradation"
+      ],
+      "ch05": [
+        "reliability-stack",
+        "agent-loop"
+      ],
+      "ch06": [
+        "test-driven-search-space"
+      ],
+      "ch07": [
+        "hook-workflow"
+      ],
+      "ch08": [
+        "learning-loop",
+        "clean-slate-recovery"
+      ],
+      "ch09": [
+        "signal-degradation",
+        "entropy-reduction"
+      ],
+      "ch10": [
+        "four-phase-pie",
+        "multi-agent-coordination"
+      ],
+      "ch11": [
+        "parallel-vs-sequential"
+      ],
+      "ch12": [
+        "incremental-development"
+      ],
+      "ch13": [
+        "linear-vs-exponential",
+        "mcp-query-flow"
+      ],
+      "ch14": [
+        "leverage-stack",
+        "roi-calculation"
+      ],
+      "ch15": [
+        "yolo-safety-hierarchy",
+        "model-selection-tree",
+        "prompt-caching-structure"
+      ]
     }
   }
 }
