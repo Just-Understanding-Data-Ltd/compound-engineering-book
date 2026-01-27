@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 22:45)
+## Current Status (Updated: 2026-01-27 23:00)
 - Phase: Chapter Milestones (10 of 15 complete, 67%)
 - Active: ch11 Sub-Agent Architecture
-- Last Completed: task-060 (ch10 final milestone) - TENTH CHAPTER COMPLETE
+- Last Completed: task-062 (ch11 code_written milestone)
 - Blockers: None active
-- Queue Health: EXCELLENT (curated)
+- Queue Health: EXCELLENT
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
@@ -13,10 +13,10 @@
 - Chapters Complete: 10/15 (ch01-ch10, 67%)
 - KB Articles: 14/15 complete (93%)
 - Diagrams: 37/~63 created (59%)
-- Code Examples: 10 chapters have code (67%)
+- Code Examples: 11 chapters have code (73%)
 - Word Count: ~47,300 (target 45,000-57,000, 94% complete)
 - Quality Issues: 129 total (AI slop 60, tech accuracy 7, term intros 62, cross-refs 0)
-- Tasks Complete: 63/109 (58%)
+- Tasks Complete: 64/109 (59%)
 
 ## Critical Issues Identified (From Latest Reviews)
 1. 44 em dashes in PRDs - MECHANICAL FIX (30 min) - CRITICAL
@@ -26,11 +26,30 @@
 5. 26 diagrams still needed - PARALLEL WITH CHAPTERS
 
 ## Next Task Priority
-1. task-061 (ch11: Sub-Agent Architecture code_written) - score 895 - READY
+1. task-063 (ch11: Sub-Agent Architecture code_tested) - next milestone
 2. task-067 (ch12: Development Workflows code_written) - score 890
 3. task-073 (ch13: Building the Harness code_written) - score 885
 
 ## Recent Activity
+
+### 2026-01-27 23:00 - COMPLETED task-062: ch11 Sub-Agent Architecture code_written - ITERATION 6
+- What: Verified code examples for Chapter 11 (Sub-Agent Architecture)
+- Files Verified:
+  - examples/ch11/sub-agent-orchestration.ts (SubAgentOrchestrator class, runAgent, system prompts)
+  - examples/ch11/context-hierarchy.ts (ContextManager, three-layer hierarchy, ContextAwareAgent)
+  - examples/ch11/actor-critic-loop.ts (ActorCriticLoop, 8 critique dimensions, iterative refinement)
+  - examples/ch11/agent-permissions.ts (PermissionChecker, ROLE_PERMISSIONS, tool access control)
+  - examples/ch11/sub-agent-architecture.test.ts (67 tests, 208 expect() calls)
+- Bug Fixed: Glob pattern matching in agent-permissions.ts (dot escaping order)
+- Test Results: 67 tests pass, 208 expect() calls
+- All examples use Anthropic SDK as required
+- Demo scripts run correctly
+- Tasks: task-062 marked complete
+- Stats: pending 45, complete 64
+- ch11 Status: 1/5 milestones complete (code_written)
+- Iteration 6 % 6 == 0: Running all 7 review agents in parallel
+- Outcome: Success
+- Next: task-063 (ch11 code_tested milestone)
 
 ### 2026-01-27 22:45 - Queue Curation (every 3rd iteration)
 - What: Curated task queue per RALPH loop protocol
