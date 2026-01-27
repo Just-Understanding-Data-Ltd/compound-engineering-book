@@ -99,6 +99,30 @@ This is more verbose than conventional commits but necessary for agent-to-agent 
 
 ---
 
+### 2026-01-27 - Term Introduction vs AI Slop as Complementary Review Passes
+
+**Context**: Reviewing ch01 for the "reviewed" milestone (iteration 10).
+
+**Observation**: A chapter can pass all AI slop checks (no em dashes, no blacklisted phrases like "delve" or "crucial") while still having undefined acronyms that confuse readers. In ch01, the AI slop checker found zero issues, but the term introduction check found two undefined acronyms:
+- "DDD" used without defining Domain-Driven Design
+- "OTEL" used without defining OpenTelemetry
+
+These are different categories of reader friction:
+- AI slop creates skepticism ("this sounds like generic AI text")
+- Undefined terms create confusion ("what does this acronym mean?")
+
+Both hurt readability, but they require different detection methods.
+
+**Implication**: The review process should run multiple complementary passes rather than relying on a single "review" step. The slop-checker agent catches stylistic issues; the term-intro-checker agent catches comprehension issues. Neither alone is sufficient.
+
+**Action**: Always run both slop-checker AND term-intro-checker during the "reviewed" milestone. Consider adding a checklist to CLAUDE.md that explicitly lists review passes:
+1. AI slop check (em dashes, blacklisted phrases)
+2. Term introduction check (acronyms defined on first use)
+3. Technical accuracy check (code syntax, tool names)
+4. Cross-reference validation (links work)
+
+---
+
 ### 2026-01-28 - Centralized Task Tracking in features.json
 
 **Context**: Working through KB article creation tasks tracked in features.json rather than separate TASKS.md files.

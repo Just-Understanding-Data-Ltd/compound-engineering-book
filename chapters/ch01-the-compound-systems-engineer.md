@@ -83,9 +83,9 @@ The skill stack that meta-engineers develop includes:
 
 1. **Mathematical reasoning**: invariants, complexity, optimization
 2. **Systems thinking**: feedback loops, emergent behavior, constraints
-3. **Architectural design**: DDD, boundaries, contracts
+3. **Architectural design**: Domain-Driven Design (DDD), boundaries, contracts
 4. **Agent orchestration**: prompts, tools, verification
-5. **Observability engineering**: OTEL, metrics, traces
+5. **Observability engineering**: OpenTelemetry (OTEL), metrics, traces
 6. **Infrastructure as code**: Terraform, Docker, Kubernetes
 7. **Core programming**: TypeScript, Python, SQL
 
