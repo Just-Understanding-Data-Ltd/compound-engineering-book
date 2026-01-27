@@ -19,12 +19,12 @@ echo ""
 
 # Check 1: Is RALPH running?
 echo "1. Process Status"
-RALPH_PID=$(pgrep -f "ralph.sh" 2>/dev/null || echo "")
+RALPH_PID=$(pgrep -f "ralph.sh" 2>/dev/null | head -1 || echo "")
 if [ -n "$RALPH_PID" ]; then
     echo -e "   ${GREEN}✓ RALPH is running (PID: $RALPH_PID)${NC}"
 
     # Get runtime
-    RALPH_START=$(ps -o lstart= -p $RALPH_PID 2>/dev/null || echo "unknown")
+    RALPH_START=$(ps -o lstart= -p $RALPH_PID 2>/dev/null | head -1 || echo "unknown")
     echo "   Started: $RALPH_START"
 else
     echo -e "   ${YELLOW}⚠ RALPH is not running${NC}"
@@ -151,7 +151,8 @@ if [ "$COMMITS_LAST_HOUR" -eq 0 ] && [ -n "$RALPH_PID" ]; then
     ISSUES=$((ISSUES + 1))
 fi
 
-if [ "${BLOCKED:-0}" -gt 0 ]; then
+BLOCKED_COUNT="${BLOCKED:-0}"
+if [ "$BLOCKED_COUNT" -gt 0 ] 2>/dev/null; then
     echo -e "${YELLOW}⚠ Blocked tasks exist${NC}"
     ISSUES=$((ISSUES + 1))
 fi
