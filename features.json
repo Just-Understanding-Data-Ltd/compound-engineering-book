@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-26T22:00:00Z",
+  "lastUpdated": "2026-01-27T10:30:00Z",
   "prds": {
     "index": {
       "status": "complete",
@@ -88,17 +88,17 @@
     "ch01": {
       "title": "The Compound Systems Engineer",
       "prd": "prds/ch01.md",
-      "chapter": null,
-      "status": "not_started",
+      "chapter": "chapters/ch01-the-compound-systems-engineer.md",
+      "status": "draft",
       "milestones": {
         "prd_complete": true,
-        "first_draft": false,
+        "first_draft": true,
         "reviewed": false,
         "diagrams_complete": false,
-        "exercises_added": false,
+        "exercises_added": true,
         "final": false
       },
-      "wordCount": 0,
+      "wordCount": 2573,
       "targetWordCount": [2500, 4000],
       "diagramsRequired": 6,
       "diagramsComplete": 0,
@@ -317,11 +317,11 @@
   "stats": {
     "totalChapters": 12,
     "prdsComplete": 12,
-    "draftsComplete": 0,
+    "draftsComplete": 1,
     "reviewed": 0,
     "diagramsRequired": 87,
     "diagramsComplete": 0,
-    "totalWordCount": 0,
+    "totalWordCount": 2573,
     "targetWordCount": [45000, 57000]
   }
 }
