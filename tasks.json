@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T22:30:00.000Z",
+  "lastUpdated": "2026-01-27T23:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -251,8 +251,10 @@
           "parentId": "task-007",
           "type": "milestone",
           "title": "reviewed",
-          "status": "pending",
-          "score": -105
+          "status": "complete",
+          "completedAt": "2026-01-27T23:00:00Z",
+          "score": -105,
+          "note": "Passed AI slop check, fixed 5 term introductions (WSL2, CLI, JWT, API), fixed 'seven tools' to 'six tools'"
         },
         {
           "id": "task-011",
@@ -1750,6 +1752,16 @@
       "score": 355
     },
     {
+      "id": "task-209",
+      "type": "fix",
+      "title": "Add Related Chapters sections to missing chapters",
+      "description": "Add standardized Related Chapters section to ch05, ch06, ch07, ch09 which currently lack this section",
+      "status": "pending",
+      "priority": "medium",
+      "score": 185,
+      "source": "cross-refs-2026-01-27-v4.md"
+    },
+    {
       "id": "task-103",
       "type": "fixes",
       "title": "Fix cross-references",
@@ -1805,6 +1817,36 @@
         }
       ],
       "score": 105
+    },
+    {
+      "id": "task-211",
+      "type": "prd",
+      "title": "Create PRD for ch13 and ch14",
+      "description": "Create missing PRD files for ch13 (Building the Harness) and ch14 (The Meta-Engineer Playbook)",
+      "status": "pending",
+      "priority": "medium",
+      "score": 105,
+      "source": "cross-refs-2026-01-27-v4.md"
+    },
+    {
+      "id": "task-212",
+      "type": "content",
+      "title": "Expand Part II chapters word count",
+      "description": "Part II (ch05-ch08) is ~2,700 words below target. Current: 11,286 words. Target: 14,000-18,000 words",
+      "status": "pending",
+      "priority": "medium",
+      "score": 105,
+      "source": "cross-refs-2026-01-27-v4.md"
+    },
+    {
+      "id": "task-213",
+      "type": "content",
+      "title": "Expand Part III chapters word count",
+      "description": "Part III (ch09-ch12) is ~2,000 words below target. Current: 11,984 words. Target: 14,000-18,000 words",
+      "status": "pending",
+      "priority": "medium",
+      "score": 105,
+      "source": "cross-refs-2026-01-27-v4.md"
     },
     {
       "id": "task-091",
@@ -1935,6 +1977,16 @@
       ]
     },
     {
+      "id": "task-210",
+      "type": "fix",
+      "title": "Standardize Related Chapters format",
+      "description": "Convert text-only Related Chapters sections (ch04, ch08, ch10, ch11, ch13) to bold format with descriptions for consistency",
+      "status": "pending",
+      "priority": "low",
+      "score": -215,
+      "source": "cross-refs-2026-01-27-v4.md"
+    },
+    {
       "id": "task-108",
       "type": "review",
       "title": "Final review cycle",
@@ -2027,56 +2079,6 @@
         }
       ],
       "score": -295
-    },
-    {
-      "id": "task-209",
-      "type": "fix",
-      "title": "Add Related Chapters sections to missing chapters",
-      "description": "Add standardized Related Chapters section to ch05, ch06, ch07, ch09 which currently lack this section",
-      "status": "pending",
-      "priority": "medium",
-      "score": 540,
-      "source": "cross-refs-2026-01-27-v4.md"
-    },
-    {
-      "id": "task-210",
-      "type": "fix",
-      "title": "Standardize Related Chapters format",
-      "description": "Convert text-only Related Chapters sections (ch04, ch08, ch10, ch11, ch13) to bold format with descriptions for consistency",
-      "status": "pending",
-      "priority": "low",
-      "score": 140,
-      "source": "cross-refs-2026-01-27-v4.md"
-    },
-    {
-      "id": "task-211",
-      "type": "prd",
-      "title": "Create PRD for ch13 and ch14",
-      "description": "Create missing PRD files for ch13 (Building the Harness) and ch14 (The Meta-Engineer Playbook)",
-      "status": "pending",
-      "priority": "medium",
-      "score": 560,
-      "source": "cross-refs-2026-01-27-v4.md"
-    },
-    {
-      "id": "task-212",
-      "type": "content",
-      "title": "Expand Part II chapters word count",
-      "description": "Part II (ch05-ch08) is ~2,700 words below target. Current: 11,286 words. Target: 14,000-18,000 words",
-      "status": "pending",
-      "priority": "medium",
-      "score": 500,
-      "source": "cross-refs-2026-01-27-v4.md"
-    },
-    {
-      "id": "task-213",
-      "type": "content",
-      "title": "Expand Part III chapters word count",
-      "description": "Part III (ch09-ch12) is ~2,000 words below target. Current: 11,984 words. Target: 14,000-18,000 words",
-      "status": "pending",
-      "priority": "medium",
-      "score": 495,
-      "source": "cross-refs-2026-01-27-v4.md"
     }
   ],
   "completed": {
@@ -2085,16 +2087,16 @@
     "items": []
   },
   "stats": {
-    "pending": 183,
+    "pending": 182,
     "inProgress": 0,
-    "complete": 30,
+    "complete": 31,
     "blocked": 0,
     "total": 213
   },
   "checkpoints": {
-    "lastGoodCommit": "9b3dd25",
-    "lastSuccessfulTask": "task-009",
-    "lastCheckpoint": "2026-01-27T22:30:00Z",
+    "lastGoodCommit": "fc110c849661d3f0e8eac01ef64fb385ac203fff",
+    "lastSuccessfulTask": "iteration-4",
+    "lastCheckpoint": "2026-01-27T23:00:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false

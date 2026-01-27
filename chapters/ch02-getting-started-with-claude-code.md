@@ -26,7 +26,7 @@ The agent mindset is: every prompt should reference what exists, specify where c
 
 ### System Requirements
 
-Claude Code runs on macOS 11+, Linux (Ubuntu 20+), and Windows 10+ (with WSL2 or native). You need Node.js 18 or higher.
+Claude Code runs on macOS 11+, Linux (Ubuntu 20+), and Windows 10+ (with WSL2 (Windows Subsystem for Linux 2) or native). You need Node.js 18 or higher.
 
 ### Installation Steps
 
@@ -108,7 +108,7 @@ This opens an interactive session where you can have a conversation. Each turn b
 
 ### Walkthrough: Building a CLI Tool
 
-Let me show you a real workflow. Suppose you want to create a simple CSV reader tool.
+Let me show you a real workflow. Suppose you want to create a simple CLI (Command Line Interface) tool that reads CSV files.
 
 **Step 1: Explore the project**
 
@@ -147,14 +147,14 @@ The pattern: Explore first to understand context. Implement with specific refere
 
 ## The Tool Ecosystem
 
-Claude Code has seven core tools. Understanding when to use each one makes your prompts more effective.
+Claude Code has six core tools. Understanding when to use each one makes your prompts more effective.
 
 ### Read (Understand Existing Code)
 
 Read fetches file contents so Claude Code can understand patterns, architecture, or implementation details.
 
 ```bash
-claude -p "Read src/services/auth.ts and explain how JWT tokens are verified"
+claude -p "Read src/services/auth.ts and explain how JWT (JSON Web Token) tokens are verified"
 ```
 
 When to use: Learning existing patterns. Understanding a file before editing. Debugging issues.
@@ -174,7 +174,7 @@ When to use: New test files. New configuration. Documentation. Never use Write o
 Edit makes surgical changes to existing code. It replaces specific text blocks while preserving surrounding context.
 
 ```bash
-claude -p "In src/api/handler.ts, add rate limiting middleware to the POST /users endpoint"
+claude -p "In src/api/handler.ts, add rate limiting middleware to the POST /users API (Application Programming Interface) endpoint"
 ```
 
 When to use: Adding features to existing code. Small targeted changes. Safer than Write for modifications.
@@ -209,11 +209,11 @@ claude -p "Run npm test and tell me which tests are failing"
 
 When to use: Running tests. Building code. Executing linters. Infrastructure operations.
 
-### Observability (See Results)
+### The Feedback Loop
 
-Every Bash execution produces output that Claude Code can read and reason about. This is the feedback loop that makes agents effective.
+Every Bash execution produces output that Claude Code can read and reason about. This observability is what makes agents effective.
 
-When tests fail, Claude Code sees the failure message, understands what went wrong, and can propose fixes. When builds break, it sees the error and can diagnose the problem. This observability is automatic; you do not need to do anything special.
+When tests fail, Claude Code sees the failure message, understands what went wrong, and can propose fixes. When builds break, it sees the error and can diagnose the problem. This feedback loop is automatic; you do not need to do anything special. The six tools listed above, combined with this observability capability, form the agent's complete toolkit.
 
 ## Basic Prompting Patterns
 
@@ -447,7 +447,7 @@ Claude Code is an agent that reads your codebase, makes changes, and verifies it
 The key insights:
 
 - **Context matters**: Prompts that reference existing patterns produce correct code on the first try. Vague prompts produce multiple iterations.
-- **Seven core tools**: Read, Write, Edit, Glob, Grep, Bash, and Observability form the agent's capability set.
+- **Six core tools**: Read, Write, Edit, Glob, Grep, and Bash form the agent's capability set, with automatic observability of command output.
 - **Right tool for the job**: Claude Code for multi-file workflows with verification. Cursor for fast inline edits. ChatGPT for concepts and brainstorming.
 - **Two modes**: Explore first to understand, then implement with informed context. This pattern reduces iterations by 60% and produces 8x fewer pattern violations.
 

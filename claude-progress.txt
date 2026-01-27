@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 22:30)
+## Current Status (Updated: 2026-01-27 23:00)
 - Phase: Chapter Milestones
-- Active: task-010 (ch02 reviewed) - next milestone for ch02
-- Last Completed: task-009 (ch02 code_tested) - iteration 3
+- Active: task-012 (ch02 final) - last milestone for ch02
+- Last Completed: task-010 (ch02 reviewed) - iteration 4
 - Blockers: None
 
 ## Project State Summary
@@ -17,14 +17,33 @@
 - Total Word Count: 44,268 (target: 45,000-57,000, 78-98% complete)
 - Quality Issues: 244 total (168 style, 18 tech, 58 terms)
 - ch01 Milestones: 6/6 COMPLETE - FIRST CHAPTER DONE!
-- ch02 Milestones: 3/5 complete (code_written, code_tested, diagrams_complete)
+- ch02 Milestones: 4/5 complete (code_written, code_tested, diagrams_complete, reviewed)
 - Chapters Complete: 1/15 (ch01)
 
 ## Next Task
-task-010 (ch02 reviewed) - score 940 (next subtask of task-007)
-OR task-207 (Add Level 2 thinking content) - score 355
+task-012 (ch02 final) - score 940 (last subtask of task-007)
+OR task-014 (ch03 code_written) - score 935
 
 ## Recent Activity
+
+### 2026-01-27 23:00 - COMPLETED ch02 reviewed (task-010) - ITERATION 4
+- What: Reviewed Chapter 2 for AI slop, technical accuracy, and term introductions
+- Review Results:
+  - AI slop check: PASS (no em dashes, no blacklisted phrases)
+  - Technical accuracy: 1 issue fixed (Observability listed as tool, changed to 6 tools)
+  - Term introduction: 4 issues fixed (WSL2, CLI, JWT, API defined on first use)
+- Fixes Applied:
+  - Line 29: Added "Windows Subsystem for Linux 2" after WSL2
+  - Line 109: Added "Command Line Interface" after CLI
+  - Line 150: Changed "seven core tools" to "six core tools"
+  - Line 159: Added "JSON Web Token" after JWT
+  - Line 177: Added "Application Programming Interface" after API
+  - Lines 212-216: Renamed "Observability" section to "The Feedback Loop" (capability, not tool)
+  - Line 450: Updated summary to say "six core tools" with observability as capability
+- Tasks: task-010 marked complete, stats updated (182 pending, 31 complete)
+- ch02 Status: 4/5 milestones complete (only final remaining)
+- Outcome: Success
+- Next: task-012 (ch02 final) or ch03 code_written (task-014)
 
 ### 2026-01-27 22:30 - COMPLETED ch02 code_tested (task-009) - ITERATION 3
 - What: Tested and verified all ch02 TypeScript code examples
