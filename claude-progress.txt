@@ -1,36 +1,65 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 10:30)
-- Phase: Chapter Writing
-- Active: Chapter 2 (next up)
-- Last Completed: Chapter 1 first draft
+## Current Status (Updated: 2026-01-27 14:30)
+- Phase: PRD Enhancement + Chapter Writing
+- Active: PRD improvements based on sub-agent KB analysis
+- Last Completed: TASKS.md update with sub-agent findings
 - Blockers: None
 
 ## Project State Summary
-- PRDs: 12/12 complete (verified in features.json)
-- Chapter Drafts: 1/12 complete
-- Diagrams: 0/87 complete
-- Total Word Count: 2,573 (target: 45,000-57,000)
+- PRDs: 15/15 complete (4 new chapters added: ch03, ch08, ch12, ch15)
+- Chapter Drafts: 1/15 complete
+- Diagrams: 13 files with 20+ Mermaid diagrams (shells created)
+- Total Word Count: 2,573 (target: 53,000-72,000)
 
 ## Next Task
-Write Chapter 2 first draft (prds/ch02.md)
+Update PRDs with missing KB article references per sub-agent analysis
 
 ## Recent Activity
 
+### 2026-01-27 14:30 - TASKS.md Updated with Sub-Agent Findings
+- What: Consolidated sub-agent analysis into actionable tasks
+- Files: TASKS.md (major update with Phase 1.5 PRD Enhancement tasks)
+- Findings: 29 unreferenced KB articles, 59% coverage, 5 critical new KB articles needed
+- Outcome: Success
+- Next: Begin updating PRDs with missing KB references
+
+### 2026-01-27 12:00 - Sub-Agent Analysis Complete
+- What: Ran 5 parallel sub-agents to analyze PRDs vs Knowledge Base
+- Agents: Ch01-Ch04, Ch05-Ch08, Ch09-Ch12, Unreferenced KB, TOC Analysis
+- Key Findings:
+  - 18 articles to add to Ch01-Ch04
+  - Entropy/reliability concepts missing in Ch05-Ch08
+  - Critical gaps in Ch09-Ch12 (sub-agent context, tool access, orchestration)
+  - 29 unreferenced KB articles (30.5% of KB)
+  - ~59% overall KB coverage
+- Outcome: Success - comprehensive improvement roadmap created
+- Next: Update TASKS.md with findings
+
+### 2026-01-27 11:00 - Week 2 Tasks Complete
+- What: Created Mermaid diagram shells for all 15 chapters
+- Files: 13 files in assets/diagrams/ with 20+ diagrams total
+- Diagrams: Flywheel, prompt anatomy, hierarchy, 12-factor, ladder, gates, diagnostic, context window, RALPH, sub-agent, workflows, harness, six waves, model selection
+- Outcome: Success
+- Commit: b664c9c
+
 ### 2026-01-27 10:30 - Chapter 1 First Draft Complete
 - What: Wrote first draft of ch01-the-compound-systems-engineer.md
-- Files: chapters/ch01-the-compound-systems-engineer.md (created), TASKS.md (updated)
+- Files: chapters/ch01-the-compound-systems-engineer.md (created)
 - Word Count: 2,573 (target: 2,500-4,000)
 - Outcome: Success
-- Commit: a98ec21
-- Next: Write Chapter 2 first draft
+- Next: Continue with Chapter 2
 
 ### 2026-01-27 09:15 - Initializer Agent Setup
-- What: Verified project state, created progress tracking, synced TASKS.md
+- What: Verified project state, created progress tracking
 - Files: claude-progress.txt (created), TASKS.md (updated)
 - Outcome: Success
-- Commit: 4b21b84
-- Next: Begin Chapter 1 first draft
 
 ## Compacted History
-(older entries summarized here)
+
+### Week of 2026-01-20
+- TOC restructured from 12 to 15 chapters
+- 4 new PRD shells created (ch03, ch08, ch12, ch15)
+- Features.json updated with 15-chapter structure
+- 2 shallow KB articles expanded (ai-cost-protection, flaky-test-diagnosis)
+- Case Studies chapter removed per user request
