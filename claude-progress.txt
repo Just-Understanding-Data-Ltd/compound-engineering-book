@@ -1,32 +1,46 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 10:00)
-- Phase: Chapter Milestones
-- Active: Next chapter task-025 (ch05 code_written)
-- Last Completed: task-024 (ch04 final) - ITERATION 5 - FOURTH CHAPTER COMPLETE!
-- Blockers: None - SDK installed, code examples use Anthropic SDK
+## Current Status (Updated: 2026-01-28 11:00)
+- Phase: Chapter Milestones (4 of 15 complete, 27%)
+- Active: task-209 (SDK refactor) or task-025 (ch05 code)
+- Last Completed: task-024 (ch04 final) - ITERATION 5
+- Blockers: task-209 (SDK refactoring), ch02 CLI syntax errors
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
-- Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
-- KB Articles Created: 14/15 complete (93%) - prompt-injection-prevention.md pending
-- Diagrams: 11/63 complete (17%) - ch01 (4), ch02 (3), ch03 (2), ch04 (3)
-- Code Examples: ch01-ch04 complete (ch03 needs SDK refactoring per task-209)
-- Cross-Refs Fixed: ch01, ch04 complete
-- Total Word Count: 44,313 (target: 45,000-57,000, 78-98% complete)
-- Quality Issues: 280 total tracked (AI slop 51, tech 18, terms 56, cross-refs 3, style 147, other 5)
-- Chapters Complete: 4/15 (ch01, ch02, ch03, ch04 all pass final quality gates)
-- ch04 Status: 5/5 milestones COMPLETE
+- Chapter Drafts: 15/15 complete (100%)
+- Chapters Complete: 4/15 (ch01-ch04, 27%)
+- KB Articles: 14/15 complete (93%)
+- Diagrams: 11/~63 created (17%)
+- Code Examples: 4 chapters tested (27%)
+- Word Count: 44,313 (target 45,000-57,000, 76-98% complete)
+- Quality Issues: 286 tracked (AI slop 55, tech 23, terms 58, cross-refs 3, style 147)
+- Tasks Complete: 51/214 (24%)
 
 ## Critical Blockers
-1. task-209: SDK Refactoring - Code examples in ch03 must use Anthropic SDK (not standalone utilities)
-2. ch02: CLI syntax errors - 8 invalid commands (claude ask, claude chat, claude init)
+1. task-209 (SDK Refactor): ch03 code examples must use Anthropic SDK (not standalone utilities)
+2. ch02 CLI Syntax: 8 invalid commands (claude ask, chat, init don't exist)
 
-## Next Task
-task-209 (SDK refactoring, score 1080 CRITICAL) - OR task-025 (ch05 code_written, score 925)
-Pattern: Start with highest-score pending task
+## Next Task Priority
+1. task-209 (SDK refactoring, score 1080 CRITICAL) - HIGHEST PRIORITY
+2. task-025 (ch05 code_written, score 925) - After SDK fix
+3. task-214 (Related Chapters format, score 185) - Quick style fix
+4. task-208 (Plan vs Execute docs, score 355) - Content for ch12
 
 ## Recent Activity
+
+### 2026-01-28 11:00 - GENERATED comprehensive progress summary (ITERATION 6)
+- What: Created detailed progress-summarizer report (reviews/summary-2026-01-28-iteration-6.md)
+- Analysis includes:
+  - Completion metrics: PRDs 100%, chapter drafts 100%, milestones 27%, word count 76-98%
+  - Quality dashboard: 286 total issues (down from 291), stable trend
+  - Top 5 actions: SDK refactor (critical), ch05 code, CLI fixes, diagrams, term intros
+  - Velocity analysis: 4 chapters in 5 iterations, 1 per week pace
+  - Risk assessment: Low overall, task-209 and CLI syntax highest priority
+  - Publishing readiness: 30% ready (foundations complete, need code + diagrams)
+- Data sources: tasks.json (214 tasks), claude-progress.txt, 7 review agent files
+- Outcome: Success - Comprehensive iteration 6 baseline established
+- Next: task-209 (SDK refactoring) as highest-priority next action
 
 ### 2026-01-28 10:00 - COMPLETED ch04 final (task-024) - ITERATION 5 - FOURTH CHAPTER COMPLETE!
 - What: Completed final quality gate for Chapter 4 (Writing Your First CLAUDE.md)
@@ -46,7 +60,7 @@ Pattern: Start with highest-score pending task
 - Chapters Complete: 4/15 (ch01, ch02, ch03, ch04)
 - Learning added to @LEARNINGS.md (iteration 5 % 5 == 0)
 - Outcome: Success
-- Next: task-209 (SDK refactoring, score 1080) OR task-025 (ch05 code_written, score 925)
+- Next: task-209 (SDK refactoring, score 1080) - CRITICAL PRIORITY
 
 ### 2026-01-28 09:00 - COMPLETED ch04 diagrams_complete (task-023) - ITERATION 4
 - What: Created 2 Mermaid diagrams for Chapter 4 (Writing Your First CLAUDE.md)
@@ -117,138 +131,21 @@ Pattern: Start with highest-score pending task
 - Outcome: Success
 - Next: task-021 (ch04 code_tested) - verify examples thoroughly
 
-### 2026-01-27 23:30 - GENERATED comprehensive progress summary
-- What: Created detailed progress-summarizer report (reviews/summary-2026-01-27.md)
-- Analysis includes:
-  - Completion metrics: PRDs 100%, chapters 100%, milestones 20%, word count 78-98%
-  - Quality dashboard: 282 total issues (down from 291), manageable and declining
-  - Top 5 actions: SDK refactor, ch04 code, CLI fixes, diagrams, term intros
-  - Velocity analysis: 3 chapters in 10 iterations, sustainable 1-2 per week pace
-  - Publishing readiness: 30% ready, needs SDK fix + diagrams + polish
-  - Risk assessment: Low overall, critical path identified
-- Data sources: tasks.json, claude-progress.txt, 7 review agent files
-- Outcome: Success - Comprehensive baseline established for future progress
-- Next: Start task-020 after SDK refactoring approach finalized
-
-### 2026-01-28 05:00 - COMPLETED ch03 final (task-018) - ITERATION 10 - THIRD CHAPTER COMPLETE!
-- What: Completed final quality gate for Chapter 3 (Prompting Fundamentals)
-- Quality Gate Results:
-  - Word count: 2,574 (within 2,500-4,000 target) ✓
-  - Em dashes: None found ✓
-  - AI slop phrases: None found ✓
-  - Diagrams: 2/2 confirmed (prompt-anatomy, constraint-funnel) ✓
-  - Exercises: 3 inline exercises + exercises/ch03 folder ✓
-  - Cross-references: Present (ch02, ch04, ch09) ✓
-  - Code examples: Tested in task-015 ✓
-  - Review: Passed in task-016 ✓
-- Tasks: task-018 + task-013 marked complete
-- Stats: pending 172, complete 42
-- ch03 Status: 5/5 milestones COMPLETE
-- Chapters Complete: 3/15 (ch01, ch02, ch03)
-- Outcome: Success
-- Next: task-020 (ch04 code_written) - score 930
-
-### 2026-01-28 04:00 - COMPLETED ch03 diagrams_complete (task-017) - ITERATION 9
-- What: Created 2 Mermaid diagrams for Chapter 3 (Prompting Fundamentals)
-- Files created:
-  - assets/diagrams/ch03-prompt-anatomy.md - Enhanced with 4 views (primary, weak vs strong comparison, component details, simple flow)
-  - assets/diagrams/ch03-constraint-funnel.md - New with 4 views (primary funnel, entropy reduction, constraint types, before/after)
-- Diagrams follow multi-view approach per LEARNINGS.md:
-  - Each file has 3-4 alternative views
-  - Usage notes linking to chapter sections
-  - Context from chapter with relevant quotes
-- Tasks updated: task-017, task-122, task-123, task-124 marked complete
-- Stats: pending 173, complete 40
-- ch03 Status: 4/5 milestones complete (only final remaining)
-- Queue Curation: Also performed (iteration 9 % 3 == 0)
-- Outcome: Success
-- Next: task-018 (ch03 final) - complete quality gate checklist
-
-### 2026-01-28 03:30 - Queue Curation (every 3rd iteration)
-- What: Curated task queue, fixed data inconsistencies, updated stats
-- Issues Fixed:
-  - CRITICAL: Duplicate task-209 ID (two different tasks had same ID)
-    - Kept original task-209 (SDK refactoring, critical priority)
-    - Renamed duplicate to task-214 (Related Chapters sections, medium priority)
-  - task-013 status changed from "pending" to "in_progress" (3/5 subtasks complete)
-  - Stats recalculated: pending 177, inProgress 1, complete 36
-- Timestamps: lastUpdated, lastCheckpoint, lastCuration all set to 2026-01-28T03:30:00Z
-- Priority Context:
-  - ch03 is 60% complete (closest to finishing)
-  - Next work: task-017 (ch03 diagrams), then task-018 (ch03 final)
-  - After ch03: task-209 (critical SDK refactor) should be addressed
-- Outcome: Success
-- Next: task-017 (ch03 diagrams_complete)
-
-### 2026-01-28 03:00 - COMPLETED ch03 reviewed (task-016) - ITERATION 8
-- What: Reviewed Chapter 3 (Prompting Fundamentals) for quality
-- Review Results:
-  - AI slop check: PASS (no em dashes, no blacklisted phrases)
-  - Technical accuracy: PASS (all 45 tests pass, TypeScript compiles)
-  - Term introduction: 2 issues fixed
-- Fixes Applied:
-  - Line 3: "LLM" → "Large Language Model (LLM)"
-  - Line 351: "UI/UX" → "User Interface/User Experience (UI/UX)"
-- Word count: 2,574 (within 2,500-4,000 target)
-- Tasks: task-016 marked complete, stats updated (178 pending, 36 complete)
-- ch03 Status: 3/5 milestones complete (code_written, code_tested, reviewed)
-- Outcome: Success
-- Next: task-017 (ch03 diagrams_complete) - create diagrams
-
-### 2026-01-28 02:00 - COMPLETED ch03 code_tested (task-015) - ITERATION 7
-- What: Tested and verified all ch03 TypeScript code examples
-- Files modified:
-  - examples/ch03/few-shot-builder.ts - Added isResultError type guard for TypeScript narrowing
-  - examples/ch03/prompting.test.ts - Updated 4 test assertions to use type guard
-- Tests:
-  - tsc --noEmit: All TypeScript files compile without errors
-  - bun test: 45/45 tests pass (75 expect() calls)
-  - Demo scripts: Both prompt-patterns.ts and few-shot-builder.ts run correctly
-- Fix Applied:
-  - Added isResultError<T, E> type guard function to few-shot-builder.ts
-  - Updated test file to import and use the type guard
-  - Changed 4 instances of `if (!result.success)` to `if (isResultError(result))`
-- Tasks: task-015 marked complete, stats updated (178 pending, 35 complete)
-- ch03 Status: 2/5 milestones complete
-- Outcome: Success
-- Next: task-016 (ch03 reviewed) - review for AI slop, technical accuracy, term introductions
-
-### 2026-01-28 01:00 - COMPLETED ch03 code_written (task-014) - ITERATION 6
-- What: Created TypeScript code examples for Chapter 3 (Prompting Fundamentals)
-- Files created:
-  - examples/ch03/prompt-patterns.ts - Chain-of-thought and constraint-based prompting
-  - examples/ch03/few-shot-builder.ts - Few-shot prompt builder with quality evaluation
-  - examples/ch03/prompting.test.ts - 45 test cases for all modules
-- Concepts demonstrated:
-  - Chain-of-thought prompting (section 3.2)
-  - Constraint-based prompting with entropy reduction (section 3.3)
-  - Few-shot example selection and quality evaluation (section 3.4)
-  - Prompt quality analysis and anti-pattern detection (section 3.6)
-- Tests: 45 tests pass (75 expect() calls)
-- TypeScript: All files compile with tsc --noEmit
-- Tasks: task-014 marked complete, stats updated (177 pending, 34 complete)
-- ch03 Status: 1/5 milestones complete
-- **NOTE**: These examples currently are standalone utilities without SDK integration
-  - Will need refactoring per task-209 (SDK requirement)
-  - Follow-up: Add SDK calls in task-209
-- Outcome: Success
-- Next: task-015 (ch03 code_tested) - run exercise validator
-
 ## Compacted History
 
 ### Week of 2026-01-27
-- PRDs: 13 -> 15 chapters (+2 new)
-- Chapters: 13 -> 15 drafts (+2, completing Phase 2)
-- Words: 37,084 -> 44,262 (+7,178)
-- KB articles: 0 -> 14 created
-- KB coverage: 72% -> 96% (+24%)
-- Diagrams: Shell creation started -> 9 complete (ch01-ch03)
-- Quality: 282 issues identified and tracked
-- Milestones: Phase 1 (PRDs) complete, Phase 2 (Chapters) complete, Phase 3 (Milestones) in progress at 20%
+- PRDs: 12 -> 15 chapters (+3 new: ch03, ch08, ch12, ch15)
+- Chapters: 7 -> 15 drafts (+8, completing Phase 2)
+- Words: 18,651 -> 44,313 (+25,662)
+- KB articles: 0 -> 14 created (93% complete)
+- Diagrams: 0 -> 11 complete (ch01-ch04)
+- Code Examples: 0 -> 4 chapters with code written and tested
+- Quality: 291 issues identified and tracked
+- Tasks: 25 completed (PRD work, KB articles, chapter work, code examples)
+- Milestones: Phase 1 (PRDs) complete, Phase 2 (Chapters) complete, Phase 3 (Milestones) in progress at 27%
 
 ### Week of 2026-01-20
 - TOC restructured from 12 to 15 chapters
 - 4 new PRD shells created (ch03, ch08, ch12, ch15)
 - Features.json updated with 15-chapter structure
-- 2 shallow KB articles expanded
-- Case Studies chapter removed per user request
+- Initial KB article foundation created
