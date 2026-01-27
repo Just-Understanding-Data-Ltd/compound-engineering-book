@@ -172,15 +172,40 @@ A chapter is **COMPLETE** when all milestones in `tasks.json.prds[chXX].mileston
 
 ### Code Testing Requirements
 
-All code examples use **TypeScript only** with the Agent SDK v2-preview.
+All code examples use **TypeScript only** with the Anthropic SDK or Agent SDK.
+
+**CRITICAL: All examples MUST use Anthropic SDKs**
+
+Every code example must demonstrate real SDK usage. Do NOT write standalone utility functions without SDK integration. Examples should show:
+
+```typescript
+// CORRECT: Uses Anthropic SDK
+import Anthropic from '@anthropic-ai/sdk';
+const client = new Anthropic();
+const response = await client.messages.create({
+  model: 'claude-sonnet-4-5-20250929',
+  max_tokens: 1024,
+  messages: [{ role: 'user', content: prompt }]
+});
+
+// CORRECT: Uses Agent SDK v2
+import { unstable_v2_prompt } from '@anthropic-ai/claude-agent-sdk';
+const result = await unstable_v2_prompt(prompt, { model: 'claude-sonnet-4-5-20250929' });
+
+// WRONG: Standalone utility without SDK
+function buildPrompt(config) { return `...`; }  // NO - must show SDK usage
+```
+
+**Why this matters:** Readers are learning to build with Claude. Every example should demonstrate actual API/SDK patterns they'll use in production.
 
 **Testing requirements:**
 1. All TypeScript examples must compile with `tsc --noEmit`
-2. Agent SDK examples use the v2-preview API (`unstable_v2_createSession`, `unstable_v2_prompt`)
+2. Examples must import and use `@anthropic-ai/sdk` or `@anthropic-ai/claude-agent-sdk`
 3. Use mock API responses stored in `examples/.cache/` for offline testing
 4. Integration tests use Anthropic prompt caching to avoid repeated API costs
 
 **Agent SDK v2 reference:** https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview
+**Anthropic SDK reference:** https://docs.anthropic.com/en/api/client-sdks
 
 Code examples live in `examples/chXX/` with structure:
 ```
