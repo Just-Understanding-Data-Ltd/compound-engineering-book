@@ -4,7 +4,7 @@ Context windows are the most constrained resource in AI-assisted development. Yo
 
 ## Information Theory Foundations
 
-Claude Shannon founded information theory in 1948 to study communication systems. His insights about channels, noise, and uncertainty apply directly to working with LLMs. When you provide context to Claude, you're transmitting information through a channel with hard capacity limits.
+Claude Shannon founded information theory in 1948 to study communication systems. His insights about channels, noise, and uncertainty apply directly to working with Large Language Models (LLMs). When you provide context to Claude, you're transmitting information through a channel with hard capacity limits.
 
 ### Entropy: Measuring Uncertainty
 
@@ -105,7 +105,7 @@ Types provide 11 times more information per token than comments. This explains w
 
 ### Mutual Information: Measuring Context Effectiveness
 
-Mutual information captures how much knowing your context tells you about the output:
+Mutual information (MI) captures how much knowing your context tells you about the output:
 
 ```
 I(X;Y) = H(X) - H(X|Y)
@@ -471,7 +471,7 @@ AI generates: Exact format specified
 
 ### Layer 3: Model Power (10% of Issues)
 
-Only escalate when Layers 1 and 2 are exhausted. Some tasks genuinely need stronger reasoning. A real-time collaborative editing system with conflict resolution may require Opus where Sonnet fails.
+Only escalate when Layers 1 and 2 are exhausted. Some tasks genuinely need stronger reasoning. A real-time collaborative editing system with conflict resolution may require Claude Opus (Anthropic's most capable model) where Claude Sonnet (the balanced cost-performance model) fails.
 
 **Cost consideration**:
 ```
@@ -582,3 +582,11 @@ Context engineering is the discipline of managing finite information capacity. Y
 - **Hierarchical debugging** resolves 60% of issues at the context layer, saving time and cost.
 
 The goal is code generation that is predictable, correct, and efficient. Not by luck, but by mathematical design.
+
+---
+
+*Related chapters:*
+- [Chapter 3: Prompting Fundamentals](ch03-prompting-fundamentals.md) for foundational techniques that maximize information density
+- [Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md) for how verification stages reduce entropy exponentially
+- [Chapter 8: Error Handling & Debugging](ch08-error-handling-debugging.md) for the Five-Point Diagnostic protocol
+- [Chapter 10: The RALPH Loop](ch10-ralph-loop.md) for managing context in long-running agent sessions
