@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T06:00:00.000Z",
+  "lastUpdated": "2026-01-28T06:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1046,8 +1046,10 @@
           "parentId": "task-073",
           "type": "milestone",
           "title": "diagrams complete",
-          "status": "pending",
-          "score": -110
+          "status": "complete",
+          "completedAt": "2026-01-28T06:30:00Z",
+          "score": -110,
+          "note": "3 diagram files: ch13-harness-architecture.md (updated to match chapter), ch13-signal-processing-harness.md, ch13-four-automation-levels.md. All aligned with chapter content."
         },
         {
           "id": "task-078",
@@ -1329,16 +1331,16 @@
     ]
   },
   "stats": {
-    "pending": 31,
+    "pending": 30,
     "inProgress": 0,
-    "complete": 83,
+    "complete": 84,
     "blocked": 0,
     "total": 114
   },
   "checkpoints": {
-    "lastGoodCommit": "bebc158",
-    "lastSuccessfulTask": "iteration-15",
-    "lastCheckpoint": "2026-01-28T06:00:00Z",
+    "lastGoodCommit": "1a106ef9a1211f08250598b9e90078f88e452f98",
+    "lastSuccessfulTask": "task-077",
+    "lastCheckpoint": "2026-01-28T06:30:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0

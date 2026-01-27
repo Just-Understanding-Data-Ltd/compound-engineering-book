@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 06:00)
+## Current Status (Updated: 2026-01-28 06:30)
 - Phase: Chapter Milestones (12 of 15 complete, 80%)
-- Active: Ch13 diagrams → Ch13 final → Ch14-15 completion
-- Last Completed: task-076 (ch13 reviewed milestone)
+- Active: Ch13 final → Ch14 code_written → Ch14-15 completion
+- Last Completed: task-077 (ch13 diagrams complete milestone)
 - Blockers: None active
 - Queue Health: CURATED - verified, no duplicates, scores correct
-- Publishing Readiness: 89%
+- Publishing Readiness: 90%
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
@@ -15,7 +15,7 @@
 - Code Examples: 13 chapters with code (87%)
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 59/63 created (94%)
-- Tasks Complete: 83/114 (73%)
+- Tasks Complete: 84/114 (74%)
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Review Cycle)
@@ -27,10 +27,10 @@
 - Diagrams Created: 59/63 (7 high-priority done; 0 pending from review cycle; 4 remaining for ch13-15 completion)
 
 ## Next Task Priority
-1. task-077 (ch13: diagrams complete milestone) - score 885 ← HIGHEST
-2. task-079 (ch14: The Meta-Engineer Playbook) - score 880
-3. task-085 (ch15: Model Strategy & Cost Optimization) - score 875
-4. task-078 (ch13: final milestone) - score 885
+1. task-078 (ch13: final milestone) - score 885 ← HIGHEST
+2. task-080 (ch14: code_written) - score 880
+3. task-079 (ch14: The Meta-Engineer Playbook) - score 880
+4. task-085 (ch15: Model Strategy & Cost Optimization) - score 875
 5. task-091 (KB articles) - score -85
 
 ## Estimated Timeline to Completion
@@ -42,6 +42,19 @@
 - **Publication target**: 2026-02-02 to 2026-02-05
 
 ## Recent Activity
+
+### 2026-01-28 06:30 - COMPLETED task-077: ch13 diagrams complete milestone - ITERATION 16
+- What: Verified and updated Chapter 13 diagrams to align with chapter content
+- Diagrams verified:
+  - ch13-harness-architecture.md: UPDATED to match chapter's four layers (Claude Code, Repository Engineering, Meta-Engineering, Closed-Loop)
+  - ch13-signal-processing-harness.md: Verified aligned (signal/noise reduction through layers)
+  - ch13-four-automation-levels.md: Verified aligned (productivity 1x to 500x)
+- Issue fixed: ch13-harness-architecture.md had incorrect layer names (Orchestration, Context, Execution, Persistence) vs chapter's actual layers
+- Coverage: 3 diagram files covering key visual concepts for ~3,316 word chapter
+- Tasks: task-077 marked complete
+- Stats: pending 30, complete 84 (74%)
+- Outcome: Success
+- Next: task-078 (ch13 final milestone)
 
 ### 2026-01-28 06:00 - COMPLETED task-076: ch13 reviewed milestone - ITERATION 15
 - What: Reviewed Chapter 13 (Building the Harness) for AI slop and term introductions
