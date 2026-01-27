@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T18:00:00.000Z",
+  "lastUpdated": "2026-01-27T19:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -155,7 +155,8 @@
       "chapter": "ch01",
       "title": "ch01: The Compound Systems Engineer",
       "description": "Complete remaining milestones for The Compound Systems Engineer",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-27T19:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -199,7 +200,8 @@
           "parentId": "task-001",
           "type": "milestone",
           "title": "final",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-27T19:00:00Z",
           "score": -115
         }
       ],
@@ -1999,16 +2001,16 @@
     "items": []
   },
   "stats": {
-    "pending": 181,
+    "pending": 179,
     "inProgress": 0,
-    "complete": 24,
+    "complete": 26,
     "blocked": 0,
     "total": 205
   },
   "checkpoints": {
-    "lastGoodCommit": "d7f02be",
-    "lastSuccessfulTask": "iteration-11",
-    "lastCheckpoint": "2026-01-27T18:00:00Z",
+    "lastGoodCommit": "ad05b8e",
+    "lastSuccessfulTask": "task-006",
+    "lastCheckpoint": "2026-01-27T19:00:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false

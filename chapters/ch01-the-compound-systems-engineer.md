@@ -70,10 +70,10 @@ The shift from builder to meta-builder looks like this:
 
 | Builder | Meta-Builder |
 |---------|--------------|
-| Writes CRUD endpoints | Designs API generation systems |
+| Writes CRUD (Create, Read, Update, Delete) endpoints | Designs API generation systems |
 | Debugs issues | Builds observability that surfaces issues |
 | Writes tests | Designs testing frameworks |
-| Uses CI/CD | Designs CI/CD pipelines |
+| Uses CI/CD (Continuous Integration/Continuous Deployment) | Designs CI/CD pipelines |
 | Follows patterns | Creates patterns |
 | Uses agents | Orchestrates agent systems |
 
