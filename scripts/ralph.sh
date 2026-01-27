@@ -592,8 +592,13 @@ run_review_agents() {
 
     local prompt_file="$PROMPT_DIR/review.md"
     cat > "$prompt_file" << EOF
-Run all 7 review agents IN PARALLEL using Task tool (single message, 7 calls):
-slop-checker, diagram-reviewer, tech-accuracy, term-intro-checker, oreilly-style, cross-ref-validator, progress-summarizer
+Run review agents SEQUENTIALLY (one at a time) to avoid API concurrency errors:
+1. slop-checker
+2. tech-accuracy
+3. term-intro-checker
+4. progress-summarizer
+
+(Skip diagram-reviewer, oreilly-style, cross-ref-validator for speed)
 
 Write summary to reviews/review-${today}.md and commit.
 
