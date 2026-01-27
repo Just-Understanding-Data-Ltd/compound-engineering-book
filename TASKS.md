@@ -81,7 +81,7 @@
 - [x] Write Chapter 7 first draft (Quality Gates - was ch06) (Completed: 2026-01-27)
 - [x] Write Chapter 8 first draft (Error Handling - NEW) (Completed: 2026-01-27)
 - [x] Write Chapter 9 first draft (Context Engineering - was ch07) (Completed: 2026-01-27)
-- [ ] Write Chapter 10 first draft (RALPH Loop - was ch08)
+- [x] Write Chapter 10 first draft (RALPH Loop - was ch08) (Completed: 2026-01-28)
 - [ ] Write Chapter 11 first draft (Sub-Agent Architecture - was ch09)
 - [ ] Write Chapter 12 first draft (Development Workflows - NEW)
 - [ ] Write Chapter 13 first draft (Building the Harness - was ch10)

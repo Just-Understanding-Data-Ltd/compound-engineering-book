@@ -368,19 +368,19 @@
     "ch10": {
       "title": "The RALPH Loop",
       "prd": "prds/ch08.md",
-      "chapter": null,
-      "status": "not_started",
+      "chapter": "chapters/ch10-the-ralph-loop.md",
+      "status": "draft",
       "milestones": {
         "prd_complete": true,
-        "first_draft": false,
+        "first_draft": true,
         "code_written": false,
         "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
-        "exercises_added": false,
+        "exercises_added": true,
         "final": false
       },
-      "wordCount": 0,
+      "wordCount": 2974,
       "targetWordCount": [3000, 4500],
       "diagramsRequired": 4,
       "diagramsComplete": 0,
@@ -510,11 +510,11 @@
     "totalChapters": 15,
     "newChaptersAdded": 4,
     "prdsComplete": 15,
-    "draftsComplete": 9,
+    "draftsComplete": 10,
     "reviewed": 0,
     "diagramsRequired": 75,
     "diagramsComplete": 0,
-    "totalWordCount": 24457,
+    "totalWordCount": 27431,
     "targetWordCount": [53000, 72000]
   }
 }
