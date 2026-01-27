@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T08:00:00Z",
+  "lastUpdated": "2026-01-28T09:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -387,8 +387,10 @@
           "parentId": "task-019",
           "type": "milestone",
           "title": "diagrams complete",
-          "status": "pending",
-          "score": -110
+          "status": "complete",
+          "completedAt": "2026-01-28T09:00:00Z",
+          "score": -110,
+          "note": "Created why-what-how-framework.md and hierarchical-scaling.md with multi-view diagrams"
         },
         {
           "id": "task-024",
@@ -1010,7 +1012,8 @@
       "chapter": "ch04",
       "title": "ch04: High-priority diagrams",
       "description": "Create 2 diagrams for ch04",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-28T09:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -1018,7 +1021,8 @@
           "parentId": "task-125",
           "type": "diagram",
           "title": "why-what-how-framework",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-28T09:00:00Z",
           "score": -105
         },
         {
@@ -1026,7 +1030,8 @@
           "parentId": "task-125",
           "type": "diagram",
           "title": "hierarchical-claude-md",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-28T09:00:00Z",
           "score": -105
         }
       ],
@@ -2343,20 +2348,40 @@
         "id": "task-022",
         "title": "ch04 reviewed",
         "completedAt": "2026-01-28T08:00:00Z"
+      },
+      {
+        "id": "task-023",
+        "title": "ch04 diagrams complete",
+        "completedAt": "2026-01-28T09:00:00Z"
+      },
+      {
+        "id": "task-125",
+        "title": "ch04: High-priority diagrams",
+        "completedAt": "2026-01-28T09:00:00Z"
+      },
+      {
+        "id": "task-126",
+        "title": "why-what-how-framework diagram",
+        "completedAt": "2026-01-28T09:00:00Z"
+      },
+      {
+        "id": "task-127",
+        "title": "hierarchical-claude-md diagram",
+        "completedAt": "2026-01-28T09:00:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 168,
+    "pending": 164,
     "inProgress": 1,
-    "complete": 45,
+    "complete": 49,
     "blocked": 0,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "c93393eef1141a013617b72fc7dd168a67f5069f",
-    "lastSuccessfulTask": "task-022",
-    "lastCheckpoint": "2026-01-28T08:00:00Z",
+    "lastGoodCommit": "e177a331344f55b205cb25c8d99557b163e2127e",
+    "lastSuccessfulTask": "task-023",
+    "lastCheckpoint": "2026-01-28T09:00:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,

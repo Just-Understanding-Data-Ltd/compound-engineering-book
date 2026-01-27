@@ -1,32 +1,47 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 08:00)
+## Current Status (Updated: 2026-01-28 09:00)
 - Phase: Chapter Milestones
-- Active: task-019 (ch04 in_progress), next: task-023 (diagrams complete)
-- Last Completed: task-022 (ch04 reviewed) - ITERATION 3
+- Active: task-019 (ch04 in_progress), next: task-024 (final)
+- Last Completed: task-023 (ch04 diagrams_complete) - ITERATION 4
 - Blockers: None - SDK installed, code examples use Anthropic SDK
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
 - KB Articles Created: 14/15 complete (93%) - prompt-injection-prevention.md pending
-- Diagrams: 9/63 complete (14%) - ch01 (4), ch02 (3), ch03 (2)
+- Diagrams: 11/63 complete (17%) - ch01 (4), ch02 (3), ch03 (2), ch04 (2)
 - Code Examples: ch01-ch04 complete (ch03 needs SDK refactoring per task-209)
 - Cross-Refs Fixed: ch01 complete (3 references corrected)
 - Total Word Count: 44,268 (target: 45,000-57,000, 78-98% complete)
 - Quality Issues: 280 total tracked (AI slop 51, tech 18, terms 56, cross-refs 3, style 147, other 5)
 - Chapters Complete: 3/15 (ch01, ch02, ch03 all pass final quality gates)
-- ch04 Status: 3/5 milestones complete (code_written, code_tested, reviewed)
+- ch04 Status: 4/5 milestones complete (code_written, code_tested, reviewed, diagrams_complete)
 
 ## Critical Blockers
 1. task-209: SDK Refactoring - Code examples in ch03 must use Anthropic SDK (not standalone utilities)
 2. ch02: CLI syntax errors - 8 invalid commands (claude ask, claude chat, claude init)
 
 ## Next Task
-task-023 (ch04 diagrams_complete) or task-125 (ch04 high-priority diagrams)
-Pattern: Create Mermaid diagrams for why-what-how-framework and hierarchical-claude-md
+task-024 (ch04 final) - complete quality gate checklist for ch04
+Pattern: Verify word count, no em dashes, no AI slop, diagrams exist, exercises, cross-refs
 
 ## Recent Activity
+
+### 2026-01-28 09:00 - COMPLETED ch04 diagrams_complete (task-023) - ITERATION 4
+- What: Created 2 Mermaid diagrams for Chapter 4 (Writing Your First CLAUDE.md)
+- Files created:
+  - assets/diagrams/ch04-why-what-how-framework.md - Visualizes WHY/WHAT/HOW dimensions with 4 views
+  - assets/diagrams/ch04-hierarchical-scaling.md - Visualizes hierarchical CLAUDE.md structure with 5 views
+- Diagrams follow multi-view approach per LEARNINGS.md:
+  - Primary view plus alternative perspectives (table, flow, comparison)
+  - Usage notes linking to chapter sections
+  - Context from chapter with relevant quotes
+- Tasks updated: task-023, task-125, task-126, task-127 marked complete
+- Stats: pending 164, inProgress 1, complete 49
+- ch04 Status: 4/5 milestones complete (only final remaining)
+- Outcome: Success
+- Next: task-024 (ch04 final) - complete quality gate checklist
 
 ### 2026-01-28 08:00 - COMPLETED ch04 reviewed (task-022) - ITERATION 3
 - What: Reviewed Chapter 4 (Writing Your First CLAUDE.md) for quality
