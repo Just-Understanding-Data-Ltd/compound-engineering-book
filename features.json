@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T22:00:00Z",
+  "lastUpdated": "2026-01-27T23:30:00Z",
   "structureNote": "Updated to 15-chapter structure. Old chapter numbers in prds section preserved for reference. New chapters added with descriptive filenames. See toc.md for canonical ordering.",
   "prds": {
     "index": {
@@ -321,20 +321,20 @@
     "ch08": {
       "title": "Error Handling & Debugging",
       "prd": "prds/ch08-error-handling.md",
-      "chapter": null,
-      "status": "not_started",
+      "chapter": "chapters/ch08-error-handling-and-debugging.md",
+      "status": "draft",
       "newChapter": true,
       "milestones": {
         "prd_complete": true,
-        "first_draft": false,
+        "first_draft": true,
         "code_written": false,
         "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
-        "exercises_added": false,
+        "exercises_added": true,
         "final": false
       },
-      "wordCount": 0,
+      "wordCount": 3133,
       "targetWordCount": [3000, 4000],
       "diagramsRequired": 5,
       "diagramsComplete": 0,
@@ -510,11 +510,11 @@
     "totalChapters": 15,
     "newChaptersAdded": 4,
     "prdsComplete": 15,
-    "draftsComplete": 7,
+    "draftsComplete": 8,
     "reviewed": 0,
     "diagramsRequired": 75,
     "diagramsComplete": 0,
-    "totalWordCount": 18651,
+    "totalWordCount": 21784,
     "targetWordCount": [53000, 72000]
   }
 }
