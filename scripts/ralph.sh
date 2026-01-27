@@ -87,8 +87,11 @@ check_time_limit() {
 }
 
 count_incomplete_tasks() {
-    if [ -f "TASKS.md" ]; then
-        grep -c '\[ \]' TASKS.md 2>/dev/null || echo "0"
+    if [ -f "features.json" ] && command -v jq &> /dev/null; then
+        # Count incomplete chapter milestones + pending tasks
+        local chapter_tasks=$(jq '[.chapters[].milestones | to_entries[] | select(.value == false)] | length' features.json 2>/dev/null || echo "0")
+        local pending_tasks=$(jq '[.tasks.kbArticlesToCreate[]?, .tasks.appendices[]?, .tasks.crossRefFixes[]?, .tasks.generalReview[]? | select(.status == "pending")] | length' features.json 2>/dev/null || echo "0")
+        echo $((chapter_tasks + pending_tasks))
     else
         echo "0"
     fi
@@ -124,13 +127,17 @@ get_prd_index() {
 }
 
 get_task_summary() {
-    if [ -f "TASKS.md" ]; then
-        echo "## Task Queue (first 10 incomplete)"
+    if [ -f "features.json" ] && command -v jq &> /dev/null; then
+        echo "## Task Queue (from features.json)"
         echo ""
-        grep '\[ \]' TASKS.md | head -10
+        echo "### Incomplete Chapter Milestones"
+        jq -r '.chapters | to_entries[] | select(.value.milestones | to_entries | map(select(.value == false)) | length > 0) | "- \(.key): \(.value.milestones | to_entries | map(select(.value == false)) | map(.key) | join(", "))"' features.json 2>/dev/null | head -10
         echo ""
-        local total=$(grep -c '\[ \]' TASKS.md 2>/dev/null || echo "0")
-        echo "($total total incomplete)"
+        echo "### Pending Tasks"
+        jq -r '.tasks.kbArticlesToCreate[]? | select(.status == "pending") | "- [KB] \(.title): \(.description)"' features.json 2>/dev/null | head -5
+        jq -r '.tasks.crossRefFixes[]? | select(.status == "pending") | "- [XREF] \(.issue)"' features.json 2>/dev/null | head -3
+        jq -r '.tasks.appendices[]? | select(.status == "pending") | "- [APP] \(.title)"' features.json 2>/dev/null | head -3
+        echo ""
     fi
 }
 
@@ -171,9 +178,8 @@ You are setting up a book writing project for long-running agent work.
 (older entries summarized here)
 ```
 
-3. Verify features.json exists
-4. Verify TASKS.md has [ ] markers
-5. Read prds/index.md to understand book structure
+3. Verify features.json exists and has tasks
+4. Read prds/index.md to understand book structure
 6. Git commit your setup work
 7. Update claude-progress.txt
 
@@ -218,30 +224,43 @@ CODING_HEADER
 1. Get up to speed:
    - Run `pwd`
    - Read claude-progress.txt
-   - Read features.json
+   - Read features.json (primary task list)
+   - Read @LEARNINGS.md
    - Run `git log --oneline -5`
 
-2. Choose FIRST incomplete task from TASKS.md
+2. Choose FIRST incomplete task from features.json:
+   - Chapter milestones (code_written, code_tested, reviewed, diagrams_complete)
+   - tasks.kbArticlesToCreate (pending KB articles)
+   - tasks.crossRefFixes (cross-reference issues)
+   - tasks.termIntroFixes (term introductions needed)
+   - tasks.appendices (appendix content)
+   - diagramTasks (diagrams to create)
 
-3. If writing a chapter:
+3. If writing content:
    - Read the PRD first (prds/chXX.md)
    - Read source articles from ~/Desktop/knowledge-base/
-   - Write to chapters/
+   - Write to chapters/ or kb/
 
 4. Complete ONE task only
 
 5. Update tracking:
-   - Mark task [x] in TASKS.md
-   - Update features.json milestones
+   - Update task status in features.json ("pending" -> "complete")
+   - Or mark milestone true in features.json
    - Add entry to claude-progress.txt
+   - Every 5 iterations: add learning to @LEARNINGS.md
 
-6. Git commit with descriptive message
+6. Discover new tasks:
+   - Check reviews/ for issues found
+   - Add new tasks to features.json as needed
+
+7. Git commit with descriptive message
 
 Rules:
 - ONE task per session
 - Always read PRD before writing chapter
 - No em dashes in content
 - Commit after every task
+- All tasks tracked in features.json (no TASKS.md)
 CODING_INSTRUCTIONS
 
     run_claude "$prompt_file"
