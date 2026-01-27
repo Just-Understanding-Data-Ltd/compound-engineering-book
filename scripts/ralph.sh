@@ -364,6 +364,17 @@ while true; do
         exit 0
     fi
 
+    # Run task curator every 3 iterations to clean/prioritize queue
+    if [ $((iteration % 3)) -eq 0 ]; then
+        echo ""
+        echo "--- Task Curator ---"
+        local curator_file="$PROMPT_DIR/curator.md"
+        cat > "$curator_file" << 'CURATOR_EOF'
+Use the task-curator agent to review tasks.json and claude-progress.txt. Clean duplicates, adjust priorities, and recommend the next task.
+CURATOR_EOF
+        run_claude "$curator_file"
+    fi
+
     # Run coding agent
     BEFORE_COMMIT=$(get_last_commit)
     run_coding_agent $iteration
