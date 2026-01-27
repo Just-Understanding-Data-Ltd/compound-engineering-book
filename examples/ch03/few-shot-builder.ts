@@ -12,6 +12,11 @@
  * @module ch03/few-shot-builder
  */
 
+import Anthropic from '@anthropic-ai/sdk';
+
+// Initialize the Anthropic client
+const client = new Anthropic();
+
 // Result type for consistent error handling
 export type Result<T, E> = { success: true; data: T } | { success: false; error: E };
 
@@ -261,6 +266,153 @@ export function validateFewShotConfig(config: FewShotConfig): Result<true, strin
   return { success: true, data: true };
 }
 
+// ============================================================================
+// SDK Integration Examples
+// ============================================================================
+
+type ContentBlock = Anthropic.Messages.ContentBlock;
+
+/**
+ * Execute a few-shot prompt using the Anthropic SDK
+ *
+ * This demonstrates the complete workflow:
+ * 1. Build structured few-shot prompt from examples
+ * 2. Send to Claude with appropriate system context
+ * 3. Parse and return the generated code
+ *
+ * @param config - Few-shot configuration with examples and task
+ * @returns Claude's generated code following the pattern
+ */
+export async function executeFewShotPrompt(
+  config: FewShotConfig
+): Promise<{
+  generatedCode: string;
+  tokenUsage: { input: number; output: number };
+  exampleCount: number;
+}> {
+  // Validate config first
+  const validation = validateFewShotConfig(config);
+  if (isResultError(validation)) {
+    throw new Error(`Invalid config: ${validation.error.join(', ')}`);
+  }
+
+  const prompt = buildFewShotPrompt(config);
+
+  const response = await client.messages.create({
+    model: 'claude-sonnet-4-5-20250929',
+    max_tokens: 2048,
+    system: `You are a senior TypeScript developer. Follow the pattern shown in the examples exactly. Output only code that matches the demonstrated pattern structure.`,
+    messages: [{ role: 'user', content: prompt }],
+  });
+
+  const textContent = response.content.find((block: ContentBlock) => block.type === 'text');
+  const generatedCode = textContent?.type === 'text' ? textContent.text : '';
+
+  return {
+    generatedCode,
+    tokenUsage: {
+      input: response.usage.input_tokens,
+      output: response.usage.output_tokens,
+    },
+    exampleCount: config.examples.length,
+  };
+}
+
+/**
+ * Generate code following a pattern with automatic example selection
+ *
+ * Higher-level function that:
+ * 1. Selects optimal examples from candidates
+ * 2. Builds the few-shot prompt
+ * 3. Executes via SDK
+ *
+ * @param candidates - All available pattern examples
+ * @param patternName - Name of the pattern
+ * @param patternIndicators - Strings that indicate pattern presence
+ * @param taskDescription - What to generate
+ * @param requirements - Requirements for the generated code
+ * @returns Generated code and metadata
+ */
+export async function generateFromPattern(
+  candidates: ExampleSource[],
+  patternName: string,
+  patternIndicators: string[],
+  taskDescription: string,
+  requirements?: string[]
+): Promise<{
+  generatedCode: string;
+  selectedExamples: string[];
+  qualityScores: number[];
+  tokenUsage: { input: number; output: number };
+}> {
+  // Select optimal examples (2-3 is ideal)
+  const selected = selectOptimalExamples(candidates, patternIndicators, 3);
+
+  const config: FewShotConfig = {
+    patternName,
+    examples: selected.map(s => s.example),
+    task: {
+      description: taskDescription,
+      requirements,
+    },
+  };
+
+  const result = await executeFewShotPrompt(config);
+
+  return {
+    generatedCode: result.generatedCode,
+    selectedExamples: selected.map(s => s.example.name),
+    qualityScores: selected.map(s => s.quality.overallScore),
+    tokenUsage: result.tokenUsage,
+  };
+}
+
+/**
+ * Compare zero-shot vs few-shot results
+ *
+ * Demonstrates the accuracy improvement from
+ * adding examples to prompts.
+ */
+export async function compareZeroVsFewShot(
+  taskDescription: string,
+  examples: ExampleSource[],
+  patternName: string
+): Promise<{
+  zeroShot: { code: string; tokens: number };
+  fewShot: { code: string; tokens: number; exampleCount: number };
+  improvementNote: string;
+}> {
+  // Zero-shot: just the task, no examples
+  const zeroShotResponse = await client.messages.create({
+    model: 'claude-sonnet-4-5-20250929',
+    max_tokens: 1024,
+    messages: [{ role: 'user', content: taskDescription }],
+  });
+
+  // Few-shot: with examples
+  const fewShotConfig: FewShotConfig = {
+    patternName,
+    examples,
+    task: { description: taskDescription },
+  };
+  const fewShotResult = await executeFewShotPrompt(fewShotConfig);
+
+  const zeroText = zeroShotResponse.content.find((b: ContentBlock) => b.type === 'text');
+
+  return {
+    zeroShot: {
+      code: zeroText?.type === 'text' ? zeroText.text : '',
+      tokens: zeroShotResponse.usage.output_tokens,
+    },
+    fewShot: {
+      code: fewShotResult.generatedCode,
+      tokens: fewShotResult.tokenUsage.output,
+      exampleCount: fewShotResult.exampleCount,
+    },
+    improvementNote: `Few-shot with ${examples.length} examples typically improves accuracy from 40-60% to 85-95%`,
+  };
+}
+
 /**
  * Demo service examples (simulated codebase patterns)
  */
@@ -406,11 +558,11 @@ export function createOrderService(deps: OrderServiceDeps): OrderService {
 ];
 
 /**
- * Demo function showing example usage
+ * Demo function showing example usage with SDK integration
  * Run with: bun run few-shot-builder.ts
  */
-function demo(): void {
-  console.log('Few-Shot Prompt Builder Demo\n');
+async function demo(): Promise<void> {
+  console.log('Few-Shot Prompt Builder Demo (with SDK Integration)\n');
   console.log('='.repeat(60));
 
   // Show accuracy by shot count
@@ -487,7 +639,47 @@ function demo(): void {
   console.log('\n' + '='.repeat(60));
   console.log(`\nEstimated token usage: ~${tokenEstimate} tokens`);
   console.log(`Example count: ${config.examples.length} (optimal: 2-3)`);
+
+  // SDK Integration Demo (requires API key)
+  console.log('\n' + '='.repeat(60));
+  console.log('\n5. SDK Integration (Live API Call):\n');
+
+  try {
+    console.log('Executing few-shot prompt with Claude...');
+    const result = await executeFewShotPrompt(config);
+    console.log(`\nGenerated code (${result.tokenUsage.output} tokens):`);
+    console.log(result.generatedCode.slice(0, 600) + '...\n');
+    console.log(`Examples used: ${result.exampleCount}`);
+    console.log(`Input tokens: ${result.tokenUsage.input}`);
+  } catch (error) {
+    console.log('(API call skipped - set ANTHROPIC_API_KEY to enable)');
+    console.log('This demonstrates how to use: executeFewShotPrompt()');
+    console.log('Which calls client.messages.create() with the built prompt.');
+  }
+
+  // Demonstrate pattern-based generation
+  console.log('\n' + '='.repeat(60));
+  console.log('\n6. Pattern-Based Generation Demo:\n');
+
+  try {
+    console.log('Using generateFromPattern() for automatic example selection...');
+    const patternResult = await generateFromPattern(
+      DEMO_EXAMPLES,
+      'Service Layer',
+      patternIndicators,
+      'Create a Comment Service for blog comments',
+      ['createComment', 'deleteComment', 'getCommentsByPost methods']
+    );
+    console.log(`Selected examples: ${patternResult.selectedExamples.join(', ')}`);
+    console.log(`Quality scores: ${patternResult.qualityScores.join(', ')}`);
+    console.log(`Generated (first 400 chars): ${patternResult.generatedCode.slice(0, 400)}...`);
+  } catch (error) {
+    console.log('(API call skipped - demonstrates generateFromPattern())');
+    console.log('This function automatically selects optimal examples and generates code.');
+  }
 }
 
 // Run demo when executed directly
-demo();
+if (import.meta.main) {
+  demo().catch(console.error);
+}

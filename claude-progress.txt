@@ -1,10 +1,10 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 17:30)
+## Current Status (Updated: 2026-01-27 18:00)
 - Phase: Chapter Milestones (4 of 15 complete, 27%)
 - Active: task-028 (ch05 reviewed)
-- Last Completed: task-027 (ch05 code_tested) - ITERATION 6
-- Blockers: task-209 (SDK refactoring), ch02 CLI syntax errors
+- Last Completed: task-209 (SDK refactor) - WARMUP ITERATION
+- Blockers: ch02 CLI syntax errors (8 invalid commands)
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
@@ -15,19 +15,38 @@
 - Code Examples: 5 chapters tested (33%) - ch05 added
 - Word Count: 44,313 (target 45,000-57,000, 76-98% complete)
 - Quality Issues: 286 tracked (AI slop 55, tech 23, terms 58, cross-refs 3, style 147)
-- Tasks Complete: 53/214 (25%) - +2 this iteration
+- Tasks Complete: 54/214 (25%) - +1 this iteration
 
 ## Critical Blockers
-1. task-209 (SDK Refactor): ch03 code examples must use Anthropic SDK (not standalone utilities)
-2. ch02 CLI Syntax: 8 invalid commands (claude ask, chat, init don't exist)
+1. ch02 CLI Syntax: 8 invalid commands (claude ask, chat, init don't exist)
+   Note: task-209 (SDK Refactor) RESOLVED this iteration
 
 ## Next Task Priority
 1. task-028 (ch05 reviewed, score TBD) - Next milestone
-2. task-209 (SDK refactoring, score 1080 CRITICAL) - Still needed
-3. task-214 (Related Chapters format, score 185) - Quick style fix
-4. task-031 (ch06 milestones, score 920) - After ch05 complete
+2. task-214 (Related Chapters format, score 185) - Quick style fix
+3. task-031 (ch06 milestones, score 920) - After ch05 complete
 
 ## Recent Activity
+
+### 2026-01-27 18:00 - COMPLETED task-209: SDK Refactor for ch03 - WARMUP ITERATION
+- What: Refactored ch03 code examples to integrate Anthropic SDK
+- Files Modified:
+  - examples/ch03/prompt-patterns.ts - Added SDK integration
+  - examples/ch03/few-shot-builder.ts - Added SDK integration
+- Changes Made:
+  - Added `import Anthropic from '@anthropic-ai/sdk'` to both files
+  - Added `const client = new Anthropic()` initialization
+  - Created executeChainOfThought() - demonstrates CoT prompting with API calls
+  - Created executeConstrainedPrompt() - demonstrates constraint-based prompting
+  - Created comparePromptQuality() - compares weak vs strong prompts via SDK
+  - Created executeFewShotPrompt() - executes few-shot prompts via SDK
+  - Created generateFromPattern() - auto-selects examples and generates code
+  - Created compareZeroVsFewShot() - demonstrates accuracy improvement
+  - Updated demo() functions to be async and include live API call demos
+- Tests: 45 pass (unchanged), all ch03 tests still work
+- Task Status: task-209 complete, stats updated to 54/214 complete
+- Outcome: Success - ch03 examples now properly demonstrate SDK usage patterns
+- Next: task-028 (ch05 reviewed) or continue with chapter milestones
 
 ### 2026-01-28 17:30 - COMPLETED ch05 code_written + code_tested (task-026, task-027) - ITERATION 6
 - What: Created and tested code examples for Chapter 5 (The 12-Factor Agent)

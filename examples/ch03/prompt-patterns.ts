@@ -12,6 +12,11 @@
  * @module ch03/prompt-patterns
  */
 
+import Anthropic from '@anthropic-ai/sdk';
+
+// Initialize the Anthropic client
+const client = new Anthropic();
+
 // Result type for consistent error handling
 export type Result<T, E> = { success: true; data: T } | { success: false; error: E };
 
@@ -319,12 +324,137 @@ export function detectAntiPatterns(prompt: string): AntiPatternCheck[] {
   return checks;
 }
 
+// ============================================================================
+// SDK Integration Examples
+// ============================================================================
+
+type ContentBlock = Anthropic.Messages.ContentBlock;
+
 /**
- * Demo function showing example usage
+ * Execute a chain-of-thought prompt using the Anthropic SDK
+ *
+ * This demonstrates how to combine prompt building utilities
+ * with actual API calls. Chain-of-thought prompting forces
+ * Claude to reason through steps before implementing.
+ *
+ * @param feature - The feature to reason about
+ * @param questions - Questions to guide reasoning
+ * @returns Claude's response with step-by-step reasoning
+ */
+export async function executeChainOfThought(
+  feature: string,
+  questions: string[]
+): Promise<{ reasoning: string; tokenUsage: { input: number; output: number } }> {
+  const prompt = buildChainOfThought({ feature, questions });
+
+  const response = await client.messages.create({
+    model: 'claude-sonnet-4-5-20250929',
+    max_tokens: 1024,
+    system: 'You are a senior software engineer. Reason carefully through each question before providing implementation guidance.',
+    messages: [{ role: 'user', content: prompt }],
+  });
+
+  const textContent = response.content.find((block: ContentBlock) => block.type === 'text');
+  const reasoning = textContent?.type === 'text' ? textContent.text : '';
+
+  return {
+    reasoning,
+    tokenUsage: {
+      input: response.usage.input_tokens,
+      output: response.usage.output_tokens,
+    },
+  };
+}
+
+/**
+ * Execute a constraint-based prompt using the Anthropic SDK
+ *
+ * Demonstrates how constraints reduce entropy in Claude's output.
+ * More constraints = more focused, correct output.
+ *
+ * @param config - Constrained prompt configuration
+ * @returns Claude's response following the constraints
+ */
+export async function executeConstrainedPrompt(
+  config: ConstrainedPromptConfig
+): Promise<{ implementation: string; tokenUsage: { input: number; output: number } }> {
+  const prompt = buildConstrainedPrompt(config);
+
+  const response = await client.messages.create({
+    model: 'claude-sonnet-4-5-20250929',
+    max_tokens: 2048,
+    system: `You are a senior TypeScript developer. Follow all constraints exactly. Output only code that meets ALL success criteria.`,
+    messages: [{ role: 'user', content: prompt }],
+  });
+
+  const textContent = response.content.find((block: ContentBlock) => block.type === 'text');
+  const implementation = textContent?.type === 'text' ? textContent.text : '';
+
+  return {
+    implementation,
+    tokenUsage: {
+      input: response.usage.input_tokens,
+      output: response.usage.output_tokens,
+    },
+  };
+}
+
+/**
+ * Compare weak vs strong prompts using the SDK
+ *
+ * Demonstrates the quality difference between unconstrained
+ * and well-constrained prompts by running both through Claude.
+ */
+export async function comparePromptQuality(
+  weakPrompt: string,
+  strongConfig: ConstrainedPromptConfig
+): Promise<{
+  weakResult: { text: string; analysis: PromptAnalysis };
+  strongResult: { text: string; analysis: PromptAnalysis };
+  qualityImprovement: string;
+}> {
+  // Analyze prompts before execution
+  const weakAnalysis = analyzePrompt(weakPrompt);
+  const strongPrompt = buildConstrainedPrompt(strongConfig);
+  const strongAnalysis = analyzePrompt(strongPrompt);
+
+  // Execute weak prompt
+  const weakResponse = await client.messages.create({
+    model: 'claude-sonnet-4-5-20250929',
+    max_tokens: 512,
+    messages: [{ role: 'user', content: weakPrompt }],
+  });
+
+  // Execute strong prompt
+  const strongResponse = await client.messages.create({
+    model: 'claude-sonnet-4-5-20250929',
+    max_tokens: 1024,
+    system: 'You are a senior TypeScript developer. Follow all constraints exactly.',
+    messages: [{ role: 'user', content: strongPrompt }],
+  });
+
+  const weakText = weakResponse.content.find((b: ContentBlock) => b.type === 'text');
+  const strongText = strongResponse.content.find((b: ContentBlock) => b.type === 'text');
+
+  return {
+    weakResult: {
+      text: weakText?.type === 'text' ? weakText.text : '',
+      analysis: weakAnalysis,
+    },
+    strongResult: {
+      text: strongText?.type === 'text' ? strongText.text : '',
+      analysis: strongAnalysis,
+    },
+    qualityImprovement: `Quality improved from ${weakAnalysis.estimatedQuality} to ${strongAnalysis.estimatedQuality}`,
+  };
+}
+
+/**
+ * Demo function showing example usage with SDK integration
  * Run with: bun run prompt-patterns.ts
  */
-function demo(): void {
-  console.log('Prompt Patterns Demo\n');
+async function demo(): Promise<void> {
+  console.log('Prompt Patterns Demo (with SDK Integration)\n');
   console.log('='.repeat(60));
 
   // Chain-of-thought example
@@ -344,7 +474,7 @@ function demo(): void {
   // Constraint-based example
   console.log('\n' + '='.repeat(60));
   console.log('\n2. Constraint-Based Prompt:\n');
-  const constrainedPrompt = buildConstrainedPrompt({
+  const constraintConfig: ConstrainedPromptConfig = {
     task: 'Add validation to the createUser endpoint in src/api/users.ts',
     context: [
       'Validation patterns are in src/utils/validation.ts',
@@ -362,7 +492,8 @@ function demo(): void {
       'Valid requests proceed to user creation',
       'All tests pass'
     ]
-  });
+  };
+  const constrainedPrompt = buildConstrainedPrompt(constraintConfig);
   console.log(constrainedPrompt);
 
   // Entropy reduction calculation
@@ -415,7 +546,28 @@ function demo(): void {
       console.log(`         Recommendation: ${check.recommendation}`);
     }
   }
+
+  // SDK Integration Demo (requires API key)
+  console.log('\n' + '='.repeat(60));
+  console.log('\n6. SDK Integration (Live API Call):\n');
+
+  try {
+    console.log('Executing chain-of-thought prompt with Claude...');
+    const cotResult = await executeChainOfThought('input validation', [
+      'What inputs need validation?',
+      'What validation rules apply?',
+      'How to report validation errors?',
+    ]);
+    console.log(`\nClaude reasoning (${cotResult.tokenUsage.output} tokens):`);
+    console.log(cotResult.reasoning.slice(0, 500) + '...\n');
+  } catch (error) {
+    console.log('(API call skipped - set ANTHROPIC_API_KEY to enable)');
+    console.log('This demonstrates how to use: executeChainOfThought()');
+    console.log('Which calls client.messages.create() with the built prompt.');
+  }
 }
 
 // Run demo when executed directly
-demo();
+if (import.meta.main) {
+  demo().catch(console.error);
+}
