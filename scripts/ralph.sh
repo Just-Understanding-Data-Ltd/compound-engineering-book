@@ -374,12 +374,114 @@ EOF
     fi
 }
 
+# ==============================================================================
+# Adaptive Review System (Convergence-Based)
+# ==============================================================================
+# Instead of fixed intervals, we adapt based on new issues found.
+# Like TCP congestion control: backoff when improving, pressure when regressing.
+
+METRICS_DIR="$PROJECT_DIR/.metrics"
+mkdir -p "$METRICS_DIR"
+
+ADAPTIVE_INTERVAL=${REVIEW_EVERY}  # Start with configured value
+MIN_REVIEW_INTERVAL=5
+MAX_REVIEW_INTERVAL=50
+LAST_REVIEW_ITERATION=0
+
+# Count issues cheaply (no agent needed)
+count_issues() {
+    local critical=0 medium=0 low=0
+
+    # Critical: FIXMEs, TODOs with BUG, broken tests
+    critical=$(grep -rE "FIXME|BUG|TODO.*critical" chapters/ examples/ 2>/dev/null | wc -l | tr -d ' ')
+
+    # Medium: em dashes (AI slop indicator)
+    medium=$(grep -c "—" chapters/*.md 2>/dev/null | awk -F: '{sum+=$2} END {print sum+0}')
+
+    # Low: AI slop phrases
+    low=$(grep -riE "delve|crucial|leverage|utilize|aforementioned" chapters/ 2>/dev/null | wc -l | tr -d ' ')
+
+    echo "$((critical * 10 + medium * 3 + low))"
+}
+
+# Calculate weighted issue score
+get_issue_score() {
+    count_issues
+}
+
+# Update adaptive interval based on new issues found
+update_adaptive_interval() {
+    local new_issues=$1
+    local prev_file="$METRICS_DIR/prev_new_issues"
+    local history_file="$METRICS_DIR/issues_history.txt"
+
+    # Record history
+    echo "$(date +%s) $new_issues" >> "$history_file"
+
+    # Get previous new issues count
+    local prev_issues=999
+    [ -f "$prev_file" ] && prev_issues=$(cat "$prev_file")
+
+    # Save current for next time
+    echo "$new_issues" > "$prev_file"
+
+    # Adaptive backoff/pressure
+    if [ "$new_issues" -lt "$prev_issues" ]; then
+        # Improving! Backoff (multiply by 1.5)
+        ADAPTIVE_INTERVAL=$(echo "$ADAPTIVE_INTERVAL * 1.5" | bc | cut -d. -f1)
+        echo "  ↓ Issues decreasing ($prev_issues → $new_issues). Backing off to review every $ADAPTIVE_INTERVAL"
+    elif [ "$new_issues" -gt "$prev_issues" ]; then
+        # Regressing! More pressure (divide by 2)
+        ADAPTIVE_INTERVAL=$(echo "$ADAPTIVE_INTERVAL / 2" | bc)
+        echo "  ↑ Issues increasing ($prev_issues → $new_issues). Increasing pressure to review every $ADAPTIVE_INTERVAL"
+    else
+        # Stable - slight backoff
+        ADAPTIVE_INTERVAL=$((ADAPTIVE_INTERVAL + 2))
+        echo "  → Issues stable ($new_issues). Interval now $ADAPTIVE_INTERVAL"
+    fi
+
+    # Clamp to bounds
+    [ "$ADAPTIVE_INTERVAL" -lt "$MIN_REVIEW_INTERVAL" ] && ADAPTIVE_INTERVAL=$MIN_REVIEW_INTERVAL
+    [ "$ADAPTIVE_INTERVAL" -gt "$MAX_REVIEW_INTERVAL" ] && ADAPTIVE_INTERVAL=$MAX_REVIEW_INTERVAL
+
+    # Check for convergence (near-zero new issues for 3+ reviews)
+    local recent_sum=$(tail -3 "$history_file" 2>/dev/null | awk '{sum+=$2} END {print sum+0}')
+    if [ "$recent_sum" -lt 5 ]; then
+        echo "  ✓ CONVERGED: <5 total issues in last 3 reviews. System is clean."
+        ADAPTIVE_INTERVAL=$MAX_REVIEW_INTERVAL
+    fi
+
+    # Save current interval
+    echo "$ADAPTIVE_INTERVAL" > "$METRICS_DIR/current_interval"
+}
+
+# Check if review is needed (adaptive)
+should_review() {
+    local iteration=$1
+    local since_last=$((iteration - LAST_REVIEW_ITERATION))
+
+    # Load saved interval if exists
+    [ -f "$METRICS_DIR/current_interval" ] && ADAPTIVE_INTERVAL=$(cat "$METRICS_DIR/current_interval")
+
+    if [ "$since_last" -ge "$ADAPTIVE_INTERVAL" ]; then
+        return 0  # Yes, review
+    else
+        return 1  # No, skip
+    fi
+}
+
 run_review_agents() {
     local iteration=$1
     local today=$(date +%Y-%m-%d)
 
+    LAST_REVIEW_ITERATION=$iteration
+
     echo ""
-    echo "=== REVIEW CYCLE ==="
+    echo "=== REVIEW CYCLE (Adaptive Interval: $ADAPTIVE_INTERVAL) ==="
+
+    # Count issues BEFORE review
+    local issues_before=$(get_issue_score)
+    echo "Issues before review: $issues_before"
 
     local prompt_file="$PROMPT_DIR/review.md"
     cat > "$prompt_file" << EOF
@@ -387,8 +489,20 @@ Run all 7 review agents IN PARALLEL using Task tool (single message, 7 calls):
 slop-checker, diagram-reviewer, tech-accuracy, term-intro-checker, oreilly-style, cross-ref-validator, progress-summarizer
 
 Write summary to reviews/review-${today}.md and commit.
+
+IMPORTANT: At the end, count total issues found (critical, medium, low) and output:
+ISSUES_FOUND: <number>
 EOF
     run_claude "$prompt_file"
+
+    # Count issues AFTER review (agents may have fixed some)
+    local issues_after=$(get_issue_score)
+    local new_issues=$((issues_before > issues_after ? issues_before - issues_after : issues_after - issues_before))
+
+    echo "Issues after review: $issues_after (Δ: $new_issues)"
+
+    # Update adaptive interval
+    update_adaptive_interval "$issues_after"
 }
 
 run_health_check() {
@@ -405,8 +519,8 @@ echo "========================================"
 echo "Project: $PROJECT_DIR"
 echo "Max iterations: ${MAX_ITERATIONS:-infinite}"
 echo "Max runtime: $MAX_HOURS hours"
-echo "Review every: $REVIEW_EVERY | Curator every: $CURATOR_EVERY"
-echo "Iteration timeout: ${ITERATION_TIMEOUT}s"
+echo "Review: ADAPTIVE (start: $REVIEW_EVERY, range: $MIN_REVIEW_INTERVAL-$MAX_REVIEW_INTERVAL)"
+echo "Curator every: $CURATOR_EVERY | Timeout: ${ITERATION_TIMEOUT}s"
 echo "Started: $(date)"
 echo ""
 
@@ -479,10 +593,14 @@ while true; do
         fi
     fi
 
-    # Review cycle
-    if [ $((iteration % REVIEW_EVERY)) -eq 0 ]; then
+    # Review cycle (adaptive based on convergence)
+    if should_review $iteration; then
         run_review_agents $iteration
         run_health_check
+    else
+        # Quick issue check without full review
+        local current_issues=$(get_issue_score)
+        echo "Quick scan: $current_issues weighted issues (next review in $((ADAPTIVE_INTERVAL - (iteration - LAST_REVIEW_ITERATION))) iterations)"
     fi
 
     echo "Sleeping ${SLEEP_BETWEEN}s..."
