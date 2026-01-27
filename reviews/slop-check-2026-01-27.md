@@ -1,8 +1,8 @@
-# AI Slop Check - 2026-01-27 (Verified 2026-01-27)
+# AI Slop Check - 2026-01-27 (Updated 2026-01-27)
 
 ## Summary
 - Files scanned: 34 (15 chapters, 19 PRDs)
-- Issues found: 53 (Critical: 1, High: 3, Medium: 49)
+- Issues found: 55 (Critical: 1, High: 3, Medium: 51)
 
 ### Good News
 - **No "delve"** in any file
@@ -15,6 +15,7 @@
 ### Areas of Concern
 - "paradigm" appears 3 times (1 chapter, 2 PRDs)
 - "powerful" and "comprehensive" used frequently (medium priority)
+- Overused qualifiers: "very", "extremely" appear in 2 chapter locations
 - Em dashes present in PRDs (should be cleaned before chapter conversion)
 
 ---
@@ -27,6 +28,16 @@
 | 765 | Critical | "crucial" | "And here's the crucial insight: when you stack these gates..." | Replace with "key insight" or "core insight" |
 
 ---
+
+### chapters/ch01-the-compound-systems-engineer.md
+| Line | Severity | Pattern | Text | Suggested Fix |
+|------|----------|---------|------|---------------|
+| 100 | Medium | "extremely" | "Variance is extremely high" | Replace with "high" or remove qualifier |
+
+### chapters/ch09-context-engineering-deep-dive.md
+| Line | Severity | Pattern | Text | Suggested Fix |
+|------|----------|---------|------|---------------|
+| 86 | Medium | "very" | "**Tests** (very high information):" | Replace with "high" or use "substantially high" |
 
 ### chapters/ch14-the-meta-engineer-playbook.md
 | Line | Severity | Pattern | Text | Suggested Fix |
@@ -94,6 +105,16 @@
 
 ---
 
+## Medium Priority: Overused Qualifiers
+
+Two instances of overused qualifiers found in chapters:
+
+### Qualifiers (2 occurrences in chapters)
+- ch01:100 - "Variance is extremely high" - Consider removing qualifier entirely
+- ch09:86 - "very high information" - Consider using "high" without qualifier
+
+---
+
 ## Medium Priority: "powerful" and "comprehensive" Usage
 
 These words appear frequently but are acceptable in technical contexts. Review for overuse:
@@ -157,9 +178,11 @@ The word "leverage" appears 74+ times across chapters. This is **intentional and
 2. prds/ch11.md:65, 248 - Replace "paradigm" instances
 
 ### Should Fix (Medium Priority)
-1. Clean em dashes from all PRD files before converting to chapters
-2. Review ch01, ch10, ch14, ch04 for "This" sentence starters
-3. Consider varying "comprehensive" usage in ch11
+1. ch01:100 - Remove "extremely" qualifier from "extremely high"
+2. ch09:86 - Simplify "very high information" to "high information"
+3. Clean em dashes from all PRD files before converting to chapters
+4. Review ch01, ch10, ch14, ch04 for "This" sentence starters
+5. Consider varying "comprehensive" usage in ch11
 
 ### Optional
 1. Review "powerful" usage for variety
@@ -167,10 +190,11 @@ The word "leverage" appears 74+ times across chapters. This is **intentional and
 
 ---
 
-## Verification Command
+## Verification Commands
 
-Re-run check with:
-\`\`\`bash
+Re-run checks with:
+```bash
 grep -rn "delve\|crucial\|pivotal\|robust" chapters/
 grep -rn "paradigm\|cutting-edge\|game-changer" chapters/
-\`\`\`
+grep -rn "\bvery\s+\|extremely\s+" chapters/
+```

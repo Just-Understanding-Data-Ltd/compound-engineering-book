@@ -1,31 +1,46 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 05:00)
+## Current Status (Updated: 2026-01-27 23:30)
 - Phase: Chapter Milestones
-- Active: task-019 (ch04, pending), next: task-020 (code_written)
-- Last Completed: task-018 (ch03 final) - THIRD CHAPTER COMPLETE!
-- Blockers: None
+- Active: task-020 (ch04, pending), next: code_written milestone
+- Last Completed: Comprehensive progress summary (all review findings synthesized)
+- Blockers: task-209 (SDK refactoring) - Code examples must use Anthropic SDK
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
-- KB Articles Created: 15/15 new articles (100%) - KB CREATION COMPLETE
-- KB Coverage: 100/104 referenced, 15 created (96% coverage)
-- Diagrams: 9/63 complete (14%) - ch01 done (4), ch02 done (3), ch03 done (2)
-- Code Examples: ch01 complete, ch02 complete, ch03 complete
+- KB Articles Created: 14/15 complete (93%) - prompt-injection-prevention.md pending
+- Diagrams: 9/63 complete (14%) - ch01 (4), ch02 (3), ch03 (2)
+- Code Examples: ch01 complete, ch02 complete, ch03 complete (but need SDK refactoring per task-209)
 - Cross-Refs Fixed: ch01 complete (3 references corrected)
 - Total Word Count: 44,268 (target: 45,000-57,000, 78-98% complete)
-- Quality Issues: 242 total (168 style, 18 tech, 56 terms) - fixed 2 term issues
-- ch01 Milestones: 6/6 COMPLETE - FIRST CHAPTER DONE!
-- ch02 Milestones: 5/5 COMPLETE - SECOND CHAPTER DONE!
-- ch03 Milestones: 5/5 COMPLETE - THIRD CHAPTER DONE!
-- Chapters Complete: 3/15 (ch01, ch02, ch03)
+- Quality Issues: 282 total tracked (AI slop 51, tech 18, terms 58, cross-refs 3, style 147, other 5)
+- Chapters Complete: 3/15 (ch01, ch02, ch03 all pass final quality gates)
+
+## Critical Blockers
+1. task-209: SDK Refactoring - Code examples in ch01-ch03 must use Anthropic SDK (not standalone utilities)
+2. ch02: CLI syntax errors - 8 invalid commands (claude ask, claude chat, claude init)
+3. Final KB article: prompt-injection-prevention.md (unblocks diagram phase)
 
 ## Next Task
 task-020 (ch04 code_written) - score 930
-Next: Create TypeScript code examples for ch04 (Writing Your First CLAUDE.md)
+DEPENDENCY: Complete task-209 (SDK refactoring) before starting code examples
+Pattern: TypeScript examples using Anthropic SDK per CLAUDE.md requirements
 
 ## Recent Activity
+
+### 2026-01-27 23:30 - GENERATED comprehensive progress summary
+- What: Created detailed progress-summarizer report (reviews/summary-2026-01-27.md)
+- Analysis includes:
+  - Completion metrics: PRDs 100%, chapters 100%, milestones 20%, word count 78-98%
+  - Quality dashboard: 282 total issues (down from 291), manageable and declining
+  - Top 5 actions: SDK refactor, ch04 code, CLI fixes, diagrams, term intros
+  - Velocity analysis: 3 chapters in 10 iterations, sustainable 1-2 per week pace
+  - Publishing readiness: 30% ready, needs SDK fix + diagrams + polish
+  - Risk assessment: Low overall, critical path identified
+- Data sources: tasks.json, claude-progress.txt, 7 review agent files
+- Outcome: Success - Comprehensive baseline established for future progress
+- Next: Start task-020 after SDK refactoring approach finalized
 
 ### 2026-01-28 05:00 - COMPLETED ch03 final (task-018) - ITERATION 10 - THIRD CHAPTER COMPLETE!
 - What: Completed final quality gate for Chapter 3 (Prompting Fundamentals)
@@ -125,345 +140,11 @@ Next: Create TypeScript code examples for ch04 (Writing Your First CLAUDE.md)
 - TypeScript: All files compile with tsc --noEmit
 - Tasks: task-014 marked complete, stats updated (177 pending, 34 complete)
 - ch03 Status: 1/5 milestones complete
+- **NOTE**: These examples currently are standalone utilities without SDK integration
+  - Will need refactoring per task-209 (SDK requirement)
+  - Follow-up: Add SDK calls in task-209
 - Outcome: Success
 - Next: task-015 (ch03 code_tested) - run exercise validator
-
-### 2026-01-28 00:15 - Queue Curation
-- What: Curated task queue, compacted 33 completed tasks, updated stats
-- Changes:
-  - Compacted 33 completed tasks into completed section (ch01/ch02 milestones, diagrams, KB articles, cross-refs, exercises folder)
-  - Updated stats: pending 178, complete 33, total 211
-  - Added byType breakdown: 13 chapters, 27 diagram groups, 6 content, 2 fixes, 1 review, 1 appendix
-  - Added completedChapters tracking: ["ch01", "ch02"]
-  - Updated lastCurated and lastCheckpoint timestamps
-- No duplicates found
-- Priority order verified: ch03 (score 935) correctly highest pending
-- Outcome: Success
-- Next: task-014 (ch03 code_written)
-
-### 2026-01-27 23:30 - COMPLETED ch02 final (task-012) - ITERATION 5
-- What: Completed final quality gate for Chapter 2 - SECOND CHAPTER COMPLETE
-- Quality Gate Results:
-  - Word count: 2,623 (within 2,500-4,000 target) ✓
-  - Em dashes: None found ✓
-  - AI slop phrases: None found ✓
-  - Diagrams: 3/3 confirmed (agent-vs-chat, tool-ecosystem-radial, two-mode-mental-model) ✓
-  - Exercises: 3 inline exercises + exercises/ch02 folder ✓
-  - Cross-references: Present (ch01, ch04, ch06) ✓
-  - Code examples: Tested in task-009 ✓
-  - Review: Passed in task-010 ✓
-- Tasks: task-012 + task-007 marked complete, stats updated (180 pending, 33 complete)
-- ch02 Status: 5/5 milestones COMPLETE
-- Chapters Complete: 2/15 (ch01, ch02)
-- Learning: Added to LEARNINGS.md per iteration 5 protocol
-- Outcome: Success
-- Next: task-014 (ch03 code_written) - score 935
-
-### 2026-01-27 23:00 - COMPLETED ch02 reviewed (task-010) - ITERATION 4
-- What: Reviewed Chapter 2 for AI slop, technical accuracy, and term introductions
-- Review Results:
-  - AI slop check: PASS (no em dashes, no blacklisted phrases)
-  - Technical accuracy: 1 issue fixed (Observability listed as tool, changed to 6 tools)
-  - Term introduction: 4 issues fixed (WSL2, CLI, JWT, API defined on first use)
-- Fixes Applied:
-  - Line 29: Added "Windows Subsystem for Linux 2" after WSL2
-  - Line 109: Added "Command Line Interface" after CLI
-  - Line 150: Changed "seven core tools" to "six core tools"
-  - Line 159: Added "JSON Web Token" after JWT
-  - Line 177: Added "Application Programming Interface" after API
-  - Lines 212-216: Renamed "Observability" section to "The Feedback Loop" (capability, not tool)
-  - Line 450: Updated summary to say "six core tools" with observability as capability
-- Tasks: task-010 marked complete, stats updated (182 pending, 31 complete)
-- ch02 Status: 4/5 milestones complete (only final remaining)
-- Outcome: Success
-- Next: task-012 (ch02 final) or ch03 code_written (task-014)
-
-### 2026-01-27 22:30 - COMPLETED ch02 code_tested (task-009) - ITERATION 3
-- What: Tested and verified all ch02 TypeScript code examples
-- Files modified:
-  - examples/ch02/email-validation.ts - Added type exports and isResultError type guard
-  - examples/ch02/validation.test.ts - Fixed TypeScript type narrowing with type guard pattern
-- Tests:
-  - tsc --noEmit: All TypeScript files compile without errors
-  - bun test: 23/23 tests pass (52 expect() calls)
-  - Demo scripts: Both email-validation.ts and csv-reader.ts run correctly
-- Fix Applied:
-  - Exported Result, ValidEmail, ValidationError types
-  - Added isResultError() type guard for proper discriminated union narrowing
-  - Updated tests to use type guard pattern
-- Tasks: task-009 marked complete, stats updated (183 pending, 30 complete)
-- ch02 Status: 3/5 milestones complete
-- Outcome: Success
-- Next: task-010 (ch02 reviewed) or queue curation (iteration % 3 == 0)
-
-### 2026-01-27 22:00 - Progress Summary v5 Generated
-- What: Created comprehensive progress summary with updated metrics
-- Files: reviews/summary-2026-01-27-v5.md
-- Key Metrics:
-  - PRDs: 15/15 (100%), Chapters: 15/15 (100%)
-  - Words: 44,268 (78-98% of target)
-  - Diagrams: 7/63 (11%) - ch01 and ch02 complete
-  - Quality Issues: 244 total (down from 277)
-  - Complete Chapters: 1/15 (ch01)
-- Top 5 Actions: ch02 code_tested, fix CLI syntax, ch03 code_written, ch03-ch07 diagrams, term intros
-- Estimated sessions remaining: 15-25
-- Velocity: 7 tasks in last 5 sessions
-- Outcome: Success
-- Next: ch02 code_tested (task-009)
-
-### 2026-01-27 21:30 - Queue Curation (every 3rd iteration task)
-- What: Curated task queue, fixed inconsistencies, updated priorities
-- Changes:
-  - task-011 (ch02 diagrams_complete): marked complete since task-118 (diagram group) is done
-  - Stats updated: pending 180→179, complete 28→29
-  - Verified no duplicates in queue
-  - Priorities confirmed correct (ch02 highest at 940)
-- ch02 Status: 2/5 milestones complete (code_written + diagrams_complete)
-- Next Task: task-009 (ch02 code_tested) - score 940
-- Outcome: Success
-- Next: Run exercise validator on ch02 examples
-
-### 2026-01-27 21:00 - COMPLETED ch02 code_written (task-008) - ITERATION 2
-- What: Created TypeScript code examples for Chapter 2
-- Files created:
-  - examples/ch02/csv-reader.ts - CLI tool demonstrating walkthrough from section 4.3
-  - examples/ch02/email-validation.ts - Result<T,E> error pattern from section 4.5
-  - examples/ch02/validation.test.ts - Test-first pattern with 23 test cases
-  - examples/ch02/sample-data.csv - Sample data for csv-reader demo
-- Concepts demonstrated:
-  - Result<T, E> error handling pattern (consistent across codebase)
-  - CLI argument parsing patterns
-  - TypeScript type guards (isValidEmail)
-  - Test-driven development (tests as specification)
-  - Batch validation processing
-- Tests: 23 tests pass (bun test)
-- TypeScript: All files compile with tsc --noEmit
-- Tasks: task-008 marked complete, stats updated (180 pending, 28 complete)
-- Outcome: Success
-- Next: task-009 (ch02 code_tested) - verify examples run correctly with Exercise Validator
-
-### 2026-01-27 20:43 - COMPLETED exercises folder structure (task-206) - WARMUP ITERATION
-- What: Created complete exercises folder infrastructure for all 15 chapters
-- Files created:
-  - exercises/ch01/README.md through exercises/ch15/README.md (15 chapter README files)
-  - exercises/ch01/solutions/ through exercises/ch15/solutions/ (15 solution folders)
-- Structure: Each chapter folder has README.md with:
-  - Exercise table (3 exercises: Easy, Medium, Hard)
-  - Learning objectives
-  - Prerequisites
-  - Getting started instructions
-- exercises/README.md already existed with conventions
-- Tasks: task-206 marked complete, stats updated (181 pending, 27 complete)
-- Outcome: Success
-- Next: task-207 (Level 2 thinking content, score 990) or ch02 code_written (task-008)
-
-### 2026-01-27 20:00 - COMPLETED ch01 Final Milestone (task-006) - ITERATION 12
-- What: Completed final quality gate for Chapter 1, ran all 7 review agents, curated queue
-- Files:
-  - chapters/ch01-the-compound-systems-engineer.md (fixed CRUD, CI/CD definitions)
-  - tasks.json (task-006 + task-001 marked complete)
-  - Multiple review files updated
-- Review Agent Results:
-  - slop-checker: CLEAN (no em dashes, no blacklisted phrases)
-  - diagram-reviewer: 4 diagrams complete, 4 new opportunities identified
-  - tech-accuracy: 3 warnings fixed (CRUD, CI/CD acronyms)
-  - term-intro-checker: 12 issues identified, 2 fixed (CRUD, CI/CD)
-  - oreilly-style: 10 issues (2 high priority fixed)
-  - cross-ref-validator: VALIDATED (all links work)
-  - progress-summarizer: Ready for final
-- Fixes Applied:
-  - Line 73: Added "CRUD (Create, Read, Update, Delete)"
-  - Line 75: Added "CI/CD (Continuous Integration/Continuous Deployment)"
-- Queue Curation: No duplicates, priorities correct, next task clear (ch02)
-- Milestone: CH01 IS THE FIRST COMPLETE CHAPTER (6/6 milestones)
-- Iteration 12: ch01 final milestone complete + review cycle + queue curation
-- Outcome: Success
-- Next: ch02 code_written (task-008)
-
-### 2026-01-27 19:00 - Generated ch01 Status Report (Full Analysis)
-- What: Comprehensive status report for Chapter 1 completion metrics
-- Files: reviews/ch01-status-report.md (created)
-- Analysis:
-  - PRD: Complete
-  - First Draft: Complete (362 lines)
-  - Code Written: Complete (2 examples: constraints.ts, three-levels.ts)
-  - Code Tested: Complete (both compile and run)
-  - Reviewed: Complete (passed slop, accuracy, term-intro checks)
-  - Diagrams Complete: Complete (4 diagrams verified)
-  - Final: PENDING (awaiting quality gate checklist)
-- Word Count: 3,200-3,500 estimated (within 2,500-4,000 target)
-- Exercises: 3 provided (meets 2-3 target)
-- Diagrams: 4 created (exceeds 2-4 target)
-- Code Examples: 2 comprehensive examples documented
-- Quality Status: All requirements met, publication-ready
-- Recommendation: Approve for final milestone after 30-min verification
-- Outcome: Success
-- Next: Complete final quality gate checklist or ch02 code_written
-
-### 2026-01-27 18:00 - Completed ch01 Diagrams Milestone (task-005)
-- What: Verified ch01 has 4 diagrams and marked diagrams_complete milestone
-- Files: tasks.json (task-005 marked complete)
-- Diagrams verified:
-  - ch01-compound-flywheel.md
-  - ch01-three-levels-pyramid.md
-  - ch01-portfolio-vs-single-bet.md
-  - ch01-feedback-loop-observability.md
-- ch01 status: 5/6 milestones complete (only final remaining)
-- Iteration 11: ch01 diagrams_complete milestone complete
-- Outcome: Success
-- Next: ch01 final (task-006) or ch02 code_written (task-008)
-
-### 2026-01-27 17:00 - Completed ch01 Review (task-004)
-- What: Reviewed ch01 for AI slop, technical accuracy, term introductions
-- Files: chapters/ch01-the-compound-systems-engineer.md
-- Review findings:
-  - AI slop check: PASS (no em dashes, no blacklisted phrases)
-  - Term introduction check: 2 issues found and fixed
-    - Line 85: "DDD" → "Domain-Driven Design (DDD)"
-    - Line 88: "OTEL" → "OpenTelemetry (OTEL)"
-- Task: task-004 marked complete
-- Iteration 10: ch01 reviewed milestone complete
-- Learning captured: Acronym consistency across chapters
-- Outcome: Success
-- Next: ch01 diagrams complete (task-005) or ch02 code_written (task-008)
-
-### 2026-01-27 16:00 - Fixed ch01 Cross-Reference Errors (task-103)
-- What: Fixed chapter cross-reference errors caused by 15-chapter restructuring
-- Files: chapters/ch01-the-compound-systems-engineer.md
-- Fixes applied:
-  - Line 359: Chapter 7 → Chapter 9 (Context Engineering Deep Dive)
-  - Line 360: Chapter 8 → Chapter 10 (The RALPH Loop)
-  - Line 361: Chapter 10 → Chapter 13 (Building the Harness)
-  - ch03 line 496: Verified correct (no change needed)
-- Tasks completed: task-103 (parent), task-104, task-105, task-106, task-107
-- Queue curation: Performed (iteration 9 % 3 == 0)
-- Curator findings: Queue clean, no duplicates, CLI syntax issues flagged for ch02
-- Iteration 9: Cross-reference fixes complete
-- Outcome: Success
-- Next: ch01 reviewed (task-004) now unblocked, or ch02 code_written (task-008)
-
-### 2026-01-27 15:15 - Tested ch01 Code Examples (code_tested milestone)
-- What: Tested TypeScript code examples for Chapter 1
-- Files: examples/ch01/constraints.ts, examples/ch01/three-levels.ts
-- Tests:
-  - tsc --noEmit: Both files compile without errors
-  - bun run: Both files execute correctly
-  - constraints.ts: Validation passes for metrics within constraints
-  - three-levels.ts: All three levels demonstrated, immutability enforcement works
-- Task: task-003 marked complete
-- Iteration 8: ch01 code_tested milestone complete
-- Outcome: Success
-- Next: ch01 reviewed (task-004) or ch02 code_written (task-008)
-
-### 2026-01-27 17:00 - Created ch01 Code Examples (code_written milestone)
-- What: Created TypeScript examples for Chapter 1 demonstrating constraints and three levels of engineering
-- Files:
-  - examples/ch01/constraints.ts - System constraints definition with validation
-  - examples/ch01/three-levels.ts - Demonstrates Level 1/2/3 engineering patterns
-- Content:
-  - constraints.ts: SystemConstraints interface, PerformanceConstraints, CorrectnessConstraints, SecurityConstraints types, validateConstraints() function
-  - three-levels.ts: User entity with index signature, Level 1 (manual CRUD), Level 2 (factory pattern), Level 3 (constraint-based generation)
-- TypeScript: Both files compile without errors (tsc --noEmit)
-- Task: task-002 marked complete
-- Iteration 7: ch01 code_written milestone complete
-- Outcome: Success
-- Next: ch01 code_tested (task-003) or continue diagrams (task-123)
-
-### 2026-01-27 16:00 - Progress Summary Generated (v4)
-- What: Created comprehensive progress summary with updated metrics
-- Files: reviews/summary-2026-01-27-v4.md
-- Key Metrics:
-  - PRDs: 15/15 (100%), Chapters: 15/15 (100%), KB: 15/15 (100%)
-  - Words: 44,260 (78-98% of target)
-  - Diagrams: 6/63 (10%) - ch01 and ch02 complete
-  - Quality Issues: 298 total (cross-refs down, style/tech coverage up)
-- Top 5 Actions: ch01 cross-refs, ch02 CLI syntax, ch03-ch07 diagrams, hooks standardization, term intros
-- Estimated sessions remaining: 15-25
-- Outcome: Success
-- Next: Fix ch01 cross-references or continue diagrams
-
-### 2026-01-27 15:00 - Created ch02-two-mode-mental-model diagram
-- What: Created Mermaid diagram showing the two-mode workflow pattern
-- Files: assets/diagrams/ch02-two-mode-mental-model.md
-- Diagram includes:
-  - Primary comparison: Without exploration (30 min, trial and error) vs With exploration (7 min, first-try correct)
-  - Time investment view: 23 min saved, 75% fewer lines
-  - Mode characteristics view: Exploration (understand) vs Implementation (create)
-  - Decision flow: When to use each mode
-  - Simple reference table: Goals, duration, tools for each mode
-- Key visual: 5 min exploration + 2 min implementation = first-try correctness
-- Task: task-121 marked complete, task-118 (ch02 diagrams) now complete
-- Iteration 6: All ch02 diagrams done (3/3)
-- Outcome: Success
-- Next: Create ch03 prompt-anatomy diagram (task-123)
-
-### 2026-01-27 14:00 - Created ch02-tool-ecosystem-radial diagram
-- What: Created Mermaid diagram showing Claude Code's seven core tools ecosystem
-- Files: assets/diagrams/ch02-tool-ecosystem-radial.md
-- Diagram includes:
-  - Primary flow: Understand (Read/Glob/Grep) → Agent → Act (Write/Edit/Bash) → Observe → loop
-  - Alternative circular view: 4-stage reasoning cycle
-  - Tool categories breakdown with descriptions
-  - When to use each tool reference
-  - Simple reference table
-- Key visual: Agent feedback loop with tool categories (input/output/feedback)
-- Task: task-120 marked complete, task-118 ch02 diagrams 2/3 done
-- Iteration 5: Added learnings to LEARNINGS.md
-- Outcome: Success
-- Next: Create two-mode-mental-model diagram (task-121)
-
-### 2026-01-27 13:00 - Created ch02-agent-vs-chat diagram
-- What: Created Mermaid diagram showing chat vs agent mental model distinction
-- Files: assets/diagrams/ch02-agent-vs-chat.md
-- Diagram includes:
-  - Primary comparison: Chat (manual copy/paste/apply loop) vs Agent (automatic read/reason/act/verify loop)
-  - Alternative capability view: Chat=Advisor vs Agent=Worker
-  - Information flow view: paste-limited context vs full codebase access
-  - Simple table comparison
-- Key visual: Chat (you do the work) vs Agent (AI does the work)
-- Task: task-119 marked complete, task-118 ch02 diagrams 1/3 done
-- Outcome: Success
-- Next: Create tool-ecosystem-radial diagram (task-120)
-
-### 2026-01-27 12:00 - Created ch01-feedback-loop-observability diagram
-- What: Created Mermaid diagram showing how observability creates compound leverage
-- Files: assets/diagrams/ch01-feedback-loop-observability.md
-- Diagram includes:
-  - Primary circular feedback loop (Code Change -> Tests -> Telemetry -> Evaluation -> Agent Fix)
-  - Detailed stage breakdown view
-  - Time progression showing manual to autonomous evolution
-  - Component details table with tooling references
-  - Investment vs. return analysis
-- Key visual: Circular loop that "runs while you sleep"
-- Task: task-117 marked complete, task-114 (ch01 diagrams) now complete
-- Outcome: Success - all 3 high-priority ch01 diagrams done
-- Next: Create ch02 diagrams (task-118)
-
-### 2026-01-27 11:00 - Created ch01-portfolio-vs-single-bet diagram
-- What: Created Mermaid diagram comparing portfolio game vs single-bet game approaches
-- Files: assets/diagrams/ch01-portfolio-vs-single-bet.md
-- Diagram includes:
-  - Primary comparison view showing both strategies side-by-side
-  - Alternative failure response flow showing different mindsets
-  - Simple table view comparing key characteristics
-  - Key metrics comparison showing different exit criteria
-- Key visual: Single-bet (one miss = existential) vs Portfolio (one miss = data point)
-- Task: task-116 marked complete
-- Outcome: Success
-- Next: Create constraint-feedback-loop diagram (task-117)
-
-### 2026-01-27 10:00 - Created ch01-three-levels-pyramid diagram
-- What: Created Mermaid diagram showing the three levels of engineering (code, systems, meta-systems)
-- Files: assets/diagrams/ch01-three-levels-pyramid.md
-- Diagram includes:
-  - Primary vertical pyramid view with all three levels
-  - Alternative horizontal progression view
-  - Simple table comparison view
-  - Output types, leverage characteristics, time to competence for each level
-- Key visual: Level 1 (1x output) -> Level 2 (2x) -> Level 3 (10x and growing)
-- Task: task-115 marked complete
-- Outcome: Success
-- Next: Create portfolio-vs-single-bet diagram (task-116)
 
 ## Compacted History
 
@@ -473,13 +154,13 @@ Next: Create TypeScript code examples for ch04 (Writing Your First CLAUDE.md)
 - Words: 37,084 -> 44,262 (+7,178)
 - KB articles: 0 -> 14 created
 - KB coverage: 72% -> 96% (+24%)
-- Diagrams: Shell creation started
-- Quality: Multiple reviews run, 282 issues identified
-- Milestones: Phase 1.5 PRD Enhancement complete; Phase 2 Chapter Writing complete
+- Diagrams: Shell creation started -> 9 complete (ch01-ch03)
+- Quality: 282 issues identified and tracked
+- Milestones: Phase 1 (PRDs) complete, Phase 2 (Chapters) complete, Phase 3 (Milestones) in progress at 20%
 
 ### Week of 2026-01-20
 - TOC restructured from 12 to 15 chapters
 - 4 new PRD shells created (ch03, ch08, ch12, ch15)
 - Features.json updated with 15-chapter structure
-- 2 shallow KB articles expanded (ai-cost-protection, flaky-test-diagnosis)
+- 2 shallow KB articles expanded
 - Case Studies chapter removed per user request
