@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 17:00)
-- Phase: Chapter Completion - Review & Fixes
-- Active: ch01 reviewed milestone COMPLETE (task-004)
-- Last Completed: ch01 review (term introductions fixed)
+## Current Status (Updated: 2026-01-27 18:00)
+- Phase: Chapter Completion - Milestones
+- Active: ch01 diagrams_complete milestone COMPLETE (task-005)
+- Last Completed: ch01 diagrams complete (4 diagrams total)
 - Blockers: None
 
 ## Project State Summary
@@ -15,12 +15,26 @@
 - Code Examples: ch01 code_written + code_tested complete
 - Cross-Refs Fixed: ch01 complete (3 references corrected)
 - Total Word Count: 44,262 (target: 53,000-72,000, 61-82% complete)
-- Quality Issues: 277 total (down from 279, term intro errors fixed)
+- Quality Issues: 277 total
+- ch01 Milestones: 5/6 complete (only final remaining)
 
 ## Next Task
-Continue with ch01 diagrams complete (task-005) or ch02 code_written (task-008)
+Continue with ch01 final (task-006) or ch02 code_written (task-008)
 
 ## Recent Activity
+
+### 2026-01-27 18:00 - Completed ch01 Diagrams Milestone (task-005)
+- What: Verified ch01 has 4 diagrams and marked diagrams_complete milestone
+- Files: tasks.json (task-005 marked complete)
+- Diagrams verified:
+  - ch01-compound-flywheel.md
+  - ch01-three-levels-pyramid.md
+  - ch01-portfolio-vs-single-bet.md
+  - ch01-feedback-loop-observability.md
+- ch01 status: 5/6 milestones complete (only final remaining)
+- Iteration 11: ch01 diagrams_complete milestone complete
+- Outcome: Success
+- Next: ch01 final (task-006) or ch02 code_written (task-008)
 
 ### 2026-01-27 17:00 - Completed ch01 Review (task-004)
 - What: Reviewed ch01 for AI slop, technical accuracy, term introductions
