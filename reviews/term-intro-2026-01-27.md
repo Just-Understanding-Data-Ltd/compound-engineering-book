@@ -1,8 +1,8 @@
 # Term Introduction Check - 2026-01-27
 
 ## Summary
-- Files scanned: 7
-- Issues found: 38
+- Files scanned: 13
+- Issues found: 52
 
 ## Issues by File
 
@@ -75,6 +75,63 @@
 | 167 | DDD | Acronym used before introduction | Move full form "Domain-Driven Design (DDD)" to line 167 instead of line 469 |
 | 234 | hooks | Jargon introduced abruptly | Consider adding "(automated scripts triggered by tool actions)" after first use |
 
+### ch08-error-handling-and-debugging.md
+
+| Line | Term | Issue | Suggested Fix |
+|------|------|-------|---------------|
+| 86 | bcrypt | Tool without explanation | Add "bcrypt (password hashing library)" on first use |
+| 222 | Opus, Sonnet | Model names without introduction | Add "Claude Opus (most capable model) instead of Sonnet (faster, lower-cost model)" |
+| 361 | Zod | Tool without explanation | Add brief reminder or reference to earlier chapter definition |
+
+### ch09-context-engineering-deep-dive.md
+
+| Line | Term | Issue | Suggested Fix |
+|------|------|-------|---------------|
+| — | — | No major issues | Chapter explains concepts well as they are introduced |
+
+**Note:** This chapter is a model for term introduction. It properly explains entropy, mutual information, channel capacity, and other technical concepts as they appear.
+
+### ch10-the-ralph-loop.md
+
+| Line | Term | Issue | Suggested Fix |
+|------|------|-------|---------------|
+| — | — | LLMs properly introduced | Line 9: "Large language models (LLMs) maintain internal state..." ✓ |
+
+**Note:** This chapter properly introduces LLMs on first use (line 9). Other chapters should follow this pattern.
+
+### ch11-sub-agent-architecture.md
+
+| Line | Term | Issue | Suggested Fix |
+|------|------|-------|---------------|
+| 35 | Result type | Pattern without context | Add "Result type (a pattern for returning success/failure instead of throwing exceptions)" |
+| 64 | hexagonal architecture | Jargon without explanation | Add "hexagonal architecture (pattern where dependencies flow inward to the domain)" |
+| 512 | JWT | Acronym used without introduction | Change to "JSON Web Token (JWT)" on first use in this chapter |
+| 724 | Chapter 15 | Reference to non-existent chapter | Remove or mark as "(coming soon)" |
+
+### ch12-development-workflows.md
+
+| Line | Term | Issue | Suggested Fix |
+|------|------|-------|---------------|
+| 449 | AST | Acronym in heading before expansion | Consider "AST-Grep: Abstract Syntax Tree Search" for heading, or expand in first sentence |
+| 515 | slash command | Feature without explanation | Add "(custom commands defined in .claude/commands/)" on first use |
+
+**Note:** Line 465 properly expands AST as "Abstract Syntax Tree" but the section heading on line 449 uses it first.
+
+### ch13-building-the-harness.md
+
+| Line | Term | Issue | Suggested Fix |
+|------|------|-------|---------------|
+| — | — | Excellent term introductions | This chapter properly introduces: |
+
+**Properly Introduced Terms in Ch13:**
+- Line 99: "OpenTelemetry (OTEL)" ✓
+- Line 159: "Domain-Driven Design (DDD)" ✓
+- Line 474: "MCP (Model Context Protocol)" ✓
+
+**Note:** Chapter 13 is an excellent model for term introduction. All major acronyms and tools are properly expanded on first use.
+
+---
+
 ## Critical Issues (High Priority)
 
 These issues appear in early chapters and affect reader comprehension:
@@ -86,6 +143,24 @@ These issues appear in early chapters and affect reader comprehension:
 3. **ch03:3** - LLM: First chapter to use this acronym extensively. Should define it at the start since this is a foundational concept for the book.
 
 4. **ch04:3** - Temporal: Opening sentence mentions this tool without explanation, potentially confusing readers.
+
+5. **ch08:222** - Opus/Sonnet: Model tier names used without explaining what they are. Readers unfamiliar with Claude models need context.
+
+6. **ch11:64** - hexagonal architecture: Architectural pattern mentioned casually without explanation.
+
+---
+
+## Chapters With Good Term Practices
+
+These chapters demonstrate proper term introduction and can serve as models:
+
+1. **ch09-context-engineering-deep-dive.md**: Explains information theory concepts (entropy, mutual information, channel capacity) thoroughly as they're introduced.
+
+2. **ch10-the-ralph-loop.md**: Opens with proper LLM introduction: "Large language models (LLMs)..."
+
+3. **ch13-building-the-harness.md**: Properly introduces OTEL, DDD, and MCP with full expansions on first use.
+
+---
 
 ## Recommendations
 
@@ -110,41 +185,66 @@ LLMs (see Chapter 3) function as stateless systems...
 ### Pattern 4: Glossary Consideration
 Given the number of technical terms, consider adding an appendix glossary that chapters can reference.
 
+### Pattern 5: Model Name Introduction
+When discussing Claude model tiers:
+```
+Claude Opus (the most capable model tier) excels at complex reasoning,
+while Sonnet (faster and more cost-effective) handles routine tasks.
+```
+
+---
+
 ## Term Index
 
 For reference, here are all identified terms that need introduction:
 
 **Acronyms:**
-- API (Application Programming Interface) - Commonly known, low priority
-- CI/CD (Continuous Integration/Continuous Deployment)
-- CRUD (Create, Read, Update, Delete)
-- DAG (Directed Acyclic Graph)
-- DDD (Domain-Driven Design)
-- JSDoc (JavaScript Documentation)
-- JWT (JSON Web Token)
-- LLM (Large Language Model)
-- OTEL (OpenTelemetry)
-- RLS (Row-Level Security)
-- tRPC (TypeScript Remote Procedure Call)
+- AST (Abstract Syntax Tree) - ch12
+- CI/CD (Continuous Integration/Continuous Deployment) - ch01
+- CRUD (Create, Read, Update, Delete) - ch01
+- DAG (Directed Acyclic Graph) - ch05
+- DDD (Domain-Driven Design) - ch01, ch07, ch13✓
+- JSDoc (JavaScript Documentation) - ch02
+- JWT (JSON Web Token) - ch02, ch11
+- LLM (Large Language Model) - ch03, ch04, ch05, ch06, ch10✓
+- MCP (Model Context Protocol) - ch13✓
+- OTEL (OpenTelemetry) - ch01, ch13✓
+- RLS (Row-Level Security) - ch04
+- tRPC (TypeScript Remote Procedure Call) - ch04
 
 **Tools:**
-- Aider (AI pair programming tool)
-- Cursor (AI-powered code editor)
-- Docker (containerization platform)
-- fast-check (property-based testing library)
-- Hypothesis (Python property-based testing)
-- io-ts (TypeScript runtime validation)
-- Kubernetes/K8s (container orchestration)
-- Stripe (payment processing)
-- Supabase (backend-as-a-service)
-- Temporal (workflow orchestration)
-- Terraform (infrastructure as code)
-- TLA+ (formal specification language)
-- Z3 (theorem prover)
-- Zod (TypeScript schema validation)
+- Aider (AI pair programming tool) - ch04
+- bcrypt (password hashing library) - ch08
+- Cursor (AI-powered code editor) - ch04
+- Docker (containerization platform) - ch01
+- fast-check (property-based testing library) - ch06
+- Hypothesis (Python property-based testing) - ch06
+- io-ts (TypeScript runtime validation) - ch06
+- Kubernetes/K8s (container orchestration) - ch01
+- Stripe (payment processing) - ch01
+- Supabase (backend-as-a-service) - ch04
+- Temporal (workflow orchestration) - ch04
+- Terraform (infrastructure as code) - ch01
+- TLA+ (formal specification language) - ch06
+- Z3 (theorem prover) - ch06
+- Zod (TypeScript schema validation) - ch03, ch06, ch08
 
 **Jargon:**
-- Aggregate roots
-- Bounded contexts
-- Idempotency
-- Trace spans
+- Aggregate roots - ch01
+- Bounded contexts - ch01
+- Hexagonal architecture - ch11
+- Hooks (automated scripts) - ch07
+- Idempotency - ch01
+- Result type (error handling pattern) - ch11
+- Slash command (Claude Code feature) - ch12
+- Trace spans - ch01
+
+**Model Names:**
+- Claude Opus (most capable tier) - ch08
+- Claude Sonnet (balanced tier) - ch08
+
+---
+
+## Status Legend
+- ✓ = Properly introduced in at least one chapter
+- No mark = Needs introduction in all occurrences

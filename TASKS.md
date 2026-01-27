@@ -218,16 +218,18 @@
 - [ ] Add "Related Chapters" section to ch07
 - [ ] Complete cross-reference section in ch06
 
-### Term Introduction Fixes (from review 2026-01-27)
-> See `reviews/term-intro-2026-01-27.md` for full details
+### Term Introduction Fixes (from review 2026-01-27, updated with ch08-13)
+> See `reviews/term-intro-2026-01-27.md` for full details (52 issues across 13 chapters)
 
 **Critical (High Priority):**
 - [ ] ch01: Introduce CRUD, CI/CD, DDD, OTEL acronyms on first use (lines 73, 76, 86, 88)
 - [ ] ch01: Add brief explanations for Terraform, Docker, Kubernetes (line 89)
 - [ ] ch03: Introduce LLM acronym at start of chapter (line 3)
 - [ ] ch04: Introduce Temporal tool on first mention (line 3)
+- [ ] ch08: Introduce Claude Opus/Sonnet model tiers (line 222)
+- [ ] ch11: Introduce hexagonal architecture pattern (line 64)
 
-**Medium Priority:**
+**Medium Priority (Ch01-07):**
 - [ ] ch01: Add jargon definitions for bounded contexts, aggregate roots, trace spans, idempotency
 - [ ] ch02: Introduce JSDoc and JWT acronyms
 - [ ] ch03: Add Zod tool explanation
@@ -235,6 +237,19 @@
 - [ ] ch05: Introduce DAG acronym
 - [ ] ch06: Introduce TLA+, Z3, fast-check, Hypothesis, Zod, io-ts tools
 - [ ] ch07: Move DDD introduction earlier in chapter
+
+**Medium Priority (Ch08-13):**
+- [ ] ch08: Introduce bcrypt library (line 86)
+- [ ] ch11: Introduce Result type pattern (line 35)
+- [ ] ch11: Introduce JWT acronym (line 512)
+- [ ] ch11: Fix Chapter 15 reference (line 724) - chapter doesn't exist yet
+- [ ] ch12: Consider expanding AST in section heading (line 449)
+- [ ] ch12: Introduce slash command feature (line 515)
+
+**Chapters with Good Practices (use as models):**
+- ch09: Explains info theory concepts thoroughly
+- ch10: Properly introduces LLMs on first use (line 9)
+- ch13: Properly introduces OTEL, DDD, MCP
 
 ### General Review Tasks
 - [ ] Technical review all chapters
