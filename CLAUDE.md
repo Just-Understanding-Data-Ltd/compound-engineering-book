@@ -312,6 +312,25 @@ exercises/
 3. Design exercises that build on each other
 4. Write clear success criteria (testable outcomes)
 5. Create solutions that demonstrate best practices
+
+**IMPORTANT: Verify Code with Web Research**
+
+When writing exercises or code examples, ALWAYS verify accuracy by:
+
+1. **Use Context7** to fetch latest SDK documentation:
+   ```
+   mcp__plugin_context7_context7__resolve-library-id("Anthropic SDK")
+   mcp__plugin_context7_context7__query-docs("/anthropics/anthropic-sdk-python", "messages API create")
+   ```
+
+2. **Use WebFetch** to check official docs:
+   - Anthropic API: https://docs.anthropic.com/en/api/
+   - Agent SDK: https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/sdk
+   - Claude Code: https://docs.anthropic.com/en/docs/claude-code
+
+3. **Use WebSearch** for recent patterns and best practices
+
+This ensures all code examples use current API signatures, correct model names, and up-to-date patterns. Never assume SDK methods exist - verify them first.
 6. Validate all code with `bun infra/scripts/exercise-validator.ts`
 
 ### Exercise Validator (Unified Code Testing Tool)
