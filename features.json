@@ -1,5 +1,6 @@
 {
-  "lastUpdated": "2026-01-27T10:30:00Z",
+  "lastUpdated": "2026-01-27T14:00:00Z",
+  "structureNote": "Updated to 15-chapter structure. Old chapter numbers in prds section preserved for reference. New chapters added with descriptive filenames. See toc.md for canonical ordering.",
   "prds": {
     "index": {
       "status": "complete",
@@ -9,79 +10,135 @@
     "toc": {
       "status": "complete",
       "file": "prds/toc.md",
-      "completedAt": "2026-01-26T22:00:00Z"
+      "completedAt": "2026-01-27T14:00:00Z",
+      "note": "Updated to 15-chapter structure"
     },
     "ch01": {
       "status": "complete",
       "file": "prds/ch01.md",
+      "title": "The Compound Systems Engineer",
       "completedAt": "2026-01-26T22:00:00Z",
       "wordCount": 533
     },
     "ch02": {
       "status": "complete",
       "file": "prds/ch02.md",
+      "title": "Getting Started with Claude Code",
       "completedAt": "2026-01-26T22:00:00Z",
       "wordCount": 933
     },
-    "ch03": {
+    "ch03-prompting": {
+      "status": "complete",
+      "file": "prds/ch03-prompting-fundamentals.md",
+      "title": "Prompting Fundamentals (NEW)",
+      "completedAt": "2026-01-27T14:00:00Z",
+      "wordCount": 850,
+      "newChapter": true
+    },
+    "ch03-claudemd": {
       "status": "complete",
       "file": "prds/ch03.md",
+      "title": "Writing Your First CLAUDE.md",
       "completedAt": "2026-01-26T22:00:00Z",
-      "wordCount": 854
+      "wordCount": 854,
+      "newNumber": "ch04"
     },
     "ch04": {
       "status": "complete",
       "file": "prds/ch04.md",
+      "title": "The 12-Factor Agent",
       "completedAt": "2026-01-26T22:00:00Z",
-      "wordCount": 988
+      "wordCount": 988,
+      "newNumber": "ch05"
     },
     "ch05": {
       "status": "complete",
       "file": "prds/ch05.md",
+      "title": "The Verification Ladder",
       "completedAt": "2026-01-26T22:00:00Z",
-      "wordCount": 1123
+      "wordCount": 1123,
+      "newNumber": "ch06"
     },
     "ch06": {
       "status": "complete",
       "file": "prds/ch06.md",
+      "title": "Quality Gates That Compound",
       "completedAt": "2026-01-26T22:00:00Z",
-      "wordCount": 777
+      "wordCount": 777,
+      "newNumber": "ch07"
+    },
+    "ch08-error-handling": {
+      "status": "complete",
+      "file": "prds/ch08-error-handling.md",
+      "title": "Error Handling & Debugging (NEW)",
+      "completedAt": "2026-01-27T14:00:00Z",
+      "wordCount": 900,
+      "newChapter": true,
+      "newNumber": "ch08"
     },
     "ch07": {
       "status": "complete",
       "file": "prds/ch07.md",
+      "title": "Context Engineering Deep Dive",
       "completedAt": "2026-01-26T22:00:00Z",
-      "wordCount": 710
+      "wordCount": 710,
+      "newNumber": "ch09"
     },
     "ch08": {
       "status": "complete",
       "file": "prds/ch08.md",
+      "title": "The RALPH Loop",
       "completedAt": "2026-01-26T22:00:00Z",
-      "wordCount": 970
+      "wordCount": 970,
+      "newNumber": "ch10"
     },
     "ch09": {
       "status": "complete",
       "file": "prds/ch09.md",
+      "title": "Sub-Agent Architecture",
       "completedAt": "2026-01-26T22:00:00Z",
-      "wordCount": 1011
+      "wordCount": 1011,
+      "newNumber": "ch11"
+    },
+    "ch12-workflows": {
+      "status": "complete",
+      "file": "prds/ch12-development-workflows.md",
+      "title": "Development Workflows (NEW)",
+      "completedAt": "2026-01-27T14:00:00Z",
+      "wordCount": 880,
+      "newChapter": true,
+      "newNumber": "ch12"
     },
     "ch10": {
       "status": "complete",
       "file": "prds/ch10.md",
+      "title": "Building the Harness",
       "completedAt": "2026-01-26T22:00:00Z",
-      "wordCount": 933
+      "wordCount": 933,
+      "newNumber": "ch13"
     },
     "ch11": {
       "status": "complete",
       "file": "prds/ch11.md",
+      "title": "The Meta-Engineer Playbook",
       "completedAt": "2026-01-26T22:00:00Z",
-      "wordCount": 878
+      "wordCount": 878,
+      "newNumber": "ch14"
     },
-    "ch12": {
+    "ch15-model-strategy": {
       "status": "complete",
+      "file": "prds/ch15-model-strategy.md",
+      "title": "Model Strategy & Cost Optimization (NEW)",
+      "completedAt": "2026-01-27T14:00:00Z",
+      "wordCount": 950,
+      "newChapter": true,
+      "newNumber": "ch15"
+    },
+    "ch12-deprecated": {
+      "status": "deprecated",
       "file": "prds/ch12.md",
-      "completedAt": "2026-01-26T22:00:00Z",
-      "wordCount": 954
+      "title": "Case Studies & Reference (REMOVED)",
+      "note": "Replaced by ch15 Model Strategy. Case study content distributed to other chapters."
     }
   },
   "codeTestingStrategy": {
@@ -93,7 +150,7 @@
     },
     "requirements": [
       "All TypeScript examples must compile with tsc --noEmit",
-      "All Python examples must pass python -m py_compile",
+      "Agent SDK examples use v2-preview API (unstable_v2_createSession)",
       "Agent SDK examples must have mock API responses for offline testing",
       "Integration tests use cached responses where possible"
     ]
@@ -115,8 +172,8 @@
         "final": false
       },
       "wordCount": 2573,
-      "targetWordCount": [2500, 4000],
-      "diagramsRequired": 6,
+      "targetWordCount": [2500, 3500],
+      "diagramsRequired": 4,
       "diagramsComplete": 0,
       "codeExamplesRequired": 3,
       "codeExamplesTested": 0,
@@ -138,7 +195,7 @@
         "final": false
       },
       "wordCount": 0,
-      "targetWordCount": [2500, 4000],
+      "targetWordCount": [2500, 3500],
       "diagramsRequired": 3,
       "diagramsComplete": 0,
       "codeExamplesRequired": 5,
@@ -146,6 +203,30 @@
       "issues": []
     },
     "ch03": {
+      "title": "Prompting Fundamentals",
+      "prd": "prds/ch03-prompting-fundamentals.md",
+      "chapter": null,
+      "status": "not_started",
+      "newChapter": true,
+      "milestones": {
+        "prd_complete": true,
+        "first_draft": false,
+        "code_written": false,
+        "code_tested": false,
+        "reviewed": false,
+        "diagrams_complete": false,
+        "exercises_added": false,
+        "final": false
+      },
+      "wordCount": 0,
+      "targetWordCount": [2500, 3500],
+      "diagramsRequired": 4,
+      "diagramsComplete": 0,
+      "codeExamplesRequired": 4,
+      "codeExamplesTested": 0,
+      "issues": []
+    },
+    "ch04": {
       "title": "Writing Your First CLAUDE.md",
       "prd": "prds/ch03.md",
       "chapter": null,
@@ -161,14 +242,14 @@
         "final": false
       },
       "wordCount": 0,
-      "targetWordCount": [2500, 4000],
-      "diagramsRequired": 6,
+      "targetWordCount": [2500, 3500],
+      "diagramsRequired": 4,
       "diagramsComplete": 0,
       "codeExamplesRequired": 4,
       "codeExamplesTested": 0,
       "issues": []
     },
-    "ch04": {
+    "ch05": {
       "title": "The 12-Factor Agent",
       "prd": "prds/ch04.md",
       "chapter": null,
@@ -191,7 +272,7 @@
       "codeExamplesTested": 0,
       "issues": []
     },
-    "ch05": {
+    "ch06": {
       "title": "The Verification Ladder",
       "prd": "prds/ch05.md",
       "chapter": null,
@@ -208,13 +289,13 @@
       },
       "wordCount": 0,
       "targetWordCount": [3000, 4500],
-      "diagramsRequired": 9,
+      "diagramsRequired": 6,
       "diagramsComplete": 0,
       "codeExamplesRequired": 8,
       "codeExamplesTested": 0,
       "issues": []
     },
-    "ch06": {
+    "ch07": {
       "title": "Quality Gates That Compound",
       "prd": "prds/ch06.md",
       "chapter": null,
@@ -231,13 +312,37 @@
       },
       "wordCount": 0,
       "targetWordCount": [3000, 4500],
-      "diagramsRequired": 8,
+      "diagramsRequired": 5,
       "diagramsComplete": 0,
       "codeExamplesRequired": 6,
       "codeExamplesTested": 0,
       "issues": []
     },
-    "ch07": {
+    "ch08": {
+      "title": "Error Handling & Debugging",
+      "prd": "prds/ch08-error-handling.md",
+      "chapter": null,
+      "status": "not_started",
+      "newChapter": true,
+      "milestones": {
+        "prd_complete": true,
+        "first_draft": false,
+        "code_written": false,
+        "code_tested": false,
+        "reviewed": false,
+        "diagrams_complete": false,
+        "exercises_added": false,
+        "final": false
+      },
+      "wordCount": 0,
+      "targetWordCount": [3000, 4000],
+      "diagramsRequired": 5,
+      "diagramsComplete": 0,
+      "codeExamplesRequired": 5,
+      "codeExamplesTested": 0,
+      "issues": []
+    },
+    "ch09": {
       "title": "Context Engineering Deep Dive",
       "prd": "prds/ch07.md",
       "chapter": null,
@@ -254,13 +359,13 @@
       },
       "wordCount": 0,
       "targetWordCount": [3500, 5000],
-      "diagramsRequired": 8,
+      "diagramsRequired": 6,
       "diagramsComplete": 0,
       "codeExamplesRequired": 5,
       "codeExamplesTested": 0,
       "issues": []
     },
-    "ch08": {
+    "ch10": {
       "title": "The RALPH Loop",
       "prd": "prds/ch08.md",
       "chapter": null,
@@ -277,13 +382,13 @@
       },
       "wordCount": 0,
       "targetWordCount": [3000, 4500],
-      "diagramsRequired": 6,
+      "diagramsRequired": 4,
       "diagramsComplete": 0,
       "codeExamplesRequired": 6,
       "codeExamplesTested": 0,
       "issues": []
     },
-    "ch09": {
+    "ch11": {
       "title": "Sub-Agent Architecture",
       "prd": "prds/ch09.md",
       "chapter": null,
@@ -300,13 +405,37 @@
       },
       "wordCount": 0,
       "targetWordCount": [3500, 5000],
-      "diagramsRequired": 7,
+      "diagramsRequired": 5,
       "diagramsComplete": 0,
       "codeExamplesRequired": 8,
       "codeExamplesTested": 0,
       "issues": []
     },
-    "ch10": {
+    "ch12": {
+      "title": "Development Workflows",
+      "prd": "prds/ch12-development-workflows.md",
+      "chapter": null,
+      "status": "not_started",
+      "newChapter": true,
+      "milestones": {
+        "prd_complete": true,
+        "first_draft": false,
+        "code_written": false,
+        "code_tested": false,
+        "reviewed": false,
+        "diagrams_complete": false,
+        "exercises_added": false,
+        "final": false
+      },
+      "wordCount": 0,
+      "targetWordCount": [3000, 4000],
+      "diagramsRequired": 5,
+      "diagramsComplete": 0,
+      "codeExamplesRequired": 6,
+      "codeExamplesTested": 0,
+      "issues": []
+    },
+    "ch13": {
       "title": "Building the Harness",
       "prd": "prds/ch10.md",
       "chapter": null,
@@ -323,13 +452,13 @@
       },
       "wordCount": 0,
       "targetWordCount": [4000, 5500],
-      "diagramsRequired": 10,
+      "diagramsRequired": 6,
       "diagramsComplete": 0,
       "codeExamplesRequired": 10,
       "codeExamplesTested": 0,
       "issues": []
     },
-    "ch11": {
+    "ch14": {
       "title": "The Meta-Engineer Playbook",
       "prd": "prds/ch11.md",
       "chapter": null,
@@ -346,17 +475,18 @@
       },
       "wordCount": 0,
       "targetWordCount": [3500, 5000],
-      "diagramsRequired": 8,
+      "diagramsRequired": 5,
       "diagramsComplete": 0,
       "codeExamplesRequired": 5,
       "codeExamplesTested": 0,
       "issues": []
     },
-    "ch12": {
-      "title": "Case Studies & Reference",
-      "prd": "prds/ch12.md",
+    "ch15": {
+      "title": "Model Strategy & Cost Optimization",
+      "prd": "prds/ch15-model-strategy.md",
       "chapter": null,
       "status": "not_started",
+      "newChapter": true,
       "milestones": {
         "prd_complete": true,
         "first_draft": false,
@@ -368,22 +498,23 @@
         "final": false
       },
       "wordCount": 0,
-      "targetWordCount": [4000, 5500],
-      "diagramsRequired": 8,
+      "targetWordCount": [3500, 4500],
+      "diagramsRequired": 5,
       "diagramsComplete": 0,
-      "codeExamplesRequired": 15,
+      "codeExamplesRequired": 6,
       "codeExamplesTested": 0,
       "issues": []
     }
   },
   "stats": {
-    "totalChapters": 12,
-    "prdsComplete": 12,
+    "totalChapters": 15,
+    "newChaptersAdded": 4,
+    "prdsComplete": 15,
     "draftsComplete": 1,
     "reviewed": 0,
-    "diagramsRequired": 87,
+    "diagramsRequired": 75,
     "diagramsComplete": 0,
     "totalWordCount": 2573,
-    "targetWordCount": [45000, 57000]
+    "targetWordCount": [53000, 72000]
   }
 }
