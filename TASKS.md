@@ -50,7 +50,7 @@
 
 ### Cross-Cutting Improvements
 - [x] Add Model Strategy (YOLO/Skills/Haiku-Sonnet-Opus) content to ch15 PRD (Completed: 2026-01-27)
-- [ ] Create index of all KB articles used in each PRD
+- [x] Create index of all KB articles used in each PRD (Completed: 2026-01-27)
 - [ ] Ensure all 93 KB articles have at least one PRD reference
 
 ### New KB Articles Needed (Critical Gaps) - TO BE CREATED
