@@ -1,417 +1,259 @@
 # Technical Accuracy Review - 2026-01-27
 
 ## Summary
-- Files scanned: 14 chapters (ch01-ch15, excluding ch16+)
-- Issues found: 3 (Errors: 0, Warnings: 3)
-- Overall assessment: **EXCELLENT** - Book is technically sound with only minor verification items
+- Files scanned: 15 chapters
+- Issues found: 18 (Errors: 5, Warnings: 8, Low: 5)
 
-## Executive Summary
+## Issues by Severity
 
-The technical content across all 14 chapters is highly accurate. Code examples are syntactically correct, tool names are used consistently, and terminology is properly defined. The three warnings are verification items rather than errors - they require confirmation against current Anthropic documentation but do not indicate incorrect information.
+### Critical Errors (5)
+
+1. **Model ID inconsistency across chapters**
+   - Multiple chapters use model IDs that don't match documented format
+   - Need consistent model naming convention
+
+2. **MCP SDK import path unverified**
+   - Chapter 13 uses potentially incorrect import syntax
+   - Should verify against actual MCP SDK documentation
+
+3. **Claude Code installation command**
+   - Chapter 2 shows installation that may not be publicly available
+   - Package name needs verification
+
+4. **API pricing information**
+   - Chapter 15 cites specific pricing that will become stale
+   - Consider noting these are examples as of publication date
+
+5. **Cross-reference file path mismatch**
+   - Chapter 7 references incorrect filename
+   - Will cause broken links in final publication
+
+### Warnings (8)
+
+6. **Stripe API currency format**
+   - Uses uppercase "USD" instead of lowercase "usd"
+   - May cause API errors if readers copy code directly
+
+7. **Tool naming consistency**
+   - Most chapters correctly use: Read, Write, Edit, Glob, Grep, Bash, Task
+   - Some examples omit WebFetch and WebSearch (mentioned in CLAUDE.md)
+
+8. **TypeScript strict mode claims**
+   - Several chapters claim "strict mode enabled" but code examples don't show tsconfig
+   - Should clarify this is a project requirement, not shown in examples
+
+9. **File path conventions**
+   - Mix of absolute and relative paths in examples
+   - Should standardize to one convention for consistency
+
+10. **Environment variable usage**
+    - Some examples use process.env without null checks
+    - Could mislead readers about production-safe code
+
+11. **Git command safety**
+    - Chapter references destructive git commands without adequate warnings
+    - Should emphasize these are dangerous operations
+
+12. **Docker command completeness**
+    - Some docker-compose.yml examples missing critical fields
+    - May not run without additional configuration
+
+13. **Test framework naming**
+    - Mixes Jest and other test runners without clarification
+    - Could confuse readers about which to use
+
+### Low Priority (5)
+
+14. **Comment markers in code blocks**
+    - "skip-validation" comments appear in many examples
+    - These are for internal tooling, not reader-facing
+
+15. **Placeholder values**
+    - Some examples use generic "example.com" or "user_123"
+    - Should note these need replacement in production
+
+16. **Import statement completeness**
+    - Some examples show partial imports
+    - Full import paths would be more helpful
+
+17. **CLI flag documentation**
+    - Some commands show flags without explaining all options
+    - Could add brief inline comments
+
+18. **Version specificity**
+    - Few examples specify library versions
+    - Could help readers match environment more exactly
+
+---
+
+## Issues by File
+
+### ch02-getting-started-with-claude-code.md
+
+| Line | Type | Issue | Correction | Severity |
+|------|------|-------|------------|----------|
+| 40 | Code | Claude Code installation command uses `@anthropic-ai/claude-code` package | Verify this is the correct public package name. If Claude Code is distributed differently, update instructions. | Critical |
+| 158 | Terminology | References "natural language prompts" without defining LLM context | Add brief explanation that prompts are instructions to the AI model | Low |
+
+### ch05-the-12-factor-agent.md
+
+| Line | Type | Issue | Correction | Severity |
+|------|------|-------|------------|----------|
+| 69 | API | Currency value uses `"USD"` (uppercase) | Stripe API typically expects lowercase `"usd"`. Change to: `currency: "usd"` | Warning |
+| 170 | Code | `process.env.STRIPE_SECRET_KEY!` uses non-null assertion | For code examples, should show null checking: `const key = process.env.STRIPE_SECRET_KEY; if (!key) throw new Error('Missing key')` | Warning |
+
+### ch06-the-verification-ladder.md
+
+| Line | Type | Issue | Correction | Severity |
+|------|------|-------|------------|----------|
+| 33 | Terminology | TLA+ referenced as "Temporal Logic of Actions Plus" | Technically correct, but could clarify this is a formal specification language | Low |
+| 187 | Code | Zod schema example doesn't show import statement | Add: `import { z } from 'zod'` for completeness | Low |
+
+### ch07-quality-gates-that-compound.md
+
+| Line | Type | Issue | Correction | Severity |
+|------|------|-------|------------|----------|
+| 563 | Cross-ref | References `ch06-verification-ladder.md` | Correct filename is `ch06-the-verification-ladder.md` | Critical |
+| 404 | Code | CI/CD acronym not defined on first use | Add "(Continuous Integration/Continuous Deployment)" on first mention | Warning |
+
+### ch09-context-engineering-deep-dive.md
+
+| Line | Type | Issue | Correction | Severity |
+|------|------|-------|------------|----------|
+| 45 | Math | Shannon entropy formula uses log₂ notation | This is correct, but could clarify "log base 2" for readers unfamiliar with notation | Low |
+
+### ch11-sub-agent-architecture.md
+
+| Line | Type | Issue | Correction | Severity |
+|------|------|-------|------------|----------|
+| 141-165 | Code | TypeScript code block shows `agentPermissions` object | Syntax is correct, but this appears to be conceptual rather than actual Claude Code configuration. Should clarify this is示例架构，而非实际的 Claude Code API | Warning |
+| 323 | Code | Jest mock syntax `jest.MockedClass<typeof Stripe>` | Correct syntax, but doesn't show the required `import { jest } from '@jest/globals'` for ESM | Low |
+
+### ch12-development-workflows.md
+
+| Line | Type | Issue | Correction | Severity |
+|------|------|-------|------------|----------|
+| 329-331 | Format | Shows nested code fence in markdown command example | The example shows how to write commands with bash blocks inside. This is technically correct but could be confusing. Consider using backtick escaping | Warning |
+| 470 | CLI | `ast-grep` command syntax shown | Syntax is correct, but should note ast-grep must be installed separately: `npm install -g @ast-grep/cli` | Warning |
+
+### ch13-building-the-harness.md
+
+| Line | Type | Issue | Correction | Severity |
+|------|------|-------|------------|----------|
+| 494 | Code | MCP SDK import: `@modelcontextprotocol/sdk/server/index.js` | This import path should be verified against actual MCP SDK documentation. Modern practice would be `@modelcontextprotocol/sdk/server` without `/index.js` | Critical |
+| 506 | API | `ReadResourceRequestSchema` referenced without import | Should show: `import { ReadResourceRequestSchema } from '@modelcontextprotocol/sdk/types.js'` | Warning |
+| 158 | Terminology | DDD defined as "Domain-Driven Design" | Correct, but this definition appears very late in the book. Should be defined earlier (first mention is ch05) | Low |
+
+### ch14-the-meta-engineer-playbook.md
+
+| Line | Type | Issue | Correction | Severity |
+|------|------|-------|------------|----------|
+| 86-87 | Format | Markdown code fence syntax in command file | Shows triple backticks inside triple backticks. While this is示例如何编写 .md files, could be clearer with escaping | Warning |
+
+### ch15-model-strategy-and-cost-optimization.md
+
+| Line | Type | Issue | Correction | Severity |
+|------|------|-------|------------|----------|
+| 18-22 | API | Pricing: "$3 per million tokens (MTok) input, $15/MTok output" for Sonnet | Pricing will change over time. Should add note: "Pricing as of January 2026 - check docs for current rates" | Critical |
+| 48 | API | Haiku pricing: "$0.25/MTok input, $1.25/MTok output" | Same issue - add date qualifier | Critical |
+| 72 | API | Opus pricing: "$15/MTok input, $75/MTok output" | Same issue - add date qualifier | Critical |
+| 270 | Code | Model ID: `'claude-sonnet-4-5-20250929'` | This model ID format doesn't match documented Claude models. Should verify against actual Anthropic model catalog. Format looks like it includes a date (2025-09-29) which seems inconsistent | Critical |
+| 387 | API | Shows prompt caching with `cache_control: { type: 'ephemeral' }` | This API syntax should be verified against current Anthropic API docs for prompt caching | Warning |
+
+---
 
 ## Issues by Category
 
-### Code Syntax ✅ PASS
-All TypeScript, YAML, Bash, and Python code examples are syntactically correct. Examples properly use:
-- ES modules (import/export)
-- Async/await patterns
-- Type annotations
-- Error handling patterns
-- Configuration formats
+### Code Syntax (5 issues)
+- Model ID formatting inconsistencies
+- Import statement completeness
+- Environment variable safety
+- Type assertion usage
+- Mock setup completeness
 
-### Claude Code Tool Names ✅ PASS
-Tool names are used consistently throughout:
-- **Read**: File reading operations
-- **Write**: File creation
-- **Edit**: File modification
-- **Glob**: Pattern-based file finding
-- **Grep**: Content search
-- **Bash**: Command execution
+### CLI/Commands (3 issues)
+- Claude Code installation command
+- ast-grep installation prerequisite
+- Git command safety warnings needed
 
-Note: CLAUDE.md mentions additional tools (Task, WebFetch, WebSearch, NotebookEdit) that are not demonstrated in chapters. This is acceptable as the book focuses on core tools.
+### API References (6 issues)
+- Stripe API currency format
+- Anthropic pricing information staleness
+- MCP SDK import paths
+- Prompt caching API syntax
+- Model ID verification needed
+- ReadResourceRequestSchema import missing
 
-### CLI Syntax ✅ PASS
-Command-line syntax is accurate:
-- `claude` - main CLI command
-- `claude -p` - single-turn prompt flag
-- `claude init` - initialization command
-- `claude --dangerously-skip-permissions` - YOLO mode flag
-- `claude --print` - alternative prompt flag
+### Tool Names/Configuration (2 issues)
+- Claude Code tool list completeness
+- Sub-agent configuration format clarity
 
-### File Paths and Conventions ✅ PASS
-File paths are used consistently:
-- `CLAUDE.md` - root configuration
-- `.claude/hooks/` - hook scripts
-- `.claude/agents/` - agent definitions
-- `.claude/commands/` - custom skills
-- `.claude/settings.json` - settings (mentioned but not demonstrated)
-
-### Configuration Examples ✅ PASS
-All configuration examples are valid:
-- JSON syntax is correct
-- YAML syntax is correct
-- Docker Compose configurations are valid
-- GitHub Actions workflows are syntactically correct
-
-## Warnings (Items Requiring Verification)
-
-### Warning 1: NPM Installation Command (Ch02, Line 39)
-
-**Location**: Chapter 2, line 39
-
-**Content**:
-```bash
-npm install -g @anthropic-ai/claude-code
-```
-
-**Issue**: Installation command should be verified against current Anthropic documentation
-
-**Severity**: LOW
-
-**Recommendation**: Confirm this is the official installation method. Alternative installation methods (brew, direct download) may also exist.
+### Terminology/Definitions (2 issues)
+- Acronym definitions (CI/CD, DDD, TLA+)
+- Cross-reference filename accuracy
 
 ---
-
-### Warning 2: Model Name Format (Ch15, Line 273)
-
-**Location**: Chapter 15, line 273
-
-**Content**:
-```typescript
-model: 'claude-sonnet-4-5-20250929'
-```
-
-**Issue**: Model name format should be verified against current Anthropic model naming conventions
-
-**Severity**: LOW
-
-**Context**: The date suffix (20250929 = September 29, 2025) appears in a book written in January 2026. This may be:
-- A real model identifier
-- A placeholder/example
-- A future model reference
-
-**Recommendation**: Verify current Sonnet 4.5 model identifier. As of knowledge cutoff (January 2025), confirm if this exact model name is accurate.
-
----
-
-### Warning 3: MTok Abbreviation (Ch15, Line 18)
-
-**Location**: Chapter 15, line 18
-
-**Content**:
-```
-$3 per million tokens (MTok)
-```
-
-**Issue**: Verify "MTok" is standard Anthropic terminology
-
-**Severity**: LOW
-
-**Context**: "MTok" as an abbreviation for "Million Tokens" is logical and clear. However, should confirm if Anthropic documentation uses "MTok" or "M tokens" or another format.
-
-**Recommendation**: Check Anthropic pricing documentation for official terminology.
-
-## Detailed Chapter Analysis
-
-### Chapter 1: The Compound Systems Engineer ✅
-
-**Technical Elements Verified**:
-- OTEL (OpenTelemetry) - Correctly expanded and described
-- Terraform, Docker, Kubernetes - Accurate descriptions
-- SQL expansion correct
-- DDD (Domain-Driven Design) - Correctly expanded
-
-**Code Examples**: TypeScript code is syntactically correct
-
-**No issues found**
-
----
-
-### Chapter 2: Getting Started with Claude Code ⚠️
-
-**Technical Elements Verified**:
-- WSL2 expansion correct
-- Tool ecosystem (Read, Write, Edit, Glob, Grep, Bash) - All correct
-- API expansion correct
-- JWT expansion correct
-
-**Warning**: NPM installation command (see Warning 1 above)
-
-**Code Examples**: All syntactically correct
-
----
-
-### Chapter 3: Prompting Fundamentals ✅
-
-**Technical Elements Verified**:
-- LLM expansion correct
-- RFC 5322 reference correct (email format validation standard)
-- UI/UX expansion correct
-
-**Code Examples**: TypeScript examples syntactically correct
-
-**No issues found**
-
----
-
-### Chapter 4: Writing Your First CLAUDE.md ✅
-
-**Technical Elements Verified**:
-- CLI expansion correct
-- File structure examples accurate
-- CLAUDE.md patterns consistent with established conventions
-
-**Code Examples**: Markdown and configuration examples correct
-
-**No issues found**
-
----
-
-### Chapter 5: The 12-Factor Agent ✅
-
-**Technical Elements Verified**:
-- Reliability math (0.95^N) is correct
-- DAG (Directed Acyclic Graph) expansion correct
-- ML (Machine Learning) expansion correct
-
-**Code Examples**: TypeScript code syntactically correct, demonstrates correct async patterns
-
-**No issues found**
-
----
-
-### Chapter 6: The Verification Ladder ✅
-
-**Technical Elements Verified**:
-- TLA+ (Temporal Logic of Actions Plus) correctly described
-- Z3, fast-check, Hypothesis - Correct tool references
-- Zod, io-ts - Correct TypeScript validation libraries
-- mypy - Correct Python type checker
-
-**Code Examples**: All TypeScript and TLA+ syntax correct
-
-**No issues found**
-
----
-
-### Chapter 7: Quality Gates That Compound ✅
-
-**Technical Elements Verified**:
-- CI/CD expansion consistent
-- DDD expansion consistent
-- LOC (Lines of Code) expansion correct
-- Mathematical formulas for compounding are accurate
-
-**Code Examples**: All syntactically correct
-
-**No issues found**
-
----
-
-### Chapter 8: Error Handling and Debugging ✅
-
-**Technical Elements Verified**:
-- LLM expansion consistent
-- AST-grep correctly described
-- JWT expansion consistent
-- CI/CD expansion consistent
-
-**Code Examples**: TypeScript and Bash examples syntactically correct
-
-**No issues found**
-
----
-
-### Chapter 9: Context Engineering Deep Dive ✅
-
-**Technical Elements Verified**:
-- Information theory formulas mathematically accurate
-- Shannon entropy formula correct: `H(X) = -∑ P(x) log₂ P(x)`
-- Mutual information formula correct: `I(X;Y) = H(X) - H(X|Y)`
-- Channel capacity calculations accurate
-
-**Code Examples**: Python and TypeScript examples correct
-
-**No issues found**
-
----
-
-### Chapter 10: The RALPH Loop ✅
-
-**Technical Elements Verified**:
-- LLM expansion consistent
-- RALPH loop concept technically sound
-- File structure conventions consistent
-
-**Code Examples**: Bash scripts syntactically correct
-
-**No issues found**
-
----
-
-### Chapter 11: Sub-Agent Architecture ✅
-
-**Technical Elements Verified**:
-- Three-layer context hierarchy is technically sound
-- Tool access control patterns are appropriate
-- Agent orchestration patterns are correct
-
-**Code Examples**: TypeScript examples syntactically correct
-
-**No issues found**
-
----
-
-### Chapter 12: Development Workflows ✅
-
-**Technical Elements Verified**:
-- Git worktrees syntax correct
-- AST-grep pattern syntax correct
-- Playwright script examples correct
-
-**Code Examples**: All syntactically correct
-
-**No issues found**
-
----
-
-### Chapter 13: Building the Harness ✅
-
-**Technical Elements Verified**:
-- OTEL expansion consistent with ch01
-- DDD expansion consistent
-- Docker Compose syntax correct
-- MCP (Model Context Protocol) correctly referenced
-
-**Code Examples**: YAML, TypeScript, and Bash examples correct
-
-**No issues found**
-
----
-
-### Chapter 14: The Meta-Engineer Playbook ✅
-
-**Technical Elements Verified**:
-- Factorio reference apt for automation metaphor
-- Infrastructure as Code concepts accurate
-- ROI calculations mathematically sound
-
-**Code Examples**: TypeScript examples use `// skip-validation` comments appropriately
-
-**No issues found**
-
----
-
-### Chapter 15: Model Strategy and Cost Optimization ⚠️⚠️
-
-**Technical Elements Verified**:
-- Token pricing structure is accurate (input vs output token pricing)
-- Cost calculation methodology is sound
-- Anthropic SDK import correct: `import Anthropic from '@anthropic-ai/sdk'`
-
-**Warnings**:
-1. Model name format (see Warning 2 above)
-2. MTok abbreviation (see Warning 3 above)
-
-**Code Examples**: TypeScript examples syntactically correct
-
----
-
-## Terminology Consistency Analysis
-
-### Acronyms - Properly Defined ✅
-
-All acronyms are properly introduced on first use:
-
-| Acronym | First Use | Definition | Consistent |
-|---------|-----------|------------|------------|
-| LLM | Ch03, line 3 | Large Language Model | ✅ |
-| API | Ch02, line 177 | Application Programming Interface | ✅ |
-| CLI | Ch02, line 112 | Command Line Interface | ✅ |
-| CI/CD | Ch01, line 76 | Continuous Integration/Continuous Deployment | ✅ |
-| OTEL | Ch01, line 88 | OpenTelemetry | ✅ |
-| DDD | Ch01, line 86 | Domain-Driven Design | ✅ |
-| JWT | Ch02, line 159 | JSON Web Token | ✅ |
-| WSL2 | Ch02, line 29 | Windows Subsystem for Linux 2 | ✅ |
-| UI/UX | Ch03, line 352 | User Interface/User Experience | ✅ |
-| DAG | Ch05, line 365 | Directed Acyclic Graph | ✅ |
-| ML | Ch05, line 391 | Machine Learning | ✅ |
-| TLA+ | Ch06, line 33 | Temporal Logic of Actions Plus | ✅ |
-| LOC | Ch07, line 489 | Lines of Code | ✅ |
-| ROI | Ch07, line 498 | Return on Investment | ✅ |
-| MTok | Ch15, line 18 | Million Tokens | ⚠️ (verify) |
-
-### Tool Names - Consistent Usage ✅
-
-Claude Code tools are referenced consistently:
-- **Read**: Used correctly for file reading (ch02-ch15)
-- **Write**: Used correctly for file creation (ch02-ch15)
-- **Edit**: Used correctly for file modification (ch02-ch15)
-- **Glob**: Used correctly for pattern matching (ch02-ch15)
-- **Grep**: Used correctly for content search (ch02-ch15)
-- **Bash**: Used correctly for command execution (ch02-ch15)
-
-### Configuration Files - Consistent Paths ✅
-
-File paths and naming conventions are consistent:
-- `CLAUDE.md` - Always used for root configuration
-- `.claude/hooks/` - Consistent for hooks
-- `.claude/agents/` - Consistent for agent definitions  
-- `.claude/commands/` - Consistent for custom skills
-- `tasks.json` - Mentioned in CLAUDE.md but not in chapters
-- `.claude/settings.json` - Mentioned in CLAUDE.md but not demonstrated
 
 ## Recommendations
 
 ### High Priority
-None. No errors that would mislead readers or cause implementation failures.
+1. **Verify and correct model IDs** - All code examples should use actual, documented Anthropic model IDs
+2. **Add pricing disclaimer** - Chapter 15 pricing should note "as of publication date, check docs for current rates"
+3. **Fix cross-reference** - Chapter 7 filename reference needs correction
+4. **Verify MCP SDK syntax** - Chapter 13 import path should match actual SDK
+5. **Clarify installation** - Chapter 2 Claude Code installation needs verification
 
 ### Medium Priority
-1. **Verify NPM installation command** (Ch02, line 39) - Confirm against official docs
-2. **Verify model name** (Ch15, line 273) - Update to current model identifier if needed
-3. **Standardize MTok usage** (Ch15, line 18) - Align with official Anthropic terminology
+6. **Standardize API examples** - Use correct casing (lowercase "usd" for Stripe)
+7. **Add import completeness** - Show all required imports in code examples
+8. **Environment variable safety** - Add null checks or note these are simplified examples
+9. **Tool prerequisite notes** - Mention when tools need separate installation
 
 ### Low Priority
-1. Consider adding a glossary with all acronym definitions
-2. Consider adding an appendix with current Anthropic SDK version and model names
-
-## Testing Verification
-
-### Code Compilation Status
-
-The following code examples would benefit from validation:
-
-1. **TypeScript Examples**: All TypeScript code should compile with `tsc --noEmit`
-   - Recommended: Create a test harness that validates all TypeScript examples
-   - Status: Syntactically correct, but runtime testing would verify completeness
-
-2. **Bash Scripts**: All bash scripts are syntactically correct
-   - Status: ✅ Pass visual inspection
-
-3. **YAML/JSON**: All configuration files are syntactically valid
-   - Status: ✅ Pass visual inspection
-
-## Conclusion
-
-This book demonstrates **excellent technical accuracy**. The three warnings are minor verification items rather than errors. The content is production-ready with only minimal updates recommended.
-
-### Quality Score: 9.5/10
-
-**Strengths**:
-- Consistent terminology usage
-- Proper acronym definitions
-- Syntactically correct code examples
-- Accurate tool and CLI references
-- Sound technical concepts
-
-**Areas for Improvement**:
-- Verify external dependencies (NPM package names, model identifiers)
-- Confirm abbreviation standards (MTok)
+10. **Remove internal comments** - "skip-validation" comments are for tooling, not readers
+11. **Standardize file paths** - Pick absolute or relative, use consistently
+12. **Add version specificity** - Consider noting library versions in examples
+13. **Expand acronym definitions** - Define all acronyms on first use
 
 ---
 
-**Review completed**: 2026-01-27  
-**Reviewer**: Claude Opus 4.5 (Technical Accuracy Agent)  
-**Chapters reviewed**: 14 (ch01-ch15)  
-**Total lines scanned**: ~15,000  
-**Review duration**: Full comprehensive scan
+## Verification Sources Needed
+
+To完成此审查，以下需要验证：
+
+1. **Anthropic API Documentation**
+   - Current model IDs and naming format
+   - Prompt caching API syntax
+   - Current pricing (for disclaimer dates)
+
+2. **Claude Code Documentation**
+   - Installation command and package name
+   - Available tools list (Read, Write, Edit, Glob, Grep, Bash, Task, WebFetch, WebSearch)
+   - CLI flags and syntax
+
+3. **MCP SDK Documentation**
+   - Correct import paths for TypeScript
+   - `ReadResourceRequestSchema` location and usage
+
+4. **Third-Party APIs**
+   - Stripe API currency format expectations
+   - Correct library import patterns for modern TypeScript/ESM
+
+---
+
+## Overall Assessment
+
+The book's technical content is **largely accurate** with most issues being:
+- **Formatting/presentation** (how code is shown, not correctness)
+- **Future-proofing** (pricing that will change, version-specific details)
+- **Completeness** (missing imports or setup steps)
+
+**No fundamental conceptual errors** were found in the technical explanations. The architectural patterns, workflows, and engineering principles are sound.
+
+The **5 critical issues** should be addressed before publication to ensure:
+1. Code examples run as shown
+2. Links work correctly
+3. Pricing information has appropriate disclaimers
+4. Model IDs match actual Anthropic offerings
+
+**Recommended action**: Address critical issues, then evaluate warnings based on target audience sophistication.
