@@ -21,6 +21,35 @@ Each learning entry should follow this format:
 
 ## Entries
 
+### 2026-01-27 - Mermaid Diagram Structure and Multi-View Approach
+
+**Context**: Creating diagrams for chapters 1 and 2 (iterations 1-5: three-levels-pyramid through tool-ecosystem-radial).
+
+**Observation**: The most effective diagram files follow a consistent structure:
+1. Diagram description (what concept it visualizes)
+2. Primary Mermaid diagram (the main visual)
+3. Alternative views (2-3 different perspectives on the same concept)
+4. Usage notes (where in the chapter this appears)
+5. Context from chapter (relevant quotes/concepts)
+
+The multi-view approach is particularly valuable. For example, the tool-ecosystem-radial diagram includes:
+- Primary flow view (understand → agent → act → observe loop)
+- Circular cycle view (4-stage reasoning cycle)
+- Tool categories breakdown (detailed descriptions)
+- Simple reference table (quick lookup)
+
+Different readers learn differently. Some prefer flowcharts, others prefer tables. Providing 3-4 views of the same concept increases accessibility without requiring separate diagrams.
+
+**Implication**: Future diagrams should always include multiple views. This increases the chances that at least one view resonates with each reader. It also provides options during editing, allowing editors to choose the clearest view for the final book.
+
+**Action**: When creating diagrams, always:
+1. Start with a primary view that matches the chapter's narrative
+2. Add 2-3 alternative views (table, flow, comparison)
+3. Include "Usage" section linking to specific chapter lines
+4. Copy relevant chapter context verbatim for reference
+
+---
+
 ### 2026-01-28 - KB Article Structure and Cross-Referencing
 
 **Context**: Creating KB articles for the Compound Engineering book (iterations 1-5: sub-agent-context-hierarchy through checkpoint-commit-patterns).
