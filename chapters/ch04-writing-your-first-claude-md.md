@@ -417,3 +417,10 @@ As projects grow, hierarchical CLAUDE.md files distribute context to achieve 80-
 Avoid common mistakes: auto-generation, style guide duplication, monolithic growth, inline snippets, and missing links. Use symlinks for multi-tool consistency.
 
 The investment in crafting effective CLAUDE.md files pays dividends across every AI-assisted coding session. One well-crafted file improves thousands of code generations.
+
+---
+
+*Related chapters:*
+- [Chapter 2: Getting Started with Claude Code](ch02-getting-started-with-claude-code.md) for installation and basic tool usage
+- [Chapter 3: Prompting Fundamentals](ch03-prompting-fundamentals.md) for techniques that make your CLAUDE.md instructions more effective
+- [Chapter 9: Context Engineering Deep Dive](ch09-context-engineering-deep-dive.md) for advanced information theory behind context optimization

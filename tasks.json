@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T10:15:00Z",
+  "lastUpdated": "2026-01-28T10:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -349,7 +349,8 @@
       "chapter": "ch04",
       "title": "ch04: Writing Your First CLAUDE.md",
       "description": "Complete remaining milestones for Writing Your First CLAUDE.md",
-      "status": "in_progress",
+      "status": "complete",
+      "completedAt": "2026-01-28T10:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -397,8 +398,10 @@
           "parentId": "task-019",
           "type": "milestone",
           "title": "final",
-          "status": "pending",
-          "score": -115
+          "status": "complete",
+          "completedAt": "2026-01-28T10:00:00Z",
+          "score": -115,
+          "note": "All quality gates passed: 2,817 words (in range), no em dashes, no AI slop, 3 diagrams, exercises folder exists, Related Chapters section added"
         }
       ],
       "score": 930
@@ -1401,7 +1404,9 @@
       "status": "pending",
       "priority": "critical",
       "score": 1080,
-      "blocksChapters": ["ch03"],
+      "blocksChapters": [
+        "ch03"
+      ],
       "note": "Score: critical(1000) + fix(80) = 1080. Must complete before ch03 can be considered truly final.",
       "affectedFiles": [
         "examples/ch03/prompt-patterns.ts",
@@ -2128,7 +2133,7 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 44,
+    "count": 51,
     "lastCompaction": "2026-01-28T00:15:00Z",
     "items": [
       {
@@ -2370,20 +2375,30 @@
         "id": "task-127",
         "title": "hierarchical-claude-md diagram",
         "completedAt": "2026-01-28T09:00:00Z"
+      },
+      {
+        "id": "task-024",
+        "title": "ch04 final",
+        "completedAt": "2026-01-28T10:00:00Z"
+      },
+      {
+        "id": "task-019",
+        "title": "ch04: Writing Your First CLAUDE.md",
+        "completedAt": "2026-01-28T10:00:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 164,
-    "inProgress": 1,
-    "complete": 49,
+    "pending": 163,
+    "inProgress": 0,
+    "complete": 51,
     "blocked": 0,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "98af649a6602e6850617504cf32ba0cd71224cb0",
-    "lastSuccessfulTask": "iteration-4",
-    "lastCheckpoint": "2026-01-27T17:16:18Z",
+    "lastGoodCommit": "101a8a2",
+    "lastSuccessfulTask": "task-024",
+    "lastCheckpoint": "2026-01-28T10:15:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
@@ -2400,7 +2415,9 @@
     "tasksFixed": 1,
     "duplicatesFound": 0,
     "statusInconsistenciesFound": 0,
-    "priorityIssues": ["task-209 score corrected: 685 -> 1080 (critical priority was underscored)"],
+    "priorityIssues": [
+      "task-209 score corrected: 685 -> 1080 (critical priority was underscored)"
+    ],
     "queueHealth": "GOOD - Score corrected for critical task",
     "findings": {
       "duplicateTaskIds": "NONE - Queue is clean",
