@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 14:00)
+## Current Status (Updated: 2026-01-28 15:00)
 - Phase: Phase 2 COMPLETE - Creating KB articles and Diagrams
 - Active: KB article creation
-- Last Completed: @kb/human-in-the-loop-patterns.md
+- Last Completed: @kb/event-sourcing-agents.md
 - Blockers: None
 
 ## Project State Summary
@@ -12,15 +12,25 @@
 - KB Article Index: Updated at prds/kb-article-index.md (100 referenced + 31 to create)
 - KB Coverage: 100/104 articles referenced (96%)
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
-- KB Articles Created: 6/15 new articles (sub-agent-context-hierarchy.md, tool-access-control.md, orchestration-patterns.md, actor-critic-pattern.md, agent-memory-patterns.md, human-in-the-loop-patterns.md)
+- KB Articles Created: 7/15 new articles (sub-agent-context-hierarchy.md, tool-access-control.md, orchestration-patterns.md, actor-critic-pattern.md, agent-memory-patterns.md, human-in-the-loop-patterns.md, event-sourcing-agents.md)
 - Diagrams: 0/75 complete (shells created)
 - Total Word Count: 44,262 (target: 53,000-72,000, 61-82% complete)
 - Quality Issues: 236 total (53 slop, 18 tech, 58 term, 13 xref, 94 style)
 
 ## Next Task
-Continue KB article creation: Create @kb/event-sourcing-agents.md (event log architecture for agent state)
+Continue KB article creation: Create @kb/tool-call-validation.md (JSON schema validation for tool outputs)
 
 ## Recent Activity
+
+### 2026-01-28 15:00 - Created @kb/event-sourcing-agents.md
+- What: Created new KB article covering event sourcing architecture for AI agents
+- Files: ~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/event-sourcing-agents.md
+- Word Count: ~3,189 words
+- Content: Why event sourcing for agents (audit, debugging, pause/resume, retry, coordination), core concepts (events vs state, log as source of truth), event schema design (structure, taxonomy, naming conventions), projections (execution state, cost tracking, audit log), snapshots for performance, time-travel debugging (replay, interactive debugging), distributed agents (causal ordering, aggregation, conflict resolution), storage options (JSON, SQLite, PostgreSQL, DynamoDB), schema evolution (versioning, migration strategies), best practices, common pitfalls
+- Key Concepts: Events as source of truth, state derived not stored, causal ordering with parent event IDs, snapshots for performance, append-only immutability, compensating events for undo
+- Cross-references: Links to agent-memory-patterns.md, 12-factor-agents.md, human-in-the-loop-patterns.md, clean-slate-trajectory-recovery.md, ralph-loop.md
+- Outcome: Success
+- Next: Create @kb/tool-call-validation.md
 
 ### 2026-01-28 14:00 - Created @kb/human-in-the-loop-patterns.md
 - What: Created new KB article covering human-in-the-loop patterns for approval, input, and escalation workflows

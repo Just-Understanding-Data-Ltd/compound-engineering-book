@@ -60,7 +60,7 @@
 - [x] Create @kb/actor-critic-pattern.md (writer agent + reviewer agent pattern) (Completed: 2026-01-28)
 - [x] Create @kb/agent-memory-patterns.md (checkpoint/resume, state persistence) (Completed: 2026-01-28)
 - [x] Create @kb/human-in-the-loop-patterns.md (HITL implementation patterns) (Completed: 2026-01-28)
-- [ ] Create @kb/event-sourcing-agents.md (event log architecture for agent state)
+- [x] Create @kb/event-sourcing-agents.md (event log architecture for agent state) (Completed: 2026-01-28)
 - [ ] Create @kb/tool-call-validation.md (JSON schema validation for tool outputs)
 - [ ] Create @kb/ci-cd-agent-patterns.md (GitHub Actions patterns for agent verification)
 - [ ] Create @kb/mutual-information-context.md (measuring context effectiveness)
