@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 19:00)
+## Current Status (Updated: 2026-01-28 20:00)
 - Phase: Phase 2 - Creating KB articles and Diagrams
 - Active: KB article creation
-- Last Completed: @kb/token-budgeting-strategies.md
+- Last Completed: @kb/lost-in-the-middle-mitigation.md
 - Blockers: None
 
 ## Project State Summary
@@ -12,15 +12,25 @@
 - KB Article Index: Updated at prds/kb-article-index.md (100 referenced + 31 to create)
 - KB Coverage: 100/104 articles referenced (96%)
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
-- KB Articles Created: 11/15 new articles (sub-agent-context-hierarchy.md, tool-access-control.md, orchestration-patterns.md, actor-critic-pattern.md, agent-memory-patterns.md, human-in-the-loop-patterns.md, event-sourcing-agents.md, tool-call-validation.md, ci-cd-agent-patterns.md, mutual-information-context.md, token-budgeting-strategies.md)
+- KB Articles Created: 12/15 new articles (sub-agent-context-hierarchy.md, tool-access-control.md, orchestration-patterns.md, actor-critic-pattern.md, agent-memory-patterns.md, human-in-the-loop-patterns.md, event-sourcing-agents.md, tool-call-validation.md, ci-cd-agent-patterns.md, mutual-information-context.md, token-budgeting-strategies.md, lost-in-the-middle-mitigation.md)
 - Diagrams: 0/75 complete (shells created)
 - Total Word Count: 44,262 (target: 53,000-72,000, 61-82% complete)
 - Quality Issues: 236 total (53 slop, 18 tech, 58 term, 13 xref, 94 style)
 
 ## Next Task
-Continue KB article creation: Create @kb/lost-in-the-middle-mitigation.md (Preventing context window degradation)
+Continue KB article creation: Create @kb/checkpoint-commit-patterns.md (Git commit strategies for AI workflows)
 
 ## Recent Activity
+
+### 2026-01-28 20:00 - Created @kb/lost-in-the-middle-mitigation.md
+- What: Created new KB article on mitigating context window attention degradation
+- Files: ~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/lost-in-the-middle-mitigation.md
+- Word Count: ~2,800 words
+- Content: U-shaped attention pattern explanation (LLMs attend less to middle content), 7 mitigation strategies (edge placement, sandwich pattern, chunk distribution, retrieval markers, summarize middle, progressive refinement, recency prompts), implementation patterns (position analyzer, automatic reorganization, retrieval verification), best practices (audit placement, consistent ordering, skimmable formatting, testing under load), common pitfalls, when middle position is acceptable
+- Key Concepts: 20-80% of context is the degraded attention zone, edges (beginning/end) receive strongest attention, sandwich critical info at both edges, bullet points better than prose in middle, test with full context length
+- Cross-references: Links to token-budgeting-strategies.md, progressive-disclosure-context.md, context-rot-auto-compacting.md, hierarchical-context-patterns.md, information-theory-coding-agents.md, context-debugging-framework.md
+- Outcome: Success
+- Next: Create @kb/checkpoint-commit-patterns.md
 
 ### 2026-01-28 19:00 - Created @kb/token-budgeting-strategies.md
 - What: Created new KB article on allocating context window by information density
