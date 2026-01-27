@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 17:00)
-- Phase: Chapter Completion - Code Examples
-- Active: ch01 code_written milestone COMPLETE (task-002)
-- Last Completed: ch01 code examples created
+## Current Status (Updated: 2026-01-27 15:15)
+- Phase: Chapter Completion - Code Testing
+- Active: ch01 code_tested milestone COMPLETE (task-003)
+- Last Completed: ch01 code examples tested
 - Blockers: None
 
 ## Project State Summary
@@ -17,9 +17,22 @@
 - Quality Issues: 282 total (declining trend)
 
 ## Next Task
-Continue with highest-scored pending task (ch01 code_tested or ch03 diagrams)
+Continue with highest-scored pending task (ch01 reviewed milestone or ch02 code_written)
 
 ## Recent Activity
+
+### 2026-01-27 15:15 - Tested ch01 Code Examples (code_tested milestone)
+- What: Tested TypeScript code examples for Chapter 1
+- Files: examples/ch01/constraints.ts, examples/ch01/three-levels.ts
+- Tests:
+  - tsc --noEmit: Both files compile without errors
+  - bun run: Both files execute correctly
+  - constraints.ts: Validation passes for metrics within constraints
+  - three-levels.ts: All three levels demonstrated, immutability enforcement works
+- Task: task-003 marked complete
+- Iteration 8: ch01 code_tested milestone complete
+- Outcome: Success
+- Next: ch01 reviewed (task-004) or ch02 code_written (task-008)
 
 ### 2026-01-27 17:00 - Created ch01 Code Examples (code_written milestone)
 - What: Created TypeScript examples for Chapter 1 demonstrating constraints and three levels of engineering
