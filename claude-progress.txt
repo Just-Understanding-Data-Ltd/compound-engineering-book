@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 23:00)
+## Current Status (Updated: 2026-01-27 23:15)
 - Phase: Chapter Milestones (10 of 15 complete, 67%)
 - Active: ch11 Sub-Agent Architecture
-- Last Completed: task-062 (ch11 code_written milestone)
+- Last Completed: task-063 (ch11 code_tested milestone)
 - Blockers: None active
 - Queue Health: EXCELLENT
 
@@ -16,7 +16,7 @@
 - Code Examples: 11 chapters have code (73%)
 - Word Count: ~47,300 (target 45,000-57,000, 94% complete)
 - Quality Issues: 129 total (AI slop 60, tech accuracy 7, term intros 62, cross-refs 0)
-- Tasks Complete: 64/109 (59%)
+- Tasks Complete: 65/109 (60%)
 
 ## Critical Issues Identified (From Latest Reviews)
 1. 44 em dashes in PRDs - MECHANICAL FIX (30 min) - CRITICAL
@@ -26,11 +26,27 @@
 5. 26 diagrams still needed - PARALLEL WITH CHAPTERS
 
 ## Next Task Priority
-1. task-063 (ch11: Sub-Agent Architecture code_tested) - next milestone
+1. task-064 (ch11: Sub-Agent Architecture reviewed) - next milestone
 2. task-067 (ch12: Development Workflows code_written) - score 890
 3. task-073 (ch13: Building the Harness code_written) - score 885
 
 ## Recent Activity
+
+### 2026-01-27 23:15 - COMPLETED task-063: ch11 Sub-Agent Architecture code_tested - ITERATION 7
+- What: Verified all code examples for Chapter 11 (Sub-Agent Architecture) compile and tests pass
+- Test Results:
+  - TypeScript: No ch11-specific errors (project-wide check)
+  - Unit tests: 67 tests pass, 208 expect() calls
+  - Demo scripts: All 4 execute correctly
+    - context-hierarchy.ts: Works fully (no API calls needed)
+    - agent-permissions.ts: Works fully (no API calls needed)
+    - sub-agent-orchestration.ts: Initializes correctly, expected API auth failure
+    - actor-critic-loop.ts: Initializes correctly, expected API auth failure
+- Tasks: task-063 marked complete
+- Stats: pending 44, complete 65
+- ch11 Status: 2/5 milestones complete (code_written, code_tested)
+- Outcome: Success
+- Next: task-064 (ch11 reviewed milestone)
 
 ### 2026-01-27 23:00 - COMPLETED task-062: ch11 Sub-Agent Architecture code_written - ITERATION 6
 - What: Verified code examples for Chapter 11 (Sub-Agent Architecture)

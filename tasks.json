@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T23:00:00.000Z",
+  "lastUpdated": "2026-01-27T23:15:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -822,8 +822,10 @@
           "parentId": "task-061",
           "type": "milestone",
           "title": "code tested",
-          "status": "pending",
-          "score": -100
+          "status": "complete",
+          "completedAt": "2026-01-27T23:15:00Z",
+          "score": -100,
+          "note": "TypeScript compiles (no ch11 errors), 67 tests pass (208 expect() calls), all 4 demo scripts run correctly (context-hierarchy, agent-permissions fully work; sub-agent-orchestration, actor-critic-loop initialize correctly, fail at API call as expected)"
         },
         {
           "id": "task-064",
@@ -1221,16 +1223,16 @@
     ]
   },
   "stats": {
-    "pending": 45,
+    "pending": 44,
     "inProgress": 0,
-    "complete": 64,
+    "complete": 65,
     "blocked": 0,
     "total": 109
   },
   "checkpoints": {
-    "lastGoodCommit": "04589ff9871e860344f33e614d2f38b634aecfbe",
-    "lastSuccessfulTask": "task-062",
-    "lastCheckpoint": "2026-01-27T23:00:00Z",
+    "lastGoodCommit": "50617d9ff7de0e2a93c9eaba998f8f7a7e2add81",
+    "lastSuccessfulTask": "task-063",
+    "lastCheckpoint": "2026-01-27T23:15:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0
