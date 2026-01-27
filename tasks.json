@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T14:00:00.000Z",
+  "lastUpdated": "2026-01-27T15:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1066,8 +1066,9 @@
       "chapter": "ch02",
       "title": "ch02: High-priority diagrams",
       "description": "Create 3 diagrams for ch02",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
+      "completedAt": "2026-01-27T15:00:00Z",
       "subtasks": [
         {
           "id": "task-119",
@@ -1090,7 +1091,8 @@
           "parentId": "task-118",
           "type": "diagram",
           "title": "two-mode-mental-model",
-          "status": "pending"
+          "status": "complete",
+          "completedAt": "2026-01-27T15:00:00Z"
         }
       ]
     },
@@ -1797,16 +1799,16 @@
     "items": []
   },
   "stats": {
-    "pending": 195,
+    "pending": 193,
     "inProgress": 0,
-    "complete": 10,
+    "complete": 12,
     "blocked": 0,
     "total": 205
   },
   "checkpoints": {
-    "lastGoodCommit": "d138728dbf963e9b5e616f235a0c33a0c291714b",
-    "lastSuccessfulTask": "iteration-4",
-    "lastCheckpoint": "2026-01-27T14:41:37Z",
+    "lastGoodCommit": "ab7c1002b348a5a4b078ad9cce659066fc52a6b8",
+    "lastSuccessfulTask": "task-121",
+    "lastCheckpoint": "2026-01-27T15:00:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false

@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 14:00)
+## Current Status (Updated: 2026-01-27 15:00)
 - Phase: Phase 3 - Diagram Creation
-- Active: ch02 diagrams IN PROGRESS (2/3)
-- Last Completed: ch02-tool-ecosystem-radial.md diagram
+- Active: ch02 diagrams COMPLETE (3/3), ch03 next
+- Last Completed: ch02-two-mode-mental-model.md diagram
 - Blockers: None
 
 ## Project State Summary
@@ -11,14 +11,29 @@
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
 - KB Articles Created: 15/15 new articles (100%) - KB CREATION COMPLETE
 - KB Coverage: 100/104 referenced, 15 created (96% coverage)
-- Diagrams: 4/75 complete (Phase 3 in progress) - ch01 done, ch02 started
+- Diagrams: 5/75 complete (Phase 3 in progress) - ch01 done, ch02 done
 - Total Word Count: 44,262 (target: 53,000-72,000, 61-82% complete)
 - Quality Issues: 282 total (declining trend)
 
 ## Next Task
-Continue Phase 3: Create ch02 two-mode-mental-model diagram (task-121)
+Continue Phase 3: Create ch03 prompt-anatomy diagram (task-123)
 
 ## Recent Activity
+
+### 2026-01-27 15:00 - Created ch02-two-mode-mental-model diagram
+- What: Created Mermaid diagram showing the two-mode workflow pattern
+- Files: assets/diagrams/ch02-two-mode-mental-model.md
+- Diagram includes:
+  - Primary comparison: Without exploration (30 min, trial and error) vs With exploration (7 min, first-try correct)
+  - Time investment view: 23 min saved, 75% fewer lines
+  - Mode characteristics view: Exploration (understand) vs Implementation (create)
+  - Decision flow: When to use each mode
+  - Simple reference table: Goals, duration, tools for each mode
+- Key visual: 5 min exploration + 2 min implementation = first-try correctness
+- Task: task-121 marked complete, task-118 (ch02 diagrams) now complete
+- Iteration 6: All ch02 diagrams done (3/3)
+- Outcome: Success
+- Next: Create ch03 prompt-anatomy diagram (task-123)
 
 ### 2026-01-27 14:00 - Created ch02-tool-ecosystem-radial diagram
 - What: Created Mermaid diagram showing Claude Code's seven core tools ecosystem
