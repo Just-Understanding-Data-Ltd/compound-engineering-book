@@ -1,8 +1,8 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 03:00)
+## Current Status (Updated: 2026-01-28 03:30)
 - Phase: Chapter Milestones
-- Active: task-017 (ch03 diagrams_complete) - next milestone
+- Active: task-013 (ch03, in_progress), next: task-017 (diagrams_complete)
 - Last Completed: task-016 (ch03 reviewed)
 - Blockers: None
 
@@ -26,6 +26,22 @@ task-017 (ch03 diagrams_complete) - score 935
 Next: Create ch03 diagrams (prompt-anatomy, constraint-funnel)
 
 ## Recent Activity
+
+### 2026-01-28 03:30 - Queue Curation (every 3rd iteration)
+- What: Curated task queue, fixed data inconsistencies, updated stats
+- Issues Fixed:
+  - CRITICAL: Duplicate task-209 ID (two different tasks had same ID)
+    - Kept original task-209 (SDK refactoring, critical priority)
+    - Renamed duplicate to task-214 (Related Chapters sections, medium priority)
+  - task-013 status changed from "pending" to "in_progress" (3/5 subtasks complete)
+  - Stats recalculated: pending 177, inProgress 1, complete 36
+- Timestamps: lastUpdated, lastCheckpoint, lastCuration all set to 2026-01-28T03:30:00Z
+- Priority Context:
+  - ch03 is 60% complete (closest to finishing)
+  - Next work: task-017 (ch03 diagrams), then task-018 (ch03 final)
+  - After ch03: task-209 (critical SDK refactor) should be addressed
+- Outcome: Success
+- Next: task-017 (ch03 diagrams_complete)
 
 ### 2026-01-28 03:00 - COMPLETED ch03 reviewed (task-016) - ITERATION 8
 - What: Reviewed Chapter 3 (Prompting Fundamentals) for quality

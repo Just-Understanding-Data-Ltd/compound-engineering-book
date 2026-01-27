@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T03:00:00.000Z",
+  "lastUpdated": "2026-01-28T03:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -150,21 +150,6 @@
   },
   "tasks": [
     {
-      "id": "task-209",
-      "type": "fix",
-      "title": "CRITICAL: Refactor all code examples to use Anthropic SDK",
-      "description": "All code examples must use @anthropic-ai/sdk or @anthropic-ai/claude-agent-sdk. Current ch03 examples (prompt-patterns.ts, few-shot-builder.ts, prompt-analyzer.ts) are standalone utility functions without SDK integration. Refactor to show real API usage patterns. Every example should demonstrate: 1) Importing the SDK, 2) Creating a client/session, 3) Making actual API calls. Delete or rewrite examples that are just helper functions.",
-      "status": "pending",
-      "priority": "critical",
-      "score": 1005,
-      "affectedFiles": [
-        "examples/ch03/prompt-patterns.ts",
-        "examples/ch03/few-shot-builder.ts",
-        "examples/ch03/prompt-analyzer.ts",
-        "examples/ch03/prompting.test.ts"
-      ]
-    },
-    {
       "id": "task-206",
       "type": "infrastructure",
       "title": "Create exercises folder structure",
@@ -301,7 +286,7 @@
       "chapter": "ch03",
       "title": "ch03: Prompting Fundamentals",
       "description": "Complete remaining milestones for Prompting Fundamentals",
-      "status": "pending",
+      "status": "in_progress",
       "priority": "high",
       "subtasks": [
         {
@@ -1390,6 +1375,21 @@
       "score": 775
     },
     {
+      "id": "task-209",
+      "type": "fix",
+      "title": "CRITICAL: Refactor all code examples to use Anthropic SDK",
+      "description": "All code examples must use @anthropic-ai/sdk or @anthropic-ai/claude-agent-sdk. Current ch03 examples (prompt-patterns.ts, few-shot-builder.ts, prompt-analyzer.ts) are standalone utility functions without SDK integration. Refactor to show real API usage patterns. Every example should demonstrate: 1) Importing the SDK, 2) Creating a client/session, 3) Making actual API calls. Delete or rewrite examples that are just helper functions.",
+      "status": "pending",
+      "priority": "critical",
+      "score": 685,
+      "affectedFiles": [
+        "examples/ch03/prompt-patterns.ts",
+        "examples/ch03/few-shot-builder.ts",
+        "examples/ch03/prompt-analyzer.ts",
+        "examples/ch03/prompting.test.ts"
+      ]
+    },
+    {
       "id": "task-167",
       "type": "diagrams",
       "chapter": "ch01",
@@ -1776,7 +1776,7 @@
       "score": 355
     },
     {
-      "id": "task-209",
+      "id": "task-214",
       "type": "fix",
       "title": "Add Related Chapters sections to missing chapters",
       "description": "Add standardized Related Chapters section to ch05, ch06, ch07, ch09 which currently lack this section",
@@ -2107,7 +2107,7 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 33,
+    "count": 36,
     "lastCompaction": "2026-01-28T00:15:00Z",
     "items": [
       {
@@ -2293,24 +2293,39 @@
     ]
   },
   "stats": {
-    "pending": 178,
-    "inProgress": 0,
+    "pending": 177,
+    "inProgress": 1,
     "complete": 36,
     "blocked": 0,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "6c93d1ea3bf9590e1c5ffcfa1bfe4bf759f4a279",
-    "lastSuccessfulTask": "task-016",
-    "lastCheckpoint": "2026-01-28T03:00:00Z",
+    "lastGoodCommit": "a5a51b1ca2b761611bcc4813e43af37ac7fed21d",
+    "lastSuccessfulTask": "iteration-8",
+    "lastCheckpoint": "2026-01-28T03:30:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
-    "lastCuration": "2026-01-28T00:15:00Z"
+    "lastCuration": "2026-01-28T03:30:00Z"
   },
   "config": {
     "maxConsecutiveFailures": 3,
     "compactionThreshold": 20,
     "healthCheckInterval": 300
+  },
+  "curatorNotes": {
+    "lastRun": "2026-01-28T03:30:00Z",
+    "tasksFixed": 3,
+    "priorityIssues": [
+      "task-209 duplicate ID resolved",
+      "task-013 status updated to in_progress (3/5 milestones complete)",
+      "stats recalculated for accuracy"
+    ],
+    "queueHealth": "Good - ch03 is 60% complete (3 of 5 milestones done). Next priorities: 1) Complete ch03 diagrams (task-122), 2) Complete ch03 final milestone (task-018), then move to ch04 code writing",
+    "recommendations": [
+      "Complete task-017 (ch03 diagrams) and task-018 (ch03 final) to finish chapter",
+      "Address task-209 critical SDK refactor (score: 685) after ch03 completion",
+      "Monitor Part II and Part III word count expansion (task-212, task-213)"
+    ]
   }
 }
