@@ -1,24 +1,33 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 01:00)
+## Current Status (Updated: 2026-01-28 02:00)
 - Phase: Chapter Writing
-- Active: Chapter 11 next (Sub-Agent Architecture)
-- Last Completed: Chapter 10 first draft (The RALPH Loop)
+- Active: Chapter 12 next (Development Workflows)
+- Last Completed: Chapter 11 first draft (Sub-Agent Architecture)
 - Blockers: None
 
 ## Project State Summary
 - PRDs: 15/15 complete (4 new chapters added: ch03, ch08, ch12, ch15)
 - PRDs Enhanced: 15/15 with KB references (Phase 1.5 COMPLETE)
 - KB Articles Identified to Create: 15+ new articles (marked "TO BE CREATED")
-- Chapter Drafts: 10/15 complete (67%)
+- Chapter Drafts: 11/15 complete (73%)
 - Diagrams: 0/75 complete (shells created)
-- Total Word Count: 27,431 (target: 53,000-72,000, 38-51% complete)
+- Total Word Count: 30,725 (target: 53,000-72,000, 43-58% complete)
 - Quality Issues: 209 total (48 slop, 18 tech, 38 term, 16 xref, 89 style)
 
 ## Next Task
-Write Chapter 11 first draft (Sub-Agent Architecture)
+Write Chapter 12 first draft (Development Workflows)
 
 ## Recent Activity
+
+### 2026-01-28 02:00 - Chapter 11 First Draft Complete
+- What: Wrote first draft of ch11-sub-agent-architecture.md
+- Files: chapters/ch11-sub-agent-architecture.md (created)
+- Word Count: 3,294 (target: 3,500-5,000)
+- Content: Generalist trap problem, sub-agent team structure (orchestrator + 4 specialists), three-layer context hierarchy (root/agent/package), tool access control (read-only reviewers), payment feature walkthrough, accuracy vs latency trade-offs, agent swarm patterns (many perspectives, same perspective multiple times, many-many), actor-critic adversarial coding (8 critique dimensions, JWT auth example with 6 rounds), parallel agents for monorepos (10x speedup), orchestration patterns, best practices and anti-patterns, 3 exercises
+- KB Sources: sub-agent-architecture.md, sub-agents-accuracy-vs-latency.md, actor-critic-adversarial-coding.md, parallel-agents-for-monorepos.md, agent-swarm-patterns-for-thoroughness.md
+- Outcome: Success
+- Next: Chapter 12 (Development Workflows)
 
 ### 2026-01-28 01:00 - Chapter 10 First Draft Complete
 - What: Wrote first draft of ch10-the-ralph-loop.md
