@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 18:30)
+## Current Status (Updated: 2026-01-27 19:30)
 - Phase: Chapter Milestones (7 of 15 complete, 47%)
-- Active: Ready for ch08 milestones (next chapter)
-- Last Completed: task-042 ch07 final - SEVENTH CHAPTER COMPLETE - WARMUP
+- Active: Critical term fixes, then ch08 milestones
+- Last Completed: task-103 Fix undefined technical terms in Ch01 - ITERATION 2
 - Blockers: None active
 
 ## Project State Summary
@@ -21,11 +21,24 @@
 None active
 
 ## Next Task Priority
-1. task-103 (Fix undefined technical terms in Ch01) - CRITICAL, score 850
-2. task-104 (Fix undefined MTok in Ch15) - CRITICAL, score 800
-3. task-043 (ch08: Error Handling & Debugging)
+1. task-104 (Fix undefined MTok in Ch15) - CRITICAL, score 1105
+2. task-043 (ch08: Error Handling & Debugging) - score 910
+3. task-049 (ch09: Context Engineering Deep Dive) - score 905
 
 ## Recent Activity
+
+### 2026-01-27 19:30 - COMPLETED task-103: Fix undefined technical terms in Ch01 - ITERATION 2
+- What: Fixed 5 undefined technical terms flagged by term-intro-checker review
+- Fixes Applied:
+  - Line 84: "invariants" → "invariants (conditions that must always remain true)"
+  - Line 89: "Infrastructure as code: Terraform, Docker, Kubernetes" → "Infrastructure as code (IaC): Terraform (declarative infrastructure provisioning), Docker (container packaging), Kubernetes (container orchestration)"
+  - Line 90: "SQL" → "SQL (Structured Query Language for databases)"
+  - Line 186: "Bounded contexts" → "Bounded contexts (self-contained domain areas)"
+  - Line 291: "idempotency" → "idempotency for safe retry behavior"
+- Tasks: task-103 marked complete
+- Stats: pending 66, complete 44
+- Outcome: Success
+- Next: task-104 (Fix undefined MTok in Ch15) - CRITICAL, score 1105
 
 ### 2026-01-27 18:30 - COMPLETED task-042: ch07 final - WARMUP - SEVENTH CHAPTER COMPLETE!
 - What: Completed final quality gate for Chapter 7 (Quality Gates That Compound)

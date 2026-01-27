@@ -81,13 +81,13 @@ This is not a job title. It is a cognitive orientation. The meta-builder asks: "
 
 The skill stack that meta-engineers develop includes:
 
-1. **Mathematical reasoning**: invariants, complexity, optimization
+1. **Mathematical reasoning**: invariants (conditions that must always remain true), complexity, optimization
 2. **Systems thinking**: feedback loops, emergent behavior, constraints
 3. **Architectural design**: Domain-Driven Design (DDD), boundaries, contracts
 4. **Agent orchestration**: prompts, tools, verification
 5. **Observability engineering**: OpenTelemetry (OTEL), metrics, traces
-6. **Infrastructure as code**: Terraform, Docker, Kubernetes
-7. **Core programming**: TypeScript, Python, SQL
+6. **Infrastructure as code (IaC)**: Terraform (declarative infrastructure provisioning), Docker (container packaging), Kubernetes (container orchestration)
+7. **Core programming**: TypeScript, Python, SQL (Structured Query Language for databases)
 
 Most engineers develop only the bottom two or three layers. Meta-engineers develop the full stack over time.
 
@@ -183,7 +183,7 @@ The reframing that matters:
 
 ```
 Instead of thinking about:    Think about:
-Functions                  →  Bounded contexts
+Functions                  →  Bounded contexts (self-contained domain areas)
 Endpoints                  →  Service boundaries
 Databases                  →  Aggregate roots
 Tests                      →  Invariants
@@ -288,7 +288,7 @@ Consider a concrete example. Two engineers need to build a payment processing fe
 
 **Engineer A (Level 1)**: Writes the Stripe integration manually. Time: three days. Next payment feature will take three days too.
 
-**Engineer B (Level 3)**: Has a constraint system that specifies payment invariants (atomic transactions, idempotency, audit logging). Gives the constraints to Claude Code. Time: four hours. Next payment feature inherits the constraints and takes two hours.
+**Engineer B (Level 3)**: Has a constraint system that specifies payment invariants (atomic transactions, idempotency for safe retry behavior, audit logging). Gives the constraints to Claude Code. Time: four hours. Next payment feature inherits the constraints and takes two hours.
 
 After ten payment features, Engineer A has spent thirty days. Engineer B has spent twenty-two hours. That is a 10x difference, and the gap keeps widening.
 

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T06:00:00Z",
+  "lastUpdated": "2026-01-27T19:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -154,12 +154,14 @@
       "type": "fix",
       "title": "CRITICAL: Fix undefined technical terms in Ch01",
       "description": "Chapter 1 uses several domain-driven design and infrastructure concepts without introducing them. Add definitions on first use for: 1) invariants (line 84), 2) bounded contexts (line 198), 3) idempotency/idempotent (line 291), 4) Infrastructure as code (line 89), 5) Terraform, Docker, Kubernetes (line 89 - add brief descriptions), 6) SQL (line 90). Review flagged by term-intro-checker-2026-01-27.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-27T19:30:00Z",
       "priority": "critical",
-      "score": 850,
+      "score": 1175,
       "flaggedByReview": "term-intro-2026-01-27",
       "chapter": "ch01",
-      "reviewReference": "reviews/term-intro-2026-01-27.md"
+      "reviewReference": "reviews/term-intro-2026-01-27.md",
+      "outcome": "Fixed 5 term introductions: invariants (line 84), IaC/Terraform/Docker/Kubernetes (line 89), SQL (line 90), bounded contexts (line 186), idempotency (line 291)"
     },
     {
       "id": "task-104",
@@ -168,7 +170,7 @@
       "description": "Chapter 15 (Model Strategy & Cost Optimization) uses 'MTok' (million tokens) as abbreviation throughout pricing examples (lines 18-234) without ever defining what it means. Add clear definition at first occurrence in line 18: 'Million tokens (MTok)'. Critical for reader comprehension when explaining API pricing. Review flagged by term-intro-checker-2026-01-27.",
       "status": "pending",
       "priority": "critical",
-      "score": 800,
+      "score": 1105,
       "flaggedByReview": "term-intro-2026-01-27",
       "chapter": "ch15",
       "reviewReference": "reviews/term-intro-2026-01-27.md"
@@ -305,6 +307,65 @@
       "score": 940
     },
     {
+      "id": "task-025",
+      "type": "chapter",
+      "chapter": "ch05",
+      "title": "ch05: The 12-Factor Agent",
+      "description": "Complete remaining milestones for The 12-Factor Agent",
+      "status": "complete",
+      "completedAt": "2026-01-27T23:00:00Z",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-026",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "code written",
+          "status": "complete",
+          "completedAt": "2026-01-27T19:30:00Z",
+          "score": -95
+        },
+        {
+          "id": "task-027",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "complete",
+          "completedAt": "2026-01-27T20:15:00Z",
+          "score": -100
+        },
+        {
+          "id": "task-028",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "complete",
+          "completedAt": "2026-01-27T21:00:00Z",
+          "score": -105,
+          "note": "Passed AI slop check. Fixed term introductions: LLM (line 5), JWT (line 91), idempotency (line 126), DAG (line 391)"
+        },
+        {
+          "id": "task-029",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "complete",
+          "completedAt": "2026-01-27T20:30:00Z",
+          "score": -110
+        },
+        {
+          "id": "task-030",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "final",
+          "status": "complete",
+          "completedAt": "2026-01-27T23:00:00Z",
+          "score": -115
+        }
+      ],
+      "score": 935
+    },
+    {
       "id": "task-013",
       "type": "chapter",
       "chapter": "ch03",
@@ -426,65 +487,6 @@
         }
       ],
       "score": 925
-    },
-    {
-      "id": "task-025",
-      "type": "chapter",
-      "chapter": "ch05",
-      "title": "ch05: The 12-Factor Agent",
-      "description": "Complete remaining milestones for The 12-Factor Agent",
-      "status": "complete",
-      "completedAt": "2026-01-27T23:00:00Z",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-026",
-          "parentId": "task-025",
-          "type": "milestone",
-          "title": "code written",
-          "status": "complete",
-          "completedAt": "2026-01-27T19:30:00Z",
-          "score": -95
-        },
-        {
-          "id": "task-027",
-          "parentId": "task-025",
-          "type": "milestone",
-          "title": "code tested",
-          "status": "complete",
-          "completedAt": "2026-01-27T20:15:00Z",
-          "score": -100
-        },
-        {
-          "id": "task-028",
-          "parentId": "task-025",
-          "type": "milestone",
-          "title": "reviewed",
-          "status": "complete",
-          "completedAt": "2026-01-27T21:00:00Z",
-          "score": -105,
-          "note": "Passed AI slop check. Fixed term introductions: LLM (line 5), JWT (line 91), idempotency (line 126), DAG (line 391)"
-        },
-        {
-          "id": "task-029",
-          "parentId": "task-025",
-          "type": "milestone",
-          "title": "diagrams complete",
-          "status": "complete",
-          "completedAt": "2026-01-27T20:30:00Z",
-          "score": -110
-        },
-        {
-          "id": "task-030",
-          "parentId": "task-025",
-          "type": "milestone",
-          "title": "final",
-          "status": "complete",
-          "completedAt": "2026-01-27T23:00:00Z",
-          "score": -115
-        }
-      ],
-      "score": 935
     },
     {
       "id": "task-031",
@@ -1073,7 +1075,7 @@
           "score": -135
         }
       ],
-      "score": -285
+      "score": -85
     },
     {
       "id": "task-097",
@@ -1124,7 +1126,7 @@
           "score": -135
         }
       ],
-      "score": -285
+      "score": -145
     },
     {
       "id": "task-098",
@@ -1193,17 +1195,16 @@
     ]
   },
   "stats": {
-    "total": 120,
-    "pending": 93,
-    "in_progress": 0,
-    "complete": 27,
+    "pending": 66,
+    "inProgress": 0,
+    "complete": 44,
     "blocked": 0,
-    "lastUpdated": "2026-01-27T18:30:00Z"
+    "total": 110
   },
   "checkpoints": {
-    "lastGoodCommit": "f5586f6e7dbb78e496e7e7cc5cb88c32d641a4e2",
-    "lastSuccessfulTask": "interrupted-5",
-    "lastCheckpoint": "2026-01-27T18:58:59Z",
+    "lastGoodCommit": "6378ff9470a3a06d7be1c1e37567534cccded166",
+    "lastSuccessfulTask": "iteration-1",
+    "lastCheckpoint": "2026-01-27T19:13:12Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false
   }
