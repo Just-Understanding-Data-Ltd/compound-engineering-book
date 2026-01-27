@@ -24,13 +24,19 @@ By the end of this chapter, you will be able to:
 
 ## Source Articles
 
-Primary sources from knowledge base:
+### Primary Sources
 - `chain-of-thought-prompting.md` - Reasoning patterns for complex tasks
 - `constraint-based-prompting.md` - Narrowing solution space through constraints
 - `few-shot-prompting-project-examples.md` - Using project examples as prompts
 - `upfront-questioning-narrows-search-space.md` - Reducing iteration through questions
 - `negative-examples-documentation.md` - Teaching through anti-patterns
 - `semantic-naming-patterns.md` - How naming affects LLM comprehension
+
+### Supplementary Sources (Added from KB Analysis Jan 27, 2026)
+- `information-theory-prompting.md` - Mathematical model of how constraints reduce entropy
+- `entropy-in-code-generation.md` - Why constraints mathematically narrow the solution space
+- `test-driven-prompting.md` - Using tests as constraints for code generation
+- `prompt-injection-prevention.md` (TO BE CREATED) - Security considerations in prompting
 
 ---
 
