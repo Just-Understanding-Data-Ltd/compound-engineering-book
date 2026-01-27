@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T10:00:00.000Z",
+  "lastUpdated": "2026-01-27T11:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1046,7 +1046,8 @@
           "parentId": "task-114",
           "type": "diagram",
           "title": "portfolio-vs-single-bet",
-          "status": "pending"
+          "status": "complete",
+          "completedAt": "2026-01-27T11:00:00Z"
         },
         {
           "id": "task-117",
@@ -1792,16 +1793,16 @@
     "items": []
   },
   "stats": {
-    "pending": 197,
+    "pending": 196,
     "inProgress": 0,
-    "complete": 8,
+    "complete": 9,
     "blocked": 0,
     "total": 205
   },
   "checkpoints": {
-    "lastGoodCommit": null,
-    "lastSuccessfulTask": null,
-    "lastCheckpoint": null,
+    "lastGoodCommit": "93f60fbb50014104e2fa66f7d589c5def17f1f79",
+    "lastSuccessfulTask": "iteration-1",
+    "lastCheckpoint": "2026-01-27T14:30:19Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false

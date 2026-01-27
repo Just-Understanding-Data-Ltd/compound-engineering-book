@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 10:00)
+## Current Status (Updated: 2026-01-27 11:00)
 - Phase: Phase 3 - Diagram Creation
-- Active: ch01 diagrams (1/3 complete)
-- Last Completed: ch01-three-levels-pyramid.md diagram
+- Active: ch01 diagrams (2/3 complete)
+- Last Completed: ch01-portfolio-vs-single-bet.md diagram
 - Blockers: None
 
 ## Project State Summary
@@ -11,14 +11,27 @@
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
 - KB Articles Created: 15/15 new articles (100%) - KB CREATION COMPLETE
 - KB Coverage: 100/104 referenced, 15 created (96% coverage)
-- Diagrams: 1/75 complete (Phase 3 started)
+- Diagrams: 2/75 complete (Phase 3 in progress)
 - Total Word Count: 44,262 (target: 53,000-72,000, 61-82% complete)
 - Quality Issues: 282 total (declining trend)
 
 ## Next Task
-Continue Phase 3: Create ch01 portfolio-vs-single-bet diagram (task-116)
+Continue Phase 3: Create ch01 constraint-feedback-loop diagram (task-117)
 
 ## Recent Activity
+
+### 2026-01-27 11:00 - Created ch01-portfolio-vs-single-bet diagram
+- What: Created Mermaid diagram comparing portfolio game vs single-bet game approaches
+- Files: assets/diagrams/ch01-portfolio-vs-single-bet.md
+- Diagram includes:
+  - Primary comparison view showing both strategies side-by-side
+  - Alternative failure response flow showing different mindsets
+  - Simple table view comparing key characteristics
+  - Key metrics comparison showing different exit criteria
+- Key visual: Single-bet (one miss = existential) vs Portfolio (one miss = data point)
+- Task: task-116 marked complete
+- Outcome: Success
+- Next: Create constraint-feedback-loop diagram (task-117)
 
 ### 2026-01-27 10:00 - Created ch01-three-levels-pyramid diagram
 - What: Created Mermaid diagram showing the three levels of engineering (code, systems, meta-systems)
