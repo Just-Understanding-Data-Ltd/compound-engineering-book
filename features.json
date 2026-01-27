@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T05:00:00Z",
+  "lastUpdated": "2026-01-28T06:00:00Z",
   "structureNote": "Updated to 15-chapter structure. Old chapter numbers in prds section preserved for reference. New chapters added with descriptive filenames. See toc.md for canonical ordering.",
   "prds": {
     "index": {
@@ -484,20 +484,20 @@
     "ch15": {
       "title": "Model Strategy & Cost Optimization",
       "prd": "prds/ch15-model-strategy.md",
-      "chapter": null,
-      "status": "not_started",
+      "chapter": "chapters/ch15-model-strategy-and-cost-optimization.md",
+      "status": "draft",
       "newChapter": true,
       "milestones": {
         "prd_complete": true,
-        "first_draft": false,
+        "first_draft": true,
         "code_written": false,
         "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
-        "exercises_added": false,
+        "exercises_added": true,
         "final": false
       },
-      "wordCount": 0,
+      "wordCount": 3667,
       "targetWordCount": [3500, 4500],
       "diagramsRequired": 5,
       "diagramsComplete": 0,
@@ -510,11 +510,11 @@
     "totalChapters": 15,
     "newChaptersAdded": 4,
     "prdsComplete": 15,
-    "draftsComplete": 14,
+    "draftsComplete": 15,
     "reviewed": 0,
     "diagramsRequired": 75,
     "diagramsComplete": 0,
-    "totalWordCount": 40595,
+    "totalWordCount": 44262,
     "targetWordCount": [53000, 72000]
   }
 }
