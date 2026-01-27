@@ -10,7 +10,7 @@ This chapter introduces systematic approaches to error diagnosis, persistent err
 
 When an AI agent produces incorrect code, most developers react immediately. They fix the specific bug and move on. But this reactive approach misses the opportunity to eliminate entire error classes.
 
-Every LLM error fits into one of five categories:
+Every Large Language Model (LLM) error fits into one of five categories:
 
 **1. Context Problem (60% of errors)**
 
@@ -109,7 +109,7 @@ Here's how the framework applies to a payment processing feature:
 
 **Error 4**: AI logs sensitive card data
 - Diagnosis: Quality Gate Problem
-- Fix: Add AST-grep rule to block logging payment data
+- Fix: Add AST-grep (Abstract Syntax Tree pattern matching tool) rule to block logging payment data
 
 After four iterations, you've permanently eliminated four error classes from your payment processing code.
 
@@ -207,7 +207,7 @@ Implement authentication - STEP 1: Basic email/password login
 Requirements for this step only:
 1. Accept email and password
 2. Validate against database
-3. Return JWT token on success
+3. Return JSON Web Token (JWT) on success
 
 We'll add OAuth and 2FA in subsequent steps.
 ```
@@ -401,7 +401,7 @@ These documented patterns become context for future tasks. When the AI starts wo
 
 ## Flaky Test Diagnosis
 
-Flaky tests destroy trust in CI/CD pipelines. They pass sometimes and fail other times, wasting developer time on false positives.
+Flaky tests destroy trust in Continuous Integration/Continuous Deployment (CI/CD) pipelines. They pass sometimes and fail other times, wasting developer time on false positives.
 
 When using AI agents, flaky tests create a compounding problem. Agents can't distinguish flaky failures from real bugs. They waste tokens trying to "fix" code that isn't broken.
 

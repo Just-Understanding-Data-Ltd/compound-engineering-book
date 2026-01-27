@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T21:30:00.000Z",
+  "lastUpdated": "2026-01-27T22:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -644,8 +644,10 @@
           "parentId": "task-043",
           "type": "milestone",
           "title": "reviewed",
-          "status": "pending",
-          "score": -105
+          "status": "complete",
+          "completedAt": "2026-01-27T22:00:00Z",
+          "score": -105,
+          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed term introductions: LLM (line 13), AST-grep (line 112), JWT (line 210), CI/CD (line 404). 67 tests pass."
         },
         {
           "id": "task-047",
@@ -1191,16 +1193,16 @@
     ]
   },
   "stats": {
-    "pending": 61,
+    "pending": 60,
     "inProgress": 1,
-    "complete": 47,
+    "complete": 48,
     "blocked": 0,
     "total": 109
   },
   "checkpoints": {
     "lastGoodCommit": "b850b7582419c1e5b0be90c78bd74797105986fa",
-    "lastSuccessfulTask": "queue-curation",
-    "lastCheckpoint": "2026-01-27T21:30:00Z",
+    "lastSuccessfulTask": "task-046",
+    "lastCheckpoint": "2026-01-27T22:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0

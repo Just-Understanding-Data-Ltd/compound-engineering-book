@@ -225,3 +225,35 @@ tail -15 chapters/chXX.md | grep -q "Related chapters" || echo "MISSING: Related
 ```
 
 ---
+
+### 2026-01-27 - Predictable Acronym Categories by Chapter Topic
+
+**Context**: Reviewing ch08 (Error Handling & Debugging) for the "reviewed" milestone (iteration 5). Fixed 4 undefined terms: LLM, AST-grep, JWT, CI/CD.
+
+**Observation**: Different chapter topics attract different categories of undefined acronyms in predictable patterns:
+
+| Chapter Topic | Common Undefined Acronyms |
+|---------------|--------------------------|
+| Error Handling | CI/CD, AST, JWT |
+| Authentication | JWT, OAuth, SSO, CORS |
+| API Design | REST, GraphQL, RPC, JSON |
+| Testing | TDD, BDD, E2E, UI |
+| Deployment | CI/CD, K8s, AWS, GCP |
+
+Chapter 8 (Error Handling) introduced:
+- **LLM** - Core AI concept (line 13)
+- **AST-grep** - Code analysis tool (line 112)
+- **JWT** - Authentication token format (line 210)
+- **CI/CD** - Pipeline terminology (line 404)
+
+The JWT and CI/CD acronyms appeared because error handling naturally intersects with authentication (password hashing examples) and continuous integration (flaky test detection). AST-grep appeared in the quality gate section. These are logical intersections, not random occurrences.
+
+**Implication**: When reviewing chapters, anticipate acronym categories based on topic. Error handling chapters will likely need authentication and CI/CD definitions. API chapters will need REST/GraphQL definitions. This foreknowledge speeds up the term-checking process.
+
+**Action**: Create a mental checklist of expected acronym categories per chapter type:
+- Security chapters: Check for JWT, OAuth, CORS, XSS, CSRF, SSL/TLS
+- Testing chapters: Check for TDD, BDD, E2E, CI/CD, QA
+- Infrastructure chapters: Check for K8s, Docker, AWS/GCP, IaC, VM
+- AI/ML chapters: Check for LLM, GPT, ML, NLP, RAG
+
+---
