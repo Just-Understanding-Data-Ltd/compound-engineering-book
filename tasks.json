@@ -553,7 +553,8 @@
       "chapter": "ch07",
       "title": "ch07: Quality Gates That Compound",
       "description": "Complete remaining milestones for Quality Gates That Compound",
-      "status": "in_progress",
+      "status": "complete",
+      "completedAt": "2026-01-27T18:30:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -599,8 +600,10 @@
           "parentId": "task-037",
           "type": "milestone",
           "title": "final",
-          "status": "pending",
-          "score": -115
+          "status": "complete",
+          "completedAt": "2026-01-27T18:30:00Z",
+          "score": -115,
+          "note": "All quality gates passed: 2,897 words (in range), no em dashes, no AI slop, 4 diagrams, exercises folder, Related Chapters section present"
         }
       ],
       "score": 915
@@ -1191,11 +1194,11 @@
   },
   "stats": {
     "total": 120,
-    "pending": 94,
-    "in_progress": 1,
-    "complete": 25,
+    "pending": 93,
+    "in_progress": 0,
+    "complete": 27,
     "blocked": 0,
-    "lastUpdated": "2026-01-28T06:00:00Z"
+    "lastUpdated": "2026-01-27T18:30:00Z"
   },
   "checkpoints": {
     "lastGoodCommit": "f5586f6e7dbb78e496e7e7cc5cb88c32d641a4e2",
