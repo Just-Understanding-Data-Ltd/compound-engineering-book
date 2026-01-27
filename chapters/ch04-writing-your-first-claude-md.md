@@ -8,7 +8,7 @@ This chapter teaches you to write effective CLAUDE.md files that solve this prob
 
 ## Why CLAUDE.md Matters
 
-LLMs function as stateless systems with frozen weights at inference time. Claude starts each session with:
+Large Language Models (LLMs) function as stateless systems with frozen weights at inference time. Claude starts each session with:
 
 - Zero codebase knowledge
 - No memory of previous sessions
@@ -339,7 +339,7 @@ All tools now read from a single source. Updates to RULES.md propagate everywher
 
 ## Case Study: Before and After
 
-A real project demonstrates the impact. Before refactoring, the team had a single 8,500-line CLAUDE.md at the root. It documented everything: API patterns, database migrations, React components, Temporal workflows, CLI tools, and deployment procedures.
+A real project demonstrates the impact. Before refactoring, the team had a single 8,500-line CLAUDE.md at the root. It documented everything: API patterns, database migrations, React components, Temporal workflows, command-line interface (CLI) tools, and deployment procedures.
 
 When a developer asked Claude to implement a new Temporal workflow, Claude loaded all 8,500 lines. The relevant Temporal section started at line 6,200. Claude often generated code using API error handling patterns instead of Temporal's `ApplicationFailure`. Code that compiled but violated workflow determinism requirements appeared frequently. Each task required 3-5 iterations to produce correct output.
 

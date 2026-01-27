@@ -1,32 +1,50 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 07:00)
+## Current Status (Updated: 2026-01-28 08:00)
 - Phase: Chapter Milestones
-- Active: task-019 (ch04 in_progress), next: task-022 (reviewed)
-- Last Completed: task-021 (ch04 code_tested) - ITERATION 12
-- Blockers: None - SDK installed, code examples now use Anthropic SDK
+- Active: task-019 (ch04 in_progress), next: task-023 (diagrams complete)
+- Last Completed: task-022 (ch04 reviewed) - ITERATION 3
+- Blockers: None - SDK installed, code examples use Anthropic SDK
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
 - KB Articles Created: 14/15 complete (93%) - prompt-injection-prevention.md pending
 - Diagrams: 9/63 complete (14%) - ch01 (4), ch02 (3), ch03 (2)
-- Code Examples: ch01 complete, ch02 complete, ch03 complete (but need SDK refactoring per task-209)
+- Code Examples: ch01-ch04 complete (ch03 needs SDK refactoring per task-209)
 - Cross-Refs Fixed: ch01 complete (3 references corrected)
 - Total Word Count: 44,268 (target: 45,000-57,000, 78-98% complete)
-- Quality Issues: 282 total tracked (AI slop 51, tech 18, terms 58, cross-refs 3, style 147, other 5)
+- Quality Issues: 280 total tracked (AI slop 51, tech 18, terms 56, cross-refs 3, style 147, other 5)
 - Chapters Complete: 3/15 (ch01, ch02, ch03 all pass final quality gates)
+- ch04 Status: 3/5 milestones complete (code_written, code_tested, reviewed)
 
 ## Critical Blockers
-1. task-209: SDK Refactoring - Code examples in ch01-ch03 must use Anthropic SDK (not standalone utilities)
+1. task-209: SDK Refactoring - Code examples in ch03 must use Anthropic SDK (not standalone utilities)
 2. ch02: CLI syntax errors - 8 invalid commands (claude ask, claude chat, claude init)
-3. Final KB article: prompt-injection-prevention.md (unblocks diagram phase)
 
 ## Next Task
-task-022 (ch04 reviewed) - score 920
-Pattern: Run AI slop check, term intro check, technical accuracy review
+task-023 (ch04 diagrams_complete) or task-125 (ch04 high-priority diagrams)
+Pattern: Create Mermaid diagrams for why-what-how-framework and hierarchical-claude-md
 
 ## Recent Activity
+
+### 2026-01-28 08:00 - COMPLETED ch04 reviewed (task-022) - ITERATION 3
+- What: Reviewed Chapter 4 (Writing Your First CLAUDE.md) for quality
+- Review Results:
+  - AI slop check: PASS (no em dashes, no blacklisted phrases)
+  - Technical accuracy: PASS (20 tests pass, TypeScript compiles)
+  - Term introduction: 2 issues fixed
+- Fixes Applied:
+  - Line 11: "LLMs" → "Large Language Models (LLMs)"
+  - Line 342: "CLI tools" → "command-line interface (CLI) tools"
+- Queue Curation (iteration 3 % 3 == 0):
+  - Stats verified: pending 168, inProgress 1, complete 45, total 214
+  - No duplicates or inconsistencies found
+  - Queue health: EXCELLENT
+- Tasks: task-022 marked complete
+- ch04 Status: 3/5 milestones complete (code_written, code_tested, reviewed)
+- Outcome: Success
+- Next: task-023 (ch04 diagrams_complete) - create Mermaid diagrams
 
 ### 2026-01-28 07:00 - COMPLETED ch04 code_tested (task-021) - ITERATION 12
 - What: Verified ch04 TypeScript code examples compile and tests pass

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T07:00:00Z",
+  "lastUpdated": "2026-01-28T08:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -377,8 +377,10 @@
           "parentId": "task-019",
           "type": "milestone",
           "title": "reviewed",
-          "status": "pending",
-          "score": -105
+          "status": "complete",
+          "completedAt": "2026-01-28T08:00:00Z",
+          "score": -105,
+          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed 2 term introductions: LLMs (line 11), CLI (line 342). Technical accuracy verified (20 tests pass)."
         },
         {
           "id": "task-023",
@@ -2336,24 +2338,29 @@
         "id": "task-021",
         "title": "ch04 code tested",
         "completedAt": "2026-01-28T07:00:00Z"
+      },
+      {
+        "id": "task-022",
+        "title": "ch04 reviewed",
+        "completedAt": "2026-01-28T08:00:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 169,
+    "pending": 168,
     "inProgress": 1,
-    "complete": 44,
+    "complete": 45,
     "blocked": 0,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "5ba735ac3edd23e8c120407e2a2b65fd852dba6b",
-    "lastSuccessfulTask": "task-021",
-    "lastCheckpoint": "2026-01-28T07:00:00Z",
+    "lastGoodCommit": "c93393eef1141a013617b72fc7dd168a67f5069f",
+    "lastSuccessfulTask": "task-022",
+    "lastCheckpoint": "2026-01-28T08:00:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
-    "lastCuration": "2026-01-28T04:15:00Z"
+    "lastCuration": "2026-01-28T08:00:00Z"
   },
   "config": {
     "maxConsecutiveFailures": 3,
@@ -2361,25 +2368,25 @@
     "healthCheckInterval": 300
   },
   "curatorNotes": {
-    "lastRun": "2026-01-28T04:15:00Z",
-    "iteration": 9,
+    "lastRun": "2026-01-28T08:00:00Z",
+    "iteration": 3,
     "tasksFixed": 0,
     "duplicatesFound": 0,
     "statusInconsistenciesFound": 0,
     "priorityIssues": [],
-    "queueHealth": "EXCELLENT - Queue is clean, consistent, and properly prioritized",
+    "queueHealth": "EXCELLENT - Queue is clean and consistent",
     "findings": {
-      "duplicateTaskIds": "NONE - Previous curation correctly resolved duplicate task-209. Current state shows task-209 (SDK refactor, CRITICAL) and task-214 (Related Chapters, medium) as distinct tasks.",
-      "statusConsistency": "ALL CONSISTENT - All parent-child relationships verified: task-013 (ch03 in_progress with 1 pending subtask), task-019 (ch04 pending with 5 pending subtasks), task-122 (ch03 diagrams complete with all subtasks complete)",
-      "statsVerification": "CORRECT - Expected: pending 173, complete 40, inProgress 1, total 214. Actual: pending 173, inProgress 1, complete 40, total 214",
-      "queuePriorities": "CORRECTLY ORDERED - Queue sorted by descending score (935 -> 930 -> 925... -> -295). All chapter tasks at top, followed by diagrams, then content/fixes.",
-      "nextTaskAnalysis": "task-013 (ch03 in_progress) has 4/5 milestones complete. Last pending: task-018 (ch03 final). After that: task-019 (ch04 code_written, score 930) is next in queue. HOWEVER: task-209 (CRITICAL SDK refactor, score 685) flags critical issue with code examples - they don't use Anthropic SDK per CLAUDE.md requirements."
+      "duplicateTaskIds": "NONE - Queue is clean",
+      "statusConsistency": "ALL CONSISTENT - task-019 (ch04 in_progress) has 3/5 subtasks complete (code_written, code_tested, reviewed)",
+      "statsVerification": "CORRECT - pending 168, inProgress 1, complete 45, total 214",
+      "queuePriorities": "CORRECTLY ORDERED - ch04 milestones next (task-023 diagrams, task-024 final)",
+      "nextTaskAnalysis": "task-019 (ch04 in_progress) is 60% complete (3/5 milestones). Next: task-023 (diagrams complete) or task-125 (ch04 high-priority diagrams). After ch04: task-025 (ch05 code_written)."
     },
     "recommendations": [
-      "IMMEDIATE: Complete task-018 (ch03 final) to finish third chapter",
-      "NEXT: task-020 (ch04 code_written) - score 930 - continues chapter sequence",
-      "CRITICAL FOLLOW-UP: task-209 (SDK refactor) must be done before further code examples are created. Current ch03 examples (prompt-patterns.ts, few-shot-builder.ts) violate SDK requirement and should be refactored to demonstrate actual Anthropic SDK usage.",
-      "Status Update: ch03 is now 80% complete (4/5 milestones). Chapters complete: 2/15 (ch01, ch02). Estimated next complete chapter: ch04 after task-020, task-021, task-022, task-023, task-024 completion."
+      "NEXT: task-023 (ch04 diagrams_complete) - create diagrams for ch04",
+      "THEN: task-024 (ch04 final) - complete quality gate checklist",
+      "CRITICAL: task-209 (SDK refactor) still pending - ch03 examples need Anthropic SDK integration",
+      "Status Update: ch04 is 60% complete (3/5 milestones). Chapters complete: 3/15 (ch01, ch02, ch03)."
     ]
   }
 }
