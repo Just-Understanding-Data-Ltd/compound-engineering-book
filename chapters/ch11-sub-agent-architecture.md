@@ -2,7 +2,7 @@
 
 When you ask a single AI agent to "add user authentication to the application," something predictable happens. The agent generates backend code with hardcoded tokens, frontend components missing validation, superficial tests covering only the happy path, and a review that misses obvious security flaws. This is the generalist trap. A single agent handling backend, frontend, testing, and code review produces mediocre results across all domains because context switching destroys focus.
 
-The solution mirrors how real development teams work. Instead of one generalist, you deploy specialized sub-agents: a backend engineer for API endpoints, a frontend engineer for UI components, a QA engineer for comprehensive tests, and a code reviewer that catches issues before human review. This chapter shows you how to build and orchestrate these specialized teams.
+The solution mirrors how real development teams work. Instead of one generalist, you deploy specialized sub-agents: a backend engineer for API endpoints, a frontend engineer for UI components, a Quality Assurance (QA) engineer for comprehensive tests, and a code reviewer that catches issues before human review. This chapter shows you how to build and orchestrate these specialized teams.
 
 ## The Generalist Trap
 
@@ -93,8 +93,8 @@ When implementing an API endpoint:
 
 2. **Design the endpoint**
    - Choose HTTP method (GET/POST/PUT/DELETE)
-   - Design URL following REST conventions
-   - Define request/response schemas using Zod
+   - Design URL following Representational State Transfer (REST) conventions
+   - Define request/response schemas using Zod (TypeScript schema validation library)
 
 3. **Implement layers**
    - Route layer: Express routing, validation middleware
@@ -117,14 +117,14 @@ Each package in your monorepo can have local conventions:
 ```markdown
 # packages/api/CLAUDE.md
 
-API Package - RESTful endpoints using Express + tRPC
+API Package - RESTful endpoints using Express + tRPC (type-safe remote procedure call framework)
 
 ## Route Structure
 All routes follow this pattern:
 router.post('/[resource]', validateSchema(schemas.create), handlers.create);
 
 ## Authentication
-Use JWT tokens with our custom middleware:
+Use JSON Web Token (JWT) tokens with our custom middleware:
 router.get('/protected', authenticate, handler);
 
 ## Validation Schemas
@@ -478,7 +478,7 @@ Aggregate findings, de-duplicate, and rank by severity. Same issue found by mult
 
 ### Pattern 2: Same Perspective Multiple Times
 
-LLMs are probabilistic. Run the same analysis 4 times and you get different findings each time. The union catches more than any single run.
+Large Language Models (LLMs) are probabilistic. Run the same analysis 4 times and you get different findings each time. The union catches more than any single run.
 
 ```typescript
 // 4 runs of security analysis

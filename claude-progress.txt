@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 23:15)
+## Current Status (Updated: 2026-01-27 23:30)
 - Phase: Chapter Milestones (10 of 15 complete, 67%)
 - Active: ch11 Sub-Agent Architecture
-- Last Completed: task-063 (ch11 code_tested milestone)
+- Last Completed: task-064 (ch11 reviewed milestone)
 - Blockers: None active
 - Queue Health: EXCELLENT
 
@@ -31,6 +31,24 @@
 3. task-073 (ch13: Building the Harness code_written) - score 885
 
 ## Recent Activity
+
+### 2026-01-27 23:30 - COMPLETED task-064: ch11 Sub-Agent Architecture reviewed - WARMUP ITERATION
+- What: Reviewed Chapter 11 (Sub-Agent Architecture) for quality
+- Review Results:
+  - AI slop check: PASS (no em dashes, no blacklisted phrases)
+  - Word count: 3,314 (within 2,500-4,000 target)
+- Fixes Applied:
+  - Line 5: "a QA engineer" → "a Quality Assurance (QA) engineer"
+  - Lines 96-97: Added "Representational State Transfer (REST)" and "Zod (TypeScript schema validation library)"
+  - Line 120: Added "tRPC (type-safe remote procedure call framework)"
+  - Line 127: Added "JSON Web Token (JWT)"
+  - Line 481: Added "Large Language Models (LLMs)"
+- Related Chapters section: Already present ✓
+- Tasks: task-064 marked complete
+- Stats: pending 43, complete 66
+- ch11 Status: 3/5 milestones complete (code_written, code_tested, reviewed)
+- Outcome: Success
+- Next: task-065 (ch11 diagrams_complete milestone)
 
 ### 2026-01-27 23:15 - COMPLETED task-063: ch11 Sub-Agent Architecture code_tested - ITERATION 7
 - What: Verified all code examples for Chapter 11 (Sub-Agent Architecture) compile and tests pass
