@@ -1,6 +1,6 @@
 # Chapter 13: Building the Harness
 
-Claude Code is a harness around an LLM. Your job is to build a harness around Claude Code.
+Claude Code is a harness around a Large Language Model (LLM). Your job is to build a harness around Claude Code.
 
 This is the fundamental insight that separates productive AI-assisted developers from those who struggle. The language model itself is a noisy channel. Each layer of infrastructure you build around it increases signal-to-noise ratio, constrains the solution space, and provides feedback loops for self-correction. By the end of this chapter, you will understand how to construct a four-layer harness architecture that transforms unreliable probabilistic outputs into consistent, high-quality code.
 
@@ -375,7 +375,7 @@ Re-run verification confirms `heap.retained_growth_slope = 0`. Constraint satisf
 
 ### CI/CD Integration
 
-The optimization loop becomes part of your workflow:
+Continuous Integration/Continuous Deployment (CI/CD) pipelines make the optimization loop part of your workflow:
 
 ```yaml
 # .github/workflows/performance-optimization.yml
@@ -436,7 +436,7 @@ The opportunity cost of building features directly is massive. Every hour spent 
 
 **Level 1: AI-Assisted Coding**. You use Claude Code to write features. This is where most developers stop. Productivity is 5-10x.
 
-**Level 2: Building Tools with AI**. You use Claude Code to build tools that generate code. A prompt like "Build an MCP server that scaffolds CRUD endpoints" produces infrastructure that runs in seconds. Productivity is 20-50x.
+**Level 2: Building Tools with AI**. You use Claude Code to build tools that generate code. A prompt like "Build an MCP (Model Context Protocol) server that scaffolds CRUD (Create, Read, Update, Delete) endpoints" produces infrastructure that runs in seconds. Productivity is 20-50x.
 
 **Level 3: Meta-Infrastructure**. You build tools that build tools. A system monitors your codebase, identifies repetitive patterns, and auto-generates tools to eliminate them. Productivity is 100-500x.
 
@@ -467,7 +467,7 @@ Build time: 4 hours
 Payback: 0.9 weeks
 ```
 
-If ROI is positive within a week, build the tool.
+If the return on investment (ROI) is positive within a week, build the tool.
 
 ## Queryable Project Context with MCP
 

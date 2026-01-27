@@ -313,3 +313,32 @@ The pattern: workflow chapters act as integration points, weaving together authe
 3. Create a project-wide acronym glossary tracking first introduction location to avoid redundant definitions
 
 ---
+
+### 2026-01-28 - Meta-Engineering Chapters Span Conceptual Layers
+
+**Context**: Reviewing Chapter 13 (Building the Harness), which covers four layers: Claude Code configuration, repository engineering, meta-engineering, and closed-loop optimization.
+
+**Observation**: Meta-engineering chapters have the highest acronym density because they span multiple conceptual layers, each with its own vocabulary:
+
+| Layer | Domain | Acronyms Needed |
+|-------|--------|-----------------|
+| Layer 1 | AI/LLMs | LLM |
+| Layer 2 | Infrastructure | OTEL, DDD |
+| Layer 3 | Protocols | MCP, CRUD |
+| Layer 4 | DevOps/Business | CI/CD, ROI |
+
+Chapter 13 required 5 distinct acronym definitions spanning AI terminology (LLM), observability (OTEL), domain modeling (DDD), API protocols (MCP, CRUD), and DevOps/business (CI/CD, ROI).
+
+The pattern: meta-engineering chapters teach "systems that build systems," which inherently requires vocabulary from every layer of the stack. A chapter about harness architecture touches signal processing (LLM concepts), infrastructure (observability), automation (protocols for MCP servers), and business justification (ROI calculations).
+
+Interestingly, MCP was used on line 439 before its formal definition on line 476. This happens when higher-layer concepts (Level 2: Building Tools with AI) reference lower-layer implementations (MCP servers) before the dedicated section explains them. The fix is to define at first use, even if a deeper explanation comes later.
+
+**Implication**: Meta-engineering and architecture chapters require the most careful term introduction review because they integrate concepts from every layer. The "define at first use" rule becomes critical when content naturally references concepts before their dedicated sections.
+
+**Action**: During review of architecture/meta-engineering chapters:
+1. List all conceptual layers the chapter touches (AI, infrastructure, DevOps, business)
+2. Expect 1-2 acronyms per layer (4-8 total for a four-layer chapter)
+3. Check for "forward references" where higher-layer content mentions lower-layer terms before the dedicated section
+4. When a term appears before its dedicated section, add a brief definition at first use
+
+---
