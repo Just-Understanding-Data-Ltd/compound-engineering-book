@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T20:00:00Z",
+  "lastUpdated": "2026-01-27T21:00:00Z",
   "structureNote": "Updated to 15-chapter structure. Old chapter numbers in prds section preserved for reference. New chapters added with descriptive filenames. See toc.md for canonical ordering.",
   "prds": {
     "index": {
@@ -275,19 +275,19 @@
     "ch06": {
       "title": "The Verification Ladder",
       "prd": "prds/ch05.md",
-      "chapter": null,
-      "status": "not_started",
+      "chapter": "chapters/ch06-the-verification-ladder.md",
+      "status": "draft",
       "milestones": {
         "prd_complete": true,
-        "first_draft": false,
+        "first_draft": true,
         "code_written": false,
         "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
-        "exercises_added": false,
+        "exercises_added": true,
         "final": false
       },
-      "wordCount": 0,
+      "wordCount": 2816,
       "targetWordCount": [3000, 4500],
       "diagramsRequired": 6,
       "diagramsComplete": 0,
@@ -510,11 +510,11 @@
     "totalChapters": 15,
     "newChaptersAdded": 4,
     "prdsComplete": 15,
-    "draftsComplete": 5,
+    "draftsComplete": 6,
     "reviewed": 0,
     "diagramsRequired": 75,
     "diagramsComplete": 0,
-    "totalWordCount": 12994,
+    "totalWordCount": 15810,
     "targetWordCount": [53000, 72000]
   }
 }

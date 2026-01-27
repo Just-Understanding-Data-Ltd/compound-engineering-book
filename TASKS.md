@@ -77,7 +77,7 @@
 - [x] Write Chapter 3 first draft (Prompting Fundamentals - NEW) (Completed: 2026-01-27)
 - [x] Write Chapter 4 first draft (CLAUDE.md - was ch03) (Completed: 2026-01-27)
 - [x] Write Chapter 5 first draft (12-Factor Agent - was ch04) (Completed: 2026-01-27)
-- [ ] Write Chapter 6 first draft (Verification Ladder - was ch05)
+- [x] Write Chapter 6 first draft (Verification Ladder - was ch05) (Completed: 2026-01-27)
 - [ ] Write Chapter 7 first draft (Quality Gates - was ch06)
 - [ ] Write Chapter 8 first draft (Error Handling - NEW)
 - [ ] Write Chapter 9 first draft (Context Engineering - was ch07)
