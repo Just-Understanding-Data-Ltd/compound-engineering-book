@@ -87,8 +87,11 @@ check_time_limit() {
 }
 
 count_incomplete_tasks() {
-    if [ -f "features.json" ] && command -v jq &> /dev/null; then
-        # Count incomplete chapter milestones + pending tasks
+    if [ -f "tasks.json" ] && command -v jq &> /dev/null; then
+        # Count pending tasks from tasks.json
+        jq '.stats.pending' tasks.json 2>/dev/null || echo "0"
+    elif [ -f "features.json" ] && command -v jq &> /dev/null; then
+        # Fallback to features.json
         local chapter_tasks=$(jq '[.chapters[].milestones | to_entries[] | select(.value == false)] | length' features.json 2>/dev/null || echo "0")
         local pending_tasks=$(jq '[.tasks.kbArticlesToCreate[]?, .tasks.appendices[]?, .tasks.crossRefFixes[]?, .tasks.generalReview[]? | select(.status == "pending")] | length' features.json 2>/dev/null || echo "0")
         echo $((chapter_tasks + pending_tasks))
@@ -127,16 +130,18 @@ get_prd_index() {
 }
 
 get_task_summary() {
-    if [ -f "features.json" ] && command -v jq &> /dev/null; then
-        echo "## Task Queue (from features.json)"
+    if [ -f "tasks.json" ] && command -v jq &> /dev/null; then
+        echo "## Task Queue (from tasks.json)"
         echo ""
-        echo "### Incomplete Chapter Milestones"
-        jq -r '.chapters | to_entries[] | select(.value.milestones | to_entries | map(select(.value == false)) | length > 0) | "- \(.key): \(.value.milestones | to_entries | map(select(.value == false)) | map(.key) | join(", "))"' features.json 2>/dev/null | head -10
+        echo "### Stats"
+        jq -r '"Pending: \(.stats.pending) | Complete: \(.stats.complete) | Total: \(.stats.total)"' tasks.json 2>/dev/null
         echo ""
-        echo "### Pending Tasks"
-        jq -r '.tasks.kbArticlesToCreate[]? | select(.status == "pending") | "- [KB] \(.title): \(.description)"' features.json 2>/dev/null | head -5
-        jq -r '.tasks.crossRefFixes[]? | select(.status == "pending") | "- [XREF] \(.issue)"' features.json 2>/dev/null | head -3
-        jq -r '.tasks.appendices[]? | select(.status == "pending") | "- [APP] \(.title)"' features.json 2>/dev/null | head -3
+        echo "### Next 10 Pending Tasks"
+        jq -r '.tasks[] | select(.status == "pending") | "- [\(.type)] \(.title)"' tasks.json 2>/dev/null | head -10
+        echo ""
+    elif [ -f "features.json" ] && command -v jq &> /dev/null; then
+        echo "## Task Queue (from features.json - fallback)"
+        jq -r '.chapters | to_entries[] | select(.value.milestones | to_entries | map(select(.value == false)) | length > 0) | "- \(.key)"' features.json 2>/dev/null | head -10
         echo ""
     fi
 }
@@ -224,43 +229,45 @@ CODING_HEADER
 1. Get up to speed:
    - Run `pwd`
    - Read claude-progress.txt
-   - Read features.json (primary task list)
+   - Read tasks.json (primary task list)
    - Read @LEARNINGS.md
    - Run `git log --oneline -5`
 
-2. Choose FIRST incomplete task from features.json:
-   - Chapter milestones (code_written, code_tested, reviewed, diagrams_complete)
-   - tasks.kbArticlesToCreate (pending KB articles)
-   - tasks.crossRefFixes (cross-reference issues)
-   - tasks.termIntroFixes (term introductions needed)
-   - tasks.appendices (appendix content)
-   - diagramTasks (diagrams to create)
+2. Choose FIRST pending task from tasks.json:
+   ```bash
+   jq '.tasks[] | select(.status == "pending") | {id, type, title}' tasks.json | head -20
+   ```
 
-3. If writing content:
-   - Read the PRD first (prds/chXX.md)
+3. If task has subtasks, complete ONE subtask:
+   ```bash
+   jq '.tasks[] | select(.id == "task-001") | .subtasks[] | select(.status == "pending")' tasks.json
+   ```
+
+4. If writing content:
+   - Read the PRD first (from tasks.json prds section or prds/ folder)
    - Read source articles from ~/Desktop/knowledge-base/
    - Write to chapters/ or kb/
 
-4. Complete ONE task only
+5. Complete ONE task/subtask only
 
-5. Update tracking:
-   - Update task status in features.json ("pending" -> "complete")
-   - Or mark milestone true in features.json
+6. Update tracking:
+   - Update task status in tasks.json ("pending" -> "complete")
+   - Update stats in tasks.json
    - Add entry to claude-progress.txt
    - Every 5 iterations: add learning to @LEARNINGS.md
 
-6. Discover new tasks:
+7. Discover new tasks:
    - Check reviews/ for issues found
-   - Add new tasks to features.json as needed
+   - Add new tasks to tasks.json
 
-7. Git commit with descriptive message
+8. Git commit with descriptive message
 
 Rules:
 - ONE task per session
 - Always read PRD before writing chapter
 - No em dashes in content
 - Commit after every task
-- All tasks tracked in features.json (no TASKS.md)
+- All tasks tracked in tasks.json
 CODING_INSTRUCTIONS
 
     run_claude "$prompt_file"

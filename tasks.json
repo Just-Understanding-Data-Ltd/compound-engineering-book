@@ -1,0 +1,1800 @@
+{
+  "lastUpdated": "2026-01-27T14:21:08.545Z",
+  "version": "2.0",
+  "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
+  "prds": {
+    "index": {
+      "status": "complete",
+      "file": "prds/index.md",
+      "completedAt": "2026-01-26T22:00:00Z"
+    },
+    "toc": {
+      "status": "complete",
+      "file": "prds/toc.md",
+      "completedAt": "2026-01-27T14:00:00Z",
+      "note": "Updated to 15-chapter structure"
+    },
+    "ch01": {
+      "status": "complete",
+      "file": "prds/ch01.md",
+      "title": "The Compound Systems Engineer",
+      "completedAt": "2026-01-26T22:00:00Z",
+      "wordCount": 533
+    },
+    "ch02": {
+      "status": "complete",
+      "file": "prds/ch02.md",
+      "title": "Getting Started with Claude Code",
+      "completedAt": "2026-01-26T22:00:00Z",
+      "wordCount": 933
+    },
+    "ch03-prompting": {
+      "status": "complete",
+      "file": "prds/ch03-prompting-fundamentals.md",
+      "title": "Prompting Fundamentals (NEW)",
+      "completedAt": "2026-01-27T14:00:00Z",
+      "wordCount": 850,
+      "newChapter": true
+    },
+    "ch03-claudemd": {
+      "status": "complete",
+      "file": "prds/ch03.md",
+      "title": "Writing Your First CLAUDE.md",
+      "completedAt": "2026-01-26T22:00:00Z",
+      "wordCount": 854,
+      "newNumber": "ch04"
+    },
+    "ch04": {
+      "status": "complete",
+      "file": "prds/ch04.md",
+      "title": "The 12-Factor Agent",
+      "completedAt": "2026-01-26T22:00:00Z",
+      "wordCount": 988,
+      "newNumber": "ch05"
+    },
+    "ch05": {
+      "status": "complete",
+      "file": "prds/ch05.md",
+      "title": "The Verification Ladder",
+      "completedAt": "2026-01-26T22:00:00Z",
+      "wordCount": 1123,
+      "newNumber": "ch06"
+    },
+    "ch06": {
+      "status": "complete",
+      "file": "prds/ch06.md",
+      "title": "Quality Gates That Compound",
+      "completedAt": "2026-01-26T22:00:00Z",
+      "wordCount": 777,
+      "newNumber": "ch07"
+    },
+    "ch08-error-handling": {
+      "status": "complete",
+      "file": "prds/ch08-error-handling.md",
+      "title": "Error Handling & Debugging (NEW)",
+      "completedAt": "2026-01-27T14:00:00Z",
+      "wordCount": 900,
+      "newChapter": true,
+      "newNumber": "ch08"
+    },
+    "ch07": {
+      "status": "complete",
+      "file": "prds/ch07.md",
+      "title": "Context Engineering Deep Dive",
+      "completedAt": "2026-01-26T22:00:00Z",
+      "wordCount": 710,
+      "newNumber": "ch09"
+    },
+    "ch08": {
+      "status": "complete",
+      "file": "prds/ch08.md",
+      "title": "The RALPH Loop",
+      "completedAt": "2026-01-26T22:00:00Z",
+      "wordCount": 970,
+      "newNumber": "ch10"
+    },
+    "ch09": {
+      "status": "complete",
+      "file": "prds/ch09.md",
+      "title": "Sub-Agent Architecture",
+      "completedAt": "2026-01-26T22:00:00Z",
+      "wordCount": 1011,
+      "newNumber": "ch11"
+    },
+    "ch12-workflows": {
+      "status": "complete",
+      "file": "prds/ch12-development-workflows.md",
+      "title": "Development Workflows (NEW)",
+      "completedAt": "2026-01-27T14:00:00Z",
+      "wordCount": 880,
+      "newChapter": true,
+      "newNumber": "ch12"
+    },
+    "ch10": {
+      "status": "complete",
+      "file": "prds/ch10.md",
+      "title": "Building the Harness",
+      "completedAt": "2026-01-26T22:00:00Z",
+      "wordCount": 933,
+      "newNumber": "ch13"
+    },
+    "ch11": {
+      "status": "complete",
+      "file": "prds/ch11.md",
+      "title": "The Meta-Engineer Playbook",
+      "completedAt": "2026-01-26T22:00:00Z",
+      "wordCount": 878,
+      "newNumber": "ch14"
+    },
+    "ch15-model-strategy": {
+      "status": "complete",
+      "file": "prds/ch15-model-strategy.md",
+      "title": "Model Strategy & Cost Optimization (NEW)",
+      "completedAt": "2026-01-27T14:00:00Z",
+      "wordCount": 950,
+      "newChapter": true,
+      "newNumber": "ch15"
+    },
+    "ch12-deprecated": {
+      "status": "deprecated",
+      "file": "prds/ch12.md",
+      "title": "Case Studies & Reference (REMOVED)",
+      "note": "Replaced by ch15 Model Strategy. Case study content distributed to other chapters."
+    }
+  },
+  "queryExamples": {
+    "allPending": "jq '[.tasks[] | select(.status == \"pending\")] | length' tasks.json",
+    "nextTask": "jq '.tasks[] | select(.status == \"pending\") | .title' tasks.json | head -1",
+    "byType": "jq '[.tasks[] | select(.type == \"chapter\")] | length' tasks.json",
+    "subtasks": "jq '.tasks[] | select(.subtasks) | {title, count: (.subtasks | length)}' tasks.json"
+  },
+  "tasks": [
+    {
+      "id": "task-001",
+      "type": "chapter",
+      "chapter": "ch01",
+      "title": "ch01: The Compound Systems Engineer",
+      "description": "Complete remaining milestones for The Compound Systems Engineer",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-002",
+          "parentId": "task-001",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-003",
+          "parentId": "task-001",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-004",
+          "parentId": "task-001",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-005",
+          "parentId": "task-001",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-006",
+          "parentId": "task-001",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-007",
+      "type": "chapter",
+      "chapter": "ch02",
+      "title": "ch02: Getting Started with Claude Code",
+      "description": "Complete remaining milestones for Getting Started with Claude Code",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-008",
+          "parentId": "task-007",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-009",
+          "parentId": "task-007",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-010",
+          "parentId": "task-007",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-011",
+          "parentId": "task-007",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-012",
+          "parentId": "task-007",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-013",
+      "type": "chapter",
+      "chapter": "ch03",
+      "title": "ch03: Prompting Fundamentals",
+      "description": "Complete remaining milestones for Prompting Fundamentals",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-014",
+          "parentId": "task-013",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-015",
+          "parentId": "task-013",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-016",
+          "parentId": "task-013",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-017",
+          "parentId": "task-013",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-018",
+          "parentId": "task-013",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-019",
+      "type": "chapter",
+      "chapter": "ch04",
+      "title": "ch04: Writing Your First CLAUDE.md",
+      "description": "Complete remaining milestones for Writing Your First CLAUDE.md",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-020",
+          "parentId": "task-019",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-021",
+          "parentId": "task-019",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-022",
+          "parentId": "task-019",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-023",
+          "parentId": "task-019",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-024",
+          "parentId": "task-019",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-025",
+      "type": "chapter",
+      "chapter": "ch05",
+      "title": "ch05: The 12-Factor Agent",
+      "description": "Complete remaining milestones for The 12-Factor Agent",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-026",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-027",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-028",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-029",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-030",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-031",
+      "type": "chapter",
+      "chapter": "ch06",
+      "title": "ch06: The Verification Ladder",
+      "description": "Complete remaining milestones for The Verification Ladder",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-032",
+          "parentId": "task-031",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-033",
+          "parentId": "task-031",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-034",
+          "parentId": "task-031",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-035",
+          "parentId": "task-031",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-036",
+          "parentId": "task-031",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-037",
+      "type": "chapter",
+      "chapter": "ch07",
+      "title": "ch07: Quality Gates That Compound",
+      "description": "Complete remaining milestones for Quality Gates That Compound",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-038",
+          "parentId": "task-037",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-039",
+          "parentId": "task-037",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-040",
+          "parentId": "task-037",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-041",
+          "parentId": "task-037",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-042",
+          "parentId": "task-037",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-043",
+      "type": "chapter",
+      "chapter": "ch08",
+      "title": "ch08: Error Handling & Debugging",
+      "description": "Complete remaining milestones for Error Handling & Debugging",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-044",
+          "parentId": "task-043",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-045",
+          "parentId": "task-043",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-046",
+          "parentId": "task-043",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-047",
+          "parentId": "task-043",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-048",
+          "parentId": "task-043",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-049",
+      "type": "chapter",
+      "chapter": "ch09",
+      "title": "ch09: Context Engineering Deep Dive",
+      "description": "Complete remaining milestones for Context Engineering Deep Dive",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-050",
+          "parentId": "task-049",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-051",
+          "parentId": "task-049",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-052",
+          "parentId": "task-049",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-053",
+          "parentId": "task-049",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-054",
+          "parentId": "task-049",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-055",
+      "type": "chapter",
+      "chapter": "ch10",
+      "title": "ch10: The RALPH Loop",
+      "description": "Complete remaining milestones for The RALPH Loop",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-056",
+          "parentId": "task-055",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-057",
+          "parentId": "task-055",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-058",
+          "parentId": "task-055",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-059",
+          "parentId": "task-055",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-060",
+          "parentId": "task-055",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-061",
+      "type": "chapter",
+      "chapter": "ch11",
+      "title": "ch11: Sub-Agent Architecture",
+      "description": "Complete remaining milestones for Sub-Agent Architecture",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-062",
+          "parentId": "task-061",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-063",
+          "parentId": "task-061",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-064",
+          "parentId": "task-061",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-065",
+          "parentId": "task-061",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-066",
+          "parentId": "task-061",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-067",
+      "type": "chapter",
+      "chapter": "ch12",
+      "title": "ch12: Development Workflows",
+      "description": "Complete remaining milestones for Development Workflows",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-068",
+          "parentId": "task-067",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-069",
+          "parentId": "task-067",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-070",
+          "parentId": "task-067",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-071",
+          "parentId": "task-067",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-072",
+          "parentId": "task-067",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-073",
+      "type": "chapter",
+      "chapter": "ch13",
+      "title": "ch13: Building the Harness",
+      "description": "Complete remaining milestones for Building the Harness",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-074",
+          "parentId": "task-073",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-075",
+          "parentId": "task-073",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-076",
+          "parentId": "task-073",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-077",
+          "parentId": "task-073",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-078",
+          "parentId": "task-073",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-079",
+      "type": "chapter",
+      "chapter": "ch14",
+      "title": "ch14: The Meta-Engineer Playbook",
+      "description": "Complete remaining milestones for The Meta-Engineer Playbook",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-080",
+          "parentId": "task-079",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-081",
+          "parentId": "task-079",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-082",
+          "parentId": "task-079",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-083",
+          "parentId": "task-079",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-084",
+          "parentId": "task-079",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-085",
+      "type": "chapter",
+      "chapter": "ch15",
+      "title": "ch15: Model Strategy & Cost Optimization",
+      "description": "Complete remaining milestones for Model Strategy & Cost Optimization",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-086",
+          "parentId": "task-085",
+          "type": "milestone",
+          "title": "code written",
+          "status": "pending"
+        },
+        {
+          "id": "task-087",
+          "parentId": "task-085",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "pending"
+        },
+        {
+          "id": "task-088",
+          "parentId": "task-085",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "pending"
+        },
+        {
+          "id": "task-089",
+          "parentId": "task-085",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "pending"
+        },
+        {
+          "id": "task-090",
+          "parentId": "task-085",
+          "type": "milestone",
+          "title": "final",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-091",
+      "type": "kb-article",
+      "title": "ci-cd-agent-patterns.md",
+      "description": "GitHub Actions patterns for agent verification",
+      "status": "complete",
+      "priority": "normal"
+    },
+    {
+      "id": "task-092",
+      "type": "kb-article",
+      "title": "mutual-information-context.md",
+      "description": "Measuring context effectiveness",
+      "status": "complete",
+      "priority": "normal"
+    },
+    {
+      "id": "task-093",
+      "type": "kb-article",
+      "title": "token-budgeting-strategies.md",
+      "description": "Allocating context by information density",
+      "status": "complete",
+      "priority": "normal"
+    },
+    {
+      "id": "task-094",
+      "type": "kb-article",
+      "title": "lost-in-the-middle-mitigation.md",
+      "description": "Preventing context window degradation",
+      "status": "complete",
+      "priority": "normal"
+    },
+    {
+      "id": "task-095",
+      "type": "kb-article",
+      "title": "checkpoint-commit-patterns.md",
+      "description": "Git commit strategies for AI workflows",
+      "status": "complete",
+      "priority": "normal"
+    },
+    {
+      "id": "task-096",
+      "type": "kb-article",
+      "title": "batch-api-patterns.md",
+      "description": "Batch processing for cost reduction",
+      "status": "pending",
+      "priority": "normal"
+    },
+    {
+      "id": "task-097",
+      "type": "kb-article",
+      "title": "prompt-injection-prevention.md",
+      "description": "Security considerations in prompting",
+      "status": "pending",
+      "priority": "normal"
+    },
+    {
+      "id": "task-098",
+      "type": "appendices",
+      "title": "Write all appendices",
+      "description": "Complete appendices A-D",
+      "status": "pending",
+      "priority": "low",
+      "subtasks": [
+        {
+          "id": "task-099",
+          "parentId": "task-098",
+          "type": "appendix",
+          "title": "Appendix A: CLAUDE.md Templates",
+          "status": "pending"
+        },
+        {
+          "id": "task-100",
+          "parentId": "task-098",
+          "type": "appendix",
+          "title": "Appendix B: Prompt Library",
+          "status": "pending"
+        },
+        {
+          "id": "task-101",
+          "parentId": "task-098",
+          "type": "appendix",
+          "title": "Appendix C: Troubleshooting",
+          "status": "pending"
+        },
+        {
+          "id": "task-102",
+          "parentId": "task-098",
+          "type": "appendix",
+          "title": "Appendix D: Further Reading",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-103",
+      "type": "fixes",
+      "title": "Fix cross-references",
+      "description": "Update chapter cross-references for new numbering",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-104",
+          "parentId": "task-103",
+          "type": "fix",
+          "title": "Fix ch07 reference to ch09 (Context Engineering)",
+          "file": "ch01",
+          "line": 359,
+          "status": "pending"
+        },
+        {
+          "id": "task-105",
+          "parentId": "task-103",
+          "type": "fix",
+          "title": "Fix ch08 reference to ch10 (RALPH Loop)",
+          "file": "ch01",
+          "line": 360,
+          "status": "pending"
+        },
+        {
+          "id": "task-106",
+          "parentId": "task-103",
+          "type": "fix",
+          "title": "Fix ch10 reference to ch13 (Building the Harness)",
+          "file": "ch01",
+          "line": 361,
+          "status": "pending"
+        },
+        {
+          "id": "task-107",
+          "parentId": "task-103",
+          "type": "fix",
+          "title": "Update ch09 reference",
+          "file": "ch03",
+          "line": 496,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-108",
+      "type": "review",
+      "title": "Final review cycle",
+      "description": "Complete all review tasks before publishing",
+      "status": "pending",
+      "priority": "low",
+      "subtasks": [
+        {
+          "id": "task-109",
+          "parentId": "task-108",
+          "type": "review",
+          "title": "Technical review all chapters",
+          "status": "pending"
+        },
+        {
+          "id": "task-110",
+          "parentId": "task-108",
+          "type": "review",
+          "title": "Style consistency pass",
+          "status": "pending"
+        },
+        {
+          "id": "task-111",
+          "parentId": "task-108",
+          "type": "review",
+          "title": "Validate all code examples",
+          "status": "pending"
+        },
+        {
+          "id": "task-112",
+          "parentId": "task-108",
+          "type": "review",
+          "title": "Cross-reference check",
+          "status": "pending"
+        },
+        {
+          "id": "task-113",
+          "parentId": "task-108",
+          "type": "review",
+          "title": "Final proofread",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-114",
+      "type": "diagrams",
+      "chapter": "ch01",
+      "title": "ch01: High-priority diagrams",
+      "description": "Create 3 diagrams for ch01",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-115",
+          "parentId": "task-114",
+          "type": "diagram",
+          "title": "three-levels-pyramid",
+          "status": "pending"
+        },
+        {
+          "id": "task-116",
+          "parentId": "task-114",
+          "type": "diagram",
+          "title": "portfolio-vs-single-bet",
+          "status": "pending"
+        },
+        {
+          "id": "task-117",
+          "parentId": "task-114",
+          "type": "diagram",
+          "title": "constraint-feedback-loop",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-118",
+      "type": "diagrams",
+      "chapter": "ch02",
+      "title": "ch02: High-priority diagrams",
+      "description": "Create 3 diagrams for ch02",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-119",
+          "parentId": "task-118",
+          "type": "diagram",
+          "title": "agent-vs-chat",
+          "status": "pending"
+        },
+        {
+          "id": "task-120",
+          "parentId": "task-118",
+          "type": "diagram",
+          "title": "tool-ecosystem-radial",
+          "status": "pending"
+        },
+        {
+          "id": "task-121",
+          "parentId": "task-118",
+          "type": "diagram",
+          "title": "two-mode-mental-model",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-122",
+      "type": "diagrams",
+      "chapter": "ch03",
+      "title": "ch03: High-priority diagrams",
+      "description": "Create 2 diagrams for ch03",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-123",
+          "parentId": "task-122",
+          "type": "diagram",
+          "title": "prompt-anatomy",
+          "status": "pending"
+        },
+        {
+          "id": "task-124",
+          "parentId": "task-122",
+          "type": "diagram",
+          "title": "constraint-funnel",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-125",
+      "type": "diagrams",
+      "chapter": "ch04",
+      "title": "ch04: High-priority diagrams",
+      "description": "Create 2 diagrams for ch04",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-126",
+          "parentId": "task-125",
+          "type": "diagram",
+          "title": "why-what-how-framework",
+          "status": "pending"
+        },
+        {
+          "id": "task-127",
+          "parentId": "task-125",
+          "type": "diagram",
+          "title": "hierarchical-claude-md",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-128",
+      "type": "diagrams",
+      "chapter": "ch05",
+      "title": "ch05: High-priority diagrams",
+      "description": "Create 3 diagrams for ch05",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-129",
+          "parentId": "task-128",
+          "type": "diagram",
+          "title": "reliability-cascade",
+          "status": "pending"
+        },
+        {
+          "id": "task-130",
+          "parentId": "task-128",
+          "type": "diagram",
+          "title": "four-turn-framework",
+          "status": "pending"
+        },
+        {
+          "id": "task-131",
+          "parentId": "task-128",
+          "type": "diagram",
+          "title": "12-factors-overview",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-132",
+      "type": "diagrams",
+      "chapter": "ch06",
+      "title": "ch06: High-priority diagrams",
+      "description": "Create 2 diagrams for ch06",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-133",
+          "parentId": "task-132",
+          "type": "diagram",
+          "title": "verification-ladder-stack",
+          "status": "pending"
+        },
+        {
+          "id": "task-134",
+          "parentId": "task-132",
+          "type": "diagram",
+          "title": "verification-sandwich",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-135",
+      "type": "diagrams",
+      "chapter": "ch07",
+      "title": "ch07: High-priority diagrams",
+      "description": "Create 3 diagrams for ch07",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-136",
+          "parentId": "task-135",
+          "type": "diagram",
+          "title": "state-space-reduction",
+          "status": "pending"
+        },
+        {
+          "id": "task-137",
+          "parentId": "task-135",
+          "type": "diagram",
+          "title": "compounding-formula",
+          "status": "pending"
+        },
+        {
+          "id": "task-138",
+          "parentId": "task-135",
+          "type": "diagram",
+          "title": "six-gate-architecture",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-139",
+      "type": "diagrams",
+      "chapter": "ch08",
+      "title": "ch08: High-priority diagrams",
+      "description": "Create 2 diagrams for ch08",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-140",
+          "parentId": "task-139",
+          "type": "diagram",
+          "title": "error-classification-pie",
+          "status": "pending"
+        },
+        {
+          "id": "task-141",
+          "parentId": "task-139",
+          "type": "diagram",
+          "title": "context-debugging-hierarchy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-142",
+      "type": "diagrams",
+      "chapter": "ch09",
+      "title": "ch09: High-priority diagrams",
+      "description": "Create 2 diagrams for ch09",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-143",
+          "parentId": "task-142",
+          "type": "diagram",
+          "title": "context-window-anatomy",
+          "status": "pending"
+        },
+        {
+          "id": "task-144",
+          "parentId": "task-142",
+          "type": "diagram",
+          "title": "progressive-disclosure",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-145",
+      "type": "diagrams",
+      "chapter": "ch10",
+      "title": "ch10: High-priority diagrams",
+      "description": "Create 2 diagrams for ch10",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-146",
+          "parentId": "task-145",
+          "type": "diagram",
+          "title": "ralph-loop-cycle",
+          "status": "pending"
+        },
+        {
+          "id": "task-147",
+          "parentId": "task-145",
+          "type": "diagram",
+          "title": "memory-architecture",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-148",
+      "type": "diagrams",
+      "chapter": "ch11",
+      "title": "ch11: High-priority diagrams",
+      "description": "Create 3 diagrams for ch11",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-149",
+          "parentId": "task-148",
+          "type": "diagram",
+          "title": "sub-agent-team-org",
+          "status": "pending"
+        },
+        {
+          "id": "task-150",
+          "parentId": "task-148",
+          "type": "diagram",
+          "title": "context-hierarchy-tree",
+          "status": "pending"
+        },
+        {
+          "id": "task-151",
+          "parentId": "task-148",
+          "type": "diagram",
+          "title": "actor-critic-loop",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-152",
+      "type": "diagrams",
+      "chapter": "ch12",
+      "title": "ch12: High-priority diagrams",
+      "description": "Create 2 diagrams for ch12",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-153",
+          "parentId": "task-152",
+          "type": "diagram",
+          "title": "plan-mode-phases",
+          "status": "pending"
+        },
+        {
+          "id": "task-154",
+          "parentId": "task-152",
+          "type": "diagram",
+          "title": "git-worktrees-parallel",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-155",
+      "type": "diagrams",
+      "chapter": "ch13",
+      "title": "ch13: High-priority diagrams",
+      "description": "Create 2 diagrams for ch13",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-156",
+          "parentId": "task-155",
+          "type": "diagram",
+          "title": "four-layer-harness",
+          "status": "pending"
+        },
+        {
+          "id": "task-157",
+          "parentId": "task-155",
+          "type": "diagram",
+          "title": "closed-loop-optimization",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-158",
+      "type": "diagrams",
+      "chapter": "ch14",
+      "title": "ch14: High-priority diagrams",
+      "description": "Create 4 diagrams for ch14",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-159",
+          "parentId": "task-158",
+          "type": "diagram",
+          "title": "skill-atrophy-ladder",
+          "status": "pending"
+        },
+        {
+          "id": "task-160",
+          "parentId": "task-158",
+          "type": "diagram",
+          "title": "six-waves-timeline",
+          "status": "pending"
+        },
+        {
+          "id": "task-161",
+          "parentId": "task-158",
+          "type": "diagram",
+          "title": "four-automation-levels",
+          "status": "pending"
+        },
+        {
+          "id": "task-162",
+          "parentId": "task-158",
+          "type": "diagram",
+          "title": "fleet-model-evolution",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-163",
+      "type": "diagrams",
+      "chapter": "ch15",
+      "title": "ch15: High-priority diagrams",
+      "description": "Create 3 diagrams for ch15",
+      "status": "pending",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-164",
+          "parentId": "task-163",
+          "type": "diagram",
+          "title": "three-tier-model-hierarchy",
+          "status": "pending"
+        },
+        {
+          "id": "task-165",
+          "parentId": "task-163",
+          "type": "diagram",
+          "title": "progressive-model-escalation",
+          "status": "pending"
+        },
+        {
+          "id": "task-166",
+          "parentId": "task-163",
+          "type": "diagram",
+          "title": "multi-layer-timeout",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-167",
+      "type": "diagrams",
+      "chapter": "ch01",
+      "title": "ch01: Medium-priority diagrams",
+      "description": "Create 2 diagrams for ch01",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-168",
+          "parentId": "task-167",
+          "type": "diagram",
+          "title": "builder-metabuilder",
+          "status": "pending"
+        },
+        {
+          "id": "task-169",
+          "parentId": "task-167",
+          "type": "diagram",
+          "title": "cost-curve-levels",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-170",
+      "type": "diagrams",
+      "chapter": "ch03",
+      "title": "ch03: Medium-priority diagrams",
+      "description": "Create 2 diagrams for ch03",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-171",
+          "parentId": "task-170",
+          "type": "diagram",
+          "title": "chain-of-thought-flow",
+          "status": "pending"
+        },
+        {
+          "id": "task-172",
+          "parentId": "task-170",
+          "type": "diagram",
+          "title": "few-shot-accuracy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-173",
+      "type": "diagrams",
+      "chapter": "ch04",
+      "title": "ch04: Medium-priority diagrams",
+      "description": "Create 2 diagrams for ch04",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-174",
+          "parentId": "task-173",
+          "type": "diagram",
+          "title": "context-relevance",
+          "status": "pending"
+        },
+        {
+          "id": "task-175",
+          "parentId": "task-173",
+          "type": "diagram",
+          "title": "instruction-degradation",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-176",
+      "type": "diagrams",
+      "chapter": "ch05",
+      "title": "ch05: Medium-priority diagrams",
+      "description": "Create 2 diagrams for ch05",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-177",
+          "parentId": "task-176",
+          "type": "diagram",
+          "title": "reliability-stack",
+          "status": "pending"
+        },
+        {
+          "id": "task-178",
+          "parentId": "task-176",
+          "type": "diagram",
+          "title": "agent-loop",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-179",
+      "type": "diagrams",
+      "chapter": "ch06",
+      "title": "ch06: Medium-priority diagrams",
+      "description": "Create 1 diagrams for ch06",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-180",
+          "parentId": "task-179",
+          "type": "diagram",
+          "title": "test-driven-search-space",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-181",
+      "type": "diagrams",
+      "chapter": "ch07",
+      "title": "ch07: Medium-priority diagrams",
+      "description": "Create 1 diagrams for ch07",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-182",
+          "parentId": "task-181",
+          "type": "diagram",
+          "title": "hook-workflow",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-183",
+      "type": "diagrams",
+      "chapter": "ch08",
+      "title": "ch08: Medium-priority diagrams",
+      "description": "Create 2 diagrams for ch08",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-184",
+          "parentId": "task-183",
+          "type": "diagram",
+          "title": "learning-loop",
+          "status": "pending"
+        },
+        {
+          "id": "task-185",
+          "parentId": "task-183",
+          "type": "diagram",
+          "title": "clean-slate-recovery",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-186",
+      "type": "diagrams",
+      "chapter": "ch09",
+      "title": "ch09: Medium-priority diagrams",
+      "description": "Create 2 diagrams for ch09",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-187",
+          "parentId": "task-186",
+          "type": "diagram",
+          "title": "signal-degradation",
+          "status": "pending"
+        },
+        {
+          "id": "task-188",
+          "parentId": "task-186",
+          "type": "diagram",
+          "title": "entropy-reduction",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-189",
+      "type": "diagrams",
+      "chapter": "ch10",
+      "title": "ch10: Medium-priority diagrams",
+      "description": "Create 2 diagrams for ch10",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-190",
+          "parentId": "task-189",
+          "type": "diagram",
+          "title": "four-phase-pie",
+          "status": "pending"
+        },
+        {
+          "id": "task-191",
+          "parentId": "task-189",
+          "type": "diagram",
+          "title": "multi-agent-coordination",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-192",
+      "type": "diagrams",
+      "chapter": "ch11",
+      "title": "ch11: Medium-priority diagrams",
+      "description": "Create 1 diagrams for ch11",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-193",
+          "parentId": "task-192",
+          "type": "diagram",
+          "title": "parallel-vs-sequential",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-194",
+      "type": "diagrams",
+      "chapter": "ch12",
+      "title": "ch12: Medium-priority diagrams",
+      "description": "Create 1 diagrams for ch12",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-195",
+          "parentId": "task-194",
+          "type": "diagram",
+          "title": "incremental-development",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-196",
+      "type": "diagrams",
+      "chapter": "ch13",
+      "title": "ch13: Medium-priority diagrams",
+      "description": "Create 2 diagrams for ch13",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-197",
+          "parentId": "task-196",
+          "type": "diagram",
+          "title": "linear-vs-exponential",
+          "status": "pending"
+        },
+        {
+          "id": "task-198",
+          "parentId": "task-196",
+          "type": "diagram",
+          "title": "mcp-query-flow",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-199",
+      "type": "diagrams",
+      "chapter": "ch14",
+      "title": "ch14: Medium-priority diagrams",
+      "description": "Create 2 diagrams for ch14",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-200",
+          "parentId": "task-199",
+          "type": "diagram",
+          "title": "leverage-stack",
+          "status": "pending"
+        },
+        {
+          "id": "task-201",
+          "parentId": "task-199",
+          "type": "diagram",
+          "title": "roi-calculation",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "task-202",
+      "type": "diagrams",
+      "chapter": "ch15",
+      "title": "ch15: Medium-priority diagrams",
+      "description": "Create 3 diagrams for ch15",
+      "status": "pending",
+      "priority": "medium",
+      "subtasks": [
+        {
+          "id": "task-203",
+          "parentId": "task-202",
+          "type": "diagram",
+          "title": "yolo-safety-hierarchy",
+          "status": "pending"
+        },
+        {
+          "id": "task-204",
+          "parentId": "task-202",
+          "type": "diagram",
+          "title": "model-selection-tree",
+          "status": "pending"
+        },
+        {
+          "id": "task-205",
+          "parentId": "task-202",
+          "type": "diagram",
+          "title": "prompt-caching-structure",
+          "status": "pending"
+        }
+      ]
+    }
+  ],
+  "completed": {
+    "summary": "Compacted completed tasks - full details in git history",
+    "count": 0,
+    "items": []
+  },
+  "stats": {
+    "pending": 200,
+    "inProgress": 0,
+    "complete": 5,
+    "blocked": 0,
+    "total": 205
+  }
+}

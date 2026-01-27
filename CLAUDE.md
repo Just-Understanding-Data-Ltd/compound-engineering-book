@@ -20,7 +20,7 @@ Every session, run these steps FIRST:
 ```
 1. pwd                              # Confirm directory
 2. Read claude-progress.txt         # Recent work summary
-3. Read features.json               # Primary task list (milestones)
+3. Read tasks.json                  # Flat task list (primary)
 4. git log --oneline -10            # Recent commits
 5. Read @LEARNINGS.md               # Accumulated insights
 ```
@@ -30,11 +30,11 @@ Every session, run these steps FIRST:
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  1. Get up to speed (protocol above)                        │
-│  2. Find FIRST incomplete milestone in features.json        │
-│  3. Read relevant source from knowledge base                │
+│  2. Query next pending task from tasks.json                 │
+│  3. If chapter work: read PRD from tasks.json.prds section  │
 │  4. Complete the single task                                │
 │  5. Verify work (word count, formatting, examples)          │
-│  6. Update features.json (mark milestone complete)          │
+│  6. Update tasks.json (status: "pending" -> "complete")     │
 │  7. Update claude-progress.txt (add entry)                  │
 │  8. Git commit with descriptive message                     │
 │  9. Every 5 iterations: Add learnings to @LEARNINGS.md      │
@@ -57,10 +57,28 @@ Every session, run these steps FIRST:
 
 When context is compacted, the RALPH loop re-injects:
 1. **Full CLAUDE.md** - All project instructions
-2. **features.json** - Primary task list with all milestones
+2. **tasks.json** - Flat task list with all pending work
 3. **@LEARNINGS.md** - Accumulated insights from previous iterations
 
 This means you always have what you need to continue, even after compaction.
+
+---
+
+## PRDs vs Tasks
+
+**PRDs (Product Requirements Documents)** are reference specs stored in `tasks.json.prds`:
+- Define chapter scope, learning objectives, and structure
+- Include word count targets, diagrams needed, code examples
+- Are completed once and serve as reference for chapter work
+- Located in `prds/` folder as markdown files
+
+**Tasks** are work items stored in `tasks.json.tasks`:
+- Flat list of actionable items with status tracking
+- Each task has: id, type, title, status, priority
+- Tasks can have subtasks (e.g., chapter milestones)
+- Status: "pending" → "in_progress" → "complete"
+
+**Workflow**: Read the PRD for context, then complete tasks against that spec.
 
 ### What to Read on Each Iteration
 
@@ -309,36 +327,47 @@ Compaction preserves:
 }
 ```
 
-### Task Priority (from features.json)
+### Task Priority (from tasks.json)
 
-Work through milestones in this order:
-1. **Blockers** - Any `tasks.blockers` entries
-2. **Chapter milestones** - Sequential: prd_complete → first_draft → code_written → code_tested → reviewed → diagrams_complete → final
-3. **Task sections** - `tasks.kbArticlesToCreate`, `tasks.crossRefFixes`, `tasks.termIntroFixes`, `tasks.appendices`
-4. **Diagrams** - `diagramTasks.highPriority` then `diagramTasks.mediumPriority`
-5. **General review** - `tasks.generalReview`
+Work through tasks by priority:
+1. **Blocked tasks** - Check if any tasks are blocked
+2. **High priority** - Chapter work, critical fixes
+3. **Medium priority** - Diagrams, cross-refs
+4. **Normal priority** - KB articles, content
+5. **Low priority** - Appendices, final review
 
-**Do NOT create separate TASKS.md files.** All tasks are tracked via features.json.
+**All tasks tracked in tasks.json** - no separate TASKS.md files.
 
 ### Task Discovery and Addition
 
-When you discover new work items (from reviews, errors, or observations), add them to features.json:
+When you discover new work items, add them to tasks.json:
 
 **Adding a new task:**
 ```json
-// In tasks.kbArticlesToCreate, tasks.crossRefFixes, etc:
-{"id": "kb-08", "title": "new-article.md", "description": "What it covers", "status": "pending"}
+{
+  "id": "task-XXX",
+  "type": "fix",
+  "title": "Fix broken link in ch05",
+  "description": "Update reference to new chapter number",
+  "status": "pending",
+  "priority": "medium"
+}
+```
 
-// In tasks.blockers (for urgent issues):
-{"id": "block-01", "description": "What's blocking progress", "severity": "high", "addedAt": "2026-01-27"}
-
-// In diagramTasks (for new diagram needs):
-"ch05": ["existing-diagram", "new-diagram-name"]
+**Adding a subtask to existing task:**
+```json
+{
+  "id": "task-XXX-sub",
+  "parentId": "task-XXX",
+  "type": "milestone",
+  "title": "code tested",
+  "status": "pending"
+}
 ```
 
 **Task statuses:** `pending` → `in_progress` → `complete`
 
-**When completing a task:** Update its status in features.json, then commit.
+**When completing a task:** Update status in tasks.json, update stats, then commit.
 
 **Sources of new tasks:**
 - Review agent outputs in `reviews/`
@@ -352,31 +381,31 @@ When you discover new work items (from reviews, errors, or observations), add th
 Use these to quickly find work:
 
 ```bash
-# Count all incomplete tasks
-jq '[.chapters[].milestones | to_entries[] | select(.value == false)] | length' features.json
+# Get stats
+jq '.stats' tasks.json
 
-# List pending KB articles
-jq '.tasks.kbArticlesToCreate[] | select(.status == "pending") | .title' features.json
+# List next 10 pending tasks
+jq '.tasks[] | select(.status == "pending") | {id, type, title, priority}' tasks.json | head -40
 
-# Find incomplete milestones for a chapter
-jq '.chapters.ch05.milestones | to_entries[] | select(.value == false) | .key' features.json
+# Count pending by type
+jq '[.tasks[] | select(.status == "pending")] | group_by(.type) | map({type: .[0].type, count: length})' tasks.json
 
-# List all pending tasks across all sections
-jq '[.tasks.kbArticlesToCreate[]?, .tasks.appendices[]?, .tasks.crossRefFixes[]?, .tasks.generalReview[]? | select(.status == "pending")] | length' features.json
+# Find high priority tasks
+jq '.tasks[] | select(.priority == "high" and .status == "pending") | .title' tasks.json
 
-# Find chapters needing code testing
-jq '.chapters | to_entries[] | select(.value.milestones.code_written == true and .value.milestones.code_tested == false) | .key' features.json
+# Get subtasks for a task
+jq '.tasks[] | select(.id == "task-001") | .subtasks' tasks.json
 
-# List high-priority diagrams for a chapter
-jq '.diagramTasks.highPriority.ch05' features.json
+# Find chapter tasks
+jq '.tasks[] | select(.type == "chapter") | {id, title, subtaskCount: (.subtasks | length)}' tasks.json
 
-# Find blockers
-jq '.tasks.blockers[]?' features.json
+# Get PRD for a chapter
+jq '.prds.ch05' tasks.json
 ```
 
 ### Task Compaction
 
-When completed task arrays get long (>10 items), compact them:
+When completed tasks exceed 20 items, compact them:
 
 ```bash
 # Move completed KB articles to compacted section
