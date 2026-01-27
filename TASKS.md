@@ -55,7 +55,7 @@
 
 ### New KB Articles Needed (Critical Gaps) - TO BE CREATED
 - [x] Create @kb/sub-agent-context-hierarchy.md (how sub-agents manage context isolation) (Completed: 2026-01-28)
-- [ ] Create @kb/tool-access-control.md (granting/restricting tool access to sub-agents)
+- [x] Create @kb/tool-access-control.md (granting/restricting tool access to sub-agents) (Completed: 2026-01-28)
 - [ ] Create @kb/orchestration-patterns.md (coordinator, swarm, pipeline patterns)
 - [ ] Create @kb/actor-critic-pattern.md (writer agent + reviewer agent pattern)
 - [ ] Create @kb/agent-memory-patterns.md (checkpoint/resume, state persistence)

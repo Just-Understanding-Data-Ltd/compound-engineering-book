@@ -1,26 +1,35 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 09:00)
+## Current Status (Updated: 2026-01-28 10:00)
 - Phase: Creating New KB Articles (Critical Gaps)
-- Active: sub-agent-context-hierarchy.md complete
-- Last Completed: Created @kb/sub-agent-context-hierarchy.md
+- Active: tool-access-control.md complete
+- Last Completed: Created @kb/tool-access-control.md
 - Blockers: None
 
 ## Project State Summary
 - PRDs: 15/15 complete (4 new chapters added: ch03, ch08, ch12, ch15)
 - PRDs Enhanced: 15/15 with KB references (Phase 1.5 COMPLETE)
-- KB Article Index: Updated at prds/kb-article-index.md (98 referenced + 32 to create)
-- KB Coverage: 99/103 articles referenced (96%), up from 98/102
+- KB Article Index: Updated at prds/kb-article-index.md (99 referenced + 31 to create)
+- KB Coverage: 100/104 articles referenced (96%), up from 99/103
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
-- KB Articles Created: 1/15 new articles (sub-agent-context-hierarchy.md)
+- KB Articles Created: 2/15 new articles (sub-agent-context-hierarchy.md, tool-access-control.md)
 - Diagrams: 0/75 complete (shells created)
 - Total Word Count: 44,262 (target: 53,000-72,000, 61-82% complete)
 - Quality Issues: 291 total (51 slop, 23 tech, 52 term, 18 xref, 147 style)
 
 ## Next Task
-Continue creating new KB articles (next: @kb/tool-access-control.md)
+Continue creating new KB articles (next: @kb/orchestration-patterns.md)
 
 ## Recent Activity
+
+### 2026-01-28 10:00 - Created @kb/tool-access-control.md
+- What: Created new KB article covering tool access control for sub-agents
+- Files: ~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/tool-access-control.md
+- Word Count: ~1,100 words
+- Content: Principle of least privilege for AI sub-agents, problems with unrestricted access (domain escapes, write-capable reviewers, Bash bypasses, security risks), standard role configurations (Backend/Frontend/QA Engineers, Code Reviewer, Security Auditor, Orchestrator), implementation patterns (tool whitelists, path-based restrictions, Bash command whitelists, role-based registries), advanced patterns (conditional tool access, escalation requests, audit logging), common pitfalls
+- Key Concepts: Read-only reviewers (most critical pattern), domain-specific path restrictions, Bash whitelist to prevent bypasses, Task tool restrictions for sub-agent spawning
+- Outcome: Success
+- Next: Create @kb/orchestration-patterns.md
 
 ### 2026-01-28 09:00 - Created @kb/sub-agent-context-hierarchy.md
 - What: Created new KB article covering sub-agent context isolation patterns
