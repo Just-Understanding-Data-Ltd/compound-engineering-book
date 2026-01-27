@@ -1,24 +1,33 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 02:00)
+## Current Status (Updated: 2026-01-28 03:00)
 - Phase: Chapter Writing
-- Active: Chapter 12 next (Development Workflows)
-- Last Completed: Chapter 11 first draft (Sub-Agent Architecture)
+- Active: Chapter 13 next (Building the Harness)
+- Last Completed: Chapter 12 first draft (Development Workflows)
 - Blockers: None
 
 ## Project State Summary
 - PRDs: 15/15 complete (4 new chapters added: ch03, ch08, ch12, ch15)
 - PRDs Enhanced: 15/15 with KB references (Phase 1.5 COMPLETE)
 - KB Articles Identified to Create: 15+ new articles (marked "TO BE CREATED")
-- Chapter Drafts: 11/15 complete (73%)
+- Chapter Drafts: 12/15 complete (80%)
 - Diagrams: 0/75 complete (shells created)
-- Total Word Count: 30,725 (target: 53,000-72,000, 43-58% complete)
+- Total Word Count: 33,768 (target: 53,000-72,000, 47-63% complete)
 - Quality Issues: 209 total (48 slop, 18 tech, 38 term, 16 xref, 89 style)
 
 ## Next Task
-Write Chapter 12 first draft (Development Workflows)
+Write Chapter 13 first draft (Building the Harness)
 
 ## Recent Activity
+
+### 2026-01-28 03:00 - Chapter 12 First Draft Complete
+- What: Wrote first draft of ch12-development-workflows.md
+- Files: chapters/ch12-development-workflows.md (created)
+- Word Count: 3,043 (target: 3,000-4,000)
+- Content: Plan Mode for strategic thinking (two-phase pattern, when to use, iterating on plans), git worktrees for parallel development (creating worktrees, symlinked configs, metrics), incremental development pattern (error probability math, authentication example), ad-hoc to deterministic scripts (conversion process, hybrid approach), Playwright script loop (speed comparison, iteration loop), AST-grep for precision (pattern syntax, refactoring), skills system deep dive (built-in skills, custom skills, composition), 3 exercises
+- KB Sources: plan-mode-strategic.md, git-worktrees-parallel-dev.md, incremental-development-pattern.md, ad-hoc-flows-to-deterministic-scripts.md, playwright-script-loop.md, ast-grep-for-precision.md, symlinked-agent-configs.md, llm-usage-modes-explore-vs-implement.md
+- Outcome: Success
+- Next: Chapter 13 (Building the Harness)
 
 ### 2026-01-28 02:00 - Chapter 11 First Draft Complete
 - What: Wrote first draft of ch11-sub-agent-architecture.md

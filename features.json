@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T02:00:00Z",
+  "lastUpdated": "2026-01-28T03:00:00Z",
   "structureNote": "Updated to 15-chapter structure. Old chapter numbers in prds section preserved for reference. New chapters added with descriptive filenames. See toc.md for canonical ordering.",
   "prds": {
     "index": {
@@ -414,20 +414,20 @@
     "ch12": {
       "title": "Development Workflows",
       "prd": "prds/ch12-development-workflows.md",
-      "chapter": null,
-      "status": "not_started",
+      "chapter": "chapters/ch12-development-workflows.md",
+      "status": "draft",
       "newChapter": true,
       "milestones": {
         "prd_complete": true,
-        "first_draft": false,
+        "first_draft": true,
         "code_written": false,
         "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
-        "exercises_added": false,
+        "exercises_added": true,
         "final": false
       },
-      "wordCount": 0,
+      "wordCount": 3043,
       "targetWordCount": [3000, 4000],
       "diagramsRequired": 5,
       "diagramsComplete": 0,
@@ -510,11 +510,11 @@
     "totalChapters": 15,
     "newChaptersAdded": 4,
     "prdsComplete": 15,
-    "draftsComplete": 11,
+    "draftsComplete": 12,
     "reviewed": 0,
     "diagramsRequired": 75,
     "diagramsComplete": 0,
-    "totalWordCount": 30725,
+    "totalWordCount": 33768,
     "targetWordCount": [53000, 72000]
   }
 }
