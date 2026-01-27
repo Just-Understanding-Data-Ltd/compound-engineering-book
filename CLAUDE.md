@@ -312,11 +312,40 @@ Compaction preserves:
 ### Task Priority (from features.json)
 
 Work through milestones in this order:
-1. **Blockers** - Any issues preventing progress
+1. **Blockers** - Any `tasks.blockers` entries
 2. **Chapter milestones** - Sequential: prd_complete → first_draft → code_written → code_tested → reviewed → diagrams_complete → final
-3. **Polish** - Cross-cutting improvements
+3. **Task sections** - `tasks.kbArticlesToCreate`, `tasks.crossRefFixes`, `tasks.termIntroFixes`, `tasks.appendices`
+4. **Diagrams** - `diagramTasks.highPriority` then `diagramTasks.mediumPriority`
+5. **General review** - `tasks.generalReview`
 
-**Do NOT create separate TASKS.md files.** All tasks are tracked via features.json milestones.
+**Do NOT create separate TASKS.md files.** All tasks are tracked via features.json.
+
+### Task Discovery and Addition
+
+When you discover new work items (from reviews, errors, or observations), add them to features.json:
+
+**Adding a new task:**
+```json
+// In tasks.kbArticlesToCreate, tasks.crossRefFixes, etc:
+{"id": "kb-08", "title": "new-article.md", "description": "What it covers", "status": "pending"}
+
+// In tasks.blockers (for urgent issues):
+{"id": "block-01", "description": "What's blocking progress", "severity": "high", "addedAt": "2026-01-27"}
+
+// In diagramTasks (for new diagram needs):
+"ch05": ["existing-diagram", "new-diagram-name"]
+```
+
+**Task statuses:** `pending` → `in_progress` → `complete`
+
+**When completing a task:** Update its status in features.json, then commit.
+
+**Sources of new tasks:**
+- Review agent outputs in `reviews/`
+- Errors encountered during work
+- Missing cross-references or term introductions
+- Code that needs testing
+- Diagrams mentioned in chapters but not yet created
 
 ### @LEARNINGS.md (Accumulated Insights)
 
