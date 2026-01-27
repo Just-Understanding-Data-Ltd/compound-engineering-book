@@ -665,7 +665,18 @@ while true; do
     else
         # Quick issue check without full review
         current_issues=$(get_issue_score)
-        echo "Quick scan: $current_issues weighted issues (next review in $((ADAPTIVE_INTERVAL - (iteration - LAST_REVIEW_ITERATION))) iterations)"
+        iterations_until_review=$((ADAPTIVE_INTERVAL - (iteration - LAST_REVIEW_ITERATION)))
+        echo "Quick scan: $current_issues weighted issues (next review in $iterations_until_review iterations)"
+
+        # REGRESSION DETECTION: If issues spike above threshold, force early review
+        REGRESSION_THRESHOLD=15
+        if [ "$current_issues" -ge "$REGRESSION_THRESHOLD" ] && [ "$ADAPTIVE_INTERVAL" -gt "$MIN_REVIEW_INTERVAL" ]; then
+            echo "  ⚠ REGRESSION DETECTED: $current_issues issues (threshold: $REGRESSION_THRESHOLD)"
+            echo "  → Forcing early review next iteration"
+            ADAPTIVE_INTERVAL=$MIN_REVIEW_INTERVAL
+            LAST_REVIEW_ITERATION=$((iteration - MIN_REVIEW_INTERVAL + 1))
+            save_adaptive_state
+        fi
     fi
 
     echo "Sleeping ${SLEEP_BETWEEN}s..."
