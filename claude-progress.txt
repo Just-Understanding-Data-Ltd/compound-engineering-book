@@ -1,23 +1,32 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 17:00)
+## Current Status (Updated: 2026-01-27 18:00)
 - Phase: Chapter Writing
-- Active: Chapter 3 next (Prompting Fundamentals)
-- Last Completed: Chapter 2 first draft (2,588 words)
+- Active: Chapter 4 next (Writing Your First CLAUDE.md)
+- Last Completed: Chapter 3 first draft (2,568 words)
 - Blockers: None
 
 ## Project State Summary
 - PRDs: 15/15 complete (4 new chapters added: ch03, ch08, ch12, ch15)
 - PRDs Enhanced: 15/15 with KB references (Phase 1.5 COMPLETE)
 - KB Articles Identified to Create: 15+ new articles (marked "TO BE CREATED")
-- Chapter Drafts: 2/15 complete
+- Chapter Drafts: 3/15 complete
 - Diagrams: 13 files with 20+ Mermaid diagrams (shells created)
-- Total Word Count: 5,161 (target: 53,000-72,000)
+- Total Word Count: 7,729 (target: 53,000-72,000)
 
 ## Next Task
-Write Chapter 3 first draft (Prompting Fundamentals)
+Write Chapter 4 first draft (Writing Your First CLAUDE.md)
 
 ## Recent Activity
+
+### 2026-01-27 18:00 - Chapter 3 First Draft Complete
+- What: Wrote first draft of ch03-prompting-fundamentals.md
+- Files: chapters/ch03-prompting-fundamentals.md (created)
+- Word Count: 2,568 (target: 2,500-3,500)
+- Content: Prompt anatomy, chain-of-thought, constraint-based prompting, few-shot examples, upfront questioning, combining techniques, anti-patterns
+- KB Sources: chain-of-thought-prompting.md, constraint-based-prompting.md, few-shot-prompting-project-examples.md, upfront-questioning-narrows-search-space.md, entropy-in-code-generation.md
+- Outcome: Success
+- Next: Chapter 4 (Writing Your First CLAUDE.md)
 
 ### 2026-01-27 17:00 - Chapter 2 First Draft Complete
 - What: Wrote first draft of ch02-getting-started-with-claude-code.md
