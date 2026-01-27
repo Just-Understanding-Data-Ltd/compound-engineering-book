@@ -150,6 +150,33 @@
   },
   "tasks": [
     {
+      "id": "task-206",
+      "type": "infrastructure",
+      "title": "Create exercises folder structure",
+      "description": "Set up exercises/ folder with per-chapter subfolders. Create exercises/README.md explaining structure. Update CLAUDE.md with exercise conventions. Each chapter should have 2-3 Try It Yourself exercises.",
+      "status": "pending",
+      "priority": "critical",
+      "score": 1000
+    },
+    {
+      "id": "task-207",
+      "type": "content",
+      "title": "Add Level 2 thinking content",
+      "description": "Document the three levels of systems thinking: Level 1 (endpoint listing - 'I need POST /users, GET /users/:id'), Level 2 (entity-relationship thinking - 'I have Users, Products, Orders with CRUD and relationships'), Level 3 (bounded contexts with invariants, contracts, failure modes). Add to appropriate chapter (ch01 or ch03).",
+      "status": "pending",
+      "priority": "high",
+      "score": 990
+    },
+    {
+      "id": "task-208",
+      "type": "content",
+      "title": "Add Plan vs Execute mode documentation",
+      "description": "Document Claude Code's plan mode vs execute mode. Plan mode: claude -p with /plan command, creates implementation plan before execution. Execute mode: direct implementation. Add to ch02 (Getting Started) or ch12 (Development Workflows).",
+      "status": "pending",
+      "priority": "high",
+      "score": 985
+    },
+    {
       "id": "task-001",
       "type": "chapter",
       "chapter": "ch01",
@@ -2001,16 +2028,16 @@
     "items": []
   },
   "stats": {
-    "pending": 179,
+    "pending": 182,
     "inProgress": 0,
     "complete": 26,
     "blocked": 0,
-    "total": 205
+    "total": 208
   },
   "checkpoints": {
-    "lastGoodCommit": "ad05b8e",
-    "lastSuccessfulTask": "task-006",
-    "lastCheckpoint": "2026-01-27T19:00:00Z",
+    "lastGoodCommit": "973ff35791cf67759b61b799d07d4708ea5a7773",
+    "lastSuccessfulTask": "iteration-12",
+    "lastCheckpoint": "2026-01-27T15:35:11Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false

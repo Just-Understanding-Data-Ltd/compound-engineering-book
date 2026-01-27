@@ -593,6 +593,7 @@ compound-engineering-book/
 │   ├── toc.md             # Table of contents
 │   └── ch01-ch12.md       # Chapter PRDs
 ├── chapters/              # Actual book content
+├── exercises/             # Try It Yourself exercises per chapter
 ├── assets/diagrams/       # Mermaid/Excalidraw diagrams
 ├── reviews/               # Review agent outputs
 ├── scripts/

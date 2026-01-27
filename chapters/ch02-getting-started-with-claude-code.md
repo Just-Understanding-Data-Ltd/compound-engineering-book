@@ -81,14 +81,14 @@ This file is your first leverage investment. Five minutes of documentation saves
 
 ## Your First Conversation
 
-Claude Code supports two primary modes: single-turn queries with `claude ask` and interactive sessions with `claude chat`.
+Claude Code supports two primary modes: single-turn queries with `claude -p` and interactive sessions with `claude`.
 
 ### Single-Turn Query
 
 For quick questions or small tasks:
 
 ```bash
-claude ask "What files exist in src/? Give me the project structure."
+claude -p "What files exist in src/? Give me the project structure."
 ```
 
 Claude Code will:
@@ -101,7 +101,7 @@ Claude Code will:
 For longer work involving multiple steps:
 
 ```bash
-claude chat
+claude
 ```
 
 This opens an interactive session where you can have a conversation. Each turn builds on previous context. Claude Code remembers what it changed and what you discussed.
@@ -113,7 +113,7 @@ Let me show you a real workflow. Suppose you want to create a simple CSV reader 
 **Step 1: Explore the project**
 
 ```bash
-claude ask "Show me the current project structure and how existing CLI tools are organized."
+claude -p "Show me the current project structure and how existing CLI tools are organized."
 ```
 
 Claude Code reads files, searches for patterns, and explains what it finds. You now understand where your new tool should live.
@@ -121,7 +121,7 @@ Claude Code reads files, searches for patterns, and explains what it finds. You 
 **Step 2: Request implementation**
 
 ```bash
-claude ask "Create a CLI tool in src/tools/csv-reader.ts that reads a CSV file and prints a summary.
+claude -p "Create a CLI tool in src/tools/csv-reader.ts that reads a CSV file and prints a summary.
 
 Context:
 - Follow the pattern from src/tools/json-parser.ts
@@ -138,7 +138,7 @@ Claude Code searches for the patterns you mentioned, understands the existing co
 **Step 3: Iterate with feedback**
 
 ```bash
-claude ask "The CSV reader works, but add filtering by column name. Make it work with test files in data/samples/ and verify with npm test."
+claude -p "The CSV reader works, but add filtering by column name. Make it work with test files in data/samples/ and verify with npm test."
 ```
 
 Claude Code reads its previous work, understands what needs to change, makes the modifications, and runs tests to verify.
@@ -154,7 +154,7 @@ Claude Code has seven core tools. Understanding when to use each one makes your 
 Read fetches file contents so Claude Code can understand patterns, architecture, or implementation details.
 
 ```bash
-claude ask "Read src/services/auth.ts and explain how JWT tokens are verified"
+claude -p "Read src/services/auth.ts and explain how JWT tokens are verified"
 ```
 
 When to use: Learning existing patterns. Understanding a file before editing. Debugging issues.
@@ -164,7 +164,7 @@ When to use: Learning existing patterns. Understanding a file before editing. De
 Write creates new files from scratch. Use it when the file does not exist.
 
 ```bash
-claude ask "Create tests/payment.test.ts with comprehensive tests for payment processing"
+claude -p "Create tests/payment.test.ts with comprehensive tests for payment processing"
 ```
 
 When to use: New test files. New configuration. Documentation. Never use Write on existing files; use Edit instead.
@@ -174,7 +174,7 @@ When to use: New test files. New configuration. Documentation. Never use Write o
 Edit makes surgical changes to existing code. It replaces specific text blocks while preserving surrounding context.
 
 ```bash
-claude ask "In src/api/handler.ts, add rate limiting middleware to the POST /users endpoint"
+claude -p "In src/api/handler.ts, add rate limiting middleware to the POST /users endpoint"
 ```
 
 When to use: Adding features to existing code. Small targeted changes. Safer than Write for modifications.
@@ -184,7 +184,7 @@ When to use: Adding features to existing code. Small targeted changes. Safer tha
 Glob discovers files matching patterns. It is the agent-friendly version of `find`.
 
 ```bash
-claude ask "Find all test files (*.test.ts) in the src/ directory"
+claude -p "Find all test files (*.test.ts) in the src/ directory"
 ```
 
 When to use: Finding files by extension. Pattern matching. Before Read operations to locate relevant files.
@@ -194,7 +194,7 @@ When to use: Finding files by extension. Pattern matching. Before Read operation
 Grep performs full-text regex search across your codebase. It finds code patterns, strings, and identifiers.
 
 ```bash
-claude ask "Search for all calls to authenticateUser() in the codebase"
+claude -p "Search for all calls to authenticateUser() in the codebase"
 ```
 
 When to use: Finding function calls. Searching for patterns. Understanding how code is used across files.
@@ -204,7 +204,7 @@ When to use: Finding function calls. Searching for patterns. Understanding how c
 Bash runs any CLI command: builds, tests, linters, deployments.
 
 ```bash
-claude ask "Run npm test and tell me which tests are failing"
+claude -p "Run npm test and tell me which tests are failing"
 ```
 
 When to use: Running tests. Building code. Executing linters. Infrastructure operations.
@@ -358,10 +358,10 @@ Key questions:
 Example workflow:
 
 ```bash
-claude ask "How does error handling work in this codebase? Show me 3 examples."
+claude -p "How does error handling work in this codebase? Show me 3 examples."
 # Claude Code greps for error patterns, shows Result<T, E> usage, explains conventions
 
-claude ask "Should I use Result<T, E> or exceptions for the new payment service?"
+claude -p "Should I use Result<T, E> or exceptions for the new payment service?"
 # Claude Code analyzes codebase, shows you chose Result<T, E>, explains why
 ```
 
@@ -374,7 +374,7 @@ Goal: Generate correct code on first try.
 Key pattern: Reference discoveries from exploration in your implementation prompt.
 
 ```bash
-claude ask "Create PaymentService using these patterns from exploration:
+claude -p "Create PaymentService using these patterns from exploration:
 
 - Result<T, E> error type
 - Log all operations to AuditLog
