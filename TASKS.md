@@ -138,13 +138,46 @@
 - [ ] Create test-driven-search-space comparison (Ch 6)
 - [ ] Create hook-workflow cycle (Ch 7)
 
+### High Priority (Chapters 8-13) - First Drafts Complete
+
+**Chapter 8: Error Handling and Debugging**
+- [ ] Create error-classification pie chart (5-category distribution)
+- [ ] Create context-debugging-hierarchy pyramid (4 layers)
+
+**Chapter 9: Context Engineering Deep Dive**
+- [ ] Create context-window-anatomy diagram (200K tokens, density)
+- [ ] Create progressive-disclosure architecture (3 levels)
+
+**Chapter 10: The RALPH Loop**
+- [ ] Create ralph-loop-cycle diagram (7-step cycle)
+- [ ] Create memory-architecture diagram (3 layers)
+
+**Chapter 11: Sub-Agent Architecture**
+- [ ] Create sub-agent-team org chart (orchestrator + 4 specialists)
+- [ ] Create context-hierarchy tree (3 layers)
+- [ ] Create actor-critic-loop cycle diagram
+
+**Chapter 12: Development Workflows**
+- [ ] Create plan-mode-phases flowchart (2 phases)
+- [ ] Create git-worktrees parallel structure diagram
+
+**Chapter 13: Building the Harness**
+- [ ] Create four-layer-harness concentric diagram
+- [ ] Create closed-loop-optimization cycle diagram
+
+### Medium Priority (Chapters 8-13)
+- [ ] Create learning-loop cycle (Ch 8)
+- [ ] Create clean-slate-recovery flowchart (Ch 8)
+- [ ] Create signal-degradation chart (Ch 9)
+- [ ] Create entropy-reduction funnel (Ch 9)
+- [ ] Create four-phase-pie chart (Ch 10)
+- [ ] Create multi-agent-coordination org chart (Ch 10)
+- [ ] Create parallel-vs-sequential comparison (Ch 11)
+- [ ] Create incremental-development cycle (Ch 12)
+- [ ] Create linear-vs-exponential comparison (Ch 13)
+- [ ] Create mcp-query-flow diagram (Ch 13)
+
 ### Future Chapters (Pending First Drafts)
-- [ ] Create error diagnostic flowchart (Ch 8 - pending)
-- [ ] Create context window anatomy diagram (Ch 9 - pending)
-- [ ] Create RALPH loop cycle diagram (Ch 10 - pending)
-- [ ] Create sub-agent architecture diagram (Ch 11 - pending)
-- [ ] Create development workflows diagram (Ch 12 - pending)
-- [ ] Create four-layer harness diagram (Ch 13 - pending)
 - [ ] Create six waves timeline diagram (Ch 14 - pending)
 - [ ] Create model selection decision tree (Ch 15 - pending)
 
