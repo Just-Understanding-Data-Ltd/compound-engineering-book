@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T05:00:00Z",
+  "lastUpdated": "2026-01-28T06:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -349,7 +349,7 @@
       "chapter": "ch04",
       "title": "ch04: Writing Your First CLAUDE.md",
       "description": "Complete remaining milestones for Writing Your First CLAUDE.md",
-      "status": "pending",
+      "status": "in_progress",
       "priority": "high",
       "subtasks": [
         {
@@ -357,8 +357,10 @@
           "parentId": "task-019",
           "type": "milestone",
           "title": "code written",
-          "status": "pending",
-          "score": -95
+          "status": "complete",
+          "completedAt": "2026-01-28T06:00:00Z",
+          "score": -95,
+          "note": "Created context-impact-demo.ts, claude-md-validator.ts, hierarchical-loader.ts, claude-md.test.ts. All use Anthropic SDK. 20 tests pass."
         },
         {
           "id": "task-021",
@@ -2331,16 +2333,16 @@
     ]
   },
   "stats": {
-    "pending": 172,
-    "inProgress": 0,
-    "complete": 42,
+    "pending": 171,
+    "inProgress": 1,
+    "complete": 43,
     "blocked": 0,
-    "total": 214
+    "total": 215
   },
   "checkpoints": {
-    "lastGoodCommit": "ca91a9e",
-    "lastSuccessfulTask": "iteration-10",
-    "lastCheckpoint": "2026-01-28T05:00:00Z",
+    "lastGoodCommit": "56be11885f05769fb44086a74e54b0b59dc32540",
+    "lastSuccessfulTask": "task-020",
+    "lastCheckpoint": "2026-01-28T06:00:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,

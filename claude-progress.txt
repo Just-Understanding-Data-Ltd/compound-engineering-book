@@ -1,10 +1,10 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 23:30)
+## Current Status (Updated: 2026-01-28 06:00)
 - Phase: Chapter Milestones
-- Active: task-020 (ch04, pending), next: code_written milestone
-- Last Completed: Comprehensive progress summary (all review findings synthesized)
-- Blockers: task-209 (SDK refactoring) - Code examples must use Anthropic SDK
+- Active: task-019 (ch04 in_progress), next: task-021 (code_tested)
+- Last Completed: task-020 (ch04 code_written) - ITERATION 11
+- Blockers: None - SDK installed, code examples now use Anthropic SDK
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
@@ -23,11 +23,29 @@
 3. Final KB article: prompt-injection-prevention.md (unblocks diagram phase)
 
 ## Next Task
-task-020 (ch04 code_written) - score 930
-DEPENDENCY: Complete task-209 (SDK refactoring) before starting code examples
-Pattern: TypeScript examples using Anthropic SDK per CLAUDE.md requirements
+task-021 (ch04 code_tested) - score 925
+Pattern: Run tsc --noEmit and bun test to verify all examples work
 
 ## Recent Activity
+
+### 2026-01-28 06:00 - COMPLETED ch04 code_written (task-020) - ITERATION 11
+- What: Created TypeScript code examples for Chapter 4 (Writing Your First CLAUDE.md)
+- Files created:
+  - examples/ch04/context-impact-demo.ts - Demonstrates how context affects Claude's code generation
+  - examples/ch04/claude-md-validator.ts - Validates CLAUDE.md files against best practices
+  - examples/ch04/hierarchical-loader.ts - Simulates hierarchical CLAUDE.md loading
+  - examples/ch04/claude-md.test.ts - 20 tests covering all modules
+- SDK Integration:
+  - Installed @anthropic-ai/sdk (v0.71.2)
+  - All examples use Anthropic SDK with proper types
+  - Examples demonstrate: system prompts, context impact, message creation
+- Tests: 20/20 pass (59 expect() calls)
+- TypeScript: All files compile with tsc --noEmit
+- Tasks: task-020 marked complete, task-019 now in_progress
+- Stats: pending 171, inProgress 1, complete 43
+- ch04 Status: 1/5 milestones complete
+- Outcome: Success
+- Next: task-021 (ch04 code_tested) - verify examples thoroughly
 
 ### 2026-01-27 23:30 - GENERATED comprehensive progress summary
 - What: Created detailed progress-summarizer report (reviews/summary-2026-01-27.md)
