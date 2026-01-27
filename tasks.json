@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T06:30:00Z",
+  "lastUpdated": "2026-01-28T07:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1008,7 +1008,8 @@
       "chapter": "ch13",
       "title": "ch13: Building the Harness",
       "description": "Complete remaining milestones for Building the Harness",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-28T07:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -1056,8 +1057,10 @@
           "parentId": "task-073",
           "type": "milestone",
           "title": "final",
-          "status": "pending",
-          "score": -115
+          "status": "complete",
+          "completedAt": "2026-01-28T07:00:00Z",
+          "score": -115,
+          "note": "All quality gates pass: word count 3,335 (in range), no em dashes, no AI slop, 3 diagrams, 5 code files, 61 tests pass, TypeScript compiles, Related Chapters section present, exercises folder exists."
         }
       ],
       "score": 885
@@ -1331,16 +1334,16 @@
     ]
   },
   "stats": {
-    "pending": 30,
+    "pending": 28,
     "inProgress": 0,
-    "complete": 84,
+    "complete": 86,
     "blocked": 0,
     "total": 114
   },
   "checkpoints": {
-    "lastGoodCommit": "1a106ef9a1211f08250598b9e90078f88e452f98",
-    "lastSuccessfulTask": "task-077",
-    "lastCheckpoint": "2026-01-28T06:30:00Z",
+    "lastGoodCommit": "134ddc27ee6c4a5d1ed9bccdb3be273c87f3acfb",
+    "lastSuccessfulTask": "task-078",
+    "lastCheckpoint": "2026-01-28T07:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0
