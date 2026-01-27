@@ -73,7 +73,7 @@
 ## Phase 2: Chapter Writing
 
 - [x] Write Chapter 1 first draft (Completed: 2026-01-27)
-- [ ] Write Chapter 2 first draft
+- [x] Write Chapter 2 first draft (Completed: 2026-01-27)
 - [ ] Write Chapter 3 first draft (Prompting Fundamentals - NEW)
 - [ ] Write Chapter 4 first draft (CLAUDE.md - was ch03)
 - [ ] Write Chapter 5 first draft (12-Factor Agent - was ch04)

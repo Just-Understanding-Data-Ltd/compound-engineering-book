@@ -1,0 +1,463 @@
+# Chapter 2: Getting Started with Claude Code
+
+Claude Code is not ChatGPT in a terminal. It is an agent: a tool that reads your codebase, makes changes, runs commands, and reasons iteratively about what to do next. Understanding this distinction matters because it changes how you work.
+
+When you use ChatGPT, you copy code into the chat, get suggestions back, and manually apply them. The conversation is isolated from your project. Claude Code operates differently. It sees your files directly, runs your tests, understands your project structure from CLAUDE.md, and takes action based on what it observes. Every tool invocation is visible. Every file change is tracked.
+
+This chapter teaches you to install Claude Code, run your first conversation, understand the tool ecosystem, and apply basic prompting patterns. By the end, you will know when to use Claude Code versus Cursor versus ChatGPT, and you will understand the two-mode mental model that separates beginners from productive practitioners.
+
+## The Agent Mindset
+
+The shift in thinking is this: instead of asking Claude Code to write code, ask it to solve a problem given context. The difference sounds subtle but produces dramatically different results.
+
+Consider these two prompts:
+
+**Prompt A**: "Write a function that validates email addresses."
+
+**Prompt B**: "In src/utils/validation.ts, add an email validation function following the pattern in src/utils/string.ts. Use TypeScript, export with JSDoc comments, and include tests in tests/utils/validation.test.ts."
+
+Prompt A produces generic code that may or may not match your project. Prompt B produces code that fits your architecture because you gave context.
+
+Claude Code has access to your entire codebase. It can read files, search for patterns, run tests, and verify its own work. When you provide context about existing patterns, it generates code that matches them on the first try. When you leave it guessing, it produces code that requires multiple iterations to fix.
+
+The agent mindset is: every prompt should reference what exists, specify where changes go, and define how success is measured.
+
+## Installation and Setup
+
+### System Requirements
+
+Claude Code runs on macOS 11+, Linux (Ubuntu 20+), and Windows 10+ (with WSL2 or native). You need Node.js 18 or higher.
+
+### Installation Steps
+
+1. Verify Node.js is installed:
+```bash
+node --version  # Should show v18.0.0 or higher
+```
+
+2. Install Claude Code globally:
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+3. Verify installation:
+```bash
+claude --version
+claude --help
+```
+
+4. Navigate to your project and initialize:
+```bash
+cd your-project
+claude init
+```
+
+The `claude init` command creates a starter CLAUDE.md file in your project root. This file provides context about your project: what language you use, how to run tests, what patterns to follow. Claude Code reads it automatically at the start of every conversation.
+
+### Your First CLAUDE.md
+
+Here is a minimal starter template:
+
+```markdown
+# Project Context
+
+## Quick Start
+- Language: TypeScript
+- Package manager: npm
+- Main entry: src/index.ts
+
+## Key Commands
+- Build: npm run build
+- Test: npm test
+- Lint: npm run lint
+
+## Important Patterns
+- Use ES modules (import/export), not CommonJS
+- Error handling uses Result<T, E> pattern
+- All functions need JSDoc comments
+```
+
+This file is your first leverage investment. Five minutes of documentation saves hours of explaining context in every conversation. Claude Code references it automatically, which means your prompts can stay focused on the task instead of repeating project details.
+
+## Your First Conversation
+
+Claude Code supports two primary modes: single-turn queries with `claude ask` and interactive sessions with `claude chat`.
+
+### Single-Turn Query
+
+For quick questions or small tasks:
+
+```bash
+claude ask "What files exist in src/? Give me the project structure."
+```
+
+Claude Code will:
+1. Read your CLAUDE.md to understand project context
+2. Use the Glob tool to list files in src/
+3. Return a structured response
+
+### Interactive Session
+
+For longer work involving multiple steps:
+
+```bash
+claude chat
+```
+
+This opens an interactive session where you can have a conversation. Each turn builds on previous context. Claude Code remembers what it changed and what you discussed.
+
+### Walkthrough: Building a CLI Tool
+
+Let me show you a real workflow. Suppose you want to create a simple CSV reader tool.
+
+**Step 1: Explore the project**
+
+```bash
+claude ask "Show me the current project structure and how existing CLI tools are organized."
+```
+
+Claude Code reads files, searches for patterns, and explains what it finds. You now understand where your new tool should live.
+
+**Step 2: Request implementation**
+
+```bash
+claude ask "Create a CLI tool in src/tools/csv-reader.ts that reads a CSV file and prints a summary.
+
+Context:
+- Follow the pattern from src/tools/json-parser.ts
+- Use the argument parsing from src/utils/args.ts
+- Output format should match our other tools
+
+Success criteria:
+- Running 'npm run csv-reader data/test.csv' prints row count and column names
+- Include basic error handling for missing files"
+```
+
+Claude Code searches for the patterns you mentioned, understands the existing conventions, and generates code that fits.
+
+**Step 3: Iterate with feedback**
+
+```bash
+claude ask "The CSV reader works, but add filtering by column name. Make it work with test files in data/samples/ and verify with npm test."
+```
+
+Claude Code reads its previous work, understands what needs to change, makes the modifications, and runs tests to verify.
+
+The pattern: Explore first to understand context. Implement with specific references to existing patterns. Iterate based on concrete feedback.
+
+## The Tool Ecosystem
+
+Claude Code has seven core tools. Understanding when to use each one makes your prompts more effective.
+
+### Read (Understand Existing Code)
+
+Read fetches file contents so Claude Code can understand patterns, architecture, or implementation details.
+
+```bash
+claude ask "Read src/services/auth.ts and explain how JWT tokens are verified"
+```
+
+When to use: Learning existing patterns. Understanding a file before editing. Debugging issues.
+
+### Write (Create New Files)
+
+Write creates new files from scratch. Use it when the file does not exist.
+
+```bash
+claude ask "Create tests/payment.test.ts with comprehensive tests for payment processing"
+```
+
+When to use: New test files. New configuration. Documentation. Never use Write on existing files; use Edit instead.
+
+### Edit (Modify Existing Files)
+
+Edit makes surgical changes to existing code. It replaces specific text blocks while preserving surrounding context.
+
+```bash
+claude ask "In src/api/handler.ts, add rate limiting middleware to the POST /users endpoint"
+```
+
+When to use: Adding features to existing code. Small targeted changes. Safer than Write for modifications.
+
+### Glob (Find Files by Pattern)
+
+Glob discovers files matching patterns. It is the agent-friendly version of `find`.
+
+```bash
+claude ask "Find all test files (*.test.ts) in the src/ directory"
+```
+
+When to use: Finding files by extension. Pattern matching. Before Read operations to locate relevant files.
+
+### Grep (Search File Contents)
+
+Grep performs full-text regex search across your codebase. It finds code patterns, strings, and identifiers.
+
+```bash
+claude ask "Search for all calls to authenticateUser() in the codebase"
+```
+
+When to use: Finding function calls. Searching for patterns. Understanding how code is used across files.
+
+### Bash (Execute Commands)
+
+Bash runs any CLI command: builds, tests, linters, deployments.
+
+```bash
+claude ask "Run npm test and tell me which tests are failing"
+```
+
+When to use: Running tests. Building code. Executing linters. Infrastructure operations.
+
+### Observability (See Results)
+
+Every Bash execution produces output that Claude Code can read and reason about. This is the feedback loop that makes agents effective.
+
+When tests fail, Claude Code sees the failure message, understands what went wrong, and can propose fixes. When builds break, it sees the error and can diagnose the problem. This observability is automatic; you do not need to do anything special.
+
+## Basic Prompting Patterns
+
+Four patterns produce consistently good results.
+
+### Pattern 1: Context + Goal + Success Criteria
+
+Bad prompt:
+```
+"Add authentication to the API"
+```
+
+Good prompt:
+```
+"Add JWT authentication to POST /users in src/api/users.ts.
+
+Context:
+- Auth service exists at src/services/auth.ts
+- Use existing authenticateUser() function
+- Error format: { success: false, error: { code, message } }
+- Reference src/api/posts.ts for middleware pattern
+
+Success criteria:
+- Unauthenticated requests return 401
+- Valid tokens return user data
+- Tests in tests/auth.test.ts pass"
+```
+
+Why it works: Claude Code knows exactly where to look, what patterns to follow, and how to verify success.
+
+### Pattern 2: Reference Existing Code
+
+Bad prompt:
+```
+"Add a date utility function"
+```
+
+Good prompt:
+```
+"Add date utilities to src/utils/date.ts following the pattern in src/utils/string.ts.
+
+Functions needed:
+- parseISO(str: string): Date | null
+- formatDate(date: Date, format: string): string
+- isValidDate(val: unknown): val is Date
+
+Follow the same export style and JSDoc conventions as string.ts.
+Include unit tests in tests/utils/date.test.ts."
+```
+
+Why it works: Claude Code reads the pattern file and matches its conventions automatically.
+
+### Pattern 3: Tests as Specification
+
+Bad prompt:
+```
+"Add email validation"
+```
+
+Good prompt:
+```
+"Write tests for email validation in tests/validation.test.ts.
+
+Test cases:
+- Valid: user@example.com, john.doe+test@company.co.uk
+- Invalid: missing @, empty string, spaces
+- Edge cases: international domains, subdomains
+
+After tests pass review, implement src/utils/validation.ts:validateEmail() to pass all tests."
+```
+
+Why it works: Tests define concrete behavior. Claude Code writes code to pass tests, not to match vague descriptions.
+
+### Pattern 4: Exploration Before Implementation
+
+Bad prompt (mixing modes):
+```
+"Add a new payment provider that works with Stripe and PayPal"
+```
+
+Good prompt (separated):
+```
+Step 1: "How is payment processing structured in this codebase?
+Show me the PaymentProvider interface and one implementation."
+
+Step 2 (after understanding): "Create StripeProvider implementing PaymentProvider.
+Follow the pattern from PayPalProvider. Use config from src/config/stripe.ts.
+Add tests following tests/providers/paypal.test.ts pattern."
+```
+
+Why it works: Exploration builds understanding. Implementation uses that understanding for first-try correctness.
+
+## Claude Code vs Cursor vs ChatGPT
+
+Each tool excels in different contexts. Knowing when to use each saves time.
+
+| Dimension | Claude Code | Cursor | ChatGPT |
+|-----------|------------|--------|---------|
+| Best for | Multi-file workflows, automation | Quick edits, real-time coding | Concepts, brainstorming |
+| Codebase context | Full repo via CLAUDE.md + tools | Open files + search | Paste-based, limited |
+| Speed per turn | ~30s (read/execute/reason) | <1s (inline) | ~5s (API) |
+| Verification | Runs tests, builds, linters | Limited | None |
+| Cost | Token-based | Subscription | Subscription |
+
+**Use Claude Code when:**
+- Task spans 3+ files
+- You need to run tests or builds
+- Full codebase context is essential
+- You are building automation
+
+**Use Cursor when:**
+- You are actively coding
+- Task is small and visible on screen
+- You want fastest iteration
+
+**Use ChatGPT when:**
+- Explaining a concept
+- Brainstorming architecture
+- No codebase context needed
+
+## The Two-Mode Mental Model
+
+The single most important pattern for productive agent work is separating exploration from implementation.
+
+### Why Two Modes?
+
+Without exploration, code generation is a lottery. You ask Claude Code to implement a feature, it generates code, and you discover it does not match your patterns. You ask for a refactor, it generates different code, still wrong. Three or four iterations later, you have something that works. Total time: 30 minutes, 800 lines generated, significant frustration.
+
+With exploration, you first ask questions. How does authentication work in this codebase? Show me an example. What error handling pattern do we use? After 5 minutes, you understand the landscape. Then you ask for implementation with informed context. Claude Code generates correct code on the first try. Total time: 7 minutes, 200 lines, working code.
+
+The difference: 23 minutes saved, 75% fewer lines generated, first-try correctness.
+
+### Exploration Mode
+
+Goal: Build understanding before writing code.
+
+Key questions:
+- "How is [feature] currently implemented?"
+- "What patterns should I follow?"
+- "Show me an example."
+
+Example workflow:
+
+```bash
+claude ask "How does error handling work in this codebase? Show me 3 examples."
+# Claude Code greps for error patterns, shows Result<T, E> usage, explains conventions
+
+claude ask "Should I use Result<T, E> or exceptions for the new payment service?"
+# Claude Code analyzes codebase, shows you chose Result<T, E>, explains why
+```
+
+Time invested: 5 minutes. Understanding gained: enough to implement correctly.
+
+### Implementation Mode
+
+Goal: Generate correct code on first try.
+
+Key pattern: Reference discoveries from exploration in your implementation prompt.
+
+```bash
+claude ask "Create PaymentService using these patterns from exploration:
+
+- Result<T, E> error type
+- Log all operations to AuditLog
+- Unit tests following existing pattern
+
+Methods: processPayment(), refundPayment(), getStatus()
+Config from src/config/payments.ts
+Tests in tests/services/payment.test.ts
+
+Success: All methods return Result<T, PaymentError>, tests pass, npm run lint passes."
+```
+
+Time: 2 minutes. Result: Correct, working code.
+
+### When to Use Each
+
+Use exploration when starting new features, working in unfamiliar codebases, evaluating approaches, or debugging unclear issues.
+
+Use implementation when you understand the patterns, are repeating established work, or have explicit examples to follow.
+
+Use both for complex features. Explore the architecture, then implement with informed context.
+
+## Exercises
+
+### Exercise 1: Exploration Practice (15 minutes)
+
+Using a real project:
+
+1. Ask Claude Code: "What is the main entry point for this project?"
+2. Ask: "How does error handling work? Show me 3 examples."
+3. Ask: "What testing framework is used? Show me one test file."
+4. Ask: "What are the top 3 architectural patterns I should follow?"
+5. Write a two-paragraph summary of what you learned.
+
+Success criteria: You can name 3+ patterns, 2 design decisions, and you read actual code.
+
+### Exercise 2: Prompt Quality Comparison (20 minutes)
+
+1. Write a vague prompt: "Add a utility function."
+2. Rewrite it using Context + Goal + Success Criteria pattern.
+3. Run the rewritten prompt.
+4. Compare iterations needed.
+
+Success criteria: Rewritten prompt is 3+ sentences, includes file paths, specifies success criteria, requires fewer iterations.
+
+### Exercise 3: Full Explore + Implement Workflow (30 minutes)
+
+Pick a feature to add to your project.
+
+**Part A: Explore (10 min)**
+1. Ask 3 to 5 questions about existing patterns
+2. Document what you discover
+3. Identify where your feature fits
+
+**Part B: Implement (15 min)**
+1. Write a detailed prompt based on exploration
+2. Run it
+3. Verify with tests and linter
+
+**Part C: Reflect (5 min)**
+1. How many iterations would this have taken without exploration?
+2. What did exploration teach you?
+
+Success criteria: Feature works, code matches existing patterns, took fewer iterations than expected.
+
+## Summary
+
+Claude Code is an agent that reads your codebase, makes changes, and verifies its work. Understanding this distinction from chat-based tools changes how you work.
+
+The key insights:
+
+- **Context matters**: Prompts that reference existing patterns produce correct code on the first try. Vague prompts produce multiple iterations.
+- **Seven core tools**: Read, Write, Edit, Glob, Grep, Bash, and Observability form the agent's capability set.
+- **Right tool for the job**: Claude Code for multi-file workflows with verification. Cursor for fast inline edits. ChatGPT for concepts and brainstorming.
+- **Two modes**: Explore first to understand, then implement with informed context. This pattern reduces iterations by 60% and produces 8x fewer pattern violations.
+
+The agent mindset is: every prompt should reference what exists, specify where changes go, and define how success is measured. Five minutes of exploration saves thirty minutes of iteration.
+
+The next chapter covers prompting fundamentals in depth. You will learn information theory concepts that explain why some prompts work better than others, and you will develop techniques for maximizing the value per token. See [Chapter 3: Prompting Fundamentals](ch03-prompting-fundamentals.md).
+
+---
+
+*Related chapters:*
+- [Chapter 1: The Compound Systems Engineer](ch01-the-compound-systems-engineer.md) for the meta-engineering philosophy
+- [Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md) for deep dives on project context files
+- [Chapter 6: The Verification Ladder](ch06-the-verification-ladder.md) for test-driven agent workflows

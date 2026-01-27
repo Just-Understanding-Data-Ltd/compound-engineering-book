@@ -1,23 +1,31 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 16:00)
+## Current Status (Updated: 2026-01-27 17:00)
 - Phase: Chapter Writing
-- Active: Ready for chapter draft writing
-- Last Completed: ALL 15 PRDs enhanced with KB references (Phase 1.5 COMPLETE)
+- Active: Chapter 3 next (Prompting Fundamentals)
+- Last Completed: Chapter 2 first draft (2,588 words)
 - Blockers: None
 
 ## Project State Summary
 - PRDs: 15/15 complete (4 new chapters added: ch03, ch08, ch12, ch15)
 - PRDs Enhanced: 15/15 with KB references (Phase 1.5 COMPLETE)
 - KB Articles Identified to Create: 15+ new articles (marked "TO BE CREATED")
-- Chapter Drafts: 1/15 complete
+- Chapter Drafts: 2/15 complete
 - Diagrams: 13 files with 20+ Mermaid diagrams (shells created)
-- Total Word Count: 2,573 (target: 53,000-72,000)
+- Total Word Count: 5,161 (target: 53,000-72,000)
 
 ## Next Task
-Start Chapter 2 first draft (Getting Started with Claude Code)
+Write Chapter 3 first draft (Prompting Fundamentals)
 
 ## Recent Activity
+
+### 2026-01-27 17:00 - Chapter 2 First Draft Complete
+- What: Wrote first draft of ch02-getting-started-with-claude-code.md
+- Files: chapters/ch02-getting-started-with-claude-code.md (created)
+- Word Count: 2,588 (target: 2,500-3,500)
+- Content: Installation, first conversation, tool ecosystem, prompting patterns, explore vs implement
+- Outcome: Success
+- Next: Chapter 3 (Prompting Fundamentals)
 
 ### 2026-01-27 16:00 - Phase 1.5 PRD Enhancement COMPLETE
 - What: Finished enhancing all 15 PRDs with KB article references

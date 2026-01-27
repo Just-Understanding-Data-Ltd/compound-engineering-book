@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T14:00:00Z",
+  "lastUpdated": "2026-01-27T17:00:00Z",
   "structureNote": "Updated to 15-chapter structure. Old chapter numbers in prds section preserved for reference. New chapters added with descriptive filenames. See toc.md for canonical ordering.",
   "prds": {
     "index": {
@@ -182,19 +182,19 @@
     "ch02": {
       "title": "Getting Started with Claude Code",
       "prd": "prds/ch02.md",
-      "chapter": null,
-      "status": "not_started",
+      "chapter": "chapters/ch02-getting-started-with-claude-code.md",
+      "status": "draft",
       "milestones": {
         "prd_complete": true,
-        "first_draft": false,
+        "first_draft": true,
         "code_written": false,
         "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
-        "exercises_added": false,
+        "exercises_added": true,
         "final": false
       },
-      "wordCount": 0,
+      "wordCount": 2588,
       "targetWordCount": [2500, 3500],
       "diagramsRequired": 3,
       "diagramsComplete": 0,
@@ -510,11 +510,11 @@
     "totalChapters": 15,
     "newChaptersAdded": 4,
     "prdsComplete": 15,
-    "draftsComplete": 1,
+    "draftsComplete": 2,
     "reviewed": 0,
     "diagramsRequired": 75,
     "diagramsComplete": 0,
-    "totalWordCount": 2573,
+    "totalWordCount": 5161,
     "targetWordCount": [53000, 72000]
   }
 }
