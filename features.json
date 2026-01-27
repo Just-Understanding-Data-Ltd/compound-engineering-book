@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T03:00:00Z",
+  "lastUpdated": "2026-01-28T04:00:00Z",
   "structureNote": "Updated to 15-chapter structure. Old chapter numbers in prds section preserved for reference. New chapters added with descriptive filenames. See toc.md for canonical ordering.",
   "prds": {
     "index": {
@@ -438,19 +438,19 @@
     "ch13": {
       "title": "Building the Harness",
       "prd": "prds/ch10.md",
-      "chapter": null,
-      "status": "not_started",
+      "chapter": "chapters/ch13-building-the-harness.md",
+      "status": "draft",
       "milestones": {
         "prd_complete": true,
-        "first_draft": false,
+        "first_draft": true,
         "code_written": false,
         "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
-        "exercises_added": false,
+        "exercises_added": true,
         "final": false
       },
-      "wordCount": 0,
+      "wordCount": 3316,
       "targetWordCount": [4000, 5500],
       "diagramsRequired": 6,
       "diagramsComplete": 0,
@@ -510,11 +510,11 @@
     "totalChapters": 15,
     "newChaptersAdded": 4,
     "prdsComplete": 15,
-    "draftsComplete": 12,
+    "draftsComplete": 13,
     "reviewed": 0,
     "diagramsRequired": 75,
     "diagramsComplete": 0,
-    "totalWordCount": 33768,
+    "totalWordCount": 37084,
     "targetWordCount": [53000, 72000]
   }
 }
