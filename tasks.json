@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T20:43:00.000Z",
+  "lastUpdated": "2026-01-27T21:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -161,24 +161,6 @@
       "outcome": "Created 15 chapter folders (ch01-ch15), each with README.md and solutions/ subfolder. Main exercises/README.md already existed."
     },
     {
-      "id": "task-207",
-      "type": "content",
-      "title": "Add Level 2 thinking content",
-      "description": "Document the three levels of systems thinking: Level 1 (endpoint listing - 'I need POST /users, GET /users/:id'), Level 2 (entity-relationship thinking - 'I have Users, Products, Orders with CRUD and relationships'), Level 3 (bounded contexts with invariants, contracts, failure modes). Add to appropriate chapter (ch01 or ch03).",
-      "status": "pending",
-      "priority": "high",
-      "score": 990
-    },
-    {
-      "id": "task-208",
-      "type": "content",
-      "title": "Add Plan vs Execute mode documentation",
-      "description": "Document Claude Code's plan mode vs execute mode. Plan mode: claude -p with /plan command, creates implementation plan before execution. Execute mode: direct implementation. Add to ch02 (Getting Started) or ch12 (Development Workflows).",
-      "status": "pending",
-      "priority": "high",
-      "score": 985
-    },
-    {
       "id": "task-001",
       "type": "chapter",
       "chapter": "ch01",
@@ -250,7 +232,8 @@
           "parentId": "task-007",
           "type": "milestone",
           "title": "code written",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-27T21:00:00Z",
           "score": -95
         },
         {
@@ -1745,6 +1728,24 @@
       "score": 525
     },
     {
+      "id": "task-207",
+      "type": "content",
+      "title": "Add Level 2 thinking content",
+      "description": "Document the three levels of systems thinking: Level 1 (endpoint listing - 'I need POST /users, GET /users/:id'), Level 2 (entity-relationship thinking - 'I have Users, Products, Orders with CRUD and relationships'), Level 3 (bounded contexts with invariants, contracts, failure modes). Add to appropriate chapter (ch01 or ch03).",
+      "status": "pending",
+      "priority": "high",
+      "score": 355
+    },
+    {
+      "id": "task-208",
+      "type": "content",
+      "title": "Add Plan vs Execute mode documentation",
+      "description": "Document Claude Code's plan mode vs execute mode. Plan mode: claude -p with /plan command, creates implementation plan before execution. Execute mode: direct implementation. Add to ch02 (Getting Started) or ch12 (Development Workflows).",
+      "status": "pending",
+      "priority": "high",
+      "score": 355
+    },
+    {
       "id": "task-103",
       "type": "fixes",
       "title": "Fix cross-references",
@@ -2030,16 +2031,16 @@
     "items": []
   },
   "stats": {
-    "pending": 181,
+    "pending": 180,
     "inProgress": 0,
-    "complete": 27,
+    "complete": 28,
     "blocked": 0,
     "total": 208
   },
   "checkpoints": {
-    "lastGoodCommit": "9b85fb6",
-    "lastSuccessfulTask": "task-206",
-    "lastCheckpoint": "2026-01-27T20:43:00Z",
+    "lastGoodCommit": "ef1f25d8061558b315385967ac389d53374c358c",
+    "lastSuccessfulTask": "iteration-1",
+    "lastCheckpoint": "2026-01-27T15:45:54Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false

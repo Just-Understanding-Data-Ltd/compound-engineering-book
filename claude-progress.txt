@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 20:43)
-- Phase: Infrastructure + Chapter Milestones
-- Active: task-207 (Level 2 thinking content) or task-008 (ch02 code_written)
-- Last Completed: task-206 (Create exercises folder structure)
+## Current Status (Updated: 2026-01-27 21:00)
+- Phase: Chapter Milestones
+- Active: task-009 (ch02 code_tested) or task-207 (Level 2 thinking content)
+- Last Completed: task-008 (ch02 code_written)
 - Blockers: None
 
 ## Project State Summary
@@ -20,10 +20,29 @@
 - Chapters Complete: 1/15 (ch01)
 
 ## Next Task
-task-207 (Add Level 2 thinking content) - score 990
-OR task-008 (ch02 code_written) - score 940
+task-009 (ch02 code_tested) - score 940 (next subtask of task-007)
+OR task-207 (Add Level 2 thinking content) - score 355
 
 ## Recent Activity
+
+### 2026-01-27 21:00 - COMPLETED ch02 code_written (task-008) - ITERATION 2
+- What: Created TypeScript code examples for Chapter 2
+- Files created:
+  - examples/ch02/csv-reader.ts - CLI tool demonstrating walkthrough from section 4.3
+  - examples/ch02/email-validation.ts - Result<T,E> error pattern from section 4.5
+  - examples/ch02/validation.test.ts - Test-first pattern with 23 test cases
+  - examples/ch02/sample-data.csv - Sample data for csv-reader demo
+- Concepts demonstrated:
+  - Result<T, E> error handling pattern (consistent across codebase)
+  - CLI argument parsing patterns
+  - TypeScript type guards (isValidEmail)
+  - Test-driven development (tests as specification)
+  - Batch validation processing
+- Tests: 23 tests pass (bun test)
+- TypeScript: All files compile with tsc --noEmit
+- Tasks: task-008 marked complete, stats updated (180 pending, 28 complete)
+- Outcome: Success
+- Next: task-009 (ch02 code_tested) - verify examples run correctly with Exercise Validator
 
 ### 2026-01-27 20:43 - COMPLETED exercises folder structure (task-206) - WARMUP ITERATION
 - What: Created complete exercises folder infrastructure for all 15 chapters
