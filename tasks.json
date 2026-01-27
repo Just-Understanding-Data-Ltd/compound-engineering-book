@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T16:33:51.244Z",
+  "lastUpdated": "2026-01-28T03:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -329,8 +329,10 @@
           "parentId": "task-013",
           "type": "milestone",
           "title": "reviewed",
-          "status": "pending",
-          "score": -105
+          "status": "complete",
+          "completedAt": "2026-01-28T03:00:00Z",
+          "score": -105,
+          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed 2 term introductions: LLM (line 3), UI/UX (line 351). Technical accuracy verified (45 tests pass)."
         },
         {
           "id": "task-017",
@@ -2282,20 +2284,25 @@
         "id": "task-015",
         "title": "ch03 code tested",
         "completedAt": "2026-01-28T02:00:00Z"
+      },
+      {
+        "id": "task-016",
+        "title": "ch03 reviewed",
+        "completedAt": "2026-01-28T03:00:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 179,
+    "pending": 178,
     "inProgress": 0,
-    "complete": 35,
+    "complete": 36,
     "blocked": 0,
     "total": 214
   },
   "checkpoints": {
     "lastGoodCommit": "6c93d1ea3bf9590e1c5ffcfa1bfe4bf759f4a279",
-    "lastSuccessfulTask": "iteration-7",
-    "lastCheckpoint": "2026-01-27T16:33:51Z",
+    "lastSuccessfulTask": "task-016",
+    "lastCheckpoint": "2026-01-28T03:00:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,

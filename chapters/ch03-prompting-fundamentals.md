@@ -1,6 +1,6 @@
 # Chapter 3: Prompting Fundamentals
 
-Prompting is how you communicate intent to an LLM. The difference between a good prompt and a bad one determines whether Claude Code generates working code on the first try or requires five iterations of refinement. This chapter teaches you four techniques that dramatically improve results: chain-of-thought prompting, constraint-based prompting, few-shot examples, and upfront questioning.
+Prompting is how you communicate intent to a Large Language Model (LLM). The difference between a good prompt and a bad one determines whether Claude Code generates working code on the first try or requires five iterations of refinement. This chapter teaches you four techniques that dramatically improve results: chain-of-thought prompting, constraint-based prompting, few-shot examples, and upfront questioning.
 
 The underlying principle is entropy reduction. Every prompt you send creates a probability distribution over possible outputs. Vague prompts produce high entropy: many equally likely outputs, most of them wrong. Precise prompts produce low entropy: few possible outputs, most of them correct. Your job as a prompt author is to reduce entropy by providing constraints that eliminate invalid possibilities before generation begins.
 
@@ -348,7 +348,7 @@ The search space collapsed from hundreds of combinations to one clear path. Impl
 | Scenario | Use Upfront Questioning? |
 |----------|-------------------------|
 | Vague feature request | Yes |
-| UI/UX work | Yes |
+| User Interface/User Experience (UI/UX) work | Yes |
 | New domain you are unfamiliar with | Yes |
 | Clear, well-specified task | No |
 | Bug fix with reproduction steps | No |

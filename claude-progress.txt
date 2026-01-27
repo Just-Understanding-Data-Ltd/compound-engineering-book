@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 02:00)
+## Current Status (Updated: 2026-01-28 03:00)
 - Phase: Chapter Milestones
-- Active: task-016 (ch03 reviewed) - next milestone
-- Last Completed: task-015 (ch03 code_tested)
+- Active: task-017 (ch03 diagrams_complete) - next milestone
+- Last Completed: task-016 (ch03 reviewed)
 - Blockers: None
 
 ## Project State Summary
@@ -12,20 +12,35 @@
 - KB Articles Created: 15/15 new articles (100%) - KB CREATION COMPLETE
 - KB Coverage: 100/104 referenced, 15 created (96% coverage)
 - Diagrams: 7/63 complete (11%) - ch01 done (4), ch02 done (3)
-- Code Examples: ch01 complete, ch02 complete, ch03 code_tested
+- Code Examples: ch01 complete, ch02 complete, ch03 complete
 - Cross-Refs Fixed: ch01 complete (3 references corrected)
 - Total Word Count: 44,268 (target: 45,000-57,000, 78-98% complete)
-- Quality Issues: 244 total (168 style, 18 tech, 58 terms)
+- Quality Issues: 242 total (168 style, 18 tech, 56 terms) - fixed 2 term issues
 - ch01 Milestones: 6/6 COMPLETE - FIRST CHAPTER DONE!
 - ch02 Milestones: 5/5 COMPLETE - SECOND CHAPTER DONE!
-- ch03 Milestones: 2/5 (code_written, code_tested)
+- ch03 Milestones: 3/5 (code_written, code_tested, reviewed)
 - Chapters Complete: 2/15 (ch01, ch02)
 
 ## Next Task
-task-016 (ch03 reviewed) - score 935
-Next: Review ch03 for AI slop, technical accuracy, term introductions
+task-017 (ch03 diagrams_complete) - score 935
+Next: Create ch03 diagrams (prompt-anatomy, constraint-funnel)
 
 ## Recent Activity
+
+### 2026-01-28 03:00 - COMPLETED ch03 reviewed (task-016) - ITERATION 8
+- What: Reviewed Chapter 3 (Prompting Fundamentals) for quality
+- Review Results:
+  - AI slop check: PASS (no em dashes, no blacklisted phrases)
+  - Technical accuracy: PASS (all 45 tests pass, TypeScript compiles)
+  - Term introduction: 2 issues fixed
+- Fixes Applied:
+  - Line 3: "LLM" → "Large Language Model (LLM)"
+  - Line 351: "UI/UX" → "User Interface/User Experience (UI/UX)"
+- Word count: 2,574 (within 2,500-4,000 target)
+- Tasks: task-016 marked complete, stats updated (178 pending, 36 complete)
+- ch03 Status: 3/5 milestones complete (code_written, code_tested, reviewed)
+- Outcome: Success
+- Next: task-017 (ch03 diagrams_complete) - create diagrams
 
 ### 2026-01-28 02:00 - COMPLETED ch03 code_tested (task-015) - ITERATION 7
 - What: Tested and verified all ch03 TypeScript code examples
