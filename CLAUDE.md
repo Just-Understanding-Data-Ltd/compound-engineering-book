@@ -25,22 +25,34 @@ Every session, run these steps FIRST:
 5. Read @LEARNINGS.md               # Accumulated insights
 ```
 
-### Session Workflow
+### Session Workflow (Iteration-Based)
+
+The prompt tells you the iteration number. Use it to decide what to do:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  1. Get up to speed (protocol above)                        │
-│  2. Query next pending task from tasks.json                 │
-│  3. If chapter work: read PRD from tasks.json.prds section  │
-│  4. Complete the single task                                │
-│  5. Verify work (word count, formatting, examples)          │
-│  6. Update tasks.json (status: "pending" -> "complete")     │
-│  7. Update claude-progress.txt (add entry)                  │
-│  8. Git commit with descriptive message                     │
-│  9. Every 5 iterations: Add learnings to @LEARNINGS.md      │
-│  10. Exit cleanly for fresh context                         │
+│  EVERY iteration:                                            │
+│    1. Read CLAUDE.md, tasks.json, claude-progress.txt        │
+│    2. Pick highest-scored pending task                       │
+│    3. Complete ONE task                                      │
+│    4. Update tasks.json (status + recalculate scores)        │
+│    5. Update claude-progress.txt                             │
+│    6. Git commit                                             │
+│                                                              │
+│  IF iteration % 3 == 0 (every 3rd):                          │
+│    → Also curate queue: clean duplicates, adjust priorities  │
+│                                                              │
+│  IF iteration % 6 == 0 (every 6th):                          │
+│    → Also run all 7 review agents IN PARALLEL                │
+│                                                              │
+│  IF iteration % 5 == 0 (every 5th):                          │
+│    → Also add learning to @LEARNINGS.md                      │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+**Parallel reviews:** Use Task tool to launch all 7 at once:
+- slop-checker, diagram-reviewer, tech-accuracy, term-intro-checker
+- oreilly-style, cross-ref-validator, progress-summarizer
 
 ### Critical Rules
 
