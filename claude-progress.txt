@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 06:00)
+## Current Status (Updated: 2026-01-28 07:00)
 - Phase: Chapter Milestones
-- Active: task-019 (ch04 in_progress), next: task-021 (code_tested)
-- Last Completed: task-020 (ch04 code_written) - ITERATION 11
+- Active: task-019 (ch04 in_progress), next: task-022 (reviewed)
+- Last Completed: task-021 (ch04 code_tested) - ITERATION 12
 - Blockers: None - SDK installed, code examples now use Anthropic SDK
 
 ## Project State Summary
@@ -23,10 +23,27 @@
 3. Final KB article: prompt-injection-prevention.md (unblocks diagram phase)
 
 ## Next Task
-task-021 (ch04 code_tested) - score 925
-Pattern: Run tsc --noEmit and bun test to verify all examples work
+task-022 (ch04 reviewed) - score 920
+Pattern: Run AI slop check, term intro check, technical accuracy review
 
 ## Recent Activity
+
+### 2026-01-28 07:00 - COMPLETED ch04 code_tested (task-021) - ITERATION 12
+- What: Verified ch04 TypeScript code examples compile and tests pass
+- Verification Results:
+  - tsc --noEmit: All TypeScript files compile without errors
+  - bun test: 20/20 tests pass (59 expect() calls)
+  - Demo scripts: Run correctly (API key required for actual API calls)
+- Files verified:
+  - examples/ch04/context-impact-demo.ts
+  - examples/ch04/claude-md-validator.ts
+  - examples/ch04/hierarchical-loader.ts
+  - examples/ch04/claude-md.test.ts
+- Tasks: task-021 marked complete
+- Stats: pending 169, inProgress 1, complete 44
+- ch04 Status: 2/5 milestones complete
+- Outcome: Success
+- Next: task-022 (ch04 reviewed) - review for AI slop, technical accuracy, term introductions
 
 ### 2026-01-28 06:00 - COMPLETED ch04 code_written (task-020) - ITERATION 11
 - What: Created TypeScript code examples for Chapter 4 (Writing Your First CLAUDE.md)
