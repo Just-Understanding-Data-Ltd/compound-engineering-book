@@ -519,15 +519,42 @@ update_adaptive_interval() {
     save_adaptive_state
 }
 
-# Check if review is needed (adaptive)
+# Probe interval - maximum iterations between full reviews regardless of adaptive state
+# This catches false positive convergence (blind spots in quick scan)
+MAX_PROBE_INTERVAL=25
+LAST_PROBE_ITERATION=0
+
+load_probe_state() {
+    if [ -f "$METRICS_DIR/last_probe_iteration" ]; then
+        local saved=$(cat "$METRICS_DIR/last_probe_iteration" 2>/dev/null)
+        if [[ "$saved" =~ ^[0-9]+$ ]]; then
+            LAST_PROBE_ITERATION=$saved
+        fi
+    fi
+}
+
+save_probe_state() {
+    echo "$LAST_PROBE_ITERATION" > "$METRICS_DIR/last_probe_iteration"
+}
+
+# Check if review is needed (adaptive + probe)
 should_review() {
     local iteration=$1
 
     # Load persisted state
     load_adaptive_state
+    load_probe_state
 
     local since_last=$((iteration - LAST_REVIEW_ITERATION))
+    local since_probe=$((iteration - LAST_PROBE_ITERATION))
 
+    # PROBE: Force review if too long since last full review (catch blind spots)
+    if [ "$since_probe" -ge "$MAX_PROBE_INTERVAL" ]; then
+        echo "  🔍 PROBE: $since_probe iterations since last review (max: $MAX_PROBE_INTERVAL)"
+        return 0  # Force review
+    fi
+
+    # Normal adaptive check
     if [ "$since_last" -ge "$ADAPTIVE_INTERVAL" ]; then
         return 0  # Yes, review
     else
@@ -540,9 +567,11 @@ run_review_agents() {
     local today=$(date +%Y-%m-%d)
 
     LAST_REVIEW_ITERATION=$iteration
+    LAST_PROBE_ITERATION=$iteration
+    save_probe_state
 
     echo ""
-    echo "=== REVIEW CYCLE (Adaptive Interval: $ADAPTIVE_INTERVAL) ==="
+    echo "=== REVIEW CYCLE (Adaptive Interval: $ADAPTIVE_INTERVAL, Probe: $MAX_PROBE_INTERVAL) ==="
 
     # Count issues BEFORE review
     local issues_before=$(get_issue_score)
