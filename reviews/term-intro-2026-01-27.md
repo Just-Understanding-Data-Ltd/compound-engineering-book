@@ -1,8 +1,8 @@
-# Term Introduction Check - 2026-01-27 (v3 - complete rescan)
+# Term Introduction Check - 2026-01-27 (v4 - updated with OAuth and 2FA findings)
 
 ## Summary
 - Files scanned: 15 chapters
-- Issues found: 54
+- Issues found: 58 (54 previous + 4 new OAuth/2FA issues)
 - Last updated: 2026-01-27
 
 ---
@@ -89,6 +89,8 @@
 | Line | Term | Issue | Suggested Fix |
 |------|------|-------|---------------|
 | 78 | bcrypt | Tool without explanation | Add context: "bcrypt (password hashing library)" |
+| 212 | OAuth | Acronym used without definition | Change to "We'll add OAuth (Open Authorization) and 2FA (Two-Factor Authentication) in subsequent steps." |
+| 212 | 2FA | Acronym used without definition | Change to "We'll add OAuth (Open Authorization) and 2FA (Two-Factor Authentication) in subsequent steps." |
 | 222 | Opus, Sonnet | Model names without introduction | Add "Claude Opus (most capable model) instead of Sonnet (faster, lower-cost model)" |
 | 265 | LLMs | Acronym used without introduction | Change to "Large Language Models (LLMs)" or reference earlier chapter |
 | 361 | Zod | Tool without explanation | Add brief reminder or reference to earlier chapter definition |
@@ -105,9 +107,9 @@
 
 | Line | Term | Issue | Suggested Fix |
 |------|------|-------|---------------|
-| — | — | LLMs properly introduced | Line 9: "Large language models (LLMs) maintain internal state..." |
+| 16-35 | JWT | Multiple uses before definition | JWT is used on lines 16, 21, 26, 31 before being defined on line 35. Consider moving definition to the first use or earlier in the chapter. |
 
-**Note:** This chapter properly introduces LLMs on first use (line 9). Other chapters should follow this pattern.
+**Note:** This chapter properly introduces LLMs on first use (line 9). JWT usage should follow the same pattern.
 
 ### ch11-sub-agent-architecture.md
 
@@ -124,6 +126,7 @@
 |------|------|-------|---------------|
 | 449 | AST | Acronym in heading before expansion | Consider "AST-Grep: Abstract Syntax Tree Search" for heading, or expand in first sentence |
 | 515 | slash command | Feature without explanation | Add "(custom commands defined in .claude/commands/)" on first use |
+| 540 | OAuth | Acronym used without definition | Change to "Usage: `/feature-branch User authentication with OAuth (Open Authorization)`" |
 
 **Note:** Line 470 properly expands AST as "Abstract Syntax Tree" but the section heading on line 449 uses it first.
 
@@ -131,7 +134,8 @@
 
 | Line | Term | Issue | Suggested Fix |
 |------|------|-------|---------------|
-| 9 | LLM | Acronym used | Consider chapter introduction or reference |
+| 3 | LLM | Acronym used in title without definition | Change line 3 to: "Claude Code is a harness around a Large Language Model (LLM). Your job is to build a harness around Claude Code." |
+| 9 | LLM | Acronym used | Properly define in opening paragraph when LLM is first mentioned |
 | 101 | Jaeger | Tool without introduction | Add "Jaeger (distributed tracing platform)" |
 | 159 | DDD | Acronym introduced here | Good - "Domain-Driven Design (DDD)" properly introduced |
 
@@ -140,7 +144,7 @@
 - Line 159: "Domain-Driven Design (DDD)"
 - Line 474: "MCP (Model Context Protocol)"
 
-**Note:** Chapter 13 is an excellent model for term introduction.
+**Note:** Chapter 13 is an excellent model for term introduction, except for the LLM definition at the start.
 
 ### ch14-the-meta-engineer-playbook.md
 
@@ -154,6 +158,7 @@
 | Line | Term | Issue | Suggested Fix |
 |------|------|-------|---------------|
 | 18 | MTok | Abbreviation without explanation | Add "(million tokens)" after first use: "$3/MTok (million tokens)" |
+| 112 | OAuth | Acronym used without definition | Change to "A task like 'redesign the authentication system to support OAuth (Open Authorization)' maps to Opus." |
 | 267 | max_tokens | API parameter without context | Brief explanation that this is an API parameter would help beginners |
 
 **Note:** Model tiers (Haiku, Sonnet, Opus) are well-introduced in context starting at line 46.
@@ -172,9 +177,13 @@ These issues appear in early chapters and affect reader comprehension:
 
 4. **ch04:3** - Temporal: Opening sentence mentions this tool without explanation, potentially confusing readers.
 
-5. **ch08:222** - Opus/Sonnet: Model tier names used without explaining what they are. Readers unfamiliar with Claude models need context.
+5. **ch08:212** - OAuth and 2FA: Both authentication-related acronyms used without definition. This is surprising given the security context.
 
-6. **ch11:64** - hexagonal architecture: Architectural pattern mentioned casually without explanation.
+6. **ch08:222** - Opus/Sonnet: Model tier names used without explaining what they are. Readers unfamiliar with Claude models need context.
+
+7. **ch11:64** - hexagonal architecture: Architectural pattern mentioned casually without explanation.
+
+8. **ch13:3** - LLM: Acronym used in chapter title without ever being formally defined in the chapter.
 
 ---
 
@@ -186,7 +195,7 @@ These chapters demonstrate proper term introduction and can serve as models:
 
 2. **ch10-the-ralph-loop.md**: Opens with proper LLM introduction: "Large language models (LLMs)..."
 
-3. **ch13-building-the-harness.md**: Properly introduces OTEL, DDD, and MCP with full expansions on first use.
+3. **ch13-building-the-harness.md**: Properly introduces OTEL, DDD, and MCP with full expansions on first use (except LLM in title).
 
 4. **ch15-model-strategy-and-cost-optimization.md**: Model tiers (Haiku, Sonnet, Opus) are well-explained in context.
 
@@ -209,11 +218,25 @@ Used without introduction: Chapters 1, 7
 **Recommendation:** Introduce "Domain-Driven Design (DDD)" in Chapter 1 (line 86) where it first appears, with a brief explanation.
 
 ### JWT (JSON Web Token)
-First introduced properly: **Never**
+First introduced properly: **Chapter 2, line 157** (but actually used much earlier in ch10)
 
-Used without introduction: Chapters 2, 5, 11
+Used without introduction or with late definition: Chapters 5, 10 (lines 16-35 before definition), 11
 
-**Recommendation:** Introduce "JSON Web Token (JWT)" on first use in Chapter 2.
+**Recommendation:** Introduce "JSON Web Token (JWT)" on first use in Chapter 2, and ensure ch10 defines it before use on line 16.
+
+### OAuth (Open Authorization)
+First introduced properly: **NEVER - NEW FINDING**
+
+Used without introduction: Chapters 8 (line 212), 12 (line 540), 15 (line 112)
+
+**Recommendation:** Define "OAuth (Open Authorization)" when first mentioned in Chapter 8, line 212.
+
+### 2FA (Two-Factor Authentication)
+First introduced properly: **NEVER - NEW FINDING**
+
+Used without introduction: Chapter 8 (line 212)
+
+**Recommendation:** Define "2FA (Two-Factor Authentication)" on line 212 of Chapter 8.
 
 ### OTEL (OpenTelemetry)
 First introduced properly: **Chapter 13, line 100**
@@ -245,7 +268,7 @@ LLMs (see Chapter 3) function as stateless systems...
 ```
 
 ### Pattern 4: Glossary Consideration
-Given the number of technical terms, consider adding an appendix glossary that chapters can reference.
+Given the number of technical terms (now 58 issues), consider adding an appendix glossary that chapters can reference.
 
 ### Pattern 5: Model Name Introduction
 When discussing Claude model tiers:
@@ -261,16 +284,18 @@ while Sonnet (faster and more cost-effective) handles routine tasks.
 For reference, here are all identified terms that need introduction:
 
 **Acronyms:**
+- 2FA (Two-Factor Authentication) - ch08 [NEW]
 - AST (Abstract Syntax Tree) - ch12
 - CI/CD (Continuous Integration/Continuous Deployment) - ch01
 - CRUD (Create, Read, Update, Delete) - ch01
 - DAG (Directed Acyclic Graph) - ch05
 - DDD (Domain-Driven Design) - ch01, ch07, ch13 (introduced)
 - JSDoc (JavaScript Documentation) - ch02
-- JWT (JSON Web Token) - ch02, ch05, ch11
+- JWT (JSON Web Token) - ch02, ch05, ch10 (late definition), ch11
 - LLM (Large Language Model) - ch03, ch04, ch05, ch06, ch08, ch09, ch10 (introduced), ch13
 - MCP (Model Context Protocol) - ch13 (introduced)
 - MTok (Million Tokens) - ch15
+- OAuth (Open Authorization) - ch08, ch12, ch15 [NEW - NOT INTRODUCED]
 - OTEL (OpenTelemetry) - ch01, ch13 (introduced)
 - QA (Quality Assurance) - ch11
 - RLS (Row-Level Security) - ch04
@@ -317,9 +342,11 @@ For reference, here are all identified terms that need introduction:
 
 ## Status Legend
 - (introduced) = Properly introduced in at least one chapter
+- [NEW] = Newly identified issues
 - No mark = Needs introduction in all occurrences
 
 ---
 
-**Review completed:** 2026-01-27
+**Review completed:** 2026-01-27 (v4)
 **Reviewer:** term-intro-checker agent
+**Updates:** Added OAuth (3 instances), 2FA (1 instance), and refined ch10 JWT analysis
