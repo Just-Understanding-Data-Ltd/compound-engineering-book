@@ -91,7 +91,7 @@ const CACHE_FILE = resolve(process.cwd(), '.exercise-cache.json')
 const TEMP_DIR = resolve(process.cwd(), '.exercise-validation-tmp')
 const CACHE_VERSION = '2.0'
 const MAX_OUTPUT_SIZE = 10 * 1024 // 10KB
-const DEFAULT_TIMEOUT_MS = 30000 // 30 seconds
+const DEFAULT_TIMEOUT_MS = 120000 // 2 minutes
 
 // Languages we can execute
 const EXECUTABLE_LANGUAGES = new Set(['bash', 'sh', 'typescript', 'ts', 'javascript', 'js'])
@@ -146,39 +146,61 @@ function truncate(text: string, maxLen: number): string {
 async function runScript(
   scriptPath: string,
   args: string[],
-  options: { silent?: boolean } = {}
-): Promise<ScriptCacheEntry> {
+  options: { silent?: boolean; timeoutMs?: number } = {}
+): Promise<ScriptCacheEntry & { timedOut?: boolean }> {
   const content = readFileSync(scriptPath, 'utf-8')
   const hash = computeHash(content)
   const startTime = Date.now()
+  const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS
+
+  // Determine command based on file extension
+  let cmd: string[]
+  if (scriptPath.endsWith('.sh') || scriptPath.endsWith('.bash')) {
+    cmd = ['bash', scriptPath, ...args]
+  } else {
+    cmd = ['bun', 'run', scriptPath, ...args]
+  }
 
   if (!options.silent) {
     console.log(`\n${'='.repeat(60)}`)
     console.log(`Running: ${basename(scriptPath)}`)
     console.log(`Hash: ${hash}`)
+    console.log(`Timeout: ${timeoutMs / 1000}s`)
     console.log(`${'='.repeat(60)}\n`)
   }
 
   const proc = spawn({
-    cmd: ['bun', 'run', scriptPath, ...args],
+    cmd,
     stdout: 'pipe',
     stderr: 'pipe',
     env: {
       ...process.env,
       FORCE_COLOR: '1',
+      CI: '1',
     }
   })
 
   const stdoutChunks: Uint8Array[] = []
   const stderrChunks: Uint8Array[] = []
+  let timedOut = false
+
+  // Set up timeout
+  const timeout = setTimeout(() => {
+    timedOut = true
+    proc.kill()
+  }, timeoutMs)
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const readStream = async (reader: any, chunks: Uint8Array[], stream?: NodeJS.WriteStream) => {
-    while (true) {
-      const { done, value } = await reader.read()
-      if (done) break
-      chunks.push(value)
-      if (stream) stream.write(value)
+    try {
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        chunks.push(value)
+        if (stream) stream.write(value)
+      }
+    } catch {
+      // Stream closed (timeout or normal exit)
     }
   }
 
@@ -186,6 +208,8 @@ async function runScript(
     readStream(proc.stdout.getReader(), stdoutChunks, options.silent ? undefined : process.stdout),
     readStream(proc.stderr.getReader(), stderrChunks, options.silent ? undefined : process.stderr)
   ])
+
+  clearTimeout(timeout)
 
   const exitCode = await proc.exited
   const duration = Date.now() - startTime
@@ -195,7 +219,11 @@ async function runScript(
 
   if (!options.silent) {
     console.log(`\n${'='.repeat(60)}`)
-    console.log(`Completed in ${duration}ms with exit code ${exitCode}`)
+    if (timedOut) {
+      console.log(`TIMED OUT after ${duration}ms`)
+    } else {
+      console.log(`Completed in ${duration}ms with exit code ${exitCode}`)
+    }
     console.log(`${'='.repeat(60)}\n`)
   }
 
@@ -203,10 +231,11 @@ async function runScript(
     type: 'script',
     hash,
     lastRun: new Date().toISOString(),
-    exitCode,
+    exitCode: timedOut ? -1 : exitCode,
     stdout: truncate(stdout, MAX_OUTPUT_SIZE),
-    stderr: truncate(stderr, MAX_OUTPUT_SIZE),
-    duration
+    stderr: timedOut ? `Execution timed out after ${timeoutMs}ms` : truncate(stderr, MAX_OUTPUT_SIZE),
+    duration,
+    timedOut,
   }
 }
 
@@ -646,8 +675,10 @@ async function handleRun(args: string[]): Promise<void> {
     process.exit(1)
   }
 
-  if (!absPath.endsWith('.ts') && !absPath.endsWith('.tsx') && !absPath.endsWith('.js')) {
-    console.error(`Error: Expected .ts, .tsx, or .js file, got: ${scriptPath}`)
+  const validExtensions = ['.ts', '.tsx', '.js', '.sh', '.bash']
+  const hasValidExtension = validExtensions.some(ext => absPath.endsWith(ext))
+  if (!hasValidExtension) {
+    console.error(`Error: Expected .ts, .tsx, .js, .sh, or .bash file, got: ${scriptPath}`)
     process.exit(1)
   }
 
@@ -681,8 +712,16 @@ async function handleRun(args: string[]): Promise<void> {
 
   try {
     const result = await runScript(absPath, scriptArgs)
-    cache.entries[cacheKey] = result
+    // Store without timedOut field in cache (it's derived from exitCode -1)
+    const { timedOut: _, ...cacheResult } = result
+    cache.entries[cacheKey] = cacheResult
     saveCache(cache)
+
+    if (result.timedOut) {
+      console.log(`\nScript timed out. Use --force to re-run.`)
+      process.exit(1)
+    }
+
     console.log(`Result cached. Use 'cache --status ${scriptPath}' to check.`)
     process.exit(result.exitCode)
   } catch (e) {
@@ -748,6 +787,13 @@ async function handleValidate(args: string[]): Promise<void> {
 
   saveCache(cache)
 
+  // Calculate score (0-100)
+  // Score = passed / (passed + failed) * 100
+  // Skipped blocks don't count toward the score
+  const testedBlocks = successCount + failCount
+  const score = testedBlocks === 0 ? 100 : Math.round((successCount / testedBlocks) * 100)
+  const isPerfect = failCount === 0
+
   console.log(`
 Summary
 =======
@@ -756,6 +802,10 @@ Code blocks: ${totalBlocks}
   ✓ Passed: ${successCount}
   ✗ Failed: ${failCount}
   ⊘ Skipped: ${skipCount}
+
+${'='.repeat(40)}
+VALIDATION SCORE: ${score}/100 ${isPerfect ? '✓ PERFECT' : '✗ NEEDS WORK'}
+${'='.repeat(40)}
 `)
 
   const failures = allResults.filter(r => !r.success && !r.skipped)
@@ -769,10 +819,11 @@ Code blocks: ${totalBlocks}
         console.log(`    ${f.stderr.slice(0, 200)}`)
       }
     }
-    process.exit(1)
   }
 
-  process.exit(0)
+  // Exit with score-based code for RALPH
+  // Exit 0 only if perfect (100/100)
+  process.exit(isPerfect ? 0 : 1)
 }
 
 function handleCache(args: string[]): void {

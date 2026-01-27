@@ -70,6 +70,14 @@ describe('Exercise Validator', () => {
       expect(result.stdout).toContain('Timestamp:')
     })
 
+    it('should run a bash script', async () => {
+      const result = await runValidator(['run', join(FIXTURES_DIR, 'hello.sh')])
+
+      expect(result.exitCode).toBe(0)
+      expect(result.stdout).toContain('Hello from bash test fixture!')
+      expect(result.stdout).toContain('Timestamp:')
+    })
+
     it('should pass arguments to the script', async () => {
       const result = await runValidator(['run', join(FIXTURES_DIR, 'hello.ts'), 'arg1', 'arg2'])
 
@@ -170,10 +178,10 @@ describe('Exercise Validator', () => {
       expect(result.stderr).toContain('Script not found')
     })
 
-    it('should reject non-TypeScript/JavaScript files', async () => {
+    it('should reject non-executable files', async () => {
       const result = await runValidator(['run', 'package.json'])
       expect(result.exitCode).toBe(1)
-      expect(result.stderr).toContain('Expected .ts, .tsx, or .js file')
+      expect(result.stderr).toContain('Expected .ts, .tsx, .js, .sh, or .bash file')
     })
   })
 
@@ -200,6 +208,50 @@ describe('Exercise Validator', () => {
 
       expect(result.exitCode).toBe(0)
       expect(result.stdout).toContain('Hello from test fixture!')
+    })
+  })
+
+  describe('validate command - Score reporting', () => {
+    it('should report 100/100 score when all blocks pass', async () => {
+      const result = await runValidator(['validate', join(FIXTURES_DIR, 'test-validation.md'), '-v'])
+
+      expect(result.exitCode).toBe(0)
+      expect(result.stdout).toContain('VALIDATION SCORE: 100/100')
+      expect(result.stdout).toContain('PERFECT')
+    })
+
+    it('should report partial score when some blocks fail', async () => {
+      const result = await runValidator(['validate', join(FIXTURES_DIR, 'test-with-failure.md'), '-v'])
+
+      expect(result.exitCode).toBe(1)
+      expect(result.stdout).toContain('VALIDATION SCORE: 50/100')
+      expect(result.stdout).toContain('NEEDS WORK')
+    })
+
+    it('should not count skipped blocks in score calculation', async () => {
+      const result = await runValidator(['validate', join(FIXTURES_DIR, 'test-validation.md'), '-v'])
+
+      // test-validation.md has 2 passing and 1 skipped
+      // Score should be 100 (2/2 passed, skipped doesn't count)
+      expect(result.stdout).toContain('Skipped: 1')
+      expect(result.stdout).toContain('VALIDATION SCORE: 100/100')
+    })
+
+    it('should show summary with pass/fail/skip counts', async () => {
+      const result = await runValidator(['validate', join(FIXTURES_DIR, 'test-validation.md'), '-v'])
+
+      expect(result.stdout).toContain('Summary')
+      expect(result.stdout).toContain('Passed:')
+      expect(result.stdout).toContain('Failed:')
+      expect(result.stdout).toContain('Skipped:')
+    })
+
+    it('should list failures with file and line number', async () => {
+      const result = await runValidator(['validate', join(FIXTURES_DIR, 'test-with-failure.md'), '-v'])
+
+      expect(result.stdout).toContain('Failures:')
+      expect(result.stdout).toContain('test-with-failure.md:')
+      expect(result.stdout).toContain('[typescript]')
     })
   })
 })
