@@ -913,6 +913,60 @@ Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
 
 ---
 
+## Known Failure Modes (for TypeScript Port)
+
+### EPIPE Error (Error: write EPIPE / ERR_STREAM_DESTROYED)
+
+**What it is:**
+EPIPE is a Unix error that occurs when a process tries to write to a pipe whose reading end has been closed. In Node.js, this manifests as `Error: write EPIPE` or `Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed`.
+
+**When it happens:**
+- Claude Code CLI running in print mode (`-p`) for long-running operations
+- The timeout command (gtimeout) terminates the process before output completes
+- Parent shell/script closes stdout before Claude finishes writing
+- Particularly common during review cycles that spawn multiple sub-agents
+
+**Root cause:**
+The Claude CLI writes output asynchronously. When the receiving pipe closes (due to timeout, parent exit, or signal), pending writes fail with EPIPE. This is a race condition between output generation and pipe lifecycle.
+
+**Affected versions:**
+- Claude Code 2.1.17-2.1.20 (all have this issue in print mode)
+- More frequent with complex prompts that generate lots of output
+
+**Workarounds:**
+1. Capture output to file first, then cat: `cmd > file 2>&1; cat file`
+2. Increase timeout significantly (600s+ for review cycles)
+3. Detect EPIPE in output and treat as retryable failure
+4. Use `--signal=TERM --kill-after=30` for graceful timeout
+
+**TypeScript port considerations:**
+- Use proper stream error handling with `.on('error', handler)`
+- Consider buffering output before writing to avoid partial writes
+- Implement retry logic for EPIPE errors
+- Don't rely on stdout for long-running operations; write to files instead
+
+### API Concurrency Error (400: tool use concurrency issues)
+
+**What it is:**
+Claude API returns HTTP 400 with message about "tool use concurrency issues" or "tool_use ids were found without tool_result blocks".
+
+**When it happens:**
+- Multiple parallel tool calls in a single prompt
+- Multiple Claude sessions competing for API slots
+- Bug in Claude Code 2.1.18-2.1.20 print mode
+
+**Workaround:**
+- Downgrade to Claude Code 2.1.17: `npm install -g @anthropic-ai/claude-code@2.1.17`
+- Run tool calls sequentially instead of parallel
+- Close other Claude sessions
+
+**TypeScript port considerations:**
+- Implement request queuing to avoid concurrent tool calls
+- Add exponential backoff for 400 errors
+- Track tool_use IDs and ensure matching tool_result blocks
+
+---
+
 ## External References
 
 - [Anthropic: Effective Harnesses for Long-Running Agents](https://anthropic.com/engineering/effective-harnesses-for-long-running-agents)

@@ -290,27 +290,36 @@ fi
 CLAUDE_BIN="${CLAUDE_BIN:-/Users/jamesaphoenix/.npm-global/bin/claude}"
 if [ ! -x "$CLAUDE_BIN" ]; then
     CLAUDE_BIN="claude"  # Fallback to PATH
+    echo "WARNING: Using fallback claude from PATH"
 fi
+echo "Claude binary: $CLAUDE_BIN"
+echo "Claude version: $($CLAUDE_BIN --version 2>/dev/null || echo 'unknown')"
 
 run_claude() {
     local prompt_file="$1"
     local output_file="$PROMPT_DIR/last_output.txt"
     local exit_code=0
 
+    # Run with graceful timeout (SIGTERM, then SIGKILL after 30s)
     if [ -n "$TIMEOUT_CMD" ]; then
-        $TIMEOUT_CMD $ITERATION_TIMEOUT $CLAUDE_BIN --dangerously-skip-permissions -p - < "$prompt_file" 2>&1 | tee "$output_file"
-        exit_code=${PIPESTATUS[0]}
+        $TIMEOUT_CMD --signal=TERM --kill-after=30 $ITERATION_TIMEOUT $CLAUDE_BIN --dangerously-skip-permissions -p - < "$prompt_file" > "$output_file" 2>&1
+        exit_code=$?
     else
-        $CLAUDE_BIN --dangerously-skip-permissions -p - < "$prompt_file" 2>&1 | tee "$output_file"
-        exit_code=${PIPESTATUS[0]}
+        $CLAUDE_BIN --dangerously-skip-permissions -p - < "$prompt_file" > "$output_file" 2>&1
+        exit_code=$?
     fi
 
-    # Detect API concurrency errors and add extra cooldown
-    if grep -q "concurrency\|rate.limit\|429\|too many" "$output_file" 2>/dev/null; then
+    # Output the result
+    cat "$output_file" 2>/dev/null
+
+    # EPIPE ERROR HANDLING: Detect and handle gracefully
+    # EPIPE occurs when Claude CLI tries to write to a closed pipe (stdout terminated early)
+    # This is a known issue with Claude Code 2.1.17 in print mode during long operations
+    if grep -q "EPIPE\|ERR_STREAM_DESTROYED" "$output_file" 2>/dev/null; then
         echo ""
-        echo "⚠ API CONCURRENCY ERROR detected - adding 60s cooldown"
-        echo "  (Parallel sub-agent calls may have exceeded rate limits)"
-        sleep 60
+        echo "⚠ EPIPE ERROR detected (pipe closed during write)"
+        echo "  This is a known Claude Code bug. Treating as retryable failure."
+        return 1  # Mark as failed so RALPH retries
     fi
 
     return $exit_code
