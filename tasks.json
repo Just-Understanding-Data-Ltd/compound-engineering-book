@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T19:00:00Z",
+  "lastUpdated": "2026-01-27T23:30:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -536,7 +536,7 @@
       "chapter": "ch07",
       "title": "ch07: Quality Gates That Compound",
       "description": "Complete remaining milestones for Quality Gates That Compound",
-      "status": "pending",
+      "status": "in_progress",
       "priority": "high",
       "subtasks": [
         {
@@ -2503,20 +2503,20 @@
     ]
   },
   "stats": {
-    "pending": 143,
-    "inProgress": 0,
-    "complete": 71,
+    "pending": 140,
+    "inProgress": 1,
+    "complete": 73,
     "blocked": 0,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "911d2fba33c3f5ca2ffe1c1d42d1da31bd0d4e39",
-    "lastSuccessfulTask": "iteration-3",
-    "lastCheckpoint": "2026-01-27T18:33:42Z",
+    "lastGoodCommit": "5f8db9096bf5b97449229e86cec153ca0f1a2693",
+    "lastSuccessfulTask": "iteration-4",
+    "lastCheckpoint": "2026-01-27T18:42:47Z",
     "failedAttempts": 11,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
-    "lastCuration": "2026-01-27T22:30:00Z"
+    "lastCuration": "2026-01-27T23:30:00Z"
   },
   "config": {
     "maxConsecutiveFailures": 3,
@@ -2524,25 +2524,26 @@
     "healthCheckInterval": 300
   },
   "curatorNotes": {
-    "lastRun": "2026-01-27T22:30:00Z",
-    "iteration": 3,
-    "tasksFixed": 0,
+    "lastRun": "2026-01-27T23:30:00Z",
+    "iteration": 5,
+    "tasksFixed": 1,
     "duplicatesFound": 0,
-    "statusInconsistenciesFound": 0,
+    "statusInconsistenciesFound": 1,
     "priorityIssues": [],
     "queueHealth": "EXCELLENT - All tasks properly prioritized",
     "findings": {
       "duplicateTaskIds": "NONE - Queue is clean",
-      "statusConsistency": "ALL CONSISTENT - ch06 5/5 milestones complete, ch07 next",
-      "statsVerification": "VERIFIED - pending 143, complete 71, total 214",
-      "queuePriorities": "CORRECT - task-037 (ch07 milestones, score 915) is next",
-      "nextTaskAnalysis": "ch06 COMPLETE. Chapters fully complete: 6/15 (ch01-ch06). Next: ch07 Quality Gates That Compound."
+      "statusConsistency": "FIXED - task-037 changed from pending to in_progress (has 2 complete subtasks)",
+      "statsVerification": "FIXED - pending 140, inProgress 1, complete 73, total 214",
+      "queuePriorities": "CORRECT - task-040 (ch07 reviewed, score -105) is next milestone within ch07",
+      "nextTaskAnalysis": "ch07 IN PROGRESS: 2/5 milestones complete (code_written, code_tested). Next: task-040 reviewed."
     },
     "recommendations": [
-      "IMMEDIATE: Start task-038 (ch07 code_written) - first milestone for ch07",
-      "Status: ch06 5/5 milestones COMPLETE. Chapters complete: 6/15 (ch01-ch06).",
-      "Diagrams: 16 total across ch01-ch06 (3+3+2+3+3+2 high-priority complete)",
-      "Progress: 33% of chapters complete, on track for completion"
+      "IMMEDIATE: task-040 (ch07 reviewed) - review for AI slop, term introductions, technical accuracy",
+      "THEN: task-041 (ch07 diagrams_complete) - create 3 high-priority diagrams",
+      "THEN: task-042 (ch07 final) - complete quality gate checklist",
+      "Status: ch06 COMPLETE. Chapters complete: 6/15 (ch01-ch06, 40%)",
+      "Progress: 34% tasks complete (73/214), 40% chapters complete"
     ]
   }
 }

@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 23:00)
+## Current Status (Updated: 2026-01-27 23:30)
 - Phase: Chapter Milestones (6 of 15 complete, 40%)
 - Active: ch07 milestones (task-040 reviewed next)
-- Last Completed: task-038, task-039 (ch07 code_written, code_tested) - ITERATION 4
+- Last Completed: Queue curation - ITERATION 5 (curation)
 - Blockers: None active
 
 ## Project State Summary
@@ -26,6 +26,20 @@ None active
 3. task-042 (ch07 final)
 
 ## Recent Activity
+
+### 2026-01-27 23:30 - Queue Curation - ITERATION 5 (curation)
+- What: Curated task queue per RALPH loop schedule (iteration % 3 == 0 equivalent)
+- Issues Found:
+  - Status inconsistency: task-037 was "pending" but has 2 complete subtasks (should be "in_progress")
+  - Stats mismatch: reported pending 141, inProgress 0; corrected to pending 140, inProgress 1
+- Fixes Applied:
+  - task-037 status: "pending" → "in_progress"
+  - stats: pending 141 → 140, inProgress 0 → 1
+  - lastUpdated and curatorNotes updated
+- No duplicates found, no priority issues
+- Queue Health: EXCELLENT
+- Outcome: Success
+- Next: task-040 (ch07 reviewed)
 
 ### 2026-01-27 23:00 - COMPLETED task-038, task-039: ch07 code_written, code_tested - ITERATION 4
 - What: Created TypeScript code examples for Chapter 7 (Quality Gates That Compound)
