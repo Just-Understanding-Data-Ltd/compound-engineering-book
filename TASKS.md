@@ -61,7 +61,7 @@
 - [x] Create @kb/agent-memory-patterns.md (checkpoint/resume, state persistence) (Completed: 2026-01-28)
 - [x] Create @kb/human-in-the-loop-patterns.md (HITL implementation patterns) (Completed: 2026-01-28)
 - [x] Create @kb/event-sourcing-agents.md (event log architecture for agent state) (Completed: 2026-01-28)
-- [ ] Create @kb/tool-call-validation.md (JSON schema validation for tool outputs)
+- [x] Create @kb/tool-call-validation.md (JSON schema validation for tool outputs) (Completed: 2026-01-28)
 - [ ] Create @kb/ci-cd-agent-patterns.md (GitHub Actions patterns for agent verification)
 - [ ] Create @kb/mutual-information-context.md (measuring context effectiveness)
 - [ ] Create @kb/token-budgeting-strategies.md (allocating context by information density)

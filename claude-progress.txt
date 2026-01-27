@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 15:00)
+## Current Status (Updated: 2026-01-28 16:00)
 - Phase: Phase 2 COMPLETE - Creating KB articles and Diagrams
 - Active: KB article creation
-- Last Completed: @kb/event-sourcing-agents.md
+- Last Completed: @kb/tool-call-validation.md
 - Blockers: None
 
 ## Project State Summary
@@ -12,15 +12,25 @@
 - KB Article Index: Updated at prds/kb-article-index.md (100 referenced + 31 to create)
 - KB Coverage: 100/104 articles referenced (96%)
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
-- KB Articles Created: 7/15 new articles (sub-agent-context-hierarchy.md, tool-access-control.md, orchestration-patterns.md, actor-critic-pattern.md, agent-memory-patterns.md, human-in-the-loop-patterns.md, event-sourcing-agents.md)
+- KB Articles Created: 8/15 new articles (sub-agent-context-hierarchy.md, tool-access-control.md, orchestration-patterns.md, actor-critic-pattern.md, agent-memory-patterns.md, human-in-the-loop-patterns.md, event-sourcing-agents.md, tool-call-validation.md)
 - Diagrams: 0/75 complete (shells created)
 - Total Word Count: 44,262 (target: 53,000-72,000, 61-82% complete)
 - Quality Issues: 236 total (53 slop, 18 tech, 58 term, 13 xref, 94 style)
 
 ## Next Task
-Continue KB article creation: Create @kb/tool-call-validation.md (JSON schema validation for tool outputs)
+Continue KB article creation: Create @kb/ci-cd-agent-patterns.md (GitHub Actions patterns for agent verification)
 
 ## Recent Activity
+
+### 2026-01-28 16:00 - Created @kb/tool-call-validation.md
+- What: Created new KB article covering JSON schema validation for tool outputs
+- Files: ~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/tool-call-validation.md
+- Word Count: ~2,800 words
+- Content: Why validate tool outputs (malformed JSON, missing fields, wrong types, invalid values, injection), core validation architecture, Zod schema definitions (base tool call, specific tools, discriminated unions), validation function with error handling, type-safe execution patterns, implementation patterns (schema registry, error recovery with retry, structured output mode, coercion for common mistakes, validation with logging), advanced patterns (contextual validation, semantic validation, chained validation for workflows), common pitfalls (trusting model types, validation without error handling, loose strings, missing defaults, no metrics), benefits (runtime safety, type inference, documentation as code, testability)
+- Key Concepts: Validation at boundaries before execution, Zod safeParse for error handling, discriminated unions for tool type narrowing, coercion for predictable LLM mistakes, validation metrics for prompt improvement
+- Cross-references: Links to 12-factor-agents.md, verification-ladder.md, making-states-illegal.md, type-driven-development.md, constraint-based-prompting.md, agent-reliability-chasm.md, error-messages-as-training.md, integration-testing-agents.md
+- Outcome: Success
+- Next: Create @kb/ci-cd-agent-patterns.md
 
 ### 2026-01-28 15:00 - Created @kb/event-sourcing-agents.md
 - What: Created new KB article covering event sourcing architecture for AI agents
