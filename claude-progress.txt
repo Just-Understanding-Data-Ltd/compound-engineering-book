@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 20:00)
+## Current Status (Updated: 2026-01-27 21:30)
 - Phase: Chapter Milestones (7 of 15 complete, 47%)
-- Active: Critical term fixes complete, ready for ch08 milestones
-- Last Completed: task-104 Fix undefined MTok in Ch15 - ITERATION 3
+- Active: ch08 in_progress (2/5 milestones done), next: reviewed milestone
+- Last Completed: Queue curation - removed duplicate, fixed stats
 - Blockers: None active
 
 ## Project State Summary
@@ -15,7 +15,7 @@
 - Code Examples: 7 chapters tested (47%)
 - Word Count: 44,313 (target 45,000-57,000, 76-98% complete)
 - Quality Issues: 286 tracked (AI slop 55, tech 23, terms 58, cross-refs 3, style 147)
-- Tasks Complete: 76/214 (36%)
+- Tasks Complete: 47/109 (43%)
 
 ## Critical Blockers
 None active
@@ -26,6 +26,21 @@ None active
 3. task-055 (ch10: The RALPH Loop) - score 900
 
 ## Recent Activity
+
+### 2026-01-27 21:30 - Queue Curation
+- What: Curated task queue, cleaned duplicates, fixed stats
+- Issues Found:
+  - Duplicate subtask: task-111 and task-112 both titled "Cross-reference check" in task-097
+  - Stats mismatch: pending 63 reported, correct count is 61 after removing duplicate
+- Fixes Applied:
+  - Removed duplicate task-112
+  - Updated stats: pending 63 → 61, total 110 → 109
+  - Reset checkpoint counters (consecutiveFailures, failedAttempts)
+  - Updated lastCheckpoint timestamp
+- Queue Health: EXCELLENT
+- No blocked tasks, priorities unchanged
+- Outcome: Success
+- Next: task-043 (ch08: Error Handling & Debugging) - reviewed milestone (score 910)
 
 ### 2026-01-27 20:00 - COMPLETED task-104: Fix undefined MTok abbreviation in Ch15 - ITERATION 3
 - What: Fixed undefined "MTok" abbreviation in Chapter 15 (Model Strategy & Cost Optimization)

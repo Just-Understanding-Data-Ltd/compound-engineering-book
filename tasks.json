@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T20:00:00Z",
+  "lastUpdated": "2026-01-27T21:30:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -618,7 +618,7 @@
       "chapter": "ch08",
       "title": "ch08: Error Handling & Debugging",
       "description": "Complete remaining milestones for Error Handling & Debugging",
-      "status": "pending",
+      "status": "in_progress",
       "priority": "high",
       "subtasks": [
         {
@@ -626,16 +626,18 @@
           "parentId": "task-043",
           "type": "milestone",
           "title": "code written",
-          "status": "pending",
-          "score": -95
+          "status": "complete",
+          "score": -95,
+          "completedAt": "2026-01-27T21:00:00Z"
         },
         {
           "id": "task-045",
           "parentId": "task-043",
           "type": "milestone",
           "title": "code tested",
-          "status": "pending",
-          "score": -100
+          "status": "complete",
+          "score": -100,
+          "completedAt": "2026-01-27T21:00:00Z"
         },
         {
           "id": "task-046",
@@ -1112,14 +1114,6 @@
           "score": -135
         },
         {
-          "id": "task-112",
-          "parentId": "task-097",
-          "type": "review",
-          "title": "Cross-reference check",
-          "status": "pending",
-          "score": -135
-        },
-        {
           "id": "task-113",
           "parentId": "task-097",
           "type": "review",
@@ -1197,17 +1191,18 @@
     ]
   },
   "stats": {
-    "pending": 65,
-    "inProgress": 0,
-    "complete": 45,
+    "pending": 61,
+    "inProgress": 1,
+    "complete": 47,
     "blocked": 0,
-    "total": 110
+    "total": 109
   },
   "checkpoints": {
-    "lastGoodCommit": "c67a2f52d219074fcc8903b849e4b5fc99e2c016",
-    "lastSuccessfulTask": "iteration-3",
-    "lastCheckpoint": "2026-01-27T20:00:00Z",
+    "lastGoodCommit": "b850b7582419c1e5b0be90c78bd74797105986fa",
+    "lastSuccessfulTask": "queue-curation",
+    "lastCheckpoint": "2026-01-27T21:30:00Z",
     "consecutiveFailures": 0,
-    "circuitBreakerTripped": false
+    "circuitBreakerTripped": false,
+    "failedAttempts": 0
   }
 }
