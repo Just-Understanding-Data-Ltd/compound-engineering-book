@@ -1,8 +1,11 @@
-# Term Introduction Check - 2026-01-27
+# Term Introduction Check - 2026-01-27 (v3 - complete rescan)
 
 ## Summary
-- Files scanned: 13
-- Issues found: 52
+- Files scanned: 15 chapters
+- Issues found: 54
+- Last updated: 2026-01-27
+
+---
 
 ## Issues by File
 
@@ -28,6 +31,7 @@
 | Line | Term | Issue | Suggested Fix |
 |------|------|-------|---------------|
 | 17 | JSDoc | Acronym/tool used before introduction | Change to "JSDoc (JavaScript documentation comments)" on first use |
+| 29 | WSL2 | Acronym used without introduction | Change to "Windows Subsystem for Linux 2 (WSL2)" on first use |
 | 157 | JWT | Acronym used before introduction | Change to "JSON Web Token (JWT)" on first use |
 
 ### ch03-prompting-fundamentals.md
@@ -35,6 +39,7 @@
 | Line | Term | Issue | Suggested Fix |
 |------|------|-------|---------------|
 | 3 | LLM | Acronym used before introduction | Change to "Large Language Model (LLM)" on first use |
+| 5-6 | entropy | Technical term used without context | Add brief explanation: "entropy (a measure of uncertainty in possible outputs)" |
 | 28 | Zod | Tool without explanation | Add "Zod (TypeScript schema validation library)" on first use |
 
 ### ch04-writing-your-first-claude-md.md
@@ -42,7 +47,7 @@
 | Line | Term | Issue | Suggested Fix |
 |------|------|-------|---------------|
 | 3 | Temporal | Tool without explanation | Add "Temporal (workflow orchestration platform)" on first use |
-| 10 | LLMs | Acronym used before introduction | Change to "Large Language Models (LLMs)" or reference Chapter 3 definition |
+| 11 | LLMs | Acronym used before introduction | Change to "Large Language Models (LLMs)" or reference Chapter 3 definition |
 | 67 | Supabase | Tool without explanation | Add "Supabase (open-source Firebase alternative)" on first use |
 | 68 | RLS | Acronym used before introduction | Change to "Row-Level Security (RLS)" on first use |
 | 167 | tRPC | Tool without explanation | Add "tRPC (TypeScript RPC framework)" on first use |
@@ -54,6 +59,8 @@
 | Line | Term | Issue | Suggested Fix |
 |------|------|-------|---------------|
 | 5 | LLM | Acronym used before introduction | Change to "Large Language Model (LLM)" or add cross-reference to ch03 |
+| 91 | JWT | Acronym used before introduction | Change to "JSON Web Token (JWT)" on first use |
+| 126 | idempotency | Jargon mentioned without explanation | Add "idempotency (operations that produce the same result when repeated)" |
 | 391 | DAG | Acronym used before introduction | Change to "Directed Acyclic Graph (DAG)" on first use |
 
 ### ch06-the-verification-ladder.md
@@ -64,7 +71,7 @@
 | 13 | Z3 | Tool without explanation | Add "Z3 (automated theorem prover)" on first use |
 | 14 | fast-check | Tool without explanation | Add "fast-check (property-based testing library)" on first use |
 | 14 | Hypothesis | Tool without explanation | Add "Hypothesis (Python property-based testing library)" on first use |
-| 21 | Zod | Tool without explanation | Add "Zod (TypeScript schema validation library)" on first use |
+| 21 | Zod | Tool referenced again | Consider adding brief reminder or reference to earlier chapter definition |
 | 21 | io-ts | Tool without explanation | Add "io-ts (TypeScript runtime type validation)" on first use |
 | 325 | LLM | Acronym used without chapter introduction | Add introduction or cross-reference to ch03 |
 
@@ -74,28 +81,31 @@
 |------|------|-------|---------------|
 | 167 | DDD | Acronym used before introduction | Move full form "Domain-Driven Design (DDD)" to line 167 instead of line 469 |
 | 234 | hooks | Jargon introduced abruptly | Consider adding "(automated scripts triggered by tool actions)" after first use |
+| 398 | Biome | Tool without introduction | Add brief description: "Biome (fast formatter and linter)" |
+| 399 | ESLint | Tool without introduction | Add brief description: "ESLint (JavaScript/TypeScript linter)" |
 
 ### ch08-error-handling-and-debugging.md
 
 | Line | Term | Issue | Suggested Fix |
 |------|------|-------|---------------|
-| 86 | bcrypt | Tool without explanation | Add "bcrypt (password hashing library)" on first use |
+| 78 | bcrypt | Tool without explanation | Add context: "bcrypt (password hashing library)" |
 | 222 | Opus, Sonnet | Model names without introduction | Add "Claude Opus (most capable model) instead of Sonnet (faster, lower-cost model)" |
+| 265 | LLMs | Acronym used without introduction | Change to "Large Language Models (LLMs)" or reference earlier chapter |
 | 361 | Zod | Tool without explanation | Add brief reminder or reference to earlier chapter definition |
 
 ### ch09-context-engineering-deep-dive.md
 
 | Line | Term | Issue | Suggested Fix |
 |------|------|-------|---------------|
-| — | — | No major issues | Chapter explains concepts well as they are introduced |
+| 7 | LLM | Acronym used | Consider adding chapter introduction or cross-reference |
 
-**Note:** This chapter is a model for term introduction. It properly explains entropy, mutual information, channel capacity, and other technical concepts as they appear.
+**Note:** This chapter is a model for term introduction. It properly explains entropy, mutual information, channel capacity, and other technical concepts as they appear. The information theory terminology is well-introduced.
 
 ### ch10-the-ralph-loop.md
 
 | Line | Term | Issue | Suggested Fix |
 |------|------|-------|---------------|
-| — | — | LLMs properly introduced | Line 9: "Large language models (LLMs) maintain internal state..." ✓ |
+| — | — | LLMs properly introduced | Line 9: "Large language models (LLMs) maintain internal state..." |
 
 **Note:** This chapter properly introduces LLMs on first use (line 9). Other chapters should follow this pattern.
 
@@ -104,9 +114,9 @@
 | Line | Term | Issue | Suggested Fix |
 |------|------|-------|---------------|
 | 35 | Result type | Pattern without context | Add "Result type (a pattern for returning success/failure instead of throwing exceptions)" |
+| 37 | QA | Acronym used without introduction | Change to "Quality Assurance (QA) Engineer" on first use |
 | 64 | hexagonal architecture | Jargon without explanation | Add "hexagonal architecture (pattern where dependencies flow inward to the domain)" |
 | 512 | JWT | Acronym used without introduction | Change to "JSON Web Token (JWT)" on first use in this chapter |
-| 724 | Chapter 15 | Reference to non-existent chapter | Remove or mark as "(coming soon)" |
 
 ### ch12-development-workflows.md
 
@@ -115,20 +125,38 @@
 | 449 | AST | Acronym in heading before expansion | Consider "AST-Grep: Abstract Syntax Tree Search" for heading, or expand in first sentence |
 | 515 | slash command | Feature without explanation | Add "(custom commands defined in .claude/commands/)" on first use |
 
-**Note:** Line 465 properly expands AST as "Abstract Syntax Tree" but the section heading on line 449 uses it first.
+**Note:** Line 470 properly expands AST as "Abstract Syntax Tree" but the section heading on line 449 uses it first.
 
 ### ch13-building-the-harness.md
 
 | Line | Term | Issue | Suggested Fix |
 |------|------|-------|---------------|
-| — | — | Excellent term introductions | This chapter properly introduces: |
+| 9 | LLM | Acronym used | Consider chapter introduction or reference |
+| 101 | Jaeger | Tool without introduction | Add "Jaeger (distributed tracing platform)" |
+| 159 | DDD | Acronym introduced here | Good - "Domain-Driven Design (DDD)" properly introduced |
 
 **Properly Introduced Terms in Ch13:**
-- Line 99: "OpenTelemetry (OTEL)" ✓
-- Line 159: "Domain-Driven Design (DDD)" ✓
-- Line 474: "MCP (Model Context Protocol)" ✓
+- Line 100: "OpenTelemetry (OTEL)"
+- Line 159: "Domain-Driven Design (DDD)"
+- Line 474: "MCP (Model Context Protocol)"
 
-**Note:** Chapter 13 is an excellent model for term introduction. All major acronyms and tools are properly expanded on first use.
+**Note:** Chapter 13 is an excellent model for term introduction.
+
+### ch14-the-meta-engineer-playbook.md
+
+| Line | Term | Issue | Suggested Fix |
+|------|------|-------|---------------|
+| 590 | ROI | Acronym used without introduction | Change to "Return on Investment (ROI)" on first use |
+| 315-326 | Wave terminology | Framework terminology | Good - explained with table |
+
+### ch15-model-strategy-and-cost-optimization.md
+
+| Line | Term | Issue | Suggested Fix |
+|------|------|-------|---------------|
+| 18 | MTok | Abbreviation without explanation | Add "(million tokens)" after first use: "$3/MTok (million tokens)" |
+| 267 | max_tokens | API parameter without context | Brief explanation that this is an API parameter would help beginners |
+
+**Note:** Model tiers (Haiku, Sonnet, Opus) are well-introduced in context starting at line 46.
 
 ---
 
@@ -159,6 +187,40 @@ These chapters demonstrate proper term introduction and can serve as models:
 2. **ch10-the-ralph-loop.md**: Opens with proper LLM introduction: "Large language models (LLMs)..."
 
 3. **ch13-building-the-harness.md**: Properly introduces OTEL, DDD, and MCP with full expansions on first use.
+
+4. **ch15-model-strategy-and-cost-optimization.md**: Model tiers (Haiku, Sonnet, Opus) are well-explained in context.
+
+---
+
+## Cross-Chapter Consistency Issues
+
+### LLM (Large Language Model)
+First introduced properly: **Chapter 10, line 9**
+
+Used without introduction: Chapters 3, 4, 5, 6, 8, 9, 13
+
+**Recommendation:** Introduce "Large Language Model (LLM)" in Chapter 1 or the book's introduction, then use abbreviation throughout.
+
+### DDD (Domain-Driven Design)
+First introduced properly: **Chapter 13, line 159**
+
+Used without introduction: Chapters 1, 7
+
+**Recommendation:** Introduce "Domain-Driven Design (DDD)" in Chapter 1 (line 86) where it first appears, with a brief explanation.
+
+### JWT (JSON Web Token)
+First introduced properly: **Never**
+
+Used without introduction: Chapters 2, 5, 11
+
+**Recommendation:** Introduce "JSON Web Token (JWT)" on first use in Chapter 2.
+
+### OTEL (OpenTelemetry)
+First introduced properly: **Chapter 13, line 100**
+
+Used without introduction: Chapter 1
+
+**Recommendation:** Introduce in Chapter 1 or add cross-reference to Chapter 13.
 
 ---
 
@@ -203,23 +265,30 @@ For reference, here are all identified terms that need introduction:
 - CI/CD (Continuous Integration/Continuous Deployment) - ch01
 - CRUD (Create, Read, Update, Delete) - ch01
 - DAG (Directed Acyclic Graph) - ch05
-- DDD (Domain-Driven Design) - ch01, ch07, ch13✓
+- DDD (Domain-Driven Design) - ch01, ch07, ch13 (introduced)
 - JSDoc (JavaScript Documentation) - ch02
-- JWT (JSON Web Token) - ch02, ch11
-- LLM (Large Language Model) - ch03, ch04, ch05, ch06, ch10✓
-- MCP (Model Context Protocol) - ch13✓
-- OTEL (OpenTelemetry) - ch01, ch13✓
+- JWT (JSON Web Token) - ch02, ch05, ch11
+- LLM (Large Language Model) - ch03, ch04, ch05, ch06, ch08, ch09, ch10 (introduced), ch13
+- MCP (Model Context Protocol) - ch13 (introduced)
+- MTok (Million Tokens) - ch15
+- OTEL (OpenTelemetry) - ch01, ch13 (introduced)
+- QA (Quality Assurance) - ch11
 - RLS (Row-Level Security) - ch04
+- ROI (Return on Investment) - ch14
 - tRPC (TypeScript Remote Procedure Call) - ch04
+- WSL2 (Windows Subsystem for Linux 2) - ch02
 
 **Tools:**
 - Aider (AI pair programming tool) - ch04
 - bcrypt (password hashing library) - ch08
+- Biome (fast formatter and linter) - ch07
 - Cursor (AI-powered code editor) - ch04
 - Docker (containerization platform) - ch01
+- ESLint (JavaScript/TypeScript linter) - ch07
 - fast-check (property-based testing library) - ch06
 - Hypothesis (Python property-based testing) - ch06
 - io-ts (TypeScript runtime validation) - ch06
+- Jaeger (distributed tracing platform) - ch13
 - Kubernetes/K8s (container orchestration) - ch01
 - Stripe (payment processing) - ch01
 - Supabase (backend-as-a-service) - ch04
@@ -234,17 +303,23 @@ For reference, here are all identified terms that need introduction:
 - Bounded contexts - ch01
 - Hexagonal architecture - ch11
 - Hooks (automated scripts) - ch07
-- Idempotency - ch01
+- Idempotency - ch01, ch05
 - Result type (error handling pattern) - ch11
 - Slash command (Claude Code feature) - ch12
 - Trace spans - ch01
 
 **Model Names:**
-- Claude Opus (most capable tier) - ch08
-- Claude Sonnet (balanced tier) - ch08
+- Claude Haiku (fastest tier) - ch15 (introduced)
+- Claude Opus (most capable tier) - ch08, ch15 (introduced)
+- Claude Sonnet (balanced tier) - ch08, ch15 (introduced)
 
 ---
 
 ## Status Legend
-- ✓ = Properly introduced in at least one chapter
+- (introduced) = Properly introduced in at least one chapter
 - No mark = Needs introduction in all occurrences
+
+---
+
+**Review completed:** 2026-01-27
+**Reviewer:** term-intro-checker agent
