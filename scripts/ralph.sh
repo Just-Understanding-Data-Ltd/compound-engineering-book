@@ -297,11 +297,17 @@ echo "Claude version: $($CLAUDE_BIN --version 2>/dev/null || echo 'unknown')"
 
 run_claude() {
     local prompt_file="$1"
+    local use_timeout="${2:-yes}"  # Second arg: "no" to skip timeout (for reviews)
     local output_file="$PROMPT_DIR/last_output.txt"
     local exit_code=0
 
-    # Run with graceful timeout (SIGTERM, then SIGKILL after 30s)
-    if [ -n "$TIMEOUT_CMD" ]; then
+    # Run with or without timeout based on second argument
+    # Reviews run without timeout to avoid EPIPE crashes
+    if [ "$use_timeout" = "no" ]; then
+        echo "  (Running without timeout to avoid EPIPE)"
+        $CLAUDE_BIN --dangerously-skip-permissions -p - < "$prompt_file" > "$output_file" 2>&1
+        exit_code=$?
+    elif [ -n "$TIMEOUT_CMD" ]; then
         $TIMEOUT_CMD --signal=TERM --kill-after=30 $ITERATION_TIMEOUT $CLAUDE_BIN --dangerously-skip-permissions -p - < "$prompt_file" > "$output_file" 2>&1
         exit_code=$?
     else
@@ -313,13 +319,11 @@ run_claude() {
     cat "$output_file" 2>/dev/null
 
     # EPIPE ERROR HANDLING: Detect and handle gracefully
-    # EPIPE occurs when Claude CLI tries to write to a closed pipe (stdout terminated early)
-    # This is a known issue with Claude Code 2.1.17 in print mode during long operations
     if grep -q "EPIPE\|ERR_STREAM_DESTROYED" "$output_file" 2>/dev/null; then
         echo ""
         echo "⚠ EPIPE ERROR detected (pipe closed during write)"
         echo "  This is a known Claude Code bug. Treating as retryable failure."
-        return 1  # Mark as failed so RALPH retries
+        return 1
     fi
 
     return $exit_code
@@ -637,7 +641,7 @@ Write summary to reviews/review-${today}.md and commit.
 IMPORTANT: At the end, count total issues found (critical, medium, low) and output:
 ISSUES_FOUND: <number>
 EOF
-    run_claude "$prompt_file"
+    run_claude "$prompt_file" "no"  # No timeout for reviews - prevents EPIPE crashes
 
     # Count issues AFTER review (agents may have fixed some)
     local issues_after=$(get_issue_score)
