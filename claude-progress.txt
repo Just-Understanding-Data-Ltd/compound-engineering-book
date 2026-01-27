@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 23:30)
+## Current Status (Updated: 2026-01-28 00:00)
 - Phase: Chapter Milestones (10 of 15 complete, 67%)
 - Active: ch11 Sub-Agent Architecture
-- Last Completed: task-064 (ch11 reviewed milestone)
+- Last Completed: task-065 (ch11 diagrams_complete milestone)
 - Blockers: None active
 - Queue Health: EXCELLENT
 
@@ -12,27 +12,45 @@
 - Chapter Drafts: 15/15 complete (100%)
 - Chapters Complete: 10/15 (ch01-ch10, 67%)
 - KB Articles: 14/15 complete (93%)
-- Diagrams: 37/~63 created (59%)
+- Diagrams: 44/~63 created (70%)
 - Code Examples: 11 chapters have code (73%)
 - Word Count: ~47,300 (target 45,000-57,000, 94% complete)
 - Quality Issues: 129 total (AI slop 60, tech accuracy 7, term intros 62, cross-refs 0)
-- Tasks Complete: 65/109 (60%)
+- Tasks Complete: 67/109 (61%)
 
 ## Critical Issues Identified (From Latest Reviews)
 1. 44 em dashes in PRDs - MECHANICAL FIX (30 min) - CRITICAL
 2. 8 undefined terms in ch10-15 - TARGETED PASS (45 min) - HIGH PRIORITY
 3. 1 critical: Plan Mode keyboard shortcut verification (ch12)
 4. 4 medium: technical accuracy items (verify, pricing, versions)
-5. 26 diagrams still needed - PARALLEL WITH CHAPTERS
+5. 19 diagrams still needed - PARALLEL WITH CHAPTERS
 
 ## Next Task Priority
-1. task-064 (ch11: Sub-Agent Architecture reviewed) - next milestone
+1. task-066 (ch11: Sub-Agent Architecture final) - next milestone
 2. task-067 (ch12: Development Workflows code_written) - score 890
 3. task-073 (ch13: Building the Harness code_written) - score 885
 
 ## Recent Activity
 
-### 2026-01-27 23:30 - COMPLETED task-064: ch11 Sub-Agent Architecture reviewed - WARMUP ITERATION
+### 2026-01-28 00:00 - COMPLETED task-065: ch11 Sub-Agent Architecture diagrams_complete - WARMUP ITERATION
+- What: Created all 7 PRD-specified diagrams for Chapter 11
+- Diagrams Created:
+  1. Team Structure and Handoffs - Orchestrator + 4 specialists flow
+  2. Three-Layer Context Hierarchy - Root/Agent/Package pyramid
+  3. Accuracy vs Latency Trade-off - Quadrant chart + decision framework
+  4. Actor-Critic Loop - Iterative refinement with 8 critique dimensions
+  5. Swarm Patterns - 10 perspectives with aggregation
+  6. Sequential vs Parallel Orchestration - Gantt timeline comparison
+  7. Parallel Agents for Monorepo - 20 packages parallel vs sequential
+- Each diagram includes alternative views and reference tables
+- File: assets/diagrams/ch11-subagent-architecture.md
+- Tasks: task-065 marked complete
+- Stats: pending 42, complete 67
+- ch11 Status: 4/5 milestones complete (code_written, code_tested, reviewed, diagrams_complete)
+- Outcome: Success
+- Next: task-066 (ch11 final milestone)
+
+### 2026-01-27 23:30 - COMPLETED task-064: ch11 Sub-Agent Architecture reviewed
 - What: Reviewed Chapter 11 (Sub-Agent Architecture) for quality
 - Review Results:
   - AI slop check: PASS (no em dashes, no blacklisted phrases)

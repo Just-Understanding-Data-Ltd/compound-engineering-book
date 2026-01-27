@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T22:08:38.266Z",
+  "lastUpdated": "2026-01-28T00:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -842,8 +842,10 @@
           "parentId": "task-061",
           "type": "milestone",
           "title": "diagrams complete",
-          "status": "pending",
-          "score": -110
+          "status": "complete",
+          "completedAt": "2026-01-28T00:00:00Z",
+          "score": -110,
+          "note": "Created all 7 PRD-specified diagrams: Team Structure/Handoffs, Three-Layer Context Hierarchy, Accuracy vs Latency, Actor-Critic Loop, Swarm Patterns, Sequential vs Parallel, Parallel Monorepo. Each includes multi-view alternatives and tables."
         },
         {
           "id": "task-066",
@@ -1225,16 +1227,16 @@
     ]
   },
   "stats": {
-    "pending": 43,
+    "pending": 42,
     "inProgress": 0,
-    "complete": 66,
+    "complete": 67,
     "blocked": 0,
     "total": 109
   },
   "checkpoints": {
     "lastGoodCommit": "2d59836baae92b2d0da9eb03b8866ceab612cb67",
-    "lastSuccessfulTask": "task-064",
-    "lastCheckpoint": "2026-01-27T23:30:00Z",
+    "lastSuccessfulTask": "task-065",
+    "lastCheckpoint": "2026-01-28T00:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0
