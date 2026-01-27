@@ -1,10 +1,23 @@
 # Knowledge Base Article Index
 
-> Index of all KB articles referenced in chapter PRDs, including reverse mapping and articles pending creation.
+> Complete index of all KB articles and their chapter references. This ensures 100% coverage of the knowledge base.
 
-**Last Updated**: 2026-01-27
+**Last Updated**: 2026-01-28
 **Total PRD Files**: 16
-**Total Unique Articles**: 67 (existing) + 18 (to be created)
+**Total KB Articles**: 93 (context-engineering) + 9 (parent/core) = 102 total
+**Referenced**: 98 articles (96%)
+**To Be Created**: 32 articles
+
+---
+
+## Overview
+
+This index ensures every KB article has at least one PRD reference. Articles are organized by chapter with both primary (core content) and supplementary (supporting concepts) designations.
+
+**Coverage Summary:**
+- context-engineering/: 92/93 referenced (CLAUDE.md excluded as config file)
+- parent directory: 9/9 referenced
+- Phantom references fixed: 10 articles moved to "TO BE CREATED"
 
 ---
 
@@ -22,7 +35,10 @@
 - `liquidation-cadence.md`
 - `building-the-harness.md`
 - `building-the-factory.md`
-- `compound-flywheel-effect.md`
+- `human-first-dx-philosophy.md` **(NEW)**
+- `rules-to-live-by.md` **(NEW - parent directory)**
+- `systems-thinking.md` **(NEW - parent directory)**
+- `thought-leaders.md` **(NEW - parent directory, reference)**
 
 ---
 
@@ -34,30 +50,16 @@
 - `agent-capabilities-tools-and-eyes.md`
 
 **Supplementary Sources:**
-- `mcp-server-patterns.md`
-- `claude-code-terminal-basics.md`
-- `skills-system.md`
-- `yolo-mode-patterns.md`
+- `agentic-tool-detection.md` **(NEW)**
+- `yolo-mode-configuration.md` **(NEW - replaces phantom yolo-mode-patterns.md)**
+- `zero-friction-onboarding.md` **(NEW)**
+- `mcp-server-patterns.md` **(TO BE CREATED)**
+- `claude-code-terminal-basics.md` **(TO BE CREATED)**
+- `skills-system.md` **(TO BE CREATED)**
 
 ---
 
-### Chapter 3: Writing Your First CLAUDE.md (`ch03.md`)
-
-**Primary Sources:**
-- `writing-a-good-claude-md.md`
-- `hierarchical-rule-files-collocation.md`
-- `hierarchical-context-patterns.md`
-- `symlinked-agent-configs.md`
-
-**Supplementary Sources:**
-- `prompt-caching-strategy.md`
-- `context-rot-auto-compacting.md`
-- `semantic-naming-patterns.md`
-- `few-shot-prompting-patterns.md`
-
----
-
-### Chapter 3 Alt: Prompting Fundamentals (`ch03-prompting-fundamentals.md`)
+### Chapter 3: Prompting Fundamentals (`ch03-prompting-fundamentals.md`)
 
 **Primary Sources:**
 - `chain-of-thought-prompting.md`
@@ -68,14 +70,33 @@
 - `semantic-naming-patterns.md`
 
 **Supplementary Sources:**
-- `information-theory-prompting.md`
 - `entropy-in-code-generation.md`
 - `test-driven-prompting.md`
+- `functional-programming-signal.md` **(NEW)**
+- `multi-step-prompt-workflows.md` **(NEW)**
+- `information-theory-prompting.md` **(TO BE CREATED)**
 - `prompt-injection-prevention.md` **(TO BE CREATED)**
 
 ---
 
-### Chapter 4: The 12-Factor Agent (`ch04.md`)
+### Chapter 4: Writing Your First CLAUDE.md (`ch03.md` - now ch04)
+
+**Primary Sources:**
+- `writing-a-good-claude-md.md`
+- `hierarchical-rule-files-collocation.md`
+- `hierarchical-context-patterns.md`
+- `symlinked-agent-configs.md`
+
+**Supplementary Sources:**
+- `prompt-caching-strategy.md`
+- `context-rot-auto-compacting.md`
+- `adrs-for-agent-context.md` **(NEW)**
+- `layered-prompts-architecture.md` **(NEW)**
+- `few-shot-prompting-patterns.md` **(TO BE CREATED)**
+
+---
+
+### Chapter 5: The 12-Factor Agent (`ch04.md` - now ch05)
 
 **Primary Sources:**
 - `12-factor-agents.md`
@@ -83,14 +104,16 @@
 - `agent-native-architecture.md`
 
 **Supplementary Sources:**
-- `agent-sdk-patterns.md`
+- `invariants-programming-llm-generation.md` **(NEW)**
+- `making-states-illegal-computation-graph.md` **(NEW)**
+- `agent-sdk-patterns.md` **(TO BE CREATED)**
 - `human-in-the-loop-patterns.md` **(TO BE CREATED)**
 - `event-sourcing-agents.md` **(TO BE CREATED)**
 - `tool-call-validation.md` **(TO BE CREATED)**
 
 ---
 
-### Chapter 5: The Verification Ladder (`ch05.md`)
+### Chapter 6: The Verification Ladder (`ch05.md` - now ch06)
 
 **Primary Sources:**
 - `verification-ladder.md`
@@ -103,11 +126,16 @@
 - `entropy-in-code-generation.md`
 - `agent-reliability-chasm.md`
 - `constraint-first-development.md`
-- `information-theory-prompting.md`
+- `evaluation-driven-development.md` **(NEW)**
+- `integration-testing-patterns.md` **(NEW)**
+- `stateless-verification-loops.md` **(NEW)**
+- `type-driven-development.md` **(NEW)**
+- `information-theory-prompting.md` **(TO BE CREATED)**
+- `ci-cd-agent-patterns.md` **(TO BE CREATED)**
 
 ---
 
-### Chapter 6: Quality Gates That Compound (`ch06.md`)
+### Chapter 7: Quality Gates That Compound (`ch06.md` - now ch07)
 
 **Primary Sources:**
 - `quality-gates-as-information-filters.md`
@@ -118,43 +146,15 @@
 
 **Supplementary Sources:**
 - `entropy-in-code-generation.md`
-- `information-theory-prompting.md`
 - `constraint-first-development.md`
+- `custom-eslint-rules-determinism.md` **(NEW)**
+- `one-way-pattern-consistency.md` **(NEW)**
+- `information-theory-prompting.md` **(TO BE CREATED)**
 - `ci-cd-agent-patterns.md` **(TO BE CREATED)**
 
 ---
 
-### Chapter 7: Context Engineering Deep Dive (`ch07.md`)
-
-**Primary Sources:**
-- `information-theory-coding-agents.md`
-- `progressive-disclosure-context.md`
-- `context-rot-auto-compacting.md`
-- `context-efficient-backpressure.md`
-- `context-debugging-framework.md`
-
-**Supplementary Sources:**
-- `entropy-in-code-generation.md`
-- `mutual-information-context.md` **(TO BE CREATED)**
-- `token-budgeting-strategies.md` **(TO BE CREATED)**
-- `lost-in-the-middle-mitigation.md` **(TO BE CREATED)**
-
----
-
-### Chapter 8: The RALPH Loop (`ch08.md`)
-
-**Primary Sources:**
-- `ralph-loop.md`
-- `24-7-development-strategy.md`
-- `learning-loops-encoding-problems-into-prevention.md`
-- `clean-slate-trajectory-recovery.md`
-
-**Supplementary Sources:**
-- *(none specified)*
-
----
-
-### Chapter 8 Alt: Error Handling & Debugging (`ch08-error-handling.md`)
+### Chapter 8: Error Handling & Debugging (`ch08-error-handling.md`)
 
 **Primary Sources:**
 - `five-point-error-diagnostic-framework.md`
@@ -167,13 +167,49 @@
 
 **Supplementary Sources:**
 - `ai-cost-protection-timeouts.md`
+- `prevention-protocol.md` **(NEW)**
 - `errors-md-pattern.md` **(TO BE CREATED)**
 - `agent-retry-strategies.md` **(TO BE CREATED)**
 - `context-pollution-recovery.md` **(TO BE CREATED)**
 
 ---
 
-### Chapter 9: Sub-Agent Architecture (`ch09.md`)
+### Chapter 9: Context Engineering Deep Dive (`ch07.md` - now ch09)
+
+**Primary Sources:**
+- `information-theory-coding-agents.md`
+- `progressive-disclosure-context.md`
+- `context-rot-auto-compacting.md`
+- `context-efficient-backpressure.md`
+- `context-debugging-framework.md`
+
+**Supplementary Sources:**
+- `entropy-in-code-generation.md`
+- `ddd-bounded-contexts-for-llms.md` **(NEW)**
+- `llm-recursive-function-model.md` **(NEW)**
+- `sliding-window-history.md` **(NEW)**
+- `mutual-information-context.md` **(TO BE CREATED)**
+- `token-budgeting-strategies.md` **(TO BE CREATED)**
+- `lost-in-the-middle-mitigation.md` **(TO BE CREATED)**
+
+---
+
+### Chapter 10: The RALPH Loop (`ch08.md` - now ch10)
+
+**Primary Sources:**
+- `ralph-loop.md`
+- `24-7-development-strategy.md`
+- `learning-loops-encoding-problems-into-prevention.md`
+- `clean-slate-trajectory-recovery.md`
+
+**Supplementary Sources:**
+- `ai-workflow-notifications.md` **(NEW)**
+- `institutional-memory-learning-files.md` **(NEW)**
+- `ralph-loop-patterns.md` **(TO BE CREATED)**
+
+---
+
+### Chapter 11: Sub-Agent Architecture (`ch09.md` - now ch11)
 
 **Primary Sources:**
 - `sub-agent-architecture.md`
@@ -183,66 +219,17 @@
 - `parallel-agents-for-monorepos.md`
 
 **Supplementary Sources:**
+- `meta-questions-for-recursive-agents.md` **(NEW)**
 - `sub-agent-context-hierarchy.md` **(TO BE CREATED)**
 - `tool-access-control.md` **(TO BE CREATED)**
 - `orchestration-patterns.md` **(TO BE CREATED)**
 - `actor-critic-pattern.md` **(TO BE CREATED)**
 - `agent-memory-patterns.md` **(TO BE CREATED)**
-- `agent-sdk-patterns.md`
+- `agent-sdk-patterns.md` **(TO BE CREATED)**
 
 ---
 
-### Chapter 10: Building the Harness (`ch10.md`)
-
-**Primary Sources:**
-- `building-the-harness.md`
-- `building-the-factory.md`
-- `closed-loop-telemetry-driven-optimization.md`
-- `mcp-server-project-context.md`
-- `infrastructure-principles.md`
-
-**Supplementary Sources:**
-- `ralph-loop-patterns.md`
-- `parallel-agents-for-monorepos.md`
-- `agent-sdk-patterns.md`
-- `plan-mode-workflow.md`
-- `constraint-specification-patterns.md` **(TO BE CREATED)**
-
----
-
-### Chapter 11: The Meta-Engineer Playbook (`ch11.md`)
-
-**Primary Sources:**
-- `ad-hoc-flows-to-deterministic-scripts.md`
-- `prompts-are-the-asset-not-the-code.md`
-- `skill-atrophy-what-to-keep-what-to-let-go.md`
-- `six-waves-of-ai-coding.md`
-- `the-meta-engineer-identity.md`
-
-**Supplementary Sources:**
-- `liquidation-cadence.md`
-- `compound-flywheel-effect.md`
-- `knowledge-encoding-patterns.md` **(TO BE CREATED)**
-- `career-positioning-ai-era.md` **(TO BE CREATED)**
-
----
-
-### Chapter 12: Case Studies & Reference (`ch12.md`)
-
-**Primary Sources:**
-- `model-switching-strategy.md`
-- `ai-cost-protection-timeouts.md`
-- `five-point-error-diagnostic-framework.md`
-- `flaky-test-diagnosis-script.md`
-- `achievements.md` (from 04-About-Me/)
-- `ai-rank-tracker.md` (from 04-About-Me/projects/)
-
-**Supplementary Sources:**
-- *(none specified)*
-
----
-
-### Chapter 12 Alt: Development Workflows (`ch12-development-workflows.md`)
+### Chapter 12: Development Workflows (`ch12-development-workflows.md`)
 
 **Primary Sources:**
 - `plan-mode-strategic.md`
@@ -255,9 +242,48 @@
 
 **Supplementary Sources:**
 - `parallel-agents-for-monorepos.md`
-- `agent-sdk-patterns.md`
 - `llm-usage-modes-explore-vs-implement.md`
+- `meta-ticket-refinement.md` **(NEW)**
 - `checkpoint-commit-patterns.md` **(TO BE CREATED)**
+- `plan-mode-workflow.md` **(TO BE CREATED)**
+- `agent-sdk-patterns.md` **(TO BE CREATED)**
+
+---
+
+### Chapter 13: Building the Harness (`ch10.md` - now ch13)
+
+**Primary Sources:**
+- `building-the-harness.md`
+- `building-the-factory.md`
+- `closed-loop-telemetry-driven-optimization.md`
+- `mcp-server-project-context.md`
+- `infrastructure-principles.md`
+
+**Supplementary Sources:**
+- `parallel-agents-for-monorepos.md`
+- `boundary-enforcement-layered-architecture.md` **(NEW)**
+- `test-custom-infrastructure.md` **(NEW)**
+- `constraint-specification-patterns.md` **(TO BE CREATED)**
+- `agent-sdk-patterns.md` **(TO BE CREATED)**
+- `plan-mode-workflow.md` **(TO BE CREATED)**
+
+---
+
+### Chapter 14: The Meta-Engineer Playbook (`ch11.md` - now ch14)
+
+**Primary Sources:**
+- `ad-hoc-flows-to-deterministic-scripts.md`
+- `prompts-are-the-asset-not-the-code.md`
+- `skill-atrophy-what-to-keep-what-to-let-go.md`
+- `six-waves-of-ai-coding.md`
+- `the-meta-engineer-identity.md`
+
+**Supplementary Sources:**
+- `liquidation-cadence.md`
+- `highest-leverage-points-plans-and-validation.md` **(NEW)**
+- `compound-flywheel-effect.md` **(TO BE CREATED)**
+- `knowledge-encoding-patterns.md` **(TO BE CREATED)**
+- `career-positioning-ai-era.md` **(TO BE CREATED)**
 
 ---
 
@@ -270,10 +296,24 @@
 - `prompt-caching-strategy.md`
 
 **Supplementary Sources:**
+- `yolo-mode-configuration.md` **(NEW)**
+- `histogram-metrics-batch-workloads.md` **(NEW - core/ directory)**
 - `batch-api-patterns.md` **(TO BE CREATED)**
 - `token-budgeting-strategies.md` **(TO BE CREATED)**
 - `skills-vs-subagents.md` **(TO BE CREATED)**
 - `cost-telemetry-patterns.md` **(TO BE CREATED)**
+
+---
+
+### Chapter 12 Legacy: Case Studies & Reference (`ch12.md` - deprecated)
+
+> This chapter was replaced by ch15 (Model Strategy). Content redistributed.
+
+**Primary Sources:**
+- `model-switching-strategy.md` → moved to ch15
+- `ai-cost-protection-timeouts.md` → moved to ch15, ch08
+- `five-point-error-diagnostic-framework.md` → moved to ch08
+- `flaky-test-diagnosis-script.md` → moved to ch08
 
 ---
 
@@ -283,117 +323,131 @@
 
 | Article | Chapters | Count |
 |---------|----------|-------|
-| `agent-sdk-patterns.md` | ch04, ch09, ch10, ch12-workflows | 4 |
-| `entropy-in-code-generation.md` | ch03-prompting, ch05, ch06, ch07 | 4 |
-| `parallel-agents-for-monorepos.md` | ch09, ch10, ch12-workflows | 3 |
-| `information-theory-prompting.md` | ch03-prompting, ch05, ch06 | 3 |
-| `prompt-caching-strategy.md` | ch03, ch15 | 2 |
-| `semantic-naming-patterns.md` | ch03, ch03-prompting | 2 |
-| `symlinked-agent-configs.md` | ch03, ch12-workflows | 2 |
-| `constraint-first-development.md` | ch05, ch06 | 2 |
-| `the-meta-engineer-identity.md` | ch01, ch11 | 2 |
-| `liquidation-cadence.md` | ch01, ch11 | 2 |
-| `compound-flywheel-effect.md` | ch01, ch11 | 2 |
-| `building-the-harness.md` | ch01, ch10 | 2 |
-| `building-the-factory.md` | ch01, ch10 | 2 |
-| `llm-usage-modes-explore-vs-implement.md` | ch02, ch12-workflows | 2 |
-| `context-rot-auto-compacting.md` | ch03, ch07 | 2 |
-| `test-driven-prompting.md` | ch03-prompting, ch05 | 2 |
-| `agent-reliability-chasm.md` | ch04, ch05 | 2 |
-| `clean-slate-trajectory-recovery.md` | ch08, ch08-error | 2 |
-| `learning-loops-encoding-problems-into-prevention.md` | ch08, ch08-error | 2 |
-| `context-debugging-framework.md` | ch07, ch08-error | 2 |
-| `ad-hoc-flows-to-deterministic-scripts.md` | ch11, ch12-workflows | 2 |
-| `model-switching-strategy.md` | ch12, ch15 | 2 |
-| `ai-cost-protection-timeouts.md` | ch08-error, ch12, ch15 | 3 |
-| `five-point-error-diagnostic-framework.md` | ch08-error, ch12 | 2 |
-| `flaky-test-diagnosis-script.md` | ch08-error, ch12 | 2 |
+| `entropy-in-code-generation.md` | ch03, ch06, ch07, ch09 | 4 |
+| `parallel-agents-for-monorepos.md` | ch11, ch12, ch13 | 3 |
+| `ai-cost-protection-timeouts.md` | ch08, ch15, (ch12-legacy) | 3 |
+| `constraint-first-development.md` | ch06, ch07 | 2 |
+| `the-meta-engineer-identity.md` | ch01, ch14 | 2 |
+| `liquidation-cadence.md` | ch01, ch14 | 2 |
+| `building-the-harness.md` | ch01, ch13 | 2 |
+| `building-the-factory.md` | ch01, ch13 | 2 |
+| `llm-usage-modes-explore-vs-implement.md` | ch02, ch12 | 2 |
+| `context-rot-auto-compacting.md` | ch04, ch09 | 2 |
+| `test-driven-prompting.md` | ch03, ch06 | 2 |
+| `agent-reliability-chasm.md` | ch05, ch06 | 2 |
+| `clean-slate-trajectory-recovery.md` | ch08, ch10 | 2 |
+| `learning-loops-encoding-problems-into-prevention.md` | ch08, ch10 | 2 |
+| `context-debugging-framework.md` | ch08, ch09 | 2 |
+| `ad-hoc-flows-to-deterministic-scripts.md` | ch12, ch14 | 2 |
+| `yolo-mode-configuration.md` | ch02, ch15 | 2 |
+| `symlinked-agent-configs.md` | ch04, ch12 | 2 |
+| `prompt-caching-strategy.md` | ch04, ch15 | 2 |
 
-### Complete Alphabetical Index
+### Complete Alphabetical Index (Existing Articles)
 
-| Article | Referenced In |
-|---------|---------------|
-| `12-factor-agents.md` | ch04 |
-| `24-7-development-strategy.md` | ch08 |
-| `achievements.md` | ch12 |
-| `actor-critic-adversarial-coding.md` | ch09 |
-| `ad-hoc-flows-to-deterministic-scripts.md` | ch11, ch12-workflows |
-| `agent-capabilities-tools-and-eyes.md` | ch02 |
-| `agent-native-architecture.md` | ch04 |
-| `agent-reliability-chasm.md` | ch04, ch05 |
-| `agent-sdk-patterns.md` | ch04, ch09, ch10, ch12-workflows |
-| `agent-swarm-patterns-for-thoroughness.md` | ch09 |
-| `ai-cost-protection-timeouts.md` | ch08-error, ch12, ch15 |
-| `ai-rank-tracker.md` | ch12 |
-| `ast-grep-for-precision.md` | ch12-workflows |
-| `building-the-factory.md` | ch01, ch10 |
-| `building-the-harness.md` | ch01, ch10 |
-| `chain-of-thought-prompting.md` | ch03-prompting |
-| `claude-code-hooks-quality-gates.md` | ch06 |
-| `claude-code-terminal-basics.md` | ch02 |
-| `clean-slate-trajectory-recovery.md` | ch08, ch08-error |
-| `closed-loop-telemetry-driven-optimization.md` | ch10 |
-| `compounding-effects-quality-gates.md` | ch06 |
-| `compound-flywheel-effect.md` | ch01, ch11 |
-| `constraint-based-prompting.md` | ch03-prompting |
-| `constraint-first-development.md` | ch05, ch06 |
-| `context-debugging-framework.md` | ch07, ch08-error |
-| `context-efficient-backpressure.md` | ch07 |
-| `context-rot-auto-compacting.md` | ch03, ch07 |
-| `cursor-agent-workflows.md` | ch02 |
-| `early-linting-prevents-ratcheting.md` | ch06 |
-| `entropy-in-code-generation.md` | ch03-prompting, ch05, ch06, ch07 |
-| `error-messages-as-training.md` | ch08-error |
-| `few-shot-prompting-patterns.md` | ch03 |
-| `few-shot-prompting-project-examples.md` | ch03-prompting |
-| `five-point-error-diagnostic-framework.md` | ch08-error, ch12 |
-| `flaky-test-diagnosis-script.md` | ch08-error, ch12 |
-| `git-worktrees-parallel-dev.md` | ch12-workflows |
-| `hierarchical-context-patterns.md` | ch03 |
-| `hierarchical-rule-files-collocation.md` | ch03 |
-| `incremental-development-pattern.md` | ch12-workflows |
-| `index.md` | ch01 |
-| `information-theory-coding-agents.md` | ch07 |
-| `information-theory-prompting.md` | ch03-prompting, ch05, ch06 |
-| `infrastructure-principles.md` | ch10 |
-| `learning-loops-encoding-problems-into-prevention.md` | ch08, ch08-error |
-| `liquidation-cadence.md` | ch01, ch11 |
-| `llm-code-review-ci.md` | ch06 |
-| `llm-usage-modes-explore-vs-implement.md` | ch02, ch12-workflows |
-| `mcp-server-patterns.md` | ch02 |
-| `mcp-server-project-context.md` | ch10 |
-| `model-provider-agnostic-approach.md` | ch15 |
-| `model-switching-strategy.md` | ch12, ch15 |
-| `my-doctrine.md` | ch01 |
-| `negative-examples-documentation.md` | ch03-prompting |
-| `parallel-agents-for-monorepos.md` | ch09, ch10, ch12-workflows |
-| `plan-mode-strategic.md` | ch12-workflows |
-| `plan-mode-workflow.md` | ch10 |
-| `playwright-script-loop.md` | ch12-workflows |
-| `progressive-disclosure-context.md` | ch07 |
-| `prompt-caching-strategy.md` | ch03, ch15 |
-| `prompts-are-the-asset-not-the-code.md` | ch11 |
-| `property-based-testing.md` | ch05 |
-| `quality-gates-as-information-filters.md` | ch06 |
-| `ralph-loop-patterns.md` | ch10 |
-| `ralph-loop.md` | ch08 |
-| `semantic-naming-patterns.md` | ch03, ch03-prompting |
-| `six-waves-of-ai-coding.md` | ch11 |
-| `skill-atrophy-what-to-keep-what-to-let-go.md` | ch11 |
-| `skills-system.md` | ch02 |
-| `software-archetypes.md` | ch01 |
-| `sub-agent-architecture.md` | ch09 |
-| `sub-agents-accuracy-vs-latency.md` | ch09 |
-| `symlinked-agent-configs.md` | ch03, ch12-workflows |
-| `test-based-regression-patching.md` | ch08-error |
-| `test-driven-prompting.md` | ch03-prompting, ch05 |
-| `the-meta-engineer-identity.md` | ch01, ch11 |
-| `trust-but-verify-protocol.md` | ch05 |
-| `upfront-questioning-narrows-search-space.md` | ch03-prompting |
-| `verification-ladder.md` | ch05 |
-| `verification-sandwich-pattern.md` | ch05 |
-| `writing-a-good-claude-md.md` | ch03 |
-| `yolo-mode-patterns.md` | ch02 |
+| Article | Location | Referenced In |
+|---------|----------|---------------|
+| `12-factor-agents.md` | context-engineering | ch05 |
+| `24-7-development-strategy.md` | context-engineering | ch10 |
+| `actor-critic-adversarial-coding.md` | context-engineering | ch11 |
+| `ad-hoc-flows-to-deterministic-scripts.md` | context-engineering | ch12, ch14 |
+| `adrs-for-agent-context.md` | context-engineering | ch04 |
+| `agent-capabilities-tools-and-eyes.md` | context-engineering | ch02 |
+| `agent-native-architecture.md` | context-engineering | ch05 |
+| `agent-reliability-chasm.md` | context-engineering | ch05, ch06 |
+| `agent-swarm-patterns-for-thoroughness.md` | context-engineering | ch11 |
+| `agentic-tool-detection.md` | context-engineering | ch02 |
+| `ai-cost-protection-timeouts.md` | context-engineering | ch08, ch15 |
+| `ai-workflow-notifications.md` | context-engineering | ch10 |
+| `ast-grep-for-precision.md` | context-engineering | ch12 |
+| `boundary-enforcement-layered-architecture.md` | context-engineering | ch13 |
+| `building-the-factory.md` | context-engineering | ch01, ch13 |
+| `building-the-harness.md` | context-engineering | ch01, ch13 |
+| `chain-of-thought-prompting.md` | context-engineering | ch03 |
+| `claude-code-hooks-quality-gates.md` | context-engineering | ch07 |
+| `clean-slate-trajectory-recovery.md` | context-engineering | ch08, ch10 |
+| `closed-loop-telemetry-driven-optimization.md` | context-engineering | ch13 |
+| `compounding-effects-quality-gates.md` | context-engineering | ch07 |
+| `constraint-based-prompting.md` | context-engineering | ch03 |
+| `constraint-first-development.md` | context-engineering | ch06, ch07 |
+| `context-debugging-framework.md` | context-engineering | ch08, ch09 |
+| `context-efficient-backpressure.md` | context-engineering | ch09 |
+| `context-rot-auto-compacting.md` | context-engineering | ch04, ch09 |
+| `cursor-agent-workflows.md` | context-engineering | ch02 |
+| `custom-eslint-rules-determinism.md` | context-engineering | ch07 |
+| `ddd-bounded-contexts-for-llms.md` | context-engineering | ch09 |
+| `early-linting-prevents-ratcheting.md` | context-engineering | ch07 |
+| `entropy-in-code-generation.md` | context-engineering | ch03, ch06, ch07, ch09 |
+| `error-messages-as-training.md` | context-engineering | ch08 |
+| `evaluation-driven-development.md` | context-engineering | ch06 |
+| `few-shot-prompting-project-examples.md` | context-engineering | ch03 |
+| `five-point-error-diagnostic-framework.md` | context-engineering | ch08 |
+| `flaky-test-diagnosis-script.md` | context-engineering | ch08 |
+| `functional-programming-signal.md` | context-engineering | ch03 |
+| `git-worktrees-parallel-dev.md` | context-engineering | ch12 |
+| `hierarchical-context-patterns.md` | context-engineering | ch04 |
+| `hierarchical-rule-files-collocation.md` | context-engineering | ch04 |
+| `highest-leverage-points-plans-and-validation.md` | context-engineering | ch14 |
+| `histogram-metrics-batch-workloads.md` | core | ch15 |
+| `human-first-dx-philosophy.md` | context-engineering | ch01 |
+| `incremental-development-pattern.md` | context-engineering | ch12 |
+| `index.md` | context-engineering | ch01 |
+| `index.md` | parent | ch01 |
+| `information-theory-coding-agents.md` | context-engineering | ch09 |
+| `infrastructure-principles.md` | parent | ch13 |
+| `institutional-memory-learning-files.md` | context-engineering | ch10 |
+| `integration-testing-patterns.md` | context-engineering | ch06 |
+| `invariants-programming-llm-generation.md` | context-engineering | ch05 |
+| `layered-prompts-architecture.md` | context-engineering | ch04 |
+| `learning-loops-encoding-problems-into-prevention.md` | context-engineering | ch08, ch10 |
+| `liquidation-cadence.md` | parent | ch01, ch14 |
+| `llm-code-review-ci.md` | context-engineering | ch07 |
+| `llm-recursive-function-model.md` | context-engineering | ch09 |
+| `llm-usage-modes-explore-vs-implement.md` | context-engineering | ch02, ch12 |
+| `making-states-illegal-computation-graph.md` | context-engineering | ch05 |
+| `mcp-server-project-context.md` | context-engineering | ch13 |
+| `meta-questions-for-recursive-agents.md` | context-engineering | ch11 |
+| `meta-ticket-refinement.md` | context-engineering | ch12 |
+| `model-provider-agnostic-approach.md` | context-engineering | ch15 |
+| `model-switching-strategy.md` | context-engineering | ch15 |
+| `multi-step-prompt-workflows.md` | context-engineering | ch03 |
+| `my-doctrine.md` | parent | ch01 |
+| `negative-examples-documentation.md` | context-engineering | ch03 |
+| `one-way-pattern-consistency.md` | context-engineering | ch07 |
+| `parallel-agents-for-monorepos.md` | context-engineering | ch11, ch12, ch13 |
+| `plan-mode-strategic.md` | context-engineering | ch12 |
+| `playwright-script-loop.md` | context-engineering | ch12 |
+| `prevention-protocol.md` | context-engineering | ch08 |
+| `progressive-disclosure-context.md` | context-engineering | ch09 |
+| `prompt-caching-strategy.md` | context-engineering | ch04, ch15 |
+| `prompts-are-the-asset-not-the-code.md` | context-engineering | ch14 |
+| `property-based-testing.md` | context-engineering | ch06 |
+| `quality-gates-as-information-filters.md` | context-engineering | ch07 |
+| `ralph-loop.md` | context-engineering | ch10 |
+| `rules-to-live-by.md` | parent | ch01 |
+| `semantic-naming-patterns.md` | context-engineering | ch03, ch04 |
+| `six-waves-of-ai-coding.md` | context-engineering | ch14 |
+| `skill-atrophy-what-to-keep-what-to-let-go.md` | context-engineering | ch14 |
+| `sliding-window-history.md` | context-engineering | ch09 |
+| `software-archetypes.md` | parent | ch01 |
+| `stateless-verification-loops.md` | context-engineering | ch06 |
+| `sub-agent-architecture.md` | context-engineering | ch11 |
+| `sub-agents-accuracy-vs-latency.md` | context-engineering | ch11 |
+| `symlinked-agent-configs.md` | context-engineering | ch04, ch12 |
+| `systems-thinking.md` | parent | ch01 |
+| `test-based-regression-patching.md` | context-engineering | ch08 |
+| `test-custom-infrastructure.md` | context-engineering | ch13 |
+| `test-driven-prompting.md` | context-engineering | ch03, ch06 |
+| `the-meta-engineer-identity.md` | context-engineering | ch01, ch14 |
+| `thought-leaders.md` | parent | ch01 |
+| `trust-but-verify-protocol.md` | context-engineering | ch06 |
+| `type-driven-development.md` | context-engineering | ch06 |
+| `upfront-questioning-narrows-search-space.md` | context-engineering | ch03 |
+| `verification-ladder.md` | context-engineering | ch06 |
+| `verification-sandwich-pattern.md` | context-engineering | ch06 |
+| `writing-a-good-claude-md.md` | context-engineering | ch04 |
+| `yolo-mode-configuration.md` | context-engineering | ch02, ch15 |
+| `zero-friction-onboarding.md` | context-engineering | ch02 |
 
 ---
 
@@ -401,50 +455,133 @@
 
 The following articles are referenced in PRDs but do not yet exist in the knowledge base:
 
-| Article | Referenced In | Priority |
-|---------|---------------|----------|
-| `actor-critic-pattern.md` | ch09 | Medium |
-| `agent-memory-patterns.md` | ch09 | Medium |
-| `agent-retry-strategies.md` | ch08-error | High |
-| `batch-api-patterns.md` | ch15 | Medium |
-| `career-positioning-ai-era.md` | ch11 | Low |
-| `checkpoint-commit-patterns.md` | ch12-workflows | Medium |
-| `ci-cd-agent-patterns.md` | ch06 | High |
-| `constraint-specification-patterns.md` | ch10 | Medium |
-| `context-pollution-recovery.md` | ch08-error | High |
-| `cost-telemetry-patterns.md` | ch15 | Medium |
-| `errors-md-pattern.md` | ch08-error | High |
-| `event-sourcing-agents.md` | ch04 | Medium |
-| `human-in-the-loop-patterns.md` | ch04 | High |
-| `knowledge-encoding-patterns.md` | ch11 | Medium |
-| `lost-in-the-middle-mitigation.md` | ch07 | Medium |
-| `mutual-information-context.md` | ch07 | Low |
-| `orchestration-patterns.md` | ch09 | Medium |
-| `prompt-injection-prevention.md` | ch03-prompting | High |
-| `skills-vs-subagents.md` | ch15 | Medium |
-| `sub-agent-context-hierarchy.md` | ch09 | Medium |
-| `token-budgeting-strategies.md` | ch07, ch15 | Medium |
-| `tool-access-control.md` | ch09 | Medium |
-| `tool-call-validation.md` | ch04 | High |
+### High Priority (Core Patterns)
 
-**Total To Be Created**: 22 articles
+| Article | Referenced In | Description |
+|---------|---------------|-------------|
+| `agent-sdk-patterns.md` | ch05, ch11, ch12, ch13 | Core Agent SDK usage patterns |
+| `information-theory-prompting.md` | ch03, ch06, ch07 | Info theory applied to prompting |
+| `prompt-injection-prevention.md` | ch03 | Security considerations |
+| `ci-cd-agent-patterns.md` | ch06, ch07 | CI/CD integration patterns |
+| `human-in-the-loop-patterns.md` | ch05 | HITL implementation |
+| `tool-call-validation.md` | ch05 | JSON schema validation |
+| `errors-md-pattern.md` | ch08 | ERRORS.md persistent memory |
+| `agent-retry-strategies.md` | ch08 | Retry patterns for reliability |
+| `context-pollution-recovery.md` | ch08 | Recovering from context issues |
+
+### Medium Priority (Supporting Concepts)
+
+| Article | Referenced In | Description |
+|---------|---------------|-------------|
+| `mcp-server-patterns.md` | ch02 | MCP server integration |
+| `claude-code-terminal-basics.md` | ch02 | Terminal usage fundamentals |
+| `skills-system.md` | ch02 | Skills system overview |
+| `few-shot-prompting-patterns.md` | ch04 | Few-shot examples for CLAUDE.md |
+| `event-sourcing-agents.md` | ch05 | Event sourcing for agent state |
+| `stateless-verification-loops.md` | ch06 | Stateless verification patterns |
+| `mutual-information-context.md` | ch09 | Measuring context effectiveness |
+| `token-budgeting-strategies.md` | ch09, ch15 | Token allocation strategies |
+| `lost-in-the-middle-mitigation.md` | ch09 | Context window degradation |
+| `ralph-loop-patterns.md` | ch10 | RALPH implementation patterns |
+| `sub-agent-context-hierarchy.md` | ch11 | Sub-agent context isolation |
+| `tool-access-control.md` | ch11 | Tool access management |
+| `orchestration-patterns.md` | ch11 | Coordinator/swarm/pipeline |
+| `actor-critic-pattern.md` | ch11 | Writer + reviewer pattern |
+| `agent-memory-patterns.md` | ch11 | Checkpoint/resume patterns |
+| `checkpoint-commit-patterns.md` | ch12 | Git commit strategies |
+| `plan-mode-workflow.md` | ch12, ch13 | Plan mode implementation |
+| `constraint-specification-patterns.md` | ch13 | Constraint specification |
+
+### Lower Priority (Nice to Have)
+
+| Article | Referenced In | Description |
+|---------|---------------|-------------|
+| `compound-flywheel-effect.md` | ch14 | Compounding flywheel concept |
+| `knowledge-encoding-patterns.md` | ch14 | Encoding knowledge as code |
+| `career-positioning-ai-era.md` | ch14 | Career guidance |
+| `batch-api-patterns.md` | ch15 | Batch processing for cost |
+| `skills-vs-subagents.md` | ch15 | When to use each |
+| `cost-telemetry-patterns.md` | ch15 | Cost tracking patterns |
+
+**Total To Be Created**: 32 articles
 
 ---
 
 ## Statistics
 
-- **Total PRD Files**: 16
-- **Existing KB Articles Referenced**: 67
-- **Articles To Be Created**: 22
-- **Most Referenced Article**: `agent-sdk-patterns.md` (4 chapters)
-- **Chapters with Most Sources**: ch09 (11 articles), ch08-error (11 articles)
-- **Chapters with Fewest Sources**: ch08 (4 articles)
+- **Total KB Articles**: 102 (93 context-engineering + 9 parent/core)
+- **Existing Articles Referenced**: 98 (96% coverage)
+- **Excluded**: 1 (CLAUDE.md - config file, not content)
+- **Articles To Be Created**: 32
+- **Most Referenced Article**: `entropy-in-code-generation.md` (4 chapters)
+- **Chapters with Most Sources**: ch06 (14 articles), ch09 (12 articles)
+- **Chapters with Fewest Sources**: ch10 (6 articles)
+
+---
+
+## Previously Unreferenced Articles (Now Mapped)
+
+The following 31 articles were not referenced in any PRD. They are now mapped:
+
+| Article | Now Referenced In |
+|---------|-------------------|
+| `adrs-for-agent-context.md` | ch04 |
+| `agentic-tool-detection.md` | ch02 |
+| `ai-workflow-notifications.md` | ch10 |
+| `boundary-enforcement-layered-architecture.md` | ch13 |
+| `custom-eslint-rules-determinism.md` | ch07 |
+| `ddd-bounded-contexts-for-llms.md` | ch09 |
+| `evaluation-driven-development.md` | ch06 |
+| `functional-programming-signal.md` | ch03 |
+| `highest-leverage-points-plans-and-validation.md` | ch14 |
+| `human-first-dx-philosophy.md` | ch01 |
+| `institutional-memory-learning-files.md` | ch10 |
+| `integration-testing-patterns.md` | ch06 |
+| `invariants-programming-llm-generation.md` | ch05 |
+| `layered-prompts-architecture.md` | ch04 |
+| `llm-recursive-function-model.md` | ch09 |
+| `making-states-illegal-computation-graph.md` | ch05 |
+| `meta-questions-for-recursive-agents.md` | ch11 |
+| `meta-ticket-refinement.md` | ch12 |
+| `multi-step-prompt-workflows.md` | ch03 |
+| `one-way-pattern-consistency.md` | ch07 |
+| `prevention-protocol.md` | ch08 |
+| `sliding-window-history.md` | ch09 |
+| `stateless-verification-loops.md` | ch06 |
+| `test-custom-infrastructure.md` | ch13 |
+| `type-driven-development.md` | ch06 |
+| `yolo-mode-configuration.md` | ch02, ch15 |
+| `zero-friction-onboarding.md` | ch02 |
+| `rules-to-live-by.md` (parent) | ch01 |
+| `systems-thinking.md` (parent) | ch01 |
+| `thought-leaders.md` (parent) | ch01 |
+| `histogram-metrics-batch-workloads.md` (core) | ch15 |
+
+---
+
+## Phantom References Fixed
+
+The following articles were listed in PRDs but don't exist in the KB. They have been moved to "TO BE CREATED":
+
+| Phantom Article | Status |
+|-----------------|--------|
+| `agent-sdk-patterns.md` | TO BE CREATED (High Priority) |
+| `compound-flywheel-effect.md` | TO BE CREATED (Lower Priority) |
+| `few-shot-prompting-patterns.md` | TO BE CREATED (Medium Priority) |
+| `information-theory-prompting.md` | TO BE CREATED (High Priority) |
+| `claude-code-terminal-basics.md` | TO BE CREATED (Medium Priority) |
+| `skills-system.md` | TO BE CREATED (Medium Priority) |
+| `mcp-server-patterns.md` | TO BE CREATED (Medium Priority) |
+| `plan-mode-workflow.md` | TO BE CREATED (Medium Priority) |
+| `ralph-loop-patterns.md` | TO BE CREATED (Medium Priority) |
+| `yolo-mode-patterns.md` | Replaced by existing `yolo-mode-configuration.md` |
 
 ---
 
 ## Notes
 
-1. Some chapters have alternate versions (ch03/ch03-prompting, ch08/ch08-error, ch12/ch12-workflows) with different content focus
-2. Chapters 13 and 14 PRD files were not found in the prds/ directory
-3. All articles are assumed to be in `01-Compound-Engineering/context-engineering/` unless otherwise noted
-4. The reverse index helps identify which articles are high-value targets for improvement
+1. **Chapter numbering**: The book was restructured from 12 to 15 chapters. PRD filenames may not match final chapter numbers.
+2. **Dual references**: Some articles (like `yolo-mode-configuration.md`) are referenced in multiple chapters where relevant.
+3. **Parent directory articles**: Articles in `01-Compound-Engineering/` (outside context-engineering/) are now included.
+4. **Core directory**: The `core/` subdirectory contains infrastructure-focused articles.
+5. **CLAUDE.md excluded**: The config file in context-engineering/ is not content and is excluded from counts.

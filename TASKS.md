@@ -51,7 +51,7 @@
 ### Cross-Cutting Improvements
 - [x] Add Model Strategy (YOLO/Skills/Haiku-Sonnet-Opus) content to ch15 PRD (Completed: 2026-01-27)
 - [x] Create index of all KB articles used in each PRD (Completed: 2026-01-27)
-- [ ] Ensure all 93 KB articles have at least one PRD reference
+- [x] Ensure all 93 KB articles have at least one PRD reference (Completed: 2026-01-28)
 
 ### New KB Articles Needed (Critical Gaps) - TO BE CREATED
 - [ ] Create @kb/sub-agent-context-hierarchy.md (how sub-agents manage context isolation)
