@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 23:30)
+## Current Status (Updated: 2026-01-28 00:15)
 - Phase: Chapter Milestones
 - Active: task-014 (ch03 code_written) - next chapter milestone
-- Last Completed: task-012 (ch02 final) - iteration 5
+- Last Completed: Queue curation
 - Blockers: None
 
 ## Project State Summary
@@ -25,6 +25,19 @@ task-014 (ch03 code_written) - score 935
 Next chapter: ch03 Prompting Fundamentals
 
 ## Recent Activity
+
+### 2026-01-28 00:15 - Queue Curation
+- What: Curated task queue, compacted 33 completed tasks, updated stats
+- Changes:
+  - Compacted 33 completed tasks into completed section (ch01/ch02 milestones, diagrams, KB articles, cross-refs, exercises folder)
+  - Updated stats: pending 178, complete 33, total 211
+  - Added byType breakdown: 13 chapters, 27 diagram groups, 6 content, 2 fixes, 1 review, 1 appendix
+  - Added completedChapters tracking: ["ch01", "ch02"]
+  - Updated lastCurated and lastCheckpoint timestamps
+- No duplicates found
+- Priority order verified: ch03 (score 935) correctly highest pending
+- Outcome: Success
+- Next: task-014 (ch03 code_written)
 
 ### 2026-01-27 23:30 - COMPLETED ch02 final (task-012) - ITERATION 5
 - What: Completed final quality gate for Chapter 2 - SECOND CHAPTER COMPLETE

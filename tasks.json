@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T23:30:00.000Z",
+  "lastUpdated": "2026-01-28T00:15:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -2086,23 +2086,70 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 0,
-    "items": []
+    "count": 33,
+    "lastCompaction": "2026-01-28T00:15:00Z",
+    "items": [
+      {"id": "task-001", "title": "ch01: The Compound Systems Engineer", "completedAt": "2026-01-27T19:00:00Z"},
+      {"id": "task-002", "title": "ch01 code written", "completedAt": "2026-01-27T17:00:00Z"},
+      {"id": "task-003", "title": "ch01 code tested", "completedAt": "2026-01-27T15:15:00Z"},
+      {"id": "task-004", "title": "ch01 reviewed", "completedAt": "2026-01-27T17:00:00Z"},
+      {"id": "task-005", "title": "ch01 diagrams complete", "completedAt": "2026-01-27T18:00:00Z"},
+      {"id": "task-006", "title": "ch01 final", "completedAt": "2026-01-27T19:00:00Z"},
+      {"id": "task-007", "title": "ch02: Getting Started with Claude Code", "completedAt": "2026-01-27T23:30:00Z"},
+      {"id": "task-008", "title": "ch02 code written", "completedAt": "2026-01-27T21:00:00Z"},
+      {"id": "task-009", "title": "ch02 code tested", "completedAt": "2026-01-27T22:30:00Z"},
+      {"id": "task-010", "title": "ch02 reviewed", "completedAt": "2026-01-27T23:00:00Z"},
+      {"id": "task-011", "title": "ch02 diagrams complete", "completedAt": "2026-01-27T21:30:00Z"},
+      {"id": "task-012", "title": "ch02 final", "completedAt": "2026-01-27T23:30:00Z"},
+      {"id": "task-091", "title": "ci-cd-agent-patterns.md", "completedAt": "2026-01-27"},
+      {"id": "task-092", "title": "mutual-information-context.md", "completedAt": "2026-01-27"},
+      {"id": "task-093", "title": "token-budgeting-strategies.md", "completedAt": "2026-01-27"},
+      {"id": "task-094", "title": "lost-in-the-middle-mitigation.md", "completedAt": "2026-01-27"},
+      {"id": "task-095", "title": "checkpoint-commit-patterns.md", "completedAt": "2026-01-27"},
+      {"id": "task-096", "title": "batch-api-patterns.md", "completedAt": "2026-01-27"},
+      {"id": "task-097", "title": "prompt-injection-prevention.md", "completedAt": "2026-01-27"},
+      {"id": "task-103", "title": "Fix cross-references", "completedAt": "2026-01-27T16:00:00Z"},
+      {"id": "task-104", "title": "Fix ch07 reference to ch09", "completedAt": "2026-01-27T16:00:00Z"},
+      {"id": "task-105", "title": "Fix ch08 reference to ch10", "completedAt": "2026-01-27T16:00:00Z"},
+      {"id": "task-106", "title": "Fix ch10 reference to ch13", "completedAt": "2026-01-27T16:00:00Z"},
+      {"id": "task-107", "title": "Update ch09 reference", "completedAt": "2026-01-27T16:00:00Z"},
+      {"id": "task-114", "title": "ch01: High-priority diagrams", "completedAt": "2026-01-27T12:00:00Z"},
+      {"id": "task-115", "title": "three-levels-pyramid", "completedAt": "2026-01-27T10:00:00Z"},
+      {"id": "task-116", "title": "portfolio-vs-single-bet", "completedAt": "2026-01-27T11:00:00Z"},
+      {"id": "task-117", "title": "constraint-feedback-loop", "completedAt": "2026-01-27T12:00:00Z"},
+      {"id": "task-118", "title": "ch02: High-priority diagrams", "completedAt": "2026-01-27T15:00:00Z"},
+      {"id": "task-119", "title": "agent-vs-chat", "completedAt": "2026-01-27T13:00:00Z"},
+      {"id": "task-120", "title": "tool-ecosystem-radial", "completedAt": "2026-01-27T14:00:00Z"},
+      {"id": "task-121", "title": "two-mode-mental-model", "completedAt": "2026-01-27T15:00:00Z"},
+      {"id": "task-206", "title": "Create exercises folder structure", "completedAt": "2026-01-27T20:43:00Z"}
+    ]
   },
   "stats": {
-    "pending": 180,
+    "pending": 178,
     "inProgress": 0,
     "complete": 33,
     "blocked": 0,
-    "total": 213
+    "total": 211,
+    "lastCurated": "2026-01-28T00:15:00Z",
+    "byType": {
+      "chapter": 13,
+      "diagrams": 27,
+      "content": 6,
+      "fix": 2,
+      "review": 1,
+      "appendix": 1
+    },
+    "completedChapters": ["ch01", "ch02"],
+    "nextChapter": "ch03"
   },
   "checkpoints": {
-    "lastGoodCommit": "8b76ed9011d3bc78e3370ed421275375831ddb83",
-    "lastSuccessfulTask": "iteration-5",
-    "lastCheckpoint": "2026-01-27T23:30:00Z",
+    "lastGoodCommit": "eec8c1775c6a39768b42b1fa92f03d12736c17a7",
+    "lastSuccessfulTask": "queue-curation",
+    "lastCheckpoint": "2026-01-28T00:15:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
-    "circuitBreakerTripped": false
+    "circuitBreakerTripped": false,
+    "lastCuration": "2026-01-28T00:15:00Z"
   },
   "config": {
     "maxConsecutiveFailures": 3,
