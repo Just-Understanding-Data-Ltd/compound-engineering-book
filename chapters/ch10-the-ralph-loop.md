@@ -32,7 +32,7 @@ Attempt 4: "Maybe we need to tweak the JWT expiration..."
   → You're stuck in a loop
 ```
 
-The model keeps suggesting JWT variations because the entire conversation history is saturated with JWT-related attempts. It struggles to explore fundamentally different solutions when negative context dominates the window.
+The model keeps suggesting JSON Web Token (JWT) variations because the entire conversation history is saturated with JWT-related attempts. It struggles to explore fundamentally different solutions when negative context dominates the window.
 
 ### Context Rot
 
@@ -165,7 +165,7 @@ A repository-wide knowledge file (AGENTS.md or CLAUDE.md) stores codebase-specif
 - Runtime: Bun (use `bun`, not `npm`)
 - Framework: Next.js 15 (app router)
 - Database: PostgreSQL (migrations in /db/migrations)
-- Testing: Vitest + Playwright
+- Testing: Vitest (unit testing) + Playwright (end-to-end testing)
 
 ## Key Patterns
 
@@ -177,7 +177,7 @@ A repository-wide knowledge file (AGENTS.md or CLAUDE.md) stores codebase-specif
 
 ### API Endpoints
 - Use Server Actions in /app/actions/
-- Always validate input with zod
+- Always validate input with zod (TypeScript schema validation library)
 - Return typed response objects
 
 ## Common Mistakes to Avoid
@@ -246,7 +246,7 @@ Each task should have clear acceptance criteria:
 - [ ] Update API documentation with rate limit info
 
 ### Context
-- Use Redis for rate limit storage (configured in /lib/redis)
+- Use Redis (in-memory data store) for rate limit storage (configured in /lib/redis)
 - Follow existing rate limiting pattern in /app/actions/uploads.ts
 
 ### Success Criteria
