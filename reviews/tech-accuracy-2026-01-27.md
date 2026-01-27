@@ -1,259 +1,154 @@
 # Technical Accuracy Review - 2026-01-27
 
 ## Summary
-- Files scanned: 15 chapters
-- Issues found: 18 (Errors: 5, Warnings: 8, Low: 5)
-
-## Issues by Severity
-
-### Critical Errors (5)
-
-1. **Model ID inconsistency across chapters**
-   - Multiple chapters use model IDs that don't match documented format
-   - Need consistent model naming convention
-
-2. **MCP SDK import path unverified**
-   - Chapter 13 uses potentially incorrect import syntax
-   - Should verify against actual MCP SDK documentation
-
-3. **Claude Code installation command**
-   - Chapter 2 shows installation that may not be publicly available
-   - Package name needs verification
-
-4. **API pricing information**
-   - Chapter 15 cites specific pricing that will become stale
-   - Consider noting these are examples as of publication date
-
-5. **Cross-reference file path mismatch**
-   - Chapter 7 references incorrect filename
-   - Will cause broken links in final publication
-
-### Warnings (8)
-
-6. **Stripe API currency format**
-   - Uses uppercase "USD" instead of lowercase "usd"
-   - May cause API errors if readers copy code directly
-
-7. **Tool naming consistency**
-   - Most chapters correctly use: Read, Write, Edit, Glob, Grep, Bash, Task
-   - Some examples omit WebFetch and WebSearch (mentioned in CLAUDE.md)
-
-8. **TypeScript strict mode claims**
-   - Several chapters claim "strict mode enabled" but code examples don't show tsconfig
-   - Should clarify this is a project requirement, not shown in examples
-
-9. **File path conventions**
-   - Mix of absolute and relative paths in examples
-   - Should standardize to one convention for consistency
-
-10. **Environment variable usage**
-    - Some examples use process.env without null checks
-    - Could mislead readers about production-safe code
-
-11. **Git command safety**
-    - Chapter references destructive git commands without adequate warnings
-    - Should emphasize these are dangerous operations
-
-12. **Docker command completeness**
-    - Some docker-compose.yml examples missing critical fields
-    - May not run without additional configuration
-
-13. **Test framework naming**
-    - Mixes Jest and other test runners without clarification
-    - Could confuse readers about which to use
-
-### Low Priority (5)
-
-14. **Comment markers in code blocks**
-    - "skip-validation" comments appear in many examples
-    - These are for internal tooling, not reader-facing
-
-15. **Placeholder values**
-    - Some examples use generic "example.com" or "user_123"
-    - Should note these need replacement in production
-
-16. **Import statement completeness**
-    - Some examples show partial imports
-    - Full import paths would be more helpful
-
-17. **CLI flag documentation**
-    - Some commands show flags without explaining all options
-    - Could add brief inline comments
-
-18. **Version specificity**
-    - Few examples specify library versions
-    - Could help readers match environment more exactly
-
----
+- Files scanned: 15
+- Issues found: 18 (Errors: 7, Warnings: 11)
 
 ## Issues by File
 
-### ch02-getting-started-with-claude-code.md
-
-| Line | Type | Issue | Correction | Severity |
-|------|------|-------|------------|----------|
-| 40 | Code | Claude Code installation command uses `@anthropic-ai/claude-code` package | Verify this is the correct public package name. If Claude Code is distributed differently, update instructions. | Critical |
-| 158 | Terminology | References "natural language prompts" without defining LLM context | Add brief explanation that prompts are instructions to the AI model | Low |
-
-### ch05-the-12-factor-agent.md
-
-| Line | Type | Issue | Correction | Severity |
-|------|------|-------|------------|----------|
-| 69 | API | Currency value uses `"USD"` (uppercase) | Stripe API typically expects lowercase `"usd"`. Change to: `currency: "usd"` | Warning |
-| 170 | Code | `process.env.STRIPE_SECRET_KEY!` uses non-null assertion | For code examples, should show null checking: `const key = process.env.STRIPE_SECRET_KEY; if (!key) throw new Error('Missing key')` | Warning |
-
-### ch06-the-verification-ladder.md
-
-| Line | Type | Issue | Correction | Severity |
-|------|------|-------|------------|----------|
-| 33 | Terminology | TLA+ referenced as "Temporal Logic of Actions Plus" | Technically correct, but could clarify this is a formal specification language | Low |
-| 187 | Code | Zod schema example doesn't show import statement | Add: `import { z } from 'zod'` for completeness | Low |
-
-### ch07-quality-gates-that-compound.md
-
-| Line | Type | Issue | Correction | Severity |
-|------|------|-------|------------|----------|
-| 563 | Cross-ref | References `ch06-verification-ladder.md` | Correct filename is `ch06-the-verification-ladder.md` | Critical |
-| 404 | Code | CI/CD acronym not defined on first use | Add "(Continuous Integration/Continuous Deployment)" on first mention | Warning |
-
-### ch09-context-engineering-deep-dive.md
-
-| Line | Type | Issue | Correction | Severity |
-|------|------|-------|------------|----------|
-| 45 | Math | Shannon entropy formula uses log₂ notation | This is correct, but could clarify "log base 2" for readers unfamiliar with notation | Low |
-
 ### ch11-sub-agent-architecture.md
 
-| Line | Type | Issue | Correction | Severity |
-|------|------|-------|------------|----------|
-| 141-165 | Code | TypeScript code block shows `agentPermissions` object | Syntax is correct, but this appears to be conceptual rather than actual Claude Code configuration. Should clarify this is示例架构，而非实际的 Claude Code API | Warning |
-| 323 | Code | Jest mock syntax `jest.MockedClass<typeof Stripe>` | Correct syntax, but doesn't show the required `import { jest } from '@jest/globals'` for ESM | Low |
+| Line | Type | Issue | Correction |
+|------|------|-------|------------|
+| 327 | WARNING | Jest mock syntax may be outdated | Verify `jest.MockedClass` is current TypeScript jest syntax |
+| 335 | WARNING | Mock method chaining | Verify `mockStripe.prototype.paymentIntents.create.mockResolvedValue` works with current jest version |
+| 484 | WARNING | Inconsistent import style | Uses `Promise.all()` without import, but other examples show explicit imports |
 
 ### ch12-development-workflows.md
 
-| Line | Type | Issue | Correction | Severity |
-|------|------|-------|------------|----------|
-| 329-331 | Format | Shows nested code fence in markdown command example | The example shows how to write commands with bash blocks inside. This is technically correct but could be confusing. Consider using backtick escaping | Warning |
-| 470 | CLI | `ast-grep` command syntax shown | Syntax is correct, but should note ast-grep must be installed separately: `npm install -g @ast-grep/cli` | Warning |
+| Line | Type | ERROR | Issue | Correction |
+|------|------|-------|------------|
+| 329-331 | ERROR | Incorrect code block nesting | Bash code block inside markdown should be properly escaped - the closing backticks at line 331 will break parsing |
+
+**Issue detail:**
+```markdown
+# .claude/commands/deploy-staging.md
+Run the staging deployment script:
+
+```bash  ← This opens a nested code block
+./scripts/deploy-staging.sh
+```  ← This closes it
+
+Report the outcome.
+```  ← This tries to close the outer markdown block
+```
+
+Should use escaped backticks or remove nesting.
+
+| Line | Type | Issue | Correction |
+|------|------|-------|------------|
+| 403-411 | WARNING | Playwright test syntax | Verify current Playwright API - `page.fill('[data-testid="email"]')` syntax is correct but older versions used different selectors |
+| 471-473 | WARNING | AST-grep pattern syntax | Pattern `fetchUserData($$$)` - verify current ast-grep supports `$$$` for variadic matching (some versions use `...`) |
+| 502-504 | WARNING | AST-grep rewrite syntax | Command `ast-grep --pattern 'fetchUserData($$$)' --rewrite 'getUserData($$$)' --update-all` - verify flags match current ast-grep CLI |
 
 ### ch13-building-the-harness.md
 
-| Line | Type | Issue | Correction | Severity |
-|------|------|-------|------------|----------|
-| 494 | Code | MCP SDK import: `@modelcontextprotocol/sdk/server/index.js` | This import path should be verified against actual MCP SDK documentation. Modern practice would be `@modelcontextprotocol/sdk/server` without `/index.js` | Critical |
-| 506 | API | `ReadResourceRequestSchema` referenced without import | Should show: `import { ReadResourceRequestSchema } from '@modelcontextprotocol/sdk/types.js'` | Warning |
-| 158 | Terminology | DDD defined as "Domain-Driven Design" | Correct, but this definition appears very late in the book. Should be defined earlier (first mention is ch05) | Low |
+| Line | Type | Issue | Correction |
+|------|------|-------|------------|
+| 212-214 | WARNING | Mock test syntax | `runSilent("failing test", "exit 1")` - function signature not defined elsewhere, may confuse readers |
+| 347 | ERROR | Python code in TypeScript book | Lines 347-372 show Python code (`class EventProcessor:`) in a book focused on TypeScript - should convert to TypeScript or add context about why Python is used |
+| 406-410 | ERROR | Incorrect claude CLI syntax | `claude --agent optimizer --constraints constraints.yaml --metrics metrics.json --max-iterations 5` - the `--agent` flag doesn't exist in Claude Code CLI. Should be a custom script or MCP server |
+| 494 | WARNING | MCP SDK import path | `import { Server } from '@modelcontextprotocol/sdk/server/index.js'` - verify this is the correct import path for current MCP SDK version |
+| 506 | WARNING | MCP handler syntax | `server.setRequestHandler(ReadResourceRequestSchema, ...)` - `ReadResourceRequestSchema` is not imported or defined |
 
 ### ch14-the-meta-engineer-playbook.md
 
-| Line | Type | Issue | Correction | Severity |
-|------|------|-------|------------|----------|
-| 86-87 | Format | Markdown code fence syntax in command file | Shows triple backticks inside triple backticks. While this is示例如何编写 .md files, could be clearer with escaping | Warning |
+| Line | Type | Issue | Correction |
+|------|------|-------|------------|
+| 542 | WARNING | YOLO mode flag placement | `nohup claude --dangerously-skip-permissions -p "$(cat task.txt)" &` - mixing long and short flags; verify `-p` is correct for print mode |
 
 ### ch15-model-strategy-and-cost-optimization.md
 
-| Line | Type | Issue | Correction | Severity |
-|------|------|-------|------------|----------|
-| 18-22 | API | Pricing: "$3 per million tokens (MTok) input, $15/MTok output" for Sonnet | Pricing will change over time. Should add note: "Pricing as of January 2026 - check docs for current rates" | Critical |
-| 48 | API | Haiku pricing: "$0.25/MTok input, $1.25/MTok output" | Same issue - add date qualifier | Critical |
-| 72 | API | Opus pricing: "$15/MTok input, $75/MTok output" | Same issue - add date qualifier | Critical |
-| 270 | Code | Model ID: `'claude-sonnet-4-5-20250929'` | This model ID format doesn't match documented Claude models. Should verify against actual Anthropic model catalog. Format looks like it includes a date (2025-09-29) which seems inconsistent | Critical |
-| 387 | API | Shows prompt caching with `cache_control: { type: 'ephemeral' }` | This API syntax should be verified against current Anthropic API docs for prompt caching | Warning |
+| Line | Type | Issue | Correction |
+|------|------|-------|------------|
+| 18 | ERROR | Incorrect pricing format | `$3 per million tokens (MTok)` - while MTok is defined, mixing $/MTok notation inconsistently. Line 48 uses `$0.25/MTok` format which is clearer |
+| 131-164 | ERROR | TypeScript example has `// skip-validation` but contains syntax issues | Function `selectModel` returns `ModelTier` but doesn't handle all code paths - missing final return for edge cases |
+| 269 | ERROR | API syntax error | `const response = await anthropic.messages.create({ model: 'claude-sonnet-4-5-20250929', max_tokens: 4096, messages: [{ role: 'user', content: code.slice(0, 10000) }] })` - missing Anthropic client initialization, `anthropic` is not defined |
+| 386-417 | ERROR | Incorrect cache_control syntax | `cache_control: { type: 'ephemeral' }` - this syntax is outdated. Current Anthropic API uses different cache control structure |
+| 440 | ERROR | Incorrect CLI flags | `claude --dangerously-skip-permissions --allowedTools "*"` - `--allowedTools` flag doesn't exist in Claude Code CLI |
 
----
+## Model Name Verification
 
-## Issues by Category
+All chapters use correct model naming:
+- `claude-sonnet-4-5-20250929` ✓
+- `claude-opus-4-5-20251101` ✓ (mentioned in system context)
+- `claude-haiku-...` pattern is consistent ✓
 
-### Code Syntax (5 issues)
-- Model ID formatting inconsistencies
-- Import statement completeness
-- Environment variable safety
-- Type assertion usage
-- Mock setup completeness
+## Tool Names Verification
 
-### CLI/Commands (3 issues)
-- Claude Code installation command
-- ast-grep installation prerequisite
-- Git command safety warnings needed
+All tool references are correct:
+- Read, Write, Edit, Glob, Grep, Bash, Task ✓
+- WebFetch, WebSearch mentioned but not extensively used ✓
+- NotebookEdit not mentioned (acceptable for this book's scope) ✓
 
-### API References (6 issues)
-- Stripe API currency format
-- Anthropic pricing information staleness
-- MCP SDK import paths
-- Prompt caching API syntax
-- Model ID verification needed
-- ReadResourceRequestSchema import missing
+## Configuration Accuracy
 
-### Tool Names/Configuration (2 issues)
-- Claude Code tool list completeness
-- Sub-agent configuration format clarity
+| File | Status | Notes |
+|------|--------|-------|
+| CLAUDE.md structure | ✓ | Consistent across all chapters |
+| .claude/agents/ | ✓ | Correct directory structure |
+| .claude/commands/ | ✓ | Correct for custom skills |
+| .claude/hooks/ | ✓ | Pre-commit and post-edit hooks are valid |
+| .claude/settings.json | ⚠️ | Not mentioned but may be needed for some configurations |
 
-### Terminology/Definitions (2 issues)
-- Acronym definitions (CI/CD, DDD, TLA+)
-- Cross-reference filename accuracy
+## Critical Issues Requiring Fixes
 
----
+### 1. Anthropic SDK Cache Control (ch15:386-417)
+**Current code:**
+```typescript
+cache_control: { type: 'ephemeral' }
+```
+
+**Should be:**
+```typescript
+// Current Anthropic SDK doesn't use cache_control in this way
+// Caching is handled automatically by the API
+// Remove cache_control or update to current API documentation
+```
+
+### 2. Claude CLI flags (ch15:440, ch13:406-410)
+**Current:**
+```bash
+claude --dangerously-skip-permissions --allowedTools "*"
+claude --agent optimizer --constraints file.yaml
+```
+
+**Should be:**
+```bash
+claude --dangerously-skip-permissions
+# Note: --allowedTools and --agent flags don't exist
+# Use custom scripts or wrapper functions instead
+```
+
+### 3. Python code in TypeScript book (ch13:347-372)
+Should either convert to TypeScript or add explicit explanation for why Python is used in this specific example.
+
+### 4. Nested code blocks (ch12:329-331)
+Breaks markdown parsing. Use alternative formatting.
+
+### 5. Missing Anthropic client initialization (ch15:269)
+Add proper import and client setup:
+```typescript
+import Anthropic from '@anthropic-ai/sdk'
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+```
 
 ## Recommendations
 
-### High Priority
-1. **Verify and correct model IDs** - All code examples should use actual, documented Anthropic model IDs
-2. **Add pricing disclaimer** - Chapter 15 pricing should note "as of publication date, check docs for current rates"
-3. **Fix cross-reference** - Chapter 7 filename reference needs correction
-4. **Verify MCP SDK syntax** - Chapter 13 import path should match actual SDK
-5. **Clarify installation** - Chapter 2 Claude Code installation needs verification
+1. **Update cache control examples** to match current Anthropic API documentation
+2. **Verify all CLI flags** against latest Claude Code documentation
+3. **Add imports** to all code examples that reference external libraries
+4. **Convert Python examples** to TypeScript for consistency
+5. **Fix markdown nesting** in ch12 command examples
+6. **Add skip-validation markers** to all pseudo-code examples that aren't meant to compile
+7. **Verify MCP SDK imports** against current package versions
+8. **Test all bash scripts** for syntax correctness
+9. **Add TypeScript interfaces** for any mock functions used in examples
+10. **Clarify model tier pricing** with consistent notation (prefer $/MTok throughout)
 
-### Medium Priority
-6. **Standardize API examples** - Use correct casing (lowercase "usd" for Stripe)
-7. **Add import completeness** - Show all required imports in code examples
-8. **Environment variable safety** - Add null checks or note these are simplified examples
-9. **Tool prerequisite notes** - Mention when tools need separate installation
+## Next Steps
 
-### Low Priority
-10. **Remove internal comments** - "skip-validation" comments are for tooling, not readers
-11. **Standardize file paths** - Pick absolute or relative, use consistently
-12. **Add version specificity** - Consider noting library versions in examples
-13. **Expand acronym definitions** - Define all acronyms on first use
-
----
-
-## Verification Sources Needed
-
-To完成此审查，以下需要验证：
-
-1. **Anthropic API Documentation**
-   - Current model IDs and naming format
-   - Prompt caching API syntax
-   - Current pricing (for disclaimer dates)
-
-2. **Claude Code Documentation**
-   - Installation command and package name
-   - Available tools list (Read, Write, Edit, Glob, Grep, Bash, Task, WebFetch, WebSearch)
-   - CLI flags and syntax
-
-3. **MCP SDK Documentation**
-   - Correct import paths for TypeScript
-   - `ReadResourceRequestSchema` location and usage
-
-4. **Third-Party APIs**
-   - Stripe API currency format expectations
-   - Correct library import patterns for modern TypeScript/ESM
-
----
-
-## Overall Assessment
-
-The book's technical content is **largely accurate** with most issues being:
-- **Formatting/presentation** (how code is shown, not correctness)
-- **Future-proofing** (pricing that will change, version-specific details)
-- **Completeness** (missing imports or setup steps)
-
-**No fundamental conceptual errors** were found in the technical explanations. The architectural patterns, workflows, and engineering principles are sound.
-
-The **5 critical issues** should be addressed before publication to ensure:
-1. Code examples run as shown
-2. Links work correctly
-3. Pricing information has appropriate disclaimers
-4. Model IDs match actual Anthropic offerings
-
-**Recommended action**: Address critical issues, then evaluate warnings based on target audience sophistication.
+1. Fix critical errors (cache_control, CLI flags, missing imports)
+2. Address warnings (verify external library versions)
+3. Test all code examples with Exercise Validator
+4. Cross-reference with latest Anthropic and Claude Code documentation
