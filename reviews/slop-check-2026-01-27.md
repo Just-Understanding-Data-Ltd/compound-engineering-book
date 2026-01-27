@@ -1,12 +1,13 @@
-# AI Slop Check - 2026-01-27
+# AI Slop Check - 2026-01-27 (Updated)
 
 ## Summary
 - Files scanned: 34 (15 chapters, 19 PRDs)
-- Issues found: 52 (Critical: 0, High: 3, Medium: 49)
+- Issues found: 53 (Critical: 1, High: 3, Medium: 49)
 
 ### Good News
 - **No "delve"** in any file
-- **No "crucial", "pivotal", "robust"** in chapters (1 in PRD, not critical)
+- **No "crucial", "pivotal", "robust"** in chapters
+- **1 "crucial"** in PRD (prds/ch06.md:765) - CRITICAL: fix before chapter conversion
 - **No em dashes** in any chapter (chapters are clean!)
 - **No transition phrases** (Additionally, Furthermore, Moreover)
 - **No hedging phrases** (It's important to note, It could be argued, etc.)
@@ -19,6 +20,13 @@
 ---
 
 ## Issues by File
+
+### CRITICAL: prds/ch06.md
+| Line | Severity | Pattern | Text | Suggested Fix |
+|------|----------|---------|------|---------------|
+| 765 | Critical | "crucial" | "And here's the crucial insight: when you stack these gates..." | Replace with "key insight" or "core insight" |
+
+---
 
 ### chapters/ch14-the-meta-engineer-playbook.md
 | Line | Severity | Pattern | Text | Suggested Fix |
@@ -140,6 +148,9 @@ The word "leverage" appears 74+ times across chapters. This is **intentional and
 ---
 
 ## Action Items
+
+### Must Fix (Critical)
+1. **prds/ch06.md:765** - Replace "crucial insight" with "key insight"
 
 ### Must Fix (High Priority)
 1. ch14:316 - Replace "paradigm shift"
