@@ -1,6 +1,6 @@
 # Chapter 7: Quality Gates That Compound
 
-Quality gates seem like bureaucracy. Type checkers, linters, tests, CI/CD pipelines. Checkpoints that slow you down and block progress. This intuition is wrong.
+Quality gates seem like bureaucracy. Type checkers, linters, tests, Continuous Integration/Continuous Deployment (CI/CD) pipelines. Checkpoints that slow you down and block progress. This intuition is wrong.
 
 Think of a quality gate not as a checkpoint but as an information filter that mathematically reduces the universe of possible programs. A type checker does not just catch bugs. It eliminates 95% of invalid implementations. A test suite does not just validate behavior. It filters from thousands of "kinda working" implementations to one that passes all assertions. Linting does not just enforce style. It narrows the solution space to implementations matching your team's mental model.
 
@@ -161,8 +161,8 @@ Let us calculate the actual compounding effect of six quality gates:
 Types:       1 + 0.10 = 1.10
 Linting:     1 + 0.15 = 1.15
 Tests:       1 + 0.20 = 1.20
-CI/CD:       1 + 0.15 = 1.15
-DDD:         1 + 0.20 = 1.20
+CI/CD:                      1 + 0.15 = 1.15
+Domain-Driven Design (DDD): 1 + 0.20 = 1.20
 CLAUDE.md:   1 + 0.25 = 1.25
 
 Total = 1.10 × 1.15 × 1.20 × 1.15 × 1.20 × 1.25
@@ -204,7 +204,7 @@ Final: 261.9 units (2.62x ≈ 2.65x improvement)
 
 ### Three Reasons Compounding Happens
 
-**Entropy Reduction Cascades**: Each quality gate reduces entropy (uncertainty) in LLM outputs. Lower entropy means fewer possible outputs and more predictable behavior. When you stack gates, entropy reduction cascades. Each gate reduces entropy for the next gate's input, making subsequent gates more effective.
+**Entropy Reduction Cascades**: Each quality gate reduces entropy (uncertainty) in Large Language Model (LLM) outputs. Lower entropy means fewer possible outputs and more predictable behavior. When you stack gates, entropy reduction cascades. Each gate reduces entropy for the next gate's input, making subsequent gates more effective.
 
 **Feedback Loops**: Quality gates inform each other. Types tell you what to test. Tests validate type contracts. Test patterns inform linting rules. Linting enforces patterns from types and tests. CI/CD runs all gates automatically. CLAUDE.md documents why gates exist and explains the patterns they enforce.
 
@@ -384,7 +384,7 @@ Per-commit overhead: 5 seconds (automated)
 Total cost over 3 months: ~105 minutes ≈ 2 hours
 ```
 
-ROI: Spend 2 hours upfront to save 60 hours later = 30x return.
+Return on Investment (ROI): Spend 2 hours upfront to save 60 hours later = 30x return.
 
 ### Day Zero Setup
 
@@ -486,7 +486,7 @@ Track these metrics:
 - Lint error rate (% of code violating rules)
 - Test failure rate (% of generated code failing tests)
 - Gate failure rate on first LLM generation (target: <10%)
-- Bugs escaped to production (target: <2 per 1000 LOC)
+- Bugs escaped to production (target: <2 per 1000 Lines of Code (LOC))
 
 ## Common Pitfalls
 
@@ -556,3 +556,11 @@ Bonus from compounding: 60% additional improvement
 ```
 
 Quality gates are not bureaucracy. They are capital that compounds. Invest early, invest completely, and watch your code quality multiply.
+
+---
+
+*Related chapters:*
+
+- **[Chapter 6: The Verification Ladder](ch06-verification-ladder.md)** for the hierarchy of verification methods that gates automate
+- **[Chapter 8: Error Handling & Debugging](ch08-error-handling.md)** for handling gate failures gracefully
+- **[Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claudemd.md)** for the CLAUDE.md gate that ties everything together

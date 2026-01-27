@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T23:30:00.000Z",
+  "lastUpdated": "2026-01-28T00:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -562,8 +562,10 @@
           "parentId": "task-037",
           "type": "milestone",
           "title": "reviewed",
-          "status": "pending",
-          "score": -105
+          "status": "complete",
+          "completedAt": "2026-01-28T00:00:00Z",
+          "score": -105,
+          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed 5 term introductions: CI/CD (line 4), DDD (line 165), LLM (line 207), ROI (line 387), LOC (line 489). Added Related Chapters section."
         },
         {
           "id": "task-041",
@@ -2499,13 +2501,18 @@
         "id": "task-031",
         "title": "ch06: The Verification Ladder",
         "completedAt": "2026-01-27T22:30:00Z"
+      },
+      {
+        "id": "task-040",
+        "title": "ch07 reviewed",
+        "completedAt": "2026-01-28T00:00:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 140,
+    "pending": 139,
     "inProgress": 1,
-    "complete": 73,
+    "complete": 74,
     "blocked": 0,
     "total": 214
   },
@@ -2524,26 +2531,26 @@
     "healthCheckInterval": 300
   },
   "curatorNotes": {
-    "lastRun": "2026-01-27T23:30:00Z",
+    "lastRun": "2026-01-28T00:00:00Z",
     "iteration": 5,
-    "tasksFixed": 1,
+    "tasksFixed": 0,
     "duplicatesFound": 0,
-    "statusInconsistenciesFound": 1,
+    "statusInconsistenciesFound": 0,
     "priorityIssues": [],
     "queueHealth": "EXCELLENT - All tasks properly prioritized",
     "findings": {
       "duplicateTaskIds": "NONE - Queue is clean",
-      "statusConsistency": "FIXED - task-037 changed from pending to in_progress (has 2 complete subtasks)",
-      "statsVerification": "FIXED - pending 140, inProgress 1, complete 73, total 214",
-      "queuePriorities": "CORRECT - task-040 (ch07 reviewed, score -105) is next milestone within ch07",
-      "nextTaskAnalysis": "ch07 IN PROGRESS: 2/5 milestones complete (code_written, code_tested). Next: task-040 reviewed."
+      "statusConsistency": "OK - task-037 in_progress with 3/5 subtasks complete",
+      "statsVerification": "VERIFIED - pending 139, inProgress 1, complete 74, total 214",
+      "queuePriorities": "CORRECT - task-041 (ch07 diagrams_complete, score -110) is next milestone within ch07",
+      "nextTaskAnalysis": "ch07 IN PROGRESS: 3/5 milestones complete (code_written, code_tested, reviewed). Next: task-041 diagrams_complete."
     },
     "recommendations": [
-      "IMMEDIATE: task-040 (ch07 reviewed) - review for AI slop, term introductions, technical accuracy",
-      "THEN: task-041 (ch07 diagrams_complete) - create 3 high-priority diagrams",
+      "IMMEDIATE: task-041 (ch07 diagrams_complete) - create 3 high-priority diagrams (state-space-reduction, compounding-formula, six-gate-architecture)",
       "THEN: task-042 (ch07 final) - complete quality gate checklist",
+      "THEN: task-043 (ch08: Error Handling & Debugging) - next chapter",
       "Status: ch06 COMPLETE. Chapters complete: 6/15 (ch01-ch06, 40%)",
-      "Progress: 34% tasks complete (73/214), 40% chapters complete"
+      "Progress: 35% tasks complete (74/214), ch07 at 60%"
     ]
   }
 }

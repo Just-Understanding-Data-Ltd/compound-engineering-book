@@ -170,6 +170,31 @@ This would reduce the final milestone to "run script, verify output, mark comple
 
 ---
 
+### 2026-01-28 - Acronym Density in Technical Chapters
+
+**Context**: Reviewing ch07 (Quality Gates That Compound) for the "reviewed" milestone (iteration 5).
+
+**Observation**: Technical chapters accumulate undefined acronyms at a predictable rate. In ch07, I found 5 undefined terms:
+- CI/CD (Continuous Integration/Continuous Deployment)
+- DDD (Domain-Driven Design)
+- LLM (Large Language Model)
+- ROI (Return on Investment)
+- LOC (Lines of Code)
+
+The pattern: each major concept introduced brings its own acronym vocabulary. Quality gates bring CI/CD. Domain modeling brings DDD. AI-assisted development brings LLM. Business justification brings ROI. Code metrics bring LOC.
+
+This is a compounding problem. A chapter introducing 5 concepts might introduce 5 acronyms. By chapter 10, readers have encountered 30+ acronyms. If even 10% go undefined, that is 3 points of confusion per chapter.
+
+**Implication**: Term introduction checking should be treated as a separate review pass with equal priority to AI slop checking. The heuristic of "scan for all-caps words 3+ characters" catches most undefined acronyms quickly. The fix is always the same pattern: "Full Term (ACRONYM)" on first use.
+
+**Action**: During review milestone, perform explicit acronym scan:
+1. Search for `\b[A-Z]{3,}\b` (all-caps words 3+ chars)
+2. For each match, check if it appears earlier with parenthetical definition
+3. If not, add definition on first use
+4. Exception: universally known terms (API, URL, HTTP) can skip definition in technical books
+
+---
+
 ### 2026-01-28 - Cross-References as Silent Quality Gate Dependencies
 
 **Context**: Completing the ch04 final milestone (iteration 5). All automated checks passed (word count, em dashes, AI slop, diagrams, exercises), but the chapter was missing a "Related Chapters" section at the end.
