@@ -1,10 +1,12 @@
-# AI Slop Check - 2026-01-27
+# AI Slop Check - 2026-01-27 (Updated)
 
 ## Summary
-- Files scanned: 25 (7 chapters, 18 PRDs)
-- Issues found: 48 (Critical: 1, High: 45, Medium: 2)
+- Files scanned: 31 (13 chapters, 18 PRDs)
+- Issues found: 51 (Critical: 1, High: 45, Medium: 5)
 
 **Good news:** The chapter files are remarkably clean. Most issues are in PRD files, which are internal planning documents. The actual book content has very few slop patterns.
+
+**Update:** Re-scanned with all 13 chapters now complete (ch01-ch13).
 
 ## Issues by File
 
@@ -76,6 +78,9 @@
 ### prds/ch11.md
 | Line | Severity | Pattern | Text | Suggested Fix |
 |------|----------|---------|------|---------------|
+| 65 | High | "paradigm" | "Strategic career planning in the six-wave paradigm" | Use: "six-wave model" or "six-wave framework" |
+| 248 | High | "paradigm" | "D.1 Context: The Paradigm Shift" | Consider: "The Fundamental Shift" or keep (acceptable in context) |
+| 848 | High | "leveraging" (verb) | "leveraging first principles" | Use: "applying first principles" |
 | 11 | High | em dash (—) | "from 'builder' to 'meta-builder'—from writing code" | Use period |
 | 165 | High | em dash (—) | "Using AI heavily WILL cause atrophy—it's not a question" | Use period |
 | 373 | High | em dash (—) | "Not wishes, not aspirations—actual constraints" | Use comma or period |
@@ -98,7 +103,7 @@
 | robust | 0 | 0 | 0 |
 | cutting-edge | 0 | 0 | 0 |
 | game-changer | 0 | 0 | 0 |
-| leverage (verb) | 0 | 1 | 1 |
+| leverage (verb) | 0 | 2 | 2 |
 | realm | 0 | 0 | 0 |
 | paradigm | 0 | 2 | 2 |
 | em dash (—) | 0 | 44 | 44 |
@@ -125,11 +130,22 @@ The PRDs heavily use em dashes for headers and explanations. Consider a batch re
 When converting PRD content to chapter drafts, ensure em dashes are converted to appropriate punctuation.
 
 ## Clean Files (No Issues)
+### Chapters (All 13 clean of critical/high patterns)
 - chapters/ch01-the-compound-systems-engineer.md
 - chapters/ch02-getting-started-with-claude-code.md
 - chapters/ch03-prompting-fundamentals.md
 - chapters/ch04-writing-your-first-claude-md.md
 - chapters/ch05-the-12-factor-agent.md
+- chapters/ch06-the-verification-ladder.md (1 medium: "comprehensive")
+- chapters/ch07-quality-gates-that-compound.md (1 medium: "powerful")
+- chapters/ch08-error-handling-and-debugging.md
+- chapters/ch09-context-engineering-deep-dive.md
+- chapters/ch10-the-ralph-loop.md
+- chapters/ch11-sub-agent-architecture.md
+- chapters/ch12-development-workflows.md
+- chapters/ch13-building-the-harness.md
+
+### PRDs (Clean)
 - prds/index.md
 - prds/toc.md
 - prds/ch03.md
@@ -138,3 +154,15 @@ When converting PRD content to chapter drafts, ensure em dashes are converted to
 - prds/ch08-error-handling.md
 - prds/ch03-prompting-fundamentals.md
 - prds/ch12-development-workflows.md
+
+## Verification Commands
+```bash
+# Check for "delve" (should return nothing)
+grep -ri "delve" chapters/ prds/
+
+# Check for remaining em dashes in PRDs
+grep -r "—" prds/
+
+# Check for "crucial"
+grep -ri "crucial" chapters/ prds/
+```
