@@ -626,22 +626,51 @@ run_review_agents() {
     local issues_before=$(get_issue_score)
     echo "Issues before review: $issues_before"
 
-    local prompt_file="$PROMPT_DIR/review.md"
+    # Run each review agent as a SEPARATE invocation to avoid EPIPE from large outputs
+    # Each invocation generates less output, reducing pipe stress
+    local review_file="reviews/review-${today}.md"
+
+    echo "Running review agents (split invocations to avoid EPIPE)..."
+
+    # Agent 1: Slop checker
+    echo "  → slop-checker..."
+    local prompt_file="$PROMPT_DIR/review-slop.md"
     cat > "$prompt_file" << EOF
-Run review agents SEQUENTIALLY (one at a time) to avoid API concurrency errors:
-1. slop-checker
-2. tech-accuracy
-3. term-intro-checker
-4. progress-summarizer
-
-(Skip diagram-reviewer, oreilly-style, cross-ref-validator for speed)
-
-Write summary to reviews/review-${today}.md and commit.
-
-IMPORTANT: At the end, count total issues found (critical, medium, low) and output:
-ISSUES_FOUND: <number>
+Run ONLY the slop-checker agent on recent chapter changes.
+Append findings to $review_file (create if needed).
+Keep output minimal - just issues found.
 EOF
-    run_claude "$prompt_file" "no"  # No timeout for reviews - prevents EPIPE crashes
+    run_claude "$prompt_file" "no" 2>/dev/null || echo "  ⚠ slop-checker had issues"
+
+    # Agent 2: Tech accuracy
+    echo "  → tech-accuracy..."
+    prompt_file="$PROMPT_DIR/review-tech.md"
+    cat > "$prompt_file" << EOF
+Run ONLY the tech-accuracy agent on recent chapter changes.
+Append findings to $review_file.
+Keep output minimal - just issues found.
+EOF
+    run_claude "$prompt_file" "no" 2>/dev/null || echo "  ⚠ tech-accuracy had issues"
+
+    # Agent 3: Term intro checker
+    echo "  → term-intro-checker..."
+    prompt_file="$PROMPT_DIR/review-term.md"
+    cat > "$prompt_file" << EOF
+Run ONLY the term-intro-checker agent on recent chapter changes.
+Append findings to $review_file.
+Keep output minimal - just issues found.
+EOF
+    run_claude "$prompt_file" "no" 2>/dev/null || echo "  ⚠ term-intro-checker had issues"
+
+    # Agent 4: Progress summarizer (and commit)
+    echo "  → progress-summarizer..."
+    prompt_file="$PROMPT_DIR/review-progress.md"
+    cat > "$prompt_file" << EOF
+Run ONLY the progress-summarizer agent.
+Append summary to $review_file and commit all review changes.
+Output: ISSUES_FOUND: <total number from review file>
+EOF
+    run_claude "$prompt_file" "no" 2>/dev/null || echo "  ⚠ progress-summarizer had issues"
 
     # Count issues AFTER review (agents may have fixed some)
     local issues_after=$(get_issue_score)
