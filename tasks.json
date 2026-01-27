@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T19:30:00Z",
+  "lastUpdated": "2026-01-27T20:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -168,12 +168,14 @@
       "type": "fix",
       "title": "CRITICAL: Fix undefined MTok abbreviation in Ch15",
       "description": "Chapter 15 (Model Strategy & Cost Optimization) uses 'MTok' (million tokens) as abbreviation throughout pricing examples (lines 18-234) without ever defining what it means. Add clear definition at first occurrence in line 18: 'Million tokens (MTok)'. Critical for reader comprehension when explaining API pricing. Review flagged by term-intro-checker-2026-01-27.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-27T20:00:00Z",
       "priority": "critical",
       "score": 1105,
       "flaggedByReview": "term-intro-2026-01-27",
       "chapter": "ch15",
-      "reviewReference": "reviews/term-intro-2026-01-27.md"
+      "reviewReference": "reviews/term-intro-2026-01-27.md",
+      "outcome": "Added definition 'million tokens (MTok)' at first use on line 18"
     },
     {
       "id": "task-206",
@@ -1195,16 +1197,16 @@
     ]
   },
   "stats": {
-    "pending": 66,
+    "pending": 65,
     "inProgress": 0,
-    "complete": 44,
+    "complete": 45,
     "blocked": 0,
     "total": 110
   },
   "checkpoints": {
-    "lastGoodCommit": "6378ff9470a3a06d7be1c1e37567534cccded166",
-    "lastSuccessfulTask": "iteration-1",
-    "lastCheckpoint": "2026-01-27T19:13:12Z",
+    "lastGoodCommit": "c67a2f52d219074fcc8903b849e4b5fc99e2c016",
+    "lastSuccessfulTask": "iteration-3",
+    "lastCheckpoint": "2026-01-27T20:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false
   }

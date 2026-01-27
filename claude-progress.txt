@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 19:30)
+## Current Status (Updated: 2026-01-27 20:00)
 - Phase: Chapter Milestones (7 of 15 complete, 47%)
-- Active: Critical term fixes, then ch08 milestones
-- Last Completed: task-103 Fix undefined technical terms in Ch01 - ITERATION 2
+- Active: Critical term fixes complete, ready for ch08 milestones
+- Last Completed: task-104 Fix undefined MTok in Ch15 - ITERATION 3
 - Blockers: None active
 
 ## Project State Summary
@@ -21,11 +21,21 @@
 None active
 
 ## Next Task Priority
-1. task-104 (Fix undefined MTok in Ch15) - CRITICAL, score 1105
-2. task-043 (ch08: Error Handling & Debugging) - score 910
-3. task-049 (ch09: Context Engineering Deep Dive) - score 905
+1. task-043 (ch08: Error Handling & Debugging) - score 910
+2. task-049 (ch09: Context Engineering Deep Dive) - score 905
+3. task-055 (ch10: The RALPH Loop) - score 900
 
 ## Recent Activity
+
+### 2026-01-27 20:00 - COMPLETED task-104: Fix undefined MTok abbreviation in Ch15 - ITERATION 3
+- What: Fixed undefined "MTok" abbreviation in Chapter 15 (Model Strategy & Cost Optimization)
+- Fix Applied:
+  - Line 18: "$3/MTok input" → "$3 per million tokens (MTok) input"
+- Context: Chapter uses MTok throughout for pricing (lines 18-234) but never defined it
+- Tasks: task-104 marked complete
+- Stats: pending 65, complete 45
+- Outcome: Success
+- Next: task-043 (ch08: Error Handling & Debugging) - score 910
 
 ### 2026-01-27 19:30 - COMPLETED task-103: Fix undefined technical terms in Ch01 - ITERATION 2
 - What: Fixed 5 undefined technical terms flagged by term-intro-checker review

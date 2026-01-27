@@ -15,7 +15,7 @@ Consider a typical development day:
 Average 5,000 tokens of context per request
 Average 500 tokens of output per request
 
-At Claude Sonnet pricing ($3/MTok input, $15/MTok output):
+At Claude Sonnet pricing ($3 per million tokens (MTok) input, $15/MTok output):
 Input: 100 × 5,000 × $0.000003 = $1.50
 Output: 100 × 500 × $0.000015 = $0.75
 Total: $2.25/day = $49.50/month = $594/year
