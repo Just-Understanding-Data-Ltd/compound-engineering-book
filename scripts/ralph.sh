@@ -88,7 +88,7 @@ check_time_limit() {
 
 count_incomplete_tasks() {
     if [ -f "TASKS.md" ]; then
-        grep -c "- \[ \]" TASKS.md 2>/dev/null || echo "0"
+        grep -c '\[ \]' TASKS.md 2>/dev/null || echo "0"
     else
         echo "0"
     fi
@@ -127,9 +127,9 @@ get_task_summary() {
     if [ -f "TASKS.md" ]; then
         echo "## Task Queue (first 10 incomplete)"
         echo ""
-        grep "- \[ \]" TASKS.md | head -10
+        grep '\[ \]' TASKS.md | head -10
         echo ""
-        local total=$(grep -c "- \[ \]" TASKS.md 2>/dev/null || echo "0")
+        local total=$(grep -c '\[ \]' TASKS.md 2>/dev/null || echo "0")
         echo "($total total incomplete)"
     fi
 }
@@ -225,7 +225,7 @@ CODING_HEADER
 
 3. If writing a chapter:
    - Read the PRD first (prds/chXX.md)
-   - Read source articles from @kb/
+   - Read source articles from ~/Desktop/knowledge-base/
    - Write to chapters/
 
 4. Complete ONE task only
@@ -251,8 +251,20 @@ CODING_INSTRUCTIONS
 # Review Sub-Agents (Every N Iterations)
 # ==============================================================================
 
+# Helper to extract markdown body from agent file (strips YAML frontmatter)
+get_agent_prompt() {
+    local agent_file="$1"
+    if [ -f "$agent_file" ]; then
+        # Skip YAML frontmatter (between --- markers) and return the rest
+        awk '/^---$/{if(++c==2)next}c>=2' "$agent_file"
+    else
+        echo "# Agent file not found: $agent_file"
+    fi
+}
+
 run_review_agents() {
     local iteration=$1
+    local agents_dir="$PROJECT_DIR/.claude/agents"
 
     echo ""
     echo "========================================"
@@ -263,101 +275,49 @@ run_review_agents() {
     echo ""
     echo "--- Review 1: Anti-AI Slop ---"
     local slop_file="$PROMPT_DIR/slop.md"
-    cat > "$slop_file" << 'SLOP_EOF'
-# SLOP CHECKER
-
-Scan chapters/ and prds/ for AI-generated text patterns:
-
-1. Em dashes (—) - CRITICAL
-2. Words: delve, crucial, pivotal, robust, cutting-edge, game-changer
-3. Phrases: Additionally, Furthermore, Moreover, It's important to note
-
-Output to: reviews/slop-check-DATE.md
-
-Format: | File | Line | Pattern | Text | Fix |
-
-Commit your review.
-SLOP_EOF
+    get_agent_prompt "$agents_dir/slop-checker.md" > "$slop_file"
     run_claude "$slop_file"
 
-    # Agent 2: Diagram Checker
+    # Agent 2: Diagram Reviewer
     echo ""
     echo "--- Review 2: Diagrams ---"
     local diag_file="$PROMPT_DIR/diagrams.md"
-    cat > "$diag_file" << 'DIAG_EOF'
-# DIAGRAM REVIEWER
-
-Check chapters/ for diagram opportunities:
-- Process flows (3+ steps)
-- Architecture layers
-- Decision trees
-
-Output to: reviews/diagrams-DATE.md
-
-Include Mermaid code drafts.
-Update TASKS.md with must-have diagrams.
-Commit your review.
-DIAG_EOF
+    get_agent_prompt "$agents_dir/diagram-reviewer.md" > "$diag_file"
     run_claude "$diag_file"
 
     # Agent 3: Tech Accuracy
     echo ""
     echo "--- Review 3: Technical Accuracy ---"
     local tech_file="$PROMPT_DIR/tech.md"
-    cat > "$tech_file" << 'TECH_EOF'
-# TECHNICAL ACCURACY
-
-Validate chapters/:
-- Code syntax correctness
-- Claude Code tool names (Read, Write, Edit, Glob, Grep, Bash, Task)
-- Terminology consistency
-
-Output to: reviews/tech-DATE.md
-Commit your review.
-TECH_EOF
+    get_agent_prompt "$agents_dir/tech-accuracy.md" > "$tech_file"
     run_claude "$tech_file"
 
-    # Agent 4: Cross-refs
+    # Agent 4: Term Introduction Checker
     echo ""
-    echo "--- Review 4: Cross-References ---"
+    echo "--- Review 4: Term Introductions ---"
+    local term_file="$PROMPT_DIR/terms.md"
+    get_agent_prompt "$agents_dir/term-intro-checker.md" > "$term_file"
+    run_claude "$term_file"
+
+    # Agent 5: O'Reilly Style
+    echo ""
+    echo "--- Review 5: O'Reilly Style ---"
+    local style_file="$PROMPT_DIR/oreilly.md"
+    get_agent_prompt "$agents_dir/oreilly-style.md" > "$style_file"
+    run_claude "$style_file"
+
+    # Agent 6: Cross-refs
+    echo ""
+    echo "--- Review 6: Cross-References ---"
     local xref_file="$PROMPT_DIR/xref.md"
-    cat > "$xref_file" << 'XREF_EOF'
-# CROSS-REFERENCE VALIDATOR
-
-Check:
-- Chapter references work
-- PRD to chapter alignment
-- Broken links
-
-Output to: reviews/xrefs-DATE.md
-Update TASKS.md with fixes needed.
-Commit your review.
-XREF_EOF
+    get_agent_prompt "$agents_dir/cross-ref-validator.md" > "$xref_file"
     run_claude "$xref_file"
 
-    # Agent 5: Summary
+    # Agent 7: Summary
     echo ""
-    echo "--- Review 5: Progress Summary ---"
+    echo "--- Review 7: Progress Summary ---"
     local sum_file="$PROMPT_DIR/summary.md"
-    cat > "$sum_file" << 'SUM_EOF'
-# PROGRESS SUMMARIZER
-
-Create status report from:
-- reviews/ files
-- features.json
-- TASKS.md
-- git log
-
-Output to: reviews/summary-DATE.md
-
-Include:
-- Completion %
-- Top 5 priority actions
-- Velocity estimate
-
-Update claude-progress.txt with summary.
-Commit all updates.
-SUM_EOF
+    get_agent_prompt "$agents_dir/progress-summarizer.md" > "$sum_file"
     run_claude "$sum_file"
 
     echo ""

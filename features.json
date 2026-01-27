@@ -84,6 +84,20 @@
       "wordCount": 954
     }
   },
+  "codeTestingStrategy": {
+    "description": "All code examples must be written and tested before chapter is marked complete",
+    "caching": {
+      "enabled": true,
+      "strategy": "Use Anthropic prompt caching to avoid re-running expensive API calls during testing",
+      "cacheLocation": "examples/.cache/"
+    },
+    "requirements": [
+      "All TypeScript examples must compile with tsc --noEmit",
+      "All Python examples must pass python -m py_compile",
+      "Agent SDK examples must have mock API responses for offline testing",
+      "Integration tests use cached responses where possible"
+    ]
+  },
   "chapters": {
     "ch01": {
       "title": "The Compound Systems Engineer",
@@ -93,6 +107,8 @@
       "milestones": {
         "prd_complete": true,
         "first_draft": true,
+        "code_written": false,
+        "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
         "exercises_added": true,
@@ -102,6 +118,8 @@
       "targetWordCount": [2500, 4000],
       "diagramsRequired": 6,
       "diagramsComplete": 0,
+      "codeExamplesRequired": 3,
+      "codeExamplesTested": 0,
       "issues": []
     },
     "ch02": {
@@ -112,6 +130,8 @@
       "milestones": {
         "prd_complete": true,
         "first_draft": false,
+        "code_written": false,
+        "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
         "exercises_added": false,
@@ -121,6 +141,8 @@
       "targetWordCount": [2500, 4000],
       "diagramsRequired": 3,
       "diagramsComplete": 0,
+      "codeExamplesRequired": 5,
+      "codeExamplesTested": 0,
       "issues": []
     },
     "ch03": {
@@ -131,6 +153,8 @@
       "milestones": {
         "prd_complete": true,
         "first_draft": false,
+        "code_written": false,
+        "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
         "exercises_added": false,
@@ -140,6 +164,8 @@
       "targetWordCount": [2500, 4000],
       "diagramsRequired": 6,
       "diagramsComplete": 0,
+      "codeExamplesRequired": 4,
+      "codeExamplesTested": 0,
       "issues": []
     },
     "ch04": {
@@ -150,6 +176,8 @@
       "milestones": {
         "prd_complete": true,
         "first_draft": false,
+        "code_written": false,
+        "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
         "exercises_added": false,
@@ -159,6 +187,8 @@
       "targetWordCount": [3000, 4500],
       "diagramsRequired": 8,
       "diagramsComplete": 0,
+      "codeExamplesRequired": 12,
+      "codeExamplesTested": 0,
       "issues": []
     },
     "ch05": {
@@ -169,6 +199,8 @@
       "milestones": {
         "prd_complete": true,
         "first_draft": false,
+        "code_written": false,
+        "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
         "exercises_added": false,
@@ -178,6 +210,8 @@
       "targetWordCount": [3000, 4500],
       "diagramsRequired": 9,
       "diagramsComplete": 0,
+      "codeExamplesRequired": 8,
+      "codeExamplesTested": 0,
       "issues": []
     },
     "ch06": {
@@ -188,6 +222,8 @@
       "milestones": {
         "prd_complete": true,
         "first_draft": false,
+        "code_written": false,
+        "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
         "exercises_added": false,
@@ -197,6 +233,8 @@
       "targetWordCount": [3000, 4500],
       "diagramsRequired": 8,
       "diagramsComplete": 0,
+      "codeExamplesRequired": 6,
+      "codeExamplesTested": 0,
       "issues": []
     },
     "ch07": {
@@ -207,6 +245,8 @@
       "milestones": {
         "prd_complete": true,
         "first_draft": false,
+        "code_written": false,
+        "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
         "exercises_added": false,
@@ -216,6 +256,8 @@
       "targetWordCount": [3500, 5000],
       "diagramsRequired": 8,
       "diagramsComplete": 0,
+      "codeExamplesRequired": 5,
+      "codeExamplesTested": 0,
       "issues": []
     },
     "ch08": {
@@ -226,6 +268,8 @@
       "milestones": {
         "prd_complete": true,
         "first_draft": false,
+        "code_written": false,
+        "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
         "exercises_added": false,
@@ -235,6 +279,8 @@
       "targetWordCount": [3000, 4500],
       "diagramsRequired": 6,
       "diagramsComplete": 0,
+      "codeExamplesRequired": 6,
+      "codeExamplesTested": 0,
       "issues": []
     },
     "ch09": {
@@ -245,6 +291,8 @@
       "milestones": {
         "prd_complete": true,
         "first_draft": false,
+        "code_written": false,
+        "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
         "exercises_added": false,
@@ -254,6 +302,8 @@
       "targetWordCount": [3500, 5000],
       "diagramsRequired": 7,
       "diagramsComplete": 0,
+      "codeExamplesRequired": 8,
+      "codeExamplesTested": 0,
       "issues": []
     },
     "ch10": {
@@ -264,6 +314,8 @@
       "milestones": {
         "prd_complete": true,
         "first_draft": false,
+        "code_written": false,
+        "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
         "exercises_added": false,
@@ -273,6 +325,8 @@
       "targetWordCount": [4000, 5500],
       "diagramsRequired": 10,
       "diagramsComplete": 0,
+      "codeExamplesRequired": 10,
+      "codeExamplesTested": 0,
       "issues": []
     },
     "ch11": {
@@ -283,6 +337,8 @@
       "milestones": {
         "prd_complete": true,
         "first_draft": false,
+        "code_written": false,
+        "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
         "exercises_added": false,
@@ -292,6 +348,8 @@
       "targetWordCount": [3500, 5000],
       "diagramsRequired": 8,
       "diagramsComplete": 0,
+      "codeExamplesRequired": 5,
+      "codeExamplesTested": 0,
       "issues": []
     },
     "ch12": {
@@ -302,6 +360,8 @@
       "milestones": {
         "prd_complete": true,
         "first_draft": false,
+        "code_written": false,
+        "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
         "exercises_added": false,
@@ -311,6 +371,8 @@
       "targetWordCount": [4000, 5500],
       "diagramsRequired": 8,
       "diagramsComplete": 0,
+      "codeExamplesRequired": 15,
+      "codeExamplesTested": 0,
       "issues": []
     }
   },

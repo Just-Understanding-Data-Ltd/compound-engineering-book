@@ -53,7 +53,7 @@ Before completing:
 
 ## Source Material
 
-Read the source articles from `@kb/01-Compound-Engineering/context-engineering/` as specified in the chapter PRD. Synthesize and expand, don't just copy.
+Read the source articles from `~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/` as specified in the chapter PRD. Synthesize and expand, don't just copy.
 
 ## Output
 

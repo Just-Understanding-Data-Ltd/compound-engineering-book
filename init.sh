@@ -50,19 +50,14 @@ check_dir "prompts"
 
 echo ""
 
-# Check symlink
-echo "Checking knowledge base symlink..."
-if [ -L "@kb" ]; then
-    TARGET=$(readlink "@kb")
-    if [ -d "$TARGET" ]; then
-        echo "  ✓ @kb -> $TARGET"
-    else
-        echo "  ✗ @kb symlink target doesn't exist: $TARGET"
-        ERRORS=$((ERRORS + 1))
-    fi
+# Check knowledge base
+echo "Checking knowledge base..."
+KB_PATH="$HOME/Desktop/knowledge-base"
+if [ -d "$KB_PATH" ]; then
+    echo "  ✓ Knowledge base exists at $KB_PATH"
 else
-    echo "  ✗ @kb symlink missing"
-    ERRORS=$((ERRORS + 1))
+    echo "  ⚠ Knowledge base not found at $KB_PATH"
+    WARNINGS=$((WARNINGS + 1))
 fi
 
 echo ""

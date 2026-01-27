@@ -31,7 +31,7 @@ Every session, run these steps FIRST:
 ┌─────────────────────────────────────────────────────────────┐
 │  1. Get up to speed (protocol above)                        │
 │  2. Choose FIRST incomplete task from TASKS.md              │
-│  3. Read relevant source from @kb/                          │
+│  3. Read relevant source from knowledge base                │
 │  4. Complete the single task                                │
 │  5. Verify work (word count, formatting, examples)          │
 │  6. Update TASKS.md (mark [x])                              │
@@ -100,10 +100,52 @@ A chapter is **COMPLETE** when all milestones in `features.json.chapters[chXX].m
 |-----------|----------|
 | `prd_complete` | PRD exists and is finalized |
 | `first_draft` | Content written to `chapters/chXX-title.md` |
+| `code_written` | All code examples written to `examples/chXX/` |
+| `code_tested` | All code compiles/runs, tests pass with cached responses |
 | `reviewed` | Passed review (no AI slop, technical accuracy) |
 | `diagrams_complete` | All required diagrams created in `assets/diagrams/` |
 | `exercises_added` | 2-3 "Try It Yourself" exercises included |
 | `final` | Ready for Leanpub publishing |
+
+### Code Testing Requirements
+
+All code examples use **TypeScript only** with the Agent SDK v2-preview.
+
+**Testing requirements:**
+1. All TypeScript examples must compile with `tsc --noEmit`
+2. Agent SDK examples use the v2-preview API (`unstable_v2_createSession`, `unstable_v2_prompt`)
+3. Use mock API responses stored in `examples/.cache/` for offline testing
+4. Integration tests use Anthropic prompt caching to avoid repeated API costs
+
+**Agent SDK v2 reference:** https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview
+
+Code examples live in `examples/chXX/` with structure:
+```
+examples/
+├── ch04/
+│   ├── email-campaign-agent.ts
+│   ├── email-with-approval.ts
+│   ├── resumable-deployment.ts
+│   └── .cache/
+│       └── responses.json
+```
+
+**Key v2 SDK patterns:**
+```typescript
+// One-shot prompt
+import { unstable_v2_prompt } from '@anthropic-ai/claude-agent-sdk'
+const result = await unstable_v2_prompt('query', { model: 'claude-sonnet-4-5-20250929' })
+
+// Multi-turn session
+import { unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk'
+await using session = unstable_v2_createSession({ model: 'claude-sonnet-4-5-20250929' })
+await session.send('message')
+for await (const msg of session.stream()) { /* handle response */ }
+
+// Resume session
+import { unstable_v2_resumeSession } from '@anthropic-ai/claude-agent-sdk'
+await using session = unstable_v2_resumeSession(sessionId, { model: 'claude-sonnet-4-5-20250929' })
+```
 
 ### How to Update features.json
 
@@ -228,7 +270,6 @@ compound-engineering-book/
 ├── claude-progress.txt    # Progress state (with compaction)
 ├── features.json          # Milestone tracking
 ├── init.sh                # Environment verification script
-├── @kb -> knowledge-base  # Symlink to source material
 ├── prds/
 │   ├── index.md           # Master PRD
 │   ├── toc.md             # Table of contents
@@ -249,12 +290,12 @@ compound-engineering-book/
 
 ## Source Knowledge Base
 
-**Symlink**: `@kb` -> `/Users/jamesaphoenix/Desktop/knowledge-base`
+The knowledge base is located at `~/Desktop/knowledge-base`. Use `@` imports to reference source material:
 
-Key directories:
-- `@kb/01-Compound-Engineering/context-engineering/` - 90+ articles
-- `@kb/01-Compound-Engineering/my-doctrine.md` - Core philosophy
-- `@kb/01-Compound-Engineering/index.md` - Topic overview
+Key sources (use these `@` imports in CLAUDE.md or when referencing):
+- `@~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/` - 90+ articles
+- `@~/Desktop/knowledge-base/01-Compound-Engineering/my-doctrine.md` - Core philosophy
+- `@~/Desktop/knowledge-base/01-Compound-Engineering/index.md` - Topic overview
 
 ---
 
@@ -289,44 +330,60 @@ Never use these words/phrases:
 
 ## Custom Subagents
 
-### Review Agents (Run Every 5 Iterations)
+All agents are defined in `.claude/agents/` and can be used both in the RALPH loop and interactively via the Task tool.
+
+### Review Agents (Run Every 6 Iterations)
 
 These agents run in the review cycle to catch issues early.
 
 #### slop-checker
 Scans for AI-generated text tells:
-- Em dashes
-- Blacklisted phrases
-- Passive voice overuse
-- Repetitive patterns
+- Words: delve, crucial, pivotal, robust, cutting-edge, game-changer
+- Phrases: Additionally, Furthermore, Moreover, It's important to note
+- Repetitive patterns and overused terms
 
 #### diagram-reviewer
 Identifies diagram opportunities:
-- Process flows
-- Architecture diagrams
-- Hierarchies and comparisons
-- Generates Mermaid drafts
+- Process flows (3+ steps)
+- Architecture layers and components
+- Decision trees and state machines
+- Generates Mermaid code drafts
 
-#### tech-accuracy-reviewer
+#### tech-accuracy
 Validates technical correctness:
-- Code syntax
-- Tool name accuracy
-- API references
+- Code syntax for stated language
+- Claude Code tool names and CLI syntax
+- Configuration and API accuracy
 - Terminology consistency
+
+#### term-intro-checker
+Ensures acronyms and technical terms are properly introduced:
+- Acronyms defined on first use (e.g., "Domain-Driven Design (DDD)")
+- Technical jargon explained in context
+- Tool names introduced with brief descriptions
+- Common acronyms: DDD, OTEL, API, CRUD, CLI, CI/CD, K8s, LLM, PRD, MCP
+
+#### oreilly-style
+Applies O'Reilly Media publishing standards:
+- Heading capitalization (Title Case for A/B, sentence case for C)
+- Cross-reference formatting (specific refs before figures/tables)
+- Typography conventions (italic for filenames, constant width for code)
+- Word list preferences (email, website, frontend, backend, etc.)
+- Inclusive language checks
 
 #### cross-ref-validator
 Checks internal references:
-- Chapter links
-- PRD alignment
-- Orphan content
-- Section references
+- Chapter links work
+- PRD to chapter alignment
+- Broken markdown links
+- Section reference accuracy
 
 #### progress-summarizer
 Creates status reports:
-- Completion percentage
-- Velocity metrics
-- Issue aggregation
-- Priority recommendations
+- Completion percentage by milestone
+- Quality metrics from other reviews
+- Velocity and estimated sessions remaining
+- Top 5 priority actions
 
 ---
 
@@ -429,6 +486,15 @@ Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
 
 **Target Audience**: Software engineers transitioning to AI-assisted development
 
+**Core Teaching Objectives**:
+This book teaches three interrelated skills together:
+
+1. **Claude Code Mastery**: Hands-on proficiency with Claude Code CLI, CLAUDE.md files, hooks, sub-agents, MCP servers, and the Agent SDK for building production AI systems
+
+2. **Systems Thinking**: Understanding information theory, context engineering, verification ladders, and quality gates as interconnected systems that compound over time
+
+3. **Compound Engineering Leverage**: The meta-skill of orchestrating AI tools to build systems that build systems. Moving from typing code to directing AI agents that compound your engineering output.
+
 **Structure**:
 - Part I: Foundations (Ch 1-3) - Beginner
 - Part II: Core Techniques (Ch 4-6) - Intermediate
@@ -439,3 +505,37 @@ Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
 **Word Count Target**: 45,000-57,000 words
 
 **Publishing**: Leanpub (Markua format)
+
+---
+
+## Improving Content with Context7 and Knowledge Base
+
+When writing or improving chapters, use these resources:
+
+### Context7 MCP Plugin
+Use the Context7 plugin to query up-to-date documentation for any library:
+```
+# Resolve library ID first
+mcp__plugin_context7_context7__resolve-library-id("Claude Agent SDK")
+
+# Then query docs
+mcp__plugin_context7_context7__query-docs("/websites/platform_claude_en_agent-sdk", "custom tools MCP human approval")
+```
+
+Key libraries for this book:
+- `/websites/platform_claude_en_agent-sdk` - Claude Agent SDK docs (868 snippets)
+- `/anthropics/claude-agent-sdk-python` - Python SDK (59 snippets)
+- `/anthropics/claude-agent-sdk-typescript` - TypeScript SDK (31 snippets)
+
+### Knowledge Base (`~/Desktop/knowledge-base`)
+Source articles for all chapters. Key directories:
+- `01-Compound-Engineering/context-engineering/` - 90+ articles on context, agents, verification
+- `01-Compound-Engineering/my-doctrine.md` - Core philosophy
+- `01-Compound-Engineering/index.md` - Topic overview
+
+**Workflow for improving content:**
+1. Read the relevant PRD to understand chapter scope
+2. Query Context7 for latest SDK patterns and examples
+3. Cross-reference with knowledge base articles
+4. Update PRD or chapter with accurate, current information
+5. Verify code examples work with latest SDK versions
