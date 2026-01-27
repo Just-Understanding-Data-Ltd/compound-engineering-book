@@ -342,10 +342,19 @@ run_coding_agent() {
     # Warmup on first iteration
     if [ $iteration -eq 1 ]; then
         cat > "$prompt_file" << 'EOF'
-Warmup iteration. Read CLAUDE.md thoroughly, understand the project, review tasks.json, then complete ONE high-scored pending task. Commit when done.
+IMPORTANT: Execute tools ONE AT A TIME to avoid API concurrency errors. Never call multiple tools in parallel.
+
+Warmup iteration:
+1. First, read CLAUDE.md
+2. Then read tasks.json
+3. Pick ONE high-scored pending task
+4. Complete it
+5. Commit when done
 EOF
     else
         cat > "$prompt_file" << EOF
+IMPORTANT: Execute tools ONE AT A TIME to avoid API concurrency errors. Never call multiple tools in parallel.
+
 Iteration $iteration. Complete ONE task from tasks.json (highest score, pending, not blocked). Commit when done.
 EOF
     fi
@@ -360,7 +369,14 @@ run_curator() {
 
     local prompt_file="$PROMPT_DIR/curator.md"
     cat > "$prompt_file" << 'EOF'
-Curate the task queue: read tasks.json and claude-progress.txt. Clean duplicates, adjust priorities based on context (finish nearly-done chapters first), update scores. Commit changes.
+IMPORTANT: Execute tools ONE AT A TIME to avoid API concurrency errors.
+
+Curate the task queue:
+1. Read tasks.json
+2. Read claude-progress.txt
+3. Clean duplicates, adjust priorities
+4. Update scores
+5. Commit changes
 EOF
     run_claude "$prompt_file"
 }
