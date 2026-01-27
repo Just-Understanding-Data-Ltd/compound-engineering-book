@@ -129,7 +129,7 @@ jq '.tasks | map(select(.status == "pending")) | sort_by(-.score) | first | {id,
 ```
 1. pwd                           # Confirm directory
 2. claude-progress.txt           # What happened recently
-3. features.json                 # Detailed milestone status
+3. tasks.json                    # Task list with scores
 4. git log --oneline -5          # Recent commits
 5. The relevant PRD              # If working on a chapter
 ```
@@ -141,7 +141,7 @@ jq '.tasks | map(select(.status == "pending")) | sort_by(-.score) | first | {id,
 ### PRD Completion
 
 A PRD is **COMPLETE** when:
-- Status in `features.json.prds[chXX].status` = "complete"
+- Status in `tasks.json.prds[chXX].status` = "complete"
 - The .md file exists in `prds/`
 - All required sections are filled out per `prds/index.md` structure:
   1. Overview (1 paragraph)
@@ -157,7 +157,7 @@ A PRD is **COMPLETE** when:
 
 ### Chapter Completion
 
-A chapter is **COMPLETE** when all milestones in `features.json.chapters[chXX].milestones` are true:
+A chapter is **COMPLETE** when all milestones in `tasks.json.prds[chXX].milestones` are true:
 
 | Milestone | Criteria |
 |-----------|----------|
@@ -252,29 +252,28 @@ After writing code examples, validate them:
 bun infra/scripts/exercise-validator.ts validate chapters/ch04.md -v
 ```
 
-### How to Update features.json
+### How to Update tasks.json
 
-When completing a milestone:
+When completing a task:
 ```json
 // Before
-"milestones": {
-  "prd_complete": true,
-  "first_draft": false,  // <- Change this
-  ...
+{
+  "id": "task-004",
+  "status": "pending",  // <- Change this
+  "score": 845
 }
 
 // After
-"milestones": {
-  "prd_complete": true,
-  "first_draft": true,   // <- Updated
-  ...
+{
+  "id": "task-004",
+  "status": "complete",   // <- Updated
+  "completedAt": "2026-01-27T16:00:00Z"
 }
 ```
 
 Also update:
-- `wordCount`: Actual word count of chapter
-- `status`: "not_started" | "in_progress" | "draft" | "review" | "complete"
-- `stats`: Aggregate counts at bottom of features.json
+- `stats`: Aggregate counts at bottom of tasks.json
+- Run `node scripts/update-queue.cjs` to recalculate scores
 
 ---
 
@@ -341,33 +340,35 @@ Compaction preserves:
 - Weekly summaries of older work
 - Key decisions and learnings
 
-### features.json (Milestone Tracking)
+### tasks.json (Task Tracking)
 
 ```json
 {
-  "lastUpdated": "2026-01-26T22:00:00Z",
-  "chapters": [
+  "lastUpdated": "2026-01-27T16:00:00Z",
+  "prds": {
+    "ch01": { "status": "complete", "title": "The Compound Systems Engineer" }
+  },
+  "tasks": [
     {
-      "id": "ch01",
-      "title": "The Compound Systems Engineer",
-      "milestones": {
-        "prd_complete": true,
-        "first_draft": false,
-        "reviewed": false,
-        "diagrams_complete": false,
-        "final": false
-      },
-      "wordCount": 0,
-      "issues": []
+      "id": "task-001",
+      "type": "chapter",
+      "title": "ch01: The Compound Systems Engineer",
+      "status": "pending",
+      "priority": "high",
+      "score": 945,
+      "subtasks": [
+        { "id": "task-002", "title": "code_written", "status": "complete" },
+        { "id": "task-003", "title": "code_tested", "status": "complete" },
+        { "id": "task-004", "title": "reviewed", "status": "pending" }
+      ]
     }
   ],
-  "stats": {
-    "totalChapters": 12,
-    "prdsComplete": 12,
-    "draftsComplete": 0,
-    "reviewed": 0,
-    "diagramsComplete": 0
-  }
+  "checkpoints": {
+    "lastGoodCommit": "abc123",
+    "lastSuccessfulTask": "task-003",
+    "consecutiveFailures": 0
+  },
+  "stats": { "pending": 180, "complete": 25, "blocked": 0 }
 }
 ```
 
@@ -452,8 +453,11 @@ jq '.prds.ch05' tasks.json
 When completed tasks exceed 20 items, compact them:
 
 ```bash
-# Move completed KB articles to compacted section
-jq '.tasks.completed.kbArticles += [.tasks.kbArticlesToCreate[] | select(.status == "complete") | {id, title, completedAt: now | todate}] | .tasks.kbArticlesToCreate = [.tasks.kbArticlesToCreate[] | select(.status == "pending")]' features.json
+# Move completed tasks to compacted section
+jq '[.tasks[] | select(.status == "complete")] | length' tasks.json
+
+# Or run the queue update script
+node scripts/update-queue.cjs
 ```
 
 **Compaction preserves:** id, title, completedAt (timestamp)
@@ -582,7 +586,7 @@ compound-engineering-book/
 ├── CLAUDE.md              # This file (agent instructions)
 ├── LEARNINGS.md           # Accumulated insights
 ├── claude-progress.txt    # Progress state (with compaction)
-├── features.json          # Milestone tracking
+├── tasks.json             # Task queue and tracking
 ├── init.sh                # Environment verification script
 ├── prds/
 │   ├── index.md           # Master PRD
@@ -780,7 +784,7 @@ Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
 
 ### If progress.txt is corrupted:
 1. Reconstruct from `git log`
-2. Read `features.json` for milestone status
+2. Read `tasks.json` for task and milestone status
 3. Create fresh progress.txt with current state
 
 ---
