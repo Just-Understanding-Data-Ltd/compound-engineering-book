@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T00:00:00.000Z",
+  "lastUpdated": "2026-01-28T00:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -804,7 +804,8 @@
       "chapter": "ch11",
       "title": "ch11: Sub-Agent Architecture",
       "description": "Complete remaining milestones for Sub-Agent Architecture",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-28T00:30:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -852,8 +853,10 @@
           "parentId": "task-061",
           "type": "milestone",
           "title": "final",
-          "status": "pending",
-          "score": -115
+          "status": "complete",
+          "completedAt": "2026-01-28T00:30:00Z",
+          "score": -115,
+          "note": "All quality gates passed: 3,314 words (in range), no em dashes, no AI slop, 7 diagrams in 1 file, exercises folder, Related Chapters section present, 67 tests pass (208 expect() calls)"
         }
       ],
       "score": 895
@@ -1227,16 +1230,16 @@
     ]
   },
   "stats": {
-    "pending": 42,
+    "pending": 41,
     "inProgress": 0,
-    "complete": 67,
+    "complete": 68,
     "blocked": 0,
     "total": 109
   },
   "checkpoints": {
-    "lastGoodCommit": "2d59836baae92b2d0da9eb03b8866ceab612cb67",
-    "lastSuccessfulTask": "task-065",
-    "lastCheckpoint": "2026-01-28T00:00:00Z",
+    "lastGoodCommit": "2b99ac2fe4122c095bbc7f89b617aa623139c977",
+    "lastSuccessfulTask": "task-066",
+    "lastCheckpoint": "2026-01-28T00:30:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0
