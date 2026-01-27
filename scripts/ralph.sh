@@ -180,45 +180,6 @@ run_claude() {
     cat "$prompt_file" | claude --dangerously-skip-permissions -p -
 }
 
-# ==============================================================================
-# Prompt Building Functions
-# ==============================================================================
-
-get_master_prompt() {
-    if [ -f "CLAUDE.md" ]; then
-        cat "CLAUDE.md"
-    else
-        echo "# No CLAUDE.md found"
-    fi
-}
-
-get_prd_index() {
-    if [ -f "features.json" ] && command -v jq &> /dev/null; then
-        echo "## PRD Index"
-        echo ""
-        echo "| Chapter | Title | PRD | Chapter Status | Words |"
-        echo "|---------|-------|-----|----------------|-------|"
-        jq -r '.chapters | to_entries[] | "| \(.key) | \(.value.title) | \(if .value.milestones.prd_complete then "✅" else "⬜" end) | \(.value.status) | \(.value.wordCount) |"' features.json 2>/dev/null || echo "| Error parsing |"
-        echo ""
-    fi
-}
-
-get_task_summary() {
-    if [ -f "tasks.json" ] && command -v jq &> /dev/null; then
-        echo "## Task Queue (from tasks.json)"
-        echo ""
-        echo "### Stats"
-        jq -r '"Pending: \(.stats.pending) | Complete: \(.stats.complete) | Total: \(.stats.total)"' tasks.json 2>/dev/null
-        echo ""
-        echo "### Next 10 Pending Tasks"
-        jq -r '.tasks[] | select(.status == "pending") | "- [\(.type)] \(.title)"' tasks.json 2>/dev/null | head -10
-        echo ""
-    elif [ -f "features.json" ] && command -v jq &> /dev/null; then
-        echo "## Task Queue (from features.json - fallback)"
-        jq -r '.chapters | to_entries[] | select(.value.milestones | to_entries | map(select(.value == false)) | length > 0) | "- \(.key)"' features.json 2>/dev/null | head -10
-        echo ""
-    fi
-}
 
 # ==============================================================================
 # Initializer Agent (First Run Only)
@@ -276,79 +237,15 @@ run_coding_agent() {
     local iteration=$1
     local prompt_file="$PROMPT_DIR/coding_prompt.md"
 
-    # Build the prompt file
-    cat > "$prompt_file" << CODING_HEADER
-# CODING AGENT - Iteration $iteration
-
-CODING_HEADER
-
-    echo "## Master Context" >> "$prompt_file"
-    echo "" >> "$prompt_file"
-    get_master_prompt >> "$prompt_file"
-    echo "" >> "$prompt_file"
-    echo "---" >> "$prompt_file"
-    echo "" >> "$prompt_file"
-
-    get_prd_index >> "$prompt_file"
-    echo "---" >> "$prompt_file"
-    echo "" >> "$prompt_file"
-
-    get_task_summary >> "$prompt_file"
-    echo "---" >> "$prompt_file"
-    echo "" >> "$prompt_file"
-
-    cat >> "$prompt_file" << 'CODING_INSTRUCTIONS'
-## Instructions
-
-1. Get up to speed:
-   - Run `pwd`
-   - Read claude-progress.txt
-   - Read tasks.json (primary task list)
-   - Read @LEARNINGS.md
-   - Run `git log --oneline -5`
-
-2. Choose FIRST pending task from tasks.json:
-   ```bash
-   jq '.tasks[] | select(.status == "pending") | {id, type, title}' tasks.json | head -20
-   ```
-
-3. If task has subtasks, complete ONE subtask:
-   ```bash
-   jq '.tasks[] | select(.id == "task-001") | .subtasks[] | select(.status == "pending")' tasks.json
-   ```
-
-4. If writing content:
-   - Read the PRD first (from tasks.json prds section or prds/ folder)
-   - Read source articles from ~/Desktop/knowledge-base/
-   - Write to chapters/ or kb/
-
-5. Complete ONE task/subtask only
-
-6. Update tracking:
-   - Update task status in tasks.json ("pending" -> "complete")
-   - Update stats in tasks.json
-   - Add entry to claude-progress.txt
-   - Every 5 iterations: add learning to @LEARNINGS.md
-
-7. Discover new tasks:
-   - Check reviews/ for issues found
-   - Add new tasks to tasks.json
-
-8. Git commit with descriptive message
-
-Rules:
-- ONE task per session
-- Always read PRD before writing chapter
-- No em dashes in content
-- Commit after every task
-- All tasks tracked in tasks.json
-CODING_INSTRUCTIONS
+    cat > "$prompt_file" << PROMPT_EOF
+Iteration $iteration. Read CLAUDE.md, then complete ONE task from tasks.json. Commit when done.
+PROMPT_EOF
 
     run_claude "$prompt_file"
 }
 
 # ==============================================================================
-# Review Sub-Agents (Every N Iterations)
+# Review Swarm (Every N Iterations)
 # ==============================================================================
 
 # Helper to extract markdown body from agent file (strips YAML frontmatter)
@@ -364,61 +261,31 @@ get_agent_prompt() {
 
 run_review_agents() {
     local iteration=$1
-    local agents_dir="$PROJECT_DIR/.claude/agents"
+    local today=$(date +%Y-%m-%d)
 
     echo ""
     echo "========================================"
     echo "REVIEW CYCLE - Iteration $iteration"
     echo "========================================"
 
-    # Agent 1: Slop Checker
-    echo ""
-    echo "--- Review 1: Anti-AI Slop ---"
-    local slop_file="$PROMPT_DIR/slop.md"
-    get_agent_prompt "$agents_dir/slop-checker.md" > "$slop_file"
-    run_claude "$slop_file"
+    local prompt_file="$PROMPT_DIR/review.md"
 
-    # Agent 2: Diagram Reviewer
-    echo ""
-    echo "--- Review 2: Diagrams ---"
-    local diag_file="$PROMPT_DIR/diagrams.md"
-    get_agent_prompt "$agents_dir/diagram-reviewer.md" > "$diag_file"
-    run_claude "$diag_file"
+    cat > "$prompt_file" << REVIEW_EOF
+Run all 7 review agents IN PARALLEL using the Task tool. Send a single message with 7 Task tool calls.
 
-    # Agent 3: Tech Accuracy
-    echo ""
-    echo "--- Review 3: Technical Accuracy ---"
-    local tech_file="$PROMPT_DIR/tech.md"
-    get_agent_prompt "$agents_dir/tech-accuracy.md" > "$tech_file"
-    run_claude "$tech_file"
+Agents to run (all in parallel):
+1. slop-checker - Check for AI slop words
+2. diagram-reviewer - Find diagram opportunities
+3. tech-accuracy - Validate code and tools
+4. term-intro-checker - Check term introductions
+5. oreilly-style - Check O'Reilly conventions
+6. cross-ref-validator - Verify cross-references
+7. progress-summarizer - Summarize progress
 
-    # Agent 4: Term Introduction Checker
-    echo ""
-    echo "--- Review 4: Term Introductions ---"
-    local term_file="$PROMPT_DIR/terms.md"
-    get_agent_prompt "$agents_dir/term-intro-checker.md" > "$term_file"
-    run_claude "$term_file"
+After all complete, write summary to reviews/review-${today}.md and commit.
+REVIEW_EOF
 
-    # Agent 5: O'Reilly Style
-    echo ""
-    echo "--- Review 5: O'Reilly Style ---"
-    local style_file="$PROMPT_DIR/oreilly.md"
-    get_agent_prompt "$agents_dir/oreilly-style.md" > "$style_file"
-    run_claude "$style_file"
-
-    # Agent 6: Cross-refs
-    echo ""
-    echo "--- Review 6: Cross-References ---"
-    local xref_file="$PROMPT_DIR/xref.md"
-    get_agent_prompt "$agents_dir/cross-ref-validator.md" > "$xref_file"
-    run_claude "$xref_file"
-
-    # Agent 7: Summary
-    echo ""
-    echo "--- Review 7: Progress Summary ---"
-    local sum_file="$PROMPT_DIR/summary.md"
-    get_agent_prompt "$agents_dir/progress-summarizer.md" > "$sum_file"
-    run_claude "$sum_file"
+    run_claude "$prompt_file"
 
     echo ""
     echo "Review cycle complete."
@@ -507,6 +374,10 @@ while true; do
         echo "✓ Progress made - new commit: $(git log --oneline -1)"
         update_checkpoint "iteration-$iteration"
         CONSECUTIVE_FAILURES=0
+
+        # Update queue scores and unblock tasks
+        echo "Updating task queue..."
+        node scripts/update-queue.cjs 2>/dev/null || echo "Queue update skipped"
     else
         echo "⚠ No new commit this iteration"
         record_failure
