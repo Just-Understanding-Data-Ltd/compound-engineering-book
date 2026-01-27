@@ -287,13 +287,26 @@ fi
 
 run_claude() {
     local prompt_file="$1"
+    local output_file="$PROMPT_DIR/last_output.txt"
+    local exit_code=0
+
     if [ -n "$TIMEOUT_CMD" ]; then
-        $TIMEOUT_CMD $ITERATION_TIMEOUT claude --dangerously-skip-permissions -p - < "$prompt_file"
+        $TIMEOUT_CMD $ITERATION_TIMEOUT claude --dangerously-skip-permissions -p - < "$prompt_file" 2>&1 | tee "$output_file"
+        exit_code=${PIPESTATUS[0]}
     else
-        # Run without timeout on systems that don't have it
-        claude --dangerously-skip-permissions -p - < "$prompt_file"
+        claude --dangerously-skip-permissions -p - < "$prompt_file" 2>&1 | tee "$output_file"
+        exit_code=${PIPESTATUS[0]}
     fi
-    return $?
+
+    # Detect API concurrency errors and add extra cooldown
+    if grep -q "concurrency\|rate.limit\|429\|too many" "$output_file" 2>/dev/null; then
+        echo ""
+        echo "⚠ API CONCURRENCY ERROR detected - adding 60s cooldown"
+        echo "  (Parallel sub-agent calls may have exceeded rate limits)"
+        sleep 60
+    fi
+
+    return $exit_code
 }
 
 # ==============================================================================
