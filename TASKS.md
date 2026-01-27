@@ -85,7 +85,7 @@
 - [x] Write Chapter 11 first draft (Sub-Agent Architecture - was ch09) (Completed: 2026-01-28)
 - [x] Write Chapter 12 first draft (Development Workflows - NEW) (Completed: 2026-01-28)
 - [x] Write Chapter 13 first draft (Building the Harness - was ch10) (Completed: 2026-01-28)
-- [ ] Write Chapter 14 first draft (Meta-Engineer Playbook - was ch11)
+- [x] Write Chapter 14 first draft (Meta-Engineer Playbook - was ch11) (Completed: 2026-01-28)
 - [ ] Write Chapter 15 first draft (Model Strategy & Cost - NEW)
 
 ## Phase 3: Diagrams

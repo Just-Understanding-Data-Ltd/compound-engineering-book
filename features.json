@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T04:00:00Z",
+  "lastUpdated": "2026-01-28T05:00:00Z",
   "structureNote": "Updated to 15-chapter structure. Old chapter numbers in prds section preserved for reference. New chapters added with descriptive filenames. See toc.md for canonical ordering.",
   "prds": {
     "index": {
@@ -461,19 +461,19 @@
     "ch14": {
       "title": "The Meta-Engineer Playbook",
       "prd": "prds/ch11.md",
-      "chapter": null,
-      "status": "not_started",
+      "chapter": "chapters/ch14-the-meta-engineer-playbook.md",
+      "status": "draft",
       "milestones": {
         "prd_complete": true,
-        "first_draft": false,
+        "first_draft": true,
         "code_written": false,
         "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
-        "exercises_added": false,
+        "exercises_added": true,
         "final": false
       },
-      "wordCount": 0,
+      "wordCount": 3511,
       "targetWordCount": [3500, 5000],
       "diagramsRequired": 5,
       "diagramsComplete": 0,
@@ -510,11 +510,11 @@
     "totalChapters": 15,
     "newChaptersAdded": 4,
     "prdsComplete": 15,
-    "draftsComplete": 13,
+    "draftsComplete": 14,
     "reviewed": 0,
     "diagramsRequired": 75,
     "diagramsComplete": 0,
-    "totalWordCount": 37084,
+    "totalWordCount": 40595,
     "targetWordCount": [53000, 72000]
   }
 }
