@@ -257,6 +257,27 @@ This file is the **single source of truth** for what's happening. It uses a comp
 3. Weekly summaries live in "Compacted History" section
 4. Monthly: Compact weekly summaries into monthly summary
 
+**Auto-Compaction Trigger:**
+
+When `claude-progress.txt` exceeds **2000 lines**, immediately compact it to **1000 lines**:
+
+```bash
+# Check line count
+wc -l claude-progress.txt
+
+# If > 2000 lines, compact by:
+# 1. Keep "Current Status" section (top ~20 lines)
+# 2. Keep "Recent Activity" with last 10 entries (~100 lines)
+# 3. Summarize everything else into "Compacted History" grouped by week
+# 4. Target: ~1000 lines total
+```
+
+Compaction preserves:
+- Current status and blockers
+- Last 10 detailed session entries
+- Weekly summaries of older work
+- Key decisions and learnings
+
 ### features.json (Milestone Tracking)
 
 ```json
