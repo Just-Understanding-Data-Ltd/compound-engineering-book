@@ -29,3 +29,6 @@ assets/diagrams/*.png
 # Logs
 *.log
 ralph-output.log
+
+# Exercise cache (hash-based execution cache)
+.exercise-cache.json
