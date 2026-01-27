@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T03:00:00Z",
+  "lastUpdated": "2026-01-28T04:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -234,6 +234,22 @@
       "suggestedFilename": "assets/diagrams/ch14-leverage-stack.md",
       "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
       "outcome": "Created multi-view diagram: skill pyramid (primary), action-oriented categories, self-check questions table, atrophy consequences, investment vs returns table, three pillars visualization"
+    },
+    {
+      "id": "task-210",
+      "type": "diagram",
+      "chapter": "ch14",
+      "title": "Create Atrophy Ladder career ceiling diagram",
+      "description": "Ladder showing 5 career levels based on skill retention during AI-assisted development. Shows Level 4 (Senior Engineer) as minimum safe level, Level 5 (Architect) with no ceiling. Lines 281-300 in chapter. Already exists as ASCII art.",
+      "status": "complete",
+      "completedAt": "2026-01-28T03:00:00Z",
+      "priority": "high",
+      "score": 995,
+      "flaggedByReview": "diagram-review-2026-01-28",
+      "reviewReference": "reviews/diagram-review-2026-01-28.md",
+      "suggestedFilename": "assets/diagrams/ch14-atrophy-ladder.md",
+      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
+      "outcome": "Created multi-view diagram: career ladder (primary), skill capability matrix, three core skills, career safety zone, self-assessment questions, what each level looks like, career trajectory over time"
     },
     {
       "id": "task-001",
@@ -1131,34 +1147,20 @@
       "score": 875
     },
     {
-      "id": "task-210",
-      "type": "diagram",
-      "chapter": "ch14",
-      "title": "Create Atrophy Ladder career ceiling diagram",
-      "description": "Ladder showing 5 career levels based on skill retention during AI-assisted development. Shows Level 4 (Senior Engineer) as minimum safe level, Level 5 (Architect) with no ceiling. Lines 281-300 in chapter. Already exists as ASCII art.",
-      "status": "complete",
-      "completedAt": "2026-01-28T03:00:00Z",
-      "priority": "high",
-      "score": 995,
-      "flaggedByReview": "diagram-review-2026-01-28",
-      "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch14-atrophy-ladder.md",
-      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
-      "outcome": "Created multi-view diagram: career ladder (primary), skill capability matrix, three core skills, career safety zone, self-assessment questions, what each level looks like, career trajectory over time"
-    },
-    {
       "id": "task-211",
       "type": "diagram",
       "chapter": "ch14",
       "title": "Create Task Decomposition comparison diagram",
       "description": "Before/after comparison: monolithic task (agent fails) vs decomposed tasks (agent succeeds). Shows 8 smaller tasks with clear boundaries vs one 15-step block. Lines 333-356 in chapter.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-28T04:00:00Z",
       "priority": "high",
-      "score": 820,
+      "score": 995,
       "flaggedByReview": "diagram-review-2026-01-28",
       "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch14-task-decomposition.mmd",
-      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995"
+      "suggestedFilename": "assets/diagrams/ch14-task-decomposition.md",
+      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
+      "outcome": "Created multi-view diagram: before/after comparison (primary), task sizing guidelines, decomposition decision tree, failure mode analysis table, 8-task migration example, why oversizing causes failure, task designer mindset table"
     },
     {
       "id": "task-091",
@@ -1300,10 +1302,16 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 77,
+    "count": 82,
     "lastCompaction": "2026-01-28T00:30:00Z",
-    "note": "Count includes all completed tasks in tasks array (15 main + 62 subtasks)",
+    "note": "Count includes all completed tasks in tasks array (15 main + 67 subtasks)",
     "recentCompletions": [
+      {
+        "id": "task-211",
+        "type": "diagram",
+        "title": "ch14 Task Decomposition comparison diagram",
+        "completedAt": "2026-01-28T04:00:00Z"
+      },
       {
         "id": "task-210",
         "type": "diagram",
@@ -1315,26 +1323,20 @@
         "type": "diagram",
         "title": "ch14 Leverage Stack pyramid diagram",
         "completedAt": "2026-01-28T02:00:00Z"
-      },
-      {
-        "id": "task-208",
-        "type": "diagram",
-        "title": "ch13 Four Levels of Automation diagram",
-        "completedAt": "2026-01-28T01:30:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 33,
+    "pending": 32,
     "inProgress": 0,
-    "complete": 81,
+    "complete": 82,
     "blocked": 0,
     "total": 114
   },
   "checkpoints": {
-    "lastGoodCommit": "63d8069",
-    "lastSuccessfulTask": "iteration-13",
-    "lastCheckpoint": "2026-01-28T03:00:00Z",
+    "lastGoodCommit": "a89cac23620397487fbd9abf907462c7158eb650",
+    "lastSuccessfulTask": "iteration-14",
+    "lastCheckpoint": "2026-01-28T04:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0
