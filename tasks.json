@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T14:21:08.545Z",
+  "lastUpdated": "2026-01-27T10:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1038,7 +1038,8 @@
           "parentId": "task-114",
           "type": "diagram",
           "title": "three-levels-pyramid",
-          "status": "pending"
+          "status": "complete",
+          "completedAt": "2026-01-27T10:00:00Z"
         },
         {
           "id": "task-116",
@@ -1791,9 +1792,9 @@
     "items": []
   },
   "stats": {
-    "pending": 200,
+    "pending": 197,
     "inProgress": 0,
-    "complete": 5,
+    "complete": 8,
     "blocked": 0,
     "total": 205
   },

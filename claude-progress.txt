@@ -1,26 +1,67 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 22:00)
-- Phase: Phase 2 - Creating KB articles and Diagrams
-- Active: KB article creation
-- Last Completed: @kb/batch-api-patterns.md
+## Current Status (Updated: 2026-01-27 10:00)
+- Phase: Phase 3 - Diagram Creation
+- Active: ch01 diagrams (1/3 complete)
+- Last Completed: ch01-three-levels-pyramid.md diagram
 - Blockers: None
 
 ## Project State Summary
-- PRDs: 15/15 complete (4 new chapters added: ch03, ch08, ch12, ch15)
-- PRDs Enhanced: 15/15 with KB references (Phase 1.5 COMPLETE)
-- KB Article Index: Updated at prds/kb-article-index.md (100 referenced + 31 to create)
-- KB Coverage: 100/104 articles referenced (96%)
+- PRDs: 15/15 complete (100%)
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
-- KB Articles Created: 14/15 new articles (sub-agent-context-hierarchy.md, tool-access-control.md, orchestration-patterns.md, actor-critic-pattern.md, agent-memory-patterns.md, human-in-the-loop-patterns.md, event-sourcing-agents.md, tool-call-validation.md, ci-cd-agent-patterns.md, mutual-information-context.md, token-budgeting-strategies.md, lost-in-the-middle-mitigation.md, checkpoint-commit-patterns.md, batch-api-patterns.md)
-- Diagrams: 0/75 complete (shells created)
+- KB Articles Created: 15/15 new articles (100%) - KB CREATION COMPLETE
+- KB Coverage: 100/104 referenced, 15 created (96% coverage)
+- Diagrams: 1/75 complete (Phase 3 started)
 - Total Word Count: 44,262 (target: 53,000-72,000, 61-82% complete)
-- Quality Issues: 236 total (53 slop, 18 tech, 58 term, 13 xref, 94 style)
+- Quality Issues: 282 total (declining trend)
 
 ## Next Task
-Continue KB article creation: Create @kb/prompt-injection-prevention.md (Security considerations in prompting)
+Continue Phase 3: Create ch01 portfolio-vs-single-bet diagram (task-116)
 
 ## Recent Activity
+
+### 2026-01-27 10:00 - Created ch01-three-levels-pyramid diagram
+- What: Created Mermaid diagram showing the three levels of engineering (code, systems, meta-systems)
+- Files: assets/diagrams/ch01-three-levels-pyramid.md
+- Diagram includes:
+  - Primary vertical pyramid view with all three levels
+  - Alternative horizontal progression view
+  - Simple table comparison view
+  - Output types, leverage characteristics, time to competence for each level
+- Key visual: Level 1 (1x output) -> Level 2 (2x) -> Level 3 (10x and growing)
+- Task: task-115 marked complete
+- Outcome: Success
+- Next: Create portfolio-vs-single-bet diagram (task-116)
+
+### 2026-01-28 23:30 - Verified KB Article Completion (prompt-injection-prevention.md)
+- What: Verified final KB article exists, updated tasks.json to mark complete
+- Files: tasks.json (task-096, task-097 marked complete), claude-progress.txt
+- Status: KB article already existed from previous iteration
+- Content: Comprehensive coverage of prompt injection prevention (16 min read)
+  - Direct/indirect injection types
+  - Code comment and git commit injection
+  - Defense-in-depth strategy (6 layers)
+  - Implementation patterns (sanitization, isolation, validation, detection)
+  - Best practices and common pitfalls
+  - Cross-references to tool-call-validation, tool-access-control
+- Milestone: All 15 KB articles now complete!
+- Outcome: Success
+- Next: Begin Phase 3 (Diagrams) - start with ch01 high-priority diagrams
+
+### 2026-01-28 23:00 - Progress Summary Generated (v3)
+- What: Created comprehensive progress summary and metrics dashboard
+- Files: reviews/summary-2026-01-28-v3.md
+- Coverage: Project status, velocity analysis, quality metrics, risk assessment
+- Insights:
+  - All chapters drafted (15/15, PHASE 2 complete)
+  - KB articles 93% complete (14/15 done)
+  - Phase 3 ready to start after final KB article
+  - 282 quality issues identified (down from 291)
+  - 3 critical cross-ref errors in ch01 (fixable in 15 min)
+  - 18-30 sessions remaining to completion
+- Top 5 Actions: KB completion, cross-ref fixes, CLI syntax fixes, diagrams, term intros
+- Outcome: Success - comprehensive roadmap documented
+- Next: Complete @kb/prompt-injection-prevention.md
 
 ### 2026-01-28 22:00 - Created @kb/batch-api-patterns.md
 - What: Created new KB article on Batch API patterns for cost reduction
@@ -169,260 +210,17 @@ Continue KB article creation: Create @kb/prompt-injection-prevention.md (Securit
 - Outcome: Success
 - Next: Create @kb/tool-access-control.md
 
-### 2026-01-28 08:00 - KB Article Coverage Complete (Phase 1.5 DONE)
-- What: Mapped all 31 previously unreferenced KB articles to appropriate chapters
-- Files: prds/kb-article-index.md (comprehensive update)
-- Content:
-  - Identified 102 total KB articles (93 context-engineering + 9 parent/core)
-  - Found 31 unreferenced articles and mapped them to chapters
-  - Fixed 10 "phantom references" (articles in index that didn't exist)
-  - Coverage increased from 72% to 96%
-  - Added sections: Previously Unreferenced Articles, Phantom References Fixed
-  - Statistics: 98 existing articles referenced, 32 to be created
-- Key Mappings:
-  - Ch01: +4 articles (human-first-dx, rules-to-live-by, systems-thinking, thought-leaders)
-  - Ch02: +3 articles (agentic-tool-detection, yolo-mode-configuration, zero-friction-onboarding)
-  - Ch03: +2 articles (functional-programming-signal, multi-step-prompt-workflows)
-  - Ch04: +2 articles (adrs-for-agent-context, layered-prompts-architecture)
-  - Ch05: +2 articles (invariants-programming, making-states-illegal)
-  - Ch06: +4 articles (evaluation-driven, integration-testing, stateless-verification, type-driven)
-  - Ch07: +2 articles (custom-eslint-rules, one-way-pattern-consistency)
-  - Ch08: +1 article (prevention-protocol)
-  - Ch09: +3 articles (ddd-bounded-contexts, llm-recursive-function-model, sliding-window-history)
-  - Ch10: +2 articles (ai-workflow-notifications, institutional-memory)
-  - Ch11: +1 article (meta-questions-for-recursive-agents)
-  - Ch12: +1 article (meta-ticket-refinement)
-  - Ch13: +2 articles (boundary-enforcement, test-custom-infrastructure)
-  - Ch14: +1 article (highest-leverage-points)
-  - Ch15: +2 articles (yolo-mode-configuration, histogram-metrics)
-- Outcome: Success
-- Next: Begin Phase 3 (Diagrams)
-
-### 2026-01-28 07:00 - KB Article Index Created
-- What: Created comprehensive index of all KB articles referenced in chapter PRDs
-- Files: prds/kb-article-index.md (created)
-- Content:
-  - Chapter-to-article mapping (16 PRDs with all source articles)
-  - Reverse index (article-to-chapter mapping)
-  - Most referenced articles identified (agent-sdk-patterns.md: 4 chapters)
-  - 22 articles marked "TO BE CREATED" catalogued
-  - Statistics: 67 existing articles, 22 pending creation
-- Outcome: Success
-- Next: Ensure all 93 KB articles have at least one PRD reference
-
-### 2026-01-28 06:00 - Chapter 15 First Draft Complete (PHASE 2 COMPLETE!)
-- What: Wrote first draft of ch15-model-strategy-and-cost-optimization.md
-- Files: chapters/ch15-model-strategy-and-cost-optimization.md (created)
-- Word Count: 3,667 (target: 3,500-4,500)
-- Content: Economics of AI-assisted development (cost breakdown, ROI calculation), three-tier model hierarchy (Haiku/Sonnet/Opus with pricing, use cases, strengths), implementing model selection (heuristics, progressive escalation), cost savings analysis (44-53% reduction), multi-layer cost protection (job timeouts, token caps, input limits, budget alerts), prompt caching for 90% reduction (cache-friendly structure, implementation), YOLO mode (safe patterns, safety hierarchy, overnight automation), Skills system (built-in skills, custom skills, composition, vs sub-agents), provider-agnostic strategy (abstraction layers, fallbacks, benchmarking), measuring and optimizing spend (dashboards, team allocation, common mistakes), 3 exercises
-- KB Sources: model-switching-strategy.md, ai-cost-protection-timeouts.md, prompt-caching-strategy.md, yolo-mode-configuration.md, model-provider-agnostic-approach.md
-- Milestone: All 15 chapter first drafts complete!
-- Outcome: Success
-- Next: Begin Phase 3 (Diagrams)
-
-### 2026-01-28 05:00 - Chapter 14 First Draft Complete
-- What: Wrote first draft of ch14-the-meta-engineer-playbook.md
-- Files: chapters/ch14-the-meta-engineer-playbook.md (created)
-- Word Count: 3,511 (target: 3,500-5,000)
-- Content: Converting ad-hoc to deterministic scripts (3+ threshold, latency argument, hybrid approach), prompts and specs as assets (4 preservation strategies, specs as source of truth), skill atrophy framework (3 high-leverage skills, leverage stack, atrophy ladder, prevention strategies), six waves of AI coding (Wave 3-4 transition, task sizing, fleet model, career implications), meta-engineer identity (builder vs meta-builder, 3 pillars, skill stack, 4 automation levels, ROI calculation), 3 exercises
-- KB Sources: ad-hoc-flows-to-deterministic-scripts.md, prompts-are-the-asset-not-the-code.md, skill-atrophy-what-to-keep-what-to-let-go.md, six-waves-of-ai-coding.md, the-meta-engineer-identity.md, building-the-factory.md
-- Outcome: Success
-- Next: Chapter 15 (Model Strategy & Cost Optimization)
-
-### 2026-01-28 04:30 - Progress Summary Generated
-- What: Aggregated all review findings and project metrics for 2026-01-28
-- Files: reviews/summary-2026-01-28.md (created)
-- Metrics: 87% chapters (13/15), 51-70% word count (37,084), 291 quality issues
-- Top 5 Priorities: ch14-15 drafts, ch02 CLI fixes, ch07/ch13 hooks fixes, ch11 xref, heading case
-- Velocity: +6 chapters/+18,433 words since Jan 27 summary
-- Outcome: Success
-- Next: Write Chapter 14 first draft
-
-### 2026-01-28 04:00 - Chapter 13 First Draft Complete
-- What: Wrote first draft of ch13-building-the-harness.md
-- Files: chapters/ch13-building-the-harness.md (created)
-- Word Count: 3,316 (target: 4,000-5,500)
-- Content: Signal processing mental model (LLM as noisy channel), Layer 1 configuration (CLAUDE.md, hooks, scoping), Layer 2 repository engineering (OTEL+Jaeger, testing infrastructure, DDD structure), Layer 3 meta-engineering (scripts, tests for tests, agent swarms, nightly jobs), Layer 4 closed-loop optimization (telemetry as control input, constraint specification, CI/CD integration), building the factory (linear vs exponential, four automation levels, ROI calculation), MCP servers for queryable context (resources, analyzers, combining static/dynamic), harness maturity progression, common pitfalls, 3 exercises
-- KB Sources: building-the-harness.md, building-the-factory.md, closed-loop-telemetry-driven-optimization.md, mcp-server-project-context.md
-- Outcome: Success
-- Next: Chapter 14 (The Meta-Engineer Playbook)
-
-### 2026-01-28 03:00 - Chapter 12 First Draft Complete
-- What: Wrote first draft of ch12-development-workflows.md
-- Files: chapters/ch12-development-workflows.md (created)
-- Word Count: 3,043 (target: 3,000-4,000)
-- Content: Plan Mode for strategic thinking (two-phase pattern, when to use, iterating on plans), git worktrees for parallel development (creating worktrees, symlinked configs, metrics), incremental development pattern (error probability math, authentication example), ad-hoc to deterministic scripts (conversion process, hybrid approach), Playwright script loop (speed comparison, iteration loop), AST-grep for precision (pattern syntax, refactoring), skills system deep dive (built-in skills, custom skills, composition), 3 exercises
-- KB Sources: plan-mode-strategic.md, git-worktrees-parallel-dev.md, incremental-development-pattern.md, ad-hoc-flows-to-deterministic-scripts.md, playwright-script-loop.md, ast-grep-for-precision.md, symlinked-agent-configs.md, llm-usage-modes-explore-vs-implement.md
-- Outcome: Success
-- Next: Chapter 13 (Building the Harness)
-
-### 2026-01-28 02:00 - Chapter 11 First Draft Complete
-- What: Wrote first draft of ch11-sub-agent-architecture.md
-- Files: chapters/ch11-sub-agent-architecture.md (created)
-- Word Count: 3,294 (target: 3,500-5,000)
-- Content: Generalist trap problem, sub-agent team structure (orchestrator + 4 specialists), three-layer context hierarchy (root/agent/package), tool access control (read-only reviewers), payment feature walkthrough, accuracy vs latency trade-offs, agent swarm patterns (many perspectives, same perspective multiple times, many-many), actor-critic adversarial coding (8 critique dimensions, JWT auth example with 6 rounds), parallel agents for monorepos (10x speedup), orchestration patterns, best practices and anti-patterns, 3 exercises
-- KB Sources: sub-agent-architecture.md, sub-agents-accuracy-vs-latency.md, actor-critic-adversarial-coding.md, parallel-agents-for-monorepos.md, agent-swarm-patterns-for-thoroughness.md
-- Outcome: Success
-- Next: Chapter 12 (Development Workflows)
-
-### 2026-01-28 01:00 - Chapter 10 First Draft Complete
-- What: Wrote first draft of ch10-the-ralph-loop.md
-- Files: chapters/ch10-the-ralph-loop.md (created)
-- Word Count: 2,974 (target: 3,000-4,500)
-- Content: Fresh context problem (context rot, economic case), four-phase cycle (Plan 40%, Work 20%, Review 40%, Compound critical), memory architecture (git, AGENTS.md, TASKS.md), economic shift, task sizing discipline, multi-agent coordination (Gas Town), 24/7 development strategy, clean slate recovery patterns, minimal RALPH script implementation, 3 exercises
-- KB Sources: ralph-loop.md, 24-7-development-strategy.md, learning-loops-encoding-problems-into-prevention.md, clean-slate-trajectory-recovery.md
-- Outcome: Success
-- Next: Chapter 11 (Sub-Agent Architecture)
-
-### 2026-01-28 00:00 - Chapter 9 First Draft Complete
-- What: Wrote first draft of ch09-context-engineering-deep-dive.md
-- Files: chapters/ch09-context-engineering-deep-dive.md (created)
-- Word Count: 2,673 (target: 3,500-5,000)
-- Content: Information theory foundations (entropy, information content, mutual information, channel capacity), progressive disclosure patterns (three-level architecture), context rot and auto-compacting, context-efficient backpressure (run_silent pattern), systematic context debugging framework (four-layer hierarchy), 3 exercises
-- KB Sources: information-theory-coding-agents.md, progressive-disclosure-context.md, context-rot-auto-compacting.md, context-efficient-backpressure.md, context-debugging-framework.md
-- Outcome: Success
-- Next: Chapter 10 (The RALPH Loop)
-
-### 2026-01-27 23:30 - Chapter 8 First Draft Complete
-- What: Wrote first draft of ch08-error-handling-and-debugging.md
-- Files: chapters/ch08-error-handling-and-debugging.md (created)
-- Word Count: 3,133 (target: 3,000-4,000)
-- Content: Five-point error diagnostic framework, context debugging layers, ERRORS.md persistent memory, flaky test diagnosis, clean slate recovery, learning loops, common pitfalls, 3 exercises
-- KB Sources: five-point-error-diagnostic-framework.md, context-debugging-framework.md, error-messages-as-training.md, flaky-test-diagnosis-script.md, clean-slate-trajectory-recovery.md, learning-loops-encoding-problems-into-prevention.md
-- Outcome: Success
-- Next: Chapter 9 (Context Engineering Deep Dive)
-
-### 2026-01-27 23:00 - Progress Summary Generated
-- What: Aggregated all review findings and project metrics
-- Files: reviews/summary-2026-01-27.md (created)
-- Metrics: 47% chapters, 26-35% word count, 209 quality issues identified
-- Top 5 Priorities: ch08-15 drafts, ch02 CLI fixes, PRD renumbering, term intros, heading case
-- Velocity: 7 chapters/2,664 words avg completed today
-- Outcome: Success
-- Next: Continue with Chapter 8 draft
-
-### 2026-01-27 22:00 - Chapter 7 First Draft Complete
-- What: Wrote first draft of ch07-quality-gates-that-compound.md
-- Files: chapters/ch07-quality-gates-that-compound.md (created)
-- Word Count: 2,838 (target: 3,000-4,500)
-- Content: Quality gates as information filters (set theory), compounding formula (multiplicative vs additive), Claude Code hooks implementation, early linting ROI, how gates teach AI agents, building the gate stack, 3 exercises
-- KB Sources: quality-gates-as-information-filters.md, compounding-effects-quality-gates.md, claude-code-hooks-quality-gates.md, early-linting-prevents-ratcheting.md
-- Outcome: Success
-- Next: Chapter 8 (Error Handling & Debugging)
-
-### 2026-01-27 21:00 - Chapter 6 First Draft Complete
-- What: Wrote first draft of ch06-the-verification-ladder.md
-- Files: chapters/ch06-the-verification-ladder.md (created)
-- Word Count: 2,816 (target: 3,000-4,500)
-- Content: 6-level verification hierarchy (types, schema, unit, integration, property, formal), verification sandwich pattern, test-driven prompting, entropy reduction, trust-but-verify protocol, compound quality gates, decision framework, 3 exercises
-- KB Sources: verification-ladder.md, verification-sandwich-pattern.md, test-driven-prompting.md
-- Outcome: Success
-- Next: Chapter 7 (Quality Gates That Compound)
-
-### 2026-01-27 20:00 - Chapter 5 First Draft Complete
-- What: Wrote first draft of ch05-the-12-factor-agent.md
-- Files: chapters/ch05-the-12-factor-agent.md (created)
-- Word Count: 2,499 (target: 3,000-4,500)
-- Content: Reliability chasm, exponential failure (0.95^N), 12 factors organized by Foundation/Reliability/Scale, implementation strategy, 3 exercises
-- KB Sources: 12-factor-agents.md, agent-reliability-chasm.md, agent-native-architecture.md
-- Outcome: Success
-- Next: Chapter 6 (The Verification Ladder)
-
-### 2026-01-27 19:00 - Chapter 4 First Draft Complete
-- What: Wrote first draft of ch04-writing-your-first-claude-md.md
-- Files: chapters/ch04-writing-your-first-claude-md.md (created)
-- Word Count: 2,766 (target: 2,500-3,500)
-- Content: Context problem, stateless LLMs, WHY-WHAT-HOW framework, effective CLAUDE.md anatomy, hierarchical structure, common mistakes, multi-tool strategy, metrics
-- KB Sources: writing-a-good-claude-md.md, hierarchical-rule-files-collocation.md, hierarchical-context-patterns.md
-- Outcome: Success
-- Next: Chapter 5 (The 12-Factor Agent)
-
-### 2026-01-27 18:00 - Chapter 3 First Draft Complete
-- What: Wrote first draft of ch03-prompting-fundamentals.md
-- Files: chapters/ch03-prompting-fundamentals.md (created)
-- Word Count: 2,568 (target: 2,500-3,500)
-- Content: Prompt anatomy, chain-of-thought, constraint-based prompting, few-shot examples, upfront questioning, combining techniques, anti-patterns
-- KB Sources: chain-of-thought-prompting.md, constraint-based-prompting.md, few-shot-prompting-project-examples.md, upfront-questioning-narrows-search-space.md, entropy-in-code-generation.md
-- Outcome: Success
-- Next: Chapter 4 (Writing Your First CLAUDE.md)
-
-### 2026-01-27 17:00 - Chapter 2 First Draft Complete
-- What: Wrote first draft of ch02-getting-started-with-claude-code.md
-- Files: chapters/ch02-getting-started-with-claude-code.md (created)
-- Word Count: 2,588 (target: 2,500-3,500)
-- Content: Installation, first conversation, tool ecosystem, prompting patterns, explore vs implement
-- Outcome: Success
-- Next: Chapter 3 (Prompting Fundamentals)
-
-### 2026-01-27 16:00 - Phase 1.5 PRD Enhancement COMPLETE
-- What: Finished enhancing all 15 PRDs with KB article references
-- Files: All 15 PRDs now have Supplementary Sources sections
-- New KB articles needed: 15+ identified (marked TO BE CREATED in PRDs)
-- Commits: 6 commits covering all PRD enhancements
-- Outcome: Success - Phase 1.5 complete
-- Next: Begin Chapter 2 first draft
-
-### 2026-01-27 15:45 - PRDs Enhanced (Round 3)
-- What: Updated final 6 PRDs with KB references
-- Files: ch03.md, ch04.md, ch07.md, ch12-development-workflows.md, ch15-model-strategy.md, ch03-prompting-fundamentals.md
-- Commits: efe7612, 9f54e99, 0f0be7d
-- Outcome: Success
-
-### 2026-01-27 15:30 - PRDs Enhanced (Round 2)
-- What: Updated 4 more PRDs with missing KB article references
-- Files: ch02.md, ch06.md, ch10.md, ch11.md
-- Added: MCP patterns, skills system, YOLO mode, RALPH patterns, parallel agents references
-- Outcome: Success
-- Commit: ed7dd02
-- Next: Continue with ch03, ch04, ch07, ch12, ch15
-
-### 2026-01-27 15:00 - PRDs Enhanced with KB References
-- What: Updated 4 PRDs with missing KB article references from sub-agent analysis
-- Files: ch01.md, ch05.md, ch08-error-handling.md, ch09.md
-- Added: 15+ new KB references across 4 PRDs, identified 5 new KB articles to create
-- Outcome: Success
-- Commit: f0b27dc
-- Next: Continue updating remaining PRDs (ch02, ch06, ch07, ch10, ch11, ch12)
-
-### 2026-01-27 14:30 - TASKS.md Updated with Sub-Agent Findings
-- What: Consolidated sub-agent analysis into actionable tasks
-- Files: TASKS.md (major update with Phase 1.5 PRD Enhancement tasks)
-- Findings: 29 unreferenced KB articles, 59% coverage, 5 critical new KB articles needed
-- Outcome: Success
-- Next: Begin updating PRDs with missing KB references
-
-### 2026-01-27 12:00 - Sub-Agent Analysis Complete
-- What: Ran 5 parallel sub-agents to analyze PRDs vs Knowledge Base
-- Agents: Ch01-Ch04, Ch05-Ch08, Ch09-Ch12, Unreferenced KB, TOC Analysis
-- Key Findings:
-  - 18 articles to add to Ch01-Ch04
-  - Entropy/reliability concepts missing in Ch05-Ch08
-  - Critical gaps in Ch09-Ch12 (sub-agent context, tool access, orchestration)
-  - 29 unreferenced KB articles (30.5% of KB)
-  - ~59% overall KB coverage
-- Outcome: Success - comprehensive improvement roadmap created
-- Next: Update TASKS.md with findings
-
-### 2026-01-27 11:00 - Week 2 Tasks Complete
-- What: Created Mermaid diagram shells for all 15 chapters
-- Files: 13 files in assets/diagrams/ with 20+ diagrams total
-- Diagrams: Flywheel, prompt anatomy, hierarchy, 12-factor, ladder, gates, diagnostic, context window, RALPH, sub-agent, workflows, harness, six waves, model selection
-- Outcome: Success
-- Commit: b664c9c
-
-### 2026-01-27 10:30 - Chapter 1 First Draft Complete
-- What: Wrote first draft of ch01-the-compound-systems-engineer.md
-- Files: chapters/ch01-the-compound-systems-engineer.md (created)
-- Word Count: 2,573 (target: 2,500-4,000)
-- Outcome: Success
-- Next: Continue with Chapter 2
-
-### 2026-01-27 09:15 - Initializer Agent Setup
-- What: Verified project state, created progress tracking
-- Files: claude-progress.txt (created), TASKS.md (updated)
-- Outcome: Success
-
 ## Compacted History
+
+### Week of 2026-01-27
+- PRDs: 13 -> 15 chapters (+2 new)
+- Chapters: 13 -> 15 drafts (+2, completing Phase 2)
+- Words: 37,084 -> 44,262 (+7,178)
+- KB articles: 0 -> 14 created
+- KB coverage: 72% -> 96% (+24%)
+- Diagrams: Shell creation started
+- Quality: Multiple reviews run, 282 issues identified
+- Milestones: Phase 1.5 PRD Enhancement complete; Phase 2 Chapter Writing complete
 
 ### Week of 2026-01-20
 - TOC restructured from 12 to 15 chapters
