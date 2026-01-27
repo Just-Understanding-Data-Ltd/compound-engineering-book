@@ -749,8 +749,10 @@
           "parentId": "task-055",
           "type": "milestone",
           "title": "code written",
-          "status": "pending",
-          "score": -95
+          "status": "complete",
+          "completedAt": "2026-01-27T12:00:00Z",
+          "score": -95,
+          "note": "5 TypeScript files in examples/ch10/, 92 tests pass"
         },
         {
           "id": "task-057",
@@ -1208,18 +1210,18 @@
     ]
   },
   "stats": {
-    "pending": 53,
+    "pending": 52,
     "inProgress": 0,
-    "complete": 56,
+    "complete": 57,
     "blocked": 0,
     "total": 109
   },
   "checkpoints": {
-    "lastGoodCommit": "f92079b4f657ca35e4edd683f78e58a35561404f",
-    "lastSuccessfulTask": "task-054",
-    "lastCheckpoint": "2026-01-28T03:00:00Z",
+    "lastGoodCommit": "4ba5bdfad3a6d84b14573df75c5421e287237144",
+    "lastSuccessfulTask": "interrupted-7",
+    "lastCheckpoint": "2026-01-27T21:06:06Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
-    "failedAttempts": 0
+    "failedAttempts": 2
   }
 }
