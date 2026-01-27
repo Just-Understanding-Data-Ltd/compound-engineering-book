@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T19:00:00.000Z",
+  "lastUpdated": "2026-01-27T19:45:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -448,8 +448,10 @@
           "parentId": "task-025",
           "type": "milestone",
           "title": "diagrams complete",
-          "status": "pending",
-          "score": -110
+          "status": "complete",
+          "score": -110,
+          "completedAt": "2026-01-27T19:45:00Z",
+          "note": "Created ch05-reliability-cascade.md and ch05-four-turn-framework.md. ch05-12factor-overview.md already existed. 3 high-priority diagrams complete."
         },
         {
           "id": "task-030",
@@ -1050,7 +1052,8 @@
       "chapter": "ch05",
       "title": "ch05: High-priority diagrams",
       "description": "Create 3 diagrams for ch05",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-27T19:45:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -1058,7 +1061,8 @@
           "parentId": "task-128",
           "type": "diagram",
           "title": "reliability-cascade",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-27T19:45:00Z",
           "score": -105
         },
         {
@@ -1066,7 +1070,8 @@
           "parentId": "task-128",
           "type": "diagram",
           "title": "four-turn-framework",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-27T19:45:00Z",
           "score": -105
         },
         {
@@ -1074,7 +1079,8 @@
           "parentId": "task-128",
           "type": "diagram",
           "title": "12-factors-overview",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-27T19:45:00Z",
           "score": -105
         }
       ],
@@ -2394,24 +2400,49 @@
         "id": "task-028",
         "title": "ch05 reviewed",
         "completedAt": "2026-01-27T19:00:00Z"
+      },
+      {
+        "id": "task-029",
+        "title": "ch05 diagrams complete",
+        "completedAt": "2026-01-27T19:45:00Z"
+      },
+      {
+        "id": "task-128",
+        "title": "ch05: High-priority diagrams",
+        "completedAt": "2026-01-27T19:45:00Z"
+      },
+      {
+        "id": "task-129",
+        "title": "reliability-cascade diagram",
+        "completedAt": "2026-01-27T19:45:00Z"
+      },
+      {
+        "id": "task-130",
+        "title": "four-turn-framework diagram",
+        "completedAt": "2026-01-27T19:45:00Z"
+      },
+      {
+        "id": "task-131",
+        "title": "12-factors-overview diagram",
+        "completedAt": "2026-01-27T19:45:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 159,
+    "pending": 154,
     "inProgress": 0,
-    "complete": 55,
+    "complete": 60,
     "blocked": 0,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "2dab4901c66cdd9274d8c5908442b064beb784af",
-    "lastSuccessfulTask": "task-028",
-    "lastCheckpoint": "2026-01-27T19:00:00Z",
+    "lastGoodCommit": "69fd7573ce3de15eea1bb20c03f165050faa7729",
+    "lastSuccessfulTask": "task-029",
+    "lastCheckpoint": "2026-01-27T19:45:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
-    "lastCuration": "2026-01-27T10:15:00Z"
+    "lastCuration": "2026-01-27T19:45:00Z"
   },
   "config": {
     "maxConsecutiveFailures": 3,
@@ -2419,28 +2450,25 @@
     "healthCheckInterval": 300
   },
   "curatorNotes": {
-    "lastRun": "2026-01-27T10:15:00Z",
-    "iteration": 5,
-    "tasksFixed": 1,
+    "lastRun": "2026-01-27T19:45:00Z",
+    "iteration": 3,
+    "tasksFixed": 0,
     "duplicatesFound": 0,
     "statusInconsistenciesFound": 0,
-    "priorityIssues": [
-      "task-209 score corrected: 685 -> 1080 (critical priority was underscored)"
-    ],
-    "queueHealth": "GOOD - Score corrected for critical task",
+    "priorityIssues": [],
+    "queueHealth": "EXCELLENT - All tasks properly prioritized",
     "findings": {
       "duplicateTaskIds": "NONE - Queue is clean",
-      "statusConsistency": "ALL CONSISTENT - task-019 (ch04 in_progress) has 4/5 subtasks complete",
-      "statsVerification": "CORRECT - pending 164 (46 tasks + 118 subtasks), inProgress 1, complete 49",
-      "queuePriorities": "CORRECTED - task-209 score fixed to 1080 to reflect critical priority",
-      "nextTaskAnalysis": "task-019 (ch04) is 80% complete (4/5 milestones). Only task-024 (final) remains. After ch04 complete, task-209 (SDK refactor, score 1080) is highest priority pending."
+      "statusConsistency": "ALL CONSISTENT - ch05 has 4/5 milestones complete (code_written, code_tested, reviewed, diagrams_complete)",
+      "statsVerification": "VERIFIED - pending 154, complete 60, total 214",
+      "queuePriorities": "CORRECT - task-030 (ch05 final) is next, then task-031 (ch06 milestones)",
+      "nextTaskAnalysis": "ch05 is 80% complete (4/5 milestones). Only task-030 (final) remains. Chapters fully complete: 4/15 (ch01-ch04). ch05 will be 5th complete after final milestone."
     },
     "recommendations": [
-      "IMMEDIATE: Complete task-024 (ch04 final) - only remaining milestone for ch04",
-      "THEN: task-209 (SDK refactor, score 1080) - CRITICAL priority, ch03 code needs SDK integration",
-      "AFTER: task-025 (ch05 code_written, score 925) - next chapter in sequence",
-      "Status: ch04 is 80% complete (4/5 milestones). Chapters complete: 3/15 (ch01, ch02, ch03).",
-      "Note: task-019 in_progress must be completed before starting any new chapter tasks"
+      "IMMEDIATE: Complete task-030 (ch05 final) - only remaining milestone for ch05",
+      "THEN: task-031 (ch06 code_written, score 920) - next chapter in sequence",
+      "Status: ch05 is 80% complete (4/5 milestones). Chapters complete: 4/15 (ch01-ch04).",
+      "Diagrams: 14 total across ch01-ch05 (3+3+2+3+3 high-priority complete)"
     ]
   }
 }

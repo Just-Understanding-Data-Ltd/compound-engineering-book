@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 19:00)
+## Current Status (Updated: 2026-01-27 19:45)
 - Phase: Chapter Milestones (4 of 15 complete, 27%)
-- Active: ch05 milestones (task-029 diagrams_complete next)
-- Last Completed: task-028 (ch05 reviewed) - ITERATION 2
+- Active: ch05 milestones (task-030 final next)
+- Last Completed: task-029 (ch05 diagrams_complete) - ITERATION 3
 - Blockers: None active
 
 ## Project State Summary
@@ -11,22 +11,42 @@
 - Chapter Drafts: 15/15 complete (100%)
 - Chapters Complete: 4/15 (ch01-ch04, 27%)
 - KB Articles: 14/15 complete (93%)
-- Diagrams: 11/~63 created (17%)
+- Diagrams: 14/~63 created (22%)
 - Code Examples: 5 chapters tested (33%) - ch05 added
 - Word Count: 44,313 (target 45,000-57,000, 76-98% complete)
 - Quality Issues: 286 tracked (AI slop 55, tech 23, terms 58, cross-refs 3, style 147)
-- Tasks Complete: 55/214 (26%) - +1 this iteration
+- Tasks Complete: 60/214 (28%) - +5 this iteration
 
 ## Critical Blockers
 1. ch02 CLI Syntax: 8 invalid commands (claude ask, chat, init don't exist)
    Note: task-209 (SDK Refactor) RESOLVED this iteration
 
 ## Next Task Priority
-1. task-029 (ch05 diagrams_complete) - Next milestone
-2. task-030 (ch05 final) - Complete ch05
-3. task-031 (ch06 milestones, score 920) - After ch05 complete
+1. task-030 (ch05 final) - Complete ch05
+2. task-031 (ch06 milestones, score 920) - After ch05 complete
+3. task-032 (ch06 code_written) - First ch06 milestone
 
 ## Recent Activity
+
+### 2026-01-27 19:45 - COMPLETED task-029: ch05 diagrams_complete - ITERATION 3
+- What: Created diagrams for Chapter 5 (The 12-Factor Agent)
+- Files Created:
+  - assets/diagrams/ch05-reliability-cascade.md - Exponential failure visualization with multiple views
+  - assets/diagrams/ch05-four-turn-framework.md - Understand/Decide/Execute/Verify production loop
+  - assets/diagrams/ch05-12factor-overview.md - Already existed (factor overview)
+- Diagram Patterns Applied:
+  - Multi-view approach (primary + 3-4 alternative views per diagram)
+  - Mermaid flowcharts and XY charts
+  - Tables for quick reference
+  - Context from chapter content
+- Queue Curation (iteration 3 % 3 == 0):
+  - Stats verified: pending 154, complete 60, total 214
+  - No duplicates or inconsistencies found
+  - Queue health: EXCELLENT
+- Tasks Completed: task-029, task-128, task-129, task-130, task-131
+- ch05 Status: 4/5 milestones complete (code_written, code_tested, reviewed, diagrams_complete)
+- Outcome: Success
+- Next: task-030 (ch05 final) - complete quality gate checklist
 
 ### 2026-01-27 19:00 - COMPLETED task-028: ch05 reviewed - ITERATION 2
 - What: Reviewed Chapter 5 (The 12-Factor Agent) for quality
