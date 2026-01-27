@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T12:00:00.000Z",
+  "lastUpdated": "2026-01-27T13:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1074,7 +1074,8 @@
           "parentId": "task-118",
           "type": "diagram",
           "title": "agent-vs-chat",
-          "status": "pending"
+          "status": "complete",
+          "completedAt": "2026-01-27T13:00:00Z"
         },
         {
           "id": "task-120",
@@ -1795,16 +1796,16 @@
     "items": []
   },
   "stats": {
-    "pending": 196,
+    "pending": 195,
     "inProgress": 0,
-    "complete": 9,
+    "complete": 10,
     "blocked": 0,
     "total": 205
   },
   "checkpoints": {
-    "lastGoodCommit": "5f3dc841348e200e038c7774e157b671876ce095",
-    "lastSuccessfulTask": "iteration-2",
-    "lastCheckpoint": "2026-01-27T14:33:18Z",
+    "lastGoodCommit": "739ee98a9ca8180a4ec58c7f3b7809f359d7782d",
+    "lastSuccessfulTask": "iteration-3",
+    "lastCheckpoint": "2026-01-27T14:36:47Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false
