@@ -73,10 +73,42 @@ This means you always have what you need to continue, even after compaction.
 - Located in `prds/` folder as markdown files
 
 **Tasks** are work items stored in `tasks.json.tasks`:
-- Flat list of actionable items with status tracking
-- Each task has: id, type, title, status, priority
-- Tasks can have subtasks (e.g., chapter milestones)
-- Status: "pending" → "in_progress" → "complete"
+- Flat list with dynamic scoring
+- Each task has: id, type, title, status, priority, score
+- Status: "pending" → "in_progress" → "complete" | "blocked"
+
+**Workflow:** Read PRD for context → Complete highest-scored pending task → Queue auto-updates
+
+---
+
+## Task Scoring System
+
+Tasks are scored automatically. Always pick the **highest-scored pending task**.
+
+**Score calculation:**
+```
+score = priority + type + chapter_sequence + blocking_bonus + age_bonus
+```
+
+| Factor | Values |
+|--------|--------|
+| Priority | critical: 1000, high: 750, medium: 500, normal: 250, low: 100 |
+| Type | chapter: 100, fix: 80, kb-article: 60, diagram: 40, appendix: 20 |
+| Chapter | Earlier chapters score higher (ch01 > ch15) |
+| Blocking | +25 per task this blocks |
+| Age | +50 if waiting 24h+, +100 if 48h+ |
+| Review flagged | +200 |
+
+**Get next task:**
+```bash
+jq '.tasks | map(select(.status == "pending")) | sort_by(-.score) | first | {id, score, title}' tasks.json
+```
+
+**Queue updates automatically** after each task via `scripts/update-queue.cjs`:
+1. Marks completed dependencies
+2. Unblocks waiting tasks
+3. Recalculates all scores
+4. Sorts by score
 
 **Workflow**: Read the PRD for context, then complete tasks against that spec.
 
