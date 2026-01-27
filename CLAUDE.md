@@ -20,9 +20,9 @@ Every session, run these steps FIRST:
 ```
 1. pwd                              # Confirm directory
 2. Read claude-progress.txt         # Recent work summary
-3. Read TASKS.md                    # Task queue
+3. Read features.json               # Primary task list (milestones)
 4. git log --oneline -10            # Recent commits
-5. Read features.json               # Milestone status
+5. Read @LEARNINGS.md               # Accumulated insights
 ```
 
 ### Session Workflow
@@ -30,14 +30,14 @@ Every session, run these steps FIRST:
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  1. Get up to speed (protocol above)                        │
-│  2. Choose FIRST incomplete task from TASKS.md              │
+│  2. Find FIRST incomplete milestone in features.json        │
 │  3. Read relevant source from knowledge base                │
 │  4. Complete the single task                                │
 │  5. Verify work (word count, formatting, examples)          │
-│  6. Update TASKS.md (mark [x])                              │
+│  6. Update features.json (mark milestone complete)          │
 │  7. Update claude-progress.txt (add entry)                  │
-│  8. Update features.json if milestone reached               │
-│  9. Git commit with descriptive message                     │
+│  8. Git commit with descriptive message                     │
+│  9. Every 5 iterations: Add learnings to @LEARNINGS.md      │
 │  10. Exit cleanly for fresh context                         │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -49,6 +49,7 @@ Every session, run these steps FIRST:
 - **Document blockers**. If stuck, write it down and move on.
 - **Never delete completed work** without explicit reason.
 - **Commit after every task**. Memory lives in git.
+- **Capture learnings every 5 iterations** into @LEARNINGS.md.
 
 ---
 
@@ -56,8 +57,8 @@ Every session, run these steps FIRST:
 
 When context is compacted, the RALPH loop re-injects:
 1. **Full CLAUDE.md** - All project instructions
-2. **PRD Index** - Status of all PRDs from features.json
-3. **Task Queue** - First 10 incomplete tasks from TASKS.md
+2. **features.json** - Primary task list with all milestones
+3. **@LEARNINGS.md** - Accumulated insights from previous iterations
 
 This means you always have what you need to continue, even after compaction.
 
@@ -308,18 +309,28 @@ Compaction preserves:
 }
 ```
 
-### TASKS.md (Task Queue)
+### Task Priority (from features.json)
 
-Task format:
-```
-- [ ] [Task description] (Est: X sessions)
-- [x] [Completed task] (Completed: YYYY-MM-DD)
+Work through milestones in this order:
+1. **Blockers** - Any issues preventing progress
+2. **Chapter milestones** - Sequential: prd_complete → first_draft → code_written → code_tested → reviewed → diagrams_complete → final
+3. **Polish** - Cross-cutting improvements
+
+**Do NOT create separate TASKS.md files.** All tasks are tracked via features.json milestones.
+
+### @LEARNINGS.md (Accumulated Insights)
+
+Every 5 iterations, capture learnings:
+```markdown
+### [Date] - [Brief Title]
+
+**Context**: What were you working on?
+**Observation**: What did you notice?
+**Implication**: How should this change future work?
+**Action**: Specific change to make
 ```
 
-Priority order:
-1. Blockers and fixes first
-2. Then sequential chapter work
-3. Then improvements and polish
+Reference: @LEARNINGS.md
 
 ---
 
