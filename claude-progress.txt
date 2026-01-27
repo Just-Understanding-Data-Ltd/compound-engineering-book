@@ -1,32 +1,50 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 19:45)
-- Phase: Chapter Milestones (4 of 15 complete, 27%)
-- Active: ch05 milestones (task-030 final next)
-- Last Completed: task-029 (ch05 diagrams_complete) - ITERATION 3
+## Current Status (Updated: 2026-01-27 20:00)
+- Phase: Chapter Milestones (5 of 15 complete, 33%)
+- Active: ch06 milestones (task-031 next)
+- Last Completed: task-030 (ch05 final) - WARMUP ITERATION
 - Blockers: None active
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
 - Chapter Drafts: 15/15 complete (100%)
-- Chapters Complete: 4/15 (ch01-ch04, 27%)
+- Chapters Complete: 5/15 (ch01-ch05, 33%)
 - KB Articles: 14/15 complete (93%)
 - Diagrams: 14/~63 created (22%)
-- Code Examples: 5 chapters tested (33%) - ch05 added
+- Code Examples: 5 chapters tested (33%)
 - Word Count: 44,313 (target 45,000-57,000, 76-98% complete)
 - Quality Issues: 286 tracked (AI slop 55, tech 23, terms 58, cross-refs 3, style 147)
-- Tasks Complete: 60/214 (28%) - +5 this iteration
+- Tasks Complete: 62/214 (29%) - +2 this iteration
 
 ## Critical Blockers
 1. ch02 CLI Syntax: 8 invalid commands (claude ask, chat, init don't exist)
    Note: task-209 (SDK Refactor) RESOLVED this iteration
 
 ## Next Task Priority
-1. task-030 (ch05 final) - Complete ch05
-2. task-031 (ch06 milestones, score 920) - After ch05 complete
-3. task-032 (ch06 code_written) - First ch06 milestone
+1. task-031 (ch06: The Verification Ladder, score 920) - Next chapter
+2. task-032 (ch06 code_written) - First ch06 milestone
+3. task-037 (ch07: Quality Gates That Compound, score 915) - After ch06
 
 ## Recent Activity
+
+### 2026-01-27 20:00 - COMPLETED task-030: ch05 final - WARMUP ITERATION - FIFTH CHAPTER COMPLETE!
+- What: Completed final quality gate for Chapter 5 (The 12-Factor Agent)
+- Quality Gate Results:
+  - Word count: 2,568 (within 2,500-4,000 target) ✓
+  - Em dashes: None found ✓
+  - AI slop phrases: None found ✓
+  - Diagrams: 3/3 confirmed (ch05-12factor-overview, ch05-reliability-cascade, ch05-four-turn-framework) ✓
+  - Exercises: 3 inline exercises + exercises/ch05 folder ✓
+  - Cross-references: Related Chapters section present ✓
+  - Code examples: Tested in task-027 (39 tests pass) ✓
+  - Review: Passed in task-028 ✓
+- Tasks: task-030 + task-025 marked complete
+- Stats: pending 152, inProgress 0, complete 62
+- ch05 Status: 5/5 milestones COMPLETE
+- Chapters Complete: 5/15 (ch01, ch02, ch03, ch04, ch05)
+- Outcome: Success
+- Next: task-031 (ch06: The Verification Ladder, score 920)
 
 ### 2026-01-27 19:45 - COMPLETED task-029: ch05 diagrams_complete - ITERATION 3
 - What: Created diagrams for Chapter 5 (The 12-Factor Agent)

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T19:45:00.000Z",
+  "lastUpdated": "2026-01-27T20:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -412,7 +412,8 @@
       "chapter": "ch05",
       "title": "ch05: The 12-Factor Agent",
       "description": "Complete remaining milestones for The 12-Factor Agent",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-27T20:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -458,8 +459,10 @@
           "parentId": "task-025",
           "type": "milestone",
           "title": "final",
-          "status": "pending",
-          "score": -115
+          "status": "complete",
+          "completedAt": "2026-01-27T20:00:00Z",
+          "score": -115,
+          "note": "All quality gates passed: 2,568 words (in range), no em dashes, no AI slop, 3 diagrams, exercises folder exists, Related Chapters section present"
         }
       ],
       "score": 925
@@ -2143,7 +2146,7 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 51,
+    "count": 53,
     "lastCompaction": "2026-01-28T00:15:00Z",
     "items": [
       {
@@ -2425,21 +2428,31 @@
         "id": "task-131",
         "title": "12-factors-overview diagram",
         "completedAt": "2026-01-27T19:45:00Z"
+      },
+      {
+        "id": "task-030",
+        "title": "ch05 final",
+        "completedAt": "2026-01-27T20:00:00Z"
+      },
+      {
+        "id": "task-025",
+        "title": "ch05: The 12-Factor Agent",
+        "completedAt": "2026-01-27T20:00:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 154,
+    "pending": 152,
     "inProgress": 0,
-    "complete": 60,
+    "complete": 62,
     "blocked": 0,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "69fd7573ce3de15eea1bb20c03f165050faa7729",
-    "lastSuccessfulTask": "task-029",
-    "lastCheckpoint": "2026-01-27T19:45:00Z",
-    "failedAttempts": 0,
+    "lastGoodCommit": "f11916fab6a8414c75e954265fe66b22add9d893",
+    "lastSuccessfulTask": "task-030",
+    "lastCheckpoint": "2026-01-27T20:00:00Z",
+    "failedAttempts": 10,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "lastCuration": "2026-01-27T19:45:00Z"
