@@ -234,8 +234,8 @@
 - [ ] Add "Related Chapters" section to ch07
 - [ ] Complete cross-reference section in ch06
 
-### Term Introduction Fixes (from review 2026-01-27, updated with ch08-13)
-> See `reviews/term-intro-2026-01-27.md` for full details (52 issues across 13 chapters)
+### Term Introduction Fixes (from review 2026-01-28, updated with ch14-15)
+> See `reviews/term-intro-2026-01-28.md` for full details (58 issues across 15 chapters)
 
 **Critical (High Priority):**
 - [ ] ch01: Introduce CRUD, CI/CD, DDD, OTEL acronyms on first use (lines 73, 76, 86, 88)
@@ -244,6 +244,9 @@
 - [ ] ch04: Introduce Temporal tool on first mention (line 3)
 - [ ] ch08: Introduce Claude Opus/Sonnet model tiers (line 222)
 - [ ] ch11: Introduce hexagonal architecture pattern (line 64)
+- [ ] ch14: Introduce K8s abbreviation (line 536)
+- [ ] ch15: Introduce Haiku/Sonnet/Opus model tier names properly (lines 48-50)
+- [ ] ch15: Define MTok abbreviation (million tokens) on first use (line 65)
 
 **Medium Priority (Ch01-07):**
 - [ ] ch01: Add jargon definitions for bounded contexts, aggregate roots, trace spans, idempotency
@@ -258,9 +261,13 @@
 - [ ] ch08: Introduce bcrypt library (line 86)
 - [ ] ch11: Introduce Result type pattern (line 35)
 - [ ] ch11: Introduce JWT acronym (line 512)
-- [ ] ch11: Fix Chapter 15 reference (line 724) - chapter doesn't exist yet (CRITICAL)
+- [x] ch11: Fix Chapter 15 reference (line 724) - chapter now exists (Completed: 2026-01-28)
 - [ ] ch12: Consider expanding AST in section heading (line 449)
 - [ ] ch12: Introduce slash command feature (line 515)
+
+**Medium Priority (Ch14-15):**
+- [ ] ch14: Add brief context for Factorio gaming reference (line 547)
+- [ ] ch15: Introduce YOLO mode term with full explanation (line 437)
 
 **Critical (Broken Cross-References in ch11):**
 - [ ] ch11 line 724: Remove or update Chapter 15 reference (chapter doesn't exist)
