@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T23:24:03.704Z",
+  "lastUpdated": "2026-01-28T03:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -218,6 +218,22 @@
       "suggestedFilename": "assets/diagrams/ch13-four-automation-levels.md",
       "scoreBreakdown": "high:750 + diagram:40 + ch13:10 + reviewFlagged:200 = 1000",
       "outcome": "Created multi-view diagram: productivity staircase (primary), multiplier ladder, ROI table, opportunity cost visualization, and 'why developers stop' analysis"
+    },
+    {
+      "id": "task-209",
+      "type": "diagram",
+      "chapter": "ch14",
+      "title": "Create Leverage Stack pyramid diagram",
+      "description": "Stacked pyramid showing what to keep sharp (understanding, design, verification), what to delegate (implementation patterns), and what to forget (syntax, boilerplate). Lines 250-266 in chapter. Already exists as ASCII art.",
+      "status": "complete",
+      "completedAt": "2026-01-28T02:00:00Z",
+      "priority": "high",
+      "score": 995,
+      "flaggedByReview": "diagram-review-2026-01-28",
+      "reviewReference": "reviews/diagram-review-2026-01-28.md",
+      "suggestedFilename": "assets/diagrams/ch14-leverage-stack.md",
+      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
+      "outcome": "Created multi-view diagram: skill pyramid (primary), action-oriented categories, self-check questions table, atrophy consequences, investment vs returns table, three pillars visualization"
     },
     {
       "id": "task-001",
@@ -1115,34 +1131,20 @@
       "score": 875
     },
     {
-      "id": "task-209",
-      "type": "diagram",
-      "chapter": "ch14",
-      "title": "Create Leverage Stack pyramid diagram",
-      "description": "Stacked pyramid showing what to keep sharp (understanding, design, verification), what to delegate (implementation patterns), and what to forget (syntax, boilerplate). Lines 250-266 in chapter. Already exists as ASCII art.",
-      "status": "complete",
-      "completedAt": "2026-01-28T02:00:00Z",
-      "priority": "high",
-      "score": 995,
-      "flaggedByReview": "diagram-review-2026-01-28",
-      "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch14-leverage-stack.md",
-      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
-      "outcome": "Created multi-view diagram: skill pyramid (primary), action-oriented categories, self-check questions table, atrophy consequences, investment vs returns table, three pillars visualization"
-    },
-    {
       "id": "task-210",
       "type": "diagram",
       "chapter": "ch14",
       "title": "Create Atrophy Ladder career ceiling diagram",
       "description": "Ladder showing 5 career levels based on skill retention during AI-assisted development. Shows Level 4 (Senior Engineer) as minimum safe level, Level 5 (Architect) with no ceiling. Lines 281-300 in chapter. Already exists as ASCII art.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-28T03:00:00Z",
       "priority": "high",
-      "score": 820,
+      "score": 995,
       "flaggedByReview": "diagram-review-2026-01-28",
       "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch14-atrophy-ladder.mmd",
-      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995"
+      "suggestedFilename": "assets/diagrams/ch14-atrophy-ladder.md",
+      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
+      "outcome": "Created multi-view diagram: career ladder (primary), skill capability matrix, three core skills, career safety zone, self-assessment questions, what each level looks like, career trajectory over time"
     },
     {
       "id": "task-211",
@@ -1303,6 +1305,12 @@
     "note": "Count includes all completed tasks in tasks array (15 main + 62 subtasks)",
     "recentCompletions": [
       {
+        "id": "task-210",
+        "type": "diagram",
+        "title": "ch14 Atrophy Ladder career ceiling diagram",
+        "completedAt": "2026-01-28T03:00:00Z"
+      },
+      {
         "id": "task-209",
         "type": "diagram",
         "title": "ch14 Leverage Stack pyramid diagram",
@@ -1313,26 +1321,20 @@
         "type": "diagram",
         "title": "ch13 Four Levels of Automation diagram",
         "completedAt": "2026-01-28T01:30:00Z"
-      },
-      {
-        "id": "task-207",
-        "type": "diagram",
-        "title": "ch13 Signal Processing Harness diagram",
-        "completedAt": "2026-01-28T01:00:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 34,
+    "pending": 33,
     "inProgress": 0,
-    "complete": 80,
+    "complete": 81,
     "blocked": 0,
     "total": 114
   },
   "checkpoints": {
-    "lastGoodCommit": "7c212ab33e3a1e7f535e0a25aa584c2d9408dde2",
-    "lastSuccessfulTask": "iteration-11",
-    "lastCheckpoint": "2026-01-27T23:24:03Z",
+    "lastGoodCommit": "63d8069",
+    "lastSuccessfulTask": "iteration-13",
+    "lastCheckpoint": "2026-01-28T03:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0
