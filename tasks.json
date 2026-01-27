@@ -1089,13 +1089,14 @@
       "chapter": "ch13",
       "title": "Create Signal Processing Harness diagram",
       "description": "Visualize the four-layer harness model as a signal processing system that filters noise and amplifies signal. Shows noise reduction at each layer with failure rate improvements (30-50% → <1%). Lines 7-17 in chapter.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 1000,
       "flaggedByReview": "diagram-review-2026-01-28",
       "reviewReference": "reviews/diagram-review-2026-01-28.md",
       "suggestedFilename": "assets/diagrams/ch13-signal-processing-harness.mmd",
-      "scoreBreakdown": "high:750 + diagram:40 + ch13:10 + reviewFlagged:200 = 1000"
+      "scoreBreakdown": "high:750 + diagram:40 + ch13:10 + reviewFlagged:200 = 1000",
+      "completedAt": "2026-01-28T01:00:00Z"
     },
     {
       "id": "task-208",
@@ -1318,16 +1319,16 @@
     ]
   },
   "stats": {
-    "pending": 37,
+    "pending": 10,
     "inProgress": 0,
-    "complete": 77,
+    "complete": 16,
     "blocked": 0,
     "total": 114
   },
   "checkpoints": {
     "lastGoodCommit": "9ab2ad20c8443f01f42b63369ee3ca779f7226c7",
-    "lastSuccessfulTask": "queue-curation",
-    "lastCheckpoint": "2026-01-28T00:30:00Z",
+    "lastSuccessfulTask": "task-207",
+    "lastCheckpoint": "2026-01-28T01:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0
