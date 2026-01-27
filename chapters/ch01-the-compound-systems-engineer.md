@@ -356,6 +356,6 @@ The next chapter covers getting started with Claude Code, the tool that makes Le
 ---
 
 *Related chapters:*
-- [Chapter 7: Context Engineering Deep Dive](ch07-context-engineering-deep-dive.md) for deep dives on constraints and observability
-- [Chapter 8: The RALPH Loop](ch08-the-ralph-loop.md) for the practical execution system
-- [Chapter 10: Building the Harness](ch10-building-the-harness.md) for implementing the four-layer infrastructure
+- [Chapter 9: Context Engineering Deep Dive](ch09-context-engineering-deep-dive.md) for deep dives on constraints and observability
+- [Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md) for the practical execution system
+- [Chapter 13: Building the Harness](ch13-building-the-harness.md) for implementing the four-layer infrastructure

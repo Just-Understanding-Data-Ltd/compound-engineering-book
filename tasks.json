@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T15:15:00.000Z",
+  "lastUpdated": "2026-01-27T16:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1716,8 +1716,9 @@
       "type": "fixes",
       "title": "Fix cross-references",
       "description": "Update chapter cross-references for new numbering",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
+      "completedAt": "2026-01-27T16:00:00Z",
       "subtasks": [
         {
           "id": "task-104",
@@ -1726,7 +1727,8 @@
           "title": "Fix ch07 reference to ch09 (Context Engineering)",
           "file": "ch01",
           "line": 359,
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-27T16:00:00Z",
           "score": -65
         },
         {
@@ -1736,7 +1738,8 @@
           "title": "Fix ch08 reference to ch10 (RALPH Loop)",
           "file": "ch01",
           "line": 360,
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-27T16:00:00Z",
           "score": -65
         },
         {
@@ -1746,7 +1749,8 @@
           "title": "Fix ch10 reference to ch13 (Building the Harness)",
           "file": "ch01",
           "line": 361,
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-27T16:00:00Z",
           "score": -65
         },
         {
@@ -1756,7 +1760,9 @@
           "title": "Update ch09 reference",
           "file": "ch03",
           "line": 496,
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-27T16:00:00Z",
+          "note": "Verified correct - no change needed",
           "score": -65
         }
       ],
@@ -1991,16 +1997,16 @@
     "items": []
   },
   "stats": {
-    "pending": 188,
+    "pending": 183,
     "inProgress": 0,
-    "complete": 17,
+    "complete": 22,
     "blocked": 0,
     "total": 205
   },
   "checkpoints": {
-    "lastGoodCommit": "a0aa14eec5ea5a916c5ab53dad9a5487d00fa3f4",
-    "lastSuccessfulTask": "iteration-8",
-    "lastCheckpoint": "2026-01-27T15:15:00Z",
+    "lastGoodCommit": "8c64ce1487c2af825ece118e83694bae8e041148",
+    "lastSuccessfulTask": "iteration-9",
+    "lastCheckpoint": "2026-01-27T16:00:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false
