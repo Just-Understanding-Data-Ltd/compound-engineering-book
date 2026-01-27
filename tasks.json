@@ -884,7 +884,7 @@
       "type": "kb-article",
       "title": "batch-api-patterns.md",
       "description": "Batch processing for cost reduction",
-      "status": "pending",
+      "status": "complete",
       "priority": "normal"
     },
     {
@@ -892,7 +892,7 @@
       "type": "kb-article",
       "title": "prompt-injection-prevention.md",
       "description": "Security considerations in prompting",
-      "status": "pending",
+      "status": "complete",
       "priority": "normal"
     },
     {
@@ -1796,5 +1796,18 @@
     "complete": 5,
     "blocked": 0,
     "total": 205
+  },
+  "checkpoints": {
+    "lastGoodCommit": null,
+    "lastSuccessfulTask": null,
+    "lastCheckpoint": null,
+    "failedAttempts": 0,
+    "consecutiveFailures": 0,
+    "circuitBreakerTripped": false
+  },
+  "config": {
+    "maxConsecutiveFailures": 3,
+    "compactionThreshold": 20,
+    "healthCheckInterval": 300
   }
 }

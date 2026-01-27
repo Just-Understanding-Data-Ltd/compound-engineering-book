@@ -431,6 +431,106 @@ Reference: @LEARNINGS.md
 
 ---
 
+## Reliability Features
+
+### Circuit Breaker
+
+RALPH stops automatically after 3 consecutive failures to prevent runaway loops:
+
+```bash
+# Check circuit breaker status
+jq '.checkpoints' tasks.json
+
+# Reset after fixing issues
+jq '.checkpoints.consecutiveFailures = 0 | .checkpoints.circuitBreakerTripped = false' tasks.json
+```
+
+**Triggers:** No new git commit after an iteration (indicates task wasn't completed)
+
+### Checkpoints
+
+After each successful task, RALPH saves a checkpoint:
+
+```json
+{
+  "checkpoints": {
+    "lastGoodCommit": "abc123",
+    "lastSuccessfulTask": "task-045",
+    "lastCheckpoint": "2026-01-27T15:30:00Z",
+    "consecutiveFailures": 0
+  }
+}
+```
+
+**Recovery:** If things go wrong, rollback to `lastGoodCommit`
+
+### Health Checks
+
+Run manually or automatically every review cycle:
+
+```bash
+./scripts/health-check.sh
+```
+
+**Checks:**
+- RALPH process running
+- Recent git commits
+- Task progress
+- Log errors
+- Disk space
+- Progress file size
+
+### Task Validation
+
+Validate tasks.json structure and fix stats:
+
+```bash
+node scripts/validate-tasks.cjs        # Check only
+node scripts/validate-tasks.cjs --fix  # Fix stats
+```
+
+**Validates:**
+- Task structure (id, type, title, status)
+- Dependency references exist
+- No circular dependencies
+- Stats match actual counts
+
+### Dependencies
+
+Tasks can declare blockers:
+
+```json
+{
+  "id": "task-050",
+  "blockedBy": ["task-045", "task-046"],
+  "status": "blocked"
+}
+```
+
+**Rules:**
+- Don't start blocked tasks
+- When blocker completes, update blocked task status
+- Circular dependencies are errors
+
+### Time Tracking
+
+Tasks track timestamps:
+
+```json
+{
+  "createdAt": "2026-01-27T14:00:00Z",
+  "startedAt": "2026-01-27T15:30:00Z",
+  "completedAt": "2026-01-27T16:00:00Z",
+  "estimatedMinutes": 30
+}
+```
+
+**Update when:**
+- `startedAt`: Set when changing status to `in_progress`
+- `completedAt`: Set when changing status to `complete`
+
+---
+
 ## Project Structure
 
 ```

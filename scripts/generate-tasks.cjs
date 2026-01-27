@@ -9,6 +9,23 @@ function nextId() {
   return `task-${String(id++).padStart(3, '0')}`;
 }
 
+function createTask(overrides) {
+  return {
+    id: nextId(),
+    type: 'generic',
+    title: '',
+    description: '',
+    status: 'pending',
+    priority: 'normal',
+    createdAt: new Date().toISOString(),
+    startedAt: null,
+    completedAt: null,
+    estimatedMinutes: null,
+    blockedBy: [],
+    ...overrides
+  };
+}
+
 // Convert chapter milestones to tasks with subtasks
 for (const [chKey, ch] of Object.entries(features.chapters)) {
   const chapterTaskId = nextId();

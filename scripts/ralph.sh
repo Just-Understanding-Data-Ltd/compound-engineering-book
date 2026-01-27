@@ -100,6 +100,80 @@ count_incomplete_tasks() {
     fi
 }
 
+# ==============================================================================
+# Circuit Breaker & Checkpoints
+# ==============================================================================
+
+CONSECUTIVE_FAILURES=0
+MAX_CONSECUTIVE_FAILURES=3
+
+get_last_commit() {
+    git rev-parse HEAD 2>/dev/null || echo ""
+}
+
+update_checkpoint() {
+    local task_id="$1"
+    local commit_hash=$(get_last_commit)
+
+    if [ -f "tasks.json" ] && command -v jq &> /dev/null; then
+        jq --arg commit "$commit_hash" \
+           --arg task "$task_id" \
+           --arg time "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+           '.checkpoints.lastGoodCommit = $commit |
+            .checkpoints.lastSuccessfulTask = $task |
+            .checkpoints.lastCheckpoint = $time |
+            .checkpoints.consecutiveFailures = 0' \
+           tasks.json > tasks.json.tmp && mv tasks.json.tmp tasks.json
+    fi
+}
+
+record_failure() {
+    CONSECUTIVE_FAILURES=$((CONSECUTIVE_FAILURES + 1))
+
+    if [ -f "tasks.json" ] && command -v jq &> /dev/null; then
+        jq --argjson failures "$CONSECUTIVE_FAILURES" \
+           '.checkpoints.consecutiveFailures = $failures |
+            .checkpoints.failedAttempts = (.checkpoints.failedAttempts + 1)' \
+           tasks.json > tasks.json.tmp && mv tasks.json.tmp tasks.json
+    fi
+
+    echo "WARNING: Task failed (attempt $CONSECUTIVE_FAILURES of $MAX_CONSECUTIVE_FAILURES)"
+}
+
+check_circuit_breaker() {
+    if [ $CONSECUTIVE_FAILURES -ge $MAX_CONSECUTIVE_FAILURES ]; then
+        echo ""
+        echo "========================================"
+        echo "CIRCUIT BREAKER TRIGGERED"
+        echo "Too many consecutive failures: $CONSECUTIVE_FAILURES"
+        echo "Last good commit: $(jq -r '.checkpoints.lastGoodCommit // "unknown"' tasks.json 2>/dev/null)"
+        echo "========================================"
+
+        if [ -f "tasks.json" ] && command -v jq &> /dev/null; then
+            jq '.checkpoints.circuitBreakerTripped = true' tasks.json > tasks.json.tmp && mv tasks.json.tmp tasks.json
+        fi
+
+        return 1
+    fi
+    return 0
+}
+
+reset_circuit_breaker() {
+    CONSECUTIVE_FAILURES=0
+    if [ -f "tasks.json" ] && command -v jq &> /dev/null; then
+        jq '.checkpoints.consecutiveFailures = 0 | .checkpoints.circuitBreakerTripped = false' \
+           tasks.json > tasks.json.tmp && mv tasks.json.tmp tasks.json
+    fi
+}
+
+run_health_check() {
+    if [ -f "scripts/health-check.sh" ]; then
+        echo ""
+        echo "--- Running Health Check ---"
+        bash scripts/health-check.sh
+    fi
+}
+
 # Run claude with prompt from file (avoids shell escaping issues)
 run_claude() {
     local prompt_file="$1"
@@ -378,9 +452,20 @@ if [ ! -f "claude-progress.txt" ]; then
     echo "Initializer complete."
 fi
 
+# Reset circuit breaker on fresh start
+reset_circuit_breaker
+
 iteration=0
+LAST_COMMIT=$(get_last_commit)
+
 while true; do
     iteration=$((iteration + 1))
+
+    # Check circuit breaker
+    if ! check_circuit_breaker; then
+        echo "Exiting due to circuit breaker"
+        exit 1
+    fi
 
     # Check iteration limit
     if [ "$MAX_ITERATIONS" -gt 0 ] && [ $iteration -gt $MAX_ITERATIONS ]; then
@@ -399,6 +484,7 @@ while true; do
     echo "Iteration $iteration"
     echo "Elapsed: $(get_elapsed_hours)h / ${MAX_HOURS}h"
     echo "Time: $(date '+%H:%M:%S')"
+    echo "Consecutive failures: $CONSECUTIVE_FAILURES"
     echo "========================================"
 
     INCOMPLETE=$(count_incomplete_tasks)
@@ -407,13 +493,29 @@ while true; do
     if [ "$INCOMPLETE" -eq 0 ]; then
         echo ""
         echo "ALL TASKS COMPLETE!"
+        run_health_check
         exit 0
     fi
 
+    # Run coding agent
+    BEFORE_COMMIT=$(get_last_commit)
     run_coding_agent $iteration
+    AFTER_COMMIT=$(get_last_commit)
 
+    # Check if progress was made (new commit)
+    if [ "$BEFORE_COMMIT" != "$AFTER_COMMIT" ]; then
+        echo "✓ Progress made - new commit: $(git log --oneline -1)"
+        update_checkpoint "iteration-$iteration"
+        CONSECUTIVE_FAILURES=0
+    else
+        echo "⚠ No new commit this iteration"
+        record_failure
+    fi
+
+    # Run review cycle
     if [ $((iteration % REVIEW_EVERY)) -eq 0 ]; then
         run_review_agents $iteration
+        run_health_check
     fi
 
     echo ""
@@ -422,6 +524,10 @@ while true; do
 done
 
 echo ""
+echo "========================================"
 echo "RALPH Loop Complete"
+echo "========================================"
 echo "Iterations: $iteration"
 echo "Time: $(get_elapsed_hours) hours"
+echo "Final commit: $(get_last_commit)"
+run_health_check
