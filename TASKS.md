@@ -157,6 +157,25 @@
 
 ## Phase 5: Review & Polish
 
+### Term Introduction Fixes (from review 2026-01-27)
+> See `reviews/term-intro-2026-01-27.md` for full details
+
+**Critical (High Priority):**
+- [ ] ch01: Introduce CRUD, CI/CD, DDD, OTEL acronyms on first use (lines 73, 76, 86, 88)
+- [ ] ch01: Add brief explanations for Terraform, Docker, Kubernetes (line 89)
+- [ ] ch03: Introduce LLM acronym at start of chapter (line 3)
+- [ ] ch04: Introduce Temporal tool on first mention (line 3)
+
+**Medium Priority:**
+- [ ] ch01: Add jargon definitions for bounded contexts, aggregate roots, trace spans, idempotency
+- [ ] ch02: Introduce JSDoc and JWT acronyms
+- [ ] ch03: Add Zod tool explanation
+- [ ] ch04: Introduce Supabase, RLS, tRPC, Cursor, Aider
+- [ ] ch05: Introduce DAG acronym
+- [ ] ch06: Introduce TLA+, Z3, fast-check, Hypothesis, Zod, io-ts tools
+- [ ] ch07: Move DDD introduction earlier in chapter
+
+### General Review Tasks
 - [ ] Technical review all chapters
 - [ ] Style consistency pass
 - [ ] Validate all code examples
