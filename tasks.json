@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T22:00:00Z",
+  "lastUpdated": "2026-01-27T22:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -473,7 +473,8 @@
       "chapter": "ch06",
       "title": "ch06: The Verification Ladder",
       "description": "Complete remaining milestones for The Verification Ladder",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-27T22:30:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -521,8 +522,10 @@
           "parentId": "task-031",
           "type": "milestone",
           "title": "final",
-          "status": "pending",
-          "score": -115
+          "status": "complete",
+          "completedAt": "2026-01-27T22:30:00Z",
+          "score": -115,
+          "note": "All quality gates passed: 2,882 words (in range), no em dashes, no AI slop, 2 diagrams, 3 exercises, Related Chapters section present"
         }
       ],
       "score": 920
@@ -2157,7 +2160,7 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 57,
+    "count": 59,
     "lastCompaction": "2026-01-28T00:15:00Z",
     "items": [
       {
@@ -2484,24 +2487,34 @@
         "id": "task-134",
         "title": "verification-sandwich diagram",
         "completedAt": "2026-01-27T22:00:00Z"
+      },
+      {
+        "id": "task-036",
+        "title": "ch06 final",
+        "completedAt": "2026-01-27T22:30:00Z"
+      },
+      {
+        "id": "task-031",
+        "title": "ch06: The Verification Ladder",
+        "completedAt": "2026-01-27T22:30:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 145,
+    "pending": 143,
     "inProgress": 0,
-    "complete": 69,
+    "complete": 71,
     "blocked": 0,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "19d55634542da13aee59bb7d93a11fed7917bb78",
-    "lastSuccessfulTask": "task-035",
-    "lastCheckpoint": "2026-01-27T22:00:00Z",
+    "lastGoodCommit": "2ac7ecd56a36fe7cc44eb11ff128d683e36135f4",
+    "lastSuccessfulTask": "task-036",
+    "lastCheckpoint": "2026-01-27T22:30:00Z",
     "failedAttempts": 11,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
-    "lastCuration": "2026-01-27T19:45:00Z"
+    "lastCuration": "2026-01-27T22:30:00Z"
   },
   "config": {
     "maxConsecutiveFailures": 3,
@@ -2509,7 +2522,7 @@
     "healthCheckInterval": 300
   },
   "curatorNotes": {
-    "lastRun": "2026-01-27T19:45:00Z",
+    "lastRun": "2026-01-27T22:30:00Z",
     "iteration": 3,
     "tasksFixed": 0,
     "duplicatesFound": 0,
@@ -2518,16 +2531,16 @@
     "queueHealth": "EXCELLENT - All tasks properly prioritized",
     "findings": {
       "duplicateTaskIds": "NONE - Queue is clean",
-      "statusConsistency": "ALL CONSISTENT - ch05 has 4/5 milestones complete (code_written, code_tested, reviewed, diagrams_complete)",
-      "statsVerification": "VERIFIED - pending 154, complete 60, total 214",
-      "queuePriorities": "CORRECT - task-030 (ch05 final) is next, then task-031 (ch06 milestones)",
-      "nextTaskAnalysis": "ch05 is 80% complete (4/5 milestones). Only task-030 (final) remains. Chapters fully complete: 4/15 (ch01-ch04). ch05 will be 5th complete after final milestone."
+      "statusConsistency": "ALL CONSISTENT - ch06 5/5 milestones complete, ch07 next",
+      "statsVerification": "VERIFIED - pending 143, complete 71, total 214",
+      "queuePriorities": "CORRECT - task-037 (ch07 milestones, score 915) is next",
+      "nextTaskAnalysis": "ch06 COMPLETE. Chapters fully complete: 6/15 (ch01-ch06). Next: ch07 Quality Gates That Compound."
     },
     "recommendations": [
-      "IMMEDIATE: Complete task-030 (ch05 final) - only remaining milestone for ch05",
-      "THEN: task-031 (ch06 code_written, score 920) - next chapter in sequence",
-      "Status: ch05 is 80% complete (4/5 milestones). Chapters complete: 4/15 (ch01-ch04).",
-      "Diagrams: 14 total across ch01-ch05 (3+3+2+3+3 high-priority complete)"
+      "IMMEDIATE: Start task-038 (ch07 code_written) - first milestone for ch07",
+      "Status: ch06 5/5 milestones COMPLETE. Chapters complete: 6/15 (ch01-ch06).",
+      "Diagrams: 16 total across ch01-ch06 (3+3+2+3+3+2 high-priority complete)",
+      "Progress: 33% of chapters complete, on track for completion"
     ]
   }
 }
