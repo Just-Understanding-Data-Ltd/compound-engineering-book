@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T23:15:00Z",
+  "lastUpdated": "2026-01-28T00:30:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1091,10 +1091,11 @@
       "description": "Visualize the four-layer harness model as a signal processing system that filters noise and amplifies signal. Shows noise reduction at each layer with failure rate improvements (30-50% → <1%). Lines 7-17 in chapter.",
       "status": "pending",
       "priority": "high",
-      "score": 825,
+      "score": 1000,
       "flaggedByReview": "diagram-review-2026-01-28",
       "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch13-signal-processing-harness.mmd"
+      "suggestedFilename": "assets/diagrams/ch13-signal-processing-harness.mmd",
+      "scoreBreakdown": "high:750 + diagram:40 + ch13:10 + reviewFlagged:200 = 1000"
     },
     {
       "id": "task-208",
@@ -1104,10 +1105,11 @@
       "description": "Visualization of productivity progression from Level 0 (manual, 1x) through Level 3 (meta-infrastructure, 100-500x). Shows ROI and where most developers stop. Lines 546-580 in chapter.",
       "status": "pending",
       "priority": "high",
-      "score": 825,
+      "score": 1000,
       "flaggedByReview": "diagram-review-2026-01-28",
       "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch13-four-automation-levels.mmd"
+      "suggestedFilename": "assets/diagrams/ch13-four-automation-levels.mmd",
+      "scoreBreakdown": "high:750 + diagram:40 + ch13:10 + reviewFlagged:200 = 1000"
     },
     {
       "id": "task-209",
@@ -1117,10 +1119,11 @@
       "description": "Stacked pyramid showing what to keep sharp (understanding, design, verification), what to delegate (implementation patterns), and what to forget (syntax, boilerplate). Lines 250-266 in chapter. Already exists as ASCII art.",
       "status": "pending",
       "priority": "high",
-      "score": 820,
+      "score": 995,
       "flaggedByReview": "diagram-review-2026-01-28",
       "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch14-leverage-stack.mmd"
+      "suggestedFilename": "assets/diagrams/ch14-leverage-stack.mmd",
+      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995"
     },
     {
       "id": "task-210",
@@ -1130,10 +1133,11 @@
       "description": "Ladder showing 5 career levels based on skill retention during AI-assisted development. Shows Level 4 (Senior Engineer) as minimum safe level, Level 5 (Architect) with no ceiling. Lines 281-300 in chapter. Already exists as ASCII art.",
       "status": "pending",
       "priority": "high",
-      "score": 820,
+      "score": 995,
       "flaggedByReview": "diagram-review-2026-01-28",
       "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch14-atrophy-ladder.mmd"
+      "suggestedFilename": "assets/diagrams/ch14-atrophy-ladder.mmd",
+      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995"
     },
     {
       "id": "task-211",
@@ -1143,10 +1147,11 @@
       "description": "Before/after comparison: monolithic task (agent fails) vs decomposed tasks (agent succeeds). Shows 8 smaller tasks with clear boundaries vs one 15-step block. Lines 333-356 in chapter.",
       "status": "pending",
       "priority": "high",
-      "score": 820,
+      "score": 995,
       "flaggedByReview": "diagram-review-2026-01-28",
       "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch14-task-decomposition.mmd"
+      "suggestedFilename": "assets/diagrams/ch14-task-decomposition.mmd",
+      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995"
     },
     {
       "id": "task-091",
@@ -1288,23 +1293,27 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 59,
-    "lastCompaction": "2026-01-28T00:15:00Z",
-    "items": [
+    "count": 77,
+    "lastCompaction": "2026-01-28T00:30:00Z",
+    "note": "Count includes all completed tasks in tasks array (15 main + 62 subtasks)",
+    "recentCompletions": [
       {
-        "id": "task-118",
-        "type": "diagram-group",
-        "title": "Ch02 diagrams group"
+        "id": "task-075",
+        "type": "milestone",
+        "title": "ch13 code_tested",
+        "completedAt": "2026-01-28T23:15:00Z"
       },
       {
-        "id": "task-119",
-        "type": "diagram-group",
-        "title": "Ch03 diagrams group"
+        "id": "task-074",
+        "type": "milestone",
+        "title": "ch13 code_written",
+        "completedAt": "2026-01-28T23:15:00Z"
       },
       {
-        "id": "task-120",
-        "type": "diagram-group",
-        "title": "Ch04 diagrams group"
+        "id": "task-072",
+        "type": "milestone",
+        "title": "ch12 final",
+        "completedAt": "2026-01-28T22:54:00Z"
       }
     ]
   },
@@ -1316,9 +1325,9 @@
     "total": 114
   },
   "checkpoints": {
-    "lastGoodCommit": "3eef70eb80590bdc9cecab1f342d980a2121ac20",
-    "lastSuccessfulTask": "iteration-8",
-    "lastCheckpoint": "2026-01-27T23:13:35Z",
+    "lastGoodCommit": "9ab2ad20c8443f01f42b63369ee3ca779f7226c7",
+    "lastSuccessfulTask": "queue-curation",
+    "lastCheckpoint": "2026-01-28T00:30:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0

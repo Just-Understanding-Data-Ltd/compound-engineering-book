@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 23:17)
+## Current Status (Updated: 2026-01-28 00:30)
 - Phase: Chapter Milestones (12 of 15 complete, 80%)
 - Active: ch13 Building the Harness
-- Last Completed: task-075 (ch13 code_tested milestone)
+- Last Completed: Queue curation
 - Blockers: None active
-- Queue Health: EXCELLENT
+- Queue Health: CURATED - scores corrected
 - Publishing Readiness: 84%
 
 ## Project State Summary
@@ -26,10 +26,12 @@
 - Heading Capitalization: 142 instances need sentence case - 82% O'Reilly compliant
 - Missing Diagrams: 9 needed (5 high-priority) - 86% complete
 
-## Next Task Priority
-1. task-076 (ch13: Building the Harness reviewed) - next milestone
-2. task-079 (ch14: The Meta-Engineer Playbook) - score 880
-3. task-085 (ch15: Model Strategy & Cost Optimization) - score 875
+## Next Task Priority (After Queue Curation)
+1. task-207/208 (ch13 diagrams, review-flagged) - score 1000 ← HIGHEST
+2. task-209/210/211 (ch14 diagrams, review-flagged) - score 995
+3. task-076 (ch13: reviewed milestone) - score 885
+4. task-079 (ch14: The Meta-Engineer Playbook) - score 880
+5. task-085 (ch15: Model Strategy & Cost Optimization) - score 875
 
 ## Estimated Timeline to Completion
 - Ch13-15 completion: 9-15 hours (3-4 iterations)
@@ -39,6 +41,21 @@
 - **Publication target**: 2026-01-31 to 2026-02-03
 
 ## Recent Activity
+
+### 2026-01-28 00:30 - QUEUE CURATION - Priority recalculation
+- What: Curated task queue, fixed score calculations, cleaned up metadata
+- Issues Fixed:
+  1. Review-flagged diagram tasks (task-207 to task-211) had incorrect scores
+     - Previous: 820-825, Should be: 995-1000 (missing +200 review bonus)
+     - Now correctly prioritized above chapter milestone tasks
+  2. Updated compacted completed count from 59 to 77 (actual)
+  3. Added scoreBreakdown fields to diagram tasks for transparency
+  4. Updated checkpoint timestamp
+- Duplicates Found: None
+- Queue Health: Verified 37 pending, 77 complete
+- Priority Change: Review-flagged diagrams now highest priority (score 995-1000)
+- Outcome: Queue curated and scores corrected
+- Next: task-207 (ch13 Signal Processing Harness diagram, score 1000)
 
 ### 2026-01-28 23:17 - COMPLETED task-075: ch13 Building the Harness code_tested - ITERATION 9
 - What: Tested all code examples for Chapter 13 (Building the Harness)
