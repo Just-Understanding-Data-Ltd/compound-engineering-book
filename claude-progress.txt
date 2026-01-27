@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 21:00)
+## Current Status (Updated: 2026-01-28 22:00)
 - Phase: Phase 2 - Creating KB articles and Diagrams
 - Active: KB article creation
-- Last Completed: @kb/checkpoint-commit-patterns.md
+- Last Completed: @kb/batch-api-patterns.md
 - Blockers: None
 
 ## Project State Summary
@@ -12,15 +12,25 @@
 - KB Article Index: Updated at prds/kb-article-index.md (100 referenced + 31 to create)
 - KB Coverage: 100/104 articles referenced (96%)
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
-- KB Articles Created: 13/15 new articles (sub-agent-context-hierarchy.md, tool-access-control.md, orchestration-patterns.md, actor-critic-pattern.md, agent-memory-patterns.md, human-in-the-loop-patterns.md, event-sourcing-agents.md, tool-call-validation.md, ci-cd-agent-patterns.md, mutual-information-context.md, token-budgeting-strategies.md, lost-in-the-middle-mitigation.md, checkpoint-commit-patterns.md)
+- KB Articles Created: 14/15 new articles (sub-agent-context-hierarchy.md, tool-access-control.md, orchestration-patterns.md, actor-critic-pattern.md, agent-memory-patterns.md, human-in-the-loop-patterns.md, event-sourcing-agents.md, tool-call-validation.md, ci-cd-agent-patterns.md, mutual-information-context.md, token-budgeting-strategies.md, lost-in-the-middle-mitigation.md, checkpoint-commit-patterns.md, batch-api-patterns.md)
 - Diagrams: 0/75 complete (shells created)
 - Total Word Count: 44,262 (target: 53,000-72,000, 61-82% complete)
 - Quality Issues: 236 total (53 slop, 18 tech, 58 term, 13 xref, 94 style)
 
 ## Next Task
-Continue KB article creation: Create @kb/batch-api-patterns.md (Batch processing for cost reduction)
+Continue KB article creation: Create @kb/prompt-injection-prevention.md (Security considerations in prompting)
 
 ## Recent Activity
+
+### 2026-01-28 22:00 - Created @kb/batch-api-patterns.md
+- What: Created new KB article on Batch API patterns for cost reduction
+- Files: ~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/batch-api-patterns.md
+- Word Count: ~2,800 words
+- Content: Anthropic Batch API overview (50% cost savings, up to 24h latency), core concepts (batch vs interactive, request/response structure), implementation patterns (basic batch submission, polling for results, result processing), 5 use case patterns (nightly code review, bulk test generation, documentation updates, security vulnerability analysis, large-scale refactoring validation), workflow integration (GitHub Actions submit/collect pattern, webhook-based collection), cost comparison table, best practices (batch similar work, meaningful custom IDs, handle partial failures, set appropriate timeouts, implement idempotency), common pitfalls (aggressive polling, not storing batch IDs, ignoring caching, batch too large), when NOT to use batch API
+- Key Concepts: 50% discount for async processing, up to 10,000 requests per batch, use for non-time-sensitive workloads, combine with prompt caching for additional savings, webhook for completion notification, exponential backoff for polling
+- Cross-references: Links to ai-cost-protection-timeouts.md, model-switching-strategy.md, prompt-caching-strategy.md, ci-cd-agent-patterns.md
+- Outcome: Success
+- Next: Create @kb/prompt-injection-prevention.md
 
 ### 2026-01-28 21:00 - Created @kb/checkpoint-commit-patterns.md
 - What: Created new KB article on Git commit strategies for AI-assisted development
