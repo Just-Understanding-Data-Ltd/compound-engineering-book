@@ -57,7 +57,7 @@
 - [x] Create @kb/sub-agent-context-hierarchy.md (how sub-agents manage context isolation) (Completed: 2026-01-28)
 - [x] Create @kb/tool-access-control.md (granting/restricting tool access to sub-agents) (Completed: 2026-01-28)
 - [x] Create @kb/orchestration-patterns.md (coordinator, swarm, pipeline patterns) (Completed: 2026-01-28)
-- [ ] Create @kb/actor-critic-pattern.md (writer agent + reviewer agent pattern)
+- [x] Create @kb/actor-critic-pattern.md (writer agent + reviewer agent pattern) (Completed: 2026-01-28)
 - [ ] Create @kb/agent-memory-patterns.md (checkpoint/resume, state persistence)
 - [ ] Create @kb/human-in-the-loop-patterns.md (HITL implementation patterns)
 - [ ] Create @kb/event-sourcing-agents.md (event log architecture for agent state)

@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 11:00)
+## Current Status (Updated: 2026-01-28 12:00)
 - Phase: Phase 2 COMPLETE - Creating KB articles and Diagrams
-- Active: KB article creation (orchestration-patterns.md)
-- Last Completed: @kb/orchestration-patterns.md
+- Active: KB article creation
+- Last Completed: @kb/actor-critic-pattern.md
 - Blockers: None
 
 ## Project State Summary
@@ -12,15 +12,24 @@
 - KB Article Index: Updated at prds/kb-article-index.md (100 referenced + 31 to create)
 - KB Coverage: 100/104 articles referenced (96%)
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
-- KB Articles Created: 3/15 new articles (sub-agent-context-hierarchy.md, tool-access-control.md, orchestration-patterns.md)
+- KB Articles Created: 4/15 new articles (sub-agent-context-hierarchy.md, tool-access-control.md, orchestration-patterns.md, actor-critic-pattern.md)
 - Diagrams: 0/75 complete (shells created)
 - Total Word Count: 44,262 (target: 53,000-72,000, 61-82% complete)
 - Quality Issues: 236 total (53 slop, 18 tech, 58 term, 13 xref, 94 style)
 
 ## Next Task
-Continue KB article creation: Create @kb/actor-critic-pattern.md (writer agent + reviewer agent pattern)
+Continue KB article creation: Create @kb/agent-memory-patterns.md (checkpoint/resume, state persistence)
 
 ## Recent Activity
+
+### 2026-01-28 12:00 - Created @kb/actor-critic-pattern.md
+- What: Created new KB article covering the writer + reviewer agent pattern
+- Files: ~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/actor-critic-pattern.md
+- Word Count: ~900 words
+- Content: Core actor-critic pattern diagram, why separation works, two implementation approaches (single agent alternating roles, separate agents), when to use each, applications beyond code (documentation, PRDs, book chapters), stopping criteria, cost vs quality trade-offs, common pitfalls, integration with RALPH
+- Key Concepts: Complements actor-critic-adversarial-coding.md (code-focused) with broader pattern coverage, non-code use cases, simpler reference format
+- Outcome: Success
+- Next: Create @kb/agent-memory-patterns.md
 
 ### 2026-01-28 11:00 - Created @kb/orchestration-patterns.md
 - What: Created new KB article covering three orchestration patterns for multi-agent systems
