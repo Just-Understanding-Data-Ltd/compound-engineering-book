@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 01:00)
+## Current Status (Updated: 2026-01-28 02:00)
 - Phase: Chapter Milestones
-- Active: task-015 (ch03 code_tested) - next milestone
-- Last Completed: task-014 (ch03 code_written)
+- Active: task-016 (ch03 reviewed) - next milestone
+- Last Completed: task-015 (ch03 code_tested)
 - Blockers: None
 
 ## Project State Summary
@@ -12,20 +12,38 @@
 - KB Articles Created: 15/15 new articles (100%) - KB CREATION COMPLETE
 - KB Coverage: 100/104 referenced, 15 created (96% coverage)
 - Diagrams: 7/63 complete (11%) - ch01 done (4), ch02 done (3)
-- Code Examples: ch01 complete, ch02 complete, ch03 code_written
+- Code Examples: ch01 complete, ch02 complete, ch03 code_tested
 - Cross-Refs Fixed: ch01 complete (3 references corrected)
 - Total Word Count: 44,268 (target: 45,000-57,000, 78-98% complete)
 - Quality Issues: 244 total (168 style, 18 tech, 58 terms)
 - ch01 Milestones: 6/6 COMPLETE - FIRST CHAPTER DONE!
 - ch02 Milestones: 5/5 COMPLETE - SECOND CHAPTER DONE!
-- ch03 Milestones: 1/5 (code_written)
+- ch03 Milestones: 2/5 (code_written, code_tested)
 - Chapters Complete: 2/15 (ch01, ch02)
 
 ## Next Task
-task-015 (ch03 code_tested) - score 935
-Next: Verify ch03 code examples run correctly
+task-016 (ch03 reviewed) - score 935
+Next: Review ch03 for AI slop, technical accuracy, term introductions
 
 ## Recent Activity
+
+### 2026-01-28 02:00 - COMPLETED ch03 code_tested (task-015) - ITERATION 7
+- What: Tested and verified all ch03 TypeScript code examples
+- Files modified:
+  - examples/ch03/few-shot-builder.ts - Added isResultError type guard for TypeScript narrowing
+  - examples/ch03/prompting.test.ts - Updated 4 test assertions to use type guard
+- Tests:
+  - tsc --noEmit: All TypeScript files compile without errors
+  - bun test: 45/45 tests pass (75 expect() calls)
+  - Demo scripts: Both prompt-patterns.ts and few-shot-builder.ts run correctly
+- Fix Applied:
+  - Added isResultError<T, E> type guard function to few-shot-builder.ts
+  - Updated test file to import and use the type guard
+  - Changed 4 instances of `if (!result.success)` to `if (isResultError(result))`
+- Tasks: task-015 marked complete, stats updated (178 pending, 35 complete)
+- ch03 Status: 2/5 milestones complete
+- Outcome: Success
+- Next: task-016 (ch03 reviewed) - review for AI slop, technical accuracy, term introductions
 
 ### 2026-01-28 01:00 - COMPLETED ch03 code_written (task-014) - ITERATION 6
 - What: Created TypeScript code examples for Chapter 3 (Prompting Fundamentals)

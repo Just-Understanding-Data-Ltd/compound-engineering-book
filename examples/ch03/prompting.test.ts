@@ -29,6 +29,7 @@ import {
   selectOptimalExamples,
   estimateTokenUsage,
   validateFewShotConfig,
+  isResultError,
   type FewShotConfig,
   type ExampleSource
 } from './few-shot-builder';
@@ -506,7 +507,7 @@ describe('Few-Shot Configuration Validation', () => {
     });
 
     expect(result.success).toBe(false);
-    if (!result.success) {
+    if (isResultError(result)) {
       expect(result.error).toContain('At least 2 examples recommended for pattern recognition');
     }
   });
@@ -518,7 +519,7 @@ describe('Few-Shot Configuration Validation', () => {
     });
 
     expect(result.success).toBe(false);
-    if (!result.success) {
+    if (isResultError(result)) {
       expect(result.error).toContain('More than 4 examples has diminishing returns');
     }
   });
@@ -530,7 +531,7 @@ describe('Few-Shot Configuration Validation', () => {
     });
 
     expect(result.success).toBe(false);
-    if (!result.success) {
+    if (isResultError(result)) {
       expect(result.error).toContain('Task description is too brief');
     }
   });
@@ -545,7 +546,7 @@ describe('Few-Shot Configuration Validation', () => {
     });
 
     expect(result.success).toBe(false);
-    if (!result.success) {
+    if (isResultError(result)) {
       expect(result.error.some(e => e.includes('empty code'))).toBe(true);
     }
   });

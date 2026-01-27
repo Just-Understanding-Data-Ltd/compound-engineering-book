@@ -16,6 +16,14 @@
 export type Result<T, E> = { success: true; data: T } | { success: false; error: E };
 
 /**
+ * Type guard for error results
+ * Enables TypeScript to narrow Result<T, E> to the error case
+ */
+export function isResultError<T, E>(result: Result<T, E>): result is { success: false; error: E } {
+  return !result.success;
+}
+
+/**
  * Example accuracy by shot count (from section 3.4)
  *
  * 0 examples (zero-shot): 40-60% accuracy
