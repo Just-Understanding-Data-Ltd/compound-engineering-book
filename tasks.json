@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T04:15:00Z",
+  "lastUpdated": "2026-01-28T05:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -286,7 +286,8 @@
       "chapter": "ch03",
       "title": "ch03: Prompting Fundamentals",
       "description": "Complete remaining milestones for Prompting Fundamentals",
-      "status": "in_progress",
+      "status": "complete",
+      "completedAt": "2026-01-28T05:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -334,8 +335,10 @@
           "parentId": "task-013",
           "type": "milestone",
           "title": "final",
-          "status": "pending",
-          "score": -115
+          "status": "complete",
+          "completedAt": "2026-01-28T05:00:00Z",
+          "score": -115,
+          "note": "All quality gates passed: 2,574 words (in range), no em dashes, no AI slop, 2 diagrams, 3 exercises, cross-refs present"
         }
       ],
       "score": 935
@@ -2112,7 +2115,7 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 40,
+    "count": 42,
     "lastCompaction": "2026-01-28T00:15:00Z",
     "items": [
       {
@@ -2314,20 +2317,30 @@
         "id": "task-124",
         "title": "constraint-funnel diagram",
         "completedAt": "2026-01-28T04:00:00Z"
+      },
+      {
+        "id": "task-018",
+        "title": "ch03 final",
+        "completedAt": "2026-01-28T05:00:00Z"
+      },
+      {
+        "id": "task-013",
+        "title": "ch03: Prompting Fundamentals",
+        "completedAt": "2026-01-28T05:00:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 173,
-    "inProgress": 1,
-    "complete": 40,
+    "pending": 172,
+    "inProgress": 0,
+    "complete": 42,
     "blocked": 0,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "548945c",
-    "lastSuccessfulTask": "iteration-9",
-    "lastCheckpoint": "2026-01-28T04:00:00Z",
+    "lastGoodCommit": "bab114b",
+    "lastSuccessfulTask": "iteration-10",
+    "lastCheckpoint": "2026-01-28T05:00:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
