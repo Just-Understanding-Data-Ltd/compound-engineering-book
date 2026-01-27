@@ -24,14 +24,20 @@ By the end of this chapter, you will be able to:
 
 ## Source Articles
 
-Primary sources from knowledge base:
+### Primary Sources
 - `five-point-error-diagnostic-framework.md` - Systematic error categorization
 - `context-debugging-framework.md` - Layer-by-layer debugging approach
 - `error-messages-as-training.md` - ERRORS.md for persistent memory
-- `flaky-test-diagnosis-script.md` - Automated flaky test detection
+- `flaky-test-diagnosis-script.md` - Automated flaky test detection (EXPANDED Jan 27)
 - `clean-slate-trajectory-recovery.md` - Recovery from stuck states
 - `learning-loops-encoding-problems-into-prevention.md` - Prevention protocols
 - `test-based-regression-patching.md` - Test-first bug fixing
+
+### Supplementary Sources (Added from KB Analysis Jan 27, 2026)
+- `ai-cost-protection-timeouts.md` - Error handling in long-running agents (timeouts, retries)
+- `errors-md-pattern.md` (TO BE CREATED) - Detailed ERRORS.md implementation patterns
+- `agent-retry-strategies.md` (TO BE CREATED) - Retry with backoff, circuit breakers, fallbacks
+- `context-pollution-recovery.md` (TO BE CREATED) - When conversation context becomes corrupted
 
 ---
 
