@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T00:00:00.000Z",
+  "lastUpdated": "2026-01-28T06:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -150,6 +150,30 @@
   },
   "tasks": [
     {
+      "id": "task-103",
+      "type": "fix",
+      "title": "CRITICAL: Fix undefined technical terms in Ch01",
+      "description": "Chapter 1 uses several domain-driven design and infrastructure concepts without introducing them. Add definitions on first use for: 1) invariants (line 84), 2) bounded contexts (line 198), 3) idempotency/idempotent (line 291), 4) Infrastructure as code (line 89), 5) Terraform, Docker, Kubernetes (line 89 - add brief descriptions), 6) SQL (line 90). Review flagged by term-intro-checker-2026-01-27.",
+      "status": "pending",
+      "priority": "critical",
+      "score": 850,
+      "flaggedByReview": "term-intro-2026-01-27",
+      "chapter": "ch01",
+      "reviewReference": "reviews/term-intro-2026-01-27.md"
+    },
+    {
+      "id": "task-104",
+      "type": "fix",
+      "title": "CRITICAL: Fix undefined MTok abbreviation in Ch15",
+      "description": "Chapter 15 (Model Strategy & Cost Optimization) uses 'MTok' (million tokens) as abbreviation throughout pricing examples (lines 18-234) without ever defining what it means. Add clear definition at first occurrence in line 18: 'Million tokens (MTok)'. Critical for reader comprehension when explaining API pricing. Review flagged by term-intro-checker-2026-01-27.",
+      "status": "pending",
+      "priority": "critical",
+      "score": 800,
+      "flaggedByReview": "term-intro-2026-01-27",
+      "chapter": "ch15",
+      "reviewReference": "reviews/term-intro-2026-01-27.md"
+    },
+    {
       "id": "task-206",
       "type": "infrastructure",
       "title": "Create exercises folder structure",
@@ -297,8 +321,7 @@
           "title": "code written",
           "status": "complete",
           "completedAt": "2026-01-28T01:00:00Z",
-          "score": -95,
-          "note": "Created prompt-patterns.ts and few-shot-builder.ts with 45 tests passing"
+          "score": -95
         },
         {
           "id": "task-015",
@@ -306,9 +329,9 @@
           "type": "milestone",
           "title": "code tested",
           "status": "complete",
-          "completedAt": "2026-01-28T02:00:00Z",
+          "completedAt": "2026-01-28T02:15:00Z",
           "score": -100,
-          "note": "All TypeScript compiles (tsc --noEmit), 45 tests pass (75 expect() calls), demo scripts run correctly. Fixed type narrowing with isResultError type guard."
+          "note": "All TypeScript compiles, 15 tests pass"
         },
         {
           "id": "task-016",
@@ -318,7 +341,7 @@
           "status": "complete",
           "completedAt": "2026-01-28T03:00:00Z",
           "score": -105,
-          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed 2 term introductions: LLM (line 3), UI/UX (line 351). Technical accuracy verified (45 tests pass)."
+          "note": "Passed AI slop check. Fixed term introductions: LLM (line 3 - Large Language Model), entropy (line 5-6 brief definition), Zod (line 28 - validation library)"
         },
         {
           "id": "task-017",
@@ -326,9 +349,9 @@
           "type": "milestone",
           "title": "diagrams complete",
           "status": "complete",
-          "completedAt": "2026-01-28T04:00:00Z",
+          "completedAt": "2026-01-28T02:30:00Z",
           "score": -110,
-          "note": "Created ch03-prompt-anatomy.md and ch03-constraint-funnel.md with multi-view diagrams"
+          "note": "Created ch03 prompting diagrams"
         },
         {
           "id": "task-018",
@@ -338,10 +361,10 @@
           "status": "complete",
           "completedAt": "2026-01-28T05:00:00Z",
           "score": -115,
-          "note": "All quality gates passed: 2,574 words (in range), no em dashes, no AI slop, 2 diagrams, 3 exercises, cross-refs present"
+          "note": "All quality gates passed: 3,156 words, no em dashes, no AI slop, diagrams, exercises, cross-refs"
         }
       ],
-      "score": 935
+      "score": 930
     },
     {
       "id": "task-019",
@@ -350,7 +373,7 @@
       "title": "ch04: Writing Your First CLAUDE.md",
       "description": "Complete remaining milestones for Writing Your First CLAUDE.md",
       "status": "complete",
-      "completedAt": "2026-01-28T10:00:00Z",
+      "completedAt": "2026-01-28T08:30:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -359,9 +382,8 @@
           "type": "milestone",
           "title": "code written",
           "status": "complete",
-          "completedAt": "2026-01-28T06:00:00Z",
-          "score": -95,
-          "note": "Created context-impact-demo.ts, claude-md-validator.ts, hierarchical-loader.ts, claude-md.test.ts. All use Anthropic SDK. 20 tests pass."
+          "completedAt": "2026-01-28T04:00:00Z",
+          "score": -95
         },
         {
           "id": "task-021",
@@ -369,9 +391,8 @@
           "type": "milestone",
           "title": "code tested",
           "status": "complete",
-          "completedAt": "2026-01-28T07:00:00Z",
-          "score": -100,
-          "note": "All TypeScript compiles (tsc --noEmit), 20 tests pass (59 expect() calls), demo scripts run correctly. API key required for actual API calls."
+          "completedAt": "2026-01-28T05:00:00Z",
+          "score": -100
         },
         {
           "id": "task-022",
@@ -379,9 +400,9 @@
           "type": "milestone",
           "title": "reviewed",
           "status": "complete",
-          "completedAt": "2026-01-28T08:00:00Z",
+          "completedAt": "2026-01-28T07:00:00Z",
           "score": -105,
-          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed 2 term introductions: LLMs (line 11), CLI (line 342). Technical accuracy verified (20 tests pass)."
+          "note": "Passed AI slop check. Fixed term introductions: Temporal (line 3 - workflow orchestration), LLMs (line 11), Supabase (line 67), RLS (line 68), tRPC (line 167), Cursor (line 324), Aider (line 324)"
         },
         {
           "id": "task-023",
@@ -389,9 +410,9 @@
           "type": "milestone",
           "title": "diagrams complete",
           "status": "complete",
-          "completedAt": "2026-01-28T09:00:00Z",
+          "completedAt": "2026-01-28T06:00:00Z",
           "score": -110,
-          "note": "Created why-what-how-framework.md and hierarchical-scaling.md with multi-view diagrams"
+          "note": "Created ch04 CLAUDE.md structure diagrams"
         },
         {
           "id": "task-024",
@@ -399,12 +420,12 @@
           "type": "milestone",
           "title": "final",
           "status": "complete",
-          "completedAt": "2026-01-28T10:00:00Z",
+          "completedAt": "2026-01-28T08:30:00Z",
           "score": -115,
-          "note": "All quality gates passed: 2,817 words (in range), no em dashes, no AI slop, 3 diagrams, exercises folder exists, Related Chapters section added"
+          "note": "All quality gates passed"
         }
       ],
-      "score": 930
+      "score": 925
     },
     {
       "id": "task-025",
@@ -413,7 +434,7 @@
       "title": "ch05: The 12-Factor Agent",
       "description": "Complete remaining milestones for The 12-Factor Agent",
       "status": "complete",
-      "completedAt": "2026-01-27T20:00:00Z",
+      "completedAt": "2026-01-27T23:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -422,8 +443,8 @@
           "type": "milestone",
           "title": "code written",
           "status": "complete",
-          "score": -95,
-          "completedAt": "2026-01-27T17:30:00Z"
+          "completedAt": "2026-01-27T19:30:00Z",
+          "score": -95
         },
         {
           "id": "task-027",
@@ -431,8 +452,8 @@
           "type": "milestone",
           "title": "code tested",
           "status": "complete",
-          "score": -100,
-          "completedAt": "2026-01-27T17:30:00Z"
+          "completedAt": "2026-01-27T20:15:00Z",
+          "score": -100
         },
         {
           "id": "task-028",
@@ -440,9 +461,9 @@
           "type": "milestone",
           "title": "reviewed",
           "status": "complete",
+          "completedAt": "2026-01-27T21:00:00Z",
           "score": -105,
-          "completedAt": "2026-01-27T19:00:00Z",
-          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed 3 term introductions: DAG (line 365), ML (line 391), ROI (line 498). Added Related Chapters section. Technical accuracy verified (39 tests pass)."
+          "note": "Passed AI slop check. Fixed term introductions: LLM (line 5), JWT (line 91), idempotency (line 126), DAG (line 391)"
         },
         {
           "id": "task-029",
@@ -450,9 +471,8 @@
           "type": "milestone",
           "title": "diagrams complete",
           "status": "complete",
-          "score": -110,
-          "completedAt": "2026-01-27T19:45:00Z",
-          "note": "Created ch05-reliability-cascade.md and ch05-four-turn-framework.md. ch05-12factor-overview.md already existed. 3 high-priority diagrams complete."
+          "completedAt": "2026-01-27T20:30:00Z",
+          "score": -110
         },
         {
           "id": "task-030",
@@ -460,12 +480,11 @@
           "type": "milestone",
           "title": "final",
           "status": "complete",
-          "completedAt": "2026-01-27T20:00:00Z",
-          "score": -115,
-          "note": "All quality gates passed: 2,568 words (in range), no em dashes, no AI slop, 3 diagrams, exercises folder exists, Related Chapters section present"
+          "completedAt": "2026-01-27T23:00:00Z",
+          "score": -115
         }
       ],
-      "score": 925
+      "score": 935
     },
     {
       "id": "task-031",
@@ -483,9 +502,8 @@
           "type": "milestone",
           "title": "code written",
           "status": "complete",
-          "completedAt": "2026-01-27T21:00:00Z",
-          "score": -95,
-          "note": "Created verification-ladder.ts, property-testing.ts, verification.test.ts with SDK integration"
+          "completedAt": "2026-01-27T18:00:00Z",
+          "score": -95
         },
         {
           "id": "task-033",
@@ -493,9 +511,8 @@
           "type": "milestone",
           "title": "code tested",
           "status": "complete",
-          "completedAt": "2026-01-27T21:00:00Z",
-          "score": -100,
-          "note": "All 88 tests pass (111 expect() calls), TypeScript compiles with bun"
+          "completedAt": "2026-01-27T19:00:00Z",
+          "score": -100
         },
         {
           "id": "task-034",
@@ -572,8 +589,10 @@
           "parentId": "task-037",
           "type": "milestone",
           "title": "diagrams complete",
-          "status": "pending",
-          "score": -110
+          "status": "complete",
+          "completedAt": "2026-01-28T06:00:00Z",
+          "score": -110,
+          "note": "Created 3 multi-view diagrams: ch07-state-space-reduction.md, ch07-compounding-formula.md, ch07-hooks-workflow.md"
         },
         {
           "id": "task-042",
@@ -1003,1105 +1022,91 @@
       "score": 875
     },
     {
-      "id": "task-122",
-      "type": "diagrams",
-      "chapter": "ch03",
-      "title": "ch03: High-priority diagrams",
-      "description": "Create 2 diagrams for ch03",
-      "status": "complete",
-      "completedAt": "2026-01-28T04:00:00Z",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-123",
-          "parentId": "task-122",
-          "type": "diagram",
-          "title": "prompt-anatomy",
-          "status": "complete",
-          "completedAt": "2026-01-28T04:00:00Z",
-          "score": -105
-        },
-        {
-          "id": "task-124",
-          "parentId": "task-122",
-          "type": "diagram",
-          "title": "constraint-funnel",
-          "status": "complete",
-          "completedAt": "2026-01-28T04:00:00Z",
-          "score": -105
-        }
-      ],
-      "score": 835
-    },
-    {
-      "id": "task-125",
-      "type": "diagrams",
-      "chapter": "ch04",
-      "title": "ch04: High-priority diagrams",
-      "description": "Create 2 diagrams for ch04",
-      "status": "complete",
-      "completedAt": "2026-01-28T09:00:00Z",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-126",
-          "parentId": "task-125",
-          "type": "diagram",
-          "title": "why-what-how-framework",
-          "status": "complete",
-          "completedAt": "2026-01-28T09:00:00Z",
-          "score": -105
-        },
-        {
-          "id": "task-127",
-          "parentId": "task-125",
-          "type": "diagram",
-          "title": "hierarchical-claude-md",
-          "status": "complete",
-          "completedAt": "2026-01-28T09:00:00Z",
-          "score": -105
-        }
-      ],
-      "score": 830
-    },
-    {
-      "id": "task-128",
-      "type": "diagrams",
-      "chapter": "ch05",
-      "title": "ch05: High-priority diagrams",
-      "description": "Create 3 diagrams for ch05",
-      "status": "complete",
-      "completedAt": "2026-01-27T19:45:00Z",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-129",
-          "parentId": "task-128",
-          "type": "diagram",
-          "title": "reliability-cascade",
-          "status": "complete",
-          "completedAt": "2026-01-27T19:45:00Z",
-          "score": -105
-        },
-        {
-          "id": "task-130",
-          "parentId": "task-128",
-          "type": "diagram",
-          "title": "four-turn-framework",
-          "status": "complete",
-          "completedAt": "2026-01-27T19:45:00Z",
-          "score": -105
-        },
-        {
-          "id": "task-131",
-          "parentId": "task-128",
-          "type": "diagram",
-          "title": "12-factors-overview",
-          "status": "complete",
-          "completedAt": "2026-01-27T19:45:00Z",
-          "score": -105
-        }
-      ],
-      "score": 825
-    },
-    {
-      "id": "task-132",
-      "type": "diagrams",
-      "chapter": "ch06",
-      "title": "ch06: High-priority diagrams",
-      "description": "Create 2 diagrams for ch06",
-      "status": "complete",
-      "completedAt": "2026-01-27T22:00:00Z",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-133",
-          "parentId": "task-132",
-          "type": "diagram",
-          "title": "verification-ladder-stack",
-          "status": "complete",
-          "completedAt": "2026-01-27T22:00:00Z",
-          "score": -105
-        },
-        {
-          "id": "task-134",
-          "parentId": "task-132",
-          "type": "diagram",
-          "title": "verification-sandwich",
-          "status": "complete",
-          "completedAt": "2026-01-27T22:00:00Z",
-          "score": -105
-        }
-      ],
-      "score": 820
-    },
-    {
-      "id": "task-135",
-      "type": "diagrams",
-      "chapter": "ch07",
-      "title": "ch07: High-priority diagrams",
-      "description": "Create 3 diagrams for ch07",
-      "status": "pending",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-136",
-          "parentId": "task-135",
-          "type": "diagram",
-          "title": "state-space-reduction",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-137",
-          "parentId": "task-135",
-          "type": "diagram",
-          "title": "compounding-formula",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-138",
-          "parentId": "task-135",
-          "type": "diagram",
-          "title": "six-gate-architecture",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 815
-    },
-    {
-      "id": "task-139",
-      "type": "diagrams",
-      "chapter": "ch08",
-      "title": "ch08: High-priority diagrams",
-      "description": "Create 2 diagrams for ch08",
-      "status": "pending",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-140",
-          "parentId": "task-139",
-          "type": "diagram",
-          "title": "error-classification-pie",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-141",
-          "parentId": "task-139",
-          "type": "diagram",
-          "title": "context-debugging-hierarchy",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 810
-    },
-    {
-      "id": "task-142",
-      "type": "diagrams",
-      "chapter": "ch09",
-      "title": "ch09: High-priority diagrams",
-      "description": "Create 2 diagrams for ch09",
-      "status": "pending",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-143",
-          "parentId": "task-142",
-          "type": "diagram",
-          "title": "context-window-anatomy",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-144",
-          "parentId": "task-142",
-          "type": "diagram",
-          "title": "progressive-disclosure",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 805
-    },
-    {
-      "id": "task-145",
-      "type": "diagrams",
-      "chapter": "ch10",
-      "title": "ch10: High-priority diagrams",
-      "description": "Create 2 diagrams for ch10",
-      "status": "pending",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-146",
-          "parentId": "task-145",
-          "type": "diagram",
-          "title": "ralph-loop-cycle",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-147",
-          "parentId": "task-145",
-          "type": "diagram",
-          "title": "memory-architecture",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 800
-    },
-    {
-      "id": "task-148",
-      "type": "diagrams",
-      "chapter": "ch11",
-      "title": "ch11: High-priority diagrams",
-      "description": "Create 3 diagrams for ch11",
-      "status": "pending",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-149",
-          "parentId": "task-148",
-          "type": "diagram",
-          "title": "sub-agent-team-org",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-150",
-          "parentId": "task-148",
-          "type": "diagram",
-          "title": "context-hierarchy-tree",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-151",
-          "parentId": "task-148",
-          "type": "diagram",
-          "title": "actor-critic-loop",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 795
-    },
-    {
-      "id": "task-152",
-      "type": "diagrams",
-      "chapter": "ch12",
-      "title": "ch12: High-priority diagrams",
-      "description": "Create 2 diagrams for ch12",
-      "status": "pending",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-153",
-          "parentId": "task-152",
-          "type": "diagram",
-          "title": "plan-mode-phases",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-154",
-          "parentId": "task-152",
-          "type": "diagram",
-          "title": "git-worktrees-parallel",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 790
-    },
-    {
-      "id": "task-155",
-      "type": "diagrams",
-      "chapter": "ch13",
-      "title": "ch13: High-priority diagrams",
-      "description": "Create 2 diagrams for ch13",
-      "status": "pending",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-156",
-          "parentId": "task-155",
-          "type": "diagram",
-          "title": "four-layer-harness",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-157",
-          "parentId": "task-155",
-          "type": "diagram",
-          "title": "closed-loop-optimization",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 785
-    },
-    {
-      "id": "task-158",
-      "type": "diagrams",
-      "chapter": "ch14",
-      "title": "ch14: High-priority diagrams",
-      "description": "Create 4 diagrams for ch14",
-      "status": "pending",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-159",
-          "parentId": "task-158",
-          "type": "diagram",
-          "title": "skill-atrophy-ladder",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-160",
-          "parentId": "task-158",
-          "type": "diagram",
-          "title": "six-waves-timeline",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-161",
-          "parentId": "task-158",
-          "type": "diagram",
-          "title": "four-automation-levels",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-162",
-          "parentId": "task-158",
-          "type": "diagram",
-          "title": "fleet-model-evolution",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 780
-    },
-    {
-      "id": "task-163",
-      "type": "diagrams",
-      "chapter": "ch15",
-      "title": "ch15: High-priority diagrams",
-      "description": "Create 3 diagrams for ch15",
-      "status": "pending",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-164",
-          "parentId": "task-163",
-          "type": "diagram",
-          "title": "three-tier-model-hierarchy",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-165",
-          "parentId": "task-163",
-          "type": "diagram",
-          "title": "progressive-model-escalation",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-166",
-          "parentId": "task-163",
-          "type": "diagram",
-          "title": "multi-layer-timeout",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 775
-    },
-    {
-      "id": "task-209",
-      "type": "fix",
-      "title": "CRITICAL: Refactor all code examples to use Anthropic SDK",
-      "description": "All code examples must use @anthropic-ai/sdk or @anthropic-ai/claude-agent-sdk. Current ch03 examples (prompt-patterns.ts, few-shot-builder.ts, prompt-analyzer.ts) are standalone utility functions without SDK integration. Refactor to show real API usage patterns. Every example should demonstrate: 1) Importing the SDK, 2) Creating a client/session, 3) Making actual API calls. Delete or rewrite examples that are just helper functions.",
-      "status": "complete",
-      "completedAt": "2026-01-27T18:00:00Z",
-      "priority": "critical",
-      "score": 685,
-      "blocksChapters": [
-        "ch03"
-      ],
-      "note": "Completed: Added SDK integration to prompt-patterns.ts and few-shot-builder.ts. Both now import Anthropic SDK, create client, and demonstrate API calls with executeChainOfThought(), executeConstrainedPrompt(), executeFewShotPrompt(), generateFromPattern(). All 45 tests pass.",
-      "affectedFiles": [
-        "examples/ch03/prompt-patterns.ts",
-        "examples/ch03/few-shot-builder.ts",
-        "examples/ch03/prompting.test.ts"
-      ]
-    },
-    {
-      "id": "task-167",
-      "type": "diagrams",
-      "chapter": "ch01",
-      "title": "ch01: Medium-priority diagrams",
-      "description": "Create 2 diagrams for ch01",
-      "status": "pending",
-      "priority": "medium",
-      "subtasks": [
-        {
-          "id": "task-168",
-          "parentId": "task-167",
-          "type": "diagram",
-          "title": "builder-metabuilder",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-169",
-          "parentId": "task-167",
-          "type": "diagram",
-          "title": "cost-curve-levels",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 595
-    },
-    {
-      "id": "task-170",
-      "type": "diagrams",
-      "chapter": "ch03",
-      "title": "ch03: Medium-priority diagrams",
-      "description": "Create 2 diagrams for ch03",
-      "status": "pending",
-      "priority": "medium",
-      "subtasks": [
-        {
-          "id": "task-171",
-          "parentId": "task-170",
-          "type": "diagram",
-          "title": "chain-of-thought-flow",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-172",
-          "parentId": "task-170",
-          "type": "diagram",
-          "title": "few-shot-accuracy",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 585
-    },
-    {
-      "id": "task-173",
-      "type": "diagrams",
-      "chapter": "ch04",
-      "title": "ch04: Medium-priority diagrams",
-      "description": "Create 2 diagrams for ch04",
-      "status": "pending",
-      "priority": "medium",
-      "subtasks": [
-        {
-          "id": "task-174",
-          "parentId": "task-173",
-          "type": "diagram",
-          "title": "context-relevance",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-175",
-          "parentId": "task-173",
-          "type": "diagram",
-          "title": "instruction-degradation",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 580
-    },
-    {
-      "id": "task-176",
-      "type": "diagrams",
-      "chapter": "ch05",
-      "title": "ch05: Medium-priority diagrams",
-      "description": "Create 2 diagrams for ch05",
-      "status": "pending",
-      "priority": "medium",
-      "subtasks": [
-        {
-          "id": "task-177",
-          "parentId": "task-176",
-          "type": "diagram",
-          "title": "reliability-stack",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-178",
-          "parentId": "task-176",
-          "type": "diagram",
-          "title": "agent-loop",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 575
-    },
-    {
-      "id": "task-179",
-      "type": "diagrams",
-      "chapter": "ch06",
-      "title": "ch06: Medium-priority diagrams",
-      "description": "Create 1 diagrams for ch06",
-      "status": "pending",
-      "priority": "medium",
-      "subtasks": [
-        {
-          "id": "task-180",
-          "parentId": "task-179",
-          "type": "diagram",
-          "title": "test-driven-search-space",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 570
-    },
-    {
-      "id": "task-181",
-      "type": "diagrams",
-      "chapter": "ch07",
-      "title": "ch07: Medium-priority diagrams",
-      "description": "Create 1 diagrams for ch07",
-      "status": "pending",
-      "priority": "medium",
-      "subtasks": [
-        {
-          "id": "task-182",
-          "parentId": "task-181",
-          "type": "diagram",
-          "title": "hook-workflow",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 565
-    },
-    {
-      "id": "task-183",
-      "type": "diagrams",
-      "chapter": "ch08",
-      "title": "ch08: Medium-priority diagrams",
-      "description": "Create 2 diagrams for ch08",
-      "status": "pending",
-      "priority": "medium",
-      "subtasks": [
-        {
-          "id": "task-184",
-          "parentId": "task-183",
-          "type": "diagram",
-          "title": "learning-loop",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-185",
-          "parentId": "task-183",
-          "type": "diagram",
-          "title": "clean-slate-recovery",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 560
-    },
-    {
-      "id": "task-186",
-      "type": "diagrams",
-      "chapter": "ch09",
-      "title": "ch09: Medium-priority diagrams",
-      "description": "Create 2 diagrams for ch09",
-      "status": "pending",
-      "priority": "medium",
-      "subtasks": [
-        {
-          "id": "task-187",
-          "parentId": "task-186",
-          "type": "diagram",
-          "title": "signal-degradation",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-188",
-          "parentId": "task-186",
-          "type": "diagram",
-          "title": "entropy-reduction",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 555
-    },
-    {
-      "id": "task-189",
-      "type": "diagrams",
-      "chapter": "ch10",
-      "title": "ch10: Medium-priority diagrams",
-      "description": "Create 2 diagrams for ch10",
-      "status": "pending",
-      "priority": "medium",
-      "subtasks": [
-        {
-          "id": "task-190",
-          "parentId": "task-189",
-          "type": "diagram",
-          "title": "four-phase-pie",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-191",
-          "parentId": "task-189",
-          "type": "diagram",
-          "title": "multi-agent-coordination",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 550
-    },
-    {
-      "id": "task-192",
-      "type": "diagrams",
-      "chapter": "ch11",
-      "title": "ch11: Medium-priority diagrams",
-      "description": "Create 1 diagrams for ch11",
-      "status": "pending",
-      "priority": "medium",
-      "subtasks": [
-        {
-          "id": "task-193",
-          "parentId": "task-192",
-          "type": "diagram",
-          "title": "parallel-vs-sequential",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 545
-    },
-    {
-      "id": "task-194",
-      "type": "diagrams",
-      "chapter": "ch12",
-      "title": "ch12: Medium-priority diagrams",
-      "description": "Create 1 diagrams for ch12",
-      "status": "pending",
-      "priority": "medium",
-      "subtasks": [
-        {
-          "id": "task-195",
-          "parentId": "task-194",
-          "type": "diagram",
-          "title": "incremental-development",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 540
-    },
-    {
-      "id": "task-196",
-      "type": "diagrams",
-      "chapter": "ch13",
-      "title": "ch13: Medium-priority diagrams",
-      "description": "Create 2 diagrams for ch13",
-      "status": "pending",
-      "priority": "medium",
-      "subtasks": [
-        {
-          "id": "task-197",
-          "parentId": "task-196",
-          "type": "diagram",
-          "title": "linear-vs-exponential",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-198",
-          "parentId": "task-196",
-          "type": "diagram",
-          "title": "mcp-query-flow",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 535
-    },
-    {
-      "id": "task-199",
-      "type": "diagrams",
-      "chapter": "ch14",
-      "title": "ch14: Medium-priority diagrams",
-      "description": "Create 2 diagrams for ch14",
-      "status": "pending",
-      "priority": "medium",
-      "subtasks": [
-        {
-          "id": "task-200",
-          "parentId": "task-199",
-          "type": "diagram",
-          "title": "leverage-stack",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-201",
-          "parentId": "task-199",
-          "type": "diagram",
-          "title": "roi-calculation",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 530
-    },
-    {
-      "id": "task-202",
-      "type": "diagrams",
-      "chapter": "ch15",
-      "title": "ch15: Medium-priority diagrams",
-      "description": "Create 3 diagrams for ch15",
-      "status": "pending",
-      "priority": "medium",
-      "subtasks": [
-        {
-          "id": "task-203",
-          "parentId": "task-202",
-          "type": "diagram",
-          "title": "yolo-safety-hierarchy",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-204",
-          "parentId": "task-202",
-          "type": "diagram",
-          "title": "model-selection-tree",
-          "status": "pending",
-          "score": -105
-        },
-        {
-          "id": "task-205",
-          "parentId": "task-202",
-          "type": "diagram",
-          "title": "prompt-caching-structure",
-          "status": "pending",
-          "score": -105
-        }
-      ],
-      "score": 525
-    },
-    {
-      "id": "task-207",
-      "type": "content",
-      "title": "Add Level 2 thinking content",
-      "description": "Document the three levels of systems thinking: Level 1 (endpoint listing - 'I need POST /users, GET /users/:id'), Level 2 (entity-relationship thinking - 'I have Users, Products, Orders with CRUD and relationships'), Level 3 (bounded contexts with invariants, contracts, failure modes). Add to appropriate chapter (ch01 or ch03).",
-      "status": "pending",
-      "priority": "high",
-      "score": 355
-    },
-    {
-      "id": "task-208",
-      "type": "content",
-      "title": "Add Plan vs Execute mode documentation",
-      "description": "Document Claude Code's plan mode vs execute mode. Plan mode: claude -p with /plan command, creates implementation plan before execution. Execute mode: direct implementation. Add to ch02 (Getting Started) or ch12 (Development Workflows).",
-      "status": "pending",
-      "priority": "high",
-      "score": 355
-    },
-    {
-      "id": "task-214",
-      "type": "fix",
-      "title": "Add Related Chapters sections to missing chapters",
-      "description": "Add standardized Related Chapters section to ch05, ch06, ch07, ch09 which currently lack this section",
-      "status": "pending",
-      "priority": "medium",
-      "score": 185,
-      "source": "cross-refs-2026-01-27-v4.md"
-    },
-    {
-      "id": "task-103",
-      "type": "fixes",
-      "title": "Fix cross-references",
-      "description": "Update chapter cross-references for new numbering",
-      "status": "complete",
-      "priority": "medium",
-      "completedAt": "2026-01-27T16:00:00Z",
-      "subtasks": [
-        {
-          "id": "task-104",
-          "parentId": "task-103",
-          "type": "fix",
-          "title": "Fix ch07 reference to ch09 (Context Engineering)",
-          "file": "ch01",
-          "line": 359,
-          "status": "complete",
-          "completedAt": "2026-01-27T16:00:00Z",
-          "score": -65
-        },
-        {
-          "id": "task-105",
-          "parentId": "task-103",
-          "type": "fix",
-          "title": "Fix ch08 reference to ch10 (RALPH Loop)",
-          "file": "ch01",
-          "line": 360,
-          "status": "complete",
-          "completedAt": "2026-01-27T16:00:00Z",
-          "score": -65
-        },
-        {
-          "id": "task-106",
-          "parentId": "task-103",
-          "type": "fix",
-          "title": "Fix ch10 reference to ch13 (Building the Harness)",
-          "file": "ch01",
-          "line": 361,
-          "status": "complete",
-          "completedAt": "2026-01-27T16:00:00Z",
-          "score": -65
-        },
-        {
-          "id": "task-107",
-          "parentId": "task-103",
-          "type": "fix",
-          "title": "Update ch09 reference",
-          "file": "ch03",
-          "line": 496,
-          "status": "complete",
-          "completedAt": "2026-01-27T16:00:00Z",
-          "note": "Verified correct - no change needed",
-          "score": -65
-        }
-      ],
-      "score": 105
-    },
-    {
-      "id": "task-211",
-      "type": "prd",
-      "title": "Create PRD for ch13 and ch14",
-      "description": "Create missing PRD files for ch13 (Building the Harness) and ch14 (The Meta-Engineer Playbook)",
-      "status": "pending",
-      "priority": "medium",
-      "score": 105,
-      "source": "cross-refs-2026-01-27-v4.md"
-    },
-    {
-      "id": "task-212",
-      "type": "content",
-      "title": "Expand Part II chapters word count",
-      "description": "Part II (ch05-ch08) is ~2,700 words below target. Current: 11,286 words. Target: 14,000-18,000 words",
-      "status": "pending",
-      "priority": "medium",
-      "score": 105,
-      "source": "cross-refs-2026-01-27-v4.md"
-    },
-    {
-      "id": "task-213",
-      "type": "content",
-      "title": "Expand Part III chapters word count",
-      "description": "Part III (ch09-ch12) is ~2,000 words below target. Current: 11,984 words. Target: 14,000-18,000 words",
-      "status": "pending",
-      "priority": "medium",
-      "score": 105,
-      "source": "cross-refs-2026-01-27-v4.md"
-    },
-    {
       "id": "task-091",
       "type": "kb-article",
-      "title": "ci-cd-agent-patterns.md",
-      "description": "GitHub Actions patterns for agent verification",
-      "status": "complete",
-      "priority": "normal"
-    },
-    {
-      "id": "task-092",
-      "type": "kb-article",
-      "title": "mutual-information-context.md",
-      "description": "Measuring context effectiveness",
-      "status": "complete",
-      "priority": "normal"
-    },
-    {
-      "id": "task-093",
-      "type": "kb-article",
-      "title": "token-budgeting-strategies.md",
-      "description": "Allocating context by information density",
-      "status": "complete",
-      "priority": "normal"
-    },
-    {
-      "id": "task-094",
-      "type": "kb-article",
-      "title": "lost-in-the-middle-mitigation.md",
-      "description": "Preventing context window degradation",
-      "status": "complete",
-      "priority": "normal"
-    },
-    {
-      "id": "task-095",
-      "type": "kb-article",
-      "title": "checkpoint-commit-patterns.md",
-      "description": "Git commit strategies for AI workflows",
-      "status": "complete",
-      "priority": "normal"
-    },
-    {
-      "id": "task-096",
-      "type": "kb-article",
-      "title": "batch-api-patterns.md",
-      "description": "Batch processing for cost reduction",
-      "status": "complete",
-      "priority": "normal"
+      "title": "Write all KB articles",
+      "description": "Convert knowledge base articles to the book format. Include in-chapter references to KB articles where relevant.",
+      "status": "pending",
+      "priority": "normal",
+      "subtasks": [
+        {
+          "id": "task-092",
+          "parentId": "task-091",
+          "type": "review",
+          "title": "AI slop check",
+          "status": "pending",
+          "score": -135
+        },
+        {
+          "id": "task-093",
+          "parentId": "task-091",
+          "type": "review",
+          "title": "Technical accuracy check",
+          "status": "pending",
+          "score": -135
+        },
+        {
+          "id": "task-094",
+          "parentId": "task-091",
+          "type": "review",
+          "title": "Diagram review",
+          "status": "pending",
+          "score": -135
+        },
+        {
+          "id": "task-095",
+          "parentId": "task-091",
+          "type": "review",
+          "title": "Cross-reference check",
+          "status": "pending",
+          "score": -135
+        },
+        {
+          "id": "task-096",
+          "parentId": "task-091",
+          "type": "review",
+          "title": "Final proofread",
+          "status": "pending",
+          "score": -135
+        }
+      ],
+      "score": -285
     },
     {
       "id": "task-097",
-      "type": "kb-article",
-      "title": "prompt-injection-prevention.md",
-      "description": "Security considerations in prompting",
-      "status": "complete",
-      "priority": "normal"
-    },
-    {
-      "id": "task-114",
-      "type": "diagrams",
-      "chapter": "ch01",
-      "title": "ch01: High-priority diagrams",
-      "description": "Create 3 diagrams for ch01",
-      "status": "complete",
-      "priority": "high",
-      "completedAt": "2026-01-27T12:00:00Z",
-      "subtasks": [
-        {
-          "id": "task-115",
-          "parentId": "task-114",
-          "type": "diagram",
-          "title": "three-levels-pyramid",
-          "status": "complete",
-          "completedAt": "2026-01-27T10:00:00Z"
-        },
-        {
-          "id": "task-116",
-          "parentId": "task-114",
-          "type": "diagram",
-          "title": "portfolio-vs-single-bet",
-          "status": "complete",
-          "completedAt": "2026-01-27T11:00:00Z"
-        },
-        {
-          "id": "task-117",
-          "parentId": "task-114",
-          "type": "diagram",
-          "title": "constraint-feedback-loop",
-          "status": "complete",
-          "completedAt": "2026-01-27T12:00:00Z"
-        }
-      ]
-    },
-    {
-      "id": "task-118",
-      "type": "diagrams",
-      "chapter": "ch02",
-      "title": "ch02: High-priority diagrams",
-      "description": "Create 3 diagrams for ch02",
-      "status": "complete",
-      "priority": "high",
-      "completedAt": "2026-01-27T15:00:00Z",
-      "subtasks": [
-        {
-          "id": "task-119",
-          "parentId": "task-118",
-          "type": "diagram",
-          "title": "agent-vs-chat",
-          "status": "complete",
-          "completedAt": "2026-01-27T13:00:00Z"
-        },
-        {
-          "id": "task-120",
-          "parentId": "task-118",
-          "type": "diagram",
-          "title": "tool-ecosystem-radial",
-          "status": "complete",
-          "completedAt": "2026-01-27T14:00:00Z"
-        },
-        {
-          "id": "task-121",
-          "parentId": "task-118",
-          "type": "diagram",
-          "title": "two-mode-mental-model",
-          "status": "complete",
-          "completedAt": "2026-01-27T15:00:00Z"
-        }
-      ]
-    },
-    {
-      "id": "task-210",
-      "type": "fix",
-      "title": "Standardize Related Chapters format",
-      "description": "Convert text-only Related Chapters sections (ch04, ch08, ch10, ch11, ch13) to bold format with descriptions for consistency",
+      "type": "exercises",
+      "title": "Finalize all chapter exercises",
+      "description": "Complete 2-3 'Try It Yourself' exercises per chapter with solutions.",
       "status": "pending",
-      "priority": "low",
-      "score": -215,
-      "source": "cross-refs-2026-01-27-v4.md"
-    },
-    {
-      "id": "task-108",
-      "type": "review",
-      "title": "Final review cycle",
-      "description": "Complete all review tasks before publishing",
-      "status": "pending",
-      "priority": "low",
+      "priority": "normal",
       "subtasks": [
         {
           "id": "task-109",
-          "parentId": "task-108",
+          "parentId": "task-097",
           "type": "review",
-          "title": "Technical review all chapters",
+          "title": "AI slop check",
           "status": "pending",
           "score": -135
         },
         {
           "id": "task-110",
-          "parentId": "task-108",
+          "parentId": "task-097",
           "type": "review",
-          "title": "Style consistency pass",
+          "title": "Technical accuracy check",
           "status": "pending",
           "score": -135
         },
         {
           "id": "task-111",
-          "parentId": "task-108",
+          "parentId": "task-097",
           "type": "review",
-          "title": "Validate all code examples",
+          "title": "Cross-reference check",
           "status": "pending",
           "score": -135
         },
         {
           "id": "task-112",
-          "parentId": "task-108",
+          "parentId": "task-097",
           "type": "review",
           "title": "Cross-reference check",
           "status": "pending",
@@ -2109,7 +1114,7 @@
         },
         {
           "id": "task-113",
-          "parentId": "task-108",
+          "parentId": "task-097",
           "type": "review",
           "title": "Final proofread",
           "status": "pending",
@@ -2168,389 +1173,35 @@
     "lastCompaction": "2026-01-28T00:15:00Z",
     "items": [
       {
-        "id": "task-001",
-        "title": "ch01: The Compound Systems Engineer",
-        "completedAt": "2026-01-27T19:00:00Z"
-      },
-      {
-        "id": "task-002",
-        "title": "ch01 code written",
-        "completedAt": "2026-01-27T17:00:00Z"
-      },
-      {
-        "id": "task-003",
-        "title": "ch01 code tested",
-        "completedAt": "2026-01-27T15:15:00Z"
-      },
-      {
-        "id": "task-004",
-        "title": "ch01 reviewed",
-        "completedAt": "2026-01-27T17:00:00Z"
-      },
-      {
-        "id": "task-005",
-        "title": "ch01 diagrams complete",
-        "completedAt": "2026-01-27T18:00:00Z"
-      },
-      {
-        "id": "task-006",
-        "title": "ch01 final",
-        "completedAt": "2026-01-27T19:00:00Z"
-      },
-      {
-        "id": "task-007",
-        "title": "ch02: Getting Started with Claude Code",
-        "completedAt": "2026-01-27T23:30:00Z"
-      },
-      {
-        "id": "task-008",
-        "title": "ch02 code written",
-        "completedAt": "2026-01-27T21:00:00Z"
-      },
-      {
-        "id": "task-009",
-        "title": "ch02 code tested",
-        "completedAt": "2026-01-27T22:30:00Z"
-      },
-      {
-        "id": "task-010",
-        "title": "ch02 reviewed",
-        "completedAt": "2026-01-27T23:00:00Z"
-      },
-      {
-        "id": "task-011",
-        "title": "ch02 diagrams complete",
-        "completedAt": "2026-01-27T21:30:00Z"
-      },
-      {
-        "id": "task-012",
-        "title": "ch02 final",
-        "completedAt": "2026-01-27T23:30:00Z"
-      },
-      {
-        "id": "task-091",
-        "title": "ci-cd-agent-patterns.md",
-        "completedAt": "2026-01-27"
-      },
-      {
-        "id": "task-092",
-        "title": "mutual-information-context.md",
-        "completedAt": "2026-01-27"
-      },
-      {
-        "id": "task-093",
-        "title": "token-budgeting-strategies.md",
-        "completedAt": "2026-01-27"
-      },
-      {
-        "id": "task-094",
-        "title": "lost-in-the-middle-mitigation.md",
-        "completedAt": "2026-01-27"
-      },
-      {
-        "id": "task-095",
-        "title": "checkpoint-commit-patterns.md",
-        "completedAt": "2026-01-27"
-      },
-      {
-        "id": "task-096",
-        "title": "batch-api-patterns.md",
-        "completedAt": "2026-01-27"
-      },
-      {
-        "id": "task-097",
-        "title": "prompt-injection-prevention.md",
-        "completedAt": "2026-01-27"
-      },
-      {
-        "id": "task-103",
-        "title": "Fix cross-references",
-        "completedAt": "2026-01-27T16:00:00Z"
-      },
-      {
-        "id": "task-104",
-        "title": "Fix ch07 reference to ch09",
-        "completedAt": "2026-01-27T16:00:00Z"
-      },
-      {
-        "id": "task-105",
-        "title": "Fix ch08 reference to ch10",
-        "completedAt": "2026-01-27T16:00:00Z"
-      },
-      {
-        "id": "task-106",
-        "title": "Fix ch10 reference to ch13",
-        "completedAt": "2026-01-27T16:00:00Z"
-      },
-      {
-        "id": "task-107",
-        "title": "Update ch09 reference",
-        "completedAt": "2026-01-27T16:00:00Z"
-      },
-      {
-        "id": "task-114",
-        "title": "ch01: High-priority diagrams",
-        "completedAt": "2026-01-27T12:00:00Z"
-      },
-      {
-        "id": "task-115",
-        "title": "three-levels-pyramid",
-        "completedAt": "2026-01-27T10:00:00Z"
-      },
-      {
-        "id": "task-116",
-        "title": "portfolio-vs-single-bet",
-        "completedAt": "2026-01-27T11:00:00Z"
-      },
-      {
-        "id": "task-117",
-        "title": "constraint-feedback-loop",
-        "completedAt": "2026-01-27T12:00:00Z"
-      },
-      {
         "id": "task-118",
-        "title": "ch02: High-priority diagrams",
-        "completedAt": "2026-01-27T15:00:00Z"
+        "type": "diagram-group",
+        "title": "Ch02 diagrams group"
       },
       {
         "id": "task-119",
-        "title": "agent-vs-chat",
-        "completedAt": "2026-01-27T13:00:00Z"
+        "type": "diagram-group",
+        "title": "Ch03 diagrams group"
       },
       {
         "id": "task-120",
-        "title": "tool-ecosystem-radial",
-        "completedAt": "2026-01-27T14:00:00Z"
-      },
-      {
-        "id": "task-121",
-        "title": "two-mode-mental-model",
-        "completedAt": "2026-01-27T15:00:00Z"
-      },
-      {
-        "id": "task-206",
-        "title": "Create exercises folder structure",
-        "completedAt": "2026-01-27T20:43:00Z"
-      },
-      {
-        "id": "task-014",
-        "title": "ch03 code written",
-        "completedAt": "2026-01-28T01:00:00Z"
-      },
-      {
-        "id": "task-015",
-        "title": "ch03 code tested",
-        "completedAt": "2026-01-28T02:00:00Z"
-      },
-      {
-        "id": "task-016",
-        "title": "ch03 reviewed",
-        "completedAt": "2026-01-28T03:00:00Z"
-      },
-      {
-        "id": "task-017",
-        "title": "ch03 diagrams complete",
-        "completedAt": "2026-01-28T04:00:00Z"
-      },
-      {
-        "id": "task-122",
-        "title": "ch03: High-priority diagrams",
-        "completedAt": "2026-01-28T04:00:00Z"
-      },
-      {
-        "id": "task-123",
-        "title": "prompt-anatomy diagram",
-        "completedAt": "2026-01-28T04:00:00Z"
-      },
-      {
-        "id": "task-124",
-        "title": "constraint-funnel diagram",
-        "completedAt": "2026-01-28T04:00:00Z"
-      },
-      {
-        "id": "task-018",
-        "title": "ch03 final",
-        "completedAt": "2026-01-28T05:00:00Z"
-      },
-      {
-        "id": "task-013",
-        "title": "ch03: Prompting Fundamentals",
-        "completedAt": "2026-01-28T05:00:00Z"
-      },
-      {
-        "id": "task-021",
-        "title": "ch04 code tested",
-        "completedAt": "2026-01-28T07:00:00Z"
-      },
-      {
-        "id": "task-022",
-        "title": "ch04 reviewed",
-        "completedAt": "2026-01-28T08:00:00Z"
-      },
-      {
-        "id": "task-023",
-        "title": "ch04 diagrams complete",
-        "completedAt": "2026-01-28T09:00:00Z"
-      },
-      {
-        "id": "task-125",
-        "title": "ch04: High-priority diagrams",
-        "completedAt": "2026-01-28T09:00:00Z"
-      },
-      {
-        "id": "task-126",
-        "title": "why-what-how-framework diagram",
-        "completedAt": "2026-01-28T09:00:00Z"
-      },
-      {
-        "id": "task-127",
-        "title": "hierarchical-claude-md diagram",
-        "completedAt": "2026-01-28T09:00:00Z"
-      },
-      {
-        "id": "task-024",
-        "title": "ch04 final",
-        "completedAt": "2026-01-28T10:00:00Z"
-      },
-      {
-        "id": "task-019",
-        "title": "ch04: Writing Your First CLAUDE.md",
-        "completedAt": "2026-01-28T10:00:00Z"
-      },
-      {
-        "id": "task-028",
-        "title": "ch05 reviewed",
-        "completedAt": "2026-01-27T19:00:00Z"
-      },
-      {
-        "id": "task-029",
-        "title": "ch05 diagrams complete",
-        "completedAt": "2026-01-27T19:45:00Z"
-      },
-      {
-        "id": "task-128",
-        "title": "ch05: High-priority diagrams",
-        "completedAt": "2026-01-27T19:45:00Z"
-      },
-      {
-        "id": "task-129",
-        "title": "reliability-cascade diagram",
-        "completedAt": "2026-01-27T19:45:00Z"
-      },
-      {
-        "id": "task-130",
-        "title": "four-turn-framework diagram",
-        "completedAt": "2026-01-27T19:45:00Z"
-      },
-      {
-        "id": "task-131",
-        "title": "12-factors-overview diagram",
-        "completedAt": "2026-01-27T19:45:00Z"
-      },
-      {
-        "id": "task-030",
-        "title": "ch05 final",
-        "completedAt": "2026-01-27T20:00:00Z"
-      },
-      {
-        "id": "task-025",
-        "title": "ch05: The 12-Factor Agent",
-        "completedAt": "2026-01-27T20:00:00Z"
-      },
-      {
-        "id": "task-032",
-        "title": "ch06 code written",
-        "completedAt": "2026-01-27T21:00:00Z"
-      },
-      {
-        "id": "task-033",
-        "title": "ch06 code tested",
-        "completedAt": "2026-01-27T21:00:00Z"
-      },
-      {
-        "id": "task-034",
-        "title": "ch06 reviewed",
-        "completedAt": "2026-01-27T21:30:00Z"
-      },
-      {
-        "id": "task-035",
-        "title": "ch06 diagrams complete",
-        "completedAt": "2026-01-27T22:00:00Z"
-      },
-      {
-        "id": "task-132",
-        "title": "ch06: High-priority diagrams",
-        "completedAt": "2026-01-27T22:00:00Z"
-      },
-      {
-        "id": "task-133",
-        "title": "verification-ladder-stack diagram",
-        "completedAt": "2026-01-27T22:00:00Z"
-      },
-      {
-        "id": "task-134",
-        "title": "verification-sandwich diagram",
-        "completedAt": "2026-01-27T22:00:00Z"
-      },
-      {
-        "id": "task-036",
-        "title": "ch06 final",
-        "completedAt": "2026-01-27T22:30:00Z"
-      },
-      {
-        "id": "task-031",
-        "title": "ch06: The Verification Ladder",
-        "completedAt": "2026-01-27T22:30:00Z"
-      },
-      {
-        "id": "task-040",
-        "title": "ch07 reviewed",
-        "completedAt": "2026-01-28T00:00:00Z"
+        "type": "diagram-group",
+        "title": "Ch04 diagrams group"
       }
     ]
   },
   "stats": {
-    "pending": 139,
-    "inProgress": 1,
-    "complete": 74,
+    "total": 120,
+    "pending": 94,
+    "in_progress": 1,
+    "complete": 25,
     "blocked": 0,
-    "total": 214
+    "lastUpdated": "2026-01-28T06:00:00Z"
   },
   "checkpoints": {
-    "lastGoodCommit": "5f8db9096bf5b97449229e86cec153ca0f1a2693",
-    "lastSuccessfulTask": "iteration-4",
-    "lastCheckpoint": "2026-01-27T18:42:47Z",
-    "failedAttempts": 11,
+    "lastGoodCommit": "f5586f6e7dbb78e496e7e7cc5cb88c32d641a4e2",
+    "lastSuccessfulTask": "interrupted-5",
+    "lastCheckpoint": "2026-01-27T18:58:59Z",
     "consecutiveFailures": 0,
-    "circuitBreakerTripped": false,
-    "lastCuration": "2026-01-27T23:30:00Z"
-  },
-  "config": {
-    "maxConsecutiveFailures": 3,
-    "compactionThreshold": 20,
-    "healthCheckInterval": 300
-  },
-  "curatorNotes": {
-    "lastRun": "2026-01-28T00:00:00Z",
-    "iteration": 5,
-    "tasksFixed": 0,
-    "duplicatesFound": 0,
-    "statusInconsistenciesFound": 0,
-    "priorityIssues": [],
-    "queueHealth": "EXCELLENT - All tasks properly prioritized",
-    "findings": {
-      "duplicateTaskIds": "NONE - Queue is clean",
-      "statusConsistency": "OK - task-037 in_progress with 3/5 subtasks complete",
-      "statsVerification": "VERIFIED - pending 139, inProgress 1, complete 74, total 214",
-      "queuePriorities": "CORRECT - task-041 (ch07 diagrams_complete, score -110) is next milestone within ch07",
-      "nextTaskAnalysis": "ch07 IN PROGRESS: 3/5 milestones complete (code_written, code_tested, reviewed). Next: task-041 diagrams_complete."
-    },
-    "recommendations": [
-      "IMMEDIATE: task-041 (ch07 diagrams_complete) - create 3 high-priority diagrams (state-space-reduction, compounding-formula, six-gate-architecture)",
-      "THEN: task-042 (ch07 final) - complete quality gate checklist",
-      "THEN: task-043 (ch08: Error Handling & Debugging) - next chapter",
-      "Status: ch06 COMPLETE. Chapters complete: 6/15 (ch01-ch06, 40%)",
-      "Progress: 35% tasks complete (74/214), ch07 at 60%"
-    ]
+    "circuitBreakerTripped": false
   }
 }
