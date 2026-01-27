@@ -285,16 +285,23 @@ else
     echo "WARNING: No timeout command found. Install coreutils: brew install coreutils"
 fi
 
+# Use Claude 2.1.17 to avoid print mode bug in 2.1.19/2.1.20
+# See: https://github.com/anthropics/claude-code/issues/18131
+CLAUDE_BIN="${CLAUDE_BIN:-/Users/jamesaphoenix/.npm-global/bin/claude}"
+if [ ! -x "$CLAUDE_BIN" ]; then
+    CLAUDE_BIN="claude"  # Fallback to PATH
+fi
+
 run_claude() {
     local prompt_file="$1"
     local output_file="$PROMPT_DIR/last_output.txt"
     local exit_code=0
 
     if [ -n "$TIMEOUT_CMD" ]; then
-        $TIMEOUT_CMD $ITERATION_TIMEOUT claude --dangerously-skip-permissions -p - < "$prompt_file" 2>&1 | tee "$output_file"
+        $TIMEOUT_CMD $ITERATION_TIMEOUT $CLAUDE_BIN --dangerously-skip-permissions -p - < "$prompt_file" 2>&1 | tee "$output_file"
         exit_code=${PIPESTATUS[0]}
     else
-        claude --dangerously-skip-permissions -p - < "$prompt_file" 2>&1 | tee "$output_file"
+        $CLAUDE_BIN --dangerously-skip-permissions -p - < "$prompt_file" 2>&1 | tee "$output_file"
         exit_code=${PIPESTATUS[0]}
     fi
 
