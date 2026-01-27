@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 11:00)
+## Current Status (Updated: 2026-01-27 12:00)
 - Phase: Phase 3 - Diagram Creation
-- Active: ch01 diagrams (2/3 complete)
-- Last Completed: ch01-portfolio-vs-single-bet.md diagram
+- Active: ch01 diagrams COMPLETE (3/3)
+- Last Completed: ch01-feedback-loop-observability.md diagram
 - Blockers: None
 
 ## Project State Summary
@@ -11,14 +11,28 @@
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
 - KB Articles Created: 15/15 new articles (100%) - KB CREATION COMPLETE
 - KB Coverage: 100/104 referenced, 15 created (96% coverage)
-- Diagrams: 2/75 complete (Phase 3 in progress)
+- Diagrams: 3/75 complete (Phase 3 in progress) - ch01 high-priority done
 - Total Word Count: 44,262 (target: 53,000-72,000, 61-82% complete)
 - Quality Issues: 282 total (declining trend)
 
 ## Next Task
-Continue Phase 3: Create ch01 constraint-feedback-loop diagram (task-117)
+Continue Phase 3: Create ch02 diagrams (task-118)
 
 ## Recent Activity
+
+### 2026-01-27 12:00 - Created ch01-feedback-loop-observability diagram
+- What: Created Mermaid diagram showing how observability creates compound leverage
+- Files: assets/diagrams/ch01-feedback-loop-observability.md
+- Diagram includes:
+  - Primary circular feedback loop (Code Change -> Tests -> Telemetry -> Evaluation -> Agent Fix)
+  - Detailed stage breakdown view
+  - Time progression showing manual to autonomous evolution
+  - Component details table with tooling references
+  - Investment vs. return analysis
+- Key visual: Circular loop that "runs while you sleep"
+- Task: task-117 marked complete, task-114 (ch01 diagrams) now complete
+- Outcome: Success - all 3 high-priority ch01 diagrams done
+- Next: Create ch02 diagrams (task-118)
 
 ### 2026-01-27 11:00 - Created ch01-portfolio-vs-single-bet diagram
 - What: Created Mermaid diagram comparing portfolio game vs single-bet game approaches

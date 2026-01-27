@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T11:00:00.000Z",
+  "lastUpdated": "2026-01-27T12:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1030,8 +1030,9 @@
       "chapter": "ch01",
       "title": "ch01: High-priority diagrams",
       "description": "Create 3 diagrams for ch01",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
+      "completedAt": "2026-01-27T12:00:00Z",
       "subtasks": [
         {
           "id": "task-115",
@@ -1054,7 +1055,8 @@
           "parentId": "task-114",
           "type": "diagram",
           "title": "constraint-feedback-loop",
-          "status": "pending"
+          "status": "complete",
+          "completedAt": "2026-01-27T12:00:00Z"
         }
       ]
     },
@@ -1800,9 +1802,9 @@
     "total": 205
   },
   "checkpoints": {
-    "lastGoodCommit": "93f60fbb50014104e2fa66f7d589c5def17f1f79",
-    "lastSuccessfulTask": "iteration-1",
-    "lastCheckpoint": "2026-01-27T14:30:19Z",
+    "lastGoodCommit": "5f3dc841348e200e038c7774e157b671876ce095",
+    "lastSuccessfulTask": "iteration-2",
+    "lastCheckpoint": "2026-01-27T14:33:18Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false
