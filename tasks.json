@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T09:00:00Z",
+  "lastUpdated": "2026-01-28T10:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -904,8 +904,10 @@
           "parentId": "task-067",
           "type": "milestone",
           "title": "diagrams complete",
-          "status": "pending",
-          "score": -110
+          "status": "complete",
+          "completedAt": "2026-01-28T10:00:00Z",
+          "score": -110,
+          "note": "Created 5 comprehensive diagrams: Plan Mode Decision Tree, Git Worktrees Architecture, Incremental Development Cycle, Script Evolution, Playwright Loop Pattern. Each with multi-view alternatives and reference tables."
         },
         {
           "id": "task-072",
@@ -1235,16 +1237,16 @@
     ]
   },
   "stats": {
-    "pending": 38,
+    "pending": 36,
     "inProgress": 0,
-    "complete": 71,
+    "complete": 73,
     "blocked": 0,
     "total": 109
   },
   "checkpoints": {
-    "lastGoodCommit": "69119bdf6b8454e2810e6276b969b9e117a4576f",
-    "lastSuccessfulTask": "task-070",
-    "lastCheckpoint": "2026-01-28T09:00:00Z",
+    "lastGoodCommit": "6a5e74441a25d2580b4e96666435c850abab6261",
+    "lastSuccessfulTask": "task-071",
+    "lastCheckpoint": "2026-01-28T10:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0
