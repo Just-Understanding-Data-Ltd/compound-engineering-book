@@ -30,6 +30,8 @@ Verification isn't a single check. It's a hierarchy where each level catches wha
 └─────────────────────────────────────────────────────────────┘
 ```
 
+The tools mentioned here: Temporal Logic of Actions Plus (TLA+) and Z3 are specification languages for formal proofs. fast-check (JavaScript) and Hypothesis (Python) are property-based testing frameworks. Zod and io-ts are TypeScript runtime validation libraries. mypy is Python's static type checker.
+
 The question isn't "which level?" but "how high do you need to climb for this code?"
 
 ## Level 1: Static Types
@@ -628,4 +630,8 @@ Each verification layer compounds with the others. Together they catch bugs that
 
 ---
 
-*Next chapter: Quality Gates That Compound explores how to build verification systems that get better over time.*
+*Related chapters:*
+
+- **[Chapter 5: The 12-Factor Agent](ch05-the-12-factor-agent.md)** for the reliability principles that verification enforces
+- **[Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md)** for building verification systems that improve over time
+- **[Chapter 3: Prompting Fundamentals](ch03-prompting-fundamentals.md)** for structuring prompts that produce testable code

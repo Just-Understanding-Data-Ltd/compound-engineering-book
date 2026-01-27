@@ -481,24 +481,30 @@
           "parentId": "task-031",
           "type": "milestone",
           "title": "code written",
-          "status": "pending",
-          "score": -95
+          "status": "complete",
+          "completedAt": "2026-01-27T21:00:00Z",
+          "score": -95,
+          "note": "Created verification-ladder.ts, property-testing.ts, verification.test.ts with SDK integration"
         },
         {
           "id": "task-033",
           "parentId": "task-031",
           "type": "milestone",
           "title": "code tested",
-          "status": "pending",
-          "score": -100
+          "status": "complete",
+          "completedAt": "2026-01-27T21:00:00Z",
+          "score": -100,
+          "note": "All 88 tests pass (111 expect() calls), TypeScript compiles with bun"
         },
         {
           "id": "task-034",
           "parentId": "task-031",
           "type": "milestone",
           "title": "reviewed",
-          "status": "pending",
-          "score": -105
+          "status": "complete",
+          "completedAt": "2026-01-27T21:30:00Z",
+          "score": -105,
+          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed term introductions: TLA+, Z3, fast-check, Hypothesis, Zod, io-ts, mypy defined. Added Related Chapters section."
         },
         {
           "id": "task-035",
@@ -2438,21 +2444,36 @@
         "id": "task-025",
         "title": "ch05: The 12-Factor Agent",
         "completedAt": "2026-01-27T20:00:00Z"
+      },
+      {
+        "id": "task-032",
+        "title": "ch06 code written",
+        "completedAt": "2026-01-27T21:00:00Z"
+      },
+      {
+        "id": "task-033",
+        "title": "ch06 code tested",
+        "completedAt": "2026-01-27T21:00:00Z"
+      },
+      {
+        "id": "task-034",
+        "title": "ch06 reviewed",
+        "completedAt": "2026-01-27T21:30:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 152,
+    "pending": 149,
     "inProgress": 0,
-    "complete": 62,
+    "complete": 65,
     "blocked": 0,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "f11916fab6a8414c75e954265fe66b22add9d893",
-    "lastSuccessfulTask": "task-030",
-    "lastCheckpoint": "2026-01-27T20:00:00Z",
-    "failedAttempts": 10,
+    "lastGoodCommit": "1ea976b713b422f2d5cd6818fa039c4b946c7895",
+    "lastSuccessfulTask": "task-034",
+    "lastCheckpoint": "2026-01-27T21:30:00Z",
+    "failedAttempts": 11,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "lastCuration": "2026-01-27T19:45:00Z"

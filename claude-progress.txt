@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 20:00)
+## Current Status (Updated: 2026-01-27 21:30)
 - Phase: Chapter Milestones (5 of 15 complete, 33%)
-- Active: ch06 milestones (task-031 next)
-- Last Completed: task-030 (ch05 final) - WARMUP ITERATION
+- Active: ch06 milestones (task-035 diagrams next)
+- Last Completed: task-034 (ch06 reviewed) - WARMUP ITERATION
 - Blockers: None active
 
 ## Project State Summary
@@ -15,18 +15,33 @@
 - Code Examples: 5 chapters tested (33%)
 - Word Count: 44,313 (target 45,000-57,000, 76-98% complete)
 - Quality Issues: 286 tracked (AI slop 55, tech 23, terms 58, cross-refs 3, style 147)
-- Tasks Complete: 62/214 (29%) - +2 this iteration
+- Tasks Complete: 65/214 (30%)
 
 ## Critical Blockers
 1. ch02 CLI Syntax: 8 invalid commands (claude ask, chat, init don't exist)
    Note: task-209 (SDK Refactor) RESOLVED this iteration
 
 ## Next Task Priority
-1. task-031 (ch06: The Verification Ladder, score 920) - Next chapter
-2. task-032 (ch06 code_written) - First ch06 milestone
+1. task-035 (ch06 diagrams_complete) - Next ch06 milestone
+2. task-036 (ch06 final) - Complete quality gate
 3. task-037 (ch07: Quality Gates That Compound, score 915) - After ch06
 
 ## Recent Activity
+
+### 2026-01-27 21:30 - COMPLETED task-034: ch06 reviewed - WARMUP ITERATION
+- What: Reviewed Chapter 6 (The Verification Ladder) for quality
+- Review Results:
+  - AI slop check: PASS (no em dashes, no blacklisted phrases)
+  - Technical accuracy: PASS (88 tests pass from prior milestone)
+  - Term introduction: 7 issues fixed
+- Fixes Applied:
+  - Added definitions paragraph after the ladder diagram explaining: TLA+ (Temporal Logic of Actions Plus), Z3 (theorem prover), fast-check (JS property testing), Hypothesis (Python property testing), Zod/io-ts (TypeScript validation), mypy (Python type checker)
+  - Added Related Chapters section at end of chapter (links to ch05, ch07, ch03)
+- Tasks: task-034 marked complete
+- Stats: pending 149, complete 65
+- ch06 Status: 3/5 milestones complete (code_written, code_tested, reviewed)
+- Outcome: Success
+- Next: task-035 (ch06 diagrams_complete)
 
 ### 2026-01-27 20:00 - COMPLETED task-030: ch05 final - WARMUP ITERATION - FIFTH CHAPTER COMPLETE!
 - What: Completed final quality gate for Chapter 5 (The 12-Factor Agent)
