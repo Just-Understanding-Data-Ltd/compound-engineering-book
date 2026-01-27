@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T06:00:00Z",
+  "lastUpdated": "2026-01-28T17:00:00Z",
   "structureNote": "Updated to 15-chapter structure. Old chapter numbers in prds section preserved for reference. New chapters added with descriptive filenames. See toc.md for canonical ordering.",
   "prds": {
     "index": {
@@ -519,7 +519,7 @@
   },
   "tasks": {
     "kbArticlesToCreate": [
-      {"id": "kb-01", "title": "ci-cd-agent-patterns.md", "description": "GitHub Actions patterns for agent verification", "status": "pending"},
+      {"id": "kb-01", "title": "ci-cd-agent-patterns.md", "description": "GitHub Actions patterns for agent verification", "status": "complete"},
       {"id": "kb-02", "title": "mutual-information-context.md", "description": "Measuring context effectiveness", "status": "pending"},
       {"id": "kb-03", "title": "token-budgeting-strategies.md", "description": "Allocating context by information density", "status": "pending"},
       {"id": "kb-04", "title": "lost-in-the-middle-mitigation.md", "description": "Preventing context window degradation", "status": "pending"},
