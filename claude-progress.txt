@@ -1,25 +1,35 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 08:00)
-- Phase: Chapter Writing COMPLETE - Phase 1.5 KB Coverage COMPLETE - Moving to Phase 3 (Diagrams)
-- Active: KB coverage task complete
-- Last Completed: All 102 KB articles now have PRD references (96% coverage)
+## Current Status (Updated: 2026-01-28 09:00)
+- Phase: Creating New KB Articles (Critical Gaps)
+- Active: sub-agent-context-hierarchy.md complete
+- Last Completed: Created @kb/sub-agent-context-hierarchy.md
 - Blockers: None
 
 ## Project State Summary
 - PRDs: 15/15 complete (4 new chapters added: ch03, ch08, ch12, ch15)
 - PRDs Enhanced: 15/15 with KB references (Phase 1.5 COMPLETE)
 - KB Article Index: Updated at prds/kb-article-index.md (98 referenced + 32 to create)
-- KB Coverage: 98/102 articles referenced (96%), up from 67/93 (72%)
+- KB Coverage: 99/103 articles referenced (96%), up from 98/102
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
+- KB Articles Created: 1/15 new articles (sub-agent-context-hierarchy.md)
 - Diagrams: 0/75 complete (shells created)
 - Total Word Count: 44,262 (target: 53,000-72,000, 61-82% complete)
 - Quality Issues: 291 total (51 slop, 23 tech, 52 term, 18 xref, 147 style)
 
 ## Next Task
-Begin Phase 3: Create diagrams (start with high-priority Ch1-7 diagrams)
+Continue creating new KB articles (next: @kb/tool-access-control.md)
 
 ## Recent Activity
+
+### 2026-01-28 09:00 - Created @kb/sub-agent-context-hierarchy.md
+- What: Created new KB article covering sub-agent context isolation patterns
+- Files: ~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/sub-agent-context-hierarchy.md
+- Word Count: ~1,200 words
+- Content: Three-layer context hierarchy (Root/Agent/Package), context loading strategy, implementation patterns (explicit injection, directory-based, role-based registry), context boundaries (what to share vs isolate), benefits (focused attention, reduced tokens, clear responsibilities), common pitfalls, measuring success
+- Key Concepts: Orchestrator sees all context, specialized agents see only their domain, 95% relevance vs 25% without isolation, 80% token savings
+- Outcome: Success
+- Next: Create @kb/tool-access-control.md
 
 ### 2026-01-28 08:00 - KB Article Coverage Complete (Phase 1.5 DONE)
 - What: Mapped all 31 previously unreferenced KB articles to appropriate chapters

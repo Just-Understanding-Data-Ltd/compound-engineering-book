@@ -54,7 +54,7 @@
 - [x] Ensure all 93 KB articles have at least one PRD reference (Completed: 2026-01-28)
 
 ### New KB Articles Needed (Critical Gaps) - TO BE CREATED
-- [ ] Create @kb/sub-agent-context-hierarchy.md (how sub-agents manage context isolation)
+- [x] Create @kb/sub-agent-context-hierarchy.md (how sub-agents manage context isolation) (Completed: 2026-01-28)
 - [ ] Create @kb/tool-access-control.md (granting/restricting tool access to sub-agents)
 - [ ] Create @kb/orchestration-patterns.md (coordinator, swarm, pipeline patterns)
 - [ ] Create @kb/actor-critic-pattern.md (writer agent + reviewer agent pattern)
