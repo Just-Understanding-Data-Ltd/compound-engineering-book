@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T01:15:00Z",
+  "lastUpdated": "2026-01-28T02:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -716,8 +716,10 @@
           "parentId": "task-049",
           "type": "milestone",
           "title": "diagrams complete",
-          "status": "pending",
-          "score": -110
+          "status": "complete",
+          "completedAt": "2026-01-28T02:00:00Z",
+          "score": -110,
+          "note": "Created 6 new diagrams: information-theory-pipeline, entropy-reduction, debugging-hierarchy, context-rot, run-silent, recursive-compacting. Combined with existing context-window diagram, 7 total diagrams covering all PRD requirements."
         },
         {
           "id": "task-054",
@@ -1203,16 +1205,16 @@
     ]
   },
   "stats": {
-    "pending": 55,
+    "pending": 54,
     "inProgress": 0,
-    "complete": 54,
+    "complete": 55,
     "blocked": 0,
     "total": 109
   },
   "checkpoints": {
     "lastGoodCommit": "3fd9e52d1409178a84734d8f9ff7db4bc285558e",
-    "lastSuccessfulTask": "task-052",
-    "lastCheckpoint": "2026-01-28T01:15:00Z",
+    "lastSuccessfulTask": "task-053",
+    "lastCheckpoint": "2026-01-28T02:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0

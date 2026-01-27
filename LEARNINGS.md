@@ -257,3 +257,32 @@ The JWT and CI/CD acronyms appeared because error handling naturally intersects 
 - AI/ML chapters: Check for LLM, GPT, ML, NLP, RAG
 
 ---
+
+### 2026-01-28 - Translating Mathematical Concepts to Visual Diagrams
+
+**Context**: Creating diagrams for Chapter 9 (Context Engineering Deep Dive), which covers information theory concepts like entropy, mutual information, channel capacity, and their application to LLM context windows.
+
+**Observation**: Mathematical concepts require different diagram strategies than process-oriented concepts. The chapter explains entropy with formulas like `H(X) = -∑ P(x) log₂ P(x)`, but readers need visual anchors to connect abstract math to practical application.
+
+The most effective diagram translations:
+1. **Entropy reduction**: Show as a filtering pipeline with concrete numbers (20 bits → 15 → 12 → 5), not as a formula
+2. **Channel capacity**: Show as a meter/gauge with utilization zones (optimal, degraded, overloaded)
+3. **Signal-to-noise degradation**: Show as a progression over time (messages 1-20, 21-50, etc.)
+4. **Hierarchical protocols**: Show as a pyramid with percentages (60%, 25%, 10%, 5%)
+
+Each diagram benefits from including a numerical table that connects the visual to specific values. The before/after comparison format works well for showing impact (e.g., 150 messages → 10 messages after compacting).
+
+**Implication**: When diagramming mathematical or theoretical content, the diagram should provide:
+1. A visual metaphor that makes the concept tangible (pipeline for filtering, pyramid for hierarchy)
+2. Concrete numbers that ground the abstract (32,768 programs, not "many programs")
+3. A summary table that readers can reference back to quickly
+
+The goal is not to replicate the formula but to show what the formula produces in practice.
+
+**Action**: For chapters with mathematical foundations, create diagrams that:
+1. Replace formulas with visual pipelines showing transformation
+2. Include before/after comparisons with specific metrics
+3. Add summary tables with concrete numbers
+4. Use color coding to indicate good/bad zones (green for optimal, red for problematic)
+
+---
