@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 03:30)
+## Current Status (Updated: 2026-01-28 04:00)
 - Phase: Chapter Milestones
-- Active: task-013 (ch03, in_progress), next: task-017 (diagrams_complete)
-- Last Completed: task-016 (ch03 reviewed)
+- Active: task-013 (ch03, in_progress), next: task-018 (final)
+- Last Completed: task-017 (ch03 diagrams_complete)
 - Blockers: None
 
 ## Project State Summary
@@ -11,21 +11,37 @@
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
 - KB Articles Created: 15/15 new articles (100%) - KB CREATION COMPLETE
 - KB Coverage: 100/104 referenced, 15 created (96% coverage)
-- Diagrams: 7/63 complete (11%) - ch01 done (4), ch02 done (3)
+- Diagrams: 9/63 complete (14%) - ch01 done (4), ch02 done (3), ch03 done (2)
 - Code Examples: ch01 complete, ch02 complete, ch03 complete
 - Cross-Refs Fixed: ch01 complete (3 references corrected)
 - Total Word Count: 44,268 (target: 45,000-57,000, 78-98% complete)
 - Quality Issues: 242 total (168 style, 18 tech, 56 terms) - fixed 2 term issues
 - ch01 Milestones: 6/6 COMPLETE - FIRST CHAPTER DONE!
 - ch02 Milestones: 5/5 COMPLETE - SECOND CHAPTER DONE!
-- ch03 Milestones: 3/5 (code_written, code_tested, reviewed)
+- ch03 Milestones: 4/5 (code_written, code_tested, reviewed, diagrams_complete)
 - Chapters Complete: 2/15 (ch01, ch02)
 
 ## Next Task
-task-017 (ch03 diagrams_complete) - score 935
-Next: Create ch03 diagrams (prompt-anatomy, constraint-funnel)
+task-018 (ch03 final) - score 935
+Next: Complete ch03 final quality gate (word count, AI slop, diagrams, exercises, cross-refs)
 
 ## Recent Activity
+
+### 2026-01-28 04:00 - COMPLETED ch03 diagrams_complete (task-017) - ITERATION 9
+- What: Created 2 Mermaid diagrams for Chapter 3 (Prompting Fundamentals)
+- Files created:
+  - assets/diagrams/ch03-prompt-anatomy.md - Enhanced with 4 views (primary, weak vs strong comparison, component details, simple flow)
+  - assets/diagrams/ch03-constraint-funnel.md - New with 4 views (primary funnel, entropy reduction, constraint types, before/after)
+- Diagrams follow multi-view approach per LEARNINGS.md:
+  - Each file has 3-4 alternative views
+  - Usage notes linking to chapter sections
+  - Context from chapter with relevant quotes
+- Tasks updated: task-017, task-122, task-123, task-124 marked complete
+- Stats: pending 173, complete 40
+- ch03 Status: 4/5 milestones complete (only final remaining)
+- Queue Curation: Also performed (iteration 9 % 3 == 0)
+- Outcome: Success
+- Next: task-018 (ch03 final) - complete quality gate checklist
 
 ### 2026-01-28 03:30 - Queue Curation (every 3rd iteration)
 - What: Curated task queue, fixed data inconsistencies, updated stats
