@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T20:00:00.000Z",
+  "lastUpdated": "2026-01-27T22:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -511,8 +511,10 @@
           "parentId": "task-031",
           "type": "milestone",
           "title": "diagrams complete",
-          "status": "pending",
-          "score": -110
+          "status": "complete",
+          "completedAt": "2026-01-27T22:00:00Z",
+          "score": -110,
+          "note": "Created ch06-verification-ladder-stack.md and ch06-verification-sandwich.md with multi-view diagrams"
         },
         {
           "id": "task-036",
@@ -1101,7 +1103,8 @@
       "chapter": "ch06",
       "title": "ch06: High-priority diagrams",
       "description": "Create 2 diagrams for ch06",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-27T22:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -1109,7 +1112,8 @@
           "parentId": "task-132",
           "type": "diagram",
           "title": "verification-ladder-stack",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-27T22:00:00Z",
           "score": -105
         },
         {
@@ -1117,7 +1121,8 @@
           "parentId": "task-132",
           "type": "diagram",
           "title": "verification-sandwich",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-27T22:00:00Z",
           "score": -105
         }
       ],
@@ -2152,7 +2157,7 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 53,
+    "count": 57,
     "lastCompaction": "2026-01-28T00:15:00Z",
     "items": [
       {
@@ -2459,20 +2464,40 @@
         "id": "task-034",
         "title": "ch06 reviewed",
         "completedAt": "2026-01-27T21:30:00Z"
+      },
+      {
+        "id": "task-035",
+        "title": "ch06 diagrams complete",
+        "completedAt": "2026-01-27T22:00:00Z"
+      },
+      {
+        "id": "task-132",
+        "title": "ch06: High-priority diagrams",
+        "completedAt": "2026-01-27T22:00:00Z"
+      },
+      {
+        "id": "task-133",
+        "title": "verification-ladder-stack diagram",
+        "completedAt": "2026-01-27T22:00:00Z"
+      },
+      {
+        "id": "task-134",
+        "title": "verification-sandwich diagram",
+        "completedAt": "2026-01-27T22:00:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 149,
+    "pending": 145,
     "inProgress": 0,
-    "complete": 65,
+    "complete": 69,
     "blocked": 0,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "1ea976b713b422f2d5cd6818fa039c4b946c7895",
-    "lastSuccessfulTask": "task-034",
-    "lastCheckpoint": "2026-01-27T21:30:00Z",
+    "lastGoodCommit": "19d55634542da13aee59bb7d93a11fed7917bb78",
+    "lastSuccessfulTask": "task-035",
+    "lastCheckpoint": "2026-01-27T22:00:00Z",
     "failedAttempts": 11,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,

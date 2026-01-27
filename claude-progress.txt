@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 21:30)
+## Current Status (Updated: 2026-01-27 22:00)
 - Phase: Chapter Milestones (5 of 15 complete, 33%)
-- Active: ch06 milestones (task-035 diagrams next)
-- Last Completed: task-034 (ch06 reviewed) - WARMUP ITERATION
+- Active: ch06 milestones (task-036 final next)
+- Last Completed: task-035 (ch06 diagrams_complete) - ITERATION 2
 - Blockers: None active
 
 ## Project State Summary
@@ -11,22 +11,40 @@
 - Chapter Drafts: 15/15 complete (100%)
 - Chapters Complete: 5/15 (ch01-ch05, 33%)
 - KB Articles: 14/15 complete (93%)
-- Diagrams: 14/~63 created (22%)
+- Diagrams: 16/~63 created (25%)
 - Code Examples: 5 chapters tested (33%)
 - Word Count: 44,313 (target 45,000-57,000, 76-98% complete)
 - Quality Issues: 286 tracked (AI slop 55, tech 23, terms 58, cross-refs 3, style 147)
-- Tasks Complete: 65/214 (30%)
+- Tasks Complete: 69/214 (32%)
 
 ## Critical Blockers
 1. ch02 CLI Syntax: 8 invalid commands (claude ask, chat, init don't exist)
    Note: task-209 (SDK Refactor) RESOLVED this iteration
 
 ## Next Task Priority
-1. task-035 (ch06 diagrams_complete) - Next ch06 milestone
-2. task-036 (ch06 final) - Complete quality gate
-3. task-037 (ch07: Quality Gates That Compound, score 915) - After ch06
+1. task-036 (ch06 final) - Complete quality gate
+2. task-037 (ch07: Quality Gates That Compound, score 915) - After ch06
+3. task-038 (ch07 code_written) - First milestone for ch07
 
 ## Recent Activity
+
+### 2026-01-27 22:00 - COMPLETED task-035: ch06 diagrams_complete - ITERATION 2
+- What: Created multi-view diagrams for Chapter 6 (The Verification Ladder)
+- Files Created:
+  - assets/diagrams/ch06-verification-ladder-stack.md - Six levels of verification with multiple views
+  - assets/diagrams/ch06-verification-sandwich.md - Pre/post verification pattern
+- Files Removed:
+  - assets/diagrams/ch06-verification-ladder.md - Outdated diagram that didn't match chapter content
+- Diagram Patterns Applied:
+  - Multi-view approach (primary + 4-5 alternative views per diagram)
+  - Mermaid flowcharts, xycharts, pie charts, sequence diagrams
+  - Decision tables for quick reference
+  - Context from chapter with specific line references
+- Tasks Completed: task-035, task-132, task-133, task-134
+- Stats: pending 145, complete 69, total 214
+- ch06 Status: 4/5 milestones complete (code_written, code_tested, reviewed, diagrams_complete)
+- Outcome: Success
+- Next: task-036 (ch06 final) - complete quality gate
 
 ### 2026-01-27 21:30 - COMPLETED task-034: ch06 reviewed - WARMUP ITERATION
 - What: Reviewed Chapter 6 (The Verification Ladder) for quality
