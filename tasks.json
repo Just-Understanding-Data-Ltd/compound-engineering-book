@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T23:00:00.000Z",
+  "lastUpdated": "2026-01-27T23:30:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -224,7 +224,8 @@
       "chapter": "ch02",
       "title": "ch02: Getting Started with Claude Code",
       "description": "Complete remaining milestones for Getting Started with Claude Code",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-27T23:30:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -271,8 +272,10 @@
           "parentId": "task-007",
           "type": "milestone",
           "title": "final",
-          "status": "pending",
-          "score": -115
+          "status": "complete",
+          "completedAt": "2026-01-27T23:30:00Z",
+          "score": -115,
+          "note": "All quality gates passed: 2,623 words (in range), no em dashes, no AI slop, 3 diagrams, 3 exercises, cross-refs present"
         }
       ],
       "score": 940
@@ -2087,16 +2090,16 @@
     "items": []
   },
   "stats": {
-    "pending": 182,
+    "pending": 180,
     "inProgress": 0,
-    "complete": 31,
+    "complete": 33,
     "blocked": 0,
     "total": 213
   },
   "checkpoints": {
-    "lastGoodCommit": "fc110c849661d3f0e8eac01ef64fb385ac203fff",
-    "lastSuccessfulTask": "iteration-4",
-    "lastCheckpoint": "2026-01-27T23:00:00Z",
+    "lastGoodCommit": "8b76ed9011d3bc78e3370ed421275375831ddb83",
+    "lastSuccessfulTask": "iteration-5",
+    "lastCheckpoint": "2026-01-27T23:30:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false

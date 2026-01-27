@@ -140,3 +140,32 @@ The structure `tasks.kbArticlesToCreate[].status` makes it trivial to find the n
 **Action**: Continue using features.json for all task tracking. If task lists grow too long (>50 items), implement compaction by moving completed tasks to a summary field.
 
 ---
+
+### 2026-01-27 - Final Quality Gates as Programmatic Verification
+
+**Context**: Completing the "final" milestone for ch02 (iteration 5), which required verifying all quality gates before marking the chapter complete.
+
+**Observation**: The final quality gate is a compound verification step that confirms all prior milestones were done correctly. Each check is independently verifiable:
+- Word count: `wc -w chapter.md` (target: 2,500-4,000)
+- Em dashes: `grep "—" chapter.md` (expect: no matches)
+- AI slop: `grep -E "delve|crucial|pivotal" chapter.md` (expect: no matches)
+- Diagrams: `glob assets/diagrams/chXX-*.md` (expect: matches PRD count)
+- Exercises: Count in-chapter exercises + verify exercises/chXX folder exists
+- Cross-refs: Verify "Related chapters" section exists at end
+
+The key insight: these checks are deterministic and scriptable. A chapter either passes all gates or it does not. There is no judgment call. This makes the "final" milestone reliable and reproducible.
+
+**Implication**: Quality gates should be designed for automated verification whenever possible. Human judgment is required for content quality (does this sentence make sense?), but structural requirements (word count, missing sections, undefined terms) can be checked programmatically. This separation allows agents to handle mechanical verification while humans focus on content quality.
+
+**Action**: Consider creating a `scripts/quality-gate.sh` script that runs all programmatic checks for a chapter:
+1. Word count within range
+2. No em dashes
+3. No blacklisted AI phrases
+4. Required diagrams exist
+5. Required exercises exist
+6. Cross-reference section exists
+7. All code examples compile
+
+This would reduce the final milestone to "run script, verify output, mark complete."
+
+---
