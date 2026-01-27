@@ -22,19 +22,23 @@ const client = new Anthropic();
 // Event Types - The complete vocabulary of things that can happen
 // ============================================================================
 
-export type Event =
-  | { type: 'user_input'; content: string; timestamp: number }
-  | { type: 'tool_call'; toolName: string; parameters: Record<string, unknown>; timestamp: number }
-  | { type: 'tool_result'; toolName: string; result: unknown; success: boolean; timestamp: number }
-  | { type: 'llm_response'; content: string; timestamp: number }
-  | { type: 'error'; message: string; code?: string; timestamp: number }
-  | { type: 'approval_requested'; action: string; context: string; id: string; timestamp: number }
-  | { type: 'approval_granted'; requestId: string; approver: string; timestamp: number }
-  | { type: 'approval_denied'; requestId: string; reason: string; timestamp: number }
-  | { type: 'human_feedback'; content: string; timestamp: number }
-  | { type: 'status_change'; from: AgentStatus; to: AgentStatus; timestamp: number };
-
 export type AgentStatus = 'idle' | 'running' | 'paused' | 'completed' | 'failed';
+
+// Base event type without timestamp (for creation)
+export type EventBase =
+  | { type: 'user_input'; content: string }
+  | { type: 'tool_call'; toolName: string; parameters: Record<string, unknown> }
+  | { type: 'tool_result'; toolName: string; result: unknown; success: boolean }
+  | { type: 'llm_response'; content: string }
+  | { type: 'error'; message: string; code?: string }
+  | { type: 'approval_requested'; action: string; context: string; id: string }
+  | { type: 'approval_granted'; requestId: string; approver: string }
+  | { type: 'approval_denied'; requestId: string; reason: string }
+  | { type: 'human_feedback'; content: string }
+  | { type: 'status_change'; from: AgentStatus; to: AgentStatus };
+
+// Full event type with timestamp (stored in thread)
+export type Event = EventBase & { timestamp: number };
 
 // ============================================================================
 // Agent State - Derived entirely from events
@@ -218,8 +222,8 @@ export function getStateAfterNEvents(thread: AgentThread, n: number): AgentState
 // Event Helpers
 // ============================================================================
 
-export function addEvent(thread: AgentThread, event: Omit<Event, 'timestamp'>): Event {
-  const fullEvent = { ...event, timestamp: Date.now() } as Event;
+export function addEvent(thread: AgentThread, event: EventBase): Event {
+  const fullEvent: Event = { ...event, timestamp: Date.now() };
   thread.events.push(fullEvent);
   return fullEvent;
 }
