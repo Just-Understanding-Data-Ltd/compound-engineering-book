@@ -32,3 +32,6 @@ ralph-output.log
 
 # Exercise cache (hash-based execution cache)
 .exercise-cache.json
+.exercise-validation-tmp/
+.code-validation-cache.json
+.code-validation-tmp/

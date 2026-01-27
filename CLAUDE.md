@@ -147,6 +147,48 @@ import { unstable_v2_resumeSession } from '@anthropic-ai/claude-agent-sdk'
 await using session = unstable_v2_resumeSession(sessionId, { model: 'claude-sonnet-4-5-20250929' })
 ```
 
+### Exercise Validator (Unified Code Testing Tool)
+
+The Exercise Validator (`infra/scripts/exercise-validator.ts`) provides hash-based caching for all code execution. Use it to:
+
+1. **Run individual scripts** (exercises, examples):
+   ```bash
+   bun infra/scripts/exercise-validator.ts run examples/ch04/agent.ts
+   bun infra/scripts/exercise-validator.ts run --force examples/ch04/agent.ts  # Force re-run
+   ```
+
+2. **Validate markdown code blocks** (end-to-end book testing):
+   ```bash
+   bun infra/scripts/exercise-validator.ts validate chapters/ch04.md -v
+   bun infra/scripts/exercise-validator.ts validate --all -v  # All chapters
+   bun infra/scripts/exercise-validator.ts validate --check chapters/ch04.md  # Check only, no execution
+   ```
+
+3. **Manage cache**:
+   ```bash
+   bun infra/scripts/exercise-validator.ts cache --stats   # View statistics
+   bun infra/scripts/exercise-validator.ts cache --clear   # Clear cache
+   bun infra/scripts/exercise-validator.ts cache --status examples/ch04/agent.ts
+   ```
+
+**How it works:**
+- Computes SHA256 hash of script/code block content
+- Skips execution if hash matches cached entry
+- Stores results in `.exercise-cache.json`
+- Supports timeout (30s default) for runaway scripts
+- Validates bash, typescript, and javascript code blocks
+
+**Skip markers** (add to code blocks to skip validation):
+- `# skip-validation`
+- `// skip-validation`
+- `<!-- skip-validation -->`
+
+**Use in RALPH loop:**
+After writing code examples, validate them:
+```bash
+bun infra/scripts/exercise-validator.ts validate chapters/ch04.md -v
+```
+
 ### How to Update features.json
 
 When completing a milestone:

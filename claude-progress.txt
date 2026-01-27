@@ -1,23 +1,32 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 18:00)
+## Current Status (Updated: 2026-01-27 19:00)
 - Phase: Chapter Writing
-- Active: Chapter 4 next (Writing Your First CLAUDE.md)
-- Last Completed: Chapter 3 first draft (2,568 words)
+- Active: Chapter 5 next (The 12-Factor Agent)
+- Last Completed: Chapter 4 first draft (2,766 words)
 - Blockers: None
 
 ## Project State Summary
 - PRDs: 15/15 complete (4 new chapters added: ch03, ch08, ch12, ch15)
 - PRDs Enhanced: 15/15 with KB references (Phase 1.5 COMPLETE)
 - KB Articles Identified to Create: 15+ new articles (marked "TO BE CREATED")
-- Chapter Drafts: 3/15 complete
+- Chapter Drafts: 4/15 complete
 - Diagrams: 13 files with 20+ Mermaid diagrams (shells created)
-- Total Word Count: 7,729 (target: 53,000-72,000)
+- Total Word Count: 10,495 (target: 53,000-72,000)
 
 ## Next Task
-Write Chapter 4 first draft (Writing Your First CLAUDE.md)
+Write Chapter 5 first draft (The 12-Factor Agent)
 
 ## Recent Activity
+
+### 2026-01-27 19:00 - Chapter 4 First Draft Complete
+- What: Wrote first draft of ch04-writing-your-first-claude-md.md
+- Files: chapters/ch04-writing-your-first-claude-md.md (created)
+- Word Count: 2,766 (target: 2,500-3,500)
+- Content: Context problem, stateless LLMs, WHY-WHAT-HOW framework, effective CLAUDE.md anatomy, hierarchical structure, common mistakes, multi-tool strategy, metrics
+- KB Sources: writing-a-good-claude-md.md, hierarchical-rule-files-collocation.md, hierarchical-context-patterns.md
+- Outcome: Success
+- Next: Chapter 5 (The 12-Factor Agent)
 
 ### 2026-01-27 18:00 - Chapter 3 First Draft Complete
 - What: Wrote first draft of ch03-prompting-fundamentals.md
