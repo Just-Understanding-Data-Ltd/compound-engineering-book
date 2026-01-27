@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 00:15)
+## Current Status (Updated: 2026-01-28 01:00)
 - Phase: Chapter Milestones
-- Active: task-014 (ch03 code_written) - next chapter milestone
-- Last Completed: Queue curation
+- Active: task-015 (ch03 code_tested) - next milestone
+- Last Completed: task-014 (ch03 code_written)
 - Blockers: None
 
 ## Project State Summary
@@ -12,19 +12,38 @@
 - KB Articles Created: 15/15 new articles (100%) - KB CREATION COMPLETE
 - KB Coverage: 100/104 referenced, 15 created (96% coverage)
 - Diagrams: 7/63 complete (11%) - ch01 done (4), ch02 done (3)
-- Code Examples: ch01 complete, ch02 complete (code_written + code_tested)
+- Code Examples: ch01 complete, ch02 complete, ch03 code_written
 - Cross-Refs Fixed: ch01 complete (3 references corrected)
 - Total Word Count: 44,268 (target: 45,000-57,000, 78-98% complete)
 - Quality Issues: 244 total (168 style, 18 tech, 58 terms)
 - ch01 Milestones: 6/6 COMPLETE - FIRST CHAPTER DONE!
 - ch02 Milestones: 5/5 COMPLETE - SECOND CHAPTER DONE!
+- ch03 Milestones: 1/5 (code_written)
 - Chapters Complete: 2/15 (ch01, ch02)
 
 ## Next Task
-task-014 (ch03 code_written) - score 935
-Next chapter: ch03 Prompting Fundamentals
+task-015 (ch03 code_tested) - score 935
+Next: Verify ch03 code examples run correctly
 
 ## Recent Activity
+
+### 2026-01-28 01:00 - COMPLETED ch03 code_written (task-014) - ITERATION 6
+- What: Created TypeScript code examples for Chapter 3 (Prompting Fundamentals)
+- Files created:
+  - examples/ch03/prompt-patterns.ts - Chain-of-thought and constraint-based prompting
+  - examples/ch03/few-shot-builder.ts - Few-shot prompt builder with quality evaluation
+  - examples/ch03/prompting.test.ts - 45 test cases for all modules
+- Concepts demonstrated:
+  - Chain-of-thought prompting (section 3.2)
+  - Constraint-based prompting with entropy reduction (section 3.3)
+  - Few-shot example selection and quality evaluation (section 3.4)
+  - Prompt quality analysis and anti-pattern detection (section 3.6)
+- Tests: 45 tests pass (75 expect() calls)
+- TypeScript: All files compile with tsc --noEmit
+- Tasks: task-014 marked complete, stats updated (177 pending, 34 complete)
+- ch03 Status: 1/5 milestones complete
+- Outcome: Success
+- Next: task-015 (ch03 code_tested) - run exercise validator
 
 ### 2026-01-28 00:15 - Queue Curation
 - What: Curated task queue, compacted 33 completed tasks, updated stats

@@ -294,8 +294,10 @@
           "parentId": "task-013",
           "type": "milestone",
           "title": "code written",
-          "status": "pending",
-          "score": -95
+          "status": "complete",
+          "completedAt": "2026-01-28T01:00:00Z",
+          "score": -95,
+          "note": "Created prompt-patterns.ts and few-shot-builder.ts with 45 tests passing"
         },
         {
           "id": "task-015",
@@ -2121,13 +2123,14 @@
       {"id": "task-119", "title": "agent-vs-chat", "completedAt": "2026-01-27T13:00:00Z"},
       {"id": "task-120", "title": "tool-ecosystem-radial", "completedAt": "2026-01-27T14:00:00Z"},
       {"id": "task-121", "title": "two-mode-mental-model", "completedAt": "2026-01-27T15:00:00Z"},
-      {"id": "task-206", "title": "Create exercises folder structure", "completedAt": "2026-01-27T20:43:00Z"}
+      {"id": "task-206", "title": "Create exercises folder structure", "completedAt": "2026-01-27T20:43:00Z"},
+      {"id": "task-014", "title": "ch03 code written", "completedAt": "2026-01-28T01:00:00Z"}
     ]
   },
   "stats": {
-    "pending": 178,
+    "pending": 177,
     "inProgress": 0,
-    "complete": 33,
+    "complete": 34,
     "blocked": 0,
     "total": 211,
     "lastCurated": "2026-01-28T00:15:00Z",
@@ -2144,8 +2147,8 @@
   },
   "checkpoints": {
     "lastGoodCommit": "eec8c1775c6a39768b42b1fa92f03d12736c17a7",
-    "lastSuccessfulTask": "queue-curation",
-    "lastCheckpoint": "2026-01-28T00:15:00Z",
+    "lastSuccessfulTask": "task-014",
+    "lastCheckpoint": "2026-01-28T01:00:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
