@@ -380,7 +380,9 @@ describe('Multi-Step Agent', () => {
       const table = reliabilityTable();
 
       expect(table.length).toBeGreaterThan(5);
-      expect(table[0].steps).toBe(1);
+      const firstRow = table[0];
+      expect(firstRow).toBeDefined();
+      expect(firstRow!.steps).toBe(1);
       expect(table.map(r => r.steps)).toContain(10);
       expect(table.map(r => r.steps)).toContain(30);
     });

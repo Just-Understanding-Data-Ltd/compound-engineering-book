@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 11:00)
+## Current Status (Updated: 2026-01-28 17:30)
 - Phase: Chapter Milestones (4 of 15 complete, 27%)
-- Active: task-209 (SDK refactor) or task-025 (ch05 code)
-- Last Completed: task-024 (ch04 final) - ITERATION 5
+- Active: task-028 (ch05 reviewed)
+- Last Completed: task-027 (ch05 code_tested) - ITERATION 6
 - Blockers: task-209 (SDK refactoring), ch02 CLI syntax errors
 
 ## Project State Summary
@@ -12,22 +12,44 @@
 - Chapters Complete: 4/15 (ch01-ch04, 27%)
 - KB Articles: 14/15 complete (93%)
 - Diagrams: 11/~63 created (17%)
-- Code Examples: 4 chapters tested (27%)
+- Code Examples: 5 chapters tested (33%) - ch05 added
 - Word Count: 44,313 (target 45,000-57,000, 76-98% complete)
 - Quality Issues: 286 tracked (AI slop 55, tech 23, terms 58, cross-refs 3, style 147)
-- Tasks Complete: 51/214 (24%)
+- Tasks Complete: 53/214 (25%) - +2 this iteration
 
 ## Critical Blockers
 1. task-209 (SDK Refactor): ch03 code examples must use Anthropic SDK (not standalone utilities)
 2. ch02 CLI Syntax: 8 invalid commands (claude ask, chat, init don't exist)
 
 ## Next Task Priority
-1. task-209 (SDK refactoring, score 1080 CRITICAL) - HIGHEST PRIORITY
-2. task-025 (ch05 code_written, score 925) - After SDK fix
+1. task-028 (ch05 reviewed, score TBD) - Next milestone
+2. task-209 (SDK refactoring, score 1080 CRITICAL) - Still needed
 3. task-214 (Related Chapters format, score 185) - Quick style fix
-4. task-208 (Plan vs Execute docs, score 355) - Content for ch12
+4. task-031 (ch06 milestones, score 920) - After ch05 complete
 
 ## Recent Activity
+
+### 2026-01-28 17:30 - COMPLETED ch05 code_written + code_tested (task-026, task-027) - ITERATION 6
+- What: Created and tested code examples for Chapter 5 (The 12-Factor Agent)
+- Files Created:
+  - examples/ch05/event-sourced-thread.ts - Factor 5 & 12 (unified state, stateless reducer)
+  - examples/ch05/approval-gate-workflow.ts - Factors 6, 7, 8 (pause/resume, human tools, control flow)
+  - examples/ch05/multi-step-agent.ts - Factor 10 (focused agents, reliability calculation)
+  - examples/ch05/twelve-factor.test.ts - 39 tests, all passing
+- Patterns Demonstrated:
+  - Event sourcing with replay capability and time-travel debugging
+  - Tool classification (immediate, requires_approval, terminal, error)
+  - Human approval gates with pause/resume workflow
+  - Reliability calculation (0.95^N formula)
+  - Focused agent orchestration for email campaigns
+- Also Completed (iteration 6 % 6 == 0):
+  - Ran all 7 review agents in parallel (slop, diagrams, tech, terms, oreilly, cross-refs, summary)
+  - Created review files: reviews/*-iteration-6.md
+- Also Completed (iteration 6 % 3 == 0):
+  - Queue curation: verified task priorities, updated stats
+- Tests: 39 pass, 0 fail, 79 expect() calls
+- Outcome: Success - ch05 code examples complete and tested
+- Next: task-028 (ch05 reviewed milestone)
 
 ### 2026-01-28 11:00 - GENERATED comprehensive progress summary (ITERATION 6)
 - What: Created detailed progress-summarizer report (reviews/summary-2026-01-28-iteration-6.md)

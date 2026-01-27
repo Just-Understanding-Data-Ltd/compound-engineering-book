@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T17:22:58.901Z",
+  "lastUpdated": "2026-01-27T17:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -420,16 +420,18 @@
           "parentId": "task-025",
           "type": "milestone",
           "title": "code written",
-          "status": "pending",
-          "score": -95
+          "status": "complete",
+          "score": -95,
+          "completedAt": "2026-01-27T17:30:00Z"
         },
         {
           "id": "task-027",
           "parentId": "task-025",
           "type": "milestone",
           "title": "code tested",
-          "status": "pending",
-          "score": -100
+          "status": "complete",
+          "score": -100,
+          "completedAt": "2026-01-27T17:30:00Z"
         },
         {
           "id": "task-028",
@@ -2389,9 +2391,9 @@
     ]
   },
   "stats": {
-    "pending": 163,
+    "pending": 161,
     "inProgress": 0,
-    "complete": 51,
+    "complete": 53,
     "blocked": 0,
     "total": 214
   },
