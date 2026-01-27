@@ -90,7 +90,7 @@
 
 ## Phase 3: Diagrams
 
-> See `reviews/diagrams-2026-01-27.md` for full diagram review with draft Mermaid code
+> See `reviews/diagrams-2026-01-28.md` for full diagram review with draft Mermaid code (updated with ch14-ch15)
 
 ### High Priority (Chapters 1-7)
 
@@ -177,9 +177,25 @@
 - [ ] Create linear-vs-exponential comparison (Ch 13)
 - [ ] Create mcp-query-flow diagram (Ch 13)
 
-### Future Chapters (Pending First Drafts)
-- [ ] Create six waves timeline diagram (Ch 14 - pending)
-- [ ] Create model selection decision tree (Ch 15 - pending)
+### High Priority (Chapters 14-15) - First Drafts Complete
+
+**Chapter 14: The Meta-Engineer Playbook**
+- [ ] Create skill-atrophy-ladder diagram (5 levels, career implications)
+- [ ] Create six-waves-timeline diagram (Wave 1-6 progression)
+- [ ] Create four-automation-levels diagram (0-3, productivity multipliers)
+- [ ] Create fleet-model-evolution diagram (Human → Agent → Code progression)
+
+**Chapter 15: Model Strategy and Cost Optimization**
+- [ ] Create three-tier-model-hierarchy diagram (Haiku/Sonnet/Opus)
+- [ ] Create progressive-model-escalation flowchart (with quality gates)
+- [ ] Create multi-layer-timeout-protection diagram (4 defense layers)
+
+### Medium Priority (Chapters 14-15)
+- [ ] Create leverage-stack diagram (Ch 14)
+- [ ] Create roi-calculation-flow diagram (Ch 14)
+- [ ] Create yolo-safety-hierarchy diagram (Ch 15)
+- [ ] Create model-selection-decision-tree (Ch 15)
+- [ ] Create prompt-caching-structure diagram (Ch 15)
 
 ## Phase 4: Appendices
 
