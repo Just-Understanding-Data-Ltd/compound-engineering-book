@@ -1,10 +1,10 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 18:00)
+## Current Status (Updated: 2026-01-27 19:00)
 - Phase: Chapter Milestones (4 of 15 complete, 27%)
-- Active: task-028 (ch05 reviewed)
-- Last Completed: task-209 (SDK refactor) - WARMUP ITERATION
-- Blockers: ch02 CLI syntax errors (8 invalid commands)
+- Active: ch05 milestones (task-029 diagrams_complete next)
+- Last Completed: task-028 (ch05 reviewed) - ITERATION 2
+- Blockers: None active
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
@@ -15,18 +15,35 @@
 - Code Examples: 5 chapters tested (33%) - ch05 added
 - Word Count: 44,313 (target 45,000-57,000, 76-98% complete)
 - Quality Issues: 286 tracked (AI slop 55, tech 23, terms 58, cross-refs 3, style 147)
-- Tasks Complete: 54/214 (25%) - +1 this iteration
+- Tasks Complete: 55/214 (26%) - +1 this iteration
 
 ## Critical Blockers
 1. ch02 CLI Syntax: 8 invalid commands (claude ask, chat, init don't exist)
    Note: task-209 (SDK Refactor) RESOLVED this iteration
 
 ## Next Task Priority
-1. task-028 (ch05 reviewed, score TBD) - Next milestone
-2. task-214 (Related Chapters format, score 185) - Quick style fix
+1. task-029 (ch05 diagrams_complete) - Next milestone
+2. task-030 (ch05 final) - Complete ch05
 3. task-031 (ch06 milestones, score 920) - After ch05 complete
 
 ## Recent Activity
+
+### 2026-01-27 19:00 - COMPLETED task-028: ch05 reviewed - ITERATION 2
+- What: Reviewed Chapter 5 (The 12-Factor Agent) for quality
+- Review Results:
+  - AI slop check: PASS (no em dashes, no blacklisted phrases)
+  - Technical accuracy: PASS (39 tests pass)
+  - Term introduction: 3 issues fixed
+- Fixes Applied:
+  - Line 365: Added "Directed Acyclic Graph (DAG)" definition
+  - Line 391: Added "Machine Learning (ML)" definition
+  - Line 498: Added "Return on Investment (ROI)" definition
+  - Added Related Chapters section at end of chapter
+- Tasks: task-028 marked complete
+- Stats: pending 159, complete 55
+- ch05 Status: 3/5 milestones complete (code_written, code_tested, reviewed)
+- Outcome: Success
+- Next: task-029 (ch05 diagrams_complete)
 
 ### 2026-01-27 18:00 - COMPLETED task-209: SDK Refactor for ch03 - WARMUP ITERATION
 - What: Refactored ch03 code examples to integrate Anthropic SDK

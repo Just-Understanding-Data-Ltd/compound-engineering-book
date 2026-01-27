@@ -362,7 +362,7 @@ const megaAgent = new Agent({
   capabilities: ["deploy", "test", "monitor", "rollback", "notify", "audit"]
 });
 
-// Good: Focused agents composed in a DAG
+// Good: Focused agents composed in a Directed Acyclic Graph (DAG)
 const deployAgent = new Agent({
   capabilities: ["deploy_staging", "deploy_prod"]
 });
@@ -388,7 +388,7 @@ async function deploymentWorkflow(pr: PullRequest) {
 }
 ```
 
-The historical progression makes this clear: programs became DAGs, DAGs got orchestrators, orchestrators embedded ML, and now agents serve as micro-optimized decision points within deterministic workflows.
+The historical progression makes this clear: programs became DAGs, DAGs got orchestrators, orchestrators embedded Machine Learning (ML), and now agents serve as micro-optimized decision points within deterministic workflows.
 
 #### Factor 11: Trigger from Anywhere
 
@@ -495,7 +495,7 @@ Deliverable: A scalable system handling multiple workflows from multiple entry p
 
 ### Quick Wins
 
-These investments show the highest ROI earliest:
+These investments show the highest Return on Investment (ROI) earliest:
 
 1. **Factor 1 + Tool validation**: 10% effort, 40% reliability improvement
 2. **Factor 8 + Approval routing**: 20% effort, 50% reliability improvement
@@ -568,3 +568,11 @@ The 12 factors provide a systematic approach to closing this chasm. Foundation f
 Implement incrementally: foundation first, then reliability, then scale. The quick wins come from tool validation, approval routing, and scope reduction.
 
 Production agents are not smarter than demo agents. They are more carefully architected. The difference between a demo that impresses and a system that delivers value lies in these 12 principles applied consistently.
+
+---
+
+*Related chapters:*
+- **[Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md)** for context engineering fundamentals that support Factor 3
+- **[Chapter 6: The Verification Ladder](ch06-the-verification-ladder.md)** for building on the verification concepts in Factors 6-9
+- **[Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md)** for long-running agent patterns that apply the 12 factors
+- **[Chapter 11: Sub-Agent Architecture](ch11-sub-agent-architecture.md)** for expanding on Factor 10's focused agent approach

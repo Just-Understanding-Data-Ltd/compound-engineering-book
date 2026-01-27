@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T18:00:00Z",
+  "lastUpdated": "2026-01-27T19:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -438,8 +438,10 @@
           "parentId": "task-025",
           "type": "milestone",
           "title": "reviewed",
-          "status": "pending",
-          "score": -105
+          "status": "complete",
+          "score": -105,
+          "completedAt": "2026-01-27T19:00:00Z",
+          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed 3 term introductions: DAG (line 365), ML (line 391), ROI (line 498). Added Related Chapters section. Technical accuracy verified (39 tests pass)."
         },
         {
           "id": "task-029",
@@ -2387,20 +2389,25 @@
         "id": "task-019",
         "title": "ch04: Writing Your First CLAUDE.md",
         "completedAt": "2026-01-28T10:00:00Z"
+      },
+      {
+        "id": "task-028",
+        "title": "ch05 reviewed",
+        "completedAt": "2026-01-27T19:00:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 160,
+    "pending": 159,
     "inProgress": 0,
-    "complete": 54,
+    "complete": 55,
     "blocked": 0,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "4b2d9c69b4027ddebbd20886b388399154341766",
-    "lastSuccessfulTask": "iteration-5",
-    "lastCheckpoint": "2026-01-27T17:22:58Z",
+    "lastGoodCommit": "2dab4901c66cdd9274d8c5908442b064beb784af",
+    "lastSuccessfulTask": "task-028",
+    "lastCheckpoint": "2026-01-27T19:00:00Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
