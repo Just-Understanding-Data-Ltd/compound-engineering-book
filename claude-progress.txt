@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 22:00)
+## Current Status (Updated: 2026-01-27 22:30)
 - Phase: Chapter Milestones
-- Active: task-009 (ch02 code_tested) - next milestone for ch02
-- Last Completed: Progress summary v5 generated
+- Active: task-010 (ch02 reviewed) - next milestone for ch02
+- Last Completed: task-009 (ch02 code_tested) - iteration 3
 - Blockers: None
 
 ## Project State Summary
@@ -12,19 +12,37 @@
 - KB Articles Created: 15/15 new articles (100%) - KB CREATION COMPLETE
 - KB Coverage: 100/104 referenced, 15 created (96% coverage)
 - Diagrams: 7/63 complete (11%) - ch01 done (4), ch02 done (3)
-- Code Examples: ch01 complete, ch02 code_written complete
+- Code Examples: ch01 complete, ch02 complete (code_written + code_tested)
 - Cross-Refs Fixed: ch01 complete (3 references corrected)
 - Total Word Count: 44,268 (target: 45,000-57,000, 78-98% complete)
 - Quality Issues: 244 total (168 style, 18 tech, 58 terms)
 - ch01 Milestones: 6/6 COMPLETE - FIRST CHAPTER DONE!
-- ch02 Milestones: 2/5 complete (code_written, diagrams_complete)
+- ch02 Milestones: 3/5 complete (code_written, code_tested, diagrams_complete)
 - Chapters Complete: 1/15 (ch01)
 
 ## Next Task
-task-009 (ch02 code_tested) - score 940 (next subtask of task-007)
+task-010 (ch02 reviewed) - score 940 (next subtask of task-007)
 OR task-207 (Add Level 2 thinking content) - score 355
 
 ## Recent Activity
+
+### 2026-01-27 22:30 - COMPLETED ch02 code_tested (task-009) - ITERATION 3
+- What: Tested and verified all ch02 TypeScript code examples
+- Files modified:
+  - examples/ch02/email-validation.ts - Added type exports and isResultError type guard
+  - examples/ch02/validation.test.ts - Fixed TypeScript type narrowing with type guard pattern
+- Tests:
+  - tsc --noEmit: All TypeScript files compile without errors
+  - bun test: 23/23 tests pass (52 expect() calls)
+  - Demo scripts: Both email-validation.ts and csv-reader.ts run correctly
+- Fix Applied:
+  - Exported Result, ValidEmail, ValidationError types
+  - Added isResultError() type guard for proper discriminated union narrowing
+  - Updated tests to use type guard pattern
+- Tasks: task-009 marked complete, stats updated (183 pending, 30 complete)
+- ch02 Status: 3/5 milestones complete
+- Outcome: Success
+- Next: task-010 (ch02 reviewed) or queue curation (iteration % 3 == 0)
 
 ### 2026-01-27 22:00 - Progress Summary v5 Generated
 - What: Created comprehensive progress summary with updated metrics

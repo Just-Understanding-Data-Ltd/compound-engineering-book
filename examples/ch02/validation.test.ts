@@ -18,7 +18,12 @@
  */
 
 import { describe, it, expect } from 'bun:test';
-import { validateEmail, isValidEmail, validateEmails } from './email-validation';
+import {
+  validateEmail,
+  isValidEmail,
+  validateEmails,
+  isResultError
+} from './email-validation';
 
 describe('validateEmail', () => {
   describe('valid emails', () => {
@@ -79,7 +84,7 @@ describe('validateEmail', () => {
       const result = validateEmail('noatexample.com');
 
       expect(result.success).toBe(false);
-      if (!result.success) {
+      if (isResultError(result)) {
         expect(result.error.code).toBe('MISSING_AT');
       }
     });
@@ -88,7 +93,7 @@ describe('validateEmail', () => {
       const result = validateEmail('invalid');
 
       expect(result.success).toBe(false);
-      if (!result.success) {
+      if (isResultError(result)) {
         expect(result.error.code).toBe('MISSING_AT');
       }
     });
@@ -99,7 +104,7 @@ describe('validateEmail', () => {
       const result = validateEmail('');
 
       expect(result.success).toBe(false);
-      if (!result.success) {
+      if (isResultError(result)) {
         expect(result.error.code).toBe('EMPTY');
         expect(result.error.message).toBe('Email address cannot be empty');
       }
@@ -111,7 +116,7 @@ describe('validateEmail', () => {
       const result = validateEmail('has spaces@example.com');
 
       expect(result.success).toBe(false);
-      if (!result.success) {
+      if (isResultError(result)) {
         expect(result.error.code).toBe('WHITESPACE');
       }
     });
@@ -120,7 +125,7 @@ describe('validateEmail', () => {
       const result = validateEmail('has\ttab@example.com');
 
       expect(result.success).toBe(false);
-      if (!result.success) {
+      if (isResultError(result)) {
         expect(result.error.code).toBe('WHITESPACE');
       }
     });
@@ -131,7 +136,7 @@ describe('validateEmail', () => {
       const result = validateEmail('@example.com');
 
       expect(result.success).toBe(false);
-      if (!result.success) {
+      if (isResultError(result)) {
         expect(result.error.code).toBe('INVALID_FORMAT');
       }
     });
@@ -140,7 +145,7 @@ describe('validateEmail', () => {
       const result = validateEmail('user@');
 
       expect(result.success).toBe(false);
-      if (!result.success) {
+      if (isResultError(result)) {
         expect(result.error.code).toBe('INVALID_FORMAT');
       }
     });
@@ -149,7 +154,7 @@ describe('validateEmail', () => {
       const result = validateEmail('user@localhost');
 
       expect(result.success).toBe(false);
-      if (!result.success) {
+      if (isResultError(result)) {
         expect(result.error.code).toBe('INVALID_FORMAT');
         expect(result.error.message).toContain('TLD');
       }
@@ -159,7 +164,7 @@ describe('validateEmail', () => {
       const result = validateEmail('double..dot@example.com');
 
       expect(result.success).toBe(false);
-      if (!result.success) {
+      if (isResultError(result)) {
         expect(result.error.code).toBe('INVALID_FORMAT');
         expect(result.error.message).toContain('consecutive dots');
       }

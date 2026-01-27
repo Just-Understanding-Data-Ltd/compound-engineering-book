@@ -13,15 +13,20 @@
  */
 
 // Result<T, E> pattern - consistent error handling across the codebase
-type Result<T, E> = { success: true; data: T } | { success: false; error: E };
+export type Result<T, E> = { success: true; data: T } | { success: false; error: E };
 
-interface ValidationError {
+// Type guard for error results - helps TypeScript narrow discriminated unions
+export function isResultError<T, E>(result: Result<T, E>): result is { success: false; error: E } {
+  return result.success === false;
+}
+
+export interface ValidationError {
   code: 'EMPTY' | 'MISSING_AT' | 'INVALID_FORMAT' | 'WHITESPACE';
   message: string;
   input: string;
 }
 
-interface ValidEmail {
+export interface ValidEmail {
   local: string;      // Part before @
   domain: string;     // Part after @
   original: string;   // Original input
