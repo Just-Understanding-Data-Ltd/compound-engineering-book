@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T10:00:00Z",
+  "lastUpdated": "2026-01-27T17:22:18.840Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1403,7 +1403,7 @@
       "description": "All code examples must use @anthropic-ai/sdk or @anthropic-ai/claude-agent-sdk. Current ch03 examples (prompt-patterns.ts, few-shot-builder.ts, prompt-analyzer.ts) are standalone utility functions without SDK integration. Refactor to show real API usage patterns. Every example should demonstrate: 1) Importing the SDK, 2) Creating a client/session, 3) Making actual API calls. Delete or rewrite examples that are just helper functions.",
       "status": "pending",
       "priority": "critical",
-      "score": 1080,
+      "score": 685,
       "blocksChapters": [
         "ch03"
       ],
@@ -2396,9 +2396,9 @@
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "101a8a2",
-    "lastSuccessfulTask": "task-024",
-    "lastCheckpoint": "2026-01-28T10:15:00Z",
+    "lastGoodCommit": "7adc3e6f512ff91247a5e5a5f40310e9a6ad74ea",
+    "lastSuccessfulTask": "interrupted-1",
+    "lastCheckpoint": "2026-01-27T17:22:18Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,

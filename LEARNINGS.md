@@ -169,3 +169,34 @@ The key insight: these checks are deterministic and scriptable. A chapter either
 This would reduce the final milestone to "run script, verify output, mark complete."
 
 ---
+
+### 2026-01-28 - Cross-References as Silent Quality Gate Dependencies
+
+**Context**: Completing the ch04 final milestone (iteration 5). All automated checks passed (word count, em dashes, AI slop, diagrams, exercises), but the chapter was missing a "Related Chapters" section at the end.
+
+**Observation**: Cross-reference sections are "silent" dependencies in the quality gate process. Unlike word count or AI slop phrases, they do not trigger errors in automated checks. The absence only becomes apparent during manual review of the chapter ending.
+
+Each completed chapter (ch01, ch02, ch03) ends with a consistent pattern:
+```markdown
+---
+
+*Related chapters:*
+- [Chapter X: Title](filename.md) for [brief description]
+- [Chapter Y: Title](filename.md) for [brief description]
+```
+
+This pattern serves two purposes:
+1. Reader navigation: Points readers to prerequisite and follow-up content
+2. Book cohesion: Creates a web of interconnected chapters rather than isolated documents
+
+When ch04 lacked this section, it technically passed all other gates but would have felt incomplete to readers. The fix was simple (3 lines of markdown), but the oversight could have propagated if not caught.
+
+**Implication**: The quality gate checklist in CLAUDE.md explicitly mentions "Cross-refs: Verify Related chapters section exists at end" but this check is easy to skip when the automated checks all pass. Silent dependencies require explicit verification steps rather than relying on automated detection.
+
+**Action**: When running the "final" milestone, explicitly tail the last 15 lines of the chapter to visually confirm the Related Chapters section exists. Add this to the quality gate script:
+```bash
+# Check for Related Chapters section
+tail -15 chapters/chXX.md | grep -q "Related chapters" || echo "MISSING: Related chapters section"
+```
+
+---
