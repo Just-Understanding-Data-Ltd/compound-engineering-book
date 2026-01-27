@@ -521,7 +521,7 @@
     "kbArticlesToCreate": [
       {"id": "kb-01", "title": "ci-cd-agent-patterns.md", "description": "GitHub Actions patterns for agent verification", "status": "complete"},
       {"id": "kb-02", "title": "mutual-information-context.md", "description": "Measuring context effectiveness", "status": "complete"},
-      {"id": "kb-03", "title": "token-budgeting-strategies.md", "description": "Allocating context by information density", "status": "pending"},
+      {"id": "kb-03", "title": "token-budgeting-strategies.md", "description": "Allocating context by information density", "status": "complete"},
       {"id": "kb-04", "title": "lost-in-the-middle-mitigation.md", "description": "Preventing context window degradation", "status": "pending"},
       {"id": "kb-05", "title": "checkpoint-commit-patterns.md", "description": "Git commit strategies for AI workflows", "status": "pending"},
       {"id": "kb-06", "title": "batch-api-patterns.md", "description": "Batch processing for cost reduction", "status": "pending"},

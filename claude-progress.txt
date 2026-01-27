@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 18:00)
+## Current Status (Updated: 2026-01-28 19:00)
 - Phase: Phase 2 - Creating KB articles and Diagrams
 - Active: KB article creation
-- Last Completed: @kb/mutual-information-context.md
+- Last Completed: @kb/token-budgeting-strategies.md
 - Blockers: None
 
 ## Project State Summary
@@ -12,15 +12,25 @@
 - KB Article Index: Updated at prds/kb-article-index.md (100 referenced + 31 to create)
 - KB Coverage: 100/104 articles referenced (96%)
 - Chapter Drafts: 15/15 complete (100%) - PHASE 2 COMPLETE
-- KB Articles Created: 10/15 new articles (sub-agent-context-hierarchy.md, tool-access-control.md, orchestration-patterns.md, actor-critic-pattern.md, agent-memory-patterns.md, human-in-the-loop-patterns.md, event-sourcing-agents.md, tool-call-validation.md, ci-cd-agent-patterns.md, mutual-information-context.md)
+- KB Articles Created: 11/15 new articles (sub-agent-context-hierarchy.md, tool-access-control.md, orchestration-patterns.md, actor-critic-pattern.md, agent-memory-patterns.md, human-in-the-loop-patterns.md, event-sourcing-agents.md, tool-call-validation.md, ci-cd-agent-patterns.md, mutual-information-context.md, token-budgeting-strategies.md)
 - Diagrams: 0/75 complete (shells created)
 - Total Word Count: 44,262 (target: 53,000-72,000, 61-82% complete)
 - Quality Issues: 236 total (53 slop, 18 tech, 58 term, 13 xref, 94 style)
 
 ## Next Task
-Continue KB article creation: Create @kb/token-budgeting-strategies.md (Allocating context by information density)
+Continue KB article creation: Create @kb/lost-in-the-middle-mitigation.md (Preventing context window degradation)
 
 ## Recent Activity
+
+### 2026-01-28 19:00 - Created @kb/token-budgeting-strategies.md
+- What: Created new KB article on allocating context window by information density
+- Files: ~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/token-budgeting-strategies.md
+- Word Count: ~2,800 words
+- Content: Information density as core metric (bits/token rankings), budget allocation framework (4-tier system: critical 20%, important 30%, supplementary 30%, dynamic 20%), practical strategies (progressive loading, density-based compression, hierarchical loading, dynamic reallocation), measuring effectiveness (utilization efficiency, relevance score, first-try success), budget templates for code review/feature implementation/bug investigation, ContextBudgetManager class implementation, common anti-patterns (flat loading, no history compaction, loading full files, ignoring dynamic budget), best practices
+- Key Concepts: Token budgeting as resource allocation, types provide 4x information density vs comments, tier-based context loading, compress low-density content with fast models, reserve dynamic space for tool outputs
+- Cross-references: Links to information-theory-coding-agents.md, progressive-disclosure-context.md, hierarchical-context-patterns.md, context-rot-auto-compacting.md, prompt-caching-strategy.md, sliding-window-history.md, model-switching-strategy.md
+- Outcome: Success
+- Next: Create @kb/lost-in-the-middle-mitigation.md
 
 ### 2026-01-28 18:00 - Created @kb/mutual-information-context.md
 - What: Created new KB article on measuring context effectiveness with mutual information
