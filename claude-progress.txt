@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 21:00)
+## Current Status (Updated: 2026-01-27 21:30)
 - Phase: Chapter Milestones
-- Active: task-009 (ch02 code_tested) or task-207 (Level 2 thinking content)
-- Last Completed: task-008 (ch02 code_written)
+- Active: task-009 (ch02 code_tested) - next milestone for ch02
+- Last Completed: task-011 (ch02 diagrams_complete) - via queue curation
 - Blockers: None
 
 ## Project State Summary
@@ -12,11 +12,12 @@
 - KB Articles Created: 15/15 new articles (100%) - KB CREATION COMPLETE
 - KB Coverage: 100/104 referenced, 15 created (96% coverage)
 - Diagrams: 6/63 complete (Phase 3 in progress) - ch01 done, ch02 done
-- Code Examples: ch01 code_written + code_tested complete
+- Code Examples: ch01 complete, ch02 code_written complete
 - Cross-Refs Fixed: ch01 complete (3 references corrected)
 - Total Word Count: 44,262 (target: 53,000-72,000, 61-82% complete)
 - Quality Issues: 277 total
 - ch01 Milestones: 6/6 COMPLETE - FIRST CHAPTER DONE!
+- ch02 Milestones: 2/5 complete (code_written, diagrams_complete)
 - Chapters Complete: 1/15 (ch01)
 
 ## Next Task
@@ -24,6 +25,18 @@ task-009 (ch02 code_tested) - score 940 (next subtask of task-007)
 OR task-207 (Add Level 2 thinking content) - score 355
 
 ## Recent Activity
+
+### 2026-01-27 21:30 - Queue Curation (every 3rd iteration task)
+- What: Curated task queue, fixed inconsistencies, updated priorities
+- Changes:
+  - task-011 (ch02 diagrams_complete): marked complete since task-118 (diagram group) is done
+  - Stats updated: pending 180→179, complete 28→29
+  - Verified no duplicates in queue
+  - Priorities confirmed correct (ch02 highest at 940)
+- ch02 Status: 2/5 milestones complete (code_written + diagrams_complete)
+- Next Task: task-009 (ch02 code_tested) - score 940
+- Outcome: Success
+- Next: Run exercise validator on ch02 examples
 
 ### 2026-01-27 21:00 - COMPLETED ch02 code_written (task-008) - ITERATION 2
 - What: Created TypeScript code examples for Chapter 2

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T21:00:00.000Z",
+  "lastUpdated": "2026-01-27T21:30:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -257,8 +257,10 @@
           "parentId": "task-007",
           "type": "milestone",
           "title": "diagrams complete",
-          "status": "pending",
-          "score": -110
+          "status": "complete",
+          "completedAt": "2026-01-27T21:30:00Z",
+          "score": -110,
+          "note": "task-118 (ch02 diagrams group) complete - all 3 diagrams created"
         },
         {
           "id": "task-012",
@@ -2031,16 +2033,16 @@
     "items": []
   },
   "stats": {
-    "pending": 180,
+    "pending": 179,
     "inProgress": 0,
-    "complete": 28,
+    "complete": 29,
     "blocked": 0,
     "total": 208
   },
   "checkpoints": {
-    "lastGoodCommit": "ef1f25d8061558b315385967ac389d53374c358c",
-    "lastSuccessfulTask": "iteration-1",
-    "lastCheckpoint": "2026-01-27T15:45:54Z",
+    "lastGoodCommit": "8cd7fc3e5f5e0a6c3825626a88e2fe0695d34353",
+    "lastSuccessfulTask": "iteration-2",
+    "lastCheckpoint": "2026-01-27T15:50:55Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false
