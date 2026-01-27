@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T21:30:00.000Z",
+  "lastUpdated": "2026-01-27T22:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -2025,6 +2025,56 @@
         }
       ],
       "score": -295
+    },
+    {
+      "id": "task-209",
+      "type": "fix",
+      "title": "Add Related Chapters sections to missing chapters",
+      "description": "Add standardized Related Chapters section to ch05, ch06, ch07, ch09 which currently lack this section",
+      "status": "pending",
+      "priority": "medium",
+      "score": 540,
+      "source": "cross-refs-2026-01-27-v4.md"
+    },
+    {
+      "id": "task-210",
+      "type": "fix",
+      "title": "Standardize Related Chapters format",
+      "description": "Convert text-only Related Chapters sections (ch04, ch08, ch10, ch11, ch13) to bold format with descriptions for consistency",
+      "status": "pending",
+      "priority": "low",
+      "score": 140,
+      "source": "cross-refs-2026-01-27-v4.md"
+    },
+    {
+      "id": "task-211",
+      "type": "prd",
+      "title": "Create PRD for ch13 and ch14",
+      "description": "Create missing PRD files for ch13 (Building the Harness) and ch14 (The Meta-Engineer Playbook)",
+      "status": "pending",
+      "priority": "medium",
+      "score": 560,
+      "source": "cross-refs-2026-01-27-v4.md"
+    },
+    {
+      "id": "task-212",
+      "type": "content",
+      "title": "Expand Part II chapters word count",
+      "description": "Part II (ch05-ch08) is ~2,700 words below target. Current: 11,286 words. Target: 14,000-18,000 words",
+      "status": "pending",
+      "priority": "medium",
+      "score": 500,
+      "source": "cross-refs-2026-01-27-v4.md"
+    },
+    {
+      "id": "task-213",
+      "type": "content",
+      "title": "Expand Part III chapters word count",
+      "description": "Part III (ch09-ch12) is ~2,000 words below target. Current: 11,984 words. Target: 14,000-18,000 words",
+      "status": "pending",
+      "priority": "medium",
+      "score": 495,
+      "source": "cross-refs-2026-01-27-v4.md"
     }
   ],
   "completed": {
@@ -2033,11 +2083,11 @@
     "items": []
   },
   "stats": {
-    "pending": 179,
+    "pending": 184,
     "inProgress": 0,
     "complete": 29,
     "blocked": 0,
-    "total": 208
+    "total": 213
   },
   "checkpoints": {
     "lastGoodCommit": "8cd7fc3e5f5e0a6c3825626a88e2fe0695d34353",
