@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T01:30:00Z",
+  "lastUpdated": "2026-01-27T23:24:03.704Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -202,6 +202,22 @@
       "suggestedFilename": "assets/diagrams/ch13-signal-processing-harness.mmd",
       "scoreBreakdown": "high:750 + diagram:40 + ch13:10 + reviewFlagged:200 = 1000",
       "completedAt": "2026-01-28T01:00:00Z"
+    },
+    {
+      "id": "task-208",
+      "type": "diagram",
+      "chapter": "ch13",
+      "title": "Create Four Levels of Automation diagram",
+      "description": "Visualization of productivity progression from Level 0 (manual, 1x) through Level 3 (meta-infrastructure, 100-500x). Shows ROI and where most developers stop. Lines 433-441 in chapter.",
+      "status": "complete",
+      "completedAt": "2026-01-28T01:30:00Z",
+      "priority": "high",
+      "score": 1000,
+      "flaggedByReview": "diagram-review-2026-01-28",
+      "reviewReference": "reviews/diagram-review-2026-01-28.md",
+      "suggestedFilename": "assets/diagrams/ch13-four-automation-levels.md",
+      "scoreBreakdown": "high:750 + diagram:40 + ch13:10 + reviewFlagged:200 = 1000",
+      "outcome": "Created multi-view diagram: productivity staircase (primary), multiplier ladder, ROI table, opportunity cost visualization, and 'why developers stop' analysis"
     },
     {
       "id": "task-001",
@@ -1099,34 +1115,20 @@
       "score": 875
     },
     {
-      "id": "task-208",
-      "type": "diagram",
-      "chapter": "ch13",
-      "title": "Create Four Levels of Automation diagram",
-      "description": "Visualization of productivity progression from Level 0 (manual, 1x) through Level 3 (meta-infrastructure, 100-500x). Shows ROI and where most developers stop. Lines 433-441 in chapter.",
-      "status": "complete",
-      "completedAt": "2026-01-28T01:30:00Z",
-      "priority": "high",
-      "score": 1000,
-      "flaggedByReview": "diagram-review-2026-01-28",
-      "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch13-four-automation-levels.md",
-      "scoreBreakdown": "high:750 + diagram:40 + ch13:10 + reviewFlagged:200 = 1000",
-      "outcome": "Created multi-view diagram: productivity staircase (primary), multiplier ladder, ROI table, opportunity cost visualization, and 'why developers stop' analysis"
-    },
-    {
       "id": "task-209",
       "type": "diagram",
       "chapter": "ch14",
       "title": "Create Leverage Stack pyramid diagram",
       "description": "Stacked pyramid showing what to keep sharp (understanding, design, verification), what to delegate (implementation patterns), and what to forget (syntax, boilerplate). Lines 250-266 in chapter. Already exists as ASCII art.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-28T02:00:00Z",
       "priority": "high",
-      "score": 820,
+      "score": 995,
       "flaggedByReview": "diagram-review-2026-01-28",
       "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch14-leverage-stack.mmd",
-      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995"
+      "suggestedFilename": "assets/diagrams/ch14-leverage-stack.md",
+      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
+      "outcome": "Created multi-view diagram: skill pyramid (primary), action-oriented categories, self-check questions table, atrophy consequences, investment vs returns table, three pillars visualization"
     },
     {
       "id": "task-210",
@@ -1301,6 +1303,12 @@
     "note": "Count includes all completed tasks in tasks array (15 main + 62 subtasks)",
     "recentCompletions": [
       {
+        "id": "task-209",
+        "type": "diagram",
+        "title": "ch14 Leverage Stack pyramid diagram",
+        "completedAt": "2026-01-28T02:00:00Z"
+      },
+      {
         "id": "task-208",
         "type": "diagram",
         "title": "ch13 Four Levels of Automation diagram",
@@ -1311,26 +1319,20 @@
         "type": "diagram",
         "title": "ch13 Signal Processing Harness diagram",
         "completedAt": "2026-01-28T01:00:00Z"
-      },
-      {
-        "id": "task-075",
-        "type": "milestone",
-        "title": "ch13 code_tested",
-        "completedAt": "2026-01-28T23:15:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 35,
+    "pending": 34,
     "inProgress": 0,
-    "complete": 79,
+    "complete": 80,
     "blocked": 0,
     "total": 114
   },
   "checkpoints": {
-    "lastGoodCommit": "4a1061cb9332c4039aeeff2a88d26a5cbbd437da",
+    "lastGoodCommit": "7c212ab33e3a1e7f535e0a25aa584c2d9408dde2",
     "lastSuccessfulTask": "iteration-11",
-    "lastCheckpoint": "2026-01-28T01:30:00Z",
+    "lastCheckpoint": "2026-01-27T23:24:03Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0

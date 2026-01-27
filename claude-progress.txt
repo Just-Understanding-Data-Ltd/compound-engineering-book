@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 01:30)
+## Current Status (Updated: 2026-01-28 02:00)
 - Phase: Chapter Milestones (12 of 15 complete, 80%)
-- Active: ch13 Building the Harness
-- Last Completed: task-208 (ch13 Four Levels of Automation diagram)
+- Active: ch14 diagrams, ch13 milestones
+- Last Completed: task-209 (ch14 Leverage Stack pyramid diagram)
 - Blockers: None active
 - Queue Health: CURATED - scores corrected
-- Publishing Readiness: 86%
+- Publishing Readiness: 87%
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
@@ -14,8 +14,8 @@
 - Chapters Complete: 12/15 (ch01-ch12, 80%)
 - Code Examples: 13 chapters with code (87%)
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
-- Diagrams: 56/63 created (89%)
-- Tasks Complete: 79/114 (69%)
+- Diagrams: 57/63 created (90%)
+- Tasks Complete: 80/114 (70%)
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Review Cycle)
@@ -27,11 +27,11 @@
 - Missing Diagrams: 8 needed (4 high-priority) - 87% complete
 
 ## Next Task Priority
-1. task-209 (ch14 Leverage Stack pyramid diagram) - score 995 ← HIGHEST
-2. task-210 (ch14 Atrophy Ladder career diagram) - score 995
-3. task-211 (ch14 Task Decomposition comparison) - score 995
-4. task-076 (ch13: reviewed milestone) - score 885
-5. task-079 (ch14: The Meta-Engineer Playbook) - score 880
+1. task-210 (ch14 Atrophy Ladder career diagram) - score 995 ← HIGHEST
+2. task-211 (ch14 Task Decomposition comparison) - score 995
+3. task-076 (ch13: reviewed milestone) - score 885
+4. task-079 (ch14: The Meta-Engineer Playbook) - score 880
+5. task-085 (ch15: Model Strategy & Cost Optimization) - score 875
 
 ## Estimated Timeline to Completion
 - Ch13-15 completion: 9-15 hours (3-4 iterations)
@@ -41,6 +41,22 @@
 - **Publication target**: 2026-01-31 to 2026-02-03
 
 ## Recent Activity
+
+### 2026-01-28 02:00 - COMPLETED task-209: ch14 Leverage Stack pyramid diagram - ITERATION 12
+- What: Created multi-view diagram for ch14 Leverage Stack
+- File: assets/diagrams/ch14-leverage-stack.md
+- Views included:
+  - Primary: Skill pyramid from boilerplate (forget) to understanding (keep sharp)
+  - Alternative 1: Action-oriented categories (Keep Sharp / Delegate / Forget)
+  - Alternative 2: Self-check questions table with guidance per skill level
+  - Alternative 3: Atrophy consequences flowchart (safe vs risky)
+  - Alternative 4: Investment vs returns table (time to regain, impact if lost)
+  - Alternative 5: Three pillars of irreplaceable skill
+- Key insight visualized: High-leverage skills (problem, design, verification) are irreplaceable
+- Tasks: task-209 marked complete
+- Stats: pending 34, complete 80 (70%)
+- Outcome: Success
+- Next: task-210 (ch14 Atrophy Ladder career diagram)
 
 ### 2026-01-28 01:30 - COMPLETED task-208: ch13 Four Levels of Automation diagram - ITERATION 11
 - What: Created multi-view diagram for ch13 Four Levels of Automation
