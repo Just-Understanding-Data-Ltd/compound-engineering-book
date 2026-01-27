@@ -40,7 +40,7 @@ Vague prompts produce vague plans. Be specific:
 ```markdown
 **Bad**: "Plan how to add authentication"
 
-**Good**: "Plan how to add JWT-based authentication:
+**Good**: "Plan how to add JSON Web Token (JWT) based authentication:
 - Where does it fit in our layered architecture?
 - What middleware is needed?
 - How to handle token refresh?
@@ -128,7 +128,7 @@ claude
 # Terminal 2: API endpoints
 cd ~/projects/my-app-api
 claude
-# Prompt: "Create REST API endpoints for user CRUD operations"
+# Prompt: "Create Representational State Transfer (REST) API endpoints for user Create, Read, Update, Delete (CRUD) operations"
 
 # Terminal 3: UI redesign
 cd ~/projects/my-app-ui
@@ -273,7 +273,7 @@ If you have typed it (or similar) three or more times, it is a candidate for scr
 
 | Ad-hoc Agent Flow | Deterministic Script |
 |-------------------|---------------------|
-| Variable latency (LLM thinking) | Fast, predictable execution |
+| Variable latency (Large Language Model thinking) | Fast, predictable execution |
 | Probabilistic (might do it differently) | Same behavior every time |
 | Token cost per run | Zero LLM cost |
 | Can deviate or get confused | Follows exact steps |
@@ -376,7 +376,7 @@ Deterministic data gathering (fast, reliable) combined with agent judgment on wh
 
 ## Playwright Script Loop
 
-Using Playwright MCP tool calls for validation creates slow feedback loops. Each tool call requires API round-trips. For a 10-step validation flow, MCP might take 2-3 minutes. A direct script runs in 10-20 seconds. This 10x slowdown kills development velocity.
+Using Playwright via Model Context Protocol (MCP) tool calls for validation creates slow feedback loops. Each tool call requires API round-trips. For a 10-step validation flow, MCP might take 2-3 minutes. A direct script runs in 10-20 seconds. This 10x slowdown kills development velocity.
 
 ### The Pattern
 
@@ -422,7 +422,7 @@ Issues found: All at once
 
 ### Why Scripts Are Superior
 
-Scripts find all failures at once while MCP finds them one by one. Scripts run locally with minimal overhead. Scripts become part of the test suite. Scripts can be run in CI automatically. Scripts are debuggable with breakpoints and trace viewers.
+Scripts find all failures at once while MCP finds them one by one. Scripts run locally with minimal overhead. Scripts become part of the test suite. Scripts can be run in Continuous Integration (CI) automatically. Scripts are debuggable with breakpoints and trace viewers.
 
 ### The Iteration Loop
 
@@ -447,7 +447,7 @@ Three iterations in 36 seconds plus fix time. Compare to MCP: 9+ minutes for the
 
 ## AST-Grep for Precision Transformations
 
-Text-based search tools like grep treat code as plain text, not structured syntax. They cannot distinguish code from comments, strings from identifiers, function calls from definitions, or similar names from exact matches. This produces false positives that waste time and risk errors.
+Abstract Syntax Tree (AST) grep tools parse code as structured syntax rather than plain text. Traditional text-based search tools like grep treat code as plain text, not structured syntax. They cannot distinguish code from comments, strings from identifiers, function calls from definitions, or similar names from exact matches. This produces false positives that waste time and risk errors.
 
 ### The Problem with Text Search
 

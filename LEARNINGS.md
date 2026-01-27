@@ -286,3 +286,30 @@ The goal is not to replicate the formula but to show what the formula produces i
 4. Use color coding to indicate good/bad zones (green for optimal, red for problematic)
 
 ---
+
+### 2026-01-28 - Workflow Chapters Draw Acronyms from Multiple Domains
+
+**Context**: Reviewing Chapter 12 (Development Workflows), which covers plan mode, git worktrees, incremental development, script capture, Playwright, and AST-grep.
+
+**Observation**: Workflow chapters have higher acronym density than single-topic chapters because they integrate tools and concepts from multiple domains:
+
+| Section | Domain | Acronyms Introduced |
+|---------|--------|-------------------|
+| Plan Mode | Authentication | JWT |
+| Worktrees | API Design | REST, CRUD |
+| Scripts | DevOps | CI |
+| Playwright | AI Tooling | MCP, LLM |
+| AST-grep | Code Analysis | AST |
+
+Chapter 12 introduced 7 distinct acronyms across 5 different domains. Compare to single-topic chapters like Chapter 6 (Verification Ladder) which introduced 4 acronyms all from the testing domain.
+
+The pattern: workflow chapters act as integration points, weaving together authentication, APIs, DevOps, AI tooling, and code analysis. Each domain brings its own vocabulary. A chapter covering "how these tools work together" inherently requires defining terms from all contributing domains.
+
+**Implication**: When reviewing workflow or integration chapters, expect 50-100% more undefined acronyms than single-topic chapters. The term introduction check becomes proportionally more important. Front-load common cross-domain acronyms (LLM, API, CI/CD) in earlier chapters so integration chapters can reference them.
+
+**Action**: During review of workflow chapters:
+1. Scan for domain indicators (authentication examples → check JWT, OAuth; DevOps examples → check CI/CD; AI examples → check LLM, MCP)
+2. Consider which acronyms should be defined in earlier chapters to reduce repetition
+3. Create a project-wide acronym glossary tracking first introduction location to avoid redundant definitions
+
+---

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T08:15:00Z",
+  "lastUpdated": "2026-01-28T09:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -894,8 +894,10 @@
           "parentId": "task-067",
           "type": "milestone",
           "title": "reviewed",
-          "status": "pending",
-          "score": -105
+          "status": "complete",
+          "completedAt": "2026-01-28T09:00:00Z",
+          "score": -105,
+          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed 6 term introductions: JWT (line 43), REST/CRUD (line 131), MCP (line 379), CI (line 425), AST (line 450), LLM (line 276). Word count 3,043 (in range). Related Chapters section present."
         },
         {
           "id": "task-071",
@@ -1241,8 +1243,8 @@
   },
   "checkpoints": {
     "lastGoodCommit": "69119bdf6b8454e2810e6276b969b9e117a4576f",
-    "lastSuccessfulTask": "task-069",
-    "lastCheckpoint": "2026-01-28T08:15:00Z",
+    "lastSuccessfulTask": "task-070",
+    "lastCheckpoint": "2026-01-28T09:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0
