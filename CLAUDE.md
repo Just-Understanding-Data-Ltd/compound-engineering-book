@@ -210,6 +210,85 @@ import { unstable_v2_resumeSession } from '@anthropic-ai/claude-agent-sdk'
 await using session = unstable_v2_resumeSession(sessionId, { model: 'claude-sonnet-4-5-20250929' })
 ```
 
+### Exercises Structure
+
+Each chapter includes 2-3 "Try It Yourself" exercises. Exercises live in `exercises/chXX/` with this structure:
+
+```
+exercises/
+├── README.md              # Overview and conventions
+├── ch01/
+│   ├── README.md          # Chapter exercise overview
+│   ├── 01-first-claude-md.md
+│   ├── 02-leverage-audit.md
+│   └── solutions/
+│       ├── 01-solution.md
+│       └── 02-solution.md
+├── ch02/
+│   ├── README.md
+│   ├── 01-explore-codebase.md
+│   ├── 02-iterative-development.md
+│   ├── 03-tool-selection.md
+│   └── solutions/
+│       └── ...
+└── ch03/
+    └── ...
+```
+
+**Exercise File Format:**
+
+```markdown
+# Exercise: [Title]
+
+## Objective
+[1-2 sentences: what the reader will learn/build]
+
+## Prerequisites
+- [Required knowledge/setup]
+- [Files or tools needed]
+
+## Scenario
+[Real-world context for the exercise]
+
+## Tasks
+1. [Specific, actionable step]
+2. [Next step with clear success criteria]
+3. [Final step]
+
+## Hints
+<details>
+<summary>Hint 1: [Topic]</summary>
+[Guidance without giving away the answer]
+</details>
+
+## Success Criteria
+- [ ] [Measurable outcome 1]
+- [ ] [Measurable outcome 2]
+
+## Stretch Goals (Optional)
+- [Advanced extension]
+```
+
+**Exercise Conventions:**
+
+| Aspect | Convention |
+|--------|------------|
+| Difficulty | Progressive within chapter (easy → medium → hard) |
+| Time | 10-30 minutes per exercise |
+| Code | All code must be testable with Exercise Validator |
+| Solutions | Provide in `solutions/` subfolder, not inline |
+| Real-world | Base on realistic scenarios, not toy examples |
+| Self-contained | Each exercise works independently |
+
+**Creating Exercises:**
+
+1. Read the chapter content first
+2. Identify 2-3 key concepts that benefit from hands-on practice
+3. Design exercises that build on each other
+4. Write clear success criteria (testable outcomes)
+5. Create solutions that demonstrate best practices
+6. Validate all code with `bun infra/scripts/exercise-validator.ts`
+
 ### Exercise Validator (Unified Code Testing Tool)
 
 The Exercise Validator (`infra/scripts/exercise-validator.ts`) provides hash-based caching for all code execution. Use it to:

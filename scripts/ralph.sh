@@ -271,12 +271,27 @@ reset_circuit_breaker() {
 }
 
 # ==============================================================================
-# Run Claude with timeout
+# Run Claude with timeout (macOS compatible)
 # ==============================================================================
+
+# Detect timeout command (gtimeout on macOS with coreutils, timeout on Linux)
+if command -v gtimeout &>/dev/null; then
+    TIMEOUT_CMD="gtimeout"
+elif command -v timeout &>/dev/null; then
+    TIMEOUT_CMD="timeout"
+else
+    TIMEOUT_CMD=""
+    echo "WARNING: No timeout command found. Install coreutils: brew install coreutils"
+fi
 
 run_claude() {
     local prompt_file="$1"
-    timeout $ITERATION_TIMEOUT claude --dangerously-skip-permissions -p - < "$prompt_file"
+    if [ -n "$TIMEOUT_CMD" ]; then
+        $TIMEOUT_CMD $ITERATION_TIMEOUT claude --dangerously-skip-permissions -p - < "$prompt_file"
+    else
+        # Run without timeout on systems that don't have it
+        claude --dangerously-skip-permissions -p - < "$prompt_file"
+    fi
     return $?
 }
 
