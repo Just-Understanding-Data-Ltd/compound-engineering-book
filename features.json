@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T23:30:00Z",
+  "lastUpdated": "2026-01-28T00:00:00Z",
   "structureNote": "Updated to 15-chapter structure. Old chapter numbers in prds section preserved for reference. New chapters added with descriptive filenames. See toc.md for canonical ordering.",
   "prds": {
     "index": {
@@ -345,19 +345,19 @@
     "ch09": {
       "title": "Context Engineering Deep Dive",
       "prd": "prds/ch07.md",
-      "chapter": null,
-      "status": "not_started",
+      "chapter": "chapters/ch09-context-engineering-deep-dive.md",
+      "status": "draft",
       "milestones": {
         "prd_complete": true,
-        "first_draft": false,
+        "first_draft": true,
         "code_written": false,
         "code_tested": false,
         "reviewed": false,
         "diagrams_complete": false,
-        "exercises_added": false,
+        "exercises_added": true,
         "final": false
       },
-      "wordCount": 0,
+      "wordCount": 2673,
       "targetWordCount": [3500, 5000],
       "diagramsRequired": 6,
       "diagramsComplete": 0,
@@ -510,11 +510,11 @@
     "totalChapters": 15,
     "newChaptersAdded": 4,
     "prdsComplete": 15,
-    "draftsComplete": 8,
+    "draftsComplete": 9,
     "reviewed": 0,
     "diagramsRequired": 75,
     "diagramsComplete": 0,
-    "totalWordCount": 21784,
+    "totalWordCount": 24457,
     "targetWordCount": [53000, 72000]
   }
 }
