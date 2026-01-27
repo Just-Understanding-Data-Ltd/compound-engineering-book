@@ -24,7 +24,7 @@ By the end of this chapter, you will be able to:
 
 ## Source Articles
 
-Primary sources from knowledge base:
+### Primary Sources
 - `plan-mode-strategic.md` - Strategic thinking before implementation
 - `git-worktrees-parallel-dev.md` - Parallel development branches
 - `incremental-development-pattern.md` - Step-by-step feature building
@@ -32,6 +32,12 @@ Primary sources from knowledge base:
 - `playwright-script-loop.md` - Browser automation patterns
 - `ast-grep-for-precision.md` - AST-based code transformations
 - `symlinked-agent-configs.md` - Sharing configs across worktrees
+
+### Supplementary Sources (Added from KB Analysis Jan 27, 2026)
+- `parallel-agents-for-monorepos.md` - Scaling parallel agent execution patterns
+- `agent-sdk-patterns.md` - Programmatic workflow orchestration with Agent SDK
+- `llm-usage-modes-explore-vs-implement.md` - When to explore vs when to implement
+- `checkpoint-commit-patterns.md` (TO BE CREATED) - Git commit strategies for AI workflows
 
 ---
 

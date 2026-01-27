@@ -24,13 +24,19 @@ By the end of this chapter, you will be able to:
 
 ## Source Articles
 
-Primary sources from knowledge base:
+### Primary Sources
 - `model-switching-strategy.md` - Comprehensive model selection guide
-- `ai-cost-protection-timeouts.md` - Multi-layer timeout protection
+- `ai-cost-protection-timeouts.md` - Multi-layer timeout protection (EXPANDED Jan 27)
 - `model-provider-agnostic-approach.md` - Provider independence
 - `prompt-caching-strategy.md` - Caching for cost reduction
 - Claude Code documentation on Skills system
 - Claude Code documentation on YOLO mode
+
+### Supplementary Sources (Added from KB Analysis Jan 27, 2026)
+- `batch-api-patterns.md` (TO BE CREATED) - Batch processing for cost reduction
+- `token-budgeting-strategies.md` (TO BE CREATED) - Allocating context by information density
+- `skills-vs-subagents.md` (TO BE CREATED) - Decision framework for when to use each
+- `cost-telemetry-patterns.md` (TO BE CREATED) - Measuring and tracking AI spend
 
 ---
 
