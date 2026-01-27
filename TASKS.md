@@ -90,22 +90,63 @@
 
 ## Phase 3: Diagrams
 
-- [x] Create Mermaid diagram shells for all chapters (Completed: 2026-01-27)
-- [ ] Create compound flywheel diagram (Ch 1)
-- [ ] Create tool ecosystem diagram (Ch 2)
-- [ ] Create prompt anatomy diagram (Ch 3 - NEW)
-- [ ] Create CLAUDE.md hierarchy diagram (Ch 4)
-- [ ] Create 12-factor overview diagram (Ch 5)
-- [ ] Create verification ladder diagram (Ch 6)
-- [ ] Create quality gate pipeline diagram (Ch 7)
-- [ ] Create error diagnostic flowchart (Ch 8 - NEW)
-- [ ] Create context window anatomy diagram (Ch 9)
-- [ ] Create RALPH loop cycle diagram (Ch 10)
-- [ ] Create sub-agent architecture diagram (Ch 11)
-- [ ] Create development workflows diagram (Ch 12 - NEW)
-- [ ] Create four-layer harness diagram (Ch 13)
-- [ ] Create six waves timeline diagram (Ch 14)
-- [ ] Create model selection decision tree (Ch 15 - NEW)
+> See `reviews/diagrams-2026-01-27.md` for full diagram review with draft Mermaid code
+
+### High Priority (Chapters 1-7)
+
+**Chapter 1: The Compound Systems Engineer**
+- [ ] Create three-levels-pyramid diagram (Level 1/2/3 engineering)
+- [ ] Create portfolio-vs-single-bet comparison diagram
+- [ ] Create constraint-feedback-loop cycle diagram
+
+**Chapter 2: Getting Started with Claude Code**
+- [ ] Create agent-vs-chat mental model diagram
+- [ ] Create tool-ecosystem radial diagram (7 core tools)
+- [ ] Create two-mode-mental-model flowchart (explore vs implement)
+
+**Chapter 3: Prompting Fundamentals**
+- [ ] Create prompt-anatomy diagram (context/instruction/constraints)
+- [ ] Create constraint-funnel diagram (state space reduction)
+
+**Chapter 4: Writing Your First CLAUDE.md**
+- [ ] Create why-what-how framework diagram
+- [ ] Create hierarchical-claude-md tree diagram
+
+**Chapter 5: The 12-Factor Agent**
+- [ ] Create reliability-cascade bar chart (0.95^N formula)
+- [ ] Create four-turn-framework comparison (demo vs production)
+- [ ] Create 12-factors-overview organization chart
+
+**Chapter 6: The Verification Ladder**
+- [ ] Create verification-ladder stack diagram (6 levels)
+- [ ] Create verification-sandwich pattern diagram
+
+**Chapter 7: Quality Gates That Compound**
+- [ ] Create state-space-reduction funnel diagram
+- [ ] Create compounding-formula comparison chart
+- [ ] Create six-gate-architecture pipeline diagram
+
+### Medium Priority (Chapters 1-7)
+- [ ] Create builder-metabuilder comparison (Ch 1)
+- [ ] Create cost-curve-levels line graph (Ch 1)
+- [ ] Create chain-of-thought flow (Ch 3)
+- [ ] Create few-shot-accuracy bar chart (Ch 3)
+- [ ] Create context-relevance comparison (Ch 4)
+- [ ] Create instruction-degradation curve (Ch 4)
+- [ ] Create reliability-stack layers (Ch 5)
+- [ ] Create agent-loop flowchart (Ch 5)
+- [ ] Create test-driven-search-space comparison (Ch 6)
+- [ ] Create hook-workflow cycle (Ch 7)
+
+### Future Chapters (Pending First Drafts)
+- [ ] Create error diagnostic flowchart (Ch 8 - pending)
+- [ ] Create context window anatomy diagram (Ch 9 - pending)
+- [ ] Create RALPH loop cycle diagram (Ch 10 - pending)
+- [ ] Create sub-agent architecture diagram (Ch 11 - pending)
+- [ ] Create development workflows diagram (Ch 12 - pending)
+- [ ] Create four-layer harness diagram (Ch 13 - pending)
+- [ ] Create six waves timeline diagram (Ch 14 - pending)
+- [ ] Create model selection decision tree (Ch 15 - pending)
 
 ## Phase 4: Appendices
 
