@@ -3,7 +3,7 @@
 ## Current Status (Updated: 2026-01-27 22:00)
 - Phase: Chapter Writing
 - Active: Chapter 8 next (Error Handling & Debugging)
-- Last Completed: Chapter 7 first draft (2,841 words)
+- Last Completed: Chapter 7 first draft (2,838 words)
 - Blockers: None
 
 ## Project State Summary
@@ -12,7 +12,7 @@
 - KB Articles Identified to Create: 15+ new articles (marked "TO BE CREATED")
 - Chapter Drafts: 7/15 complete
 - Diagrams: 13 files with 20+ Mermaid diagrams (shells created)
-- Total Word Count: 18,651 (target: 53,000-72,000)
+- Total Word Count: 18,648 (target: 53,000-72,000)
 
 ## Next Task
 Write Chapter 8 first draft (Error Handling & Debugging)
@@ -22,7 +22,7 @@ Write Chapter 8 first draft (Error Handling & Debugging)
 ### 2026-01-27 22:00 - Chapter 7 First Draft Complete
 - What: Wrote first draft of ch07-quality-gates-that-compound.md
 - Files: chapters/ch07-quality-gates-that-compound.md (created)
-- Word Count: 2,841 (target: 3,000-4,500)
+- Word Count: 2,838 (target: 3,000-4,500)
 - Content: Quality gates as information filters (set theory), compounding formula (multiplicative vs additive), Claude Code hooks implementation, early linting ROI, how gates teach AI agents, building the gate stack, 3 exercises
 - KB Sources: quality-gates-as-information-filters.md, compounding-effects-quality-gates.md, claude-code-hooks-quality-gates.md, early-linting-prevents-ratcheting.md
 - Outcome: Success

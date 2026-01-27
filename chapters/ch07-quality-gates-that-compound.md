@@ -124,9 +124,9 @@ Eliminated: functions with wrong business logic, improper error handling, missin
 
 ```
 S0 = 1,000,000 (all syntactically valid programs)
-S1 =    50,000 (after type checker) — 95.0% eliminated
-S2 =     5,000 (after linter)       — 99.5% eliminated
-S3 =       200 (after unit tests)   — 99.98% eliminated
+S1 =    50,000 (after type checker)   95.0% eliminated
+S2 =     5,000 (after linter)        99.5% eliminated
+S3 =       200 (after unit tests)    99.98% eliminated
 ```
 
 Those final 200 implementations are semantically equivalent. They differ only in minor style choices but are all correct.
