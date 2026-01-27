@@ -2340,9 +2340,9 @@
     "total": 215
   },
   "checkpoints": {
-    "lastGoodCommit": "56be11885f05769fb44086a74e54b0b59dc32540",
-    "lastSuccessfulTask": "task-020",
-    "lastCheckpoint": "2026-01-28T06:00:00Z",
+    "lastGoodCommit": "6ea70921ec71b7c975a3e7c1ab3234facc184705",
+    "lastSuccessfulTask": "interrupted-11",
+    "lastCheckpoint": "2026-01-27T17:05:04Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
