@@ -157,6 +157,34 @@
 
 ## Phase 5: Review & Polish
 
+### Cross-Reference Fixes (from review 2026-01-27)
+> See `reviews/cross-refs-2026-01-27.md` for full details
+
+**Critical (PRD Renumbering):**
+- [ ] Rename prds/ch03.md to prds/ch04.md (Writing Your First CLAUDE.md)
+- [ ] Rename prds/ch04.md to prds/ch05.md (12-Factor Agent)
+- [ ] Rename prds/ch05.md to prds/ch06.md (Verification Ladder)
+- [ ] Rename prds/ch06.md to prds/ch07.md (Quality Gates)
+- [ ] Rename prds/ch07.md to prds/ch09.md (Context Engineering)
+
+**Critical (Missing PRDs):**
+- [ ] Create prds/ch03.md (Prompting Fundamentals - NEW chapter)
+- [ ] Create prds/ch08.md (Error Handling & Debugging - NEW chapter)
+- [ ] Create prds/ch12.md (Development Workflows - NEW chapter)
+- [ ] Create prds/ch15.md (Model Strategy & Cost Optimization - NEW chapter)
+
+**Critical (Broken Links in Chapters):**
+- [ ] ch01 line 359: Fix ch07 reference to ch09 (Context Engineering)
+- [ ] ch01 line 360: Fix ch08 reference to ch10 (RALPH Loop)
+- [ ] ch01 line 361: Fix ch10 reference to ch13 (Building the Harness)
+- [ ] ch03 line 496: Update ch09 reference (pending chapter creation)
+
+**Medium (Missing Cross-Reference Sections):**
+- [ ] Add "Related Chapters" section to ch04
+- [ ] Add "Related Chapters" section to ch05
+- [ ] Add "Related Chapters" section to ch07
+- [ ] Complete cross-reference section in ch06
+
 ### Term Introduction Fixes (from review 2026-01-27)
 > See `reviews/term-intro-2026-01-27.md` for full details
 
