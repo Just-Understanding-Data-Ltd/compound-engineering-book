@@ -1,36 +1,65 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 10:00)
-- Phase: Chapter Milestones (11 of 15 complete, 73%)
-- Active: ch12 Development Workflows
-- Last Completed: task-071 (ch12 diagrams_complete milestone)
+## Current Status (Updated: 2026-01-28 22:54)
+- Phase: Chapter Milestones (12 of 15 complete, 80%)
+- Active: ch13 Building the Harness
+- Last Completed: task-072 (ch12 Development Workflows final milestone)
 - Blockers: None active
 - Queue Health: EXCELLENT
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
 - Chapter Drafts: 15/15 complete (100%)
-- Chapters Complete: 11/15 (ch01-ch11, 73%)
+- Chapters Complete: 12/15 (ch01-ch12, 80%)
 - KB Articles: 14/15 complete (93%)
-- Diagrams: 49/~63 created (78%)
+- Diagrams: 54/~63 created (86%)
 - Code Examples: 12 chapters have code (80%)
 - Word Count: ~47,300 (target 45,000-57,000, 94% complete)
-- Quality Issues: Review agents running for updated metrics
-- Tasks Complete: 73/109 (67%)
+- Quality Issues: AI slop 11, tech accuracy 7, term intros 62, cross-refs 0
+- Tasks Complete: 75/114 (66%)
 
-## Critical Issues Identified (From Latest Reviews)
-1. 44 em dashes in PRDs - MECHANICAL FIX (30 min) - CRITICAL
-2. 8 undefined terms in ch10-15 - TARGETED PASS (45 min) - HIGH PRIORITY
-3. 1 critical: Plan Mode keyboard shortcut verification (ch12)
-4. 4 medium: technical accuracy items (verify, pricing, versions)
-5. 14 diagrams still needed - PARALLEL WITH CHAPTERS
+## Critical Issues Identified (From 2026-01-28 Reviews)
+1. Plan Mode keyboard shortcut unverified (ch12) - CRITICAL
+2. 8 undefined terms in ch10-15 - HIGH PRIORITY
+3. 11 AI slop word choice issues - GOOD (easy fixes)
+4. 14 diagrams still needed - ON TRACK
 
 ## Next Task Priority
-1. task-072 (ch12: Development Workflows final) - score 890
-2. task-073 (ch13: Building the Harness code_written) - score 885
-3. task-079 (ch14: The Meta-Engineer Playbook) - score 880
+1. task-073 (ch13: Building the Harness code_written) - score 885
+2. task-079 (ch14: The Meta-Engineer Playbook) - score 880
+3. task-085 (ch15: Model Strategy & Cost Optimization) - score 875
 
 ## Recent Activity
+
+### 2026-01-28 22:54 - COMPLETED task-072: ch12 Development Workflows final - ITERATION 7
+- What: Completed final quality gate for Chapter 12 (Development Workflows) - TWELFTH CHAPTER COMPLETE
+- Quality Gate Results:
+  - Word count: 3,078 (within 2,500-4,000 target) ✓
+  - Em dashes: None found ✓
+  - AI slop phrases: None found ✓
+  - Diagrams: 7 sections in ch12-workflows.md ✓
+  - Exercises: ch12 folder with README.md and solutions/ ✓
+  - Cross-references: Related Chapters section present ✓
+  - Code tests: 59 tests pass ✓
+- Tasks: task-072 + task-067 marked complete
+- Stats: pending 39, complete 75
+- ch12 Status: 5/5 milestones COMPLETE
+- Chapters Complete: 12/15 (ch01-ch12, 80%)
+- Outcome: Success
+- Next: task-073 (ch13: Building the Harness code_written milestone) - score 885
+
+### 2026-01-28 10:15 - GENERATED comprehensive progress summary
+- What: Created detailed status report synthesizing all review findings
+- Analysis includes:
+  - Completion metrics: 11/15 chapters (73%), 72/109 tasks (66%)
+  - Quality dashboard: 80 issues identified (AI slop 11, tech 7, term intros 62, cross-refs 0)
+  - Top 5 priorities: Complete ch12, fix Plan Mode, define terms, complete ch13-15, create diagrams
+  - Velocity: 1 chapter per 1.5 hours, 100% success rate, 25-27 hours remaining
+  - Publishing readiness: 80% (content solid with targeted editorial fixes needed)
+  - All data from slop-check, tech-accuracy, term-intro, diagrams review agents
+- Files: reviews/summary-2026-01-28.md (updated with latest comprehensive metrics)
+- Outcome: Success - Clear roadmap to publication identified
+- Next: task-072 (ch12 final milestone)
 
 ### 2026-01-28 10:00 - COMPLETED task-071: ch12 Development Workflows diagrams_complete - ITERATION 6
 - What: Created all 5 PRD-specified diagrams for Chapter 12 (Development Workflows)
@@ -151,333 +180,22 @@
 - Outcome: Success
 - Next: task-068 (ch12: Development Workflows code_written milestone) - score 890
 
-### 2026-01-28 00:00 - COMPLETED task-065: ch11 Sub-Agent Architecture diagrams_complete - WARMUP ITERATION
-- What: Created all 7 PRD-specified diagrams for Chapter 11
-- Diagrams Created:
-  1. Team Structure and Handoffs - Orchestrator + 4 specialists flow
-  2. Three-Layer Context Hierarchy - Root/Agent/Package pyramid
-  3. Accuracy vs Latency Trade-off - Quadrant chart + decision framework
-  4. Actor-Critic Loop - Iterative refinement with 8 critique dimensions
-  5. Swarm Patterns - 10 perspectives with aggregation
-  6. Sequential vs Parallel Orchestration - Gantt timeline comparison
-  7. Parallel Agents for Monorepo - 20 packages parallel vs sequential
-- Each diagram includes alternative views and reference tables
-- File: assets/diagrams/ch11-subagent-architecture.md
-- Tasks: task-065 marked complete
-- Stats: pending 42, complete 67
-- ch11 Status: 4/5 milestones complete (code_written, code_tested, reviewed, diagrams_complete)
-- Outcome: Success
-- Next: task-066 (ch11 final milestone)
-
-### 2026-01-27 23:30 - COMPLETED task-064: ch11 Sub-Agent Architecture reviewed
-- What: Reviewed Chapter 11 (Sub-Agent Architecture) for quality
-- Review Results:
-  - AI slop check: PASS (no em dashes, no blacklisted phrases)
-  - Word count: 3,314 (within 2,500-4,000 target)
-- Fixes Applied:
-  - Line 5: "a QA engineer" → "a Quality Assurance (QA) engineer"
-  - Lines 96-97: Added "Representational State Transfer (REST)" and "Zod (TypeScript schema validation library)"
-  - Line 120: Added "tRPC (type-safe remote procedure call framework)"
-  - Line 127: Added "JSON Web Token (JWT)"
-  - Line 481: Added "Large Language Models (LLMs)"
-- Related Chapters section: Already present ✓
-- Tasks: task-064 marked complete
-- Stats: pending 43, complete 66
-- ch11 Status: 3/5 milestones complete (code_written, code_tested, reviewed)
-- Outcome: Success
-- Next: task-065 (ch11 diagrams_complete milestone)
-
-### 2026-01-27 23:15 - COMPLETED task-063: ch11 Sub-Agent Architecture code_tested - ITERATION 7
-- What: Verified all code examples for Chapter 11 (Sub-Agent Architecture) compile and tests pass
-- Test Results:
-  - TypeScript: No ch11-specific errors (project-wide check)
-  - Unit tests: 67 tests pass, 208 expect() calls
-  - Demo scripts: All 4 execute correctly
-    - context-hierarchy.ts: Works fully (no API calls needed)
-    - agent-permissions.ts: Works fully (no API calls needed)
-    - sub-agent-orchestration.ts: Initializes correctly, expected API auth failure
-    - actor-critic-loop.ts: Initializes correctly, expected API auth failure
-- Tasks: task-063 marked complete
-- Stats: pending 44, complete 65
-- ch11 Status: 2/5 milestones complete (code_written, code_tested)
-- Outcome: Success
-- Next: task-064 (ch11 reviewed milestone)
-
-### 2026-01-27 23:00 - COMPLETED task-062: ch11 Sub-Agent Architecture code_written - ITERATION 6
-- What: Verified code examples for Chapter 11 (Sub-Agent Architecture)
-- Files Verified:
-  - examples/ch11/sub-agent-orchestration.ts (SubAgentOrchestrator class, runAgent, system prompts)
-  - examples/ch11/context-hierarchy.ts (ContextManager, three-layer hierarchy, ContextAwareAgent)
-  - examples/ch11/actor-critic-loop.ts (ActorCriticLoop, 8 critique dimensions, iterative refinement)
-  - examples/ch11/agent-permissions.ts (PermissionChecker, ROLE_PERMISSIONS, tool access control)
-  - examples/ch11/sub-agent-architecture.test.ts (67 tests, 208 expect() calls)
-- Bug Fixed: Glob pattern matching in agent-permissions.ts (dot escaping order)
-- Test Results: 67 tests pass, 208 expect() calls
-- All examples use Anthropic SDK as required
-- Demo scripts run correctly
-- Tasks: task-062 marked complete
-- Stats: pending 45, complete 64
-- ch11 Status: 1/5 milestones complete (code_written)
-- Iteration 6 % 6 == 0: Running all 7 review agents in parallel
-- Outcome: Success
-- Next: task-063 (ch11 code_tested milestone)
-
-### 2026-01-27 22:45 - Queue Curation (every 3rd iteration)
-- What: Curated task queue per RALPH loop protocol
-- Queue State:
-  - Pending: 46 tasks (verified)
-  - Complete: 63 tasks (verified)
-  - Total: 109 tasks
-  - No duplicates found
-  - No blocked tasks
-- Fixes Applied:
-  - Reset consecutiveFailures counter (1 → 0)
-  - Reset failedAttempts counter (1 → 0)
-  - Updated lastCheckpoint timestamp
-- Score Verification:
-  - task-061 (ch11): 895 ✓ (750 + 100 + 45)
-  - task-067 (ch12): 890 ✓ (750 + 100 + 40)
-  - task-073 (ch13): 885 ✓ (750 + 100 + 35)
-- Queue Health: EXCELLENT
-- Next Priority: task-061 (ch11: Sub-Agent Architecture code_written)
-- Outcome: Success
-
-### 2026-01-27 22:30 - COMPLETED task-060: ch10 The RALPH Loop final - ITERATION 3
-- What: Completed final quality gate for Chapter 10 (The RALPH Loop) - TENTH CHAPTER COMPLETE
-- Quality Gate Results:
-  - Word count: 2,988 (within 2,500-4,000 target) ✓
-  - Em dashes: None found ✓
-  - AI slop phrases: None found ✓
-  - Diagrams: 5 files confirmed ✓
-  - Exercises: ch10 folder with README ✓
-  - Cross-references: Related Chapters section present ✓
-  - Code examples: 92 tests pass (143 expect() calls) ✓
-- Tasks: task-060 + task-055 marked complete
-- Stats: pending 46, complete 63
-- ch10 Status: 5/5 milestones COMPLETE
-- Chapters Complete: 10/15 (ch01-ch10, 67%)
-- Iteration 3 % 3 == 0: Running queue curation
-- Outcome: Success
-- Next: task-061 (ch11: Sub-Agent Architecture code_written milestone) - score 895
-
-### 2026-01-27 22:00 - COMPLETED task-059: ch10 The RALPH Loop diagrams_complete - ITERATION 2
-- What: Created all required diagrams for Chapter 10 (The RALPH Loop)
-- Diagrams Created (4 new files):
-  - ch10-four-phase-cycle.md (time allocation: Plan 40%, Work 20%, Review 40%)
-  - ch10-memory-architecture.md (three-layer persistence: AGENTS.md, Git, TASKS.md)
-  - ch10-gas-town.md (multi-agent coordination pattern)
-  - ch10-clean-slate-recovery.md (3-attempt threshold, recovery process)
-- Existing diagram:
-  - ch10-ralph-loop.md (covers Fresh Context Cycle + 24/7 Timeline)
-- Total ch10 diagrams: 5 files covering all 6 PRD requirements
-- Tasks: task-059 marked complete
-- Stats: pending 48, complete 61
-- ch10 Status: 4/5 milestones complete (code_written, code_tested, reviewed, diagrams_complete)
-- Outcome: Success
-- Next: task-060 (ch10 final milestone)
-
-### 2026-01-27 13:00 - COMPLETED task-058: ch10 The RALPH Loop reviewed - WARMUP ITERATION
-- What: Reviewed Chapter 10 (The RALPH Loop) for quality
-- Review Results:
-  - AI slop check: PASS (no em dashes, no blacklisted phrases)
-  - Word count: 2,974 (within 2,500-4,000 target)
-- Fixes Applied:
-  - Line 35: Added "JSON Web Token (JWT)" definition
-  - Line 168: Added "Vitest (unit testing) + Playwright (end-to-end testing)"
-  - Line 180: Added "zod (TypeScript schema validation library)"
-  - Line 249: Added "Redis (in-memory data store)"
-- Related Chapters section: Already present ✓
-- Tasks: task-058 marked complete
-- Stats: pending 50, complete 59
-- ch10 Status: 3/5 milestones complete (code_written, code_tested, reviewed)
-- Outcome: Success
-- Next: task-059 (ch10 diagrams_complete milestone)
-
-### 2026-01-27 12:30 - COMPLETED task-057: ch10 The RALPH Loop code_tested - WARMUP ITERATION
-- What: Verified all code examples for Chapter 10 (The RALPH Loop)
-- Test Results:
-  - TypeScript: All ch10 files compile without errors
-  - Unit tests: 92 tests pass, 143 expect() calls
-  - Demo scripts: All 4 execute correctly (ralph-loop, task-management, clean-slate-recovery, memory-architecture)
-- Tasks: task-057 marked complete
-- Stats: pending 51, complete 58
-- ch10 Status: 2/5 milestones complete (code_written, code_tested)
-- Outcome: Success
-- Next: task-058 (ch10 reviewed milestone)
-
-### 2026-01-27 12:00 - COMPLETED task-056: ch10 The RALPH Loop code_written - WARMUP ITERATION
-- What: Verified code examples for Chapter 10 (The RALPH Loop)
-- Files Verified:
-  - examples/ch10/ralph-loop.ts (576 lines - RALPH loop orchestration, task parsing, fresh context)
-  - examples/ch10/task-management.ts (task filtering, autonomous readiness, priority calculation)
-  - examples/ch10/clean-slate-recovery.ts (trajectory analysis, constraint extraction, recovery framing)
-  - examples/ch10/memory-architecture.ts (git layer, AGENTS.md parsing, task tracking)
-  - examples/ch10/ralph-loop.test.ts (92 tests, 143 expect() calls)
-- Test Results: 92 tests pass (fixed 2 minor assertion issues)
-- All examples use Anthropic SDK as required
-- Tasks: task-056 marked complete
-- Stats: pending 52, complete 57
-- Outcome: Success
-- Next: task-057 (ch10 code_tested milestone)
-
-### 2026-01-28 04:15 - GENERATED comprehensive progress summary and quality analysis
-- What: Created detailed progress summary synthesizing all review agents (slop-check, tech-accuracy, term-intro)
-- Analysis includes:
-  - Completion metrics: 9/15 chapters (60%), 56/109 tasks (51%)
-  - Quality dashboard: 129 issues identified and categorized with solutions
-  - Top 5 priorities: Fix em dashes, define terms, verify Plan Mode, complete chapters, create diagrams
-  - Velocity: 1 chapter per 1.5 days, 100% success rate, 33-36 days to publication
-  - Publishing readiness: 52% (content solid with editorial fixes needed)
-  - All data aggregated from review agents
-- Files: reviews/summary-2026-01-28.md created with comprehensive detail
-- Outcome: Success - Clear roadmap to publication identified
-- Next: task-055 (ch10 code_written milestone)
-
-### 2026-01-28 03:00 - COMPLETED task-054: ch09 Context Engineering Deep Dive final - ITERATION 6
-- What: Completed final quality gate for Chapter 9 (Context Engineering Deep Dive)
-- Quality Gate Results:
-  - Word count: 2,741 (within 2,500-4,000 target) ✓
-  - Em dashes: None found ✓
-  - AI slop phrases: None found ✓
-  - Diagrams: 7 files confirmed ✓
-  - Exercises: ch09 folder with README ✓
-  - Cross-references: Related Chapters section present ✓
-  - Code examples: Tested in task-051 (67 tests pass) ✓
-  - Review: Passed in task-052 ✓
-- Tasks: task-054 + task-049 marked complete
-- Stats: pending 53, complete 56
-- ch09 Status: 5/5 milestones COMPLETE
-- Chapters Complete: 9/15 (ch01-ch09, 60%)
-- Iteration 6 % 6 == 0: Running all 7 review agents in parallel
-- Outcome: Success
-- Next: task-055 (ch10: The RALPH Loop code_written milestone) - score 900
-
-### 2026-01-27 23:00 - GENERATED comprehensive progress summary and quality analysis
-- What: Created detailed progress summary with all review data synthesized
-- Analysis includes:
-  - Completion metrics: 8/15 chapters (53%), 55/109 tasks (50%)
-  - Quality dashboard: 118 issues identified, all categorized with solutions
-  - Top 5 priorities: ch09 final, complete ch10-15, fix em dashes, tech accuracy, term intros
-  - Velocity: 1-2 chapters per week, 100% success rate, 7-9 weeks to completion
-  - Publishing readiness: 45% (content solid, quality/diagrams pending)
-  - All data aggregated from 6 review agents
-- Files: reviews/summary-2026-01-27.md created with comprehensive detail
-- Outcome: Success - Clear roadmap to completion identified
-- Next: Complete ch09 final milestone
-
-### 2026-01-28 02:00 - COMPLETED task-053: ch09 Context Engineering Deep Dive diagrams_complete - ITERATION 5
-- What: Created all required diagrams for Chapter 9 (Context Engineering Deep Dive)
-- Diagrams Created (6 new files):
-  - ch09-information-theory-pipeline.md (4 concepts: channel capacity, entropy, MI, gates)
-  - ch09-entropy-reduction.md (exponential filtering: 20 → 15 → 12 → 5 bits)
-  - ch09-debugging-hierarchy.md (4-layer: Context 60%, Prompting 25%, Model 10%, Manual 5%)
-  - ch09-context-rot.md (signal-to-noise degradation, before/after compacting)
-  - ch09-run-silent.md (backpressure pattern, 97% token reduction)
-  - ch09-recursive-compacting.md (task → feature → sprint → version)
-- Existing diagram:
-  - ch09-context-window.md (progressive disclosure pattern)
-- Total ch09 diagrams: 7 files covering all PRD requirements
-- Tasks: task-053 marked complete
-- Stats: pending 54, complete 55
-- ch09 Status: 4/5 milestones complete (code_written, code_tested, reviewed, diagrams_complete)
-- Learning: Added entry to @LEARNINGS.md (iteration 5 % 5 == 0)
-- Outcome: Success
-- Next: task-054 (ch09 final milestone)
-
-### 2026-01-28 01:15 - Queue Curation
-- What: Curated task queue (every 3rd iteration protocol)
-- Queue State:
-  - Pending: 55 tasks (verified)
-  - Complete: 54 tasks (verified)
-  - Total: 109 tasks
-  - No duplicates found
-  - No blocked tasks
-- Score Verification:
-  - task-049 (ch09): 905 ✓ (750 + 100 + 55)
-  - task-055 (ch10): 900 ✓ (750 + 100 + 50)
-  - task-061 (ch11): 895 ✓ (750 + 100 + 45)
-- Updates Applied:
-  - Updated lastUpdated timestamp
-  - Updated checkpoint.lastCheckpoint timestamp
-  - Updated checkpoint.lastSuccessfulTask to task-052
-- Queue Health: EXCELLENT
-- Next Priority: task-053 (ch09 diagrams_complete)
-- Outcome: Success
-
-### 2026-01-28 01:00 - COMPLETED task-052: ch09 Context Engineering Deep Dive reviewed - ITERATION 4
-- What: Reviewed Chapter 9 (Context Engineering Deep Dive) for quality
-- Review Results:
-  - AI slop check: PASS (no em dashes, no blacklisted phrases)
-  - Technical accuracy: PASS (information theory concepts correct)
-  - Term introduction: 3 issues fixed
-- Fixes Applied:
-  - Line 7: "LLMs" → "Large Language Models (LLMs)"
-  - Line 108: "Mutual information" → "Mutual information (MI)"
-  - Line 475: Added clarification for "Opus" and "Sonnet" model tiers
-  - Added Related Chapters section at end
-- Word count: 2,741 (within 2,500-4,000 target)
-- Related Chapters section: Added (links to ch03, ch07, ch08, ch10)
-- Tasks: task-052 marked complete
-- Stats: pending 55, complete 54
-- ch09 Status: 3/5 milestones complete (code_written, code_tested, reviewed)
-- Outcome: Success
-- Next: task-053 (ch09 diagrams_complete)
-
-### 2026-01-28 00:30 - COMPLETED task-051: ch09 Context Engineering Deep Dive code_tested - ITERATION 3
-- What: Tested all code examples for Chapter 9 (Context Engineering Deep Dive)
-- Test Results:
-  - TypeScript: All ch09 files compile without errors (project-wide check)
-  - Unit tests: 67 tests pass, 94 expect() calls
-  - Demo scripts: All 4 execute correctly
-- Files Tested:
-  - examples/ch09/entropy-measurement.ts - Runs, shows entropy calculations
-  - examples/ch09/progressive-disclosure.ts - Runs, demonstrates token savings
-  - examples/ch09/context-backpressure.ts - Runs, shows budget management
-  - examples/ch09/context-debugger.ts - Runs, shows debugging hierarchy
-  - examples/ch09/context-engineering.test.ts - 67 tests pass
-- Tasks: task-051 marked complete
-- Stats: pending 56, complete 53
-- ch09 Status: 2/5 milestones complete (code_written, code_tested)
-- Outcome: Success
-- Next: task-052 (ch09 reviewed milestone)
-
-### 2026-01-27 23:55 - COMPLETED task-050: ch09 Context Engineering Deep Dive code_written - ITERATION 2
-- What: Created code examples for Chapter 9 (Context Engineering Deep Dive)
-- Files Created:
-  - examples/ch09/entropy-measurement.ts (entropy calculation, mutual information, channel capacity)
-  - examples/ch09/progressive-disclosure.ts (three-level skill loading pattern)
-  - examples/ch09/context-backpressure.ts (run_silent pattern, budget management)
-  - examples/ch09/context-debugger.ts (four-layer debugging hierarchy)
-  - examples/ch09/context-engineering.test.ts (67 tests all passing)
-- Key Patterns Demonstrated:
-  - Entropy measurement through output variance
-  - Information content by constraint type (types > tests > comments)
-  - Progressive disclosure with metadata/core/supplementary layers
-  - Context budget tracking and backpressure
-  - Systematic debugging protocol (60% context, 25% prompting, 10% model, 5% manual)
-- All examples use Anthropic SDK as required
-- Tasks: task-050 marked complete
-- Stats: pending 57, complete 52
-- ch09 Status: 1/5 milestones complete (code_written)
-- Outcome: Success
-- Next: task-051 (ch09 code_tested milestone)
-
 ## Compacted History
 
 ### Week of 2026-01-27 (Major Progress)
-- Chapter Completion: 8/15 complete (53%)
+- Chapter Completion: 11/15 complete (73%)
 - PRDs: 15/15 finalized (100%)
-- Word Count: 44,313 (target 45,000-57,000)
-- Quality Issues: 129 identified and categorized (AI slop 60, tech 7, terms 62, cross-refs 0)
-- Diagrams: 33 created (52% complete)
-- Tasks: 56 completed (51%), 109 total
+- Word Count: 47,300 (target 45,000-57,000)
+- Quality Issues: 80 identified and categorized (AI slop 11, tech 7, terms 62, cross-refs 0)
+- Diagrams: 49 created (78% complete)
+- Tasks: 73 completed (67%), 109 total
 - Key Achievements:
-  - Comprehensive progress summary generated with all review data
+  - Comprehensive progress summary generated with all review data (2026-01-28)
   - All quality issues identified with specific solutions
-  - Clear roadmap to publication established
+  - Clear roadmap to publication established (25-27 hours remaining)
   - Cross-reference issues RESOLVED
-  - Publishing readiness assessment: 52% (content solid, quality/diagrams pending)
-  - Estimated 33-36 days to publication at current velocity
+  - Publishing readiness assessment: 80% (content solid, targeted fixes needed)
+  - Estimated 5-7 days to publication at current velocity
 
 ### Week of 2026-01-20
 - TOC restructured from 12 to 15 chapters

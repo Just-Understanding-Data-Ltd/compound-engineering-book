@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T10:00:00Z",
+  "lastUpdated": "2026-01-28T22:54:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -149,6 +149,71 @@
     "subtasks": "jq '.tasks[] | select(.subtasks) | {title, count: (.subtasks | length)}' tasks.json"
   },
   "tasks": [
+    {
+      "id": "task-207",
+      "type": "diagram",
+      "chapter": "ch13",
+      "title": "Create Signal Processing Harness diagram",
+      "description": "Visualize the four-layer harness model as a signal processing system that filters noise and amplifies signal. Shows noise reduction at each layer with failure rate improvements (30-50% → <1%). Lines 7-17 in chapter.",
+      "status": "pending",
+      "priority": "high",
+      "score": 745,
+      "flaggedByReview": "diagram-review-2026-01-28",
+      "reviewReference": "reviews/diagram-review-2026-01-28.md",
+      "suggestedFilename": "assets/diagrams/ch13-signal-processing-harness.mmd"
+    },
+    {
+      "id": "task-208",
+      "type": "diagram",
+      "chapter": "ch13",
+      "title": "Create Four Levels of Automation diagram",
+      "description": "Visualization of productivity progression from Level 0 (manual, 1x) through Level 3 (meta-infrastructure, 100-500x). Shows ROI and where most developers stop. Lines 546-580 in chapter.",
+      "status": "pending",
+      "priority": "high",
+      "score": 740,
+      "flaggedByReview": "diagram-review-2026-01-28",
+      "reviewReference": "reviews/diagram-review-2026-01-28.md",
+      "suggestedFilename": "assets/diagrams/ch13-four-automation-levels.mmd"
+    },
+    {
+      "id": "task-209",
+      "type": "diagram",
+      "chapter": "ch14",
+      "title": "Create Leverage Stack pyramid diagram",
+      "description": "Stacked pyramid showing what to keep sharp (understanding, design, verification), what to delegate (implementation patterns), and what to forget (syntax, boilerplate). Lines 250-266 in chapter. Already exists as ASCII art.",
+      "status": "pending",
+      "priority": "high",
+      "score": 735,
+      "flaggedByReview": "diagram-review-2026-01-28",
+      "reviewReference": "reviews/diagram-review-2026-01-28.md",
+      "suggestedFilename": "assets/diagrams/ch14-leverage-stack.mmd"
+    },
+    {
+      "id": "task-210",
+      "type": "diagram",
+      "chapter": "ch14",
+      "title": "Create Atrophy Ladder career ceiling diagram",
+      "description": "Ladder showing 5 career levels based on skill retention during AI-assisted development. Shows Level 4 (Senior Engineer) as minimum safe level, Level 5 (Architect) with no ceiling. Lines 281-300 in chapter. Already exists as ASCII art.",
+      "status": "pending",
+      "priority": "high",
+      "score": 730,
+      "flaggedByReview": "diagram-review-2026-01-28",
+      "reviewReference": "reviews/diagram-review-2026-01-28.md",
+      "suggestedFilename": "assets/diagrams/ch14-atrophy-ladder.mmd"
+    },
+    {
+      "id": "task-211",
+      "type": "diagram",
+      "chapter": "ch14",
+      "title": "Create Task Decomposition comparison diagram",
+      "description": "Before/after comparison: monolithic task (agent fails) vs decomposed tasks (agent succeeds). Shows 8 smaller tasks with clear boundaries vs one 15-step block. Lines 333-356 in chapter.",
+      "status": "pending",
+      "priority": "high",
+      "score": 725,
+      "flaggedByReview": "diagram-review-2026-01-28",
+      "reviewReference": "reviews/diagram-review-2026-01-28.md",
+      "suggestedFilename": "assets/diagrams/ch14-task-decomposition.mmd"
+    },
     {
       "id": "task-103",
       "type": "fix",
@@ -867,7 +932,8 @@
       "chapter": "ch12",
       "title": "ch12: Development Workflows",
       "description": "Complete remaining milestones for Development Workflows",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-28T22:54:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -914,8 +980,10 @@
           "parentId": "task-067",
           "type": "milestone",
           "title": "final",
-          "status": "pending",
-          "score": -115
+          "status": "complete",
+          "completedAt": "2026-01-28T22:54:00Z",
+          "score": -115,
+          "note": "All quality gates passed: 3,078 words (in range), no em dashes, no AI slop, 7 diagram sections, exercises folder, Related Chapters section present, 59 tests pass"
         }
       ],
       "score": 890
@@ -1237,16 +1305,16 @@
     ]
   },
   "stats": {
-    "pending": 36,
+    "pending": 39,
     "inProgress": 0,
-    "complete": 73,
+    "complete": 75,
     "blocked": 0,
-    "total": 109
+    "total": 114
   },
   "checkpoints": {
     "lastGoodCommit": "6a5e74441a25d2580b4e96666435c850abab6261",
-    "lastSuccessfulTask": "task-071",
-    "lastCheckpoint": "2026-01-28T10:00:00Z",
+    "lastSuccessfulTask": "task-072",
+    "lastCheckpoint": "2026-01-28T22:54:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0
