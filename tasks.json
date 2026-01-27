@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T09:00:00Z",
+  "lastUpdated": "2026-01-27T10:15:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1400,7 +1400,9 @@
       "description": "All code examples must use @anthropic-ai/sdk or @anthropic-ai/claude-agent-sdk. Current ch03 examples (prompt-patterns.ts, few-shot-builder.ts, prompt-analyzer.ts) are standalone utility functions without SDK integration. Refactor to show real API usage patterns. Every example should demonstrate: 1) Importing the SDK, 2) Creating a client/session, 3) Making actual API calls. Delete or rewrite examples that are just helper functions.",
       "status": "pending",
       "priority": "critical",
-      "score": 685,
+      "score": 1080,
+      "blocksChapters": ["ch03"],
+      "note": "Score: critical(1000) + fix(80) = 1080. Must complete before ch03 can be considered truly final.",
       "affectedFiles": [
         "examples/ch03/prompt-patterns.ts",
         "examples/ch03/few-shot-builder.ts",
@@ -2379,13 +2381,13 @@
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "e177a331344f55b205cb25c8d99557b163e2127e",
-    "lastSuccessfulTask": "task-023",
-    "lastCheckpoint": "2026-01-28T09:00:00Z",
+    "lastGoodCommit": "98af649a6602e6850617504cf32ba0cd71224cb0",
+    "lastSuccessfulTask": "iteration-4",
+    "lastCheckpoint": "2026-01-27T17:16:18Z",
     "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
-    "lastCuration": "2026-01-28T08:00:00Z"
+    "lastCuration": "2026-01-27T10:15:00Z"
   },
   "config": {
     "maxConsecutiveFailures": 3,
@@ -2393,25 +2395,26 @@
     "healthCheckInterval": 300
   },
   "curatorNotes": {
-    "lastRun": "2026-01-28T08:00:00Z",
-    "iteration": 3,
-    "tasksFixed": 0,
+    "lastRun": "2026-01-27T10:15:00Z",
+    "iteration": 5,
+    "tasksFixed": 1,
     "duplicatesFound": 0,
     "statusInconsistenciesFound": 0,
-    "priorityIssues": [],
-    "queueHealth": "EXCELLENT - Queue is clean and consistent",
+    "priorityIssues": ["task-209 score corrected: 685 -> 1080 (critical priority was underscored)"],
+    "queueHealth": "GOOD - Score corrected for critical task",
     "findings": {
       "duplicateTaskIds": "NONE - Queue is clean",
-      "statusConsistency": "ALL CONSISTENT - task-019 (ch04 in_progress) has 3/5 subtasks complete (code_written, code_tested, reviewed)",
-      "statsVerification": "CORRECT - pending 168, inProgress 1, complete 45, total 214",
-      "queuePriorities": "CORRECTLY ORDERED - ch04 milestones next (task-023 diagrams, task-024 final)",
-      "nextTaskAnalysis": "task-019 (ch04 in_progress) is 60% complete (3/5 milestones). Next: task-023 (diagrams complete) or task-125 (ch04 high-priority diagrams). After ch04: task-025 (ch05 code_written)."
+      "statusConsistency": "ALL CONSISTENT - task-019 (ch04 in_progress) has 4/5 subtasks complete",
+      "statsVerification": "CORRECT - pending 164 (46 tasks + 118 subtasks), inProgress 1, complete 49",
+      "queuePriorities": "CORRECTED - task-209 score fixed to 1080 to reflect critical priority",
+      "nextTaskAnalysis": "task-019 (ch04) is 80% complete (4/5 milestones). Only task-024 (final) remains. After ch04 complete, task-209 (SDK refactor, score 1080) is highest priority pending."
     },
     "recommendations": [
-      "NEXT: task-023 (ch04 diagrams_complete) - create diagrams for ch04",
-      "THEN: task-024 (ch04 final) - complete quality gate checklist",
-      "CRITICAL: task-209 (SDK refactor) still pending - ch03 examples need Anthropic SDK integration",
-      "Status Update: ch04 is 60% complete (3/5 milestones). Chapters complete: 3/15 (ch01, ch02, ch03)."
+      "IMMEDIATE: Complete task-024 (ch04 final) - only remaining milestone for ch04",
+      "THEN: task-209 (SDK refactor, score 1080) - CRITICAL priority, ch03 code needs SDK integration",
+      "AFTER: task-025 (ch05 code_written, score 925) - next chapter in sequence",
+      "Status: ch04 is 80% complete (4/5 milestones). Chapters complete: 3/15 (ch01, ch02, ch03).",
+      "Note: task-019 in_progress must be completed before starting any new chapter tasks"
     ]
   }
 }
