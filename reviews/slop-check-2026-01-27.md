@@ -1,14 +1,24 @@
-# AI Slop Check - 2026-01-27 (Updated)
+# AI Slop Check - 2026-01-27 (Updated v2)
 
 ## Summary
-- Files scanned: 31 (13 chapters, 18 PRDs)
-- Issues found: 51 (Critical: 1, High: 45, Medium: 5)
+- Files scanned: 34 (15 chapters, 19 PRDs)
+- Issues found: 53 (Critical: 1, High: 47, Medium: 5)
 
 **Good news:** The chapter files are remarkably clean. Most issues are in PRD files, which are internal planning documents. The actual book content has very few slop patterns.
 
-**Update:** Re-scanned with all 13 chapters now complete (ch01-ch13).
+**Update v2:** Re-scanned with all 15 chapters now complete (ch01-ch15, including new ch14 and ch15).
 
 ## Issues by File
+
+### chapters/ch14-the-meta-engineer-playbook.md
+| Line | Severity | Pattern | Text | Suggested Fix |
+|------|----------|---------|------|---------------|
+| 316 | High | "paradigm" | "AI-powered coding agents represent a paradigm shift" | Use: "AI-powered coding agents represent a fundamental shift" |
+
+### chapters/ch15-model-strategy-and-cost-optimization.md
+| Line | Severity | Pattern | Text | Suggested Fix |
+|------|----------|---------|------|---------------|
+| 606 | Medium | "powerful" | "Skills can invoke other skills, creating powerful workflows" | Consider: "creating flexible workflows" or "creating composed workflows" |
 
 ### chapters/ch07-quality-gates-that-compound.md
 | Line | Severity | Pattern | Text | Suggested Fix |
@@ -105,9 +115,9 @@
 | game-changer | 0 | 0 | 0 |
 | leverage (verb) | 0 | 2 | 2 |
 | realm | 0 | 0 | 0 |
-| paradigm | 0 | 2 | 2 |
+| paradigm | 1 | 2 | 3 |
 | em dash (—) | 0 | 44 | 44 |
-| powerful | 1 | 5 | 6 |
+| powerful | 2 | 5 | 7 |
 | comprehensive | 2 | 13 | 15 |
 
 **Note:** "leverage" as a noun is acceptable and heavily used in this book (core concept). Only verb uses are flagged.
@@ -121,6 +131,9 @@
 ### Priority 1: Fix the "crucial" instance
 Replace "here's the crucial insight" with "here's the key insight" in prds/ch06.md:765.
 
+### Priority 1b: Fix "paradigm" in chapter content
+Replace "paradigm shift" with "fundamental shift" in chapters/ch14-the-meta-engineer-playbook.md:316.
+
 ### Priority 2: Standardize PRD formatting
 The PRDs heavily use em dashes for headers and explanations. Consider a batch replacement:
 - Section headers: Use colons ("Section 4.2: Case Study" not "Section 4.2—Case Study")
@@ -130,7 +143,7 @@ The PRDs heavily use em dashes for headers and explanations. Consider a batch re
 When converting PRD content to chapter drafts, ensure em dashes are converted to appropriate punctuation.
 
 ## Clean Files (No Issues)
-### Chapters (All 13 clean of critical/high patterns)
+### Chapters (14 of 15 clean of critical/high patterns)
 - chapters/ch01-the-compound-systems-engineer.md
 - chapters/ch02-getting-started-with-claude-code.md
 - chapters/ch03-prompting-fundamentals.md
@@ -144,6 +157,8 @@ When converting PRD content to chapter drafts, ensure em dashes are converted to
 - chapters/ch11-sub-agent-architecture.md
 - chapters/ch12-development-workflows.md
 - chapters/ch13-building-the-harness.md
+- chapters/ch14-the-meta-engineer-playbook.md (1 high: "paradigm")
+- chapters/ch15-model-strategy-and-cost-optimization.md (1 medium: "powerful")
 
 ### PRDs (Clean)
 - prds/index.md
