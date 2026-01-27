@@ -98,6 +98,7 @@ preflight() {
     [ ! -f "tasks.json" ] && echo "ERROR: Missing tasks.json" && errors=$((errors + 1))
     command -v jq &>/dev/null || { echo "ERROR: jq required"; errors=$((errors + 1)); }
     command -v claude &>/dev/null || { echo "ERROR: claude CLI required"; errors=$((errors + 1)); }
+    command -v bc &>/dev/null || { echo "ERROR: bc required (brew install bc)"; errors=$((errors + 1)); }
 
     if [ -n "$(git status --porcelain)" ]; then
         echo "WARNING: Uncommitted changes detected"
@@ -379,6 +380,9 @@ EOF
 # ==============================================================================
 # Instead of fixed intervals, we adapt based on new issues found.
 # Like TCP congestion control: backoff when improving, pressure when regressing.
+#
+# Algorithm uses 1.3/0.7 ratios (net 0.91 per oscillation cycle) to prevent
+# interval from collapsing to MIN during normal issue fluctuation.
 
 METRICS_DIR="$PROJECT_DIR/.metrics"
 mkdir -p "$METRICS_DIR"
@@ -388,18 +392,56 @@ MIN_REVIEW_INTERVAL=5
 MAX_REVIEW_INTERVAL=50
 LAST_REVIEW_ITERATION=0
 
+# Load persisted state
+load_adaptive_state() {
+    if [ -f "$METRICS_DIR/current_interval" ]; then
+        local saved=$(cat "$METRICS_DIR/current_interval" 2>/dev/null)
+        if [[ "$saved" =~ ^[0-9]+$ ]] && [ "$saved" -gt 0 ]; then
+            ADAPTIVE_INTERVAL=$saved
+        fi
+    fi
+    if [ -f "$METRICS_DIR/last_review_iteration" ]; then
+        local saved=$(cat "$METRICS_DIR/last_review_iteration" 2>/dev/null)
+        if [[ "$saved" =~ ^[0-9]+$ ]]; then
+            LAST_REVIEW_ITERATION=$saved
+        fi
+    fi
+}
+
+# Save adaptive state (call after review)
+save_adaptive_state() {
+    echo "$ADAPTIVE_INTERVAL" > "$METRICS_DIR/current_interval"
+    echo "$LAST_REVIEW_ITERATION" > "$METRICS_DIR/last_review_iteration"
+}
+
+# Validate numeric value with default fallback
+validate_numeric() {
+    local value="$1"
+    local default="$2"
+    value=$(echo "$value" | tr -dc '0-9')
+    if [ -n "$value" ] && [ "$value" -ge 0 ] 2>/dev/null; then
+        echo "$value"
+    else
+        echo "$default"
+    fi
+}
+
 # Count issues cheaply (no agent needed)
 count_issues() {
     local critical=0 medium=0 low=0
 
-    # Critical: FIXMEs, TODOs with BUG, broken tests
-    critical=$(grep -rE "FIXME|BUG|TODO.*critical" chapters/ examples/ 2>/dev/null | wc -l | tr -d ' ')
+    # Critical: FIXMEs, TODOs with BUG (word boundaries to avoid DEBUG, etc.)
+    critical=$(grep -rE '\bFIXME\b|\bBUG\b|TODO.*(bug|critical)' chapters/ examples/ 2>/dev/null | wc -l | tr -d ' ')
+    critical=$(validate_numeric "$critical" "0")
 
-    # Medium: em dashes (AI slop indicator)
-    medium=$(grep -c "—" chapters/*.md 2>/dev/null | awk -F: '{sum+=$2} END {print sum+0}')
+    # Medium: em dashes (AI slop indicator) - recursive through all .md files
+    medium=$(grep -r "—" chapters/ examples/ --include="*.md" 2>/dev/null | wc -l | tr -d ' ')
+    medium=$(validate_numeric "$medium" "0")
 
-    # Low: AI slop phrases
-    low=$(grep -riE "delve|crucial|leverage|utilize|aforementioned" chapters/ 2>/dev/null | wc -l | tr -d ' ')
+    # Low: AI slop phrases (exclude meta-discussion about avoiding these words)
+    low=$(grep -riE '\bdelve\b|\bcrucial\b|\bleverage\b|\butilize\b|\baforementioned\b' chapters/ examples/ 2>/dev/null | \
+          grep -viE "don.t use|avoid|blacklist|never use" 2>/dev/null | wc -l | tr -d ' ')
+    low=$(validate_numeric "$low" "0")
 
     echo "$((critical * 10 + medium * 3 + low))"
 }
@@ -415,53 +457,76 @@ update_adaptive_interval() {
     local prev_file="$METRICS_DIR/prev_new_issues"
     local history_file="$METRICS_DIR/issues_history.txt"
 
+    # Validate input
+    new_issues=$(validate_numeric "$new_issues" "0")
+
+    # Trim history file if > 100 lines (prevent unbounded growth)
+    if [ -f "$history_file" ]; then
+        local lines=$(wc -l < "$history_file" 2>/dev/null | tr -d ' ')
+        if [ "${lines:-0}" -gt 100 ]; then
+            tail -100 "$history_file" > "$history_file.tmp" && mv "$history_file.tmp" "$history_file"
+        fi
+    fi
+
     # Record history
     echo "$(date +%s) $new_issues" >> "$history_file"
 
-    # Get previous new issues count
+    # Get previous issues count with validation
     local prev_issues=999
-    [ -f "$prev_file" ] && prev_issues=$(cat "$prev_file")
+    if [ -f "$prev_file" ]; then
+        prev_issues=$(validate_numeric "$(cat "$prev_file" 2>/dev/null)" "999")
+    fi
 
     # Save current for next time
     echo "$new_issues" > "$prev_file"
 
-    # Adaptive backoff/pressure
+    # Adaptive backoff/pressure using 1.3/0.7 ratios (net 0.91 per oscillation)
     if [ "$new_issues" -lt "$prev_issues" ]; then
-        # Improving! Backoff (multiply by 1.5)
-        ADAPTIVE_INTERVAL=$(echo "$ADAPTIVE_INTERVAL * 1.5" | bc | cut -d. -f1)
-        echo "  ↓ Issues decreasing ($prev_issues → $new_issues). Backing off to review every $ADAPTIVE_INTERVAL"
+        # Improving! Backoff (multiply by 1.3)
+        ADAPTIVE_INTERVAL=$(echo "$ADAPTIVE_INTERVAL * 13 / 10" | bc 2>/dev/null)
+        ADAPTIVE_INTERVAL=$(validate_numeric "$ADAPTIVE_INTERVAL" "$REVIEW_EVERY")
+        echo "  ↓ Issues decreasing ($prev_issues → $new_issues). Backing off to $ADAPTIVE_INTERVAL"
     elif [ "$new_issues" -gt "$prev_issues" ]; then
-        # Regressing! More pressure (divide by 2)
-        ADAPTIVE_INTERVAL=$(echo "$ADAPTIVE_INTERVAL / 2" | bc)
-        echo "  ↑ Issues increasing ($prev_issues → $new_issues). Increasing pressure to review every $ADAPTIVE_INTERVAL"
+        # Regressing! More pressure (multiply by 0.7)
+        ADAPTIVE_INTERVAL=$(echo "$ADAPTIVE_INTERVAL * 7 / 10" | bc 2>/dev/null)
+        ADAPTIVE_INTERVAL=$(validate_numeric "$ADAPTIVE_INTERVAL" "$MIN_REVIEW_INTERVAL")
+        echo "  ↑ Issues increasing ($prev_issues → $new_issues). Pressure to $ADAPTIVE_INTERVAL"
     else
-        # Stable - slight backoff
-        ADAPTIVE_INTERVAL=$((ADAPTIVE_INTERVAL + 2))
-        echo "  → Issues stable ($new_issues). Interval now $ADAPTIVE_INTERVAL"
+        # Stable - behavior depends on absolute level
+        if [ "$new_issues" -lt 10 ]; then
+            ADAPTIVE_INTERVAL=$(echo "$ADAPTIVE_INTERVAL * 11 / 10" | bc 2>/dev/null)
+            ADAPTIVE_INTERVAL=$(validate_numeric "$ADAPTIVE_INTERVAL" "$REVIEW_EVERY")
+            echo "  → Stable and low ($new_issues). Backing off to $ADAPTIVE_INTERVAL"
+        else
+            echo "  → Stable but elevated ($new_issues). Maintaining $ADAPTIVE_INTERVAL"
+        fi
     fi
 
     # Clamp to bounds
     [ "$ADAPTIVE_INTERVAL" -lt "$MIN_REVIEW_INTERVAL" ] && ADAPTIVE_INTERVAL=$MIN_REVIEW_INTERVAL
     [ "$ADAPTIVE_INTERVAL" -gt "$MAX_REVIEW_INTERVAL" ] && ADAPTIVE_INTERVAL=$MAX_REVIEW_INTERVAL
 
-    # Check for convergence (near-zero new issues for 3+ reviews)
-    local recent_sum=$(tail -3 "$history_file" 2>/dev/null | awk '{sum+=$2} END {print sum+0}')
-    if [ "$recent_sum" -lt 5 ]; then
-        echo "  ✓ CONVERGED: <5 total issues in last 3 reviews. System is clean."
-        ADAPTIVE_INTERVAL=$MAX_REVIEW_INTERVAL
+    # Check for convergence: ALL of last 3 reviews must have ≤2 issues each
+    if [ -f "$history_file" ]; then
+        local converged=$(tail -3 "$history_file" 2>/dev/null | awk '$2 <= 2 {c++} END {print (c >= 3 ? 1 : 0)}')
+        if [ "${converged:-0}" -eq 1 ]; then
+            echo "  ✓ CONVERGED: ≤2 issues in each of last 3 reviews. System is clean."
+            ADAPTIVE_INTERVAL=$MAX_REVIEW_INTERVAL
+        fi
     fi
 
-    # Save current interval
-    echo "$ADAPTIVE_INTERVAL" > "$METRICS_DIR/current_interval"
+    # Save state
+    save_adaptive_state
 }
 
 # Check if review is needed (adaptive)
 should_review() {
     local iteration=$1
-    local since_last=$((iteration - LAST_REVIEW_ITERATION))
 
-    # Load saved interval if exists
-    [ -f "$METRICS_DIR/current_interval" ] && ADAPTIVE_INTERVAL=$(cat "$METRICS_DIR/current_interval")
+    # Load persisted state
+    load_adaptive_state
+
+    local since_last=$((iteration - LAST_REVIEW_ITERATION))
 
     if [ "$since_last" -ge "$ADAPTIVE_INTERVAL" ]; then
         return 0  # Yes, review
@@ -497,11 +562,11 @@ EOF
 
     # Count issues AFTER review (agents may have fixed some)
     local issues_after=$(get_issue_score)
-    local new_issues=$((issues_before > issues_after ? issues_before - issues_after : issues_after - issues_before))
+    local delta=$((issues_before - issues_after))
 
-    echo "Issues after review: $issues_after (Δ: $new_issues)"
+    echo "Issues after review: $issues_after (Δ: $delta)"
 
-    # Update adaptive interval
+    # Update adaptive interval and save state
     update_adaptive_interval "$issues_after"
 }
 
@@ -599,7 +664,7 @@ while true; do
         run_health_check
     else
         # Quick issue check without full review
-        local current_issues=$(get_issue_score)
+        current_issues=$(get_issue_score)
         echo "Quick scan: $current_issues weighted issues (next review in $((ADAPTIVE_INTERVAL - (iteration - LAST_REVIEW_ITERATION))) iterations)"
     fi
 
