@@ -20,44 +20,55 @@
 - [x] Write ch12.md PRD (Case Studies & Reference) (Completed: 2026-01-26)
 - [x] Review all PRDs for consistency (Completed: 2026-01-26)
 
-## Phase 1.5: PRD Enhancement (Based on Sub-Agent Analysis)
+## Phase 1.5: PRD Enhancement (Based on Sub-Agent Analysis) - COMPLETE
 
 > These tasks come from the sub-agent analysis of PRDs vs Knowledge Base (Jan 27, 2026)
+> **ALL PRD ENHANCEMENTS COMPLETE** (Completed: 2026-01-27)
 
 ### Ch01-Ch04 PRD Improvements
-- [ ] Add liquidation-cadence.md reference to ch01 PRD (builds on "when to persist" section)
-- [ ] Add building-the-harness.md reference to ch01 PRD (harness philosophy)
-- [ ] Add building-the-factory.md reference to ch01 PRD (factory vs product)
-- [ ] Add information-theory-prompting.md reference to ch03 PRD (entropy reduction)
-- [ ] Add prompt-caching-strategies.md reference to ch03 PRD
-- [ ] Update ch04 PRD with Agent SDK v2-preview patterns (unstable_v2_* APIs) (Completed: 2026-01-27)
+- [x] Add liquidation-cadence.md reference to ch01 PRD (Completed: 2026-01-27)
+- [x] Add building-the-harness.md reference to ch01 PRD (Completed: 2026-01-27)
+- [x] Add building-the-factory.md reference to ch01 PRD (Completed: 2026-01-27)
+- [x] Add information-theory-prompting.md reference to ch03 PRD (Completed: 2026-01-27)
+- [x] Add prompt-caching-strategies.md reference to ch03 PRD (Completed: 2026-01-27)
+- [x] Update ch04 PRD with Agent SDK v2-preview patterns (Completed: 2026-01-27)
 
 ### Ch05-Ch08 PRD Improvements
-- [ ] Add entropy-in-code-generation.md reference to ch05 PRD (verification theory)
-- [ ] Add agent-reliability-chasm.md reference to ch05 PRD
-- [ ] Add flaky-test-diagnosis-script.md reference to ch08 PRD
-- [ ] Add ai-cost-protection-timeouts.md reference to ch08/ch15 PRDs
-- [ ] Add errors-md-pattern.md reference to ch08 PRD
+- [x] Add entropy-in-code-generation.md reference to ch05 PRD (Completed: 2026-01-27)
+- [x] Add agent-reliability-chasm.md reference to ch05 PRD (Completed: 2026-01-27)
+- [x] Add flaky-test-diagnosis-script.md reference to ch08 PRD (Completed: 2026-01-27)
+- [x] Add ai-cost-protection-timeouts.md reference to ch08/ch15 PRDs (Completed: 2026-01-27)
+- [x] Add errors-md-pattern.md reference to ch08 PRD (Completed: 2026-01-27)
 
 ### Ch09-Ch12 PRD Improvements
-- [ ] Add sub-agent-context-hierarchy.md concepts to ch09 PRD (context isolation patterns)
-- [ ] Add tool-access-control.md concepts to ch09 PRD (permission boundaries)
-- [ ] Add orchestration-patterns.md concepts to ch10 PRD
-- [ ] Add parallel-agent-execution.md reference to ch10 PRD (git worktrees pattern)
-- [ ] Add plan-mode-workflow.md reference to ch12 PRD
-- [ ] Add incremental-development.md reference to ch12 PRD
+- [x] Add sub-agent-context-hierarchy.md concepts to ch09 PRD (Completed: 2026-01-27)
+- [x] Add tool-access-control.md concepts to ch09 PRD (Completed: 2026-01-27)
+- [x] Add orchestration-patterns.md concepts to ch10 PRD (Completed: 2026-01-27)
+- [x] Add parallel-agent-execution.md reference to ch10 PRD (Completed: 2026-01-27)
+- [x] Add plan-mode-workflow.md reference to ch12 PRD (Completed: 2026-01-27)
+- [x] Add incremental-development.md reference to ch12 PRD (Completed: 2026-01-27)
 
 ### Cross-Cutting Improvements
+- [x] Add Model Strategy (YOLO/Skills/Haiku-Sonnet-Opus) content to ch15 PRD (Completed: 2026-01-27)
 - [ ] Create index of all KB articles used in each PRD
-- [ ] Add Model Strategy (YOLO/Skills/Haiku-Sonnet-Opus) content to ch15 PRD
 - [ ] Ensure all 93 KB articles have at least one PRD reference
 
-### New KB Articles Needed (Critical Gaps)
+### New KB Articles Needed (Critical Gaps) - TO BE CREATED
 - [ ] Create @kb/sub-agent-context-hierarchy.md (how sub-agents manage context isolation)
 - [ ] Create @kb/tool-access-control.md (granting/restricting tool access to sub-agents)
 - [ ] Create @kb/orchestration-patterns.md (coordinator, swarm, pipeline patterns)
 - [ ] Create @kb/actor-critic-pattern.md (writer agent + reviewer agent pattern)
 - [ ] Create @kb/agent-memory-patterns.md (checkpoint/resume, state persistence)
+- [ ] Create @kb/human-in-the-loop-patterns.md (HITL implementation patterns)
+- [ ] Create @kb/event-sourcing-agents.md (event log architecture for agent state)
+- [ ] Create @kb/tool-call-validation.md (JSON schema validation for tool outputs)
+- [ ] Create @kb/ci-cd-agent-patterns.md (GitHub Actions patterns for agent verification)
+- [ ] Create @kb/mutual-information-context.md (measuring context effectiveness)
+- [ ] Create @kb/token-budgeting-strategies.md (allocating context by information density)
+- [ ] Create @kb/lost-in-the-middle-mitigation.md (preventing context window degradation)
+- [ ] Create @kb/checkpoint-commit-patterns.md (git commit strategies for AI workflows)
+- [ ] Create @kb/batch-api-patterns.md (batch processing for cost reduction)
+- [ ] Create @kb/prompt-injection-prevention.md (security considerations in prompting)
 
 ## Phase 2: Chapter Writing
 
