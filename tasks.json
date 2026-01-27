@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T22:30:00Z",
+  "lastUpdated": "2026-01-27T19:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -544,7 +544,8 @@
           "parentId": "task-037",
           "type": "milestone",
           "title": "code written",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-27T19:00:00Z",
           "score": -95
         },
         {
@@ -552,7 +553,8 @@
           "parentId": "task-037",
           "type": "milestone",
           "title": "code tested",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-27T19:00:00Z",
           "score": -100
         },
         {
@@ -2508,9 +2510,9 @@
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "2ac7ecd56a36fe7cc44eb11ff128d683e36135f4",
-    "lastSuccessfulTask": "task-036",
-    "lastCheckpoint": "2026-01-27T22:30:00Z",
+    "lastGoodCommit": "911d2fba33c3f5ca2ffe1c1d42d1da31bd0d4e39",
+    "lastSuccessfulTask": "iteration-3",
+    "lastCheckpoint": "2026-01-27T18:33:42Z",
     "failedAttempts": 11,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
