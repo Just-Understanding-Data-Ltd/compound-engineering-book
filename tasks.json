@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T06:30:00Z",
+  "lastUpdated": "2026-01-28T07:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -884,8 +884,10 @@
           "parentId": "task-067",
           "type": "milestone",
           "title": "code tested",
-          "status": "pending",
-          "score": -100
+          "status": "complete",
+          "completedAt": "2026-01-28T07:30:00Z",
+          "score": -100,
+          "note": "TypeScript compiles (no ch12 errors), 59 tests pass (123 expect() calls), all 5 demo scripts run correctly (4 fully, plan-mode-session initializes correctly then fails at API call as expected)"
         },
         {
           "id": "task-070",
@@ -1231,16 +1233,16 @@
     ]
   },
   "stats": {
-    "pending": 40,
+    "pending": 38,
     "inProgress": 0,
-    "complete": 69,
+    "complete": 71,
     "blocked": 0,
     "total": 109
   },
   "checkpoints": {
-    "lastGoodCommit": "8acc951f5c74ca6c59361b920b374947d90dab1c",
-    "lastSuccessfulTask": "iteration-2",
-    "lastCheckpoint": "2026-01-27T22:16:59Z",
+    "lastGoodCommit": "20c2a5c2f075774ed9badd1be29ea151ed47a172",
+    "lastSuccessfulTask": "task-069",
+    "lastCheckpoint": "2026-01-28T07:30:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0
