@@ -242,9 +242,12 @@
 - [ ] ch08: Introduce bcrypt library (line 86)
 - [ ] ch11: Introduce Result type pattern (line 35)
 - [ ] ch11: Introduce JWT acronym (line 512)
-- [ ] ch11: Fix Chapter 15 reference (line 724) - chapter doesn't exist yet
+- [ ] ch11: Fix Chapter 15 reference (line 724) - chapter doesn't exist yet (CRITICAL)
 - [ ] ch12: Consider expanding AST in section heading (line 449)
 - [ ] ch12: Introduce slash command feature (line 515)
+
+**Critical (Broken Cross-References in ch11):**
+- [ ] ch11 line 724: Remove or update Chapter 15 reference (chapter doesn't exist)
 
 **Chapters with Good Practices (use as models):**
 - ch09: Explains info theory concepts thoroughly

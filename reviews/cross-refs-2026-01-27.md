@@ -1,8 +1,9 @@
 # Cross-Reference Validation Review
 
-**Date**: 2026-01-27
+**Date**: 2026-01-27 (Updated with ch08-13 analysis)
 **Validator**: Claude Opus 4.5
 **Scope**: All files in `chapters/` and `prds/`
+**Files Scanned**: 13 chapters, 18 PRDs
 
 ---
 
@@ -13,7 +14,8 @@
 | Broken Links | 4 | 4 |
 | PRD Misalignments | 5 | 5 |
 | Missing Cross-Refs | 3 | 0 |
-| Chapter Reference Issues | 4 | 2 |
+| Chapter Reference Issues | 5 | 3 |
+| Non-Existent Chapter Refs | 1 | 1 |
 
 **Overall Status**: Requires attention before publishing
 
@@ -59,19 +61,37 @@ The PRDs use an **outdated numbering scheme** that predates the addition of 4 ne
 |------|-------|----------|
 | ch01 | References ch07/ch08/ch10 with old numbers (should be ch09/ch10/ch13) | Critical |
 | ch02 | References ch01, ch03, ch04, ch06 - mostly correct | Low |
-| ch03 | References ch09 (Context Engineering) which doesn't exist yet | Medium |
+| ch03 | References ch09 (Context Engineering) - NOW EXISTS | Fixed |
 | ch06 | Cross-reference section exists but is incomplete | Low |
+| ch11 | References Chapter 15 (Model Strategy) - DOES NOT EXIST | Critical |
 
 ### Forward References to Unwritten Chapters
 
-These are intentional forward references but the chapters don't exist yet:
-
 | Source | Target Chapter | Status |
 |--------|----------------|--------|
-| ch01 | Context Engineering Deep Dive | Not written (ch09) |
-| ch01 | The RALPH Loop | Not written (ch10) |
-| ch01 | Building the Harness | Not written (ch13) |
-| ch03 | Context Engineering Deep Dive | Not written (ch09) |
+| ch01 | Context Engineering Deep Dive | NOW WRITTEN (ch09) - link still broken |
+| ch01 | The RALPH Loop | NOW WRITTEN (ch10) - link still broken |
+| ch01 | Building the Harness | NOW WRITTEN (ch13) - link still broken |
+| ch03 | Context Engineering Deep Dive | NOW WRITTEN (ch09) |
+| ch11 | Model Strategy (Chapter 15) | NOT WRITTEN - chapter doesn't exist |
+
+### Chapters 8-13 Cross-Reference Validation (NEW)
+
+All chapters 8-13 have been written. Here's their cross-reference status:
+
+| Chapter | Related Chapters Section | Cross-Refs Valid | Issues |
+|---------|-------------------------|------------------|--------|
+| ch08 | Yes (lines ~350) | ✓ Valid | References ch06, ch07, ch09, ch10 correctly |
+| ch09 | Yes (lines ~380) | ✓ Valid | References ch03, ch04, ch07, ch10 correctly |
+| ch10 | Yes (lines ~330) | ✓ Valid | References ch04, ch07, ch08, ch09, ch11, ch13 correctly |
+| ch11 | Yes (lines ~718-724) | ✗ ISSUE | References **Chapter 15** which doesn't exist |
+| ch12 | Yes (lines ~619-623) | ✓ Valid | References ch04, ch10, ch11, ch13 correctly |
+| ch13 | Yes (lines ~612-618) | ✓ Valid | References ch04, ch07, ch09, ch10, ch11 correctly |
+
+**Critical Issue Found:**
+- **ch11 line 724**: `- Chapter 15 (Model Strategy) covers using different model tiers for different agent roles`
+- Chapter 15 is listed in `prds/toc.md` but has NOT been written yet
+- This forward reference should either be removed or marked as "(upcoming chapter)"
 
 ---
 
@@ -106,17 +126,22 @@ These are intentional forward references but the chapters don't exist yet:
    - ch08 -> ch10 (RALPH Loop)
    - ch10 -> ch13 (Building the Harness)
 
+4. **Fix ch11 Chapter 15 reference** (line 724):
+   - Either remove the reference entirely
+   - Or change to: "Chapter 15 (Model Strategy) will cover using different model tiers for different agent roles (upcoming)"
+   - Or write Chapter 15 first
+
 ### Medium Priority
 
-4. **Add cross-reference sections** to ch04, ch05, ch07
+5. **Add cross-reference sections** to ch04, ch05, ch07
 
-5. **Complete ch06 cross-reference section**
+6. **Complete ch06 cross-reference section**
 
-6. **Update ch03 reference** to ch09 once that chapter exists
+7. ~~Update ch03 reference to ch09~~ - ch09 now exists, reference is valid
 
 ### Low Priority
 
-7. Consider adding a `chapter-map.md` file that documents the PRD-to-chapter mapping to prevent future confusion
+8. Consider adding a `chapter-map.md` file that documents the PRD-to-chapter mapping to prevent future confusion
 
 ---
 
