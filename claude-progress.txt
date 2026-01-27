@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-27 20:00)
-- Phase: Chapter Completion - Milestones
-- Active: ch02 code_written (task-008)
-- Last Completed: ch01 FINAL COMPLETE (task-006) - First chapter publication-ready!
+## Current Status (Updated: 2026-01-27 20:43)
+- Phase: Infrastructure + Chapter Milestones
+- Active: task-207 (Level 2 thinking content) or task-008 (ch02 code_written)
+- Last Completed: task-206 (Create exercises folder structure)
 - Blockers: None
 
 ## Project State Summary
@@ -20,9 +20,25 @@
 - Chapters Complete: 1/15 (ch01)
 
 ## Next Task
-ch02 code_written (task-008) - Create TypeScript examples for Getting Started chapter
+task-207 (Add Level 2 thinking content) - score 990
+OR task-008 (ch02 code_written) - score 940
 
 ## Recent Activity
+
+### 2026-01-27 20:43 - COMPLETED exercises folder structure (task-206) - WARMUP ITERATION
+- What: Created complete exercises folder infrastructure for all 15 chapters
+- Files created:
+  - exercises/ch01/README.md through exercises/ch15/README.md (15 chapter README files)
+  - exercises/ch01/solutions/ through exercises/ch15/solutions/ (15 solution folders)
+- Structure: Each chapter folder has README.md with:
+  - Exercise table (3 exercises: Easy, Medium, Hard)
+  - Learning objectives
+  - Prerequisites
+  - Getting started instructions
+- exercises/README.md already existed with conventions
+- Tasks: task-206 marked complete, stats updated (181 pending, 27 complete)
+- Outcome: Success
+- Next: task-207 (Level 2 thinking content, score 990) or ch02 code_written (task-008)
 
 ### 2026-01-27 20:00 - COMPLETED ch01 Final Milestone (task-006) - ITERATION 12
 - What: Completed final quality gate for Chapter 1, ran all 7 review agents, curated queue

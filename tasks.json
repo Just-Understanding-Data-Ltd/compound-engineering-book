@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-27T19:00:00.000Z",
+  "lastUpdated": "2026-01-27T20:43:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -154,9 +154,11 @@
       "type": "infrastructure",
       "title": "Create exercises folder structure",
       "description": "Set up exercises/ folder with per-chapter subfolders. Create exercises/README.md explaining structure. Update CLAUDE.md with exercise conventions. Each chapter should have 2-3 Try It Yourself exercises.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-27T20:43:00Z",
       "priority": "critical",
-      "score": 1000
+      "score": 1000,
+      "outcome": "Created 15 chapter folders (ch01-ch15), each with README.md and solutions/ subfolder. Main exercises/README.md already existed."
     },
     {
       "id": "task-207",
@@ -2028,17 +2030,17 @@
     "items": []
   },
   "stats": {
-    "pending": 182,
+    "pending": 181,
     "inProgress": 0,
-    "complete": 26,
+    "complete": 27,
     "blocked": 0,
     "total": 208
   },
   "checkpoints": {
-    "lastGoodCommit": "d26f8a86894e356ced91eba966619786fff67305",
-    "lastSuccessfulTask": "interrupted-3",
-    "lastCheckpoint": "2026-01-27T15:40:30Z",
-    "failedAttempts": 2,
+    "lastGoodCommit": "9b85fb6",
+    "lastSuccessfulTask": "task-206",
+    "lastCheckpoint": "2026-01-27T20:43:00Z",
+    "failedAttempts": 0,
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false
   },
