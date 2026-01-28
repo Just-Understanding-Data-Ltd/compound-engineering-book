@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T08:30:00Z",
+  "lastUpdated": "2026-01-28T11:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -149,6 +149,66 @@
     "subtasks": "jq '.tasks[] | select(.subtasks) | {title, count: (.subtasks | length)}' tasks.json"
   },
   "tasks": [
+    {
+      "id": "task-212",
+      "type": "fix",
+      "title": "CRITICAL: Fix broken markdown links in ch07 Related Chapters",
+      "description": "Chapter 7 (Quality Gates That Compound) has 3 broken markdown links in the Related Chapters section. These links will fail when the book is processed or when readers click them. Lines 564-566 need fixing: 1) ch06-verification-ladder.md → ch06-the-verification-ladder.md, 2) ch08-error-handling.md → ch08-error-handling-and-debugging.md, 3) ch04-writing-your-first-claudemd.md → ch04-writing-your-first-claude-md.md. Flagged by cross-ref-validator-2026-01-28.",
+      "status": "complete",
+      "completedAt": "2026-01-28T11:00:00Z",
+      "priority": "critical",
+      "score": 1250,
+      "chapter": "ch07",
+      "flaggedByReview": "cross-ref-validator-2026-01-28",
+      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
+      "estimatedMinutes": 5,
+      "breakdownCount": 3,
+      "breakdownDetails": "Fix 3 broken links (ch06, ch08, ch04 references)",
+      "outcome": "Fixed all 3 broken links: ch06-verification-ladder.md → ch06-the-verification-ladder.md, ch08-error-handling.md → ch08-error-handling-and-debugging.md, ch04-writing-your-first-claudemd.md → ch04-writing-your-first-claude-md.md"
+    },
+    {
+      "id": "task-213",
+      "type": "fix",
+      "title": "CRITICAL: Fix broken markdown links in ch09 Related Chapters",
+      "description": "Chapter 9 (Context Engineering Deep Dive) has 2 broken markdown links in the Related Chapters section. Lines 591-592 need fixing: 1) ch08-error-handling-debugging.md → ch08-error-handling-and-debugging.md, 2) ch10-ralph-loop.md → ch10-the-ralph-loop.md. Flagged by cross-ref-validator-2026-01-28.",
+      "status": "pending",
+      "priority": "critical",
+      "score": 1250,
+      "chapter": "ch09",
+      "flaggedByReview": "cross-ref-validator-2026-01-28",
+      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
+      "estimatedMinutes": 3,
+      "breakdownCount": 2,
+      "breakdownDetails": "Fix 2 broken links (ch08, ch10 references)"
+    },
+    {
+      "id": "task-214",
+      "type": "fix",
+      "title": "CRITICAL: Resolve PRD title mismatch for ch07",
+      "description": "prds/ch07.md is titled 'Chapter 7 PRD: Context Engineering Deep Dive' but the actual Chapter 7 is 'Quality Gates That Compound'. This is a major alignment issue. The PRD content discusses information theory, entropy, context windows, and progressive disclosure - which matches Chapter 9's actual content, not Chapter 7. Section numbering (4.1, 4.2) suggests file was copied without proper renumbering. Either: 1) Rename file to prds/ch09.md and update PRD numbering, OR 2) Rewrite ch07.md PRD to match Quality Gates content. Review flagged the mismatch. Flagged by cross-ref-validator-2026-01-28.",
+      "status": "pending",
+      "priority": "critical",
+      "score": 1200,
+      "flaggedByReview": "cross-ref-validator-2026-01-28",
+      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
+      "estimatedMinutes": 120,
+      "relatedFile": "prds/ch07.md",
+      "action": "Investigate and resolve PRD-chapter misalignment"
+    },
+    {
+      "id": "task-215",
+      "type": "fix",
+      "title": "CRITICAL: Resolve PRD title mismatch for ch09",
+      "description": "prds/ch09.md is titled 'Chapter 9 PRD: Sub-Agent Architecture' but actual Chapter 9 is 'Context Engineering Deep Dive'. Sub-Agent Architecture is actually Chapter 11. This indicates PRD files are misaligned with chapter numbers. The ch09.md PRD may belong to ch11 OR the ch07.md 'Context Engineering' content belongs to ch09. This is critical for PRD-chapter alignment verification. Flagged by cross-ref-validator-2026-01-28.",
+      "status": "pending",
+      "priority": "critical",
+      "score": 1200,
+      "flaggedByReview": "cross-ref-validator-2026-01-28",
+      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
+      "estimatedMinutes": 120,
+      "relatedFile": "prds/ch09.md",
+      "action": "Investigate PRD numbering (ch07 and ch09 may be swapped or mislabeled)"
+    },
     {
       "id": "task-103",
       "type": "fix",
@@ -1336,16 +1396,16 @@
     ]
   },
   "stats": {
-    "pending": 27,
+    "pending": 30,
     "inProgress": 0,
-    "complete": 87,
+    "complete": 88,
     "blocked": 0,
-    "total": 114
+    "total": 118
   },
   "checkpoints": {
-    "lastGoodCommit": "63b9126aa13a0f598063c628f623853ddcf6002c",
-    "lastSuccessfulTask": "iteration-18",
-    "lastCheckpoint": "2026-01-28T08:30:00Z",
+    "lastGoodCommit": "a646199",
+    "lastSuccessfulTask": "task-212",
+    "lastCheckpoint": "2026-01-28T11:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0

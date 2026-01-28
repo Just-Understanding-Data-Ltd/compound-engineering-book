@@ -561,6 +561,6 @@ Quality gates are not bureaucracy. They are capital that compounds. Invest early
 
 *Related chapters:*
 
-- **[Chapter 6: The Verification Ladder](ch06-verification-ladder.md)** for the hierarchy of verification methods that gates automate
-- **[Chapter 8: Error Handling & Debugging](ch08-error-handling.md)** for handling gate failures gracefully
-- **[Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claudemd.md)** for the CLAUDE.md gate that ties everything together
+- **[Chapter 6: The Verification Ladder](ch06-the-verification-ladder.md)** for the hierarchy of verification methods that gates automate
+- **[Chapter 8: Error Handling & Debugging](ch08-error-handling-and-debugging.md)** for handling gate failures gracefully
+- **[Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md)** for the CLAUDE.md gate that ties everything together
