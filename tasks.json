@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-01-28T16:21:55.639Z",
+  "lastUpdated": "2026-01-30T00:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T22:30:00Z",
-    "iteration": 20,
+    "lastRun": "2026-01-30T00:00:00Z",
+    "iteration": 24,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
-    "recommendedNext": "task-256",
-    "reasoning": "Curation cycle 20. Queue is clean with 7 main pending tasks (16 total including subtasks). All high-priority work complete. Remaining tasks are low/medium priority polish: 1 diagram (task-256), 2 enhancements (task-301, task-303), 2 KB articles (task-316, task-317), 2 meta-tasks (task-091, task-097). Next: task-256 (Cost Protection Layers diagram) at score 175. Publishing readiness: 99%."
+    "recommendedNext": "task-091",
+    "reasoning": "Curation cycle 24. Queue nearly empty: 2 main pending tasks (task-091: Write all KB articles, task-097: Finalize exercises), both meta-tasks with negative scores. 9 pending subtasks are review/finalization tasks. All substantive work complete. Publishing readiness: 99%+. Only remaining work: final polish passes if desired."
   },
   "prds": {
     "index": {
@@ -1914,13 +1914,13 @@
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "bea22522a4246722517ecd70c51bb7b10c8a57c2",
-    "lastSuccessfulTask": "iteration-23",
-    "lastCheckpoint": "2026-01-28T16:21:55Z",
+    "lastGoodCommit": "150226f154f183dc6ff1b3c1f6233d51125bb455",
+    "lastSuccessfulTask": "iteration-24",
+    "lastCheckpoint": "2026-01-30T00:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
-    "lastQueueCuration": "2026-01-29T22:30:00Z"
+    "lastQueueCuration": "2026-01-30T00:00:00Z"
   },
-  "lastQueueCuration": "2026-01-29T22:30:00Z"
+  "lastQueueCuration": "2026-01-30T00:00:00Z"
 }
