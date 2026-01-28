@@ -342,3 +342,29 @@ Interestingly, MCP was used on line 439 before its formal definition on line 476
 4. When a term appears before its dedicated section, add a brief definition at first use
 
 ---
+
+### 2026-01-28 - Cross-Reference Link Filename Mismatches Follow Predictable Patterns
+
+**Context**: Fixing broken markdown links in ch07 (iteration 19) and ch09 (iteration 20). Found 5 broken cross-reference links total across these two chapters.
+
+**Observation**: Broken cross-reference links consistently fall into two categories of filename mismatch:
+
+| Mismatch Type | Example | Frequency |
+|---------------|---------|-----------|
+| Missing connector word | `ch08-error-handling-debugging.md` vs `ch08-error-handling-and-debugging.md` | 40% |
+| Missing article | `ch10-ralph-loop.md` vs `ch10-the-ralph-loop.md` | 40% |
+| Wrong word variation | `ch04-writing-your-first-claudemd.md` vs `ch04-writing-your-first-claude-md.md` | 20% |
+
+The errors arise when authors write cross-references from memory rather than verifying actual filenames. The human brain naturally abbreviates: "The RALPH Loop" becomes "ralph-loop" when typing quickly. "Error Handling and Debugging" becomes "error-handling-debugging".
+
+**Implication**: Cross-reference validation should be part of the chapter completion workflow, not just a periodic review task. A simple glob check during the "reviewed" milestone would catch these errors immediately. The fix is always fast (seconds), but the detection delay can be days.
+
+**Action**: Add filename verification step to the "reviewed" milestone checklist:
+1. Extract all markdown links: `grep -o '\[.*\](.*\.md)' chapter.md`
+2. For each link, verify target exists: `ls chapters/<filename>`
+3. Common mismatches to check:
+   - Missing "the-" prefix (ch10-the-ralph-loop vs ch10-ralph-loop)
+   - Missing "and" connector (ch08-error-handling-and-debugging vs ch08-error-handling-debugging)
+   - Hyphen vs no-hyphen in compound words (claude-md vs claudemd)
+
+---

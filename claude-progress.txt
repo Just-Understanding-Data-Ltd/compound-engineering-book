@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 11:30)
+## Current Status (Updated: 2026-01-28 12:00)
 - Phase: Chapter Milestones (13 of 15 complete, 87%)
 - Active: Critical fixes → Ch14 code_tested → Ch14-15 completion
-- Last Completed: Queue curation (post-iteration 19)
+- Last Completed: task-213 (Fix ch09 broken links) - ITERATION 20
 - Blockers: None active
 - Queue Health: CURATED - scores recalculated, priorities verified
 - Publishing Readiness: 92%
@@ -27,11 +27,11 @@
 - Diagrams Created: 59/63 (7 high-priority done; 0 pending from review cycle; 4 remaining for ch13-15 completion)
 
 ## Next Task Priority
-1. task-213 (CRITICAL: Fix broken links in ch09) - score 1330 ← HIGHEST
-2. task-214 (CRITICAL: Resolve PRD mismatch ch07) - score 1280
-3. task-215 (CRITICAL: Resolve PRD mismatch ch09) - score 1280
-4. task-079 (ch14: milestones remaining) - score 880
-5. task-085 (ch15: all milestones) - score 875
+1. task-214 (CRITICAL: Resolve PRD mismatch ch07) - score 1280 ← HIGHEST
+2. task-215 (CRITICAL: Resolve PRD mismatch ch09) - score 1280
+3. task-079 (ch14: milestones remaining) - score 880
+4. task-085 (ch15: all milestones) - score 875
+5. task-081 (ch14: code_tested) - next ch14 milestone
 
 ## Estimated Timeline to Completion
 - Ch14 completion (code + testing + review + diagrams): 8-10 hours
@@ -41,6 +41,19 @@
 - **Publication target**: 2026-02-01 to 2026-02-04
 
 ## Recent Activity
+
+### 2026-01-28 12:00 - COMPLETED task-213: Fix ch09 broken links - ITERATION 20
+- What: Fixed 2 broken markdown links in Chapter 9's Related Chapters section
+- Links fixed:
+  - ch08-error-handling-debugging.md → ch08-error-handling-and-debugging.md
+  - ch10-ralph-loop.md → ch10-the-ralph-loop.md
+- File: chapters/ch09-context-engineering-deep-dive.md (lines 591-592)
+- Flagged by: cross-ref-validator-2026-01-28
+- Tasks: task-213 marked complete
+- Stats: pending 29, complete 89 (75%)
+- Special: Iteration 20 (20 % 5 = 0) → Add learning to @LEARNINGS.md
+- Outcome: Success
+- Next: task-214 (Resolve PRD mismatch ch07) or task-215 (Resolve PRD mismatch ch09)
 
 ### 2026-01-28 11:30 - QUEUE CURATION - Post-Iteration 19
 - What: Curated task queue, recalculated scores, verified no duplicates
