@@ -27,7 +27,7 @@ The single-model problem compounds over time. Simple tasks like reading files, r
 
 ### When AI Assistance Pays for Itself
 
-The ROI calculation for AI tooling isn't just about API costs. Consider the full picture:
+The Return on Investment (ROI) calculation for AI tooling isn't just about API costs. Consider the full picture:
 
 ```
 Developer hourly rate: $75/hour
@@ -89,7 +89,7 @@ Each tier has distinct strengths that inform task routing:
 - File I/O operations and navigation
 - Pattern matching and text search
 - Simple text transformations
-- AST navigation and symbol lookup
+- Abstract Syntax Tree (AST) navigation and symbol lookup
 - Quick edits to existing code
 - Documentation string updates
 
@@ -432,7 +432,7 @@ Model switching (44%) combined with prompt caching (90% on cached tokens) yields
 
 ## YOLO Mode: When to Skip Permissions
 
-Permission prompts kill flow state. Every "Allow this action?" dialog forces a context switch. Research shows it takes 3 minutes to recover focus after an interruption. With 50+ tool calls per hour, permission prompts create more disruption time than productive time.
+YOLO ("You Only Live Once") mode is a Claude Code configuration that skips permission prompts. Permission prompts kill flow state. Every "Allow this action?" dialog forces a context switch. Research shows it takes 3 minutes to recover focus after an interruption. With 50+ tool calls per hour, permission prompts create more disruption time than productive time.
 
 YOLO mode eliminates permission prompts:
 
