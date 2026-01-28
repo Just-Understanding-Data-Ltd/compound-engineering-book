@@ -74,6 +74,12 @@ import {
   generateSampleData
 } from './cost-dashboard';
 
+// Batch Processor tests
+import {
+  calculateBatchSavings,
+  isBatchSuitable
+} from './batch-processor';
+
 // =============================================================================
 // MODEL SELECTOR TESTS
 // =============================================================================
@@ -696,6 +702,168 @@ describe('Cost Dashboard', () => {
       // Should be roughly 70% haiku
       expect(haiku).toBeGreaterThan(600);
       expect(haiku).toBeLessThan(800);
+    });
+  });
+});
+
+// =============================================================================
+// BATCH PROCESSOR TESTS
+// =============================================================================
+
+describe('Batch Processor', () => {
+  describe('calculateBatchSavings', () => {
+    it('calculates 50% savings for all models', () => {
+      const haikuSavings = calculateBatchSavings(10000, 5000, 'haiku');
+      const sonnetSavings = calculateBatchSavings(10000, 5000, 'sonnet');
+      const opusSavings = calculateBatchSavings(10000, 5000, 'opus');
+
+      // All models should have exactly 50% savings
+      expect(haikuSavings.savingsPercent).toBe(50);
+      expect(sonnetSavings.savingsPercent).toBe(50);
+      expect(opusSavings.savingsPercent).toBe(50);
+    });
+
+    it('calculates correct haiku pricing', () => {
+      // 10K input + 5K output tokens with haiku
+      // Standard: (10000 * 0.25 + 5000 * 1.25) / 1M = 0.00875
+      // Batch: 0.00875 * 0.5 = 0.004375
+      const result = calculateBatchSavings(10000, 5000, 'haiku');
+
+      expect(result.standardCost).toBeCloseTo(0.00875, 5);
+      expect(result.batchCost).toBeCloseTo(0.004375, 5);
+      expect(result.savings).toBeCloseTo(0.004375, 5);
+    });
+
+    it('calculates correct sonnet pricing', () => {
+      // 10K input + 5K output tokens with sonnet
+      // Standard: (10000 * 3 + 5000 * 15) / 1M = 0.105
+      // Batch: 0.105 * 0.5 = 0.0525
+      const result = calculateBatchSavings(10000, 5000, 'sonnet');
+
+      expect(result.standardCost).toBeCloseTo(0.105, 4);
+      expect(result.batchCost).toBeCloseTo(0.0525, 4);
+      expect(result.savings).toBeCloseTo(0.0525, 4);
+    });
+
+    it('calculates correct opus pricing', () => {
+      // 10K input + 5K output tokens with opus
+      // Standard: (10000 * 15 + 5000 * 75) / 1M = 0.525
+      // Batch: 0.525 * 0.5 = 0.2625
+      const result = calculateBatchSavings(10000, 5000, 'opus');
+
+      expect(result.standardCost).toBeCloseTo(0.525, 4);
+      expect(result.batchCost).toBeCloseTo(0.2625, 4);
+      expect(result.savings).toBeCloseTo(0.2625, 4);
+    });
+
+    it('handles zero tokens', () => {
+      const result = calculateBatchSavings(0, 0, 'sonnet');
+
+      expect(result.standardCost).toBe(0);
+      expect(result.batchCost).toBe(0);
+      expect(result.savings).toBe(0);
+    });
+
+    it('handles large token counts', () => {
+      // 1M input + 500K output tokens
+      const result = calculateBatchSavings(1000000, 500000, 'sonnet');
+
+      // Standard: (1M * 3 + 500K * 15) / 1M = 10.5
+      // Batch: 10.5 * 0.5 = 5.25
+      expect(result.standardCost).toBeCloseTo(10.5, 1);
+      expect(result.batchCost).toBeCloseTo(5.25, 1);
+      expect(result.savings).toBeCloseTo(5.25, 1);
+    });
+  });
+
+  describe('isBatchSuitable', () => {
+    it('rejects immediate urgency tasks', () => {
+      const result = isBatchSuitable({
+        urgency: 'immediate',
+        requestCount: 10,
+        estimatedTokens: 50000
+      });
+
+      expect(result.suitable).toBe(false);
+      expect(result.reason).toContain('immediate');
+      expect(result.estimatedSavings).toBe(0);
+    });
+
+    it('rejects tasks with too few requests', () => {
+      const result = isBatchSuitable({
+        urgency: 'this-week',
+        requestCount: 2,
+        estimatedTokens: 50000
+      });
+
+      expect(result.suitable).toBe(false);
+      expect(result.reason).toContain('Too few requests');
+      expect(result.estimatedSavings).toBe(0);
+    });
+
+    it('accepts tasks with 3+ requests and non-immediate urgency', () => {
+      const result = isBatchSuitable({
+        urgency: 'this-week',
+        requestCount: 3,
+        estimatedTokens: 50000
+      });
+
+      expect(result.suitable).toBe(true);
+      expect(result.reason).toContain('3 requests');
+      expect(result.estimatedSavings).toBeGreaterThan(0);
+    });
+
+    it('accepts today urgency with sufficient requests', () => {
+      const result = isBatchSuitable({
+        urgency: 'today',
+        requestCount: 10,
+        estimatedTokens: 100000
+      });
+
+      expect(result.suitable).toBe(true);
+      expect(result.estimatedSavings).toBeGreaterThan(0);
+    });
+
+    it('accepts whenever urgency with sufficient requests', () => {
+      const result = isBatchSuitable({
+        urgency: 'whenever',
+        requestCount: 100,
+        estimatedTokens: 500000
+      });
+
+      expect(result.suitable).toBe(true);
+      expect(result.reason).toContain('100 requests');
+    });
+
+    it('calculates estimated savings correctly', () => {
+      const result = isBatchSuitable({
+        urgency: 'this-week',
+        requestCount: 10,
+        estimatedTokens: 50000
+      });
+
+      // Savings = (50000 * 3 / 1M) * 0.5 = 0.075
+      expect(result.estimatedSavings).toBeCloseTo(0.075, 4);
+    });
+
+    it('boundary: exactly 3 requests is suitable', () => {
+      const result = isBatchSuitable({
+        urgency: 'today',
+        requestCount: 3,
+        estimatedTokens: 10000
+      });
+
+      expect(result.suitable).toBe(true);
+    });
+
+    it('boundary: exactly 2 requests is not suitable', () => {
+      const result = isBatchSuitable({
+        urgency: 'today',
+        requestCount: 2,
+        estimatedTokens: 10000
+      });
+
+      expect(result.suitable).toBe(false);
     });
   });
 });

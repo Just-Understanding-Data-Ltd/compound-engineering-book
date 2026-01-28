@@ -430,6 +430,191 @@ First request creates the cache. Subsequent requests (within 5 minutes) read fro
 
 Model switching (44%) combined with prompt caching (90% on cached tokens) yields 94-97% total cost reduction on repeated context. For a team of 20 developers, that's $10,000+/year in savings.
 
+## The Batch API: 50% Discount for Async Work
+
+Some tasks don't need immediate responses. Code reviews, documentation generation, test creation, and bulk refactoring suggestions can wait hours without blocking your workflow. The Batch API is built for these cases: submit requests now, get results within 24 hours, pay half price.
+
+### When to Use Batch Processing
+
+Batch processing works best for high-volume, low-urgency tasks:
+
+- **Code reviews**: Review 50 files overnight at 50% cost
+- **Documentation**: Generate docs for an entire codebase
+- **Test generation**: Create test cases for multiple functions
+- **Refactoring analysis**: Get improvement suggestions across many files
+- **Translation**: Convert error messages or UI strings to multiple languages
+
+The pattern: identify work that can wait, batch it together, submit before leaving for the day.
+
+### How Batches Work
+
+The API follows a submit-poll-process pattern:
+
+```typescript
+// skip-validation
+import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic();
+
+// Step 1: Create a batch with multiple requests
+const batch = await client.messages.batches.create({
+  requests: [
+    {
+      custom_id: 'review-auth-ts',
+      params: {
+        model: 'claude-sonnet-4-5-20250929',
+        max_tokens: 2048,
+        messages: [{ role: 'user', content: 'Review auth.ts for security issues' }]
+      }
+    },
+    {
+      custom_id: 'review-api-ts',
+      params: {
+        model: 'claude-sonnet-4-5-20250929',
+        max_tokens: 2048,
+        messages: [{ role: 'user', content: 'Review api.ts for best practices' }]
+      }
+    }
+  ]
+});
+
+console.log('Batch created:', batch.id);
+
+// Step 2: Poll for completion
+let status = await client.messages.batches.retrieve(batch.id);
+while (status.processing_status !== 'ended') {
+  await sleep(30000); // Check every 30 seconds
+  status = await client.messages.batches.retrieve(batch.id);
+  console.log(`Progress: ${status.request_counts.succeeded} complete`);
+}
+
+// Step 3: Process results
+const results = await client.messages.batches.results(batch.id);
+for await (const entry of results) {
+  if (entry.result.type === 'succeeded') {
+    console.log(`${entry.custom_id}:`, entry.result.message.content);
+  } else {
+    console.log(`${entry.custom_id} failed:`, entry.result.error);
+  }
+}
+```
+
+Each request needs a `custom_id` to correlate results with inputs. The batch processes within 24 hours, with most batches completing in 1-4 hours depending on size and system load.
+
+### Batch Cost Savings
+
+The economics are straightforward: batch requests cost 50% less per token.
+
+| Model | Standard Input | Batch Input | Standard Output | Batch Output |
+|-------|---------------|-------------|-----------------|--------------|
+| Haiku | $0.25/MTok | $0.125/MTok | $1.25/MTok | $0.625/MTok |
+| Sonnet | $3/MTok | $1.50/MTok | $15/MTok | $7.50/MTok |
+| Opus | $15/MTok | $7.50/MTok | $75/MTok | $37.50/MTok |
+
+For a 100-file code review (estimated 500K input tokens, 250K output tokens with Sonnet):
+
+```
+Standard API cost:
+  Input: 500,000 × $0.000003 = $1.50
+  Output: 250,000 × $0.000015 = $3.75
+  Total: $5.25
+
+Batch API cost:
+  Input: 500,000 × $0.0000015 = $0.75
+  Output: 250,000 × $0.0000075 = $1.875
+  Total: $2.625
+
+Savings: $2.625 (50%)
+```
+
+### Batch-Suitable Task Identification
+
+Not every task benefits from batching. Use this decision framework:
+
+```typescript
+// skip-validation
+function shouldUseBatch(task: {
+  urgency: 'immediate' | 'today' | 'this-week';
+  requestCount: number;
+}): boolean {
+  // Immediate needs sync API
+  if (task.urgency === 'immediate') return false;
+
+  // Single requests have overhead not worth the setup
+  if (task.requestCount < 3) return false;
+
+  // Batch everything else
+  return true;
+}
+```
+
+**Good batch candidates:**
+- End-of-day code reviews
+- Weekly documentation updates
+- Nightly test generation
+- Bulk data processing
+
+**Poor batch candidates:**
+- Interactive development (need immediate feedback)
+- Single-file changes
+- Time-sensitive bug fixes
+
+### Overnight Batch Workflow
+
+Maximize batch value by automating the submit-collect cycle:
+
+```bash
+#!/bin/bash
+# submit-batch.sh - Run before leaving work
+
+# Collect files to review
+FILES=$(find src -name "*.ts" -mtime -1)
+
+# Create batch request JSON
+node scripts/create-batch-request.js $FILES > batch-request.json
+
+# Submit batch
+BATCH_ID=$(curl -s -X POST \
+  -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d @batch-request.json \
+  https://api.anthropic.com/v1/messages/batches | jq -r '.id')
+
+echo "Submitted batch: $BATCH_ID"
+echo $BATCH_ID > .last-batch-id
+```
+
+```bash
+#!/bin/bash
+# collect-batch.sh - Run in the morning
+
+BATCH_ID=$(cat .last-batch-id)
+
+# Check status
+STATUS=$(curl -s \
+  -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
+  https://api.anthropic.com/v1/messages/batches/$BATCH_ID | jq -r '.processing_status')
+
+if [ "$STATUS" = "ended" ]; then
+  # Fetch and process results
+  node scripts/process-batch-results.js $BATCH_ID
+else
+  echo "Batch still processing: $STATUS"
+fi
+```
+
+### Combined Cost Strategy
+
+Layer batch processing with other optimizations:
+
+| Strategy | Savings | Cumulative |
+|----------|---------|------------|
+| Model switching | 44% | 44% |
+| Prompt caching | 90% on cached | 70% |
+| Batch processing | 50% | 85% |
+
+For a team doing daily code reviews and weekly documentation updates, batch processing alone saves $500-1,000/year. Combined with model switching and caching, total savings exceed 80%.
+
 ## YOLO Mode: When to Skip Permissions
 
 YOLO ("You Only Live Once") mode is a Claude Code configuration that skips permission prompts. Permission prompts kill flow state. Every "Allow this action?" dialog forces a context switch. Research shows it takes 3 minutes to recover focus after an interruption. With 50+ tool calls per hour, permission prompts create more disruption time than productive time.
