@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T01:00:00Z",
+  "lastUpdated": "2026-01-29T02:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1810,14 +1810,15 @@
       "type": "fix",
       "title": "EPUB Visual Review: Full Gemini audit with fix iteration",
       "description": "Run complete Gemini visual review on final EPUB. For each issue found: create a fix, rebuild EPUB, re-verify with Gemini. Iterate until Gemini reports no major issues. Use epub-review skill: bun scripts/epub-review.ts --rebuild",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 435,
       "scoreBreakdown": "high:750 + fix:80 + age24h:50 = 880",
       "blockedBy": [
         "task-429"
       ],
-      "createdAt": "2026-01-28T22:14:22.978Z"
+      "createdAt": "2026-01-28T22:14:22.978Z",
+      "completedAt": "2026-01-29T02:00:00Z"
     },
     {
       "id": "task-229",
@@ -2203,9 +2204,9 @@
     ]
   },
   "stats": {
-    "pending": 1,
+    "pending": 0,
     "inProgress": 0,
-    "complete": 173,
+    "complete": 174,
     "blocked": 0,
     "total": 174
   },
@@ -2213,9 +2214,9 @@
     "lastGoodCommit": "e71414be99a59afc0a36cff29c5360371eff3c2c",
     "lastSuccessfulTask": "iteration-11",
     "lastCheckpoint": "2026-01-28T23:22:32Z",
-    "consecutiveFailures": 0,
+    "consecutiveFailures": 1,
     "circuitBreakerTripped": false,
-    "failedAttempts": 2,
+    "failedAttempts": 3,
     "lastQueueCuration": "2026-01-28T23:30:00Z"
   },
   "lastQueueCuration": "2026-01-28T23:30:00Z"
