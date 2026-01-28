@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 00:20)
-- Phase: EPUB Polish - Visual Review Pipeline
-- Active: EPUB visual reviews (2 pending, 172 complete)
-- Last Completed: task-428 (Tables/lists/blockquotes visual review - ALL PASS, light/dark/narrow)
+## Current Status (Updated: 2026-01-29 01:00)
+- Phase: EPUB Polish - Final Visual Review
+- Active: EPUB visual reviews (1 pending, 173 complete)
+- Last Completed: task-429 (Typography/font visual review - ALL PASS, 3 font families verified)
 - Blockers: None
-- Queue Health: 2 pending, 172 complete
-- Publishing Readiness: 99% - Tables, lists, blockquotes verified in all modes
-- Next Task: task-429 (Typography/font visual review)
+- Queue Health: 1 pending, 173 complete
+- Publishing Readiness: 99.5% - All typography verified, fonts loading correctly
+- Next Task: task-430 (Full Gemini audit with fix iteration)
 - Publication Target: 2026-01-30 morning
 
 ## Project State Summary
@@ -30,6 +30,36 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 01:00 - COMPLETED task-429: EPUB Visual Review - Typography and Font Rendering
+- What: Visual review of typography and font rendering across 3 chapters in light, dark, and narrow (375px) modes
+- Method: Playwright manual inspection with computed style verification via JavaScript evaluation
+- Chapters tested: ch005 (Chapter 3), ch012 (Chapter 10), ch002 (Part I header)
+- Font Loading Results:
+  - 10 @font-face declarations registered, all actively-used weights loaded
+  - Source Serif 4: Regular, italic, bold loaded (600 weight unloaded - not used)
+  - Source Sans 3: Semibold (600), bold (700) loaded (400 unloaded - not used)
+  - JetBrains Mono: Regular, bold, italic all loaded
+  - document.fonts.check() confirms all 3 families available
+- Computed Style Verification (ALL PASS):
+  - Body: Source Serif 4, 16px, line-height 25.6px, letter-spacing -0.16px, oldstyle-nums
+  - H1: Source Sans 3, 28.8px, weight 700, lining-nums
+  - H2: Source Sans 3, 22.4px, weight 600
+  - H3: Source Sans 3, 18.4px, weight 600
+  - Code block: JetBrains Mono, 13.12px, line-height 19.024px
+  - Inline code: JetBrains Mono, 13.12px
+  - Consecutive paragraphs (p+p): text-indent 24px (1.5em)
+  - Blockquote: Source Serif 4, italic, 15.2px
+  - Table headers: Source Sans 3, weight 600
+  - Table cells: Source Serif 4, 14.08px
+  - Part header: Source Sans 3, 32px, weight 700, center-aligned
+- Dark Mode (ALL PASS): Colors switch correctly, fonts remain identical
+- Narrow Screen 375px (ALL PASS): Fonts still load, no overflow, code wraps gracefully
+- Cross-chapter consistency: ch005 and ch012 produce identical computed styles
+- Files: reviews/epub-typography-visual-review-2026-01-29.md
+- Outcome: Zero actionable issues. Typography is publication-ready.
+- Stats: 1 pending, 173 complete
+- Next: task-430 (Full Gemini audit with fix iteration)
 
 ### 2026-01-29 00:20 - COMPLETED task-428: EPUB Visual Review - Tables, Lists, Blockquotes
 - What: Visual review of tables, lists, and blockquotes in light mode, narrow screen (375px), and dark mode

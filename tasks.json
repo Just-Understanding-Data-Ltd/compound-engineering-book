@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T00:20:00Z",
+  "lastUpdated": "2026-01-29T01:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -861,6 +861,33 @@
       "score": 905
     },
     {
+      "id": "task-427",
+      "type": "fix",
+      "title": "EPUB Visual Review: Code blocks in light/dark modes",
+      "description": "Use the epub-review skill (Gemini vision) to verify code blocks render correctly in both light and dark modes. Check syntax highlighting contrast, line wrapping, no horizontal overflow. Run: bun scripts/epub-review.ts then review the report.",
+      "status": "complete",
+      "priority": "high",
+      "score": 905,
+      "scoreBreakdown": "high:750 + fix:80 + blocking(1×25):25 + age24h:50 = 905",
+      "blockedBy": [],
+      "createdAt": "2026-01-28T22:14:22.977Z",
+      "completedAt": "2026-01-28T23:30:00Z"
+    },
+    {
+      "id": "task-428",
+      "type": "fix",
+      "title": "EPUB Visual Review: Tables, lists, and blockquotes formatting",
+      "description": "Use the epub-review skill (Gemini vision) to verify tables have no horizontal overflow, lists indent correctly, blockquotes have proper styling. Check rendering on narrow screens. Run: bun scripts/epub-review.ts then review the report.",
+      "status": "complete",
+      "priority": "high",
+      "score": 905,
+      "scoreBreakdown": "high:750 + fix:80 + blocking(1×25):25 + age24h:50 = 905",
+      "blockedBy": [],
+      "createdAt": "2026-01-28T22:14:22.978Z",
+      "startedAt": "2026-01-28T23:45:00Z",
+      "completedAt": "2026-01-29T00:20:00Z"
+    },
+    {
       "id": "task-055",
       "type": "chapter",
       "chapter": "ch10",
@@ -1678,43 +1705,17 @@
       "completedAt": "2026-01-28T22:32:00Z"
     },
     {
-      "id": "task-427",
-      "type": "fix",
-      "title": "EPUB Visual Review: Code blocks in light/dark modes",
-      "description": "Use the epub-review skill (Gemini vision) to verify code blocks render correctly in both light and dark modes. Check syntax highlighting contrast, line wrapping, no horizontal overflow. Run: bun scripts/epub-review.ts then review the report.",
-      "status": "complete",
-      "priority": "high",
-      "score": 905,
-      "scoreBreakdown": "high:750 + fix:80 + blocking(1×25):25 + age24h:50 = 905",
-      "blockedBy": [],
-      "createdAt": "2026-01-28T22:14:22.977Z",
-      "completedAt": "2026-01-28T23:30:00Z"
-    },
-    {
-      "id": "task-428",
-      "type": "fix",
-      "title": "EPUB Visual Review: Tables, lists, and blockquotes formatting",
-      "description": "Use the epub-review skill (Gemini vision) to verify tables have no horizontal overflow, lists indent correctly, blockquotes have proper styling. Check rendering on narrow screens. Run: bun scripts/epub-review.ts then review the report.",
-      "status": "complete",
-      "priority": "high",
-      "score": 905,
-      "scoreBreakdown": "high:750 + fix:80 + blocking(1×25):25 + age24h:50 = 905",
-      "blockedBy": [],
-      "createdAt": "2026-01-28T22:14:22.978Z",
-      "startedAt": "2026-01-28T23:45:00Z",
-      "completedAt": "2026-01-29T00:20:00Z"
-    },
-    {
       "id": "task-429",
       "type": "fix",
       "title": "EPUB Visual Review: Typography and font rendering verification",
       "description": "Use the epub-review skill (Gemini vision) to verify embedded fonts (JetBrains Mono for code, Source Serif 4 for body, Source Sans 3 for headings) render correctly. Check font fallbacks, kerning, line height. Run: bun scripts/epub-review.ts then review the report.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
-      "score": 905,
+      "score": 460,
       "scoreBreakdown": "high:750 + fix:80 + blocking(1×25):25 + age24h:50 = 905",
       "blockedBy": [],
-      "createdAt": "2026-01-28T22:14:22.978Z"
+      "createdAt": "2026-01-28T22:14:22.978Z",
+      "completedAt": "2026-01-29T01:00:00Z"
     },
     {
       "id": "task-321",
@@ -1811,11 +1812,9 @@
       "description": "Run complete Gemini visual review on final EPUB. For each issue found: create a fix, rebuild EPUB, re-verify with Gemini. Iterate until Gemini reports no major issues. Use epub-review skill: bun scripts/epub-review.ts --rebuild",
       "status": "pending",
       "priority": "high",
-      "score": 880,
+      "score": 435,
       "scoreBreakdown": "high:750 + fix:80 + age24h:50 = 880",
       "blockedBy": [
-        "task-427",
-        "task-428",
         "task-429"
       ],
       "createdAt": "2026-01-28T22:14:22.978Z"
@@ -2204,17 +2203,17 @@
     ]
   },
   "stats": {
-    "pending": 2,
+    "pending": 1,
     "inProgress": 0,
-    "complete": 172,
+    "complete": 173,
     "blocked": 0,
     "total": 174
   },
   "checkpoints": {
-    "lastGoodCommit": "5f661c5c33af578eaf8bb4da22231aa0bddfcc6f",
-    "lastSuccessfulTask": "iteration-9",
-    "lastCheckpoint": "2026-01-28T22:55:07Z",
-    "consecutiveFailures": 1,
+    "lastGoodCommit": "e71414be99a59afc0a36cff29c5360371eff3c2c",
+    "lastSuccessfulTask": "iteration-11",
+    "lastCheckpoint": "2026-01-28T23:22:32Z",
+    "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 2,
     "lastQueueCuration": "2026-01-28T23:30:00Z"
