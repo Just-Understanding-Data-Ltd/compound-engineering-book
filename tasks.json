@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T23:45:00Z",
+  "lastUpdated": "2026-01-29T23:55:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1703,10 +1703,11 @@
       "type": "kb-article",
       "title": "Create KB: context-pollution-recovery.md",
       "description": "Recover from context pollution. Cover: symptoms, diagnostics, compacting, clean slate. TO BE CREATED per kb-article-index.md. Focus: context window management.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 165,
       "createdAt": "2026-01-28T16:30:00Z",
+      "completedAt": "2026-01-29T23:55:00Z",
       "chapters": [
         "ch08"
       ],
@@ -1904,16 +1905,16 @@
     ]
   },
   "stats": {
-    "pending": 13,
+    "pending": 12,
     "inProgress": 0,
-    "complete": 138,
+    "complete": 139,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "093a7232a2e646d93599e2fa402512aff08b171f",
-    "lastSuccessfulTask": "iteration-21",
-    "lastCheckpoint": "2026-01-28T16:14:23Z",
+    "lastGoodCommit": "4b9a1562fb1f8a8d6859b4de433e80e77d896544",
+    "lastSuccessfulTask": "iteration-22",
+    "lastCheckpoint": "2026-01-28T16:17:42Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
