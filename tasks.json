@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T11:15:27.633Z",
+  "lastUpdated": "2026-01-28T22:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1326,7 +1326,7 @@
       "status": "in_progress",
       "startedAt": "2026-01-28T22:30:00Z",
       "priority": "critical",
-      "score": 630,
+      "score": 1155,
       "scoreBreakdown": "critical:1000 + refactor:80 + blocks:25 + age:50 = 1155",
       "createdAt": "2026-01-28T22:00:00Z",
       "subtasks": [
@@ -1391,7 +1391,8 @@
           "title": "Rewrite ch10 examples with Agent SDK",
           "description": "The RALPH Loop - convert to Agent SDK session resumption and checkpoints.",
           "status": "pending",
-          "score": 605,
+          "score": 1035,
+          "scoreBreakdown": "critical:1000 + milestone:0 + ch10:35 = 1035",
           "priority": "critical"
         },
         {
@@ -1401,7 +1402,8 @@
           "title": "Rewrite ch11 examples with Agent SDK",
           "description": "Sub-Agent Architecture - convert to Agent SDK sub-agent spawning patterns.",
           "status": "pending",
-          "score": 605,
+          "score": 1030,
+          "scoreBreakdown": "critical:1000 + milestone:0 + ch11:30 = 1030",
           "priority": "critical"
         },
         {
@@ -1411,7 +1413,8 @@
           "title": "Rewrite ch12 examples with Agent SDK",
           "description": "Development Workflows - convert to Agent SDK workflow patterns.",
           "status": "pending",
-          "score": 605,
+          "score": 1025,
+          "scoreBreakdown": "critical:1000 + milestone:0 + ch12:25 = 1025",
           "priority": "critical"
         },
         {
@@ -1421,7 +1424,8 @@
           "title": "Rewrite ch13 examples with Agent SDK",
           "description": "Building the Harness - convert to Agent SDK harness patterns.",
           "status": "pending",
-          "score": 605,
+          "score": 1020,
+          "scoreBreakdown": "critical:1000 + milestone:0 + ch13:20 = 1020",
           "priority": "critical"
         },
         {
@@ -1431,7 +1435,8 @@
           "title": "Rewrite ch14 examples with Agent SDK",
           "description": "The Meta-Engineer Playbook - convert to Agent SDK meta-engineering patterns.",
           "status": "pending",
-          "score": 605,
+          "score": 1015,
+          "scoreBreakdown": "critical:1000 + milestone:0 + ch14:15 = 1015",
           "priority": "critical"
         },
         {
@@ -1441,7 +1446,8 @@
           "title": "Rewrite ch15 examples with Agent SDK",
           "description": "Model Strategy & Cost Optimization - convert to Agent SDK cost patterns.",
           "status": "pending",
-          "score": 605,
+          "score": 1010,
+          "scoreBreakdown": "critical:1000 + milestone:0 + ch15:10 = 1010",
           "priority": "critical"
         },
         {
@@ -1451,23 +1457,11 @@
           "title": "Test all migrated examples",
           "description": "Run all migrated examples through exercise-validator to confirm they compile and work.",
           "status": "pending",
-          "score": 605,
+          "score": 1005,
+          "scoreBreakdown": "critical:1000 + milestone:0 + verification:5 = 1005",
           "priority": "critical"
         }
       ]
-    },
-    {
-      "id": "task-235",
-      "type": "chapter",
-      "chapter": "ch15",
-      "title": "Add Batch API example to ch15",
-      "description": "Add code example demonstrating Batch API patterns from batch-api-patterns.md KB article. Shows 50% cost reduction for async workloads like nightly code reviews. Include submit/poll/process pattern.",
-      "status": "complete",
-      "priority": "medium",
-      "score": 625,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/batch-api-patterns.md",
-      "completedAt": "2026-01-28T16:00:00Z"
     },
     {
       "id": "task-260",
@@ -2002,9 +1996,9 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 82,
+    "count": 114,
     "lastCompaction": "2026-01-28T00:30:00Z",
-    "note": "Count includes all completed tasks in tasks array (15 main + 67 subtasks)",
+    "note": "Count includes all completed tasks in tasks array (34 main + 80 subtasks)",
     "recentCompletions": [
       {
         "id": "task-211",
@@ -2029,18 +2023,18 @@
   "stats": {
     "pending": 51,
     "inProgress": 1,
-    "complete": 115,
+    "complete": 114,
     "blocked": 1,
-    "total": 168
+    "total": 167
   },
   "checkpoints": {
-    "lastGoodCommit": "088ab961298d9120240606334e5fd7ee237861e0",
-    "lastSuccessfulTask": "iteration-13",
-    "lastCheckpoint": "2026-01-28T11:15:27Z",
+    "lastGoodCommit": "7491cd9b06cccbbf216f9557863ab758a4050449",
+    "lastSuccessfulTask": "iteration-14",
+    "lastCheckpoint": "2026-01-28T11:17:50Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 1,
-    "lastQueueCuration": "2026-01-28T14:30:00Z"
+    "lastQueueCuration": "2026-01-28T22:00:00Z"
   },
-  "lastQueueCuration": "2026-01-28T17:45:00Z"
+  "lastQueueCuration": "2026-01-28T22:00:00Z"
 }
