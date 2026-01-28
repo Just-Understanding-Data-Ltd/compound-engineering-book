@@ -76,7 +76,7 @@ async function createUser(email: string, password: string) {
 
 **Fix**: Add the rule to CLAUDE.md, not just the code:
 
-```markdown
+````markdown
 <!-- CLAUDE.md -->
 ## Security Requirements
 
@@ -88,6 +88,7 @@ import bcrypt from 'bcrypt'
 const passwordHash = await bcrypt.hash(password, 12)
 await db.users.create({ email, passwordHash })
 ```
+````
 
 Now all future authentication code will include proper hashing. You fixed not just one instance but the entire error class.
 
@@ -1142,7 +1143,7 @@ Good: "Previous approach failed because API lacks refresh endpoint."
 
 Without documentation, the new session might repeat the same mistakes.
 
-## Try It Yourself
+## Exercises
 
 ### Exercise 1: Create Your ERRORS.md
 
@@ -1168,14 +1169,6 @@ Think of a time you got stuck debugging with AI. Practice the clean slate patter
 3. What constraints would you include in a fresh session?
 4. Write the clean slate prompt you would use
 
-## Related Chapters
-
-- [Chapter 6: The Verification Ladder](ch06-the-verification-ladder.md) for the verification patterns that catch errors early
-- [Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md) for quality gates that automate prevention
-- [Chapter 9: Context Engineering Deep Dive](ch09-context-engineering-deep-dive.md) for context engineering principles that improve AI output
-- [Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md) for error recovery in long-running agent workflows
-- [Chapter 15: Model Strategy & Cost Optimization](ch15-model-strategy-and-cost-optimization.md) for cost optimization and budget protection strategies
-
 ## Summary
 
 Error handling in AI-assisted development requires systematic approaches:
@@ -1195,3 +1188,13 @@ The reliability compounding problem explains why demo agents fail in production:
 The goal isn't perfection. It's compounding improvement. Every error you diagnose correctly becomes a barrier against future errors. Every lesson you encode strengthens your harness.
 
 Errors are inevitable. Repeated errors are a choice.
+
+---
+
+*Related chapters:*
+
+- **[Chapter 6: The Verification Ladder](ch06-the-verification-ladder.md)** for the verification patterns that catch errors early
+- **[Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md)** for quality gates that automate prevention
+- **[Chapter 9: Context Engineering Deep Dive](ch09-context-engineering-deep-dive.md)** for context engineering principles that improve AI output
+- **[Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md)** for error recovery in long-running agent workflows
+- **[Chapter 15: Model Strategy & Cost Optimization](ch15-model-strategy-and-cost-optimization.md)** for cost optimization and budget protection strategies

@@ -1075,7 +1075,7 @@ Classification rules that worked last month may not work this month. Review and 
 
 A developer blocked for an hour waiting for AI approval costs $75. A few extra dollars in API costs to maintain flow is almost always worth it.
 
-## Try It Yourself
+## Exercises
 
 ### Exercise 1: Audit Your Model Usage
 
@@ -1109,12 +1109,10 @@ The compound effects are significant. Model switching saves 40-70%. Prompt cachi
 
 That is why this path compounds: not because any single idea is guaranteed to win, but because the cost of exploration keeps dropping. When each experiment costs $0.05 instead of $2, you run forty experiments instead of one. When overnight batch processing costs half price, you review entire codebases instead of spot-checking. When Haiku handles 70% of your requests at 12x lower cost, you try more approaches, validate more assumptions, and iterate faster. The experiments that fail cost almost nothing. The experiments that succeed become the foundation for the next layer of automation. Cost optimization is not about frugality. It is about increasing your iteration velocity until good ideas find you instead of the other way around.
 
-For related patterns, see Chapter 10 (The RALPH Loop) for cost management in long-running agents and Chapter 13 (Building the Harness) for production cost optimization.
-
 ---
 
-## Related Chapters
+*Related chapters:*
 
-- [Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md) for automated gates that validate cheaper models
-- [Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md) for cost management in long-running agents
-- [Chapter 13: Building the Harness](ch13-building-the-harness.md) for production cost optimization and telemetry
+- **[Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md)** for automated gates that validate cheaper models
+- **[Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md)** for cost management in long-running agents
+- **[Chapter 13: Building the Harness](ch13-building-the-harness.md)** for production cost optimization and telemetry

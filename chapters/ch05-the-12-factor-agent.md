@@ -503,7 +503,7 @@ These investments show the highest Return on Investment (ROI) earliest:
 2. **Factor 8 + Approval routing**: 20% effort, 50% reliability improvement
 3. **Factor 10 + Scope reduction**: 15% effort, 35% performance improvement
 
-## Try It Yourself
+## Exercises
 
 **Prerequisite**: Before starting these exercises, review `examples/ch05/tool-usage-basics.ts` for a beginner-friendly introduction to tool definitions, tool calling patterns, and handling tool results. It covers the fundamentals you will build upon in these exercises.
 

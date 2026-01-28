@@ -633,7 +633,7 @@ Track these metrics to verify your gates are truly stateless:
 
 Stateless verification is the difference between "works on my machine" and "works everywhere." It transforms unreliable gates into deterministic filters that compound reliably.
 
-## Try It Yourself
+## Exercises
 
 ### Exercise 1: Set Up Claude Code Hooks
 
@@ -668,7 +668,7 @@ Expected result: multiplicative should be 20-60% higher than linear.
 
 Expected result: 30x or greater ROI from early adoption.
 
-## Key Takeaways
+## Summary
 
 Quality gates are mathematical information filters that reduce the state space of valid programs through set intersection. This explains why layered verification is exponentially more effective than individual checks.
 

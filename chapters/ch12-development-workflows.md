@@ -615,9 +615,11 @@ These workflows do not exist in isolation. Plan Mode informs your worktree setup
 
 The key insight: workflows are force multipliers. A 10% improvement in each workflow compounds across your entire development process. Master these patterns and watch your velocity accelerate.
 
-## Related Chapters
+---
 
-- [Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md) for long-running agent automation built on workflows
-- [Chapter 11: Sub-Agent Architecture](ch11-sub-agent-architecture.md) for skills evolving into specialized sub-agents
-- [Chapter 13: Building the Harness](ch13-building-the-harness.md) for codifying workflows into production infrastructure
-- [Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md) for project instructions that workflows reference
+*Related chapters:*
+
+- **[Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md)** for long-running agent automation built on workflows
+- **[Chapter 11: Sub-Agent Architecture](ch11-sub-agent-architecture.md)** for skills evolving into specialized sub-agents
+- **[Chapter 13: Building the Harness](ch13-building-the-harness.md)** for codifying workflows into production infrastructure
+- **[Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md)** for project instructions that workflows reference

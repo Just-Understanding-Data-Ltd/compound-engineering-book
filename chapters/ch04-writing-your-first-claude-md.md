@@ -371,7 +371,7 @@ With hierarchical structure, developers can run `cat packages/workflows/CLAUDE.m
 
 **Developer Adoption**: Survey your team with one question: "Do you actually read CLAUDE.md before starting work in a new area?" If fewer than 80% say yes, your documentation is probably too long, too generic, or too stale to be useful.
 
-## Try It Yourself
+## Exercises
 
 ### Exercise 1: Audit Your CLAUDE.md
 

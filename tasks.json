@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T20:00:00Z",
+  "lastUpdated": "2026-01-28T21:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1734,7 +1734,7 @@
       "type": "kb-article",
       "title": "Write all KB articles",
       "description": "Convert knowledge base articles to the book format. Include in-chapter references to KB articles where relevant.",
-      "status": "pending",
+      "status": "complete",
       "priority": "normal",
       "subtasks": [
         {
@@ -1778,11 +1778,13 @@
           "parentId": "task-091",
           "type": "review",
           "title": "Final proofread",
-          "status": "pending",
-          "score": -135
+          "status": "complete",
+          "score": -135,
+          "completedAt": "2026-01-28T21:00:00Z"
         }
       ],
-      "score": -85
+      "score": -85,
+      "completedAt": "2026-01-28T21:00:00Z"
     },
     {
       "id": "task-097",
@@ -1911,16 +1913,19 @@
     ]
   },
   "stats": {
-    "pending": 7,
-    "inProgress": 0,
-    "complete": 144,
+    "pending": 5,
+    "complete": 146,
     "blocked": 0,
-    "total": 151
+    "total": 151,
+    "mainPending": 1,
+    "mainComplete": 60,
+    "subtaskPending": 4,
+    "subtaskComplete": 86
   },
   "checkpoints": {
-    "lastGoodCommit": "7e7c1fca867c64e43a090ad2efecb9198dd1e741",
-    "lastSuccessfulTask": "iteration-27",
-    "lastCheckpoint": "2026-01-28T16:51:11Z",
+    "lastGoodCommit": "4424cb49572e99f7feffe67a4364e0b0af4a120b",
+    "lastSuccessfulTask": "iteration-28",
+    "lastCheckpoint": "2026-01-28T16:58:35Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

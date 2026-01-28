@@ -529,7 +529,7 @@ For cost optimization:
 - Cache stable, high-MI content
 - Use Sonnet with good context before Opus
 
-## Try It Yourself
+## Exercises
 
 ### Exercise 1: Measure Entropy in Your Codebase
 
