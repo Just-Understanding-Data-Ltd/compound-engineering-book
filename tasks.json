@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T14:00:00Z",
+  "lastUpdated": "2026-01-28T15:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -183,6 +183,23 @@
       "relatedFile": "prds/ch07.md",
       "action": "Investigate and resolve PRD-chapter misalignment",
       "outcome": "Updated prds/ch07.md title from 'Chapter 7 PRD' to 'Chapter 9 PRD' and added note explaining historical numbering. PRD content correctly aligns with ch09-context-engineering-deep-dive.md."
+    },
+    {
+      "id": "task-215",
+      "type": "fix",
+      "title": "CRITICAL: Resolve PRD title mismatch for ch09",
+      "description": "prds/ch09.md is titled 'Chapter 9 PRD: Sub-Agent Architecture' but actual Chapter 9 is 'Context Engineering Deep Dive'. Sub-Agent Architecture is actually Chapter 11. This indicates PRD files are misaligned with chapter numbers. The ch09.md PRD may belong to ch11 OR the ch07.md 'Context Engineering' content belongs to ch09. This is critical for PRD-chapter alignment verification. Flagged by cross-ref-validator-2026-01-28.",
+      "status": "complete",
+      "completedAt": "2026-01-28T14:00:00Z",
+      "priority": "critical",
+      "score": 1280,
+      "scoreBreakdown": "critical:1000 + fix:80 + reviewFlagged:200 = 1280",
+      "flaggedByReview": "cross-ref-validator-2026-01-28",
+      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
+      "estimatedMinutes": 120,
+      "relatedFile": "prds/ch09.md",
+      "action": "Investigate PRD numbering (ch07 and ch09 may be swapped or mislabeled)",
+      "outcome": "Updated prds/ch09.md title from 'Chapter 9 PRD' to 'Chapter 11 PRD' and added note explaining historical numbering. PRD content correctly aligns with ch11-sub-agent-architecture.md."
     },
     {
       "id": "task-212",
@@ -1141,8 +1158,10 @@
           "parentId": "task-079",
           "type": "milestone",
           "title": "code tested",
-          "status": "pending",
-          "score": -100
+          "status": "complete",
+          "completedAt": "2026-01-28T15:00:00Z",
+          "score": -100,
+          "note": "TypeScript compiles (no ch14 errors), 60 tests pass (125 expect() calls), all 5 demo scripts run correctly (workflow-converter, conversation-archiver, skill-auditor, task-decomposer, meta-builder)"
         },
         {
           "id": "task-082",
@@ -1222,23 +1241,6 @@
         }
       ],
       "score": 875
-    },
-    {
-      "id": "task-215",
-      "type": "fix",
-      "title": "CRITICAL: Resolve PRD title mismatch for ch09",
-      "description": "prds/ch09.md is titled 'Chapter 9 PRD: Sub-Agent Architecture' but actual Chapter 9 is 'Context Engineering Deep Dive'. Sub-Agent Architecture is actually Chapter 11. This indicates PRD files are misaligned with chapter numbers. The ch09.md PRD may belong to ch11 OR the ch07.md 'Context Engineering' content belongs to ch09. This is critical for PRD-chapter alignment verification. Flagged by cross-ref-validator-2026-01-28.",
-      "status": "complete",
-      "completedAt": "2026-01-28T14:00:00Z",
-      "priority": "critical",
-      "score": 1280,
-      "scoreBreakdown": "critical:1000 + fix:80 + reviewFlagged:200 = 1280",
-      "flaggedByReview": "cross-ref-validator-2026-01-28",
-      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
-      "estimatedMinutes": 120,
-      "relatedFile": "prds/ch09.md",
-      "action": "Investigate PRD numbering (ch07 and ch09 may be swapped or mislabeled)",
-      "outcome": "Updated prds/ch09.md title from 'Chapter 9 PRD' to 'Chapter 11 PRD' and added note explaining historical numbering. PRD content correctly aligns with ch11-sub-agent-architecture.md."
     },
     {
       "id": "task-091",
@@ -1405,16 +1407,16 @@
     ]
   },
   "stats": {
-    "pending": 27,
+    "pending": 26,
     "inProgress": 0,
-    "complete": 91,
+    "complete": 92,
     "blocked": 0,
     "total": 118
   },
   "checkpoints": {
-    "lastGoodCommit": "d5bcb94c5baf0c7f36c61f9ec1bb23f6f2d3f03a",
-    "lastSuccessfulTask": "iteration-22",
-    "lastCheckpoint": "2026-01-28T14:00:00Z",
+    "lastGoodCommit": "faf629b2daad112f0590721a995d26fd8e7139df",
+    "lastSuccessfulTask": "iteration-23",
+    "lastCheckpoint": "2026-01-28T15:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0
