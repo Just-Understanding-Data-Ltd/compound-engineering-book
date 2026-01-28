@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-01-28T14:44:28.152Z",
+  "lastUpdated": "2026-01-29T09:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T07:00:00Z",
-    "iteration": 3,
+    "lastRun": "2026-01-29T09:00:00Z",
+    "iteration": 4,
     "tasksRemoved": 0,
     "tasksMerged": 0,
-    "prioritiesAdjusted": 1,
+    "prioritiesAdjusted": 4,
     "newTasksAdded": 0,
-    "tasksUnblocked": 1,
-    "recommendedNext": "task-229",
-    "reasoning": "Completed task-228 (test all migrated examples). MILESTONE: Agent SDK Migration (task-216) COMPLETE. Unblocked task-229 (update chapter prose for Agent SDK focus) since its blocker task-216 is now complete. task-229 (score 830) is now highest-scored pending task, followed by task-320 (PRD em dashes)."
+    "tasksUnblocked": 0,
+    "recommendedNext": "task-320",
+    "reasoning": "Recalculated scores for pending tasks. Fixed score misalignments: task-320 and task-321 now correctly scored at 1030 (review-flagged fixes). task-229 updated to 830 (unblocked after SDK migration). task-232/234 (structured outputs) also at 830. Top priority: Fix PRD em dashes (task-320) as highest-impact quality fix."
   },
   "prds": {
     "index": {
@@ -1507,8 +1507,8 @@
       "description": "Replace all em dashes (—) in PRD files with periods or commas. Identified 13 instances across 9 PRD files. Em dashes are AI text tells that must be eliminated for publication. This is a quick find-and-replace task. Flagged by slop-checker-2026-01-28.",
       "status": "pending",
       "priority": "high",
-      "score": 435,
-      "scoreBreakdown": "high:750 + fix:80 + reviewFlagged:200 - 140 for subtask = 890",
+      "score": 1030,
+      "scoreBreakdown": "high:750 + fix:80 + reviewFlagged:200 = 1030",
       "chapter": "multiple",
       "flaggedByReview": "slop-checker-2026-01-28",
       "reviewReference": "reviews/slop-check-2026-01-28.md",
@@ -1524,8 +1524,8 @@
       "description": "Add definitions for 7 high-priority undefined terms identified across chapters. Critical and high-priority issues from term-intro-checker review. Include: 1) Ch03 acronyms, 2) Ch05 technical terms, 3) Ch10 RALPH-specific terms, 4) Ch12 workflow terms, 5) Ch14 architecture terms. Each requires definition at first use. Flagged by term-intro-checker-2026-01-28.",
       "status": "pending",
       "priority": "high",
-      "score": 435,
-      "scoreBreakdown": "high:750 + fix:80 + reviewFlagged:200 - 180 = 850",
+      "score": 1030,
+      "scoreBreakdown": "high:750 + fix:80 + reviewFlagged:200 = 1030",
       "flaggedByReview": "term-intro-checker-2026-01-28",
       "reviewReference": "reviews/term-intro-2026-01-28.md",
       "estimatedMinutes": 45,
@@ -1568,7 +1568,8 @@
       "description": "Replace manual text parsing with Anthropic structured outputs across 20 files. Current pattern: `response.content.find((c) => c.type === \"text\")`. Should use structured outputs with Zod schema for typed responses. Files: ch03(2), ch05(2), ch09(4), ch10(4), ch13(3), ch14(5). See: https://docs.anthropic.com/en/docs/build-with-claude/structured-output",
       "status": "pending",
       "priority": "high",
-      "score": 435,
+      "score": 830,
+      "scoreBreakdown": "high:750 + fix:80 = 830",
       "createdAt": "2026-01-29T00:00:00Z",
       "file": "examples/ch09/entropy-measurement.ts"
     },
@@ -1579,7 +1580,8 @@
       "description": "Update examples/ch06/schema-generator.ts to use Anthropic structured outputs (beta). Use output_format with json_schema for guaranteed valid JSON responses. Requires beta header: structured-outputs-2025-11-13. Use client.beta.messages.create() with betas array. Can use Zod with betaZodOutputFormat helper for TypeScript.",
       "status": "pending",
       "priority": "high",
-      "score": 435,
+      "score": 830,
+      "scoreBreakdown": "high:750 + fix:80 = 830",
       "createdAt": "2026-01-29T00:00:00Z",
       "file": "examples/ch06/schema-generator.ts",
       "reference": "https://docs.anthropic.com/en/docs/build-with-claude/structured-output"
@@ -1591,7 +1593,7 @@
       "description": "After code migration, update chapter text to reference Agent SDK concepts (sessions, streaming, resumption) instead of raw API calls.",
       "status": "pending",
       "priority": "high",
-      "score": 365,
+      "score": 830,
       "scoreBreakdown": "high:750 + review:80 = 830",
       "createdAt": "2026-01-28T22:00:00Z",
       "unblockNote": "Unblocked: task-216 (Agent SDK Migration) completed 2026-01-29T07:00:00Z"
@@ -1873,13 +1875,13 @@
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "9a4e9bd472b4519cb665925135cb03ced024e76b",
-    "lastSuccessfulTask": "iteration-3",
-    "lastCheckpoint": "2026-01-28T14:44:28Z",
+    "lastGoodCommit": "1e1097d83e3dab5832287bd48800c272d47b60c9",
+    "lastSuccessfulTask": "iteration-5",
+    "lastCheckpoint": "2026-01-29T09:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
-    "lastQueueCuration": "2026-01-29T07:00:00Z"
+    "lastQueueCuration": "2026-01-29T09:00:00Z"
   },
-  "lastQueueCuration": "2026-01-29T07:00:00Z"
+  "lastQueueCuration": "2026-01-29T09:00:00Z"
 }
