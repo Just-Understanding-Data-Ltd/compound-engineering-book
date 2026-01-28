@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T22:30:00.000Z",
+  "lastUpdated": "2026-01-28T16:09:30.879Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1662,10 +1662,11 @@
       "chapter": "ch13",
       "title": "Create Cost Protection Layers diagram",
       "description": "Visualize five-layer cost protection: job timeout (outer), step timeout, request token cap, input size limit, budget enforcement (inner).",
-      "status": "pending",
+      "status": "complete",
       "priority": "low",
       "score": 175,
-      "createdAt": "2026-01-28T14:30:00Z"
+      "createdAt": "2026-01-28T14:30:00Z",
+      "completedAt": "2026-01-29T23:00:00Z"
     },
     {
       "id": "task-301",
@@ -1901,9 +1902,9 @@
     ]
   },
   "stats": {
-    "pending": 16,
+    "pending": 15,
     "inProgress": 0,
-    "complete": 135,
+    "complete": 136,
     "blocked": 0,
     "total": 151
   },

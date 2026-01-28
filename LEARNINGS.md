@@ -595,3 +595,27 @@ The formula provides a "why this matters" anchor. Readers understand abstract ad
 4. End with an improvement table showing the payoff of better inputs
 
 ---
+
+### 2026-01-29 - Complementary Diagrams Across Chapters for Same Concept
+
+**Context**: Creating the Cost Protection Layers diagram for Chapter 13 (task-256), when a similar diagram already exists for Chapter 8 (ch08-multi-layer-timeout-protection.md). Both visualize the same five-layer cost protection model.
+
+**Observation**: The same technical concept (five-layer cost protection) can serve different pedagogical purposes in different chapters. The ch08 diagram focuses on error handling and reliability, emphasizing failure scenarios and circuit breaker patterns. The ch13 diagram focuses on harness architecture and cost optimization, emphasizing cost calculations, savings percentages (72% with model switching), and integration with the Layer 4 closed-loop optimization context.
+
+| Diagram | Chapter Focus | Primary Perspective | Key Metrics Shown |
+|---------|--------------|---------------------|-------------------|
+| ch08-multi-layer-timeout | Error Handling | What failures each layer catches | Failure scenarios, recovery |
+| ch13-cost-protection | Harness Architecture | Cost calculation and optimization | $71.28 → $20.24, 72% savings |
+
+The diagrams are not duplicates. They are complementary views that reinforce understanding from different angles. A reader learning error handling (ch08) benefits from seeing how layers catch failures. A reader building harnesses (ch13) benefits from seeing how layers reduce costs.
+
+**Implication**: When the same concept appears in multiple chapters, create distinct diagrams tailored to each chapter's context rather than reusing the same diagram. The concept is the same, but the framing, metrics, and connections differ. This approach requires more work but produces better learning outcomes.
+
+**Action**: When creating diagrams for concepts that appear in multiple chapters:
+1. Check if a similar diagram exists in another chapter
+2. If yes, identify the different pedagogical focus of each chapter
+3. Create a new diagram that emphasizes the current chapter's perspective
+4. Include cross-references to related diagrams in other chapters
+5. Ensure key metrics/examples align with the chapter's narrative (e.g., ch08 shows failure costs, ch13 shows optimization savings)
+
+---
