@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 13:00)
+## Current Status (Updated: 2026-01-28 14:30)
 - Phase: All Chapters COMPLETE - Agent SDK Migration Phase
-- Active: task-222 (Rewrite ch10 examples with Agent SDK) → NEXT
+- Active: task-216 (Agent SDK Migration) in_progress, task-222 (ch10) next subtask
 - Last Completed: task-221 (Rewrite ch09 examples with Agent SDK)
 - Blockers: task-229 blocked by task-216 (Agent SDK migration)
-- Queue Health: Curated - 1 blocked task, 28 pending
+- Queue Health: Curated - 1 blocked task, 39 pending, 1 in_progress, 149 total
 - Publishing Readiness: ALL CHAPTERS COMPLETE (ch01-ch15)
 
 ## Project State Summary
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 63/63 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 108/137 (79%), 1 blocked
+- Tasks Complete: 108/149 (72%), 1 blocked, 1 in_progress
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Review Cycle - COMPREHENSIVE)
@@ -42,6 +42,20 @@
 - **Publication target**: 2026-02-01 to 2026-02-03
 
 ## Recent Activity
+
+### 2026-01-28 14:30 - Queue Curation
+- What: Curated task queue per RALPH protocol
+- Changes made:
+  1. task-216 (Agent SDK Migration): status changed from "pending" to "in_progress", score updated to 1155 (critical priority)
+  2. Migration subtasks (task-222 through task-228): scores boosted to positive values (950-920) for proper prioritization
+  3. Timestamps updated (lastUpdated, lastQueueCuration)
+  4. recentCompletions updated to reflect latest Agent SDK migration work
+- External additions detected: 6 new tasks added (task-235 through task-239) for ch15 enhancements
+- Stats: 39 pending, 1 in_progress (task-216), 108 complete, 1 blocked, 149 total
+- No duplicates found
+- Priority order verified: task-222 (ch10 SDK migration) is correctly next
+- Outcome: Queue curated, priorities correct
+- Next: task-222 (Rewrite ch10 examples with Agent SDK)
 
 ### 2026-01-28 13:00 - COMPLETED task-221: Ch09 Agent SDK migration - ITERATION 9
 - What: Migrated ch09 code examples from native Anthropic SDK to Agent SDK

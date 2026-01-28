@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T13:00:00Z",
+  "lastUpdated": "2026-01-28T14:30:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1261,13 +1261,27 @@
       "score": 875
     },
     {
+      "id": "task-233",
+      "type": "chapter",
+      "title": "Add simple tool usage notebook to ch05 and update chapter",
+      "description": "Create a Jupyter notebook (or interactive TypeScript examples) for Chapter 5 that explains tool usage in a simpler, step-by-step format. Should cover: basic tool definitions, tool calling patterns, handling tool results, and common tool use cases. Make it beginner-friendly with progressive examples. Also update chapters/ch05-*.md to reference and integrate the new notebook content.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 675,
+      "createdAt": "2026-01-29T00:00:00Z",
+      "chapter": "ch05",
+      "path": "examples/ch05/"
+    },
+    {
       "id": "task-216",
       "type": "refactor",
       "title": "Agent SDK Migration: Ch06-Ch15 Code Examples",
       "description": "Migrate all code examples in chapters 06-15 from native Anthropic SDK to Claude Agent SDK. This teaches readers to build custom agents rather than just API calls.",
-      "status": "pending",
+      "status": "in_progress",
+      "startedAt": "2026-01-28T22:30:00Z",
       "priority": "critical",
-      "score": 630,
+      "score": 1155,
+      "scoreBreakdown": "critical:1000 + refactor:80 + blocks:25 + age:50 = 1155",
       "createdAt": "2026-01-28T22:00:00Z",
       "subtasks": [
         {
@@ -1331,7 +1345,8 @@
           "title": "Rewrite ch10 examples with Agent SDK",
           "description": "The RALPH Loop - convert to Agent SDK session resumption and checkpoints.",
           "status": "pending",
-          "score": -145
+          "score": 950,
+          "priority": "critical"
         },
         {
           "id": "task-223",
@@ -1340,7 +1355,8 @@
           "title": "Rewrite ch11 examples with Agent SDK",
           "description": "Sub-Agent Architecture - convert to Agent SDK sub-agent spawning patterns.",
           "status": "pending",
-          "score": -145
+          "score": 945,
+          "priority": "critical"
         },
         {
           "id": "task-224",
@@ -1349,7 +1365,8 @@
           "title": "Rewrite ch12 examples with Agent SDK",
           "description": "Development Workflows - convert to Agent SDK workflow patterns.",
           "status": "pending",
-          "score": -145
+          "score": 940,
+          "priority": "critical"
         },
         {
           "id": "task-225",
@@ -1358,7 +1375,8 @@
           "title": "Rewrite ch13 examples with Agent SDK",
           "description": "Building the Harness - convert to Agent SDK harness patterns.",
           "status": "pending",
-          "score": -145
+          "score": 935,
+          "priority": "critical"
         },
         {
           "id": "task-226",
@@ -1367,7 +1385,8 @@
           "title": "Rewrite ch14 examples with Agent SDK",
           "description": "The Meta-Engineer Playbook - convert to Agent SDK meta-engineering patterns.",
           "status": "pending",
-          "score": -145
+          "score": 930,
+          "priority": "critical"
         },
         {
           "id": "task-227",
@@ -1376,7 +1395,8 @@
           "title": "Rewrite ch15 examples with Agent SDK",
           "description": "Model Strategy & Cost Optimization - convert to Agent SDK cost patterns.",
           "status": "pending",
-          "score": -145
+          "score": 925,
+          "priority": "critical"
         },
         {
           "id": "task-228",
@@ -1385,7 +1405,8 @@
           "title": "Test all migrated examples",
           "description": "Run all migrated examples through exercise-validator to confirm they compile and work.",
           "status": "pending",
-          "score": -145
+          "score": 920,
+          "priority": "critical"
         }
       ]
     },
@@ -1411,6 +1432,18 @@
       "score": 435,
       "createdAt": "2026-01-29T00:00:00Z",
       "file": "examples/ch09/entropy-measurement.ts"
+    },
+    {
+      "id": "task-234",
+      "type": "fix",
+      "title": "Use structured outputs in ch06/schema-generator.ts",
+      "description": "Update examples/ch06/schema-generator.ts to use Anthropic structured outputs (beta). Use output_format with json_schema for guaranteed valid JSON responses. Requires beta header: structured-outputs-2025-11-13. Use client.beta.messages.create() with betas array. Can use Zod with betaZodOutputFormat helper for TypeScript.",
+      "status": "pending",
+      "priority": "high",
+      "score": 435,
+      "createdAt": "2026-01-29T00:00:00Z",
+      "file": "examples/ch06/schema-generator.ts",
+      "reference": "https://docs.anthropic.com/en/docs/build-with-claude/structured-output"
     },
     {
       "id": "task-229",
@@ -1573,28 +1606,436 @@
       "score": -295
     },
     {
-      "id": "task-233",
+      "id": "task-235",
+      "type": "enhancement",
+      "chapter": "ch03",
+      "title": "ch03: Add advanced prompting techniques section",
+      "description": "Add optional advanced section covering: (1) Layered prompts architecture (4-layer structure from layered-prompts-architecture.md), (2) Test-driven prompting (tests as executable specs from test-driven-prompting.md), (3) Multi-step workflows (from multi-step-prompt-workflows.md). These KB articles contain excellent content that could extend ch03 for advanced readers.",
+      "status": "pending",
+      "priority": "low",
+      "score": 95,
+      "createdAt": "2026-01-28T12:00:00Z",
+      "kbSources": [
+        "layered-prompts-architecture.md",
+        "test-driven-prompting.md",
+        "multi-step-prompt-workflows.md"
+      ],
+      "note": "Enhancement for future edition. Core ch03 content is complete."
+    },
+    {
+      "id": "task-235",
       "type": "chapter",
-      "title": "Add simple tool usage notebook to ch05 and update chapter",
-      "description": "Create a Jupyter notebook (or interactive TypeScript examples) for Chapter 5 that explains tool usage in a simpler, step-by-step format. Should cover: basic tool definitions, tool calling patterns, handling tool results, and common tool use cases. Make it beginner-friendly with progressive examples. Also update chapters/ch05-*.md to reference and integrate the new notebook content.",
+      "chapter": "ch15",
+      "title": "Add Batch API example to ch15",
+      "description": "Add code example demonstrating Batch API patterns from batch-api-patterns.md KB article. Shows 50% cost reduction for async workloads like nightly code reviews. Include submit/poll/process pattern.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 540,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/batch-api-patterns.md"
+    },
+    {
+      "id": "task-236",
+      "type": "chapter",
+      "chapter": "ch15",
+      "title": "Add Token Budget Manager example to ch15",
+      "description": "Add code example demonstrating token budgeting from token-budgeting-strategies.md KB article. Shows information density ranking, budget tier allocation (Critical 20%, Important 30%, Supplementary 30%, Dynamic 20%), and ContextBudgetManager class.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 540,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/token-budgeting-strategies.md"
+    },
+    {
+      "id": "task-237",
+      "type": "chapter",
+      "chapter": "ch15",
+      "title": "Add run_silent() backpressure example to ch15",
+      "description": "Add code example demonstrating context-efficient backpressure from context-efficient-backpressure.md KB article. Shows run_silent() pattern that saves 2-3% context on test/build/lint runs by suppressing pass output.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 540,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/context-efficient-backpressure.md"
+    },
+    {
+      "id": "task-238",
+      "type": "diagram",
+      "chapter": "ch15",
+      "title": "Create Token Budgeting Tiers diagram",
+      "description": "Visualize the four budget tiers (Critical 20%, Important 30%, Supplementary 30%, Dynamic 20%) and information density rankings. Show how types (4.0 bits/token) beat comments (1.0 bits/token).",
+      "status": "pending",
+      "priority": "medium",
+      "score": 530,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "suggestedFilename": "assets/diagrams/ch15-token-budget-tiers.md"
+    },
+    {
+      "id": "task-239",
+      "type": "diagram",
+      "chapter": "ch15",
+      "title": "Create Batch API workflow diagram",
+      "description": "Visualize the batch API submit -> poll/webhook -> process workflow. Show 50% cost savings vs interactive API and appropriate use cases (nightly reviews, bulk operations).",
+      "status": "pending",
+      "priority": "medium",
+      "score": 530,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "suggestedFilename": "assets/diagrams/ch15-batch-api-workflow.md"
+    },
+    {
+      "id": "task-235",
+      "type": "enhancement",
+      "title": "ch12: Add parallel agent patterns content",
+      "description": "KB analysis found 3 articles not yet covered: (1) parallel-agents-for-monorepos.md - 10x speedup for monorepo changes, (2) 24-7-development-strategy.md - autonomous overnight agents, (3) agent-swarm-patterns-for-thoroughness.md - orchestrating multiple agents.",
+      "status": "pending",
+      "priority": "low",
+      "score": 120,
+      "createdAt": "2026-01-29T00:00:00Z",
+      "chapter": "ch12"
+    },
+    {
+      "id": "task-236",
+      "type": "kb-article",
+      "title": "Create human-in-the-loop-patterns.md KB article",
+      "description": "Write KB article on HITL patterns for agent workflows. Based on ch04 PRD (12-Factor Agent) Factor 7 content. Cover: approval gates, escalation thresholds, async approval (Slack/email), confidence-based escalation, high-risk action routing. Include TypeScript examples using Agent SDK v2 sessions. Source: KB scan Jan 28, 2026.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 560,
+      "scoreBreakdown": "medium:500 + kb-article:60 = 560",
+      "createdAt": "2026-01-28T22:00:00Z",
+      "chapter": "ch05",
+      "relatedPRD": "prds/ch04.md",
+      "targetPath": "kb/human-in-the-loop-patterns.md"
+    },
+    {
+      "id": "task-237",
+      "type": "kb-article",
+      "title": "Create event-sourcing-agents.md KB article",
+      "description": "Write KB article on event sourcing architecture for agent state. Based on ch04 PRD Factor 5 (Unify Execution State and Business State). Cover: event log as single source of truth, deriveState() reducer pattern, time-travel debugging, audit trails, replay capabilities. Include TypeScript examples. Source: KB scan Jan 28, 2026.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 560,
+      "scoreBreakdown": "medium:500 + kb-article:60 = 560",
+      "createdAt": "2026-01-28T22:00:00Z",
+      "chapter": "ch05",
+      "relatedPRD": "prds/ch04.md",
+      "targetPath": "kb/event-sourcing-agents.md"
+    },
+    {
+      "id": "task-238",
+      "type": "kb-article",
+      "title": "Create tool-call-validation.md KB article",
+      "description": "Write KB article on validating tool call outputs. Based on ch04 PRD Factor 4 (Tools Are Just Structured Outputs). Cover: JSON schema validation, Zod patterns for tool outputs, separating specification from implementation, type-safe tool definitions, testing tool handlers. Include TypeScript examples. Source: KB scan Jan 28, 2026.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 560,
+      "scoreBreakdown": "medium:500 + kb-article:60 = 560",
+      "createdAt": "2026-01-28T22:00:00Z",
+      "chapter": "ch05",
+      "relatedPRD": "prds/ch04.md",
+      "targetPath": "kb/tool-call-validation.md"
+    },
+    {
+      "id": "task-239",
+      "type": "kb-article",
+      "title": "Create claude-code-hooks-patterns.md KB article",
+      "description": "Write KB article on Claude Code hooks configuration. Based on claude-code-hooks-quality-gates.md from knowledge base. Cover: hook types (pre-commit, post-edit, post-write), JSON configuration format, chaining multiple checks, conditional hooks by file type, Ctrl+O diagnostics. Include practical examples. Source: KB scan Jan 28, 2026.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 560,
+      "scoreBreakdown": "medium:500 + kb-article:60 = 560",
+      "createdAt": "2026-01-28T22:00:00Z",
+      "chapter": "ch04",
+      "relatedPRD": "prds/ch03.md",
+      "kbSource": "claude-code-hooks-quality-gates.md",
+      "targetPath": "kb/claude-code-hooks-patterns.md"
+    },
+    {
+      "id": "task-240",
+      "type": "kb-article",
+      "title": "Create mcp-server-patterns.md KB article",
+      "description": "Write KB article on MCP servers for dynamic project context. Based on mcp-server-project-context.md from knowledge base. Cover: static vs dynamic context, queryable knowledge, resource URI design, TypeScript implementation, 87% context reduction metrics. Source: KB scan Jan 28, 2026.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 560,
+      "scoreBreakdown": "medium:500 + kb-article:60 = 560",
+      "createdAt": "2026-01-28T22:00:00Z",
+      "chapter": "ch04",
+      "relatedPRD": "prds/ch03.md",
+      "kbSource": "mcp-server-project-context.md",
+      "targetPath": "kb/mcp-server-patterns.md"
+    },
+    {
+      "id": "task-236",
+      "type": "enhancement",
+      "title": "ch11: Add advanced KB orchestration patterns",
+      "description": "Incorporate patterns from KB: 1) Escalation request pattern from tool-access-control.md, 2) Bash command whitelists per role, 3) 3-tier memory architecture from agent-memory-patterns.md, 4) Hybrid orchestration patterns (Coordinator + Swarm) from orchestration-patterns.md.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 500,
+      "createdAt": "2026-01-29T00:00:00Z",
+      "chapter": "ch11",
+      "kbReferences": [
+        "tool-access-control.md",
+        "agent-memory-patterns.md",
+        "orchestration-patterns.md"
+      ]
+    },
+    {
+      "id": "task-250",
+      "type": "enhancement",
+      "chapter": "ch13",
+      "title": "Enrich ch13 with CI/CD agent patterns from KB",
+      "description": "Add content from ci-cd-agent-patterns.md to ch13. Include: tiered verification (PR vs nightly gates), response caching, cost budget enforcement, behavioral regression tests.",
       "status": "pending",
       "priority": "medium",
       "score": 550,
-      "createdAt": "2026-01-29T00:00:00Z",
-      "chapter": "ch05",
-      "path": "examples/ch05/"
+      "createdAt": "2026-01-28T14:30:00Z",
+      "sourceArticle": "ci-cd-agent-patterns.md"
     },
     {
-      "id": "task-234",
-      "type": "fix",
-      "title": "Use structured outputs in ch06/schema-generator.ts",
-      "description": "Update examples/ch06/schema-generator.ts to use Anthropic structured outputs (beta). Use output_format with json_schema for guaranteed valid JSON responses. Requires beta header: structured-outputs-2025-11-13. Use client.beta.messages.create() with betas array. Can use Zod with betaZodOutputFormat helper for TypeScript.",
+      "id": "task-251",
+      "type": "enhancement",
+      "chapter": "ch13",
+      "title": "Add checkpoint/resume patterns from agent-memory-patterns.md",
+      "description": "Three-tier memory hierarchy (session, file-based, event-sourced), checkpoint-after-every-tool-call pattern, webhook integration for human approval.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 545,
+      "createdAt": "2026-01-28T14:30:00Z",
+      "sourceArticle": "agent-memory-patterns.md"
+    },
+    {
+      "id": "task-252",
+      "type": "enhancement",
+      "chapter": "ch13",
+      "title": "Expand cost protection section with KB patterns",
+      "description": "Five-layer protection model (job timeout, request tokens, input limits, budget alerts, model selection) and cost calculation examples from ai-cost-protection-timeouts.md.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 540,
+      "createdAt": "2026-01-28T14:30:00Z",
+      "sourceArticle": "ai-cost-protection-timeouts.md"
+    },
+    {
+      "id": "task-253",
+      "type": "enhancement",
+      "chapter": "ch13",
+      "title": "Add agent reliability patterns to ch13",
+      "description": "Exponential reliability problem (95% to 36%), four-turn framework (understand/decide/execute/verify), pre-action and post-action verification from agent-reliability-chasm.md.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 535,
+      "createdAt": "2026-01-28T14:30:00Z",
+      "sourceArticle": "agent-reliability-chasm.md"
+    },
+    {
+      "id": "task-254",
+      "type": "enhancement",
+      "chapter": "ch13",
+      "title": "Integrate 12-factor agents patterns into ch13",
+      "description": "Factor 5 (unify state), Factor 6 (pause/resume), Factor 7 (contact humans with tools), Factor 10 (small agents 3-20 steps), Factor 12 (stateless reducer) from 12-factor-agents.md.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 530,
+      "createdAt": "2026-01-28T14:30:00Z",
+      "sourceArticle": "12-factor-agents.md"
+    },
+    {
+      "id": "task-255",
+      "type": "diagram",
+      "chapter": "ch13",
+      "title": "Create Agent Memory Tiers diagram",
+      "description": "Visualize three-tier memory hierarchy: session (ephemeral), file-based (TASKS.md/progress.txt), event-sourced (full audit trail).",
+      "status": "pending",
+      "priority": "low",
+      "score": 150,
+      "createdAt": "2026-01-28T14:30:00Z"
+    },
+    {
+      "id": "task-256",
+      "type": "diagram",
+      "chapter": "ch13",
+      "title": "Create Cost Protection Layers diagram",
+      "description": "Visualize five-layer cost protection: job timeout (outer), step timeout, request token cap, input size limit, budget enforcement (inner).",
+      "status": "pending",
+      "priority": "low",
+      "score": 145,
+      "createdAt": "2026-01-28T14:30:00Z"
+    },
+    {
+      "id": "task-300",
+      "type": "enhancement",
+      "chapter": "ch06",
+      "title": "ch06: Add integration testing patterns section",
+      "description": "Enhance The Verification Ladder chapter with content from integration-testing-patterns.md KB article. Key insights: Integration tests provide 10-20x better signal-to-noise ratio for LLM verification, inverted test pyramid for AI-assisted development.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 595,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "kbSources": [
+        "integration-testing-patterns.md"
+      ]
+    },
+    {
+      "id": "task-301",
+      "type": "enhancement",
+      "chapter": "ch06",
+      "title": "ch06: Add flaky test diagnosis content",
+      "description": "Enhance The Verification Ladder chapter with content from flaky-test-diagnosis-script.md KB article. Add diagnostic script pattern, common causes, remediation strategies to Pitfall 6.",
+      "status": "pending",
+      "priority": "low",
+      "score": 195,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "kbSources": [
+        "flaky-test-diagnosis-script.md"
+      ]
+    },
+    {
+      "id": "task-302",
+      "type": "enhancement",
+      "chapter": "ch07",
+      "title": "ch07: Add stateless verification loops content",
+      "description": "Enhance Quality Gates chapter with stateless-verification-loops.md KB content. Add to section 4.8: stateless execution, clean slate verification, prevent ghost failures.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 590,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "kbSources": [
+        "stateless-verification-loops.md"
+      ]
+    },
+    {
+      "id": "task-303",
+      "type": "enhancement",
+      "chapter": "ch07",
+      "title": "ch07: Expand Trust But Verify Protocol section",
+      "description": "Incorporate trust-but-verify-protocol.md content: AI-generated tests, visual verification, 99% review reduction. Strengthens section 4.6 Automated Code Review.",
+      "status": "pending",
+      "priority": "low",
+      "score": 190,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "kbSources": [
+        "trust-but-verify-protocol.md"
+      ]
+    },
+    {
+      "id": "task-236",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Add Common Pitfalls for Newcomers section to ch02",
+      "description": "Based on KB scan (Jan 28 2026), add new section covering 5 common pitfalls: (1) Oversized tasks - 90% error reduction through incremental development, (2) Skipping exploration - 60% fewer iterations with explore-first, (3) Long conversations - context accumulates noise, (4) Bloated CLAUDE.md - 150-200 instruction limit, (5) Manual review - use verification instead.",
       "status": "pending",
       "priority": "high",
-      "score": 700,
-      "createdAt": "2026-01-29T00:00:00Z",
-      "file": "examples/ch06/schema-generator.ts",
-      "reference": "https://docs.anthropic.com/en/docs/build-with-claude/structured-output"
+      "score": 800,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticles": [
+        "incremental-development-pattern.md",
+        "writing-a-good-claude-md.md",
+        "cursor-agent-workflows.md",
+        "trust-but-verify-protocol.md"
+      ],
+      "estimatedWords": 500
+    },
+    {
+      "id": "task-237",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Update CLAUDE.md guidance with Less is More insights",
+      "description": "Based on writing-a-good-claude-md.md: Update section 4.2 to emphasize brevity. Add: (1) 150-200 instruction limit before degradation, (2) System prompt uses ~50 instructions, (3) Optimal length < 100 lines, (4) Progressive disclosure pattern, (5) Never use Claude as linter.",
+      "status": "pending",
+      "priority": "high",
+      "score": 790,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "writing-a-good-claude-md.md"
+    },
+    {
+      "id": "task-238",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Add setup validation to installation section",
+      "description": "Based on zero-friction-onboarding.md: Add subsection on validating setup works. If junior dev can get system running in 5 minutes, Claude Code will too. Add validation checklist, common setup issues, environment variable verification.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 550,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "zero-friction-onboarding.md"
+    },
+    {
+      "id": "task-239",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Add Incremental Development prompting pattern",
+      "description": "Based on incremental-development-pattern.md: Add Pattern 5 covering incremental development. Include why large requests fail, the 20-100 lines per increment pattern, validation loop, context accumulation, 90% error reduction.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 540,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "incremental-development-pattern.md"
+    },
+    {
+      "id": "task-240",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Add Trust But Verify workflow example",
+      "description": "Based on trust-but-verify-protocol.md: Enhance Pattern 3 with verification workflow. Request verification alongside implementation, review test output not code, fix failures immediately, verification becomes quality gates.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 530,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "trust-but-verify-protocol.md"
+    },
+    {
+      "id": "task-241",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Add Wave 4 context to introduction",
+      "description": "Based on six-waves-of-ai-coding.md: Add brief context explaining Wave 4 coding agents vs Wave 3 chat-based coding. Key skill shift is task decomposition for agent delegation.",
+      "status": "pending",
+      "priority": "low",
+      "score": 340,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "six-waves-of-ai-coding.md"
+    },
+    {
+      "id": "task-240",
+      "type": "enhancement",
+      "title": "ch01: Add doctrine Final Invariant quotes",
+      "description": "Add 4 missing quotes from doctrine to Summary: (1) Never confuse motion with progress, (2) Never confuse safety with wisdom, (3) This is not stubbornness. This is disciplined persistence, (4) You are building the machine that builds products.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 580,
+      "chapter": "ch01"
+    },
+    {
+      "id": "task-241",
+      "type": "enhancement",
+      "title": "ch13: Add doctrine harness component list",
+      "description": "Add emphasized list: the harness, the agent workflows, the observability, the math, and the taste you are developing all persist.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 550,
+      "chapter": "ch13"
+    },
+    {
+      "id": "task-242",
+      "type": "enhancement",
+      "title": "ch14: Add full identity definition callout",
+      "description": "Add complete Compound Systems Engineer definition with not socially legible note as callout box.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 545,
+      "chapter": "ch14"
+    },
+    {
+      "id": "task-243",
+      "type": "enhancement",
+      "title": "ch15: Add cost of exploration insight",
+      "description": "Add: That is why this path compounds: not because any single idea is guaranteed to win, but because the cost of exploration keeps dropping.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 540,
+      "chapter": "ch15"
     }
   ],
   "completed": {
@@ -1624,19 +2065,19 @@
     ]
   },
   "stats": {
-    "pending": 28,
-    "inProgress": 0,
+    "pending": 35,
+    "inProgress": 1,
     "complete": 108,
     "blocked": 1,
-    "total": 137
+    "total": 158
   },
   "checkpoints": {
-    "lastGoodCommit": "1db6d7fecde4a2221faac9d8fa270bdcf80e3914",
-    "lastSuccessfulTask": "iteration-8",
-    "lastCheckpoint": "2026-01-28T10:39:30Z",
+    "lastGoodCommit": "d6a8ba0de340064e4275b225f464360e2bc28a6e",
+    "lastSuccessfulTask": "task-221",
+    "lastCheckpoint": "2026-01-28T14:30:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
-    "lastQueueCuration": "2026-01-28T10:35:00Z"
+    "lastQueueCuration": "2026-01-28T14:30:00Z"
   }
 }
