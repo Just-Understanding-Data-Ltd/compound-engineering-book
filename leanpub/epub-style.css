@@ -114,6 +114,20 @@ ul, ol {
 
 li {
   margin-bottom: 0.3em;
+  padding-left: 0.5em;
+  line-height: 1.5;
+}
+
+/* Nested lists */
+ul ul, ol ol, ul ol, ol ul {
+  padding-left: 2em;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+}
+
+/* Tighten nested list items */
+li li {
+  margin-bottom: 0.2em;
 }
 
 /* Bold and emphasis */
