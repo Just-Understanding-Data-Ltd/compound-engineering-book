@@ -513,6 +513,14 @@ To: "What constraints define success? What environment enforces them? What feedb
 
 The best engineers do not write better code. They design better systems that make good code inevitable.
 
+> **The Compound Systems Engineer Definition**
+>
+> A Compound Systems Engineer builds reusable cognitive and technical capital to operate in high-variance domains with asymmetric upside.
+>
+> This identity is intentionally not socially legible. It does not fit LinkedIn. It does not compress into a job title. It does not resolve quickly. That is fine. The value lies in what compounds, not in what is easily explained.
+>
+> You are building the machine that builds products. Even if a specific product fails, the harness, the agent workflows, the observability, the math, and the taste you are developing all persist. Each subsequent product becomes cheaper, faster, and more stable to build.
+
 ### The Full Skill Stack
 
 What separates meta-engineers from regular engineers is the full stack they develop:

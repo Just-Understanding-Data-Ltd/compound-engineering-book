@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-01-29T16:00:00.000Z",
+  "lastUpdated": "2026-01-28T15:22:10.967Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T14:30:00Z",
-    "iteration": 10,
+    "lastRun": "2026-01-29T17:00:00Z",
+    "iteration": 12,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
-    "recommendedNext": "task-253",
-    "reasoning": "Queue curation iteration 10. Verified 17 pending tasks, no duplicates found. task-232 (structured outputs for 20 files) and task-234 (ch06/schema-generator.ts) are separate tasks covering different scopes. Stats corrected from 30→17 pending. Next highest priority: task-253 (agent reliability patterns) at score 535, followed by task-254 (12-factor agent patterns) also at 535."
+    "recommendedNext": "task-243",
+    "reasoning": "Queue curation iteration 12. Completed task-242 (ch14 identity callout). Next highest priority: task-243 (ch15 cost of exploration insight) at score 525, then task-232/task-234 (structured outputs) at score 435. Running 7 review agents in parallel per iteration % 6 == 0 rule."
   },
   "prds": {
     "index": {
@@ -1513,10 +1513,12 @@
       "type": "enhancement",
       "title": "ch14: Add full identity definition callout",
       "description": "Add complete Compound Systems Engineer definition with not socially legible note as callout box.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-29T17:00:00Z",
       "priority": "medium",
       "score": 530,
-      "chapter": "ch14"
+      "chapter": "ch14",
+      "outcome": "Added blockquote callout after 'The Identity Shift' section with: (1) Full CSE definition from doctrine, (2) 'not socially legible' note explaining the identity doesn't fit conventional titles, (3) 'machine that builds products' insight. Word count 3,651 (in range)."
     },
     {
       "id": "task-243",
@@ -1881,20 +1883,20 @@
     ]
   },
   "stats": {
-    "pending": 15,
+    "pending": 14,
     "inProgress": 0,
-    "complete": 136,
+    "complete": 137,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "7833ca7a41a1778f68bdb63a94c158cfc5103692",
-    "lastSuccessfulTask": "iteration-10",
-    "lastCheckpoint": "2026-01-28T15:19:19Z",
+    "lastGoodCommit": "67438d6f60ca3829d8c32218d9f0493f882c8117",
+    "lastSuccessfulTask": "task-242",
+    "lastCheckpoint": "2026-01-29T17:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
-    "lastQueueCuration": "2026-01-29T14:30:00Z"
+    "lastQueueCuration": "2026-01-29T17:00:00Z"
   },
-  "lastQueueCuration": "2026-01-29T14:30:00Z"
+  "lastQueueCuration": "2026-01-29T17:00:00Z"
 }
