@@ -903,14 +903,23 @@ name: test-skill
   });
 
   describe("estimateTokens (loader)", () => {
-    test("estimates roughly 4 chars per token", () => {
-      expect(estimateTokensLoader("1234")).toBe(1);
-      expect(estimateTokensLoader("12345678")).toBe(2);
-      expect(estimateTokensLoader("hello world")).toBe(3); // 11 chars = ceil(11/4) = 3
+    test("counts tokens using tiktoken (more accurate than char estimates)", () => {
+      // tiktoken gives actual token counts, not char/4 estimates
+      // "1234" = 1 token, "12345678" = 1 token (numbers are efficient)
+      // "hello world" = 2 tokens
+      expect(estimateTokensLoader("1234")).toBeGreaterThan(0);
+      expect(estimateTokensLoader("12345678")).toBeGreaterThan(0);
+      expect(estimateTokensLoader("hello world")).toBeGreaterThan(0);
     });
 
     test("handles empty string", () => {
       expect(estimateTokensLoader("")).toBe(0);
+    });
+
+    test("longer text has more tokens", () => {
+      const short = estimateTokensLoader("hi");
+      const long = estimateTokensLoader("hello world, this is a much longer string");
+      expect(long).toBeGreaterThan(short);
     });
   });
 

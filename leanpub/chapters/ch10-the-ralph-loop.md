@@ -537,6 +537,9 @@ The compound effect emerges over time. Each iteration feeds the next through doc
 
 ---
 
+> **Companion Code**: All 5 code examples for this chapter are available at [examples/ch10/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch10)
+
+
 *Related chapters:*
 
 - **[Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md)** for the documentation layer in depth

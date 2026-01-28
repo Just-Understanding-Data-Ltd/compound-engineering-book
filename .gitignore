@@ -28,11 +28,27 @@ assets/diagrams/*.png
 
 # Logs
 *.log
+logs/
 ralph-output.log
+
+# RALPH internal artifacts
+.ralph-state
+.metrics/
+claude-progress.txt
+tasks.json
+reviews/
+dashboard.html
+kb-scan-results.md
 
 # Exercise cache (hash-based execution cache)
 .exercise-cache.json
 .exercise-validation-tmp/
 .code-validation-cache.json
 .code-validation-tmp/
+
+# Secrets
 .env
+
+# Build artifacts
+the-meta-engineer.epub
+manuscript.zip

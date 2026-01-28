@@ -617,6 +617,9 @@ The key insight: workflows are force multipliers. A 10% improvement in each work
 
 ---
 
+> **Companion Code**: All 6 code examples for this chapter are available at [examples/ch12/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch12)
+
+
 *Related chapters:*
 
 - **[Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md)** for long-running agent automation built on workflows

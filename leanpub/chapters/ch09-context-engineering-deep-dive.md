@@ -585,6 +585,9 @@ The goal is code generation that is predictable, correct, and efficient. Not by 
 
 ---
 
+> **Companion Code**: All 7 code examples for this chapter are available at [examples/ch09/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch09)
+
+
 *Related chapters:*
 - [Chapter 3: Prompting Fundamentals](ch03-prompting-fundamentals.md) for foundational techniques that maximize information density
 - [Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md) for how verification stages reduce entropy exponentially

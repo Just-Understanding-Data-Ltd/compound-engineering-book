@@ -717,6 +717,9 @@ The cost is orchestration complexity. The benefit is dramatically higher quality
 
 ---
 
+> **Companion Code**: All 5 code examples for this chapter are available at [examples/ch11/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch11)
+
+
 *Related chapters:*
 
 - **[Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md)** for the foundation of three-layer context hierarchy

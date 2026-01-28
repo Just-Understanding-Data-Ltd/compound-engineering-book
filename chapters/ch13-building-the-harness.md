@@ -1251,6 +1251,9 @@ The LLM is the least controllable part of the system. Everything else is enginee
 
 ---
 
+> **Companion Code**: All 5 code examples for this chapter are available at [examples/ch13/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch13)
+
+
 *Related chapters:*
 
 - **[Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md)** for CLAUDE.md fundamentals

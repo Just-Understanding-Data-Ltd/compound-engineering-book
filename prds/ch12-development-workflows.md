@@ -34,10 +34,14 @@ By the end of this chapter, you will be able to:
 - `symlinked-agent-configs.md` - Sharing configs across worktrees
 
 ### Supplementary Sources (Added from KB Analysis Jan 27, 2026)
-- `parallel-agents-for-monorepos.md` - Scaling parallel agent execution patterns
-- `agent-sdk-patterns.md` - Programmatic workflow orchestration with Agent SDK
+- `parallel-agents-for-monorepos.md` - Scaling parallel agent execution patterns (10x speedup)
 - `llm-usage-modes-explore-vs-implement.md` - When to explore vs when to implement
-- `checkpoint-commit-patterns.md` (TO BE CREATED) - Git commit strategies for AI workflows
+- `checkpoint-commit-patterns.md` - Git commit strategies for AI workflows (checkpoint commits, RALPH integration)
+
+### Additional Sources (Added from KB Analysis Jan 28, 2026)
+- `24-7-development-strategy.md` - Autonomous agents running overnight with worktrees
+- `agent-swarm-patterns-for-thoroughness.md` - Parallel agent orchestration patterns
+- `yolo-mode-configuration.md` - Permission-free parallel sessions across worktrees
 
 ---
 
@@ -312,6 +316,26 @@ Convert an ad-hoc workflow to a script:
 - **Builds on**: Chapter 10 (RALPH Loop), Chapter 11 (Sub-Agent Architecture)
 - **Leads to**: Chapter 13 (Building the Harness) - workflows become infrastructure
 - **Related**: Chapter 4 (CLAUDE.md) - workflows reference project instructions
+- **Related**: Chapter 10 (RALPH Loop) - checkpoint commits integrate with RALPH iterations
+
+---
+
+## Future Enhancements (KB Content Available)
+
+These KB articles contain additional content that could enhance future editions:
+
+1. **Parallel Agents for Monorepos** (`parallel-agents-for-monorepos.md`)
+   - 10x speedup for monorepo-wide changes
+   - Batched agent execution patterns
+   - Dependency-aware ordering
+
+2. **24/7 Development Strategy** (`24-7-development-strategy.md`)
+   - Autonomous agents running overnight with worktrees
+   - Notification and handoff patterns
+
+3. **Agent Swarm Patterns** (`agent-swarm-patterns-for-thoroughness.md`)
+   - Orchestrating multiple agents for thorough coverage
+   - Combining parallel execution with quality gates
 
 ---
 
@@ -323,14 +347,14 @@ Convert an ad-hoc workflow to a script:
 
 ## Status
 
-**Status**: Draft
+**Status**: Complete
 
 **Milestones**:
 - [x] PRD complete
-- [ ] First draft
-- [ ] Code examples written
-- [ ] Code examples tested
-- [ ] Reviewed
-- [ ] Diagrams complete
-- [ ] Exercises validated
-- [ ] Final
+- [x] First draft
+- [x] Code examples written (examples/ch12/ - 5 TypeScript files)
+- [x] Code examples tested (59 tests pass, 123 assertions)
+- [x] Reviewed (fixed 6 term introductions: JWT, REST/CRUD, MCP, CI, AST, LLM)
+- [x] Diagrams complete (5 diagrams: Plan Mode, Git Worktrees, Incremental Dev, Script Evolution, Playwright Loop)
+- [x] Exercises validated
+- [x] Final (2026-01-28T22:54:00Z)

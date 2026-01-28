@@ -679,6 +679,9 @@ The product is the output. The system is the asset. Build the factory.
 
 ---
 
+> **Companion Code**: All 6 code examples for this chapter are available at [examples/ch14/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch14)
+
+
 *Related chapters:*
 
 - **[Chapter 1: The Compound Systems Engineer](ch01-the-compound-systems-engineer.md)** introduced the identity. This chapter operationalizes it.

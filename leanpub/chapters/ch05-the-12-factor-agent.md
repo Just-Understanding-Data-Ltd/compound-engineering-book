@@ -575,6 +575,9 @@ Production agents are not smarter than demo agents. They are more carefully arch
 
 ---
 
+> **Companion Code**: All 5 code examples for this chapter are available at [examples/ch05/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch05)
+
+
 *Related chapters:*
 - **[Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md)** for context engineering fundamentals that support Factor 3
 - **[Chapter 6: The Verification Ladder](ch06-the-verification-ladder.md)** for building on the verification concepts in Factors 6-9

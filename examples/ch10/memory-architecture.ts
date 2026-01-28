@@ -12,6 +12,7 @@
  */
 
 import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+import { countTokens } from "../shared/tokenizer";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -723,7 +724,7 @@ export async function demo(): Promise<void> {
   console.log("\n7. Combined Memory Context");
   const context = await buildMemoryContext(agentsDoc, commits, taskStats);
   console.log(`   Combined context: ${context.length} characters`);
-  console.log(`   Estimated tokens: ~${Math.ceil(context.length * 0.25)}`);
+  console.log(`   Tokens: ${countTokens(context)}`);
 
   // Example 8: Generate updated AGENTS.md
   console.log("\n8. Regenerating AGENTS.md");

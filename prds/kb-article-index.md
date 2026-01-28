@@ -4,9 +4,16 @@
 
 **Last Updated**: 2026-01-28
 **Total PRD Files**: 16
-**Total KB Articles**: 93 (context-engineering) + 9 (parent/core) = 102 total
-**Referenced**: 98 articles (96%)
+**Total KB Articles**: 93 (context-engineering) + 9 (parent/core) + 3 (03-Math-Reference) = 105 total
+**Referenced**: 98 articles (93%)
 **To Be Created**: 32 articles
+**Gap Analysis**: See [kb-mapping-analysis.md](kb-mapping-analysis.md) for comprehensive mapping
+
+**NEW (2026-01-28):** Added comprehensive gap analysis identifying:
+- 3 Mathematical Foundation articles NOT in any chapter (control-theory, probability, optimisation)
+- 32 KB articles to be created (9 high priority, 18 medium, 6 lower)
+- 5 PRD gaps to address
+- Cross-reference analysis showing most-referenced articles
 
 ---
 

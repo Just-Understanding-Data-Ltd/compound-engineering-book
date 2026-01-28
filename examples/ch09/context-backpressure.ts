@@ -14,6 +14,7 @@
 
 import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 import { spawn } from "child_process";
+import { countTokens } from "../shared/tokenizer";
 
 // ============================================================================
 // BACKPRESSURE TYPES AND INTERFACES
@@ -87,8 +88,6 @@ export const CONTEXT_THRESHOLDS = {
   optimalMax: 75000,
   /** Context window limit */
   absoluteMax: 200000,
-  /** Tokens per character estimate */
-  tokensPerChar: 0.25,
   /** Success indicator token cost */
   successTokens: 10,
   /** Failure dump token multiplier */
@@ -100,10 +99,11 @@ export const CONTEXT_THRESHOLDS = {
 // ============================================================================
 
 /**
- * Estimate token count from text length
+ * Count tokens in text using tiktoken
+ * Uses accurate token counting instead of character-based estimates
  */
 export function estimateTokens(text: string): number {
-  return Math.ceil(text.length * CONTEXT_THRESHOLDS.tokensPerChar);
+  return countTokens(text);
 }
 
 /**

@@ -694,6 +694,9 @@ Quality gates are not bureaucracy. They are capital that compounds. Invest early
 
 ---
 
+> **Companion Code**: All 3 code examples for this chapter are available at [examples/ch07/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch07)
+
+
 *Related chapters:*
 
 - **[Chapter 6: The Verification Ladder](ch06-the-verification-ladder.md)** for the hierarchy of verification methods that gates automate

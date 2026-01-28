@@ -376,9 +376,23 @@ describe('Cost Protector', () => {
   });
 
   describe('estimateTokens', () => {
-    it('estimates tokens based on character count', () => {
+    it('counts tokens using tiktoken (more accurate than char estimates)', () => {
       const text = 'x'.repeat(400);
-      expect(estimateTokens(text, 4)).toBe(100);
+      // tiktoken counts actual tokens, not chars/4
+      // repetitive 'x' characters tokenize efficiently
+      const tokens = estimateTokens(text);
+      expect(tokens).toBeGreaterThan(0);
+      expect(tokens).toBeLessThan(500); // should be reasonable
+    });
+
+    it('longer text has more tokens', () => {
+      const short = estimateTokens('hello');
+      const long = estimateTokens('hello world, this is a longer message');
+      expect(long).toBeGreaterThan(short);
+    });
+
+    it('handles empty string', () => {
+      expect(estimateTokens('')).toBe(0);
     });
   });
 

@@ -1111,6 +1111,9 @@ That is why this path compounds: not because any single idea is guaranteed to wi
 
 ---
 
+> **Companion Code**: All 8 code examples for this chapter are available at [examples/ch15/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch15)
+
+
 *Related chapters:*
 
 - **[Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md)** for automated gates that validate cheaper models

@@ -24,19 +24,51 @@ By the end of this chapter, you will be able to:
 
 ## Source Articles
 
-### Primary Sources
-- `model-switching-strategy.md` - Comprehensive model selection guide
-- `ai-cost-protection-timeouts.md` - Multi-layer timeout protection (EXPANDED Jan 27)
-- `model-provider-agnostic-approach.md` - Provider independence
-- `prompt-caching-strategy.md` - Caching for cost reduction
+### Primary Sources (from ~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/)
+1. **model-switching-strategy.md** - Comprehensive model selection (Haiku/Sonnet/Opus), task classification, 40-70% cost savings
+2. **prompt-caching-strategy.md** - 90% cost reduction through cache-friendly prompt design, combining with model switching for 94-97% total savings
+3. **ai-cost-protection-timeouts.md** - Multi-layer timeout protection (job/request/input/budget layers)
+4. **batch-api-patterns.md** - 50% batch API discount, nightly reviews, bulk operations (EXISTS - Jan 28)
+5. **token-budgeting-strategies.md** - Allocating context by information density, budget tiers, progressive loading (EXISTS - Jan 28)
+6. **model-provider-agnostic-approach.md** - Provider independence, abstraction layers, model evaluation
+7. **yolo-mode-configuration.md** - YOLO mode safety, flow state preservation, quality gates
+8. **context-efficient-backpressure.md** - run_silent() pattern for token-efficient output
+
+### Supporting Sources
 - Claude Code documentation on Skills system
 - Claude Code documentation on YOLO mode
+- **closed-loop-telemetry-driven-optimization.md** - Measuring and tracking AI spend
+- **sub-agents-accuracy-vs-latency.md** - Decision framework for sub-agents
 
-### Supplementary Sources (Added from KB Analysis Jan 27, 2026)
-- `batch-api-patterns.md` (TO BE CREATED) - Batch processing for cost reduction
-- `token-budgeting-strategies.md` (TO BE CREATED) - Allocating context by information density
-- `skills-vs-subagents.md` (TO BE CREATED) - Decision framework for when to use each
-- `cost-telemetry-patterns.md` (TO BE CREATED) - Measuring and tracking AI spend
+### Key Insights from KB Analysis (Jan 28, 2026)
+
+**From prompt-caching-strategy.md:**
+- Cache first 1024+ tokens of identical content for 5-minute window
+- Structure: stable context first, dynamic requests last
+- Individual developer: $202/year → $27/year (86% reduction)
+- Combined with model switching: 94-97% total cost reduction
+
+**From model-switching-strategy.md:**
+- Tier 1 (Haiku): 60-80% of tasks, $0.25/MTok input
+- Tier 2 (Sonnet): 15-30% of tasks, $3/MTok input
+- Tier 3 (Opus): 5-15% of tasks, $15/MTok input
+- Progressive escalation: try cheap first, escalate on failure
+- Quality gates validate cheaper model output
+
+**From batch-api-patterns.md:**
+- 50% discount on async workloads (up to 24h turnaround)
+- Use cases: nightly reviews, bulk test generation, security scans
+- Pattern: submit batch → poll/webhook → process results
+
+**From token-budgeting-strategies.md:**
+- Information density: Types (4.0) > Tests (3.5) > Code (3.5) > Constraints (3.0) > Prose (1.5)
+- Budget tiers: Critical (20%), Important (30%), Supplementary (30%), Dynamic (20%)
+- Progressive loading: load by priority until budget exhausted
+
+**From context-efficient-backpressure.md:**
+- run_silent(): suppress pass output, show fail output
+- Saves 2-3% context on test/build/lint runs
+- "Smart zone" is ~75k tokens; beyond = degraded performance
 
 ---
 
@@ -68,13 +100,28 @@ By the end of this chapter, you will be able to:
 - **Example**: GitHub Actions timeout configuration
 
 ### 15.4 Prompt Caching Strategy
-- How prompt caching works
-- Cache-friendly prompt design
-- Measuring cache hit rates
+- How prompt caching works (1024+ tokens, 5-minute window)
+- Cache-friendly prompt design (stable first, dynamic last)
+- Measuring cache hit rates (target: 80%+)
 - Combining caching with model switching (94-97% savings)
 - **Example**: Caching project context across sessions
 
-### 15.5 YOLO Mode: When to Skip Permissions
+### 15.5 Token Budgeting and Backpressure
+- Information density: types (4.0) > tests (3.5) > code (3.5) > prose (1.5)
+- Budget tiers: Critical (20%), Important (30%), Supplementary (30%), Dynamic (20%)
+- The run_silent() pattern for context-efficient output
+- Progressive loading: load by priority until budget exhausted
+- Staying in the "smart zone" (~75k tokens)
+- **Example**: Token budget manager implementation
+
+### 15.6 Batch API for Non-Interactive Work
+- 50% discount on async workloads
+- Nightly code reviews, bulk test generation, security scans
+- Submit → poll/webhook → process pattern
+- When NOT to use batch (interactive work, dependent requests)
+- **Example**: Nightly review workflow with batch API
+
+### 15.7 YOLO Mode: When to Skip Permissions
 - What is YOLO mode (--dangerously-skip-permissions)?
 - Risk assessment framework
 - Safe YOLO patterns:
@@ -84,7 +131,7 @@ By the end of this chapter, you will be able to:
 - Unsafe YOLO anti-patterns
 - **Exercise**: Identify safe YOLO candidates in your workflow
 
-### 15.6 The Skills System
+### 15.8 The Skills System
 - What are Claude Code Skills?
 - Built-in skills overview (/commit, /review, etc.)
 - Creating custom skills
@@ -92,14 +139,14 @@ By the end of this chapter, you will be able to:
 - Skills vs sub-agents (decision framework)
 - **Example**: Custom skill for deployment workflow
 
-### 15.7 Provider-Agnostic Strategy
+### 15.9 Provider-Agnostic Strategy
 - Why provider independence matters
 - Abstraction patterns for multi-provider support
 - Fallback strategies when providers fail
 - Evaluating new models quickly
 - **Example**: Provider abstraction layer
 
-### 15.8 Measuring and Optimizing Spend
+### 15.10 Measuring and Optimizing Spend
 - Setting up cost tracking
 - Dashboard metrics to monitor
 - Monthly optimization review process

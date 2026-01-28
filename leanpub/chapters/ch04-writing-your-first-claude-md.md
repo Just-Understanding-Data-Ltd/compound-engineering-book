@@ -420,6 +420,9 @@ The investment in crafting effective CLAUDE.md files pays dividends across every
 
 ---
 
+> **Companion Code**: All 4 code examples for this chapter are available at [examples/ch04/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch04)
+
+
 *Related chapters:*
 - [Chapter 2: Getting Started with Claude Code](ch02-getting-started-with-claude-code.md) for installation and basic tool usage
 - [Chapter 3: Prompting Fundamentals](ch03-prompting-fundamentals.md) for techniques that make your CLAUDE.md instructions more effective

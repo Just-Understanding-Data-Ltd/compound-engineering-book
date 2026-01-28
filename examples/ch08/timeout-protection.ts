@@ -15,6 +15,7 @@
  */
 
 import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+import { countTokens } from "../shared/tokenizer";
 
 /**
  * Extract text content from an SDK message
@@ -311,10 +312,10 @@ export function checkBudget(config: BudgetConfig = DEFAULT_BUDGET): BudgetStatus
 // ============================================================================
 
 /**
- * Estimate token count from text (rough: 4 chars = 1 token)
+ * Count tokens in text using tiktoken for accurate measurement
  */
 export function estimateTokens(text: string): number {
-  return Math.ceil(text.length / 4);
+  return countTokens(text);
 }
 
 /**

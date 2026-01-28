@@ -355,6 +355,9 @@ The next chapter covers getting started with Claude Code, the tool that makes Le
 
 ---
 
+> **Companion Code**: All 2 code examples for this chapter are available at [examples/ch01/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch01)
+
+
 *Related chapters:*
 - [Chapter 9: Context Engineering Deep Dive](ch09-context-engineering-deep-dive.md) for deep dives on constraints and observability
 - [Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md) for the practical execution system

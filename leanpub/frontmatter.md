@@ -25,6 +25,26 @@ Written by an engineer who used the techniques in this book to write this book.
 - Technical leads building AI-powered development workflows
 - Anyone who wants to multiply their engineering output with Claude Code
 
+## Companion Repository
+
+All code examples from this book are available on GitHub:
+
+**https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book**
+
+The `examples/` folder contains runnable TypeScript code for every chapter. Clone the repo to follow along:
+
+```
+git clone https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book.git
+cd compound-engineering-book
+npm install
+```
+
+Each chapter's examples are in `examples/chXX/`. Run any example with:
+
+```
+npx tsx examples/ch04/agent.ts
+```
+
 ## How to Read This Book
 
 - **Part I (Chapters 1-3)**: Foundations - Start here if you're new to Claude Code

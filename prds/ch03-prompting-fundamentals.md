@@ -24,19 +24,27 @@ By the end of this chapter, you will be able to:
 
 ## Source Articles
 
-### Primary Sources
-- `chain-of-thought-prompting.md` - Reasoning patterns for complex tasks
-- `constraint-based-prompting.md` - Narrowing solution space through constraints
-- `few-shot-prompting-project-examples.md` - Using project examples as prompts
-- `upfront-questioning-narrows-search-space.md` - Reducing iteration through questions
-- `negative-examples-documentation.md` - Teaching through anti-patterns
-- `semantic-naming-patterns.md` - How naming affects LLM comprehension
+### Primary Sources (Core Chapter Content)
+| KB Article | Chapter Section | Content Coverage |
+|------------|-----------------|------------------|
+| `chain-of-thought-prompting.md` | 3.2 Chain-of-Thought Prompting | Step-by-step reasoning, 5 prompt patterns, when to use vs skip, 60-80% fewer bugs |
+| `constraint-based-prompting.md` | 3.3 Constraint-Based Prompting | Declarative over imperative, MUST statements, verification strategies, 50-70% shorter prompts |
+| `few-shot-prompting-project-examples.md` | 3.4 Few-Shot Prompting | 2-3 examples optimal, selection criteria, storage in CLAUDE.md, 40%->85% accuracy |
+| `upfront-questioning-narrows-search-space.md` | 3.5 Upfront Questioning | Clarification checkpoint pattern, UI search space vs backend, exponential cost savings |
+| `negative-examples-documentation.md` | 3.6 Anti-Patterns | DON'T/DO patterns, contrastive learning, 20% first-try improvement |
 
-### Supplementary Sources (Added from KB Analysis Jan 27, 2026)
-- `information-theory-prompting.md` - Mathematical model of how constraints reduce entropy
-- `entropy-in-code-generation.md` - Why constraints mathematically narrow the solution space
-- `test-driven-prompting.md` - Using tests as constraints for code generation
-- `prompt-injection-prevention.md` (TO BE CREATED) - Security considerations in prompting
+### Supplementary Sources (Advanced Techniques)
+| KB Article | Potential Addition | Notes |
+|------------|-------------------|-------|
+| `layered-prompts-architecture.md` | Advanced: 4-layer prompt structure | Core/Domain/Application/Task layers, A/B testing, prompt caching integration |
+| `test-driven-prompting.md` | Advanced: Tests as executable specs | 600x success improvement, entropy reduction formula, property-based testing |
+| `multi-step-prompt-workflows.md` | Advanced: Breaking complex tasks | Verification gates, cognitive load reduction, error isolation |
+| `semantic-naming-patterns.md` | Related: Naming for retrieval | 60-80% retrieval improvement, supports few-shot pattern discovery |
+
+### Sources for Future Expansion
+- `entropy-in-code-generation.md` - Mathematical foundation for constraint-based prompting
+- `prompt-caching-strategy.md` - Cost optimization when using layered prompts
+- `actor-critic-adversarial-coding.md` - Combines with chain-of-thought for review cycles
 
 ---
 
@@ -226,14 +234,32 @@ Practice upfront questioning by:
 
 ## Status
 
-**Status**: Draft
+**Status**: Complete
 
 **Milestones**:
-- [x] PRD complete
-- [ ] First draft
-- [ ] Code examples written
-- [ ] Code examples tested
-- [ ] Reviewed
-- [ ] Diagrams complete
-- [ ] Exercises validated
-- [ ] Final
+- [x] PRD complete (2026-01-27)
+- [x] First draft (2026-01-27)
+- [x] Code examples written (2026-01-28)
+- [x] Code examples tested (2026-01-28)
+- [x] Reviewed (2026-01-28)
+- [x] Diagrams complete (2026-01-28)
+- [x] Exercises validated (2026-01-28)
+- [x] Final (2026-01-28)
+
+**Chapter Stats**:
+- Word count: ~3,200 words
+- Code examples: 4 (debug CoT, constrained prompt, few-shot API, clarification pattern)
+- Diagrams: 4 (prompt anatomy, CoT flow, constraint funnel, few-shot selection)
+- Exercises: 3
+
+---
+
+## KB Article Mapping Summary (Jan 28, 2026)
+
+**Source scan performed**: `/Users/jamesaphoenix/Desktop/knowledge-base/01-Compound-Engineering/`
+
+**Relevant articles found**: 9 total
+- 5 primary sources used in chapter content
+- 4 supplementary sources available for future expansion
+
+**Coverage assessment**: Chapter comprehensively covers core prompting techniques. Advanced topics (layered prompts, test-driven prompting, multi-step workflows) could be added in future editions or as advanced appendix content.

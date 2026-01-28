@@ -490,6 +490,9 @@ The next chapter applies these prompting fundamentals to CLAUDE.md files. You wi
 
 ---
 
+> **Companion Code**: All 3 code examples for this chapter are available at [examples/ch03/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch03)
+
+
 *Related chapters:*
 - [Chapter 2: Getting Started with Claude Code](ch02-getting-started-with-claude-code.md) for tool usage and basic patterns
 - [Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md) for project context configuration

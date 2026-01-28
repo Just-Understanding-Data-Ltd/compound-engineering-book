@@ -13,6 +13,7 @@
  */
 
 import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+import { countTokens } from "../shared/tokenizer";
 
 // ============================================================================
 // ENTROPY TYPES AND INTERFACES
@@ -204,8 +205,8 @@ export async function measureEntropy(
       if (message.type === "assistant") {
         code += extractTextContent(message);
       }
-      // Estimate tokens from text length (Agent SDK doesn't expose usage directly)
-      tokenCount = Math.ceil(code.length * 0.25);
+      // Count tokens using tiktoken (Agent SDK doesn't expose usage directly)
+      tokenCount = countTokens(code);
     }
 
     const hash = hashCode(code);

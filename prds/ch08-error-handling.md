@@ -33,11 +33,19 @@ By the end of this chapter, you will be able to:
 - `learning-loops-encoding-problems-into-prevention.md` - Prevention protocols
 - `test-based-regression-patching.md` - Test-first bug fixing
 
-### Supplementary Sources (Added from KB Analysis Jan 27, 2026)
-- `ai-cost-protection-timeouts.md` - Error handling in long-running agents (timeouts, retries)
-- `errors-md-pattern.md` (TO BE CREATED) - Detailed ERRORS.md implementation patterns
-- `agent-retry-strategies.md` (TO BE CREATED) - Retry with backoff, circuit breakers, fallbacks
-- `context-pollution-recovery.md` (TO BE CREATED) - When conversation context becomes corrupted
+### Supplementary Sources (Added from KB Analysis Jan 27-28, 2026)
+- `ai-cost-protection-timeouts.md` - Multi-layer timeout protection (job/request/input/budget levels)
+- `agent-reliability-chasm.md` - The 95% per-action reliability compounding problem
+- `checkpoint-commit-patterns.md` - Git as external memory for error recovery
+- `orchestration-patterns.md` - Retry patterns with exponential backoff
+- `tool-call-validation.md` - Validating tool outputs before acting
+- `event-sourcing-agents.md` - Error recovery through event replay
+- `human-in-the-loop-patterns.md` - Escalation patterns when agents fail
+
+### Cross-Referenced Patterns
+- `12-factor-agents.md` - Factor 9 (Compact Errors), Factor 10 (Small Agents)
+- `prevention-protocol.md` - Systematic prevention after bug fixes
+- `stateless-verification-loops.md` - Fresh state for reliable verification
 
 ---
 
@@ -83,13 +91,28 @@ By the end of this chapter, you will be able to:
 - When to abandon vs when to persist
 - **Pattern**: The "fresh eyes" protocol
 
-### 8.6 Learning Loops: Encoding Prevention
+### 8.6 Circuit Breakers and Reliability Patterns (NEW)
+- The agent reliability chasm: 95% per-action compounds to 36% at 20 actions
+- Multi-layer timeout protection (job, request, input, budget)
+- Retry patterns with exponential backoff
+- When to stop vs when to retry (consecutive failure thresholds)
+- Cost protection: budget caps and alerts
+- **Pattern**: The three-failure circuit breaker
+
+### 8.7 Learning Loops: Encoding Prevention
 - The prevention protocol pattern
 - Converting errors to lint rules
 - Converting errors to type guards
 - Converting errors to CI checks
 - Measuring prevention effectiveness
 - **Exercise**: Create a prevention protocol for a recurring error
+
+### 8.8 Recovery Patterns for Long-Running Agents (NEW)
+- Checkpoint commit patterns: git as external memory
+- Event sourcing for agent state recovery
+- Human escalation: when to ask for help
+- The four-turn reliability framework: Understand, Decide, Execute, Verify
+- **Example**: RALPH loop recovery with fresh context
 
 ---
 
@@ -246,6 +269,157 @@ async function cleanSlateRecovery(failedAttempt: string) {
 }
 ```
 
+### Example 5: Circuit Breaker Pattern (NEW)
+```typescript
+interface CircuitBreakerConfig {
+  maxFailures: number      // Failures before opening circuit
+  resetTimeMs: number      // Time before trying again
+  halfOpenMax: number      // Max requests in half-open state
+}
+
+const DEFAULT_CONFIG: CircuitBreakerConfig = {
+  maxFailures: 3,
+  resetTimeMs: 30000,      // 30 seconds
+  halfOpenMax: 1
+}
+
+class CircuitBreaker {
+  private state: 'closed' | 'open' | 'half-open' = 'closed'
+  private failures = 0
+  private lastFailureTime = 0
+  private halfOpenAttempts = 0
+
+  constructor(private config = DEFAULT_CONFIG) {}
+
+  async execute<T>(operation: () => Promise<T>): Promise<T> {
+    if (this.state === 'open') {
+      if (Date.now() - this.lastFailureTime > this.config.resetTimeMs) {
+        this.state = 'half-open'
+        this.halfOpenAttempts = 0
+      } else {
+        throw new Error('Circuit breaker is open')
+      }
+    }
+
+    if (this.state === 'half-open' && this.halfOpenAttempts >= this.config.halfOpenMax) {
+      throw new Error('Circuit breaker half-open limit reached')
+    }
+
+    try {
+      if (this.state === 'half-open') this.halfOpenAttempts++
+      const result = await operation()
+      this.onSuccess()
+      return result
+    } catch (error) {
+      this.onFailure()
+      throw error
+    }
+  }
+
+  private onSuccess() {
+    this.failures = 0
+    this.state = 'closed'
+  }
+
+  private onFailure() {
+    this.failures++
+    this.lastFailureTime = Date.now()
+    if (this.failures >= this.config.maxFailures) {
+      this.state = 'open'
+    }
+  }
+}
+
+// Usage with Agent SDK
+const breaker = new CircuitBreaker({ maxFailures: 3 })
+
+async function reliableAgentCall(prompt: string) {
+  return breaker.execute(async () => {
+    await using session = unstable_v2_createSession({
+      model: 'claude-sonnet-4-5-20250929'
+    })
+    return session.send(prompt)
+  })
+}
+```
+
+### Example 6: Multi-Layer Timeout Protection (NEW)
+```typescript
+import { unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk'
+
+interface TimeoutConfig {
+  taskTimeoutMs: number     // Overall task timeout
+  requestTimeoutMs: number  // Per-request timeout
+  maxRetries: number        // Max retries per request
+  backoffMs: number         // Initial backoff delay
+}
+
+const TIMEOUT_CONFIG: TimeoutConfig = {
+  taskTimeoutMs: 300000,    // 5 minutes
+  requestTimeoutMs: 60000,  // 1 minute
+  maxRetries: 3,
+  backoffMs: 1000           // 1 second initial
+}
+
+async function withTimeout<T>(
+  promise: Promise<T>,
+  timeoutMs: number,
+  message: string
+): Promise<T> {
+  let timeoutId: NodeJS.Timeout
+  const timeoutPromise = new Promise<never>((_, reject) => {
+    timeoutId = setTimeout(() => reject(new Error(message)), timeoutMs)
+  })
+
+  try {
+    return await Promise.race([promise, timeoutPromise])
+  } finally {
+    clearTimeout(timeoutId!)
+  }
+}
+
+async function withRetry<T>(
+  operation: () => Promise<T>,
+  config: TimeoutConfig
+): Promise<T> {
+  let lastError: Error
+
+  for (let attempt = 0; attempt < config.maxRetries; attempt++) {
+    try {
+      return await withTimeout(
+        operation(),
+        config.requestTimeoutMs,
+        `Request timeout after ${config.requestTimeoutMs}ms`
+      )
+    } catch (error) {
+      lastError = error as Error
+      console.log(`Attempt ${attempt + 1} failed: ${lastError.message}`)
+
+      if (attempt < config.maxRetries - 1) {
+        const backoff = config.backoffMs * Math.pow(2, attempt)
+        await new Promise(r => setTimeout(r, backoff))
+      }
+    }
+  }
+
+  throw lastError!
+}
+
+// Protected agent operation
+async function protectedAgentTask(task: string) {
+  return withTimeout(
+    withRetry(async () => {
+      await using session = unstable_v2_createSession({
+        model: 'claude-sonnet-4-5-20250929'
+      })
+      return session.send(task)
+    }, TIMEOUT_CONFIG),
+    TIMEOUT_CONFIG.taskTimeoutMs,
+    `Task timeout after ${TIMEOUT_CONFIG.taskTimeoutMs}ms`
+  )
+}
+```
+
 ---
 
 ## Diagrams Needed
@@ -269,6 +443,18 @@ async function cleanSlateRecovery(failedAttempt: string) {
 5. **Clean Slate Recovery Pattern**
    - When to use it (decision points)
    - The recovery process flow
+
+6. **Agent Reliability Compounding** (NEW)
+   - Table showing 95% per-action reliability degrading over multiple steps
+   - Visual: 20 actions = 36% success rate
+
+7. **Multi-Layer Timeout Protection** (NEW)
+   - Nested circles: Job → Step → Request → Budget
+   - Each layer with specific timeout values
+
+8. **Circuit Breaker State Machine** (NEW)
+   - States: Closed → Open → Half-Open
+   - Transitions based on failure counts
 
 ---
 
@@ -299,28 +485,33 @@ Practice the recovery pattern:
 
 ## Cross-References
 
-- **Builds on**: Chapter 6 (Verification Ladder), Chapter 7 (Quality Gates)
+- **Builds on**: Chapter 5 (12-Factor Agent - Factor 9 Compact Errors), Chapter 6 (Verification Ladder), Chapter 7 (Quality Gates)
 - **Leads to**: Chapter 9 (Context Engineering) - debugging is context manipulation
-- **Related**: Chapter 10 (RALPH Loop) - error recovery in long-running agents
+- **Related**: Chapter 10 (RALPH Loop) - error recovery in long-running agents, circuit breakers
+- **Related**: Chapter 15 (Model Strategy) - cost protection, budget caps
 
 ---
 
 ## Word Count Target
 
-3,000 - 4,000 words
+3,500 - 4,500 words (expanded for new sections)
 
 ---
 
 ## Status
 
-**Status**: Draft
+**Status**: Draft (Expanded Jan 28, 2026)
 
 **Milestones**:
-- [x] PRD complete
-- [ ] First draft
-- [ ] Code examples written
+- [x] PRD complete (Original)
+- [x] PRD expanded (Jan 28, 2026 - Added circuit breakers, reliability patterns, recovery patterns from KB)
+- [ ] First draft (needs update for new sections 8.6-8.8)
+- [ ] Code examples written (needs circuit breaker, timeout protection examples)
 - [ ] Code examples tested
 - [ ] Reviewed
-- [ ] Diagrams complete
+- [ ] Diagrams complete (needs 3 new diagrams: reliability compounding, timeout layers, circuit breaker)
 - [ ] Exercises validated
 - [ ] Final
+
+**Jan 28 KB Analysis Update**:
+Added 7 new source articles from knowledge base, 3 new outline sections (8.6 Circuit Breakers, 8.7 Learning Loops, 8.8 Recovery Patterns), 3 new diagrams needed, 2 new code examples. Word count target increased to 3,500-4,500.

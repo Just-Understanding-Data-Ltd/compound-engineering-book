@@ -12,6 +12,7 @@
  */
 
 import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+import { countTokens } from "../shared/tokenizer";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -415,8 +416,8 @@ export async function executeCleanSlateRecovery(
     }
   }
 
-  // Estimate tokens from content length (Agent SDK doesn't expose usage directly)
-  const tokensUsed = Math.ceil(prompt.length * 0.25) + Math.ceil(approach.length * 0.25);
+  // Count tokens using tiktoken (Agent SDK doesn't expose usage directly)
+  const tokensUsed = countTokens(prompt) + countTokens(approach);
 
   return { approach, tokensUsed };
 }

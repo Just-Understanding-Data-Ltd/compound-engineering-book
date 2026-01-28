@@ -1191,6 +1191,9 @@ Errors are inevitable. Repeated errors are a choice.
 
 ---
 
+> **Companion Code**: All 7 code examples for this chapter are available at [examples/ch08/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch08)
+
+
 *Related chapters:*
 
 - **[Chapter 6: The Verification Ladder](ch06-the-verification-ladder.md)** for the verification patterns that catch errors early

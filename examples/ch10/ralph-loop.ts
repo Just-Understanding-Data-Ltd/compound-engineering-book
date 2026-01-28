@@ -15,6 +15,7 @@
 import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 import { readFile, writeFile } from "fs/promises";
 import { existsSync } from "fs";
+import { countTokens } from "../shared/tokenizer";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -296,8 +297,8 @@ export async function executeIteration(
     }
   }
 
-  // Estimate tokens from content length (Agent SDK doesn't expose usage directly)
-  const tokensUsed = Math.ceil(prompt.length * 0.25) + Math.ceil(responseText.length * 0.25);
+  // Count tokens using tiktoken (Agent SDK doesn't expose usage directly)
+  const tokensUsed = countTokens(prompt) + countTokens(responseText);
 
   // Extract learnings from response
   const learningsMatch = responseText.match(/## Learnings?\s*([\s\S]*?)(?=##|$)/i);
@@ -532,7 +533,7 @@ export async function demo(): Promise<void> {
   if (nextTask) {
     const prompt = buildIterationPrompt(nextTask, mockAgentsMd);
     console.log(`   Prompt length: ${prompt.length} characters`);
-    console.log(`   Estimated tokens: ~${Math.ceil(prompt.length * 0.25)}`);
+    console.log(`   Tokens: ${countTokens(prompt)}`);
   }
 
   // Example 4: Task completion
@@ -587,7 +588,7 @@ export async function demo(): Promise<void> {
       }
 
       console.log(`   Response: ${demoText.slice(0, 150)}...`);
-      console.log(`   Tokens: ~${Math.ceil(demoText.length * 0.25)}`);
+      console.log(`   Tokens: ${countTokens(demoText)}`);
     } catch (error) {
       console.log("   (API call skipped)");
     }

@@ -711,6 +711,9 @@ Each verification layer compounds with the others. Together they catch bugs that
 
 ---
 
+> **Companion Code**: All 3 code examples for this chapter are available at [examples/ch06/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch06)
+
+
 *Related chapters:*
 
 - **[Chapter 5: The 12-Factor Agent](ch05-the-12-factor-agent.md)** for the reliability principles that verification enforces

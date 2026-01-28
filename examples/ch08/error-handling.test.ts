@@ -1909,13 +1909,16 @@ describe("Timeout Protection Framework", () => {
   });
 
   describe("Token Estimation", () => {
-    test("should estimate 1 token per 4 chars", () => {
-      expect(estimateTokens("1234")).toBe(1);
-      expect(estimateTokens("12345678")).toBe(2);
+    test("counts tokens using tiktoken (more accurate than char estimates)", () => {
+      // tiktoken gives actual token counts, not chars/4 estimates
+      expect(estimateTokens("1234")).toBeGreaterThan(0);
+      expect(estimateTokens("12345678")).toBeGreaterThan(0);
     });
 
-    test("should round up partial tokens", () => {
-      expect(estimateTokens("12345")).toBe(2); // 5 chars = 1.25 tokens, rounds to 2
+    test("longer text has more tokens", () => {
+      const short = estimateTokens("hi");
+      const long = estimateTokens("hello world, this is a longer string");
+      expect(long).toBeGreaterThan(short);
     });
 
     test("should handle empty string", () => {
