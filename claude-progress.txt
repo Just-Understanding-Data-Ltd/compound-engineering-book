@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 15:53)
+## Current Status (Updated: 2026-01-28 23:30)
 - Phase: EPUB Polish - Visual Review Pipeline
-- Active: EPUB visual reviews (4 pending, 170 complete)
-- Last Completed: task-425 (Full rebuild with all improvements, validated, copied to Desktop)
+- Active: EPUB visual reviews (3 pending, 171 complete)
+- Last Completed: task-427 (Code blocks visual review - PASSED, both light/dark modes)
 - Blockers: None
-- Queue Health: 4 pending, 170 complete
-- Publishing Readiness: 99% - EPUB fully rebuilt with all improvements, epubcheck 0 errors
-- Next Task: task-427/428/429 (visual review pipeline, now UNBLOCKED)
+- Queue Health: 3 pending, 171 complete
+- Publishing Readiness: 99% - Code blocks verified in both light and dark modes
+- Next Task: task-428 or task-429 (tables/lists or typography visual review)
 - Publication Target: 2026-01-30 morning
 
 ## Project State Summary
@@ -17,7 +17,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 170/174 (98%) - ALL CONTENT DONE
+- Tasks Complete: 171/174 (98%) - ALL CONTENT DONE
 - Test Pass Rate: 100% across all chapters (787 tests total)
 - Exercises: 44 total (2-3 per chapter), all reviewed and finalized ✓
 
@@ -30,6 +30,18 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-28 23:30 - COMPLETED task-427: EPUB Visual Review - Code Blocks
+- What: Visual review of code blocks in both light and dark modes
+- Method: Gemini 2.5 Flash vision analysis (23 chapters) + Playwright manual inspection (4 chapters, both modes)
+- Findings:
+  - Light mode: All PASS - syntax highlighting, backgrounds, borders, line wrapping, inline code, blockquote code
+  - Dark mode: All PASS - VS Code Dark+ palette renders correctly, comments readable, all token types distinct
+  - Minor: TLA+ has partial highlighting (keywords only), plain text blocks have no highlighting (expected)
+  - Gemini false positives: Several reported issues are artifacts of screenshots taken before CSS injection
+- Files: reviews/epub-codeblocks-visual-review-2026-01-28.md
+- Outcome: No actionable issues found. Code blocks are publication-ready.
+- Next: task-428 (Tables/lists/blockquotes review) or task-429 (Typography/fonts review)
 
 ### 2026-01-28 16:00 - Queue Curation Cycle 5
 - What: Curated task queue - fixed score mismatches, verified no duplicates

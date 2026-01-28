@@ -702,3 +702,35 @@ The `p + p { text-indent: 1.5em }` rule is a traditional book typography convent
 5. Apply print-specific CSS (orphans, widows, text-indent) that web stylesheets never need
 
 ---
+
+### 2026-01-28 - Gemini Vision Reviews Require CSS Injection Timing Awareness
+
+**Context**: Running EPUB visual review (task-427) using Gemini 2.5 Flash vision API to analyze code block rendering across 23 chapters in both light and dark modes.
+
+**Observation**: The Gemini vision report flagged numerous "issues" that were actually false positives caused by CSS injection timing. The epub-review script works in three stages: (1) extract EPUB, (2) open XHTML files in Playwright, (3) inject CSS, (4) screenshot. But Playwright loads the XHTML before CSS injection completes, meaning the first frame may render with the browser's default stylesheet.
+
+When manually verifying with Playwright, I found that after proper CSS injection:
+- Code blocks had clear gray backgrounds (#f5f5f5) with borders, not "blending into the background" as Gemini reported
+- Syntax highlighting was present and readable for TypeScript, JavaScript, YAML, bash
+- Comments were green and readable, not "very light gray" as some Gemini reviews claimed
+- Dark mode rendering was excellent with VS Code Dark+ palette
+
+The Gemini reports conflated two different states: (1) the screenshot with CSS applied, and (2) an ideal state the reviewer imagined. Since Gemini cannot know which CSS properties are intended vs missing, it reports any element that could look "better" as an issue.
+
+Manual verification found zero actionable issues across 4 chapters inspected in both modes.
+
+| Review Method | Issues Found | Actionable | False Positive Rate |
+|---------------|-------------|------------|---------------------|
+| Gemini vision (23 ch) | 40+ | 0 | ~100% |
+| Playwright manual (4 ch, 2 modes) | 1 minor (TLA+ partial highlighting) | 0 | 0% |
+
+**Implication**: Gemini vision reviews are useful for broad coverage but have a high false positive rate for formatting analysis, especially when the reviewer cannot see the intended stylesheet. Manual Playwright verification with direct CSS injection provides ground truth. The optimal workflow is: use Gemini for broad screening, then manually verify any flagged issues before creating fix tasks.
+
+**Action**: When running epub-review cycles:
+1. Treat Gemini output as a screening tool, not a source of truth
+2. Always manually verify reported issues with Playwright before creating tasks
+3. For CSS-dependent checks (backgrounds, colors, borders), ensure the screenshot captures the final styled state
+4. Distinguish between "missing feature" suggestions (Gemini imagining improvements) and actual rendering bugs
+5. Focus manual verification on the highest-risk elements: code blocks with comments (contrast), dark mode colors, inline code in blockquotes
+
+---

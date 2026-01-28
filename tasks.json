@@ -1682,12 +1682,13 @@
       "type": "fix",
       "title": "EPUB Visual Review: Code blocks in light/dark modes",
       "description": "Use the epub-review skill (Gemini vision) to verify code blocks render correctly in both light and dark modes. Check syntax highlighting contrast, line wrapping, no horizontal overflow. Run: bun scripts/epub-review.ts then review the report.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 905,
       "scoreBreakdown": "high:750 + fix:80 + blocking(1×25):25 + age24h:50 = 905",
       "blockedBy": [],
-      "createdAt": "2026-01-28T22:14:22.977Z"
+      "createdAt": "2026-01-28T22:14:22.977Z",
+      "completedAt": "2026-01-28T23:30:00Z"
     },
     {
       "id": "task-428",
@@ -2201,9 +2202,9 @@
     ]
   },
   "stats": {
-    "pending": 4,
+    "pending": 3,
     "inProgress": 0,
-    "complete": 170,
+    "complete": 171,
     "blocked": 0,
     "total": 174
   },
