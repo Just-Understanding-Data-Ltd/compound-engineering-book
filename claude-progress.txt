@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 22:30)
-- Phase: Agent SDK Migration (NEW PRIORITY - ch06-ch15 code rewrite)
-- Active: task-218 (Rewrite ch06 examples with Agent SDK) → NEXT
-- Last Completed: task-217 (Audit ch06-ch15 for native SDK usage)
+## Current Status (Updated: 2026-01-28 23:00)
+- Phase: Agent SDK Migration (ch06-ch15 code rewrite)
+- Active: task-219 (Rewrite ch07 examples with Agent SDK) → NEXT
+- Last Completed: task-218 (Created ch06 examples with Agent SDK)
 - Blockers: None active
-- Queue Health: 15 new tasks added for Agent SDK migration
+- Queue Health: Agent SDK migration in progress (1/10 chapters done)
 - Publishing Readiness: On hold pending SDK migration
 
 ## Project State Summary
@@ -42,6 +42,24 @@
 - **Publication target**: 2026-02-01 to 2026-02-03
 
 ## Recent Activity
+
+### 2026-01-28 23:00 - COMPLETED task-218: Created ch06 examples with Agent SDK - WARMUP
+- What: Created ch06 examples directory and wrote Agent SDK code examples for The Verification Ladder chapter
+- Discovery: ch06 examples folder was missing (audit incorrectly counted it as having 2 files)
+- Files created:
+  - examples/ch06/verification-analyzer.ts (risk analysis, verification levels, agent-assisted code review)
+  - examples/ch06/schema-generator.ts (Zod schema generation, boundary validation patterns)
+  - examples/ch06/ch06.test.ts (54 tests, 105 assertions)
+- Agent SDK patterns used:
+  - `query()` function for one-shot prompts
+  - `SDKMessage` type for streaming response handling
+  - Correct content extraction from `message.message.content`
+- Tests: 54 pass, all demos run correctly
+- Also installed @anthropic-ai/claude-agent-sdk@0.2.22 to project dependencies
+- Tasks: task-218 marked complete
+- Stats: pending 34, complete 99 (74%)
+- Outcome: ch06 examples created (was missing), Agent SDK migration 1/10 complete
+- Next: task-219 (Rewrite ch07 examples with Agent SDK)
 
 ### 2026-01-28 22:30 - COMPLETED task-217: Audit ch06-ch15 for native SDK usage - ITERATION 28
 - What: Audited all code examples in ch06-ch15 for SDK usage patterns

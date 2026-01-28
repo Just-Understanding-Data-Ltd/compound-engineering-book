@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T22:30:00Z",
+  "lastUpdated": "2026-01-28T23:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1415,8 +1415,10 @@
           "type": "milestone",
           "title": "Rewrite ch06 examples with Agent SDK",
           "description": "The Verification Ladder - convert examples to use Agent SDK sessions and streaming.",
-          "status": "pending",
-          "score": 1100
+          "status": "complete",
+          "completedAt": "2026-01-28T23:00:00Z",
+          "score": 1100,
+          "note": "Created ch06 examples (folder was missing): verification-analyzer.ts, schema-generator.ts, ch06.test.ts. 54 tests pass, both demos run. Uses query() function from Agent SDK."
         },
         {
           "id": "task-219",
@@ -1561,16 +1563,16 @@
     ]
   },
   "stats": {
-    "pending": 35,
+    "pending": 34,
     "inProgress": 0,
-    "complete": 98,
+    "complete": 99,
     "blocked": 0,
     "total": 133
   },
   "checkpoints": {
     "lastGoodCommit": "b722d57b7592021537d39ef83841a8448a01c886",
-    "lastSuccessfulTask": "interrupted-28",
-    "lastCheckpoint": "2026-01-28T01:21:42Z",
+    "lastSuccessfulTask": "task-218",
+    "lastCheckpoint": "2026-01-28T23:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
