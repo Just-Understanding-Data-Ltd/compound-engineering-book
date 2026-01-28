@@ -23,7 +23,7 @@ Consider the numbers:
 
 | Ad-hoc Agent Flow | Deterministic Script |
 |-------------------|---------------------|
-| Variable latency (LLM reasoning + execution) | Fast, predictable execution |
+| Variable latency (Large Language Model (LLM) reasoning + execution) | Fast, predictable execution |
 | Probabilistic (might do it differently each time) | Same behavior every time |
 | Token cost per run | Zero LLM cost |
 | Can deviate or get confused | Follows exact steps |
@@ -424,10 +424,10 @@ Level 3: Write systems that write systems
 
 | Builder | Meta-Builder |
 |---------|--------------|
-| Writes CRUD endpoints | Designs API generation systems |
+| Writes Create, Read, Update, Delete (CRUD) endpoints | Designs API generation systems |
 | Debugs issues | Builds observability that surfaces issues |
 | Writes tests | Designs testing frameworks |
-| Uses CI/CD | Designs CI/CD pipelines |
+| Uses Continuous Integration/Continuous Deployment (CI/CD) | Designs CI/CD pipelines |
 | Follows patterns | Creates patterns |
 | Uses agents | Orchestrates agent systems |
 
@@ -445,6 +445,7 @@ services:
   app:
     build: .
     environment:
+      # OpenTelemetry (OTEL) exporter configuration
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
 
   otel-collector:
@@ -525,7 +526,7 @@ What separates meta-engineers from regular engineers is the full stack they deve
 │  (Feedback loops, emergent behavior, constraints)           │
 ├─────────────────────────────────────────────────────────────┤
 │  Architectural Design                                       │
-│  (DDD, boundaries, contracts)                               │
+│  (Domain-Driven Design (DDD), boundaries, contracts)        │
 ├─────────────────────────────────────────────────────────────┤
 │  Agent Orchestration                                        │
 │  (Prompts, tools, verification)                             │
@@ -534,7 +535,7 @@ What separates meta-engineers from regular engineers is the full stack they deve
 │  (OTEL, metrics, traces)                                    │
 ├─────────────────────────────────────────────────────────────┤
 │  Infrastructure as Code                                     │
-│  (Terraform, Docker, K8s)                                   │
+│  (Terraform, Docker, Kubernetes (K8s))                      │
 ├─────────────────────────────────────────────────────────────┤
 │  Core Programming                                           │
 │  (TypeScript, Python, SQL)                                  │
@@ -557,7 +558,7 @@ You use Claude Code to write features. Each day, you ask it to add authenticatio
 
 **Level 2: Building Tools with AI**
 
-You use Claude Code to build tools that generate code. An MCP server that scaffolds CRUD endpoints. A CLI that generates feature templates. Productivity: 20-50x.
+You use Claude Code to build tools that generate code. A Model Context Protocol (MCP) server that scaffolds CRUD endpoints. A CLI that generates feature templates. Productivity: 20-50x.
 
 ```bash
 # Level 2: Tool invocation
@@ -579,7 +580,7 @@ You build tools that build tools. A system that monitors your codebase, identifi
 
 Productivity: 100-500x. The infrastructure compounds.
 
-### The ROI Calculation
+### The Return on Investment (ROI) Calculation
 
 Before building a tool, calculate its value:
 
@@ -610,7 +611,7 @@ If the ROI is positive within two weeks, build the tool. If not, keep the workfl
 
 | Surface Level | Meta Level |
 |---------------|------------|
-| A SaaS product | A product-building system |
+| A Software as a Service (SaaS) product | A product-building system |
 | An API | An API generation pipeline |
 | A test suite | A correctness verification system |
 | A deployment | A self-healing infrastructure |
