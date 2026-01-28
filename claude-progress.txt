@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 18:00)
+## Current Status (Updated: 2026-01-29 19:00)
 - Phase: Final Quality Polish
 - Active: Content enhancements from KB articles
-- Last Completed: task-243 (ch15 cost of exploration insight)
+- Last Completed: task-232 (structured outputs in ch05/multi-step-agent.ts)
 - Blockers: None - all quality issues have identified solutions
-- Queue Health: 13 pending tasks, clean queue, no duplicates
+- Queue Health: 24 pending tasks, clean queue, no duplicates
 - Publishing Readiness: 99% (content complete, SDK migration 12/12 done, ch13+ch14+ch15 fully enhanced)
 
 ## Project State Summary
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 138/151 (91%) with clear prioritization
+- Tasks Complete: 127/151 (84%) with clear prioritization
 - Test Pass Rate: 100% across all chapters (787 tests total)
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -39,9 +39,11 @@
    - Fixed 5 terms: JWT, idempotent, Jaeger, E2E, CI/CD
    - Most issues were already fixed in previous iterations
 
-4. HIGH: Use Structured Outputs (task-232, 20 files)
-   - Replace manual text parsing with Zod schemas
-   - Modern API patterns
+4. ✓ COMPLETE: Use Structured Outputs (task-232)
+   - Scope revised: only ch05/multi-step-agent.ts needed update
+   - Added Zod schemas + betaZodOutputFormat for JSON parsing
+   - Ch06-Ch15 use Agent SDK (no regex JSON parsing)
+   - Ch03 returns free-form text (structured outputs N/A)
 
 5. MEDIUM: Content Enhancements (tasks 241-254)
    - Various chapter enrichments from KB articles

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T15:25:02.352Z",
+  "lastUpdated": "2026-01-28T15:27:15.964Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1583,25 +1583,29 @@
       "type": "fix",
       "title": "Use structured outputs across all examples",
       "description": "Replace manual text parsing with Anthropic structured outputs across 20 files. Current pattern: `response.content.find((c) => c.type === \"text\")`. Should use structured outputs with Zod schema for typed responses. Files: ch03(2), ch05(2), ch09(4), ch10(4), ch13(3), ch14(5). See: https://docs.anthropic.com/en/docs/build-with-claude/structured-output",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-29T19:00:00Z",
       "priority": "high",
       "score": 435,
       "scoreBreakdown": "high:750 + fix:80 = 830",
       "createdAt": "2026-01-29T00:00:00Z",
-      "file": "examples/ch09/entropy-measurement.ts"
+      "file": "examples/ch09/entropy-measurement.ts",
+      "outcome": "SCOPE REVISED after investigation: Original task assumed 20 files used regex-based JSON parsing. After Agent SDK migration (task-216), ch06-ch15 now use streaming pattern with extractTextContent helper. Ch03 files return free-form text (reasoning, code), not JSON. The only applicable file was ch05/multi-step-agent.ts which parsed JSON with regex. Updated it to use structured outputs with betaZodOutputFormat and Zod schemas (SubscriberArraySchema, EmailTemplateSchema). Tests pass (68 tests). Structured outputs are documented at platform.claude.com/docs/en/build-with-claude/structured-outputs."
     },
     {
       "id": "task-234",
       "type": "fix",
       "title": "Use structured outputs in ch06/schema-generator.ts",
       "description": "Update examples/ch06/schema-generator.ts to use Anthropic structured outputs (beta). Use output_format with json_schema for guaranteed valid JSON responses. Requires beta header: structured-outputs-2025-11-13. Use client.beta.messages.create() with betas array. Can use Zod with betaZodOutputFormat helper for TypeScript.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-29T19:00:00Z",
       "priority": "high",
       "score": 435,
       "scoreBreakdown": "high:750 + fix:80 = 830",
       "createdAt": "2026-01-29T00:00:00Z",
       "file": "examples/ch06/schema-generator.ts",
-      "reference": "https://docs.anthropic.com/en/docs/build-with-claude/structured-output"
+      "reference": "https://docs.anthropic.com/en/docs/build-with-claude/structured-output",
+      "outcome": "NOT APPLICABLE: ch06/schema-generator.ts was migrated to Agent SDK (task-216) and now uses query() with streaming pattern (extractTextContent helper). The file does not parse JSON with regex. Ch06-Ch15 use Agent SDK per CLAUDE.md instructions. Structured outputs apply to native SDK JSON parsing patterns, which ch06 no longer uses."
     },
     {
       "id": "task-229",
@@ -1885,16 +1889,16 @@
     ]
   },
   "stats": {
-    "pending": 13,
+    "pending": 24,
     "inProgress": 0,
-    "complete": 138,
+    "complete": 127,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "7056a918904d726cccb33bfd9d2e820da1c7d311",
-    "lastSuccessfulTask": "iteration-12",
-    "lastCheckpoint": "2026-01-28T15:25:02Z",
+    "lastGoodCommit": "4b3742a755530a8c7698257a5e4ed5a700888a50",
+    "lastSuccessfulTask": "iteration-13",
+    "lastCheckpoint": "2026-01-28T15:27:15Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

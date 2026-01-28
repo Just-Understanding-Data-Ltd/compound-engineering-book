@@ -16,8 +16,38 @@
  */
 
 import Anthropic from '@anthropic-ai/sdk';
+import { z } from 'zod';
+import { betaZodOutputFormat } from '@anthropic-ai/sdk/helpers/beta/zod';
 
 const client = new Anthropic();
+
+// ============================================================================
+// Zod Schemas for Structured Outputs
+// ============================================================================
+
+/**
+ * Schema for subscriber records.
+ * Used with structured outputs to guarantee valid JSON responses.
+ */
+const SubscriberArraySchema = z.array(
+  z.object({
+    id: z.string(),
+    email: z.string(),
+    name: z.string(),
+    segment: z.string(),
+  })
+);
+
+/**
+ * Schema for email templates.
+ * Used with structured outputs to guarantee valid JSON responses.
+ */
+const EmailTemplateSchema = z.object({
+  id: z.string(),
+  subject: z.string(),
+  body: z.string(),
+  variables: z.array(z.string()),
+});
 
 // ============================================================================
 // Reliability Calculator
@@ -113,7 +143,8 @@ interface DeliveryResult {
 // Focused Agent Implementations
 // ============================================================================
 
-type ContentBlock = Anthropic.Messages.ContentBlock;
+// Note: With structured outputs, we no longer need ContentBlock type
+// since parsed_output is already typed by our Zod schemas.
 
 /**
  * Agent 1: Subscriber List Agent (5 steps max)
@@ -127,31 +158,29 @@ export const subscriberAgent: FocusedAgent<SubscriberListInput, Subscriber[]> = 
     console.log(`[${this.name}] Fetching subscribers for segment: ${input.segment}`);
 
     try {
-      // Use Claude to help filter/process subscribers
-      const response = await client.messages.create({
+      // Use structured outputs to guarantee valid JSON matching our schema.
+      // This eliminates the need for regex extraction and JSON.parse error handling.
+      const response = await client.beta.messages.parse({
         model: 'claude-sonnet-4-5-20250929',
         max_tokens: 256,
+        betas: ['structured-outputs-2025-11-13'],
         system: 'You help filter and validate email subscriber lists. Be concise.',
         messages: [
           {
             role: 'user',
-            content: `Given segment "${input.segment}", generate 3 sample valid subscriber records as JSON array. Include id, email, name, segment fields.`,
+            content: `Given segment "${input.segment}", generate 3 sample valid subscriber records. Include id, email, name, segment fields.`,
           },
         ],
+        output_format: betaZodOutputFormat(SubscriberArraySchema),
       });
 
-      const textContent = response.content.find((block: ContentBlock) => block.type === 'text');
-      const responseText = textContent?.type === 'text' ? textContent.text : '[]';
-
-      // Extract JSON from response
-      const jsonMatch = responseText.match(/\[[\s\S]*?\]/);
-      const subscribers: Subscriber[] = jsonMatch
-        ? JSON.parse(jsonMatch[0])
-        : [
-            { id: '1', email: 'user1@example.com', name: 'User 1', segment: input.segment },
-            { id: '2', email: 'user2@example.com', name: 'User 2', segment: input.segment },
-            { id: '3', email: 'user3@example.com', name: 'User 3', segment: input.segment },
-          ];
+      // With structured outputs, parsed_output is guaranteed to match our schema.
+      // No regex extraction or JSON.parse needed.
+      const subscribers: Subscriber[] = response.parsed_output ?? [
+        { id: '1', email: 'user1@example.com', name: 'User 1', segment: input.segment },
+        { id: '2', email: 'user2@example.com', name: 'User 2', segment: input.segment },
+        { id: '3', email: 'user3@example.com', name: 'User 3', segment: input.segment },
+      ];
 
       return {
         success: true,
@@ -180,30 +209,30 @@ export const templateAgent: FocusedAgent<TemplateInput, EmailTemplate> = {
     console.log(`[${this.name}] Loading template: ${input.templateId}`);
 
     try {
-      const response = await client.messages.create({
+      // Use structured outputs to guarantee valid JSON matching our schema.
+      // This eliminates the need for regex extraction and JSON.parse error handling.
+      const response = await client.beta.messages.parse({
         model: 'claude-sonnet-4-5-20250929',
         max_tokens: 512,
+        betas: ['structured-outputs-2025-11-13'],
         system: 'You help create email templates. Be professional and concise.',
         messages: [
           {
             role: 'user',
-            content: `Create an email template for campaign "${input.campaign}". Return JSON with: id, subject, body (using {{name}} and {{product}} variables), and variables array.`,
+            content: `Create an email template for campaign "${input.campaign}". Include id (use "${input.templateId}"), subject, body (using {{name}} and {{product}} variables), and variables array.`,
           },
         ],
+        output_format: betaZodOutputFormat(EmailTemplateSchema),
       });
 
-      const textContent = response.content.find((block: ContentBlock) => block.type === 'text');
-      const responseText = textContent?.type === 'text' ? textContent.text : '{}';
-
-      const jsonMatch = responseText.match(/\{[\s\S]*?\}/);
-      const template: EmailTemplate = jsonMatch
-        ? JSON.parse(jsonMatch[0])
-        : {
-            id: input.templateId,
-            subject: `Important update about ${input.campaign}`,
-            body: 'Hello {{name}}, check out our {{product}}!',
-            variables: ['name', 'product'],
-          };
+      // With structured outputs, parsed_output is guaranteed to match our schema.
+      // No regex extraction or JSON.parse needed.
+      const template: EmailTemplate = response.parsed_output ?? {
+        id: input.templateId,
+        subject: `Important update about ${input.campaign}`,
+        body: 'Hello {{name}}, check out our {{product}}!',
+        variables: ['name', 'product'],
+      };
 
       return {
         success: true,
