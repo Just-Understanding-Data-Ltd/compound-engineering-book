@@ -55,7 +55,7 @@ cd your-project
 Here is a minimal starter template:
 
 ```markdown
-# Project Context {#ch02-getting-started-with-claude-code}
+# Project Context
 
 ## Quick Start
 - Language: TypeScript
@@ -472,10 +472,10 @@ Example workflow:
 
 ```bash
 claude -p "How does error handling work in this codebase? Show me 3 examples."
-# Greps for error patterns, shows Result<T, E> usage {#ch02-getting-started-with-claude-code}
+# Greps for error patterns, shows Result<T, E> usage
 
 claude -p "Should I use Result<T, E> or exceptions for the new payment service?"
-# Claude Code analyzes codebase, shows you chose Result<T, E>, explains why {#ch02-getting-started-with-claude-code}
+# Claude Code analyzes codebase, shows you chose Result<T, E>, explains why
 ```
 
 Time invested: 5 minutes. Understanding gained: enough to implement correctly.
@@ -553,7 +553,7 @@ There is another constraint you may not have considered: Claude Code's system pr
 
 Lean CLAUDE.md (works reliably):
 ```markdown
-# Project Context {#ch02-getting-started-with-claude-code}
+# Project Context
 
 ## Stack (5 items)
 ## Commands (4 items)
@@ -564,7 +564,7 @@ Total: ~12 instructions across 3 sections
 
 Bloated CLAUDE.md (degrades quality):
 ```markdown
-# Project Context {#ch02-getting-started-with-claude-code}
+# Project Context
 
 ## Stack (15 items)
 ## Commands (20 items)

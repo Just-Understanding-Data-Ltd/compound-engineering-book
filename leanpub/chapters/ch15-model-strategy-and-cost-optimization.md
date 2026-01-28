@@ -246,7 +246,7 @@ Build protection in layers:
 The outermost safety net. If everything else fails, the job dies:
 
 ```yaml
-# .github/workflows/ai-task.yml {#ch15-model-strategy-and-cost-optimization}
+# .github/workflows/ai-task.yml
 jobs:
   ai-task:
     runs-on: ubuntu-latest
@@ -372,7 +372,7 @@ Claude automatically caches the first 1024+ tokens of identical content for 5 mi
 
 **Cache-friendly structure:**
 ```markdown
-# SYSTEM CONTEXT (CACHED - put first) {#ch15-model-strategy-and-cost-optimization}
+# SYSTEM CONTEXT (CACHED - put first)
 
 ## Project Architecture
 [Content from CLAUDE.md]
@@ -385,7 +385,7 @@ Claude automatically caches the first 1024+ tokens of identical content for 5 mi
 
 ---
 
-# CURRENT REQUEST (NOT CACHED - put last) {#ch15-model-strategy-and-cost-optimization}
+# CURRENT REQUEST (NOT CACHED - put last)
 
 ## Task
 [Specific request for this call]
@@ -405,10 +405,10 @@ const client = new Anthropic();
 
 // Load stable context once
 const stableContext = `
-# Project Architecture {#ch15-model-strategy-and-cost-optimization}
+# Project Architecture
 ${await readFile('CLAUDE.md', 'utf-8')}
 
-# Schemas {#ch15-model-strategy-and-cost-optimization}
+# Schemas
 ${await readFile('schemas/user.json', 'utf-8')}
 `;
 
@@ -589,15 +589,15 @@ Maximize batch value by automating the submit-collect cycle:
 
 ```bash
 #!/bin/bash
-# submit-batch.sh - Run before leaving work {#ch15-model-strategy-and-cost-optimization}
+# submit-batch.sh - Run before leaving work
 
-# Collect files to review {#ch15-model-strategy-and-cost-optimization}
+# Collect files to review
 FILES=$(find src -name "*.ts" -mtime -1)
 
-# Create batch request JSON {#ch15-model-strategy-and-cost-optimization}
+# Create batch request JSON
 node scripts/create-batch-request.js $FILES > batch-request.json
 
-# Submit batch {#ch15-model-strategy-and-cost-optimization}
+# Submit batch
 BATCH_ID=$(curl -s -X POST \
   -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
   -H "Content-Type: application/json" \
@@ -610,11 +610,11 @@ echo $BATCH_ID > .last-batch-id
 
 ```bash
 #!/bin/bash
-# collect-batch.sh - Run in the morning {#ch15-model-strategy-and-cost-optimization}
+# collect-batch.sh - Run in the morning
 
 BATCH_ID=$(cat .last-batch-id)
 
-# Check status {#ch15-model-strategy-and-cost-optimization}
+# Check status
 STATUS=$(curl -s \
   -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
   "https://api.anthropic.com/v1/messages/batches/$BATCH_ID" \
@@ -671,11 +671,11 @@ Use YOLO mode in controlled environments:
 
 ```bash
 #!/bin/bash
-# safe-yolo.sh {#ch15-model-strategy-and-cost-optimization}
+# safe-yolo.sh
 
 set -e
 
-# Safety checks before YOLO {#ch15-model-strategy-and-cost-optimization}
+# Safety checks before YOLO
 check_safety() {
   # Only in CI or containers
   if [ -z "$CI" ] && [ -z "$CONTAINER" ]; then
@@ -699,7 +699,7 @@ check_safety() {
 
 check_safety
 
-# Safe to run {#ch15-model-strategy-and-cost-optimization}
+# Safe to run
 claude --dangerously-skip-permissions -p "Run tests and fix failures"
 ```
 
@@ -744,13 +744,13 @@ Start with Level 3 for most work. Move to Level 4 for production deployments or 
 YOLO mode enables unattended operation. Set up work before leaving:
 
 ```bash
-# Before leaving (9pm) {#ch15-model-strategy-and-cost-optimization}
+# Before leaving (9pm)
 echo "Implement feature X based on spec.md" > task.txt
 
-# Run overnight {#ch15-model-strategy-and-cost-optimization}
+# Run overnight
 nohup claude --dangerously-skip-permissions -p "$(cat task.txt)" &
 
-# Check results in morning {#ch15-model-strategy-and-cost-optimization}
+# Check results in morning
 git log --oneline -10
 npm test
 ```
@@ -773,7 +773,7 @@ Claude Code includes skills for common operations:
 Define skills for your team's workflows:
 
 ```markdown
-# .claude/skills/deploy.md {#ch15-model-strategy-and-cost-optimization}
+# .claude/skills/deploy.md
 
 ## Skill: Deploy
 
@@ -816,7 +816,7 @@ Use skills for linear, repeatable workflows. Use sub-agents for tasks requiring 
 Skills can invoke other skills, creating powerful workflows:
 
 ```markdown
-# .claude/skills/release.md {#ch15-model-strategy-and-cost-optimization}
+# .claude/skills/release.md
 
 ## Skill: Release
 

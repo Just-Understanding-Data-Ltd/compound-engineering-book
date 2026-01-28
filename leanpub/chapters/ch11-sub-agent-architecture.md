@@ -51,7 +51,7 @@ Sub-agents derive their expertise from a three-layer context hierarchy:
 The root configuration establishes patterns all agents must follow:
 
 ```markdown
-# Project Coding Standards {#ch11-sub-agent-architecture}
+# Project Coding Standards
 
 ## Architecture
 - Monorepo structure with packages
@@ -78,7 +78,7 @@ The root configuration establishes patterns all agents must follow:
 Each agent has a dedicated behavioral flow in `.claude/agents/`. This file defines the agent's workflow, focus areas, and boundaries:
 
 ```markdown
-# .claude/agents/backend-engineer.md {#ch11-sub-agent-architecture}
+# .claude/agents/backend-engineer.md
 
 You are a Backend Engineer specializing in Node.js/TypeScript APIs.
 
@@ -115,7 +115,7 @@ When implementing an API endpoint:
 Each package in your monorepo can have local conventions:
 
 ```markdown
-# packages/api/CLAUDE.md {#ch11-sub-agent-architecture}
+# packages/api/CLAUDE.md
 
 API Package - RESTful endpoints using
 Express + tRPC (type-safe RPC framework)
@@ -398,7 +398,7 @@ Output: "Tests complete. Coverage: 95%. Ready for review."
 The reviewer analyzes all implementation files with read-only access:
 
 ```markdown
-# Code Review: Payment Feature {#ch11-sub-agent-architecture}
+# Code Review: Payment Feature
 
 ## Security: PASS
 - Stripe secret from environment variable

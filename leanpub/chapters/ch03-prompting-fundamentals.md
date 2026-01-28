@@ -252,7 +252,7 @@ Choose examples that:
 ### The Few-Shot Template
 
 ```markdown
-# Pattern: Service Layer {#ch03-prompting-fundamentals}
+# Pattern: Service Layer
 
 Here are examples of how we implement services in this codebase:
 
@@ -270,7 +270,7 @@ Here are examples of how we implement services in this codebase:
 
 ---
 
-# Your Task {#ch03-prompting-fundamentals}
+# Your Task
 
 Now create a Post Service following the same pattern:
 - Factory function: createPostService(deps: PostServiceDeps): PostService

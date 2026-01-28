@@ -27,7 +27,7 @@ Your CLAUDE.md file is the primary control surface. It tells the agent WHAT the 
 Consider an authentication system. A weak CLAUDE.md might say "This is a Node.js API." A strong one provides architectural constraints:
 
 ```markdown
-# Authentication Service {#ch13-building-the-harness}
+# Authentication Service
 
 ## Architecture
 - All auth functions return AuthResult:
@@ -52,15 +52,15 @@ A pre-commit hook prevents broken code from entering version control:
 
 ```bash
 #!/bin/bash
-# .claude/hooks/pre-commit.sh {#ch13-building-the-harness}
+# .claude/hooks/pre-commit.sh
 
-# Type check {#ch13-building-the-harness}
+# Type check
 npm run typecheck || exit 1
 
-# Lint {#ch13-building-the-harness}
+# Lint
 npm run lint || exit 1
 
-# Run tests {#ch13-building-the-harness}
+# Run tests
 npm test || exit 1
 
 echo "All checks passed"
@@ -70,9 +70,9 @@ Post-edit hooks can run tests immediately after Claude makes changes, catching e
 
 ```bash
 #!/bin/bash
-# .claude/hooks/post-edit.sh {#ch13-building-the-harness}
+# .claude/hooks/post-edit.sh
 
-# Run tests related to changed files {#ch13-building-the-harness}
+# Run tests related to changed files
 npm test -- --changed
 ```
 
@@ -101,7 +101,7 @@ Observability is not just monitoring for humans. It provides signal to agents. W
 A basic observability stack uses OpenTelemetry (OTEL) and Jaeger (distributed tracing tool):
 
 ```yaml
-# docker-compose.yml {#ch13-building-the-harness}
+# docker-compose.yml
 services:
   jaeger:
     image: jaegertracing/all-in-one:latest
@@ -124,7 +124,7 @@ Tests are the primary feedback mechanism for agents. They must be fast, reliable
 Use context-efficient test runners that provide clear signal. Silence on success, detail on failure. This follows the backpressure pattern from Chapter 9:
 
 ```bash
-# run-tests.sh {#ch13-building-the-harness}
+# run-tests.sh
 if npm test 2>&1 | grep -q "FAIL"; then
     # Show full output only on failure
     npm test
@@ -151,7 +151,7 @@ AI-generated code must work in production, not just locally. Dockerization ensur
 FROM node:20-slim AS base
 WORKDIR /app
 
-# Same environment everywhere {#ch13-building-the-harness}
+# Same environment everywhere
 COPY package.json bun.lockb ./
 RUN bun install --frozen-lockfile
 ```
@@ -733,7 +733,7 @@ This is control theory applied to software development.
 Define performance constraints as mathematical invariants:
 
 ```yaml
-# constraints.yaml {#ch13-building-the-harness}
+# constraints.yaml
 performance:
   memory_max_mb: 300
   p99_latency_ms: 100
@@ -761,7 +761,7 @@ The agent optimization loop works as follows:
 Here is a concrete example. The constraint `heap.retained_growth_slope > 0` is violated. The agent analyzes heap snapshots and finds an event list that grows without bound:
 
 ```python
-# Before {#ch13-building-the-harness}
+# Before
 class EventProcessor:
     def __init__(self):
         self.events = []
@@ -775,7 +775,7 @@ class EventProcessor:
 The agent identifies the missing cleanup and proposes a fix:
 
 ```python
-# After {#ch13-building-the-harness}
+# After
 class EventProcessor:
     def __init__(self):
         self.events = []
@@ -794,7 +794,7 @@ Re-run verification confirms `heap.retained_growth_slope = 0`. Constraint satisf
 Continuous Integration/Continuous Deployment (CI/CD) pipelines make the optimization loop part of your workflow:
 
 ```yaml
-# .github/workflows/performance-optimization.yml {#ch13-building-the-harness}
+# .github/workflows/performance-optimization.yml
 name: Closed-Loop Optimization
 
 on:
@@ -836,7 +836,7 @@ Traditional CI/CD assumes deterministic tests with fast feedback. AI agents brea
 Run different gates based on trigger type:
 
 ```yaml
-# .github/workflows/agent-ci.yml {#ch13-building-the-harness}
+# .github/workflows/agent-ci.yml
 on:
   pull_request:    # Lightweight checks
   schedule:
@@ -1189,7 +1189,7 @@ Use both approaches:
 - **MCP Server**: Current examples, metrics, and state that change frequently
 
 ```markdown
-# CLAUDE.md {#ch13-building-the-harness}
+# CLAUDE.md
 
 ## Factory Function Pattern
 We use factory functions instead of classes.

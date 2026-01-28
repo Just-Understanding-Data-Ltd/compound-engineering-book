@@ -54,7 +54,7 @@ Every effective CLAUDE.md covers three dimensions:
 A minimal example demonstrates the pattern:
 
 ```markdown
-# Social Media Scheduler {#ch04-writing-your-first-claude-md}
+# Social Media Scheduler
 
 ## Why
 
@@ -89,7 +89,7 @@ This file runs about 30 lines. It provides enough context for Claude to understa
 Build your file around these sections:
 
 ```markdown
-# Project Name {#ch04-writing-your-first-claude-md}
+# Project Name
 
 ## Stack
 [Language, frameworks, key dependencies - 5-10 lines]
@@ -220,7 +220,7 @@ Create domain-level files when patterns diverge between directories. Create subd
 Here is what a domain CLAUDE.md might look like for the workflows package:
 
 ```markdown
-# Workflows Package {#ch04-writing-your-first-claude-md}
+# Workflows Package
 
 ## Architecture
 
@@ -327,10 +327,10 @@ Teams using multiple AI tools face duplication problems. Claude Code reads CLAUD
 Symlinks solve this:
 
 ```bash
-# Create master rules file {#ch04-writing-your-first-claude-md}
+# Create master rules file
 touch RULES.md
 
-# Link tools to master {#ch04-writing-your-first-claude-md}
+# Link tools to master
 ln -s RULES.md CLAUDE.md
 ln -s RULES.md .cursorrules
 mkdir -p .aider && ln -s ../RULES.md .aider/AGENTS.md

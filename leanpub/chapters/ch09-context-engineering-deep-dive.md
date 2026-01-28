@@ -127,7 +127,7 @@ High-MI patterns include:
 Compare low-MI context:
 
 ```markdown
-# Context {#ch09-context-engineering-deep-dive}
+# Context
 Write clean, maintainable code.
 Use good patterns.
 Handle errors properly.
@@ -136,7 +136,7 @@ Handle errors properly.
 With high-MI context:
 
 ```markdown
-# Context {#ch09-context-engineering-deep-dive}
+# Context
 
 ✅ DO THIS:
 function authenticate(email: string, password: string): AuthResult {
@@ -160,10 +160,10 @@ The second context has much higher mutual information. It strongly constrains wh
 Channel capacity is the maximum information that can reliably pass through a context window:
 
 ```python
-# Claude context window {#ch09-context-engineering-deep-dive}
+# Claude context window
 max_tokens = 200_000
 
-# If each token encodes ~4 bits of information {#ch09-context-engineering-deep-dive}
+# If each token encodes ~4 bits of information
 channel_capacity = 200_000 * 4 = 800_000 bits = 100 KB
 ```
 
@@ -188,7 +188,7 @@ Progressive disclosure organizes context in layers that load on-demand. Instead 
 **Level 1: Metadata Layer** (always loaded)
 
 ```yaml
-# SKILL.md frontmatter {#ch09-context-engineering-deep-dive}
+# SKILL.md frontmatter
 ---
 name: pdf-manipulation
 description: Extract text, fill forms, merge/split PDFs
@@ -204,7 +204,7 @@ Cost: ~50-100 tokens per skill. You can have dozens of skills for under 2,000 to
 **Level 2: Core Instructions** (loaded when relevant)
 
 ```markdown
-# PDF Manipulation Skill {#ch09-context-engineering-deep-dive}
+# PDF Manipulation Skill
 
 ## Capabilities
 - Extract text from PDFs using `pdf-extract` tool
@@ -354,7 +354,7 @@ run_silent() {
     fi
 }
 
-# Usage {#ch09-context-engineering-deep-dive}
+# Usage
 run_silent "Auth tests" "pytest tests/auth/"
 run_silent "Utils tests" "pytest tests/utils/"
 run_silent "API tests" "pytest tests/api/"

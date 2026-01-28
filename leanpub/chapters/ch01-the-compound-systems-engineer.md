@@ -206,7 +206,7 @@ Meta-engineers build three things:
 **1. Environments** where constraints can be measured and enforced:
 
 ```yaml
-# docker-compose.yml {#ch01-the-compound-systems-engineer}
+# docker-compose.yml
 services:
   app:
     build: .

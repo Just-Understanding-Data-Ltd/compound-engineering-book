@@ -159,7 +159,7 @@ Shows prior migration approaches, including ones that failed and how they were f
 A repository-wide knowledge file (AGENTS.md or CLAUDE.md) stores codebase-specific knowledge:
 
 ```markdown
-# AGENTS.md - Accumulated Knowledge {#ch10-the-ralph-loop}
+# AGENTS.md - Accumulated Knowledge
 
 ## Tech Stack
 - Runtime: Bun (use `bun`, not `npm`)
@@ -199,7 +199,7 @@ Agents read this file at the start of each iteration and update it with learning
 TASKS.md tracks incomplete, in-progress, and completed tasks:
 
 ```markdown
-# Tasks {#ch10-the-ralph-loop}
+# Tasks
 
 - [x] Implement user authentication (Completed: 2025-01-15)
 - [x] Add rate limiting to API (Completed: 2025-01-16)
@@ -403,7 +403,7 @@ Here's a minimal RALPH script to start with:
 
 ```bash
 #!/bin/bash
-# ralph.sh - Run agent loop until all tasks complete {#ch10-the-ralph-loop}
+# ralph.sh - Run agent loop until all tasks complete
 
 while true; do
   # Check for incomplete tasks

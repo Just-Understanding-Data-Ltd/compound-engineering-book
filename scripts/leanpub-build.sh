@@ -20,8 +20,8 @@ for src in chapters/ch*.md; do
 
   # Convert standard markdown to Markua
   cat "$src" | \
-    # Add chapter anchors to h1 headers
-    sed -E 's/^# (.+)$/# \1 {#'"${filename%.md}"'}/' | \
+    # Add chapter anchor to first h1 header only (line 1)
+    sed -E '1s/^# (.+)$/# \1 {#'"${filename%.md}"'}/' | \
     # Convert > blockquotes to {blurb} for tips
     sed -E 's/^> \*\*Tip:\*\* (.+)$/{blurb, class: tip}\n\1\n{\/blurb}/' | \
     # Convert > **Warning:** to warning blurbs

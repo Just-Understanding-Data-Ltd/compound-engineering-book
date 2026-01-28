@@ -148,7 +148,7 @@ When AI output is wrong, systematically add context:
 
 **Include relevant code files**. Show existing patterns:
 ```bash
-# Claude Code automatically includes files you reference {#ch08-error-handling-and-debugging}
+# Claude Code automatically includes files you reference
 claude "Add pagination following the pattern in src/api/products.ts"
 ```
 
@@ -276,7 +276,7 @@ The solution is ERRORS.md. A persistent document that serves as memory for your 
 ### Structure of ERRORS.md
 
 ````markdown
-# Common Errors & Solutions {#ch08-error-handling-and-debugging}
+# Common Errors & Solutions
 
 Last Updated: 2026-01-27
 Total Errors Documented: 23
@@ -603,7 +603,7 @@ Runaway Large Language Model (LLM) workflows can rack up hundreds of dollars in 
 The outermost protection layer. If everything else fails, the job dies.
 
 ```yaml
-# .github/workflows/ai-review.yml {#ch08-error-handling-and-debugging}
+# .github/workflows/ai-review.yml
 name: AI Code Review
 
 on: [pull_request]
@@ -908,10 +908,10 @@ This creates a "ratchet effect" where progress is locked in and cannot be lost.
 Before any operation that might break things, create a safety checkpoint:
 
 ```bash
-# Before major refactoring {#ch08-error-handling-and-debugging}
+# Before major refactoring
 git add -A && git commit -m "checkpoint: before refactoring auth module"
 
-# Before running unfamiliar AI suggestions {#ch08-error-handling-and-debugging}
+# Before running unfamiliar AI suggestions
 git add -A && git commit -m "checkpoint: before applying AI caching suggestion"
 ```
 
@@ -1089,15 +1089,15 @@ The RALPH (Read, Act, Log, Persist, Halt) loop uses fresh context for each itera
 Git commits become the "save game" between iterations. Each fresh start eliminates context rot while preserving progress:
 
 ```bash
-# What previous agent did (memory reconstruction) {#ch08-error-handling-and-debugging}
+# What previous agent did (memory reconstruction)
 git log --oneline -5
 
-# f8bd993 [progress]: add user validation - all tests pass {#ch08-error-handling-and-debugging}
-# b1c32b7 [progress]: add password hashing utilities {#ch08-error-handling-and-debugging}
-# 0b6ebd0 [progress]: create User model {#ch08-error-handling-and-debugging}
-# 3922f65 [progress]: initial project setup {#ch08-error-handling-and-debugging}
+# f8bd993 [progress]: add user validation - all tests pass
+# b1c32b7 [progress]: add password hashing utilities
+# 0b6ebd0 [progress]: create User model
+# 3922f65 [progress]: initial project setup
 
-# Current agent continues from last commit {#ch08-error-handling-and-debugging}
+# Current agent continues from last commit
 ```
 
 The key insight: you don't need the full conversation history. You need the outcomes, constraints discovered, and next steps. Git provides this external memory without the context window costs.
@@ -1123,13 +1123,13 @@ Including your entire codebase "just in case" creates noise that reduces signal.
 
 After applying a fix, always verify it works:
 ```bash
-# Before fix {#ch08-error-handling-and-debugging}
+# Before fix
 claude "Implement user authentication"
-# → Generates code without password hashing {#ch08-error-handling-and-debugging}
+# → Generates code without password hashing
 
-# After fix (added rule to CLAUDE.md) {#ch08-error-handling-and-debugging}
+# After fix (added rule to CLAUDE.md)
 claude "Implement user authentication"
-# → Generates code WITH password hashing ✓ {#ch08-error-handling-and-debugging}
+# → Generates code WITH password hashing ✓
 ```
 
 If you don't verify, you don't know if your fix was effective.

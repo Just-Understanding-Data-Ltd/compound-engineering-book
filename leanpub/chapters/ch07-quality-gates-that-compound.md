@@ -391,23 +391,23 @@ Return on Investment (ROI): Spend 2 hours upfront to save 60 hours later = 30x r
 Enable linting from project start, before writing any application code.
 
 ```bash
-# Initialize project {#ch07-quality-gates-that-compound}
+# Initialize project
 npm init -y
 
-# Install linting tools immediately {#ch07-quality-gates-that-compound}
+# Install linting tools immediately
 npm install --save-dev eslint \
   @typescript-eslint/parser \
   @typescript-eslint/eslint-plugin
 npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 
-# Generate config {#ch07-quality-gates-that-compound}
+# Generate config
 npx eslint --init
 ```
 
 Add CI/CD gate:
 
 ```yaml
-# .github/workflows/lint.yml {#ch07-quality-gates-that-compound}
+# .github/workflows/lint.yml
 name: Lint
 on: [push, pull_request]
 jobs:

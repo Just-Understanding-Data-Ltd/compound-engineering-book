@@ -105,36 +105,36 @@ All worktrees share the same Git repository (commits, branches, history) but hav
 ### Creating and Using Worktrees
 
 ```bash
-# From your main repository {#ch12-development-workflows}
+# From your main repository
 cd ~/projects/my-app
 
-# Create worktrees for different features {#ch12-development-workflows}
+# Create worktrees for different features
 git worktree add ../my-app-auth feature/authentication
 git worktree add ../my-app-api feature/api-endpoints
 git worktree add ../my-app-ui feature/ui-redesign
 
-# Verify worktrees {#ch12-development-workflows}
+# Verify worktrees
 git worktree list
 ```
 
 Now launch Claude Code in each worktree:
 
 ```bash
-# Terminal 1: Authentication {#ch12-development-workflows}
+# Terminal 1: Authentication
 cd ~/projects/my-app-auth
 claude
-# Prompt: "Implement JWT-based authentication with refresh tokens" {#ch12-development-workflows}
+# Prompt: "Implement JWT-based authentication with refresh tokens"
 
-# Terminal 2: API endpoints {#ch12-development-workflows}
+# Terminal 2: API endpoints
 cd ~/projects/my-app-api
 claude
-# Prompt: "Create REST API endpoints for {#ch12-development-workflows}
-#   user CRUD operations" {#ch12-development-workflows}
+# Prompt: "Create REST API endpoints for
+#   user CRUD operations"
 
-# Terminal 3: UI redesign {#ch12-development-workflows}
+# Terminal 3: UI redesign
 cd ~/projects/my-app-ui
 claude
-# Prompt: "Redesign login page with new branding guidelines" {#ch12-development-workflows}
+# Prompt: "Redesign login page with new branding guidelines"
 ```
 
 All three agents work simultaneously without interference.
@@ -144,7 +144,7 @@ All three agents work simultaneously without interference.
 When using multiple AI coding tools across worktrees, maintain a single source of truth for configuration:
 
 ```bash
-# Symlink shared configs to each worktree {#ch12-development-workflows}
+# Symlink shared configs to each worktree
 for worktree in ../my-app-auth ../my-app-api ../my-app-ui; do
   ln -sf $(pwd)/CLAUDE.md $worktree/CLAUDE.md
   ln -sf $(pwd)/.claude $worktree/.claude
@@ -299,7 +299,7 @@ If you have typed it (or similar) three or more times, it is a candidate for scr
 
 ```bash
 #!/bin/bash
-# scripts/deploy-staging.sh {#ch12-development-workflows}
+# scripts/deploy-staging.sh
 
 set -e
 
@@ -325,7 +325,7 @@ fi
 **Step 3: Make it a slash command**
 
 ````markdown
-# .claude/commands/deploy-staging.md {#ch12-development-workflows}
+# .claude/commands/deploy-staging.md
 Run the staging deployment script:
 
 ```bash
@@ -356,21 +356,21 @@ Some flows need both determinism and judgment:
 
 ```bash
 #!/bin/bash
-# scripts/diagnose.sh {#ch12-development-workflows}
+# scripts/diagnose.sh
 
-# Deterministic: gather data {#ch12-development-workflows}
+# Deterministic: gather data
 echo "Gathering diagnostics..."
 bun test 2>&1 > test-output.txt
 bun run typecheck 2>&1 > type-output.txt
 biome check src/ 2>&1 > lint-output.txt
 
-# Deterministic: summarize {#ch12-development-workflows}
+# Deterministic: summarize
 echo "=== Summary ==="
 echo "Test failures: $(grep -c FAIL test-output.txt || echo 0)"
 echo "Type errors: $(grep -c error type-output.txt || echo 0)"
 echo "Lint issues: $(grep -c '✖' lint-output.txt || echo 0)"
 
-# Output for agent to analyze {#ch12-development-workflows}
+# Output for agent to analyze
 cat test-output.txt type-output.txt lint-output.txt
 ```
 
@@ -429,7 +429,7 @@ Scripts find all failures at once while MCP finds them one by one. Scripts run l
 ### The Iteration Loop
 
 ```bash
-# Iteration 1: Generate and run {#ch12-development-workflows}
+# Iteration 1: Generate and run
 $ npx playwright test tests/validation/login-flow.spec.ts
 
 ❌ 3 failed:
@@ -437,12 +437,12 @@ $ npx playwright test tests/validation/login-flow.spec.ts
   Password input not found
   Submit button not found
 
-# Iteration 2: Add data-testid attributes, run again {#ch12-development-workflows}
+# Iteration 2: Add data-testid attributes, run again
 $ npx playwright test tests/validation/login-flow.spec.ts
 
 ❌ 1 failed: Expected redirect to /dashboard, got /login
 
-# Iteration 3: Fix redirect logic, run again {#ch12-development-workflows}
+# Iteration 3: Fix redirect logic, run again
 $ npx playwright test tests/validation/login-flow.spec.ts
 
 ✓ 3 passed
@@ -473,7 +473,7 @@ Only 1 of 5 matches is the actual function call you are looking for.
 AST-grep parses code into an Abstract Syntax Tree and searches for structural patterns:
 
 ```bash
-# Find all calls to fetchUserData (not comments, strings, or definitions) {#ch12-development-workflows}
+# Find all calls to fetchUserData (not comments, strings, or definitions)
 ast-grep --pattern 'fetchUserData($$$)'
 ```
 
@@ -485,13 +485,13 @@ This matches only function calls, ignoring everything else.
 **Ellipsis (`$$$`)**: Matches zero or more nodes
 
 ```bash
-# Find all async function definitions {#ch12-development-workflows}
+# Find all async function definitions
 ast-grep --pattern 'async function $NAME($$$) { $$$ }'
 
-# Find all destructured useState calls {#ch12-development-workflows}
+# Find all destructured useState calls
 ast-grep --pattern 'const [$STATE, $SETTER] = useState($$$)'
 
-# Find all try-catch blocks {#ch12-development-workflows}
+# Find all try-catch blocks
 ast-grep --pattern 'try { $$$ } catch ($ERR) { $$$ }'
 ```
 
@@ -500,10 +500,10 @@ ast-grep --pattern 'try { $$$ } catch ($ERR) { $$$ }'
 Rename a function everywhere it is called (not in comments or docs):
 
 ```bash
-# Find all function calls {#ch12-development-workflows}
+# Find all function calls
 ast-grep --pattern 'fetchUserData($$$)' --json
 
-# Rewrite all matches {#ch12-development-workflows}
+# Rewrite all matches
 ast-grep --pattern 'fetchUserData($$$)' \
   --rewrite 'getUserData($$$)' \
   --update-all
@@ -531,7 +531,7 @@ Claude Code ships with skills like `/commit` (create git commits), `/pr` (create
 Custom skills live in `.claude/commands/`:
 
 ```markdown
-# .claude/commands/feature-branch.md {#ch12-development-workflows}
+# .claude/commands/feature-branch.md
 Create a new feature branch for the given description:
 
 1. Generate a slug from the description
@@ -553,7 +553,7 @@ Skills are stateless, single-purpose commands. Sub-agents (covered in Chapter 11
 Skills can invoke other skills or scripts:
 
 ```markdown
-# .claude/commands/ship-feature.md {#ch12-development-workflows}
+# .claude/commands/ship-feature.md
 Complete sequence to ship the current feature:
 
 1. Run `/test` to verify tests pass

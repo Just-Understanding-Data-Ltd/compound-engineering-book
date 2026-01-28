@@ -361,7 +361,7 @@ The verification sandwich solves this.
 
 ```bash
 #!/bin/bash
-# scripts/verify.sh {#ch06-the-verification-ladder}
+# scripts/verify.sh
 
 set -e  # Exit on first failure
 
@@ -505,7 +505,7 @@ Individual verification levels catch individual bug types. Combined levels catch
 Layer your verification in CI/CD:
 
 ```yaml
-# .github/workflows/verify.yml {#ch06-the-verification-ladder}
+# .github/workflows/verify.yml
 jobs:
   level-1-types:
     run: tsc --noEmit
@@ -583,7 +583,7 @@ Flaky tests that pass sometimes and fail others create false confidence or false
 When a test flakes, run it multiple times to understand the pattern:
 
 ```bash
-# Run test 10 times, count failures {#ch06-the-verification-ladder}
+# Run test 10 times, count failures
 for i in {1..10}; do
   npm test -- path/to/test.ts && echo PASS || echo FAIL
 done | grep -c FAIL

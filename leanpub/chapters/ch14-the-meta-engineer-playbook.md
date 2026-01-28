@@ -54,7 +54,7 @@ Then convert to a shell script:
 
 ```bash
 #!/bin/bash
-# scripts/deploy-staging.sh {#ch14-the-meta-engineer-playbook}
+# scripts/deploy-staging.sh
 
 set -e
 
@@ -80,7 +80,7 @@ fi
 Finally, wrap it in a slash command so the agent can invoke it:
 
 ```markdown
-# .claude/commands/deploy-staging.md {#ch14-the-meta-engineer-playbook}
+# .claude/commands/deploy-staging.md
 Run the staging deployment script:
 
 \`\`\`bash
@@ -98,7 +98,7 @@ Some workflows need both determinism and judgment. The solution is to split resp
 
 ```bash
 #!/bin/bash
-# scripts/diagnose.sh {#ch14-the-meta-engineer-playbook}
+# scripts/diagnose.sh
 
 echo "Gathering diagnostics..."
 bun test 2>&1 > test-output.txt
@@ -176,7 +176,7 @@ This ties conversations to commits. You can trace any feature back to its origin
 Extract key insights to a knowledge base instead of keeping raw conversations:
 
 ```markdown
-# .claude/commands/extract.md {#ch14-the-meta-engineer-playbook}
+# .claude/commands/extract.md
 Review this conversation and extract:
 
 1. Key decisions made and their rationale
@@ -442,7 +442,7 @@ The meta-builder asks: "How do I make all future work of this type cheaper?"
 Development environments where constraints can be measured and enforced:
 
 ```yaml
-# docker-compose.yml {#ch14-the-meta-engineer-playbook}
+# docker-compose.yml
 services:
   app:
     build: .
@@ -571,9 +571,9 @@ You use Claude Code to write features. Each day, you ask it to add authenticatio
 You use Claude Code to build tools that generate code. A Model Context Protocol (MCP) server that scaffolds CRUD endpoints. A CLI that generates feature templates. Productivity: 20-50x.
 
 ```bash
-# Level 2: Tool invocation {#ch14-the-meta-engineer-playbook}
+# Level 2: Tool invocation
 mcp-scaffold create-crud User
-# Generates complete CRUD in 5 seconds {#ch14-the-meta-engineer-playbook}
+# Generates complete CRUD in 5 seconds
 ```
 
 **Level 3: Meta-Infrastructure**
