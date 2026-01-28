@@ -673,3 +673,32 @@ The fix uses `rgba(255, 255, 255, 0.6)` for blockquote code background, which cr
 4. Test with `pre code` reset pattern: always reset `background: none; border: none; padding: 0` for code inside pre
 
 ---
+
+### 2026-01-28 - Three-Font-Family Typography Creates Visual Hierarchy Through Font Role Separation
+
+**Context**: Implementing the typography overhaul (task-421) for the EPUB, updating CSS to use three embedded font families: Source Serif 4 (body), Source Sans 3 (headings), and JetBrains Mono (code).
+
+**Observation**: A three-font-family system creates a natural visual hierarchy where each font role signals content type to the reader:
+
+| Font Family | Role | Visual Signal | Properties |
+|-------------|------|---------------|------------|
+| Source Serif 4 | Body text | "Read this carefully" | oldstyle-nums, tight letter-spacing (-0.01em) |
+| Source Sans 3 | Headings, table headers | "Navigate/scan here" | lining-nums, normal letter-spacing, semibold/bold |
+| JetBrains Mono | Code (inline + blocks) | "This is executable" | Fixed-width, 0.82em size |
+
+The key insight is that font properties must cross-cut the containment hierarchy. Headings use lining numbers (1, 2, 3) because they appear in navigational contexts where alignment matters. Body text uses oldstyle numbers (with descenders) because they integrate better with running prose. These are different decisions made for the same underlying data type (numbers) based on context.
+
+Similarly, `blockquote` inherits the body font (Source Serif 4) and adds `font-style: italic` to signal "this is a callout/aside." But `code` inside blockquotes must reset `font-style: normal` to avoid italic monospace (which is hard to read and signals the wrong thing). This creates a chain: body font (serif) > blockquote (serif italic) > blockquote code (mono normal).
+
+The `p + p { text-indent: 1.5em }` rule is a traditional book typography convention that replaces vertical spacing between consecutive paragraphs with horizontal indentation. This makes the text feel more like a printed book and less like a web page. Combined with `orphans: 2; widows: 2`, these are print-oriented CSS properties that most web developers never encounter but are standard in publishing.
+
+**Implication**: Typography for EPUB publishing requires thinking in terms of "font roles" rather than "font choices." Each role (body, navigation, code) has different requirements for numeric style, weight, spacing, and style. When adding a new element type, the first question should be "which role does this serve?" not "what font should this use?"
+
+**Action**: When implementing EPUB typography:
+1. Define font roles first (body, navigation/heading, code), then assign font families
+2. Use `font-variant-numeric` to match number style to context (oldstyle for prose, lining for headings/tables)
+3. Use `letter-spacing` to differentiate: tighter for serif body text, normal for sans headings
+4. Reset inherited styles when crossing role boundaries (e.g., code inside italic blockquotes)
+5. Apply print-specific CSS (orphans, widows, text-indent) that web stylesheets never need
+
+---
