@@ -451,11 +451,13 @@ Some tasks don't need immediate responses. Code reviews, documentation generatio
 
 Batch processing works best for high-volume, low-urgency tasks:
 
-- **Code reviews**: Review 50 files overnight at 50% cost
-- **Documentation**: Generate docs for an entire codebase
-- **Test generation**: Create test cases for multiple functions
-- **Refactoring analysis**: Get improvement suggestions across many files
-- **Translation**: Convert error messages or UI strings to multiple languages
+| Task Type | Example |
+|-----------|---------|
+| Code reviews | Review 50 files overnight at 50% cost |
+| Documentation | Generate docs for an entire codebase |
+| Test generation | Create test cases for multiple functions |
+| Refactoring analysis | Get improvement suggestions across many files |
+| Translation | Convert error messages or UI strings to multiple languages |
 
 The pattern: identify work that can wait, batch it together, submit before leaving for the day.
 

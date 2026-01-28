@@ -128,7 +128,8 @@ claude
 # Terminal 2: API endpoints {#ch12-development-workflows}
 cd ~/projects/my-app-api
 claude
-# Prompt: "Create Representational State Transfer (REST) API endpoints for user Create, Read, Update, Delete (CRUD) operations" {#ch12-development-workflows}
+# Prompt: "Create REST API endpoints for {#ch12-development-workflows}
+#   user CRUD operations" {#ch12-development-workflows}
 
 # Terminal 3: UI redesign {#ch12-development-workflows}
 cd ~/projects/my-app-ui

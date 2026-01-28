@@ -109,7 +109,8 @@ Let me show you a real workflow. Suppose you want to create a simple CLI (Comman
 **Step 1: Explore the project**
 
 ```bash
-claude -p "Show me the current project structure and how existing CLI tools are organized."
+claude -p "Show me the current project structure \
+  and how existing CLI tools are organized."
 ```
 
 Claude Code reads files, searches for patterns, and explains what it finds. You now understand where your new tool should live.
@@ -117,7 +118,9 @@ Claude Code reads files, searches for patterns, and explains what it finds. You 
 **Step 2: Request implementation**
 
 ```bash
-claude -p "Create a CLI tool in src/tools/csv-reader.ts that reads a CSV file and prints a summary.
+claude -p "Create a CLI tool in \
+  src/tools/csv-reader.ts that reads a CSV file \
+  and prints a summary.
 
 Context:
 - Follow the pattern from src/tools/json-parser.ts
@@ -134,7 +137,9 @@ Claude Code searches for the patterns you mentioned, understands the existing co
 **Step 3: Iterate with feedback**
 
 ```bash
-claude -p "The CSV reader works, but add filtering by column name. Make it work with test files in data/samples/ and verify with npm test."
+claude -p "The CSV reader works, but add filtering \
+  by column name. Make it work with test files \
+  in data/samples/ and verify with npm test."
 ```
 
 Claude Code reads its previous work, understands what needs to change, makes the modifications, and runs tests to verify.
@@ -150,7 +155,8 @@ Claude Code has six core tools. Understanding when to use each one makes your pr
 Read fetches file contents so Claude Code can understand patterns, architecture, or implementation details.
 
 ```bash
-claude -p "Read src/services/auth.ts and explain how JWT (JSON Web Token) tokens are verified"
+claude -p "Read src/services/auth.ts and explain \
+  how JWT (JSON Web Token) tokens are verified"
 ```
 
 When to use: Learning existing patterns. Understanding a file before editing. Debugging issues.
@@ -170,7 +176,8 @@ When to use: New test files. New configuration. Documentation. Never use Write o
 Edit makes surgical changes to existing code. It replaces specific text blocks while preserving surrounding context.
 
 ```bash
-claude -p "In src/api/handler.ts, add rate limiting middleware to the POST /users API (Application Programming Interface) endpoint"
+claude -p "In src/api/handler.ts, add rate limiting \
+  middleware to the POST /users endpoint"
 ```
 
 When to use: Adding features to existing code. Small targeted changes. Safer than Write for modifications.
@@ -278,7 +285,9 @@ Test cases:
 - Invalid: missing @, empty string, spaces
 - Edge cases: international domains, subdomains
 
-After tests pass review, implement src/utils/validation.ts:validateEmail() to pass all tests."
+After tests pass review, implement
+src/utils/validation.ts:validateEmail()
+to pass all tests."
 ```
 
 Why it works: Tests define concrete behavior. Claude Code writes code to pass tests, not to match vague descriptions.
@@ -298,7 +307,9 @@ Example workflow:
 
 **Step 1: Request implementation with verification:**
 ```
-"Implement email validation in src/utils/validation.ts to pass the tests in tests/validation.test.ts.
+"Implement email validation in
+src/utils/validation.ts to pass the tests
+in tests/validation.test.ts.
 
 After implementation:
 1. Run npm test tests/validation.test.ts
@@ -361,22 +372,33 @@ Why it works: Exploration builds understanding. Implementation uses that underst
 
 Bad prompt:
 ```
-"Build a complete user authentication system with JWT tokens, password hashing, login/logout endpoints, password reset flow with email verification, session refresh tokens, rate limiting, and an admin dashboard."
+"Build a complete user authentication system
+with JWT tokens, password hashing,
+login/logout endpoints, password reset flow
+with email verification, session refresh
+tokens, rate limiting, and an admin dashboard."
 ```
 
 Good prompt (broken into increments):
 ```
-Increment 1: "Create a User interface with id, email, passwordHash, createdAt fields in src/models/user.ts"
+Increment 1: "Create a User interface with id,
+email, passwordHash, createdAt fields
+in src/models/user.ts"
 
 [Validate: Types compile. Continue.]
 
-Increment 2: "Add hashPassword and verifyPassword functions in src/utils/auth.ts using bcrypt. Export with JSDoc comments."
+Increment 2: "Add hashPassword and verifyPassword
+functions in src/utils/auth.ts using bcrypt.
+Export with JSDoc comments."
 
-[Validate: Quick test shows hashing works. Continue.]
+[Validate: Quick test shows hashing works.]
 
-Increment 3: "Create an authenticate function that takes email/password and returns AuthResult with success boolean, optional user, and optional error message."
+Increment 3: "Create an authenticate function that
+takes email/password and returns AuthResult with
+success boolean, optional user, and optional
+error message."
 
-[Validate: Function works with test credentials. Continue.]
+[Validate: Function works with test credentials.]
 ```
 
 Why it works: Large requests generate 1,000+ lines where errors compound and debugging becomes archaeology. Incremental requests generate 20 to 100 lines at a time, where each piece can be validated immediately. Errors are caught at the source, not buried under subsequent code.

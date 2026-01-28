@@ -117,7 +117,8 @@ Each package in your monorepo can have local conventions:
 ```markdown
 # packages/api/CLAUDE.md
 
-API Package - RESTful endpoints using Express + tRPC (type-safe remote procedure call framework)
+API Package - RESTful endpoints using
+Express + tRPC (type-safe RPC framework)
 
 ## Route Structure
 All routes follow this pattern:

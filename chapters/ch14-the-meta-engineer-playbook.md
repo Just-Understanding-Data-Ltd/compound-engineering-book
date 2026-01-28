@@ -140,11 +140,13 @@ If you lose the code, you can regenerate it from the prompts. If you lose the pr
 
 When a conversation vanishes, you lose:
 
-- **Intent**: The "why" behind decisions
-- **Iterations**: Dead ends and pivots that taught you what does not work
-- **Context**: What you knew at the time, what was unknown
-- **Tradeoffs**: What was considered and rejected
-- **Regeneration ability**: Can you reproduce the code from memory?
+| What's Lost | Impact |
+|-------------|--------|
+| Intent | The "why" behind decisions |
+| Iterations | Dead ends and pivots that taught you what does not work |
+| Context | What you knew at the time, what was unknown |
+| Tradeoffs | What was considered and rejected |
+| Regeneration ability | Can you reproduce the code from memory? |
 
 ### Four Preservation Strategies
 

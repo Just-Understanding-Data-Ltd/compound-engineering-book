@@ -134,10 +134,13 @@ fi
 ```
 
 Multiple test levels provide different kinds of signal:
-- **Unit tests**: Fast feedback on individual functions
-- **Integration tests**: Verify components work together
-- **End-to-End (E2E) tests**: Confirm real user flows work
-- **Load tests**: Catch performance regressions
+
+| Test Level | Signal |
+|------------|--------|
+| Unit tests | Fast feedback on individual functions |
+| Integration tests | Verify components work together |
+| End-to-End (E2E) tests | Confirm real user flows work |
+| Load tests | Catch performance regressions |
 
 ### Production/Development Parity
 
@@ -915,12 +918,18 @@ class CostTracker {
 
   track(name: string, model: string, inputTokens: number, outputTokens: number): void {
     const pricing = this.pricing[model] || this.pricing['claude-sonnet-4-5-20250929'];
-    const cost = (inputTokens * pricing.input + outputTokens * pricing.output) / 1_000_000;
+    const cost =
+      (inputTokens * pricing.input
+        + outputTokens * pricing.output)
+      / 1_000_000;
     this.entries.push({ name, cost });
 
     const total = this.entries.reduce((sum, e) => sum + e.cost, 0);
     if (total > this.budget) {
-      throw new Error(`Cost budget exceeded: $${total.toFixed(2)} > $${this.budget.toFixed(2)}`);
+      throw new Error(
+        `Cost budget exceeded: ` +
+        `$${total.toFixed(2)} > $${this.budget.toFixed(2)}`
+      );
     }
   }
 }
@@ -1231,11 +1240,13 @@ Pick a real system and define one performance constraint (memory, latency, or er
 
 You are building the machine that builds products. Even if a specific product fails, what persists is not tied to that product:
 
-- **The harness**: Your four-layer infrastructure for constraining and amplifying AI outputs
-- **The agent workflows**: Your Claude Code scripts, hooks, and orchestration patterns
-- **The observability**: Your tracing, metrics, and feedback loop infrastructure
-- **The math**: Your constraint definitions, optimization loops, and quality gate formulas
-- **The taste**: Your intuition for what works, what fails, and what compounds
+| What Persists | Description |
+|---------------|-------------|
+| The harness | Your four-layer infrastructure for constraining and amplifying AI outputs |
+| The agent workflows | Your Claude Code scripts, hooks, and orchestration patterns |
+| The observability | Your tracing, metrics, and feedback loop infrastructure |
+| The math | Your constraint definitions, optimization loops, and quality gate formulas |
+| The taste | Your intuition for what works, what fails, and what compounds |
 
 Each subsequent product becomes cheaper, faster, and more stable to build. That is why this path compounds: not because any single idea is guaranteed to win, but because the cost of exploration keeps dropping.
 
