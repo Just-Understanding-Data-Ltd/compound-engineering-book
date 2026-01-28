@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T13:00:00Z",
+  "lastUpdated": "2026-01-28T14:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -166,6 +166,23 @@
       "breakdownCount": 2,
       "breakdownDetails": "Fix 2 broken links (ch08, ch10 references)",
       "outcome": "Fixed 2 broken links: ch08-error-handling-debugging.md → ch08-error-handling-and-debugging.md, ch10-ralph-loop.md → ch10-the-ralph-loop.md"
+    },
+    {
+      "id": "task-214",
+      "type": "fix",
+      "title": "CRITICAL: Resolve PRD title mismatch for ch07",
+      "description": "prds/ch07.md is titled 'Chapter 7 PRD: Context Engineering Deep Dive' but the actual Chapter 7 is 'Quality Gates That Compound'. This is a major alignment issue. The PRD content discusses information theory, entropy, context windows, and progressive disclosure - which matches Chapter 9's actual content, not Chapter 7. Section numbering (4.1, 4.2) suggests file was copied without proper renumbering. Either: 1) Rename file to prds/ch09.md and update PRD numbering, OR 2) Rewrite ch07.md PRD to match Quality Gates content. Review flagged the mismatch. Flagged by cross-ref-validator-2026-01-28.",
+      "status": "complete",
+      "completedAt": "2026-01-28T13:00:00Z",
+      "priority": "critical",
+      "score": 1280,
+      "scoreBreakdown": "critical:1000 + fix:80 + reviewFlagged:200 = 1280",
+      "flaggedByReview": "cross-ref-validator-2026-01-28",
+      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
+      "estimatedMinutes": 120,
+      "relatedFile": "prds/ch07.md",
+      "action": "Investigate and resolve PRD-chapter misalignment",
+      "outcome": "Updated prds/ch07.md title from 'Chapter 7 PRD' to 'Chapter 9 PRD' and added note explaining historical numbering. PRD content correctly aligns with ch09-context-engineering-deep-dive.md."
     },
     {
       "id": "task-212",
@@ -1207,28 +1224,12 @@
       "score": 875
     },
     {
-      "id": "task-214",
-      "type": "fix",
-      "title": "CRITICAL: Resolve PRD title mismatch for ch07",
-      "description": "prds/ch07.md is titled 'Chapter 7 PRD: Context Engineering Deep Dive' but the actual Chapter 7 is 'Quality Gates That Compound'. This is a major alignment issue. The PRD content discusses information theory, entropy, context windows, and progressive disclosure - which matches Chapter 9's actual content, not Chapter 7. Section numbering (4.1, 4.2) suggests file was copied without proper renumbering. Either: 1) Rename file to prds/ch09.md and update PRD numbering, OR 2) Rewrite ch07.md PRD to match Quality Gates content. Review flagged the mismatch. Flagged by cross-ref-validator-2026-01-28.",
-      "status": "complete",
-      "completedAt": "2026-01-28T13:00:00Z",
-      "priority": "critical",
-      "score": 1280,
-      "scoreBreakdown": "critical:1000 + fix:80 + reviewFlagged:200 = 1280",
-      "flaggedByReview": "cross-ref-validator-2026-01-28",
-      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
-      "estimatedMinutes": 120,
-      "relatedFile": "prds/ch07.md",
-      "action": "Investigate and resolve PRD-chapter misalignment",
-      "outcome": "Updated prds/ch07.md title from 'Chapter 7 PRD' to 'Chapter 9 PRD' and added note explaining historical numbering. PRD content correctly aligns with ch09-context-engineering-deep-dive.md."
-    },
-    {
       "id": "task-215",
       "type": "fix",
       "title": "CRITICAL: Resolve PRD title mismatch for ch09",
       "description": "prds/ch09.md is titled 'Chapter 9 PRD: Sub-Agent Architecture' but actual Chapter 9 is 'Context Engineering Deep Dive'. Sub-Agent Architecture is actually Chapter 11. This indicates PRD files are misaligned with chapter numbers. The ch09.md PRD may belong to ch11 OR the ch07.md 'Context Engineering' content belongs to ch09. This is critical for PRD-chapter alignment verification. Flagged by cross-ref-validator-2026-01-28.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-28T14:00:00Z",
       "priority": "critical",
       "score": 1280,
       "scoreBreakdown": "critical:1000 + fix:80 + reviewFlagged:200 = 1280",
@@ -1236,7 +1237,8 @@
       "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
       "estimatedMinutes": 120,
       "relatedFile": "prds/ch09.md",
-      "action": "Investigate PRD numbering (ch07 and ch09 may be swapped or mislabeled)"
+      "action": "Investigate PRD numbering (ch07 and ch09 may be swapped or mislabeled)",
+      "outcome": "Updated prds/ch09.md title from 'Chapter 9 PRD' to 'Chapter 11 PRD' and added note explaining historical numbering. PRD content correctly aligns with ch11-sub-agent-architecture.md."
     },
     {
       "id": "task-091",
@@ -1403,16 +1405,16 @@
     ]
   },
   "stats": {
-    "pending": 28,
+    "pending": 27,
     "inProgress": 0,
-    "complete": 90,
+    "complete": 91,
     "blocked": 0,
     "total": 118
   },
   "checkpoints": {
-    "lastGoodCommit": "4590aadca0d1e6c9b3414759e574662dd83ccc50",
-    "lastSuccessfulTask": "task-214",
-    "lastCheckpoint": "2026-01-28T13:00:00Z",
+    "lastGoodCommit": "d5bcb94c5baf0c7f36c61f9ec1bb23f6f2d3f03a",
+    "lastSuccessfulTask": "iteration-22",
+    "lastCheckpoint": "2026-01-28T14:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0
