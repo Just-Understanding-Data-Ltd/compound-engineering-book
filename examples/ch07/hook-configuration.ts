@@ -10,10 +10,7 @@
  * - post-write: After creating/overwriting files
  */
 
-import Anthropic from "@anthropic-ai/sdk";
-
-// Initialize the Anthropic client
-const client = new Anthropic();
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 
 // ============================================================================
 // HOOK TYPES AND INTERFACES
@@ -310,11 +307,30 @@ export function simulateHookChain(
 }
 
 // ============================================================================
-// CLAUDE SDK INTEGRATION
+// AGENT SDK INTEGRATION
 // ============================================================================
 
 /**
- * Uses Claude to suggest optimal hook configuration for a project
+ * Extract text content from an assistant message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+
+  // Extract text from content blocks
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
+
+/**
+ * Uses Claude Agent SDK to suggest optimal hook configuration for a project
  */
 export async function suggestHookConfiguration(
   projectDescription: string,
@@ -322,13 +338,7 @@ export async function suggestHookConfiguration(
 ): Promise<HooksDirectory> {
   const toolsList = existingTools.join(", ");
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 1024,
-    messages: [
-      {
-        role: "user",
-        content: `Suggest optimal Claude Code hook configurations for this project.
+  const prompt = `Suggest optimal Claude Code hook configurations for this project.
 
 PROJECT: ${projectDescription}
 
@@ -353,19 +363,30 @@ Format as JSON:
 }
 
 Use {file} placeholder for the affected file path.
-Consider performance (hooks should be fast, <5s ideally).`,
-      },
-    ],
+Consider performance (hooks should be fast, <5s ideally).`;
+
+  const response = query({
+    prompt,
+    options: {
+      cwd: process.cwd(),
+      allowedTools: [], // No tools needed for analysis
+    },
   });
 
-  const textBlock = response.content.find((block) => block.type === "text");
-  if (!textBlock || textBlock.type !== "text") {
+  let fullText = "";
+  for await (const message of response) {
+    if (message.type === "assistant") {
+      fullText += extractTextContent(message);
+    }
+  }
+
+  if (!fullText) {
     throw new Error("No text response from Claude");
   }
 
   try {
     // Extract JSON from response
-    let jsonText = textBlock.text;
+    let jsonText = fullText;
     const jsonMatch = jsonText.match(/```(?:json)?\s*([\s\S]*?)```/);
     if (jsonMatch && jsonMatch[1]) {
       jsonText = jsonMatch[1].trim();
@@ -381,7 +402,7 @@ Consider performance (hooks should be fast, <5s ideally).`,
 }
 
 /**
- * Uses Claude to diagnose hook failures
+ * Uses Claude Agent SDK to diagnose hook failures
  */
 export async function diagnoseHookFailure(
   hook: ClaudeHook,
@@ -392,13 +413,7 @@ export async function diagnoseHookFailure(
   suggestedFix: string;
   autoFixable: boolean;
 }> {
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 1024,
-    messages: [
-      {
-        role: "user",
-        content: `Diagnose this Claude Code hook failure and suggest fixes.
+  const prompt = `Diagnose this Claude Code hook failure and suggest fixes.
 
 HOOK: ${hook.description}
 COMMAND: ${hook.command}
@@ -421,18 +436,29 @@ Format as JSON:
   "diagnosis": "...",
   "suggestedFix": "...",
   "autoFixable": true/false
-}`,
-      },
-    ],
+}`;
+
+  const response = query({
+    prompt,
+    options: {
+      cwd: process.cwd(),
+      allowedTools: [], // No tools needed for analysis
+    },
   });
 
-  const textBlock = response.content.find((block) => block.type === "text");
-  if (!textBlock || textBlock.type !== "text") {
+  let fullText = "";
+  for await (const message of response) {
+    if (message.type === "assistant") {
+      fullText += extractTextContent(message);
+    }
+  }
+
+  if (!fullText) {
     throw new Error("No text response from Claude");
   }
 
   try {
-    let jsonText = textBlock.text;
+    let jsonText = fullText;
     const jsonMatch = jsonText.match(/```(?:json)?\s*([\s\S]*?)```/);
     if (jsonMatch && jsonMatch[1]) {
       jsonText = jsonMatch[1].trim();
@@ -440,7 +466,7 @@ Format as JSON:
     return JSON.parse(jsonText);
   } catch {
     return {
-      diagnosis: textBlock.text,
+      diagnosis: fullText,
       suggestedFix: "Review error output and fix manually",
       autoFixable: false,
     };

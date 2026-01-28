@@ -11,10 +11,7 @@
  * - Technical debt accumulation modeling
  */
 
-import Anthropic from "@anthropic-ai/sdk";
-
-// Initialize the Anthropic client
-const client = new Anthropic();
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 
 // ============================================================================
 // QUALITY GATE TYPES AND INTERFACES
@@ -465,11 +462,30 @@ export function generateChainedHook(gates: QualityGate[]): HookConfig {
 }
 
 // ============================================================================
-// CLAUDE SDK INTEGRATION
+// AGENT SDK INTEGRATION
 // ============================================================================
 
 /**
- * Uses Claude to analyze which quality gates would catch specific issues
+ * Extract text content from an assistant message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+
+  // Extract text from content blocks
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
+
+/**
+ * Uses Claude Agent SDK to analyze which quality gates would catch specific issues
  */
 export async function analyzeIssueWithGates(
   codeSnippet: string,
@@ -479,13 +495,7 @@ export async function analyzeIssueWithGates(
   recommendedGates: string[];
   priority: "low" | "medium" | "high" | "critical";
 }> {
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 1024,
-    messages: [
-      {
-        role: "user",
-        content: `Analyze this code issue and determine which quality gates would catch it.
+  const prompt = `Analyze this code issue and determine which quality gates would catch it.
 
 CODE:
 \`\`\`typescript
@@ -507,19 +517,30 @@ Respond in JSON format:
   "analysis": "Brief analysis of the issue",
   "recommendedGates": ["Gate1", "Gate2"],
   "priority": "low|medium|high|critical"
-}`,
-      },
-    ],
+}`;
+
+  const response = query({
+    prompt,
+    options: {
+      cwd: process.cwd(),
+      allowedTools: [], // No tools needed for analysis
+    },
   });
 
-  const textBlock = response.content.find((block) => block.type === "text");
-  if (!textBlock || textBlock.type !== "text") {
+  let fullText = "";
+  for await (const message of response) {
+    if (message.type === "assistant") {
+      fullText += extractTextContent(message);
+    }
+  }
+
+  if (!fullText) {
     throw new Error("No text response from Claude");
   }
 
   try {
     // Extract JSON from response (handle markdown code blocks)
-    let jsonText = textBlock.text;
+    let jsonText = fullText;
     const jsonMatch = jsonText.match(/```(?:json)?\s*([\s\S]*?)```/);
     if (jsonMatch && jsonMatch[1]) {
       jsonText = jsonMatch[1].trim();
@@ -527,7 +548,7 @@ Respond in JSON format:
     return JSON.parse(jsonText);
   } catch {
     return {
-      analysis: textBlock.text,
+      analysis: fullText,
       recommendedGates: ["Types (TypeScript)", "Tests (Unit/Integration)"],
       priority: "medium",
     };
@@ -535,7 +556,7 @@ Respond in JSON format:
 }
 
 /**
- * Uses Claude to suggest improvements to a quality gate configuration
+ * Uses Claude Agent SDK to suggest improvements to a quality gate configuration
  */
 export async function suggestGateImprovements(
   currentGates: QualityGate[],
@@ -547,13 +568,7 @@ export async function suggestGateImprovements(
 
   const issuesSummary = recentIssues.map((i, idx) => `${idx + 1}. ${i}`).join("\n");
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 1024,
-    messages: [
-      {
-        role: "user",
-        content: `Review this quality gate configuration and suggest improvements based on recent issues.
+  const prompt = `Review this quality gate configuration and suggest improvements based on recent issues.
 
 CURRENT GATES:
 ${gatesSummary}
@@ -565,13 +580,24 @@ Suggest:
 1. Which existing gates need strengthening
 2. New rules or checks to add
 3. Any gaps in the gate stack
-4. Priority order for improvements`,
-      },
-    ],
+4. Priority order for improvements`;
+
+  const response = query({
+    prompt,
+    options: {
+      cwd: process.cwd(),
+      allowedTools: [], // No tools needed for analysis
+    },
   });
 
-  const textBlock = response.content.find((block) => block.type === "text");
-  return textBlock?.type === "text" ? textBlock.text : "Unable to generate suggestions";
+  let fullText = "";
+  for await (const message of response) {
+    if (message.type === "assistant") {
+      fullText += extractTextContent(message);
+    }
+  }
+
+  return fullText || "Unable to generate suggestions";
 }
 
 // ============================================================================
