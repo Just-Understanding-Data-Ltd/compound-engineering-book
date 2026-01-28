@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T16:09:30.879Z",
+  "lastUpdated": "2026-01-28T16:10:45.899Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1674,13 +1674,14 @@
       "chapter": "ch06",
       "title": "ch06: Add flaky test diagnosis content",
       "description": "Enhance The Verification Ladder chapter with content from flaky-test-diagnosis-script.md KB article. Add diagnostic script pattern, common causes, remediation strategies to Pitfall 6.",
-      "status": "pending",
+      "status": "complete",
       "priority": "low",
       "score": 170,
       "createdAt": "2026-01-28T15:00:00Z",
       "kbSources": [
         "flaky-test-diagnosis-script.md"
-      ]
+      ],
+      "completedAt": "2026-01-29T23:30:00Z"
     },
     {
       "id": "task-303",
@@ -1902,16 +1903,15 @@
     ]
   },
   "stats": {
-    "pending": 15,
-    "inProgress": 0,
-    "complete": 136,
+    "pending": 5,
+    "complete": 56,
     "blocked": 0,
-    "total": 151
+    "in_progress": 0
   },
   "checkpoints": {
-    "lastGoodCommit": "b33a0f08b4d72aca90ecd4343b984e489ed34b72",
+    "lastGoodCommit": "b8aee71aaaae0ac77d5db0603f037ed1801aefa7",
     "lastSuccessfulTask": "iteration-20",
-    "lastCheckpoint": "2026-01-29T22:30:00Z",
+    "lastCheckpoint": "2026-01-28T16:10:45Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

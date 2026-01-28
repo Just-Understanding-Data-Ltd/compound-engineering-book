@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 23:00)
+## Current Status (Updated: 2026-01-29 23:30)
 - Phase: Final Quality Polish
-- Active: Cost Protection Layers diagram complete
-- Last Completed: task-256 (Cost Protection Layers diagram)
+- Active: Flaky test diagnosis content added to ch06
+- Last Completed: task-301 (ch06 flaky test diagnosis content)
 - Blockers: None - all quality issues have identified solutions
-- Queue Health: 6 pending tasks (15 total), clean queue, no duplicates
+- Queue Health: 5 pending tasks (14 total), clean queue, no duplicates
 - Publishing Readiness: 99% (content complete, SDK migration 12/12 done, diagrams 66/66)
 
 ## Project State Summary
@@ -59,6 +59,28 @@
 - **Confidence**: HIGH (98%)
 
 ## Recent Activity
+
+### 2026-01-29 23:30 - COMPLETED task-301: Add flaky test diagnosis content to ch06
+- What: Enhanced Pitfall 5 in Chapter 6 with comprehensive flaky test diagnosis guidance
+- File: chapters/ch06-the-verification-ladder.md
+- Content added:
+  - Why flaky tests are especially harmful with AI agents (4 reasons)
+  - Common causes table: timing, order-dependent, external service, random data, date/time
+  - Quick diagnosis approach with bash script for running tests multiple times
+  - Category-based remediation strategies
+  - Agent-specific guidance: check known flaky tests before investigating
+- Source: flaky-test-diagnosis-script.md KB article
+- Word count: 3,510 (within 2,500-4,000 target)
+- Quality: No em dashes, no AI slop phrases
+- Iteration: 21 (21 % 3 == 0: queue curation done)
+- Stats: 5 pending, 56 complete (main tasks)
+- Outcome: Ch06 Pitfall 5 expanded from 2 sentences to comprehensive diagnosis guide
+- Queue Curation:
+  - Verified 5 pending tasks, no duplicates
+  - Top 3: task-303 (ch07 content, score 165), task-316 (KB article, 165), task-317 (KB article, 165)
+  - 2 meta-tasks with negative scores (task-091, task-097) are low priority aggregators
+  - Queue health: excellent, no blocked tasks
+- Next: task-303 (ch07 Trust But Verify expansion) is highest priority
 
 ### 2026-01-29 23:00 - COMPLETED task-256: Create Cost Protection Layers diagram
 - What: Created diagram visualizing five-layer cost protection for autonomous LLM workflows

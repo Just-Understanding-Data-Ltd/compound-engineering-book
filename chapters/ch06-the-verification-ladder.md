@@ -559,9 +559,39 @@ Assuming verification works without running it is cargo cult quality.
 
 **Pitfall 5: Non-deterministic tests**
 
-Flaky tests that pass sometimes and fail others create false confidence or false alarms.
+Flaky tests that pass sometimes and fail others create false confidence or false alarms. The impact is worse than you might think: five developers encountering three flaky tests per week, spending 15 minutes debugging each, wastes nearly 200 hours per year.
 
-**Solution:** Fix flaky tests or exclude them from verification gates.
+**Why flaky tests are especially harmful with AI agents:**
+
+1. **Agents can't distinguish flaky from real failures.** They'll try to "fix" code that isn't broken.
+2. **Wasted API tokens.** The agent spends cycles analyzing false positives.
+3. **Context pollution.** Failed fix attempts add noise to conversation history.
+4. **Lost trust.** Developers stop trusting agent test feedback.
+
+**Common causes and fixes:**
+
+| Category | Symptoms | Typical Fix |
+|----------|----------|-------------|
+| Timing | Async operations, race conditions, "timeout" in errors | Use `waitFor`/`waitForExpect`, increase timeouts, or use fake timers |
+| Order-dependent | Tests depend on previous test state | Reset state in `beforeEach`, ensure test isolation |
+| External service | Network calls fail with ECONNREFUSED, ETIMEDOUT | Mock with MSW or nock |
+| Random data | Value assertion mismatches on re-runs | Seed random generators or use fixed fixtures |
+| Date/time | Tests fail on certain days or after dates pass | Mock Date with vitest/sinon fake timers |
+
+**Quick diagnosis approach:**
+
+When a test flakes, run it multiple times to understand the pattern:
+
+```bash
+# Run test 10 times, count failures
+for i in {1..10}; do
+  npm test -- path/to/test.ts && echo PASS || echo FAIL
+done | grep -c FAIL
+```
+
+If the pass rate falls between 10% and 90%, you have a flaky test. Categorize by examining error messages: "timeout" keywords indicate timing issues, "ECONNREFUSED" points to external services, and value mismatches suggest random data or order-dependent problems.
+
+**Solution:** Fix flaky tests systematically by category. For timing issues, add explicit waits. For external services, mock them with MSW. For random data, seed your generators. Track flaky tests in a report rather than addressing them one at a time. When using AI agents, check known flaky tests before letting the agent investigate: if a test is known to flake, retry it before assuming the code is broken.
 
 ## Practical Application
 
