@@ -1,18 +1,18 @@
 {
-  "lastUpdated": "2026-01-29T15:53:00Z",
+  "lastUpdated": "2026-01-28T16:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-28T23:30:00Z",
-    "iteration": 4,
-    "tasksRemoved": 2,
+    "lastRun": "2026-01-28T16:00:00Z",
+    "iteration": 5,
+    "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
-    "scoresRecalculated": 9,
+    "scoresRecalculated": 4,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
-    "recommendedNext": "task-421",
-    "reasoning": "Curation cycle 4. Removed 2 tasks: task-413 (superseded by task-425, intermediate rebuild no longer needed) and task-426 (duplicate, subsumed by task-427+428+429+430 pipeline). Recalculated all 9 pending task scores with blocking bonuses and 24h age bonuses. Pipeline: task-421 (typography CSS, score 1180) → task-422 (dark mode, 905) + task-423 (template, 655) + task-424 (highlighting, 655) → task-425 (full rebuild, 955) → task-427/428/429 (visual reviews, 905 each) → task-430 (full audit, 880). Critical path: 421 → 422 → 425 → 427-429 → 430. Parallel opportunities: 423+424 can run alongside 421-422."
+    "recommendedNext": "task-427",
+    "reasoning": "Curation cycle 5. Fixed score field mismatches on all 4 remaining tasks (score values didn't match scoreBreakdown calculations: 460→905 for task-427/428/429, 435→880 for task-430). No duplicates found. No priority changes needed. Pipeline: task-427+428+429 (parallel, all unblocked, tied at 905) → task-430 (blocked by 427/428/429, score 880). All three visual review tasks can be done in any order. After all three complete, task-430 (full Gemini audit) becomes unblocked. 170/174 tasks complete (98%). Final 4 tasks are all EPUB visual reviews."
   },
   "prds": {
     "index": {
@@ -1684,11 +1684,9 @@
       "description": "Use the epub-review skill (Gemini vision) to verify code blocks render correctly in both light and dark modes. Check syntax highlighting contrast, line wrapping, no horizontal overflow. Run: bun scripts/epub-review.ts then review the report.",
       "status": "pending",
       "priority": "high",
-      "score": 460,
+      "score": 905,
       "scoreBreakdown": "high:750 + fix:80 + blocking(1×25):25 + age24h:50 = 905",
-      "blockedBy": [
-        "task-425"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-28T22:14:22.977Z"
     },
     {
@@ -1698,11 +1696,9 @@
       "description": "Use the epub-review skill (Gemini vision) to verify tables have no horizontal overflow, lists indent correctly, blockquotes have proper styling. Check rendering on narrow screens. Run: bun scripts/epub-review.ts then review the report.",
       "status": "pending",
       "priority": "high",
-      "score": 460,
+      "score": 905,
       "scoreBreakdown": "high:750 + fix:80 + blocking(1×25):25 + age24h:50 = 905",
-      "blockedBy": [
-        "task-425"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-28T22:14:22.978Z"
     },
     {
@@ -1712,11 +1708,9 @@
       "description": "Use the epub-review skill (Gemini vision) to verify embedded fonts (JetBrains Mono for code, Source Serif 4 for body, Source Sans 3 for headings) render correctly. Check font fallbacks, kerning, line height. Run: bun scripts/epub-review.ts then review the report.",
       "status": "pending",
       "priority": "high",
-      "score": 460,
+      "score": 905,
       "scoreBreakdown": "high:750 + fix:80 + blocking(1×25):25 + age24h:50 = 905",
-      "blockedBy": [
-        "task-425"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-28T22:14:22.978Z"
     },
     {
@@ -1814,7 +1808,7 @@
       "description": "Run complete Gemini visual review on final EPUB. For each issue found: create a fix, rebuild EPUB, re-verify with Gemini. Iterate until Gemini reports no major issues. Use epub-review skill: bun scripts/epub-review.ts --rebuild",
       "status": "pending",
       "priority": "high",
-      "score": 435,
+      "score": 880,
       "scoreBreakdown": "high:750 + fix:80 + age24h:50 = 880",
       "blockedBy": [
         "task-427",
@@ -1928,9 +1922,7 @@
       "status": "complete",
       "priority": "medium",
       "score": 185,
-      "blockedBy": [
-        "task-425"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-28T22:10:00Z",
       "completedAt": "2026-01-28T22:19:00Z",
       "note": "Duplicate - subsumed by tasks 427+428+429 (specific visual reviews by area) + task-430 (full audit with fix iteration). The 427-430 pipeline provides more granular coverage."
@@ -2216,9 +2208,9 @@
     "total": 174
   },
   "checkpoints": {
-    "lastGoodCommit": "c4e7f3795abb659a4dce745c1df9747016061356",
-    "lastSuccessfulTask": "iteration-8",
-    "lastCheckpoint": "2026-01-28T22:51:11Z",
+    "lastGoodCommit": "5f661c5c33af578eaf8bb4da22231aa0bddfcc6f",
+    "lastSuccessfulTask": "iteration-9",
+    "lastCheckpoint": "2026-01-28T22:55:07Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 1,

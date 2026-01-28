@@ -31,6 +31,21 @@
 
 ## Recent Activity
 
+### 2026-01-28 16:00 - Queue Curation Cycle 5
+- What: Curated task queue - fixed score mismatches, verified no duplicates
+- Changes:
+  - Fixed score field mismatches on all 4 pending tasks (score values didn't match scoreBreakdown calculations)
+  - task-427: 460 → 905, task-428: 460 → 905, task-429: 460 → 905, task-430: 435 → 880
+  - No duplicates found, no tasks removed, no priority changes
+  - Updated curatorNotes to iteration 5
+- Pipeline (final 4 tasks):
+  1. task-427 (Code blocks visual review, 905) - UNBLOCKED
+  2. task-428 (Tables/lists/blockquotes visual review, 905) - UNBLOCKED
+  3. task-429 (Typography/font visual review, 905) - UNBLOCKED
+  4. task-430 (Full Gemini audit, 880) - BLOCKED by 427+428+429
+- Outcome: Clean queue, correct scores, clear path to completion
+- Next: Any of task-427/428/429 (all tied at 905, pick any)
+
 ### 2026-01-29 15:53 - COMPLETED task-425: Full EPUB Rebuild with All Improvements
 - What: Full end-to-end EPUB rebuild with all CSS, font, template, and syntax highlighting improvements
 - Steps completed:
