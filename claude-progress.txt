@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 20:00)
+## Current Status (Updated: 2026-01-29 21:00)
 - Phase: Final Quality Polish
-- Active: Chapter prose alignment with Agent SDK
-- Last Completed: task-229 (update chapter prose for Agent SDK focus)
+- Active: Content enhancements from KB articles
+- Last Completed: task-309 (add Wave 4 context to ch02 introduction)
 - Blockers: None - all quality issues have identified solutions
-- Queue Health: 10 pending tasks, clean queue, no duplicates
+- Queue Health: 9 pending tasks, clean queue, no duplicates
 - Publishing Readiness: 99% (content complete, SDK migration 12/12 done, prose aligned with SDK patterns)
 
 ## Project State Summary
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 127/151 (84%) with clear prioritization
+- Tasks Complete: 128/151 (85%) with clear prioritization
 - Test Pass Rate: 100% across all chapters (787 tests total)
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -59,6 +59,22 @@
 - **Confidence**: HIGH (98%)
 
 ## Recent Activity
+
+### 2026-01-29 21:00 - COMPLETED task-309: Add Wave 4 context to ch02 introduction
+- What: Added paragraph explaining Wave 3 → Wave 4 transition in AI-assisted development
+- File: chapters/ch02-getting-started-with-claude-code.md
+- Content added:
+  - Wave 4 transition context (from chat-based coding to coding agents)
+  - Wave 3 characteristics: developers drive conversations, manually apply suggestions
+  - Wave 4 characteristics: autonomous operation, multi-step tasks, only intervene when stuck
+  - Key skill shift: task decomposition for agent delegation
+- Source: six-waves-of-ai-coding.md KB article
+- Word count: 4,135 (slightly over 4,000 target, acceptable for enhanced content)
+- Quality: No em dashes, no AI slop phrases
+- Iteration: 16 (16 % 3 != 0: no queue curation)
+- Stats: 9 pending, 52 complete (main tasks)
+- Outcome: Ch02 introduction now positions Claude Code in the broader Wave 4 industry context
+- Next: Highest priority pending task from queue
 
 ### 2026-01-29 20:00 - COMPLETED task-229: Update chapter prose for Agent SDK focus
 - What: Updated chapter text (ch08, ch15) to reference Agent SDK concepts instead of raw API calls

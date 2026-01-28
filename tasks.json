@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T19:30:00Z",
+  "lastUpdated": "2026-01-28T15:40:07.232Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1627,11 +1627,12 @@
       "chapter": "ch02",
       "title": "Add Wave 4 context to introduction",
       "description": "Based on six-waves-of-ai-coding.md: Add brief context explaining Wave 4 coding agents vs Wave 3 chat-based coding. Key skill shift is task decomposition for agent delegation.",
-      "status": "pending",
+      "status": "complete",
       "priority": "low",
       "score": 190,
       "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "six-waves-of-ai-coding.md"
+      "sourceArticle": "six-waves-of-ai-coding.md",
+      "completedAt": "2026-01-29T21:00:00Z"
     },
     {
       "id": "task-231",
@@ -1899,16 +1900,15 @@
     ]
   },
   "stats": {
-    "pending": 10,
-    "inProgress": 0,
-    "complete": 51,
-    "blocked": 0,
-    "total": 151
+    "pending": 9,
+    "complete": 52,
+    "in_progress": 0,
+    "blocked": 0
   },
   "checkpoints": {
-    "lastGoodCommit": "87eca67a8cc6131c1d9bf5baffb4961700700636",
-    "lastSuccessfulTask": "curation-14",
-    "lastCheckpoint": "2026-01-29T19:30:00Z",
+    "lastGoodCommit": "57158c75117dd2fbf1d540738376fa0c0440deb4",
+    "lastSuccessfulTask": "iteration-15",
+    "lastCheckpoint": "2026-01-28T15:40:07Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

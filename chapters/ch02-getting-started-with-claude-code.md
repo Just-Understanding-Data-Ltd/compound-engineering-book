@@ -4,6 +4,8 @@ Claude Code is not ChatGPT in a terminal. It is an agent: a tool that reads your
 
 When you use ChatGPT, you copy code into the chat, get suggestions back, and manually apply them. The conversation is isolated from your project. Claude Code operates differently. It sees your files directly, runs your tests, understands your project structure from CLAUDE.md, and takes action based on what it observes. Every tool invocation is visible. Every file change is tracked.
 
+This represents a fundamental shift in AI-assisted development. Industry observers call it the "Wave 4" transition: from chat-based coding (Wave 3) where developers drive conversations and manually apply suggestions, to coding agents (Wave 4) that operate autonomously on multi-step tasks and only need intervention when stuck. The key skill shift is not writing code faster. It is task decomposition for agent delegation: breaking work into right-sized chunks that agents can execute independently.
+
 This chapter teaches you to install Claude Code, run your first conversation, understand the tool ecosystem, and apply basic prompting patterns. By the end, you will know when to use Claude Code versus Cursor versus ChatGPT, and you will understand the two-mode mental model that separates beginners from productive practitioners.
 
 ## The Agent Mindset
