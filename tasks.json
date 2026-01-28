@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T22:00:00Z",
+  "lastUpdated": "2026-01-28T11:25:19.573Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1326,7 +1326,7 @@
       "status": "in_progress",
       "startedAt": "2026-01-28T22:30:00Z",
       "priority": "critical",
-      "score": 1155,
+      "score": 630,
       "scoreBreakdown": "critical:1000 + refactor:80 + blocks:25 + age:50 = 1155",
       "createdAt": "2026-01-28T22:00:00Z",
       "subtasks": [
@@ -1391,7 +1391,7 @@
           "title": "Rewrite ch10 examples with Agent SDK",
           "description": "The RALPH Loop - convert to Agent SDK session resumption and checkpoints.",
           "status": "pending",
-          "score": 1035,
+          "score": 605,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch10:35 = 1035",
           "priority": "critical"
         },
@@ -1402,7 +1402,7 @@
           "title": "Rewrite ch11 examples with Agent SDK",
           "description": "Sub-Agent Architecture - convert to Agent SDK sub-agent spawning patterns.",
           "status": "pending",
-          "score": 1030,
+          "score": 605,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch11:30 = 1030",
           "priority": "critical"
         },
@@ -1413,7 +1413,7 @@
           "title": "Rewrite ch12 examples with Agent SDK",
           "description": "Development Workflows - convert to Agent SDK workflow patterns.",
           "status": "pending",
-          "score": 1025,
+          "score": 605,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch12:25 = 1025",
           "priority": "critical"
         },
@@ -1424,7 +1424,7 @@
           "title": "Rewrite ch13 examples with Agent SDK",
           "description": "Building the Harness - convert to Agent SDK harness patterns.",
           "status": "pending",
-          "score": 1020,
+          "score": 605,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch13:20 = 1020",
           "priority": "critical"
         },
@@ -1435,7 +1435,7 @@
           "title": "Rewrite ch14 examples with Agent SDK",
           "description": "The Meta-Engineer Playbook - convert to Agent SDK meta-engineering patterns.",
           "status": "pending",
-          "score": 1015,
+          "score": 605,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch14:15 = 1015",
           "priority": "critical"
         },
@@ -1446,7 +1446,7 @@
           "title": "Rewrite ch15 examples with Agent SDK",
           "description": "Model Strategy & Cost Optimization - convert to Agent SDK cost patterns.",
           "status": "pending",
-          "score": 1010,
+          "score": 605,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch15:10 = 1010",
           "priority": "critical"
         },
@@ -1457,7 +1457,7 @@
           "title": "Test all migrated examples",
           "description": "Run all migrated examples through exercise-validator to confirm they compile and work.",
           "status": "pending",
-          "score": 1005,
+          "score": 605,
           "scoreBreakdown": "critical:1000 + milestone:0 + verification:5 = 1005",
           "priority": "critical"
         }
@@ -1508,11 +1508,12 @@
       "chapter": "ch02",
       "title": "Add Incremental Development prompting pattern",
       "description": "Based on incremental-development-pattern.md: Add Pattern 5 covering incremental development. Include why large requests fail, the 20-100 lines per increment pattern, validation loop, context accumulation, 90% error reduction.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 590,
       "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "incremental-development-pattern.md"
+      "sourceArticle": "incremental-development-pattern.md",
+      "completedAt": "2026-01-28T21:00:00Z"
     },
     {
       "id": "task-308",
@@ -2022,16 +2023,16 @@
     ]
   },
   "stats": {
-    "pending": 30,
+    "pending": 29,
     "inProgress": 1,
-    "complete": 35,
+    "complete": 36,
     "blocked": 1,
     "total": 167
   },
   "checkpoints": {
-    "lastGoodCommit": "7491cd9b06cccbbf216f9557863ab758a4050449",
-    "lastSuccessfulTask": "iteration-14",
-    "lastCheckpoint": "2026-01-28T11:17:50Z",
+    "lastGoodCommit": "d1f2659108762ab066122ca2f2a835051fa47244",
+    "lastSuccessfulTask": "iteration-15",
+    "lastCheckpoint": "2026-01-28T11:25:19Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 1,

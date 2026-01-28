@@ -306,6 +306,42 @@ Add tests following tests/providers/paypal.test.ts pattern."
 
 Why it works: Exploration builds understanding. Implementation uses that understanding for first-try correctness.
 
+### Pattern 5: Incremental Development
+
+Bad prompt:
+```
+"Build a complete user authentication system with JWT tokens, password hashing, login/logout endpoints, password reset flow with email verification, session refresh tokens, rate limiting, and an admin dashboard."
+```
+
+Good prompt (broken into increments):
+```
+Increment 1: "Create a User interface with id, email, passwordHash, createdAt fields in src/models/user.ts"
+
+[Validate: Types compile. Continue.]
+
+Increment 2: "Add hashPassword and verifyPassword functions in src/utils/auth.ts using bcrypt. Export with JSDoc comments."
+
+[Validate: Quick test shows hashing works. Continue.]
+
+Increment 3: "Create an authenticate function that takes email/password and returns AuthResult with success boolean, optional user, and optional error message."
+
+[Validate: Function works with test credentials. Continue.]
+```
+
+Why it works: Large requests generate 1,000+ lines where errors compound and debugging becomes archaeology. Incremental requests generate 20 to 100 lines at a time, where each piece can be validated immediately. Errors are caught at the source, not buried under subsequent code.
+
+The validation loop is critical: after each increment, run the code, verify it works, fix any issues before proceeding. Working code becomes context for the next increment, which means Claude Code sees concrete examples of what you want rather than inferring from descriptions.
+
+**The numbers**: Teams measuring this pattern report 90% error rate reduction compared to large batch requests. The first increment produces working code in 5 minutes instead of debugging 1,000 lines for 90 minutes.
+
+**Increment sizing guide**:
+- Single interface or type: 5 to 20 lines
+- Single utility function: 10 to 30 lines
+- Single service method: 20 to 50 lines
+- Single API endpoint: 20 to 60 lines
+
+If an increment feels large, split it further. The cost of additional prompts is far less than the cost of debugging cascading errors.
+
 ## Claude Code vs Cursor vs ChatGPT
 
 Each tool excels in different contexts. Knowing when to use each saves time.
