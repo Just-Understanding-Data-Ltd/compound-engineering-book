@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-01-28T14:56:21.734Z",
+  "lastUpdated": "2026-01-28T15:04:00.671Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T10:00:00Z",
-    "iteration": 6,
+    "lastRun": "2026-01-29T11:00:00Z",
+    "iteration": 7,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
-    "recommendedNext": "task-250",
-    "reasoning": "Completed task-321 (fix term introductions). Fixed 5 terms: JWT, idempotent, Jaeger, E2E, CI/CD across ch10, ch13, ch15. Next highest priority: task-250 (ch13 CI/CD agent patterns) at score 535."
+    "recommendedNext": "task-251",
+    "reasoning": "Completed task-250 (ch13 CI/CD agent patterns). Added Agent-Specific CI/CD Patterns subsection covering tiered verification, response caching, cost budget enforcement, behavioral regression tests. Next highest priority: task-251 (ch13 checkpoint/resume patterns) at score 535."
   },
   "prds": {
     "index": {
@@ -1445,11 +1445,13 @@
       "chapter": "ch13",
       "title": "Enrich ch13 with CI/CD agent patterns from KB",
       "description": "Add content from ci-cd-agent-patterns.md to ch13. Include: tiered verification (PR vs nightly gates), response caching, cost budget enforcement, behavioral regression tests.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-29T11:00:00Z",
       "priority": "medium",
       "score": 535,
       "createdAt": "2026-01-28T14:30:00Z",
-      "sourceArticle": "ci-cd-agent-patterns.md"
+      "sourceArticle": "ci-cd-agent-patterns.md",
+      "outcome": "Added Agent-Specific CI/CD Patterns subsection to Layer 4 covering: tiered verification (PR vs nightly gates), response caching for speed, cost budget enforcement, behavioral regression tests. Word count 4,082 (slightly over target, acceptable)."
     },
     {
       "id": "task-251",
@@ -1872,16 +1874,16 @@
     ]
   },
   "stats": {
-    "pending": 33,
+    "pending": 32,
     "inProgress": 0,
-    "complete": 118,
+    "complete": 119,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "c91410b6880f15ffb53fd4541d7bc50466895829",
-    "lastSuccessfulTask": "iteration-5",
-    "lastCheckpoint": "2026-01-28T14:56:21Z",
+    "lastGoodCommit": "14db991ed7c4d298d6a19ed4b0b0f2ba11ecbae7",
+    "lastSuccessfulTask": "iteration-6",
+    "lastCheckpoint": "2026-01-28T15:04:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

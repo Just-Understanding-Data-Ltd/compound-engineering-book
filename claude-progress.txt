@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 10:00)
+## Current Status (Updated: 2026-01-29 11:00)
 - Phase: Final Quality Polish
-- Active: Quality fixes from review cycle
-- Last Completed: task-321: Fix term introductions (5 fixes across ch10, ch13, ch15)
+- Active: Content enhancements from KB articles
+- Last Completed: task-250: Enrich ch13 with CI/CD agent patterns
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
-- Publishing Readiness: 99% (content complete, SDK migration 12/12 done, term intros fixed)
+- Publishing Readiness: 99% (content complete, SDK migration 12/12 done, ch13 enhanced)
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%) - EM DASHES FIXED ✓
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 118/151 (78%) with clear prioritization
+- Tasks Complete: 119/151 (79%) with clear prioritization
 - Test Pass Rate: 100% across all chapters (787 tests total)
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -57,6 +57,21 @@
 - **Confidence**: HIGH (98%)
 
 ## Recent Activity
+
+### 2026-01-29 11:00 - COMPLETED task-250: Enrich ch13 with CI/CD agent patterns
+- What: Added Agent-Specific CI/CD Patterns subsection to Chapter 13 Layer 4
+- File: chapters/ch13-building-the-harness.md
+- Content added:
+  - Tiered verification (PR vs nightly gates with GitHub Actions example)
+  - Response caching for speed (SHA256-based prompt hashing)
+  - Cost budget enforcement (per-run cost tracking with automatic stops)
+  - Behavioral regression tests (golden sets with precision/recall thresholds)
+- Source: ci-cd-agent-patterns.md KB article
+- Word count: 4,082 (slightly over 4,000 target, acceptable for enhanced content)
+- Quality: No em dashes, no AI slop phrases
+- Stats: 119 complete, 32 pending
+- Outcome: Ch13 Layer 4 enhanced with agent-specific CI/CD patterns
+- Next: task-251 (checkpoint/resume patterns) or other priority task
 
 ### 2026-01-29 10:00 - COMPLETED task-321: Fix term introductions
 - What: Added definitions for 5 undefined technical terms across chapters

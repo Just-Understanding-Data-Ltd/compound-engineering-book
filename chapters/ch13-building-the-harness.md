@@ -411,6 +411,158 @@ jobs:
 
 When constraints are violated, the optimizer agent automatically diagnoses and fixes the problem. You review the PR in the morning instead of debugging all night.
 
+### Agent-Specific CI/CD Patterns
+
+Traditional CI/CD assumes deterministic tests with fast feedback. AI agents break these assumptions in three ways: non-determinism (the same prompt produces different outputs), cost constraints (running full agent flows is expensive), and behavioral verification (you need to verify the agent accomplished the task, not just that it ran).
+
+**Tiered Verification**
+
+Run different gates based on trigger type:
+
+```yaml
+# .github/workflows/agent-ci.yml
+on:
+  pull_request:    # Lightweight checks
+  schedule:
+    - cron: '0 2 * * *'  # Nightly comprehensive
+
+jobs:
+  # Always run: fast, cheap, deterministic
+  static-analysis:
+    steps:
+      - run: npx tsc --noEmit
+      - run: |
+          # Check for prompt anti-patterns
+          ! grep -r "delve\|crucial\|leverage" prompts/ || exit 1
+
+  # PR: cached agent tests only
+  cached-tests:
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/cache@v4
+        with:
+          path: .agent-cache/
+          key: agent-responses-${{ hashFiles('prompts/**') }}
+      - run: bun test --cached-only agents/
+
+  # Nightly: full verification
+  full-verification:
+    if: github.event_name == 'schedule'
+    steps:
+      - run: bun test agents/
+        env:
+          AGENT_COST_LIMIT: '5.00'
+```
+
+PRs get cached tests only (free, 30 seconds). Nightly runs refresh the cache with full agent execution ($5 budget). This reduces CI costs from $40/day to $5/day while maintaining coverage.
+
+**Response Caching for Speed**
+
+Cache agent responses to enable fast PR checks:
+
+```typescript
+// lib/agent-cache.ts
+import { createHash } from 'crypto';
+import { readFile, writeFile, existsSync } from 'fs';
+
+function hashPrompt(prompt: string, systemPrompt?: string): string {
+  const content = `${systemPrompt || ''}|||${prompt}`;
+  return createHash('sha256').update(content).digest('hex').slice(0, 16);
+}
+
+export async function runWithCache(
+  prompt: string,
+  systemPrompt: string,
+  runner: (p: string, s: string) => Promise<string>
+): Promise<{ response: string; cached: boolean }> {
+  const hash = hashPrompt(prompt, systemPrompt);
+  const cachePath = `.agent-cache/${hash}.json`;
+
+  if (existsSync(cachePath)) {
+    const cached = JSON.parse(await readFile(cachePath, 'utf-8'));
+    return { response: cached.response, cached: true };
+  }
+
+  const response = await runner(prompt, systemPrompt);
+  await writeFile(cachePath, JSON.stringify({ prompt, response }));
+  return { response, cached: false };
+}
+```
+
+The cache key includes both the prompt and system prompt. When prompts change, the cache invalidates automatically. Cached tests run in seconds instead of minutes.
+
+**Cost Budget Enforcement**
+
+Prevent runaway costs with per-run budgets:
+
+```typescript
+// lib/cost-tracker.ts
+class CostTracker {
+  private entries: Array<{ name: string; cost: number }> = [];
+  private budget: number;
+
+  private pricing: Record<string, { input: number; output: number }> = {
+    'claude-3-haiku': { input: 0.25, output: 1.25 },
+    'claude-sonnet-4-5-20250929': { input: 3.00, output: 15.00 },
+  };
+
+  constructor(budget: number) {
+    this.budget = budget;
+  }
+
+  track(name: string, model: string, inputTokens: number, outputTokens: number): void {
+    const pricing = this.pricing[model] || this.pricing['claude-sonnet-4-5-20250929'];
+    const cost = (inputTokens * pricing.input + outputTokens * pricing.output) / 1_000_000;
+    this.entries.push({ name, cost });
+
+    const total = this.entries.reduce((sum, e) => sum + e.cost, 0);
+    if (total > this.budget) {
+      throw new Error(`Cost budget exceeded: $${total.toFixed(2)} > $${this.budget.toFixed(2)}`);
+    }
+  }
+}
+
+export const costTracker = new CostTracker(
+  parseFloat(process.env.AGENT_COST_LIMIT || '10.00')
+);
+```
+
+When the budget is exceeded, tests stop immediately. PRs get $2 budgets. Nightly runs get $50. This prevents a broken loop from burning $500 overnight.
+
+**Behavioral Regression Tests**
+
+Detect quality degradation in agent outputs:
+
+```typescript
+// tests/agent-regression.test.ts
+describe('Code Review Agent Regression', () => {
+  const goldenSet = loadGoldenSet('code-review');
+
+  for (const golden of goldenSet) {
+    test(`${golden.name}: maintains quality baseline`, async () => {
+      const result = await codeReviewAgent.run({
+        diff: golden.input.diff,
+        context: golden.input.context,
+      });
+
+      // Quality metrics (may vary but must meet thresholds)
+      const metrics = evaluateReview(result, golden.expectedIssues);
+
+      // Precision: of issues found, how many are real?
+      expect(metrics.precision).toBeGreaterThan(0.7);
+
+      // Recall: of known issues, how many were found?
+      expect(metrics.recall).toBeGreaterThan(0.6);
+
+      // No hallucinated file paths
+      expect(metrics.validPaths).toBe(true);
+    });
+  }
+});
+```
+
+Golden sets contain known issues that the agent should find. Precision and recall thresholds catch quality degradation without requiring exact output matching. A prompt change that silently reduces feedback quality by 40% now fails CI.
+
 ## Building the Factory, Not Just the Product
 
 Most developers use AI to build features. Advanced developers use AI to build infrastructure that builds features. Elite developers build infrastructure that builds infrastructure.
