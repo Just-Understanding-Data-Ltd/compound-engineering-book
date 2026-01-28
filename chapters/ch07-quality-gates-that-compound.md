@@ -288,7 +288,7 @@ Run multiple quality gates in sequence:
 ```json
 // .claude/hooks/post-write.json
 {
-  "command": "npx eslint {file} --fix && tsc --noEmit && npm test -- --related {file} --passWithNoTests",
+  "command": "eslint {file} --fix && tsc --noEmit && npm t -- --related {file}",
   "description": "Lint, type check, and test in one pass",
   "continueOnError": false
 }
@@ -395,7 +395,9 @@ Enable linting from project start, before writing any application code.
 npm init -y
 
 # Install linting tools immediately
-npm install --save-dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
+npm install --save-dev eslint \
+  @typescript-eslint/parser \
+  @typescript-eslint/eslint-plugin
 npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 
 # Generate config

@@ -93,8 +93,8 @@ When implementing an API endpoint:
 
 2. **Design the endpoint**
    - Choose HTTP method (GET/POST/PUT/DELETE)
-   - Design URL following Representational State Transfer (REST) conventions
-   - Define request/response schemas using Zod (TypeScript schema validation library)
+   - Design URL following REST conventions
+   - Define request/response schemas using Zod
 
 3. **Implement layers**
    - Route layer: Express routing, validation middleware
@@ -304,7 +304,9 @@ export function PaymentForm({
     <form onSubmit={handleSubmit}>
       <CardElement />
       <Button type="submit" disabled={loading || !stripe}>
-        {loading ? 'Processing...' : `Pay ${amount / 100} ${currency.toUpperCase()}`}
+        {loading
+          ? 'Processing...'
+          : `Pay ${amount / 100}`}
       </Button>
     </form>
   );

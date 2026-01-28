@@ -434,7 +434,8 @@ How does authentication work? Also implement a new login endpoint.
 Good:
 ```
 Step 1: How does authentication work in this codebase? Show me examples.
-Step 2 (after understanding): Implement the login endpoint following these patterns.
+Step 2 (after understanding):
+Implement the login endpoint following these patterns.
 ```
 
 Separate the modes. Explore first, then implement with informed context.

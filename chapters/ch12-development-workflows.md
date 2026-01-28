@@ -236,7 +236,8 @@ Validate: Quick test confirms hashing works. Proceed.
 
 **Increment 3: User Repository Interface**
 ```typescript
-// Request: "Create UserRepository interface with findByEmail and create methods"
+// Request: "Create UserRepository interface
+// with findByEmail and create methods"
 
 export interface UserRepository {
   findByEmail(email: string): Promise<User | null>;
@@ -431,7 +432,10 @@ Scripts find all failures at once while MCP finds them one by one. Scripts run l
 # Iteration 1: Generate and run
 $ npx playwright test tests/validation/login-flow.spec.ts
 
-❌ 3 failed: Email input not found, Password input not found, Submit button not found
+❌ 3 failed:
+  Email input not found
+  Password input not found
+  Submit button not found
 
 # Iteration 2: Add data-testid attributes, run again
 $ npx playwright test tests/validation/login-flow.spec.ts

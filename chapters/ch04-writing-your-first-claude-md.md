@@ -233,7 +233,8 @@ Temporal SDK orchestrates long-running background jobs.
 
 ### Workflow Determinism
 
-Workflows MUST be deterministic. Replaying history must produce identical results.
+Workflows MUST be deterministic.
+Replaying history must produce identical results.
 
 DO:
 - Use `workflow.uuid()` for randomness

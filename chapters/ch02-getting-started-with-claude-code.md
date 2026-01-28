@@ -166,7 +166,8 @@ When to use: Learning existing patterns. Understanding a file before editing. De
 Write creates new files from scratch. Use it when the file does not exist.
 
 ```bash
-claude -p "Create tests/payment.test.ts with comprehensive tests for payment processing"
+claude -p "Create tests/payment.test.ts \
+  with tests for payment processing"
 ```
 
 When to use: New test files. New configuration. Documentation. Never use Write on existing files; use Edit instead.
@@ -256,7 +257,8 @@ Bad prompt:
 
 Good prompt:
 ```
-"Add date utilities to src/utils/date.ts following the pattern in src/utils/string.ts.
+"Add date utilities to src/utils/date.ts
+following the pattern in src/utils/string.ts.
 
 Functions needed:
 - parseISO(str: string): Date | null
@@ -361,9 +363,11 @@ Good prompt (separated):
 Step 1: "How is payment processing structured in this codebase?
 Show me the PaymentProvider interface and one implementation."
 
-Step 2 (after understanding): "Create StripeProvider implementing PaymentProvider.
-Follow the pattern from PayPalProvider. Use config from src/config/stripe.ts.
-Add tests following tests/providers/paypal.test.ts pattern."
+Step 2 (after understanding):
+"Create StripeProvider implementing PaymentProvider.
+Follow the pattern from PayPalProvider.
+Use config from src/config/stripe.ts.
+Add tests following tests/providers/paypal.test.ts."
 ```
 
 Why it works: Exploration builds understanding. Implementation uses that understanding for first-try correctness.
@@ -468,7 +472,7 @@ Example workflow:
 
 ```bash
 claude -p "How does error handling work in this codebase? Show me 3 examples."
-# Claude Code greps for error patterns, shows Result<T, E> usage, explains conventions
+# Greps for error patterns, shows Result<T, E> usage
 
 claude -p "Should I use Result<T, E> or exceptions for the new payment service?"
 # Claude Code analyzes codebase, shows you chose Result<T, E>, explains why
@@ -493,7 +497,8 @@ Methods: processPayment(), refundPayment(), getStatus()
 Config from src/config/payments.ts
 Tests in tests/services/payment.test.ts
 
-Success: All methods return Result<T, PaymentError>, tests pass, npm run lint passes."
+Success: All methods return Result<T, PaymentError>,
+tests pass, npm run lint passes."
 ```
 
 Time: 2 minutes. Result: Correct, working code.

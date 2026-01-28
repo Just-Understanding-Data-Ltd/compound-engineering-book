@@ -836,7 +836,9 @@ Every 1% improvement in per-action reliability compounds dramatically. Strategie
 Every problem is a lesson. Encode it so it never happens again.
 
 ```
-Problem occurs → Fix it → Ask: "How do we prevent this class?" → Encode the answer
+Problem occurs → Fix it →
+Ask: "How do we prevent this class?" →
+Encode the answer
 ```
 
 ### Where Knowledge Goes
@@ -1056,7 +1058,10 @@ function checkGoalAlignment(
   const alignment = scoreAlignment(currentAction, originalGoal)
 
   if (alignment < DRIFT_THRESHOLD) {
-    console.warn(`Action "${currentAction.name}" may not serve goal "${originalGoal}"`)
+    console.warn(
+      `Action "${currentAction.name}"` +
+      ` may not serve goal "${originalGoal}"`
+    )
     return false
   }
 

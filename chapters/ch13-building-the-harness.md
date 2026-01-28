@@ -30,7 +30,8 @@ Consider an authentication system. A weak CLAUDE.md might say "This is a Node.js
 # Authentication Service
 
 ## Architecture
-- All auth functions return AuthResult: { success: boolean, user?: User, error?: string }
+- All auth functions return AuthResult:
+  { success: boolean, user?: User, error?: string }
 - Passwords use bcrypt with cost factor 12
 - Sessions stored in Redis, not memory
 - Rate limiting: 5 attempts per minute per IP
@@ -536,9 +537,12 @@ interface AgentThread {
 
 // State is derived from events, never stored separately
 function deriveState(thread: AgentThread): ExecutionState {
-  const stepCompleteEvents = thread.events.filter(e => e.type === "step_complete");
-  const approvalRequests = thread.events.filter(e => e.type === "approval_requested");
-  const approvalGrants = thread.events.filter(e => e.type === "approval_granted");
+  const stepCompleteEvents = thread.events
+    .filter(e => e.type === "step_complete");
+  const approvalRequests = thread.events
+    .filter(e => e.type === "approval_requested");
+  const approvalGrants = thread.events
+    .filter(e => e.type === "approval_granted");
 
   return {
     currentStep: stepCompleteEvents.length,
@@ -607,9 +611,15 @@ const megaAgent = new Agent({
 });
 
 // GOOD: Focused agents composed in a DAG
-const deployAgent = new Agent({ capabilities: ["deploy_staging", "deploy_prod"] });
-const testAgent = new Agent({ capabilities: ["run_tests", "analyze_results"] });
-const notifyAgent = new Agent({ capabilities: ["slack", "email", "pagerduty"] });
+const deployAgent = new Agent({
+  capabilities: ["deploy_staging", "deploy_prod"]
+});
+const testAgent = new Agent({
+  capabilities: ["run_tests", "analyze_results"]
+});
+const notifyAgent = new Agent({
+  capabilities: ["slack", "email", "pagerduty"]
+});
 
 // Deterministic orchestration connects them
 async function deploymentWorkflow(pr: PullRequest) {
@@ -916,8 +926,13 @@ class CostTracker {
     this.budget = budget;
   }
 
-  track(name: string, model: string, inputTokens: number, outputTokens: number): void {
-    const pricing = this.pricing[model] || this.pricing['claude-sonnet-4-5-20250929'];
+  track(
+    name: string, model: string,
+    inputTokens: number,
+    outputTokens: number
+  ): void {
+    const pricing = this.pricing[model]
+      || this.pricing['claude-sonnet-4-5-20250929'];
     const cost =
       (inputTokens * pricing.input
         + outputTokens * pricing.output)

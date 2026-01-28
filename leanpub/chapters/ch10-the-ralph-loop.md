@@ -172,8 +172,10 @@ A repository-wide knowledge file (AGENTS.md or CLAUDE.md) stores codebase-specif
 ### Database Migrations
 - Use the pattern in /db/migrations/*.sql
 - Always test migration up AND down
-- Migrations must be idempotent (safe to run multiple times with the same result)
-- Common error: forgetting to handle null values in new NOT NULL columns
+- Migrations must be idempotent
+  (safe to run multiple times with same result)
+- Common error: forgetting null handling
+  in new NOT NULL columns
 
 ### API Endpoints
 - Use Server Actions in /app/actions/
@@ -246,7 +248,8 @@ Each task should have clear acceptance criteria:
 - [ ] Update API documentation with rate limit info
 
 ### Context
-- Use Redis (in-memory data store) for rate limit storage (configured in /lib/redis)
+- Use Redis (in-memory data store) for rate limits
+  (configured in /lib/redis)
 - Follow existing rate limiting pattern in /app/actions/uploads.ts
 
 ### Success Criteria

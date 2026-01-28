@@ -323,7 +323,10 @@ async function gatherContext(patterns: string[]) {
 
   // Enforce file limit
   if (filtered.length > INPUT_LIMITS.maxFiles) {
-    console.warn(`Sampling ${INPUT_LIMITS.maxFiles} of ${filtered.length} files`)
+    console.warn(
+      `Sampling ${INPUT_LIMITS.maxFiles}` +
+      ` of ${filtered.length} files`
+    )
     filtered.splice(INPUT_LIMITS.maxFiles)
   }
 
@@ -479,7 +482,10 @@ const batch = await client.messages.batches.create({
       params: {
         model: 'claude-sonnet-4-5-20250929',
         max_tokens: 2048,
-        messages: [{ role: 'user', content: 'Review auth.ts for security issues' }]
+        messages: [{
+          role: 'user',
+          content: 'Review auth.ts for security'
+        }]
       }
     },
     {
@@ -487,7 +493,10 @@ const batch = await client.messages.batches.create({
       params: {
         model: 'claude-sonnet-4-5-20250929',
         max_tokens: 2048,
-        messages: [{ role: 'user', content: 'Review api.ts for best practices' }]
+        messages: [{
+          role: 'user',
+          content: 'Review api.ts for best practices'
+        }]
       }
     }
   ]
@@ -608,7 +617,8 @@ BATCH_ID=$(cat .last-batch-id)
 # Check status
 STATUS=$(curl -s \
   -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
-  https://api.anthropic.com/v1/messages/batches/$BATCH_ID | jq -r '.processing_status')
+  "https://api.anthropic.com/v1/messages/batches/$BATCH_ID" \
+  | jq -r '.processing_status')
 
 if [ "$STATUS" = "ended" ]; then
   # Fetch and process results
