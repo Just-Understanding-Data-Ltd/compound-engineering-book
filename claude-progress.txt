@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 23:00)
+## Current Status (Updated: 2026-01-28 23:30)
 - Phase: Final Quality Polish & Publication Preparation
 - Active: All 15 chapters COMPLETE, focus on quality fixes
-- Last Completed: task-257: Add circuit breakers and reliability patterns to ch08
+- Last Completed: task-258: Ch08 circuit breaker implementation example
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
 - Publishing Readiness: 92% (content complete, quality gates identified)
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 40/67 (60%) with clear prioritization
+- Tasks Complete: 41/65 (63%) with clear prioritization
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -59,6 +59,26 @@
 - **Confidence**: HIGH (95%)
 
 ## Recent Activity
+
+### 2026-01-28 23:30 - COMPLETED task-258: Ch08 circuit breaker implementation example
+- What: Created examples/ch08/circuit-breaker.ts implementing the three-state circuit breaker pattern
+- File: examples/ch08/circuit-breaker.ts (new, ~520 lines)
+- Content:
+  - CircuitBreaker class with Closed/Open/Half-Open states
+  - Configurable failure thresholds and reset timeouts
+  - Event-driven state transitions with listener support
+  - Circuit breaker factory for named breakers
+  - Multi-layer timeout protection utilities
+  - Reliability compounding calculations and recommendations
+  - Integration with Agent SDK for protected API calls
+- Tests: Added 25 new tests to error-handling.test.ts
+  - CircuitBreaker class behavior (13 tests)
+  - Named circuit breakers (4 tests)
+  - Timeout protection (3 tests)
+  - Reliability calculations (5 tests)
+- Stats: 41 complete, 24 pending
+- Outcome: Ch08 code examples enhanced with resilience patterns
+- Next: Next highest priority task from queue
 
 ### 2026-01-28 23:00 - COMPLETED task-257: Circuit breakers and reliability patterns for ch08
 - What: Added two major sections to Chapter 8: Circuit Breakers and Reliability Patterns (Section 8.6) and Recovery Patterns for Long-Running Agents (Section 8.8)

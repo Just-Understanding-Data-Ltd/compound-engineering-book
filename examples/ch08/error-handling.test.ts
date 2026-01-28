@@ -58,6 +58,24 @@ import {
   type SessionState,
 } from "./clean-slate-recovery";
 
+// Import from circuit-breaker.ts
+import {
+  CircuitBreaker,
+  DEFAULT_CONFIG,
+  DEFAULT_TIMEOUT_CONFIG,
+  getCircuitBreaker,
+  getAllBreakerMetrics,
+  resetAllBreakers,
+  withTimeout,
+  calculateOverallReliability,
+  requiredPerActionReliability,
+  analyzeReliability,
+  type CircuitState,
+  type CircuitBreakerConfig,
+  type CircuitEvent,
+  type CircuitMetrics,
+} from "./circuit-breaker";
+
 // ============================================================================
 // ERROR DIAGNOSTIC TESTS
 // ============================================================================
@@ -1219,5 +1237,435 @@ describe("Integration Tests", () => {
     const recovery = extractConstraints(state.failedAttempts);
     expect(recovery.constraints).toContain("Backend is read-only");
     expect(recovery.freshPrompt).toContain("Do NOT repeat");
+  });
+});
+
+// ============================================================================
+// CIRCUIT BREAKER TESTS
+// ============================================================================
+
+describe("Circuit Breaker Pattern", () => {
+  describe("CircuitBreaker class", () => {
+    test("should start in closed state", () => {
+      const breaker = new CircuitBreaker();
+      expect(breaker.getState()).toBe("closed");
+    });
+
+    test("should use default config when none provided", () => {
+      const breaker = new CircuitBreaker();
+      const config = breaker.getConfig();
+      expect(config.maxFailures).toBe(DEFAULT_CONFIG.maxFailures);
+      expect(config.resetTimeMs).toBe(DEFAULT_CONFIG.resetTimeMs);
+      expect(config.successThreshold).toBe(DEFAULT_CONFIG.successThreshold);
+    });
+
+    test("should allow custom config", () => {
+      const breaker = new CircuitBreaker({
+        maxFailures: 5,
+        resetTimeMs: 10000,
+        successThreshold: 2,
+      });
+      const config = breaker.getConfig();
+      expect(config.maxFailures).toBe(5);
+      expect(config.resetTimeMs).toBe(10000);
+      expect(config.successThreshold).toBe(2);
+    });
+
+    test("should pass through successful operations", async () => {
+      const breaker = new CircuitBreaker();
+      const result = await breaker.execute(async () => "success");
+      expect(result).toBe("success");
+    });
+
+    test("should pass through failed operations", async () => {
+      const breaker = new CircuitBreaker();
+      await expect(
+        breaker.execute(async () => {
+          throw new Error("test error");
+        })
+      ).rejects.toThrow("test error");
+    });
+
+    test("should remain closed after one failure", async () => {
+      const breaker = new CircuitBreaker({ maxFailures: 3 });
+      try {
+        await breaker.execute(async () => {
+          throw new Error("failure");
+        });
+      } catch {}
+      expect(breaker.getState()).toBe("closed");
+    });
+
+    test("should open after maxFailures consecutive failures", async () => {
+      const breaker = new CircuitBreaker({ maxFailures: 3 });
+
+      for (let i = 0; i < 3; i++) {
+        try {
+          await breaker.execute(async () => {
+            throw new Error(`failure ${i}`);
+          });
+        } catch {}
+      }
+
+      expect(breaker.getState()).toBe("open");
+    });
+
+    test("should reject requests when open", async () => {
+      const breaker = new CircuitBreaker({ maxFailures: 1 });
+
+      // Trigger open state
+      try {
+        await breaker.execute(async () => {
+          throw new Error("trigger");
+        });
+      } catch {}
+
+      // Verify rejection
+      await expect(
+        breaker.execute(async () => "should not run")
+      ).rejects.toThrow("Circuit breaker is open");
+    });
+
+    test("should reset failure count on success", async () => {
+      const breaker = new CircuitBreaker({ maxFailures: 3 });
+
+      // Two failures
+      for (let i = 0; i < 2; i++) {
+        try {
+          await breaker.execute(async () => {
+            throw new Error("failure");
+          });
+        } catch {}
+      }
+
+      // One success resets the count
+      await breaker.execute(async () => "success");
+
+      // Two more failures should not open circuit
+      for (let i = 0; i < 2; i++) {
+        try {
+          await breaker.execute(async () => {
+            throw new Error("failure");
+          });
+        } catch {}
+      }
+
+      expect(breaker.getState()).toBe("closed");
+    });
+
+    test("should track metrics correctly", async () => {
+      const breaker = new CircuitBreaker({ maxFailures: 2 });
+
+      // 3 successes
+      for (let i = 0; i < 3; i++) {
+        await breaker.execute(async () => "ok");
+      }
+
+      // 2 failures to open
+      for (let i = 0; i < 2; i++) {
+        try {
+          await breaker.execute(async () => {
+            throw new Error("fail");
+          });
+        } catch {}
+      }
+
+      // 1 rejected
+      try {
+        await breaker.execute(async () => "rejected");
+      } catch {}
+
+      const metrics = breaker.getMetrics();
+      expect(metrics.totalRequests).toBe(6);
+      expect(metrics.successfulRequests).toBe(3);
+      expect(metrics.failedRequests).toBe(2);
+      expect(metrics.rejectedRequests).toBe(1);
+      expect(metrics.currentState).toBe("open");
+    });
+
+    test("should emit events", async () => {
+      const breaker = new CircuitBreaker({ maxFailures: 1 });
+      const events: CircuitEvent[] = [];
+      breaker.addListener((event) => events.push(event));
+
+      await breaker.execute(async () => "ok");
+      expect(events).toContainEqual({ type: "success" });
+
+      try {
+        await breaker.execute(async () => {
+          throw new Error("fail");
+        });
+      } catch {}
+
+      expect(events.some((e) => e.type === "failure")).toBe(true);
+      expect(
+        events.some(
+          (e) => e.type === "state_change" && e.from === "closed" && e.to === "open"
+        )
+      ).toBe(true);
+    });
+
+    test("should allow removing event listeners", async () => {
+      const breaker = new CircuitBreaker();
+      const events: CircuitEvent[] = [];
+      const remove = breaker.addListener((event) => events.push(event));
+
+      await breaker.execute(async () => "first");
+      expect(events.length).toBe(1);
+
+      remove();
+      await breaker.execute(async () => "second");
+      expect(events.length).toBe(1); // No new events
+    });
+
+    test("should reset to closed state", async () => {
+      const breaker = new CircuitBreaker({ maxFailures: 1 });
+
+      // Open the circuit
+      try {
+        await breaker.execute(async () => {
+          throw new Error("fail");
+        });
+      } catch {}
+      expect(breaker.getState()).toBe("open");
+
+      // Reset
+      breaker.reset();
+      expect(breaker.getState()).toBe("closed");
+
+      // Should work again
+      const result = await breaker.execute(async () => "after reset");
+      expect(result).toBe("after reset");
+    });
+
+    test("should force open", async () => {
+      const breaker = new CircuitBreaker();
+      expect(breaker.getState()).toBe("closed");
+
+      breaker.forceOpen();
+      expect(breaker.getState()).toBe("open");
+
+      await expect(
+        breaker.execute(async () => "should fail")
+      ).rejects.toThrow("Circuit breaker is open");
+    });
+  });
+
+  describe("Named circuit breakers", () => {
+    beforeEach(() => {
+      resetAllBreakers();
+    });
+
+    test("should create named breakers", () => {
+      const breaker1 = getCircuitBreaker("api");
+      const breaker2 = getCircuitBreaker("database");
+
+      expect(breaker1).not.toBe(breaker2);
+    });
+
+    test("should return same breaker for same name", () => {
+      const breaker1 = getCircuitBreaker("shared");
+      const breaker2 = getCircuitBreaker("shared");
+
+      expect(breaker1).toBe(breaker2);
+    });
+
+    test("should get all breaker metrics", () => {
+      getCircuitBreaker("test-a");
+      getCircuitBreaker("test-b");
+      getCircuitBreaker("test-c");
+
+      const allMetrics = getAllBreakerMetrics();
+      expect(allMetrics.size).toBeGreaterThanOrEqual(3);
+      expect(allMetrics.has("test-a")).toBe(true);
+      expect(allMetrics.has("test-b")).toBe(true);
+      expect(allMetrics.has("test-c")).toBe(true);
+    });
+
+    test("should reset all breakers", async () => {
+      const breaker1 = getCircuitBreaker("x", { maxFailures: 1 });
+      const breaker2 = getCircuitBreaker("y", { maxFailures: 1 });
+
+      // Open both
+      for (const breaker of [breaker1, breaker2]) {
+        try {
+          await breaker.execute(async () => {
+            throw new Error("fail");
+          });
+        } catch {}
+      }
+
+      expect(breaker1.getState()).toBe("open");
+      expect(breaker2.getState()).toBe("open");
+
+      resetAllBreakers();
+
+      expect(breaker1.getState()).toBe("closed");
+      expect(breaker2.getState()).toBe("closed");
+    });
+  });
+
+  describe("Timeout protection", () => {
+    test("should complete before timeout", async () => {
+      const result = await withTimeout(
+        async () => {
+          await new Promise((r) => setTimeout(r, 10));
+          return "completed";
+        },
+        1000,
+        "test"
+      );
+      expect(result).toBe("completed");
+    });
+
+    test("should timeout slow operations", async () => {
+      await expect(
+        withTimeout(
+          async () => {
+            await new Promise((r) => setTimeout(r, 1000));
+            return "too slow";
+          },
+          50,
+          "slow operation"
+        )
+      ).rejects.toThrow("slow operation timed out after 50ms");
+    });
+
+    test("should have default timeout config", () => {
+      expect(DEFAULT_TIMEOUT_CONFIG.jobTimeoutMs).toBe(60 * 60 * 1000);
+      expect(DEFAULT_TIMEOUT_CONFIG.requestTimeoutMs).toBe(60 * 1000);
+      expect(DEFAULT_TIMEOUT_CONFIG.inputTokenLimit).toBe(100000);
+      expect(DEFAULT_TIMEOUT_CONFIG.budgetLimitDollars).toBe(10);
+    });
+  });
+
+  describe("Reliability calculations", () => {
+    test("should calculate overall reliability correctly", () => {
+      // 95% per action, 5 actions = 0.95^5 = 0.7738
+      const overall = calculateOverallReliability(0.95, 5);
+      expect(overall).toBeCloseTo(0.7738, 3);
+    });
+
+    test("should show reliability degrades with more actions", () => {
+      const rel5 = calculateOverallReliability(0.95, 5);
+      const rel10 = calculateOverallReliability(0.95, 10);
+      const rel20 = calculateOverallReliability(0.95, 20);
+
+      expect(rel5).toBeGreaterThan(rel10);
+      expect(rel10).toBeGreaterThan(rel20);
+    });
+
+    test("should calculate required per-action reliability", () => {
+      // To achieve 90% overall with 20 actions, need 99.47% per action
+      const required = requiredPerActionReliability(0.9, 20);
+      expect(required).toBeCloseTo(0.9947, 3);
+    });
+
+    test("should provide meaningful recommendations", () => {
+      const analysis = analyzeReliability(0.95, 20, 0.9);
+
+      expect(analysis.current).toBe(0.95);
+      expect(analysis.target).toBe(0.9);
+      expect(analysis.actionCount).toBe(20);
+      expect(analysis.currentOverall).toBeCloseTo(0.3585, 3); // 0.95^20
+      expect(analysis.recommendations.length).toBeGreaterThan(0);
+    });
+
+    test("should recommend improvements for low reliability", () => {
+      const analysis = analyzeReliability(0.90, 15, 0.9);
+
+      expect(analysis.recommendations).toContainEqual(
+        expect.stringContaining("Improve per-action reliability")
+      );
+    });
+
+    test("should recommend checkpoint-resume for many actions", () => {
+      const analysis = analyzeReliability(0.95, 25, 0.9);
+
+      expect(
+        analysis.recommendations.some((r) =>
+          r.toLowerCase().includes("checkpoint")
+        )
+      ).toBe(true);
+    });
+  });
+
+  describe("Half-open state", () => {
+    test("should transition to half-open after reset time", async () => {
+      const breaker = new CircuitBreaker({
+        maxFailures: 1,
+        resetTimeMs: 50, // Short timeout for testing
+      });
+
+      // Open the circuit
+      try {
+        await breaker.execute(async () => {
+          throw new Error("fail");
+        });
+      } catch {}
+      expect(breaker.getState()).toBe("open");
+
+      // Wait for reset time
+      await new Promise((r) => setTimeout(r, 60));
+
+      // Next request should trigger half-open
+      const events: CircuitEvent[] = [];
+      breaker.addListener((e) => events.push(e));
+
+      try {
+        await breaker.execute(async () => "probe");
+      } catch {}
+
+      expect(events.some((e) => e.type === "probe_started")).toBe(true);
+    });
+
+    test("should close after successful probe", async () => {
+      const breaker = new CircuitBreaker({
+        maxFailures: 1,
+        resetTimeMs: 10,
+        successThreshold: 1,
+      });
+
+      // Open the circuit
+      try {
+        await breaker.execute(async () => {
+          throw new Error("fail");
+        });
+      } catch {}
+
+      // Wait for reset
+      await new Promise((r) => setTimeout(r, 20));
+
+      // Successful probe
+      await breaker.execute(async () => "success");
+
+      expect(breaker.getState()).toBe("closed");
+    });
+
+    test("should reopen after failed probe", async () => {
+      const breaker = new CircuitBreaker({
+        maxFailures: 1,
+        resetTimeMs: 10,
+      });
+
+      // Open the circuit
+      try {
+        await breaker.execute(async () => {
+          throw new Error("first fail");
+        });
+      } catch {}
+
+      // Wait for reset
+      await new Promise((r) => setTimeout(r, 20));
+
+      // Failed probe
+      try {
+        await breaker.execute(async () => {
+          throw new Error("probe fail");
+        });
+      } catch {}
+
+      expect(breaker.getState()).toBe("open");
+    });
   });
 });
