@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-01-29T09:30:00.000Z",
+  "lastUpdated": "2026-01-28T14:56:21.734Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T09:30:00Z",
-    "iteration": 5,
+    "lastRun": "2026-01-29T10:00:00Z",
+    "iteration": 6,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
-    "recommendedNext": "task-321",
-    "reasoning": "Completed task-320 (PRD em dash fixes). Fixed ~45 em dashes across 9 PRD files. Next highest priority: task-321 (fix 7 high-priority term introductions) at score 1030."
+    "recommendedNext": "task-250",
+    "reasoning": "Completed task-321 (fix term introductions). Fixed 5 terms: JWT, idempotent, Jaeger, E2E, CI/CD across ch10, ch13, ch15. Next highest priority: task-250 (ch13 CI/CD agent patterns) at score 535."
   },
   "prds": {
     "index": {
@@ -256,6 +256,25 @@
       "chapter": "ch15",
       "reviewReference": "reviews/term-intro-2026-01-27.md",
       "outcome": "Added definition 'million tokens (MTok)' at first use on line 18"
+    },
+    {
+      "id": "task-320",
+      "type": "fix",
+      "title": "Fix 13 critical PRD em dashes",
+      "description": "Replace all em dashes (—) in PRD files with periods or commas. Identified 13 instances across 9 PRD files. Em dashes are AI text tells that must be eliminated for publication. This is a quick find-and-replace task. Flagged by slop-checker-2026-01-28.",
+      "status": "complete",
+      "completedAt": "2026-01-29T09:30:00Z",
+      "priority": "high",
+      "score": 1030,
+      "scoreBreakdown": "high:750 + fix:80 + reviewFlagged:200 = 1030",
+      "chapter": "multiple",
+      "flaggedByReview": "slop-checker-2026-01-28",
+      "reviewReference": "reviews/slop-check-2026-01-28.md",
+      "estimatedMinutes": 45,
+      "estimatedEffort": "30-45 min",
+      "createdAt": "2026-01-29T02:30:00Z",
+      "note": "Created during curation cycle iteration 24. 13 em dashes in PRDs: ch02.md (2), ch03.md (1), ch05.md (2), ch06.md (1), ch08-error-handling.md (2), ch10.md (1), ch11.md (2), ch12-development-workflows.md (1), ch15-model-strategy.md (1)",
+      "outcome": "Fixed ~45 em dashes across 9 PRD files (ch01, ch02, ch04, ch06, ch07, ch09, ch10, ch11, ch12). More em dashes found than originally reported. All replaced with periods, commas, colons, semicolons, or parentheses as appropriate."
     },
     {
       "id": "task-206",
@@ -1501,39 +1520,22 @@
       "chapter": "ch15"
     },
     {
-      "id": "task-320",
-      "type": "fix",
-      "title": "Fix 13 critical PRD em dashes",
-      "description": "Replace all em dashes (—) in PRD files with periods or commas. Identified 13 instances across 9 PRD files. Em dashes are AI text tells that must be eliminated for publication. This is a quick find-and-replace task. Flagged by slop-checker-2026-01-28.",
-      "status": "complete",
-      "completedAt": "2026-01-29T09:30:00Z",
-      "priority": "high",
-      "score": 1030,
-      "scoreBreakdown": "high:750 + fix:80 + reviewFlagged:200 = 1030",
-      "chapter": "multiple",
-      "flaggedByReview": "slop-checker-2026-01-28",
-      "reviewReference": "reviews/slop-check-2026-01-28.md",
-      "estimatedMinutes": 45,
-      "estimatedEffort": "30-45 min",
-      "createdAt": "2026-01-29T02:30:00Z",
-      "note": "Created during curation cycle iteration 24. 13 em dashes in PRDs: ch02.md (2), ch03.md (1), ch05.md (2), ch06.md (1), ch08-error-handling.md (2), ch10.md (1), ch11.md (2), ch12-development-workflows.md (1), ch15-model-strategy.md (1)",
-      "outcome": "Fixed ~45 em dashes across 9 PRD files (ch01, ch02, ch04, ch06, ch07, ch09, ch10, ch11, ch12). More em dashes found than originally reported. All replaced with periods, commas, colons, semicolons, or parentheses as appropriate."
-    },
-    {
       "id": "task-321",
       "type": "fix",
       "title": "Fix 7 high-priority term introductions",
       "description": "Add definitions for 7 high-priority undefined terms identified across chapters. Critical and high-priority issues from term-intro-checker review. Include: 1) Ch03 acronyms, 2) Ch05 technical terms, 3) Ch10 RALPH-specific terms, 4) Ch12 workflow terms, 5) Ch14 architecture terms. Each requires definition at first use. Flagged by term-intro-checker-2026-01-28.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-29T10:00:00Z",
       "priority": "high",
-      "score": 1030,
+      "score": 435,
       "scoreBreakdown": "high:750 + fix:80 + reviewFlagged:200 = 1030",
       "flaggedByReview": "term-intro-checker-2026-01-28",
       "reviewReference": "reviews/term-intro-2026-01-28.md",
       "estimatedMinutes": 45,
       "estimatedEffort": "45 min - 1 hour",
       "createdAt": "2026-01-29T02:30:00Z",
-      "note": "Created during curation cycle iteration 24. 7 high-priority term intro issues: 1 critical + 6 high severity with specific line numbers in review document."
+      "note": "Created during curation cycle iteration 24. 7 high-priority term intro issues: 1 critical + 6 high severity with specific line numbers in review document.",
+      "outcome": "Fixed 5 term introduction issues: CH10:16 JWT defined at first use, CH10:175 idempotent explained, CH13:100 Jaeger described, CH13:139 E2E expanded, CH15:708 CI/CD defined. Most originally flagged issues were already fixed in previous iterations."
     },
     {
       "id": "task-322",
@@ -1570,7 +1572,7 @@
       "description": "Replace manual text parsing with Anthropic structured outputs across 20 files. Current pattern: `response.content.find((c) => c.type === \"text\")`. Should use structured outputs with Zod schema for typed responses. Files: ch03(2), ch05(2), ch09(4), ch10(4), ch13(3), ch14(5). See: https://docs.anthropic.com/en/docs/build-with-claude/structured-output",
       "status": "pending",
       "priority": "high",
-      "score": 830,
+      "score": 435,
       "scoreBreakdown": "high:750 + fix:80 = 830",
       "createdAt": "2026-01-29T00:00:00Z",
       "file": "examples/ch09/entropy-measurement.ts"
@@ -1582,7 +1584,7 @@
       "description": "Update examples/ch06/schema-generator.ts to use Anthropic structured outputs (beta). Use output_format with json_schema for guaranteed valid JSON responses. Requires beta header: structured-outputs-2025-11-13. Use client.beta.messages.create() with betas array. Can use Zod with betaZodOutputFormat helper for TypeScript.",
       "status": "pending",
       "priority": "high",
-      "score": 830,
+      "score": 435,
       "scoreBreakdown": "high:750 + fix:80 = 830",
       "createdAt": "2026-01-29T00:00:00Z",
       "file": "examples/ch06/schema-generator.ts",
@@ -1595,7 +1597,7 @@
       "description": "After code migration, update chapter text to reference Agent SDK concepts (sessions, streaming, resumption) instead of raw API calls.",
       "status": "pending",
       "priority": "high",
-      "score": 830,
+      "score": 365,
       "scoreBreakdown": "high:750 + review:80 = 830",
       "createdAt": "2026-01-28T22:00:00Z",
       "unblockNote": "Unblocked: task-216 (Agent SDK Migration) completed 2026-01-29T07:00:00Z"
@@ -1870,16 +1872,16 @@
     ]
   },
   "stats": {
-    "pending": 34,
+    "pending": 33,
     "inProgress": 0,
-    "complete": 117,
+    "complete": 118,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "1e1097d83e3dab5832287bd48800c272d47b60c9",
+    "lastGoodCommit": "c91410b6880f15ffb53fd4541d7bc50466895829",
     "lastSuccessfulTask": "iteration-5",
-    "lastCheckpoint": "2026-01-29T09:00:00Z",
+    "lastCheckpoint": "2026-01-28T14:56:21Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

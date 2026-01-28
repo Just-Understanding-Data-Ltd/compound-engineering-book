@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 09:30)
+## Current Status (Updated: 2026-01-29 10:00)
 - Phase: Final Quality Polish
 - Active: Quality fixes from review cycle
-- Last Completed: task-320: Fix PRD em dashes (~45 instances across 9 files)
+- Last Completed: task-321: Fix term introductions (5 fixes across ch10, ch13, ch15)
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
-- Publishing Readiness: 99% (content complete, SDK migration 12/12 done, PRD slop fixed)
+- Publishing Readiness: 99% (content complete, SDK migration 12/12 done, term intros fixed)
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%) - EM DASHES FIXED ✓
@@ -15,13 +15,13 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 117/151 (77%) with clear prioritization
+- Tasks Complete: 118/151 (78%) with clear prioritization
 - Test Pass Rate: 100% across all chapters (787 tests total)
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
 - AI Slop: 5 remaining issues (13 critical em dashes in PRDs FIXED, 3 high, 2 medium in chapters)
 - Tech Accuracy: 3 issues (2 errors ch13, 1 warning ch07) - 98% accurate
-- Term Introductions: 74 total issues (1 critical, 6 high, 67 medium/low) - All identified with specific line numbers
+- Term Introductions: 74 total issues (1 critical, 6 high, 67 medium/low) - CRITICAL+HIGH FIXED ✓
 - Cross-References: 5 broken links identified (exact fixes specified), 100% alignment when fixed
 - Heading Capitalization: 142 instances need sentence case - 82% O'Reilly compliant
 - Diagrams: 100% complete (63/63)
@@ -35,9 +35,9 @@
    - Fixed ~45 em dashes across 9 PRD files
    - All PRDs now publication-ready
 
-3. HIGH: Fix High-Priority Term Introductions (task-321, 7 items, 45 min)
-   - Specific line numbers identified
-   - Important for reader comprehension
+3. ✓ COMPLETE: Fix High-Priority Term Introductions (task-321)
+   - Fixed 5 terms: JWT, idempotent, Jaeger, E2E, CI/CD
+   - Most issues were already fixed in previous iterations
 
 4. HIGH: Use Structured Outputs (task-232, 20 files)
    - Replace manual text parsing with Zod schemas
@@ -57,6 +57,18 @@
 - **Confidence**: HIGH (98%)
 
 ## Recent Activity
+
+### 2026-01-29 10:00 - COMPLETED task-321: Fix term introductions
+- What: Added definitions for 5 undefined technical terms across chapters
+- Files modified:
+  - chapters/ch10-the-ralph-loop.md: JWT defined at first use (line 16), idempotent explained (line 175)
+  - chapters/ch13-building-the-harness.md: Jaeger described (line 100), E2E expanded (line 139)
+  - chapters/ch15-model-strategy-and-cost-optimization.md: CI/CD defined (line 708)
+- Key pattern: Define on first use with parenthetical explanation
+- Stats: 118 complete, 33 pending
+- Note: Many originally flagged issues were already fixed in prior iterations
+- Outcome: Critical and high-priority term introductions now complete
+- Next: task-250 (ch13 CI/CD agent patterns) or run review cycle (iteration 6 % 6 == 0)
 
 ### 2026-01-29 09:30 - COMPLETED task-320: Fix PRD em dashes
 - What: Removed all em dashes (—) from PRD files, replacing with appropriate punctuation

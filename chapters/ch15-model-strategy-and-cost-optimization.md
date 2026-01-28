@@ -705,7 +705,7 @@ Different environments call for different safety levels:
 **Level 3: YOLO mode + Git + Quality gates (recommended)**
 - Safety: High (automated verification)
 - Productivity: Very High (no interruptions, reliable output)
-- Use case: Daily development, CI/CD automation
+- Use case: Daily development, Continuous Integration/Continuous Deployment (CI/CD) automation
 
 **Level 4: YOLO mode + Git + Quality gates + Manual review**
 - Safety: Very High (multiple verification layers)

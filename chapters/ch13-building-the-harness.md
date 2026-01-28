@@ -97,7 +97,7 @@ The second layer is your repository environment. Better environment equals bette
 
 Observability is not just monitoring for humans. It provides signal to agents. When Claude can see traces, metrics, and logs, it can diagnose problems that would otherwise require human intervention.
 
-A basic observability stack uses OpenTelemetry (OTEL) and Jaeger:
+A basic observability stack uses OpenTelemetry (OTEL) and Jaeger (distributed tracing tool):
 
 ```yaml
 # docker-compose.yml
@@ -136,7 +136,7 @@ fi
 Multiple test levels provide different kinds of signal:
 - **Unit tests**: Fast feedback on individual functions
 - **Integration tests**: Verify components work together
-- **E2E tests**: Confirm real user flows work
+- **End-to-End (E2E) tests**: Confirm real user flows work
 - **Load tests**: Catch performance regressions
 
 ### Production/Development Parity

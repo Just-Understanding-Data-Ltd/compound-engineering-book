@@ -13,7 +13,7 @@ The problem emerges gradually. After your third or fourth failed attempt at solv
 Consider this progression:
 
 ```
-Attempt 1: "Try using JWT refresh tokens"
+Attempt 1: "Try using JSON Web Token (JWT) refresh tokens"
   → Implementation fails (API doesn't support refresh endpoint)
   → Error messages added to context
   → Failed code added to context
@@ -32,7 +32,7 @@ Attempt 4: "Maybe we need to tweak the JWT expiration..."
   → You're stuck in a loop
 ```
 
-The model keeps suggesting JSON Web Token (JWT) variations because the entire conversation history is saturated with JWT-related attempts. It struggles to explore fundamentally different solutions when negative context dominates the window.
+The model keeps suggesting JWT variations because the entire conversation history is saturated with JWT-related attempts. It struggles to explore fundamentally different solutions when negative context dominates the window.
 
 ### Context Rot
 
@@ -172,7 +172,7 @@ A repository-wide knowledge file (AGENTS.md or CLAUDE.md) stores codebase-specif
 ### Database Migrations
 - Use the pattern in /db/migrations/*.sql
 - Always test migration up AND down
-- Migrations must be idempotent
+- Migrations must be idempotent (safe to run multiple times with the same result)
 - Common error: forgetting to handle null values in new NOT NULL columns
 
 ### API Endpoints
