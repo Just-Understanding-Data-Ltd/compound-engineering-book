@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 15:00)
+## Current Status (Updated: 2026-01-29 16:00)
 - Phase: Final Quality Polish
 - Active: Content enhancements from KB articles
-- Last Completed: task-253 (agent reliability patterns to ch13)
+- Last Completed: task-254 (12-factor agents patterns to ch13)
 - Blockers: None - all quality issues have identified solutions
-- Queue Health: 16 pending tasks, clean queue, no duplicates
+- Queue Health: 15 pending tasks, clean queue, no duplicates
 - Publishing Readiness: 99% (content complete, SDK migration 12/12 done, ch13 fully enhanced)
 
 ## Project State Summary
@@ -57,6 +57,23 @@
 - **Confidence**: HIGH (98%)
 
 ## Recent Activity
+
+### 2026-01-29 16:00 - COMPLETED task-254: Integrate 12-factor agents patterns into ch13
+- What: Added "The 12-Factor Agent Principles" subsection to Chapter 13 Layer 3
+- File: chapters/ch13-building-the-harness.md
+- Content added:
+  - Introduction to HumanLayer's 12-factor framework for production agents
+  - Factor 5: Unified State (event-sourced threads, deriveState pattern)
+  - Factor 7: Contact Humans with Tools (structured approval requests, multi-channel routing)
+  - Factor 10: Small Focused Agents (3-20 step micro-agents in deterministic DAGs)
+  - Factor 12: Stateless Reducer (pure function pattern, replayState for debugging)
+  - Mapping table connecting factors to harness layers
+- Source: 12-factor-agents.md KB article
+- Word count: 6,348 (over 4,000 target but acceptable for enhanced content)
+- Quality: No em dashes, no AI slop phrases
+- Stats: 15 pending, 136 complete
+- Outcome: Ch13 Layer 3 enhanced with comprehensive 12-factor agent principles
+- Next: task-242 (ch14 full identity definition) is highest priority
 
 ### 2026-01-29 15:00 - COMPLETED task-253: Add agent reliability patterns to ch13
 - What: Added Agent Reliability Patterns subsection to Chapter 13 Layer 3

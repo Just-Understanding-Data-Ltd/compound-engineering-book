@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T14:30:00Z",
+  "lastUpdated": "2026-01-29T16:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1500,11 +1500,13 @@
       "chapter": "ch13",
       "title": "Integrate 12-factor agents patterns into ch13",
       "description": "Factor 5 (unify state), Factor 6 (pause/resume), Factor 7 (contact humans with tools), Factor 10 (small agents 3-20 steps), Factor 12 (stateless reducer) from 12-factor-agents.md.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 535,
       "createdAt": "2026-01-28T14:30:00Z",
-      "sourceArticle": "12-factor-agents.md"
+      "completedAt": "2026-01-29T16:00:00Z",
+      "sourceArticle": "12-factor-agents.md",
+      "outcome": "Added '12-Factor Agent Principles' subsection to Layer 3 covering: Factor 5 (unified state with event-sourced threads), Factor 7 (structured human contact tools), Factor 10 (small 3-20 step micro-agents), Factor 12 (stateless reducer pattern). Includes mapping table to harness layers. Word count 6,348."
     },
     {
       "id": "task-242",
@@ -1879,15 +1881,16 @@
     ]
   },
   "stats": {
-    "pending": 16,
-    "complete": 45,
-    "in_progress": 0,
-    "blocked": 0
+    "pending": 15,
+    "inProgress": 0,
+    "complete": 136,
+    "blocked": 0,
+    "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "6a50a8e2d009e5fba03f6126ce4111c5a731d692",
+    "lastGoodCommit": "7833ca7a41a1778f68bdb63a94c158cfc5103692",
     "lastSuccessfulTask": "iteration-10",
-    "lastCheckpoint": "2026-01-29T14:30:00Z",
+    "lastCheckpoint": "2026-01-28T15:19:19Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

@@ -516,6 +516,181 @@ Every 1% improvement in per-action reliability compounds dramatically:
 
 The RALPH loop (Chapter 10) helps reliability by starting each task with fresh context, avoiding context degradation and goal drift. Smaller tasks mean fewer actions per workflow, which directly improves overall success rates.
 
+### The 12-Factor Agent Principles
+
+The "12 Factor Agents" framework (developed by HumanLayer) distills production agent patterns into replicable principles. Several factors are directly relevant to harness construction.
+
+**Factor 5: Unify Execution State and Business State**
+
+Agents that scatter state across variables, databases, and external services become impossible to debug and resume. The solution: derive all execution state from a single event stream.
+
+```typescript
+interface AgentThread {
+  id: string;
+  events: Event[];
+  status: "running" | "paused" | "completed" | "failed";
+}
+
+// State is derived from events, never stored separately
+function deriveState(thread: AgentThread): ExecutionState {
+  const stepCompleteEvents = thread.events.filter(e => e.type === "step_complete");
+  const approvalRequests = thread.events.filter(e => e.type === "approval_requested");
+  const approvalGrants = thread.events.filter(e => e.type === "approval_granted");
+
+  return {
+    currentStep: stepCompleteEvents.length,
+    pendingApprovals: approvalRequests.filter(req =>
+      !approvalGrants.find(grant => grant.requestId === req.id)
+    ),
+    errors: thread.events.filter(e => e.type === "error"),
+    canResume: thread.status !== "completed" && thread.status !== "failed",
+  };
+}
+```
+
+When state derives from events, you get serialization for free. You can replay any point in execution by reducing over the event log. Debugging becomes "show me events 15-20" instead of "which variable held the problem state?"
+
+**Factor 7: Contact Humans with Tool Calls**
+
+Agents that contact humans via plaintext responses lose structure. When the agent just says "I need approval to proceed," there is no audit trail, no routing logic, no timeout handling. The solution: treat human contact as structured tool calls.
+
+```typescript
+const humanTools = [
+  {
+    name: "request_human_approval",
+    parameters: {
+      action: { type: "string", description: "What action needs approval" },
+      context: { type: "string", description: "Relevant context for decision" },
+      urgency: { type: "string", enum: ["low", "medium", "high"] },
+      channel: { type: "string", enum: ["slack", "email"] },
+    },
+  },
+  {
+    name: "request_human_input",
+    parameters: {
+      question: { type: "string" },
+      options: { type: "array", items: { type: "string" }, optional: true },
+    },
+  },
+];
+
+async function executeHumanTool(toolCall: ToolCall, thread: AgentThread) {
+  // Route to appropriate channel based on urgency
+  const channel = toolCall.parameters.urgency === "high" ? "slack" : "email";
+  await notifyHuman(toolCall, channel);
+
+  // Structured pause with clear awaiting state
+  thread.status = "paused";
+  thread.events.push({
+    type: "awaiting_human",
+    toolCall,
+    timestamp: Date.now(),
+  });
+
+  return { status: "paused", awaiting: "human_response" };
+}
+```
+
+Structured human contact enables multi-channel routing (urgent requests go to Slack, low-priority to email), timeout handling (auto-escalate after 4 hours), and complete audit trails for compliance.
+
+**Factor 10: Small, Focused Agents**
+
+Monolithic agents that handle "deploy, test, monitor, rollback, notify, and audit" fail reliably. As context grows, LLM performance degrades. The solution: scope agents to 3-20 steps maximum.
+
+```typescript
+// BAD: Monolithic agent
+const megaAgent = new Agent({
+  capabilities: ["deploy", "test", "monitor", "rollback", "notify", "audit"],
+});
+
+// GOOD: Focused agents composed in a DAG
+const deployAgent = new Agent({ capabilities: ["deploy_staging", "deploy_prod"] });
+const testAgent = new Agent({ capabilities: ["run_tests", "analyze_results"] });
+const notifyAgent = new Agent({ capabilities: ["slack", "email", "pagerduty"] });
+
+// Deterministic orchestration connects them
+async function deploymentWorkflow(pr: PullRequest) {
+  // Step 1: Deploy to staging (deterministic)
+  await deployToStaging(pr);
+
+  // Step 2: Run tests (agent decides which tests)
+  const testPlan = await testAgent.planTests(pr);
+  const results = await runTests(testPlan);
+
+  // Step 3: Conditional routing (deterministic)
+  if (results.passed) {
+    await deployAgent.requestProdApproval(pr);
+  } else {
+    await notifyAgent.alertFailure(results);
+  }
+}
+```
+
+The key insight: agents handle well-scoped decisions within deterministic workflows. The orchestration is code (predictable), while the decisions are LLM (flexible). This matches the harness philosophy: constrain what you can control, let the LLM do what it does best within those constraints.
+
+**Factor 12: Make Your Agent a Stateless Reducer**
+
+Agents with hidden state are impossible to test, replay, or parallelize. The solution: treat agents as pure functions that transform input state into output state.
+
+```typescript
+// Agent as a pure function
+type AgentReducer = (state: AgentState, event: Event) => AgentState;
+
+const agentReducer: AgentReducer = (state, event) => {
+  switch (event.type) {
+    case "user_input":
+      return { ...state, pendingInput: event.content };
+
+    case "tool_call":
+      return { ...state, lastToolCall: event.toolCall };
+
+    case "tool_result":
+      return {
+        ...state,
+        context: [...state.context, event],
+        lastToolCall: null,
+      };
+
+    case "error":
+      return {
+        ...state,
+        errors: [...state.errors, event],
+        consecutiveErrors: state.consecutiveErrors + 1,
+      };
+
+    case "human_response":
+      return {
+        ...state,
+        context: [...state.context, event],
+        status: "running",
+      };
+
+    default:
+      return state;
+  }
+};
+
+// Replay any state by reducing over events
+function replayState(events: Event[]): AgentState {
+  return events.reduce(agentReducer, initialState);
+}
+```
+
+The stateless reducer pattern enables time-travel debugging (replay to any point), parallel execution (same input yields same output), and testing (no hidden state to mock). Combined with the unified state from Factor 5, this creates agents that are fundamentally debuggable.
+
+**Applying the Factors to Your Harness**
+
+The 12-factor principles reinforce the harness architecture:
+
+| Factor | Harness Layer | Application |
+|--------|---------------|-------------|
+| Factor 5: Unified State | Layer 3 (Checkpoints) | Event-sourced agent threads |
+| Factor 7: Human Tools | Layer 3 (Webhooks) | Structured approval requests |
+| Factor 10: Small Agents | Layer 3 (Swarms) | 5-20 step micro-agents in DAGs |
+| Factor 12: Stateless | Layer 4 (Optimization) | Pure reducer enables automated testing |
+
+The harness constrains agent behavior. The 12 factors provide the design principles that make those constraints effective.
+
 ## Layer 4: Closed-Loop Optimization
 
 The outermost layer uses telemetry as active feedback control. Instead of passive monitoring, the system measures behavior, detects constraint violations, and automatically fixes problems.
