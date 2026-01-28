@@ -1,18 +1,17 @@
 {
-  "lastUpdated": "2026-01-28T16:03:02.161Z",
+  "lastUpdated": "2026-01-29T22:30:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T19:30:00Z",
-    "iteration": 14,
+    "lastRun": "2026-01-29T22:30:00Z",
+    "iteration": 20,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
-    "appendixSubtasksCompleted": 4,
-    "recommendedNext": "task-229",
-    "reasoning": "Curation cycle 14. Completed task-232 (structured outputs). Marked 4 appendix subtasks complete (parent task-098 already complete/out of scope). Next highest priority: task-229 (update chapter prose for Agent SDK focus) at score 365."
+    "recommendedNext": "task-256",
+    "reasoning": "Curation cycle 20. Queue is clean with 7 main pending tasks (16 total including subtasks). All high-priority work complete. Remaining tasks are low/medium priority polish: 1 diagram (task-256), 2 enhancements (task-301, task-303), 2 KB articles (task-316, task-317), 2 meta-tasks (task-091, task-097). Next: task-256 (Cost Protection Layers diagram) at score 175. Publishing readiness: 99%."
   },
   "prds": {
     "index": {
@@ -1902,20 +1901,20 @@
     ]
   },
   "stats": {
-    "pending": 7,
+    "pending": 16,
     "inProgress": 0,
-    "complete": 54,
+    "complete": 135,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "b12d73881dbafab752f89c52d1cc67e609a6b04b",
-    "lastSuccessfulTask": "iteration-18",
-    "lastCheckpoint": "2026-01-28T16:03:02Z",
+    "lastGoodCommit": "b33a0f08b4d72aca90ecd4343b984e489ed34b72",
+    "lastSuccessfulTask": "iteration-20",
+    "lastCheckpoint": "2026-01-29T22:30:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
-    "failedAttempts": 1,
-    "lastQueueCuration": "2026-01-29T19:30:00Z"
+    "failedAttempts": 0,
+    "lastQueueCuration": "2026-01-29T22:30:00Z"
   },
-  "lastQueueCuration": "2026-01-29T19:30:00Z"
+  "lastQueueCuration": "2026-01-29T22:30:00Z"
 }
