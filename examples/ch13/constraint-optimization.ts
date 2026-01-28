@@ -5,7 +5,21 @@
  * using telemetry, constraints, and automated agent-driven fixes.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+
+// Helper to extract text content from Agent SDK streaming responses
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // ============================================================================
 // Constraint Types
@@ -231,8 +245,6 @@ export interface OptimizationContext {
 export async function generateOptimizationFix(
   context: OptimizationContext
 ): Promise<string> {
-  const client = new Anthropic();
-
   const violationReport = context.violations
     .map(
       (v) =>
@@ -245,13 +257,7 @@ export async function generateOptimizationFix(
       ? `\n\nPrevious attempted fixes that did not resolve the issue:\n${context.previousAttempts.join("\n---\n")}`
       : "";
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 2048,
-    messages: [
-      {
-        role: "user",
-        content: `You are a performance optimization agent. Analyze the constraint violations and propose a minimal, targeted fix.
+  const prompt = `You are a performance optimization agent. Analyze the constraint violations and propose a minimal, targeted fix.
 
 ## Constraint Violations
 ${violationReport}
@@ -268,13 +274,21 @@ ${previousAttemptsNote}
 3. Explain why the fix addresses the root cause
 4. Return only the fixed code with a brief comment explaining the change
 
-Focus on the most critical violations first. Make surgical changes, not rewrites.`,
-      },
-    ],
+Focus on the most critical violations first. Make surgical changes, not rewrites.`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const textContent = response.content.find((block) => block.type === "text");
-  return textContent ? textContent.text : "";
+  let result = "";
+  for await (const message of response) {
+    result += extractTextContent(message);
+  }
+  return result;
 }
 
 export async function runOptimizationLoop(

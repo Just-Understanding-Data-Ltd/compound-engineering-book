@@ -1,16 +1,16 @@
 {
-  "lastUpdated": "2026-01-29T05:00:00Z",
+  "lastUpdated": "2026-01-29T05:15:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T05:00:00Z",
-    "iteration": 28,
+    "lastRun": "2026-01-29T05:15:00Z",
+    "iteration": 29,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
-    "recommendedNext": "task-225",
-    "reasoning": "Completed task-224 (ch12 Agent SDK migration). Migrated 5 files (ast-grep-refactor.ts, incremental-development.ts, plan-mode-session.ts, playwright-automation.ts, script-capture.ts). All 59 tests pass. Next: task-225 (ch13 SDK migration) continues the systematic SDK migration. Remaining: task-225-task-227 (ch13-ch15) plus test suite task-228."
+    "recommendedNext": "task-226",
+    "reasoning": "Completed task-225 (ch13 Agent SDK migration). Migrated 4 files (constraint-optimization.ts, agent-swarm.ts, harness-configuration.ts, mcp-project-context.ts). All 61 tests pass, all 4 demos run correctly. Next: task-226 (ch14 SDK migration) continues the systematic SDK migration. Remaining: task-226-task-227 (ch14-ch15) plus test suite task-228. Parent task-216 now 9/11 subtasks complete (82%)."
   },
   "prds": {
     "index": {
@@ -1309,11 +1309,13 @@
           "type": "milestone",
           "title": "Rewrite ch13 examples with Agent SDK",
           "description": "Building the Harness - convert to Agent SDK harness patterns.",
-          "status": "pending",
+          "status": "complete",
           "score": 605,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch13:20 + age:100 = 1120 (recalc with age bonus) → 705 (display score)",
           "priority": "critical",
-          "createdAt": "2026-01-28T22:00:00Z"
+          "createdAt": "2026-01-28T22:00:00Z",
+          "completedAt": "2026-01-29T05:15:00Z",
+          "note": "Migrated 4 files: constraint-optimization.ts, agent-swarm.ts, harness-configuration.ts, mcp-project-context.ts. Uses query() function with streaming pattern. 61 tests pass, all 4 demos run correctly."
         },
         {
           "id": "task-226",
@@ -1853,16 +1855,16 @@
     ]
   },
   "stats": {
-    "pending": 40,
+    "pending": 38,
     "inProgress": 1,
-    "complete": 109,
+    "complete": 111,
     "blocked": 1,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "4b0533dbff7589b3a28c1e3a13d91ba02bf60d19",
-    "lastSuccessfulTask": "iteration-27",
-    "lastCheckpoint": "2026-01-28T12:33:31Z",
+    "lastGoodCommit": "f4931da997bb4647e2e0a08a7de6485f72782cd5",
+    "lastSuccessfulTask": "iteration-28",
+    "lastCheckpoint": "2026-01-28T12:40:20Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

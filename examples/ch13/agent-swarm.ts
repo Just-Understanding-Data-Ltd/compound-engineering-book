@@ -5,7 +5,21 @@
  * for large tasks, task breakdown, and result merging.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+
+// Helper to extract text content from Agent SDK streaming responses
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // ============================================================================
 // Task Breakdown Types
@@ -100,8 +114,7 @@ export function breakdownSpec(
 // ============================================================================
 
 export async function spawnAgent(
-  task: TaskSpec,
-  client: Anthropic
+  task: TaskSpec
 ): Promise<AgentResult> {
   const startTime = Date.now();
 
@@ -129,14 +142,18 @@ ${task.constraints.join("\n")}
 Expected output: ${task.expectedOutput}`;
 
   try {
-    const response = await client.messages.create({
-      model: "claude-sonnet-4-5-20250929",
-      max_tokens: 4096,
-      messages: [{ role: "user", content: prompt }],
+    const response = query({
+      prompt,
+      options: {
+        model: "claude-sonnet-4-5-20250929",
+        allowedTools: [],
+      },
     });
 
-    const textContent = response.content.find((b) => b.type === "text");
-    const output = textContent?.text || "";
+    let output = "";
+    for await (const message of response) {
+      output += extractTextContent(message);
+    }
 
     return {
       taskId: task.id,
@@ -165,7 +182,6 @@ export async function executeSwarm(
   tasks: TaskSpec[],
   config: SwarmConfig
 ): Promise<SwarmResult> {
-  const client = new Anthropic();
   const startTime = Date.now();
   const results: AgentResult[] = [];
   const conflicts: ConflictReport[] = [];
@@ -186,20 +202,20 @@ export async function executeSwarm(
     for (let i = 0; i < independentTasks.length; i += config.maxConcurrency) {
       const batch = independentTasks.slice(i, i + config.maxConcurrency);
       const batchResults = await Promise.all(
-        batch.map((task) => executeWithRetry(task, client, config.retryAttempts))
+        batch.map((task) => executeWithRetry(task, config.retryAttempts))
       );
       results.push(...batchResults);
     }
 
     // Execute dependent tasks sequentially
     for (const task of dependentTasks) {
-      const result = await executeWithRetry(task, client, config.retryAttempts);
+      const result = await executeWithRetry(task, config.retryAttempts);
       results.push(result);
     }
   } else {
     // Sequential execution
     for (const task of sortedTasks) {
-      const result = await executeWithRetry(task, client, config.retryAttempts);
+      const result = await executeWithRetry(task, config.retryAttempts);
       results.push(result);
     }
   }
@@ -234,13 +250,12 @@ export async function executeSwarm(
 
 async function executeWithRetry(
   task: TaskSpec,
-  client: Anthropic,
   maxRetries: number
 ): Promise<AgentResult> {
   let lastResult: AgentResult | null = null;
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
-    lastResult = await spawnAgent(task, client);
+    lastResult = await spawnAgent(task);
     if (lastResult.success) {
       return lastResult;
     }
@@ -295,8 +310,7 @@ export function topologicalSort(tasks: TaskSpec[]): TaskSpec[] {
 // ============================================================================
 
 export async function resolveConflicts(
-  swarmResult: SwarmResult,
-  client: Anthropic
+  swarmResult: SwarmResult
 ): Promise<string> {
   if (swarmResult.conflicts.length === 0) {
     return "No conflicts to resolve";
@@ -313,13 +327,7 @@ export async function resolveConflicts(
     .map((r) => `## ${r.taskId}\n${r.output}`)
     .join("\n\n");
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 4096,
-    messages: [
-      {
-        role: "user",
-        content: `Multiple agents have modified the same files. Resolve the conflicts by merging the changes intelligently.
+  const prompt = `Multiple agents have modified the same files. Resolve the conflicts by merging the changes intelligently.
 
 ## Conflicts
 ${conflictReport}
@@ -331,13 +339,21 @@ ${taskOutputs}
 1. Identify overlapping changes in each conflicting file
 2. Merge changes preserving functionality from both
 3. Resolve any contradictory changes by choosing the most recent or most complete version
-4. Return the merged code for each conflicting file`,
-      },
-    ],
+4. Return the merged code for each conflicting file`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const textContent = response.content.find((b) => b.type === "text");
-  return textContent?.text || "";
+  let result = "";
+  for await (const message of response) {
+    result += extractTextContent(message);
+  }
+  return result;
 }
 
 // ============================================================================

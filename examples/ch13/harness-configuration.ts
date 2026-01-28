@@ -5,7 +5,21 @@
  * configuring Claude Code through CLAUDE.md structures, hooks, and constraints.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+
+// Helper to extract text content from Agent SDK streaming responses
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // ============================================================================
 // CLAUDE.md Configuration Types
@@ -328,17 +342,9 @@ export async function generateClaudeMdWithAI(
   projectDescription: string,
   existingFiles: string[]
 ): Promise<string> {
-  const client = new Anthropic();
-
   const fileContext = existingFiles.slice(0, 20).join("\n- ");
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 4096,
-    messages: [
-      {
-        role: "user",
-        content: `Generate a CLAUDE.md configuration for this project:
+  const prompt = `Generate a CLAUDE.md configuration for this project:
 
 Project Description: ${projectDescription}
 
@@ -352,13 +358,21 @@ Generate a CLAUDE.md with:
 4. Scope rules for safe modification
 5. Quality gates with actual commands
 
-Output only the markdown content, no explanation.`,
-      },
-    ],
+Output only the markdown content, no explanation.`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const textContent = response.content.find((block) => block.type === "text");
-  return textContent ? textContent.text : "";
+  let result = "";
+  for await (const message of response) {
+    result += extractTextContent(message);
+  }
+  return result;
 }
 
 // ============================================================================

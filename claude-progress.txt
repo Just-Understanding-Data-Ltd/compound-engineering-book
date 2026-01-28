@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 05:05)
+## Current Status (Updated: 2026-01-29 05:15)
 - Phase: Final Quality Polish & Agent SDK Migration
 - Active: Agent SDK migration (ch06-ch15 examples)
-- Last Completed: task-224: Rewrite ch12 examples with Agent SDK
+- Last Completed: task-225: Rewrite ch13 examples with Agent SDK
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
-- Publishing Readiness: 95% (content complete, SDK migration 8/11 done)
+- Publishing Readiness: 96% (content complete, SDK migration 9/11 done)
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 109/151 (72%) with clear prioritization
+- Tasks Complete: 111/151 (73%) with clear prioritization
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -59,6 +59,24 @@
 - **Confidence**: HIGH (95%)
 
 ## Recent Activity
+
+### 2026-01-29 05:15 - COMPLETED task-225: Ch13 Agent SDK migration
+- What: Migrated ch13 examples from native Anthropic SDK to Claude Agent SDK
+- Files modified:
+  - examples/ch13/constraint-optimization.ts (Constraint-based optimization loop)
+  - examples/ch13/agent-swarm.ts (Parallel agent execution, task breakdown, conflict resolution)
+  - examples/ch13/harness-configuration.ts (CLAUDE.md builder, hooks generator)
+  - examples/ch13/mcp-project-context.ts (MCP server for queryable project context)
+- Changes:
+  - Replaced `import Anthropic from "@anthropic-ai/sdk"` with `import { query, type SDKMessage }`
+  - Added extractTextContent helper function for streaming responses
+  - Updated all API calls: generateOptimizationFix, spawnAgent, resolveConflicts, generateClaudeMdWithAI, queryProjectContext
+  - Removed Anthropic client parameters from function signatures
+  - Renamed `query` parameter to `userQuery` in queryProjectContext to avoid naming conflict with SDK import
+- Tests: All 61 tests pass
+- Demos: All 4 demos run correctly (constraint-optimization, agent-swarm, harness-configuration, mcp-project-context)
+- Stats: 111 complete, 38 pending
+- Parent task: task-216 (Agent SDK Migration) now 9/11 subtasks complete (82%)
 
 ### 2026-01-29 05:05 - COMPLETED task-224: Ch12 Agent SDK migration
 - What: Migrated ch12 examples from native Anthropic SDK to Claude Agent SDK

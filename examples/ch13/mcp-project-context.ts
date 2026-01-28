@@ -5,7 +5,21 @@
  * pattern examples, test coverage, and git history as queryable resources.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+
+// Helper to extract text content from Agent SDK streaming responses
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // ============================================================================
 // MCP Resource Types
@@ -433,10 +447,8 @@ export class ProjectContextServer {
 
 export async function queryProjectContext(
   server: ProjectContextServer,
-  query: string
+  userQuery: string
 ): Promise<string> {
-  const client = new Anthropic();
-
   // List available resources
   const resources = server.listResources();
   const resourceList = resources
@@ -444,28 +456,30 @@ export async function queryProjectContext(
     .join("\n");
 
   // First, determine which resources to query
-  const planResponse = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 1024,
-    messages: [
-      {
-        role: "user",
-        content: `Given this query about a project: "${query}"
+  const planPrompt = `Given this query about a project: "${userQuery}"
 
 Available resources:
 ${resourceList}
 
-Which resources would help answer this query? List the URIs, one per line.`,
-      },
-    ],
+Which resources would help answer this query? List the URIs, one per line.`;
+
+  const planResponse = query({
+    prompt: planPrompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const planText =
-    planResponse.content.find((b) => b.type === "text")?.text || "";
+  let planText = "";
+  for await (const message of planResponse) {
+    planText += extractTextContent(message);
+  }
+
   const selectedUris = planText
     .split("\n")
-    .filter((line) => line.includes("://"))
-    .map((line) => line.trim());
+    .filter((line: string) => line.includes("://"))
+    .map((line: string) => line.trim());
 
   // Fetch the selected resources
   const contextData: string[] = [];
@@ -479,23 +493,26 @@ Which resources would help answer this query? List the URIs, one per line.`,
   }
 
   // Generate answer using context
-  const answerResponse = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 2048,
-    messages: [
-      {
-        role: "user",
-        content: `Answer this query about the project: "${query}"
+  const answerPrompt = `Answer this query about the project: "${userQuery}"
 
 Project Context:
 ${contextData.join("\n\n")}
 
-Provide a clear, specific answer based on the actual project data.`,
-      },
-    ],
+Provide a clear, specific answer based on the actual project data.`;
+
+  const answerResponse = query({
+    prompt: answerPrompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  return answerResponse.content.find((b) => b.type === "text")?.text || "";
+  let result = "";
+  for await (const message of answerResponse) {
+    result += extractTextContent(message);
+  }
+  return result;
 }
 
 // ============================================================================
