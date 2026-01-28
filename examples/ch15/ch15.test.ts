@@ -27,7 +27,8 @@ import {
   allGatesPassed,
   simulateEscalation,
   calculateSavings,
-  type QualityCheck
+  type QualityCheck,
+  type ResponseWrapper
 } from './progressive-escalation';
 
 // Cost Protector tests
@@ -198,13 +199,14 @@ describe('Model Selector', () => {
 
 describe('Progressive Escalation', () => {
   describe('Quality Gates', () => {
-    // Create mock response
-    function createMockResponse(text: string, stopReason: string = 'end_turn') {
+    // Create mock response using new ResponseWrapper format
+    function createMockResponse(text: string, stopReason: 'end_turn' | 'max_tokens' | 'stop_sequence' = 'end_turn'): ResponseWrapper {
       return {
-        content: [{ type: 'text', text }],
-        stop_reason: stopReason,
-        usage: { input_tokens: 100, output_tokens: 50 }
-      } as any;
+        content: text,
+        stopReason: stopReason,
+        inputTokens: 100,
+        outputTokens: 50
+      };
     }
 
     describe('syntaxGate', () => {

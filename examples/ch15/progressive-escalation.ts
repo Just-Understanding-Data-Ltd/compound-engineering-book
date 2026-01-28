@@ -6,9 +6,36 @@
  * This can save 40-70% on AI costs by using Haiku for simple tasks.
  */
 
-import Anthropic from '@anthropic-ai/sdk';
+import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
 import type { ModelTier } from './model-selector';
 import { MODEL_CONFIGS, getModelConfig, estimateCost } from './model-selector';
+
+/**
+ * Extract text content from an Agent SDK message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== 'assistant') return '';
+  const content = message.message.content;
+  if (typeof content === 'string') return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === 'text' && 'text' in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join('');
+}
+
+/**
+ * Response wrapper for quality gate checking
+ * This provides a consistent interface for checking responses
+ */
+export interface ResponseWrapper {
+  content: string;
+  stopReason: 'end_turn' | 'max_tokens' | 'stop_sequence';
+  inputTokens: number;
+  outputTokens: number;
+}
 
 // Quality gate result
 export interface QualityCheck {
@@ -29,27 +56,23 @@ export interface EscalationResult {
   }>;
   totalCost: number;
   savedVsOpus: number;
-  response?: Anthropic.Message;
+  response?: string;
 }
 
 // Quality gate functions
-export type QualityGate = (response: Anthropic.Message) => QualityCheck;
+export type QualityGate = (response: ResponseWrapper) => QualityCheck;
 
 /**
- * Helper to extract text from first content block
+ * Helper to get text content from response wrapper
  */
-function getTextContent(response: Anthropic.Message): string | null {
-  const content = response.content[0];
-  if (content && content.type === 'text') {
-    return content.text;
-  }
-  return null;
+function getTextContent(response: ResponseWrapper): string | null {
+  return response.content || null;
 }
 
 /**
  * Check if response contains valid code (basic syntax check)
  */
-export function syntaxGate(response: Anthropic.Message): QualityCheck {
+export function syntaxGate(response: ResponseWrapper): QualityCheck {
   const text = getTextContent(response);
   if (text === null) {
     return { name: 'syntax', passed: false, message: 'No text response' };
@@ -92,9 +115,9 @@ export function syntaxGate(response: Anthropic.Message): QualityCheck {
 /**
  * Check if response is complete (not truncated)
  */
-export function completenessGate(response: Anthropic.Message): QualityCheck {
+export function completenessGate(response: ResponseWrapper): QualityCheck {
   // Check stop reason
-  if (response.stop_reason === 'max_tokens') {
+  if (response.stopReason === 'max_tokens') {
     return { name: 'completeness', passed: false, message: 'Response was truncated' };
   }
 
@@ -121,7 +144,7 @@ export function completenessGate(response: Anthropic.Message): QualityCheck {
  * Check if response addresses the task
  */
 export function relevanceGate(task: string): QualityGate {
-  return (response: Anthropic.Message): QualityCheck => {
+  return (response: ResponseWrapper): QualityCheck => {
     const rawText = getTextContent(response);
     if (rawText === null) {
       return { name: 'relevance', passed: false, message: 'No text response' };
@@ -152,7 +175,7 @@ export function relevanceGate(task: string): QualityGate {
  * Check minimum response length
  */
 export function lengthGate(minLength: number): QualityGate {
-  return (response: Anthropic.Message): QualityCheck => {
+  return (response: ResponseWrapper): QualityCheck => {
     const text = getTextContent(response);
     if (text === null) {
       return { name: 'length', passed: false, message: 'No text response' };
@@ -174,7 +197,7 @@ export function lengthGate(minLength: number): QualityGate {
  * Run all quality gates on a response
  */
 export function runQualityGates(
-  response: Anthropic.Message,
+  response: ResponseWrapper,
   gates: QualityGate[]
 ): QualityCheck[] {
   return gates.map(gate => gate(response));
@@ -188,15 +211,13 @@ export function allGatesPassed(results: QualityCheck[]): boolean {
 }
 
 /**
- * Execute a task with progressive model escalation
+ * Execute a task with progressive model escalation using Agent SDK
  */
 export async function executeWithEscalation(
-  client: Anthropic,
   task: string,
   options?: {
     gates?: QualityGate[];
     startTier?: ModelTier;
-    maxTokens?: number;
   }
 ): Promise<EscalationResult> {
   const gates = options?.gates || [
@@ -212,7 +233,7 @@ export async function executeWithEscalation(
     : 0;
 
   const attempts: EscalationResult['attempts'] = [];
-  let lastResponse: Anthropic.Message | undefined;
+  let lastResponse: string | undefined;
 
   // Calculate what Opus alone would cost
   const opusOnlyCost = estimateCost('opus', 5000, 1000);
@@ -223,25 +244,40 @@ export async function executeWithEscalation(
 
     console.log(`Trying ${tier}...`);
 
-    const response = await client.messages.create({
-      model: config.modelId,
-      max_tokens: options?.maxTokens || 4096,
-      messages: [{
-        role: 'user',
-        content: task
-      }]
+    const stream = query({
+      prompt: task,
+      options: {
+        model: config.modelId,
+        allowedTools: []
+      }
     });
 
-    const qualityResults = runQualityGates(response, gates);
+    let responseText = '';
+    for await (const message of stream) {
+      const text = extractTextContent(message);
+      if (text) {
+        responseText += text;
+      }
+    }
+
+    // Estimate tokens from content length
+    const inputTokens = Math.ceil(task.length / 4);
+    const outputTokens = Math.ceil(responseText.length / 4);
+
+    // Create response wrapper for quality gates
+    const responseWrapper: ResponseWrapper = {
+      content: responseText,
+      stopReason: 'end_turn',
+      inputTokens,
+      outputTokens
+    };
+
+    const qualityResults = runQualityGates(responseWrapper, gates);
     const passed = allGatesPassed(qualityResults);
-    const cost = estimateCost(
-      tier,
-      response.usage.input_tokens,
-      response.usage.output_tokens
-    );
+    const cost = estimateCost(tier, inputTokens, outputTokens);
 
     attempts.push({ tier, passed, qualityResults, cost });
-    lastResponse = response;
+    lastResponse = responseText;
 
     if (passed) {
       const totalCost = attempts.reduce((sum, a) => sum + a.cost, 0);
@@ -251,7 +287,7 @@ export async function executeWithEscalation(
         attempts,
         totalCost,
         savedVsOpus: opusOnlyCost - totalCost,
-        response
+        response: responseText
       };
     }
 

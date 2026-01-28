@@ -5,8 +5,24 @@
  * Four layers: job timeout, token caps, input limits, budget alerts.
  */
 
-import Anthropic from '@anthropic-ai/sdk';
+import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
 import { estimateCost, type ModelTier } from './model-selector';
+
+/**
+ * Extract text content from an Agent SDK message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== 'assistant') return '';
+  const content = message.message.content;
+  if (typeof content === 'string') return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === 'text' && 'text' in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join('');
+}
 
 // Budget configuration
 export interface BudgetConfig {
@@ -263,10 +279,9 @@ export function estimateTokens(text: string, charsPerToken: number = 4): number 
 }
 
 /**
- * Create a protected API call with all safeguards
+ * Create a protected API call with all safeguards using Agent SDK
  */
 export async function protectedApiCall(
-  client: Anthropic,
   task: string,
   model: string,
   tier: ModelTier,
@@ -275,7 +290,7 @@ export async function protectedApiCall(
     tokenLimits?: TokenLimits;
     timeoutMs?: number;
   }
-): Promise<Anthropic.Message | null> {
+): Promise<string | null> {
   const budget = options?.budget || DEFAULT_BUDGET;
   const limits = options?.tokenLimits || DEFAULT_TOKEN_LIMITS;
   const timeoutMs = options?.timeoutMs || 30000;
@@ -299,41 +314,52 @@ export async function protectedApiCall(
   const truncatedTask = truncateInput(task, limits.maxInputTokens);
 
   // Layer 3: Execute with timeout
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  const timeoutPromise = new Promise<null>((_, reject) => {
+    setTimeout(() => reject(new Error('Request timeout')), timeoutMs);
+  });
 
   try {
-    const response = await client.messages.create({
-      model,
-      max_tokens: limits.maxOutputTokens,
-      messages: [{
-        role: 'user',
-        content: truncatedTask
-      }]
+    const stream = query({
+      prompt: truncatedTask,
+      options: {
+        model,
+        allowedTools: []
+      }
     });
 
-    clearTimeout(timeoutId);
+    let responseText = '';
+    let inputTokens = 0;
+    let outputTokens = 0;
+
+    // Race between stream processing and timeout
+    const processStream = async () => {
+      for await (const message of stream) {
+        const text = extractTextContent(message);
+        if (text) {
+          responseText += text;
+          outputTokens += Math.ceil(text.length / 4);
+        }
+      }
+      inputTokens = estimateTokens(truncatedTask);
+      return responseText;
+    };
+
+    await Promise.race([processStream(), timeoutPromise]);
 
     // Record actual usage
-    const actualCost = estimateCost(
-      tier,
-      response.usage.input_tokens,
-      response.usage.output_tokens
-    );
+    const actualCost = estimateCost(tier, inputTokens, outputTokens);
 
     recordUsage({
       model,
-      inputTokens: response.usage.input_tokens,
-      outputTokens: response.usage.output_tokens,
+      inputTokens,
+      outputTokens,
       cost: actualCost,
       task: task.substring(0, 100)
     });
 
-    return response;
+    return responseText;
   } catch (error) {
-    clearTimeout(timeoutId);
-
-    if (error instanceof Error && error.name === 'AbortError') {
+    if (error instanceof Error && error.message === 'Request timeout') {
       console.error(`Request timed out after ${timeoutMs}ms`);
     } else {
       throw error;

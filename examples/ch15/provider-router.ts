@@ -5,7 +5,23 @@
  * support with automatic fallback and preference-based routing.
  */
 
-import Anthropic from '@anthropic-ai/sdk';
+import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
+
+/**
+ * Extract text content from an Agent SDK message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== 'assistant') return '';
+  const content = message.message.content;
+  if (typeof content === 'string') return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === 'text' && 'text' in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join('');
+}
 
 // Completion options that work across providers
 export interface CompletionOptions {
@@ -38,31 +54,33 @@ export interface AIProvider {
 export type ProviderPreference = 'quality' | 'speed' | 'cost';
 
 /**
- * Claude provider implementation
+ * Claude provider implementation using Agent SDK
  */
 export class ClaudeProvider implements AIProvider {
   name = 'claude';
   model: string;
   costs: { inputPerMTok: number; outputPerMTok: number };
-  private client: Anthropic;
 
   constructor(
     model: string = 'claude-sonnet-4-5-20250929',
     costs?: { inputPerMTok: number; outputPerMTok: number }
   ) {
-    this.client = new Anthropic();
     this.model = model;
     this.costs = costs || { inputPerMTok: 3, outputPerMTok: 15 };
   }
 
   async isAvailable(): Promise<boolean> {
     try {
-      // Simple health check
-      await this.client.messages.create({
-        model: this.model,
-        max_tokens: 10,
-        messages: [{ role: 'user', content: 'ping' }]
+      // Simple health check using Agent SDK
+      const stream = query({
+        prompt: 'ping',
+        options: {
+          model: this.model,
+          allowedTools: []
+        }
       });
+      // Consume stream to complete the check
+      for await (const _ of stream) { /* check completes */ }
       return true;
     } catch {
       return false;
@@ -72,27 +90,38 @@ export class ClaudeProvider implements AIProvider {
   async complete(prompt: string, options?: CompletionOptions): Promise<CompletionResult> {
     const startTime = Date.now();
 
-    const response = await this.client.messages.create({
-      model: this.model,
-      max_tokens: options?.maxTokens || 4096,
-      messages: [{ role: 'user', content: prompt }],
-      stop_sequences: options?.stopSequences
+    const stream = query({
+      prompt,
+      options: {
+        model: this.model,
+        allowedTools: []
+      }
     });
 
+    let content = '';
+    for await (const message of stream) {
+      const text = extractTextContent(message);
+      if (text) {
+        content += text;
+      }
+    }
+
     const latencyMs = Date.now() - startTime;
-    const contentBlock = response.content[0];
-    const content = contentBlock && contentBlock.type === 'text' ? contentBlock.text : '';
+
+    // Estimate tokens from content length (Agent SDK doesn't expose usage directly)
+    const inputTokens = Math.ceil(prompt.length / 4);
+    const outputTokens = Math.ceil(content.length / 4);
 
     const cost =
-      (response.usage.input_tokens * this.costs.inputPerMTok / 1_000_000) +
-      (response.usage.output_tokens * this.costs.outputPerMTok / 1_000_000);
+      (inputTokens * this.costs.inputPerMTok / 1_000_000) +
+      (outputTokens * this.costs.outputPerMTok / 1_000_000);
 
     return {
       content,
       provider: this.name,
       model: this.model,
-      inputTokens: response.usage.input_tokens,
-      outputTokens: response.usage.output_tokens,
+      inputTokens,
+      outputTokens,
       latencyMs,
       cost
     };

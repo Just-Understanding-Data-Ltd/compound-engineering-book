@@ -6,7 +6,23 @@
  * optimize cost while maintaining quality.
  */
 
-import Anthropic from '@anthropic-ai/sdk';
+import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
+
+/**
+ * Extract text content from an Agent SDK message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== 'assistant') return '';
+  const content = message.message.content;
+  if (typeof content === 'string') return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === 'text' && 'text' in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join('');
+}
 
 // Model tiers with their corresponding costs and capabilities
 export type ModelTier = 'haiku' | 'sonnet' | 'opus';
@@ -247,29 +263,34 @@ export function compareCosts(
 }
 
 /**
- * Create an Anthropic client and execute a task with the selected model
+ * Execute a task with the selected model using Agent SDK
  */
 export async function executeWithSelectedModel(
-  client: Anthropic,
   task: string,
   options?: {
     forceModel?: ModelTier;
-    maxTokens?: number;
   }
-): Promise<{ response: Anthropic.Message; tier: ModelTier; config: ModelConfig }> {
+): Promise<{ response: string; tier: ModelTier; config: ModelConfig }> {
   const tier = options?.forceModel || selectModel(task);
   const config = getModelConfig(tier);
 
-  const response = await client.messages.create({
-    model: config.modelId,
-    max_tokens: options?.maxTokens || 4096,
-    messages: [{
-      role: 'user',
-      content: task
-    }]
+  const stream = query({
+    prompt: task,
+    options: {
+      model: config.modelId,
+      allowedTools: []
+    }
   });
 
-  return { response, tier, config };
+  let responseText = '';
+  for await (const message of stream) {
+    const text = extractTextContent(message);
+    if (text) {
+      responseText += text;
+    }
+  }
+
+  return { response: responseText, tier, config };
 }
 
 // Demo: Show model selection in action
