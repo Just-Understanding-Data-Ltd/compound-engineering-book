@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T15:00:00Z",
+  "lastUpdated": "2026-01-29T15:53:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1594,14 +1594,13 @@
       "type": "fix",
       "title": "EPUB: Full rebuild with all improvements, validate, and copy to Desktop",
       "description": "After all typography and font tasks are complete: (1) Run scripts/leanpub-build.sh, (2) Rebuild EPUB with ALL new flags: --css, --syntax-highlighting, --lua-filter, --epub-embed-font (all 8 font files), --template (if created), (3) Run epubcheck for 0 errors, (4) Copy to ~/Desktop/the-meta-engineer.epub, (5) Open in Apple Books for visual verification, (6) Check both light and dark modes.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 535,
       "scoreBreakdown": "high:750 + fix:80 + blocking(3×25):75 + age24h:50 = 955",
-      "blockedBy": [
-        "task-424"
-      ],
-      "createdAt": "2026-01-28T22:10:00Z"
+      "blockedBy": [],
+      "createdAt": "2026-01-28T22:10:00Z",
+      "completedAt": "2026-01-29T15:53:00Z"
     },
     {
       "id": "task-242",
@@ -2210,16 +2209,16 @@
     ]
   },
   "stats": {
-    "pending": 5,
+    "pending": 4,
     "inProgress": 0,
-    "complete": 169,
+    "complete": 170,
     "blocked": 0,
     "total": 174
   },
   "checkpoints": {
-    "lastGoodCommit": "7477293fde0cb4361e9f01934e8db38055808b73",
-    "lastSuccessfulTask": "iteration-7",
-    "lastCheckpoint": "2026-01-28T22:43:52Z",
+    "lastGoodCommit": "c4e7f3795abb659a4dce745c1df9747016061356",
+    "lastSuccessfulTask": "iteration-8",
+    "lastCheckpoint": "2026-01-28T22:51:11Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 1,

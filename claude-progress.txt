@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 15:00)
-- Phase: EPUB Polish - Final Review Pipeline
-- Active: EPUB visual review pipeline (5 pending, 169 complete)
-- Last Completed: task-424 (Custom syntax highlighting theme for light/dark modes)
+## Current Status (Updated: 2026-01-29 15:53)
+- Phase: EPUB Polish - Visual Review Pipeline
+- Active: EPUB visual reviews (4 pending, 170 complete)
+- Last Completed: task-425 (Full rebuild with all improvements, validated, copied to Desktop)
 - Blockers: None
-- Queue Health: 5 pending, 169 complete
-- Publishing Readiness: 99% - All CSS infrastructure complete, full rebuild next
-- Next Task: task-425 (full rebuild with all improvements) now UNBLOCKED
+- Queue Health: 4 pending, 170 complete
+- Publishing Readiness: 99% - EPUB fully rebuilt with all improvements, epubcheck 0 errors
+- Next Task: task-427/428/429 (visual review pipeline, now UNBLOCKED)
 - Publication Target: 2026-01-30 morning
 
 ## Project State Summary
@@ -17,7 +17,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 168/174 (97%) - ALL CONTENT DONE
+- Tasks Complete: 170/174 (98%) - ALL CONTENT DONE
 - Test Pass Rate: 100% across all chapters (787 tests total)
 - Exercises: 44 total (2-3 per chapter), all reviewed and finalized ✓
 
@@ -30,6 +30,25 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 15:53 - COMPLETED task-425: Full EPUB Rebuild with All Improvements
+- What: Full end-to-end EPUB rebuild with all CSS, font, template, and syntax highlighting improvements
+- Steps completed:
+  1. Ran leanpub-build.sh: 15 chapters converted, 54,284 total words
+  2. Built EPUB with pandoc: all flags (CSS, template, 10 fonts, 2 Lua filters, syntax theme)
+  3. Validated with epubcheck: 0 fatals, 0 errors, 0 warnings, 0 infos
+  4. Copied to ~/Desktop/the-meta-engineer.epub (1.0MB)
+- EPUB contents verified (43 files):
+  - 10 embedded fonts (3 JetBrains Mono TTF, 4 Source Serif WOFF2, 3 Source Sans WOFF2)
+  - Full CSS with dark mode (2 prefers-color-scheme media queries)
+  - Custom template with lang="en", viewport meta, class hooks
+  - Syntax highlighting with 10+ span classes (kw, fu, co, ss, op, etc.)
+  - Part headers with .part-header class hook applied
+  - Cover image (270KB)
+- Unblocked: task-427, task-428, task-429 (visual review pipeline)
+- Iteration: 9
+- Stats: 4 pending, 170 complete
+- Next: task-427/428/429 (EPUB visual reviews for code blocks, tables, typography)
 
 ### 2026-01-29 15:00 - COMPLETED task-424: Custom Syntax Highlighting Theme
 - What: Created custom pandoc highlight theme optimized for both light and dark EPUB modes
