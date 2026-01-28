@@ -1052,20 +1052,84 @@ This book teaches three interrelated skills together:
 
 When writing or improving chapters, use these resources:
 
-### Context7 MCP Plugin
-Use the Context7 plugin to query up-to-date documentation for any library:
-```
-# Resolve library ID first
-mcp__plugin_context7_context7__resolve-library-id("Claude Agent SDK")
+### Context7 MCP Plugin (REQUIRED for SDK Work)
 
-# Then query docs
-mcp__plugin_context7_context7__query-docs("/websites/platform_claude_en_agent-sdk", "custom tools MCP human approval")
+**ALWAYS use Context7 before writing Agent SDK code.** This ensures you use current API patterns, not outdated ones.
+
+```
+# Step 1: Resolve library ID
+mcp__plugin_context7_context7__resolve-library-id("Claude Agent SDK TypeScript")
+
+# Step 2: Query for specific patterns
+mcp__plugin_context7_context7__query-docs("/anthropics/claude-agent-sdk-typescript", "create session streaming messages custom tools")
 ```
 
-Key libraries for this book:
-- `/websites/platform_claude_en_agent-sdk` - Claude Agent SDK docs (868 snippets)
-- `/anthropics/claude-agent-sdk-python` - Python SDK (59 snippets)
-- `/anthropics/claude-agent-sdk-typescript` - TypeScript SDK (31 snippets)
+**Key Library IDs for this book:**
+
+| Library | ID | Snippets | Use For |
+|---------|-----|----------|---------|
+| Agent SDK Docs | `/websites/platform_claude_en_agent-sdk` | 868 | Concepts, architecture |
+| Agent SDK TypeScript | `/anthropics/claude-agent-sdk-typescript` | 31 | TypeScript code patterns |
+| Agent SDK Python | `/anthropics/claude-agent-sdk-python` | 59 | Python examples |
+
+**Common Context7 Queries for Agent SDK Migration:**
+
+```
+# Session management
+mcp__plugin_context7_context7__query-docs("/anthropics/claude-agent-sdk-typescript", "unstable_v2_createSession unstable_v2_prompt multi-turn")
+
+# Streaming responses
+mcp__plugin_context7_context7__query-docs("/anthropics/claude-agent-sdk-typescript", "streaming message types assistant tool_call error handling")
+
+# Custom tools
+mcp__plugin_context7_context7__query-docs("/anthropics/claude-agent-sdk-typescript", "createSdkMcpServer tool zod schema custom tools")
+
+# One-shot queries
+mcp__plugin_context7_context7__query-docs("/anthropics/claude-agent-sdk-typescript", "query function prompt options workingDirectory")
+
+# Session resumption
+mcp__plugin_context7_context7__query-docs("/anthropics/claude-agent-sdk-typescript", "unstable_v2_resumeSession session_id checkpoint")
+```
+
+**Agent SDK Key Patterns (from Context7):**
+
+```typescript
+// One-shot query with streaming
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+const response = query({
+  prompt: "Analyze this code",
+  options: { model: "claude-sonnet-4-5", workingDirectory: "/path" }
+});
+
+for await (const message of response) {
+  if (message.type === 'assistant') console.log(message.content);
+}
+
+// Multi-turn session
+import { unstable_v2_createSession, unstable_v2_prompt } from "@anthropic-ai/claude-agent-sdk";
+
+const session = await unstable_v2_createSession({
+  model: "claude-sonnet-4-5",
+  systemPrompt: "You are a coding assistant."
+});
+
+const response = unstable_v2_prompt(session, { prompt: "Help me refactor" });
+for await (const msg of response) { /* handle */ }
+
+// Custom MCP tools
+import { createSdkMcpServer, tool } from "@anthropic-ai/claude-agent-sdk";
+import { z } from "zod";
+
+const tools = createSdkMcpServer({
+  name: "my-tools",
+  tools: [
+    tool("my_tool", "Description", { param: z.string() }, async (args) => {
+      return { content: [{ type: "text", text: "result" }] };
+    })
+  ]
+});
+```
 
 ### Knowledge Base (`~/Desktop/knowledge-base`)
 Source articles for all chapters. Key directories:
@@ -1073,9 +1137,13 @@ Source articles for all chapters. Key directories:
 - `01-Compound-Engineering/my-doctrine.md` - Core philosophy
 - `01-Compound-Engineering/index.md` - Topic overview
 
-**Workflow for improving content:**
-1. Read the relevant PRD to understand chapter scope
-2. Query Context7 for latest SDK patterns and examples
-3. Cross-reference with knowledge base articles
-4. Update PRD or chapter with accurate, current information
-5. Verify code examples work with latest SDK versions
+**Workflow for Agent SDK Migration (ch06-ch15):**
+1. Read the existing code file to understand current patterns
+2. **Query Context7** for equivalent Agent SDK patterns
+3. Identify which Agent SDK imports to use:
+   - `query` for one-shot prompts
+   - `unstable_v2_createSession` + `unstable_v2_prompt` for multi-turn
+   - `createSdkMcpServer` + `tool` for custom tools
+4. Rewrite the code using Agent SDK patterns
+5. Update message handling to use streaming pattern (`for await...of`)
+6. Test with `bun run` to verify it works
