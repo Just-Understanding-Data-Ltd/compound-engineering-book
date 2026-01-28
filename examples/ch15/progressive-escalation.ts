@@ -7,6 +7,7 @@
  */
 
 import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
+import { countTokens } from '../shared/tokenizer';
 import type { ModelTier } from './model-selector';
 import { MODEL_CONFIGS, getModelConfig, estimateCost } from './model-selector';
 
@@ -260,9 +261,9 @@ export async function executeWithEscalation(
       }
     }
 
-    // Estimate tokens from content length
-    const inputTokens = Math.ceil(task.length / 4);
-    const outputTokens = Math.ceil(responseText.length / 4);
+    // Count tokens using tiktoken for accurate measurement
+    const inputTokens = countTokens(task);
+    const outputTokens = countTokens(responseText);
 
     // Create response wrapper for quality gates
     const responseWrapper: ResponseWrapper = {

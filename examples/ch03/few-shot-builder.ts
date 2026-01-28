@@ -13,6 +13,7 @@
  */
 
 import Anthropic from '@anthropic-ai/sdk';
+import { countTokens } from '../shared/tokenizer';
 
 // Initialize the Anthropic client
 const client = new Anthropic();
@@ -216,15 +217,15 @@ export function selectOptimalExamples(
 /**
  * Estimate prompt token usage
  *
- * Rough estimation: ~4 characters per token for code
+ * Uses tiktoken for accurate token counting instead of character-based estimates.
+ * Character estimates (chars / 4) can be off by 20-40% depending on content.
  *
  * @param config - Few-shot configuration
- * @returns Estimated token count
+ * @returns Accurate token count using tiktoken
  */
 export function estimateTokenUsage(config: FewShotConfig): number {
   const prompt = buildFewShotPrompt(config);
-  // Rough estimation: ~4 characters per token for code
-  return Math.ceil(prompt.length / 4);
+  return countTokens(prompt);
 }
 
 /**

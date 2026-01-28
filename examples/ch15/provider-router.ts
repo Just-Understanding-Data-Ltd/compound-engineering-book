@@ -6,6 +6,7 @@
  */
 
 import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
+import { countTokens } from '../shared/tokenizer';
 
 /**
  * Extract text content from an Agent SDK message
@@ -108,9 +109,9 @@ export class ClaudeProvider implements AIProvider {
 
     const latencyMs = Date.now() - startTime;
 
-    // Estimate tokens from content length (Agent SDK doesn't expose usage directly)
-    const inputTokens = Math.ceil(prompt.length / 4);
-    const outputTokens = Math.ceil(content.length / 4);
+    // Count tokens using tiktoken for accurate measurement
+    const inputTokens = countTokens(prompt);
+    const outputTokens = countTokens(content);
 
     const cost =
       (inputTokens * this.costs.inputPerMTok / 1_000_000) +
@@ -162,7 +163,7 @@ export class MockProvider implements AIProvider {
     // Simulate latency
     await new Promise(resolve => setTimeout(resolve, this.latencyMs));
 
-    const inputTokens = Math.ceil(prompt.length / 4);
+    const inputTokens = countTokens(prompt);
     const outputTokens = options?.maxTokens ? Math.min(500, options.maxTokens) : 500;
 
     const cost =

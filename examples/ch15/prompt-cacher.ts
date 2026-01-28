@@ -6,6 +6,7 @@
  */
 
 import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
+import { countTokens } from '../shared/tokenizer';
 
 /**
  * Extract text content from an Agent SDK message
@@ -169,11 +170,10 @@ export async function cachedApiCall(
     }
   }
 
-  // Estimate cache metrics based on prompt structure
+  // Count tokens using tiktoken for accurate measurement
   // In production, the API returns actual cache_creation_input_tokens and cache_read_input_tokens
-  const charsPerToken = 4;
-  const stableTokens = Math.ceil(stableContext.length / charsPerToken);
-  const dynamicTokens = Math.ceil(dynamicTask.length / charsPerToken);
+  const stableTokens = countTokens(stableContext);
+  const dynamicTokens = countTokens(dynamicTask);
   const totalTokens = stableTokens + dynamicTokens;
 
   // Estimate: first call creates cache, subsequent calls read from cache
@@ -206,20 +206,19 @@ export function analyzeCacheEfficiency(sections: PromptSection[]): {
   cacheEfficiency: number;
   recommendations: string[];
 } {
-  const charsPerToken = 4;
-  let cacheableChars = 0;
-  let dynamicChars = 0;
+  let cacheableTokens = 0;
+  let dynamicTokens = 0;
 
+  // Count tokens using tiktoken for accurate measurement
   for (const section of sections) {
+    const tokens = countTokens(section.content);
     if (section.cacheable) {
-      cacheableChars += section.content.length;
+      cacheableTokens += tokens;
     } else {
-      dynamicChars += section.content.length;
+      dynamicTokens += tokens;
     }
   }
 
-  const cacheableTokens = Math.ceil(cacheableChars / charsPerToken);
-  const dynamicTokens = Math.ceil(dynamicChars / charsPerToken);
   const totalTokens = cacheableTokens + dynamicTokens;
   const cacheEfficiency = totalTokens > 0 ? cacheableTokens / totalTokens : 0;
 

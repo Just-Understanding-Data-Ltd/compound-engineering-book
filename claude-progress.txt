@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 21:00)
+## Current Status (Updated: 2026-01-29 21:30)
 - Phase: Final Quality Polish
-- Active: Content enhancements from KB articles
-- Last Completed: task-309 (add Wave 4 context to ch02 introduction)
+- Active: Code quality fixes
+- Last Completed: task-231 (replace tokensPerChar estimate with tiktoken)
 - Blockers: None - all quality issues have identified solutions
-- Queue Health: 9 pending tasks, clean queue, no duplicates
-- Publishing Readiness: 99% (content complete, SDK migration 12/12 done, prose aligned with SDK patterns)
+- Queue Health: 8 pending tasks, clean queue, no duplicates
+- Publishing Readiness: 99% (content complete, SDK migration 12/12 done, token counting now accurate)
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%) - EM DASHES FIXED ✓
@@ -59,6 +59,22 @@
 - **Confidence**: HIGH (98%)
 
 ## Recent Activity
+
+### 2026-01-29 21:30 - COMPLETED task-231: Replace tokensPerChar estimate with tiktoken
+- What: Replaced character-based token estimates (chars / 4) with accurate tiktoken counting
+- Files modified:
+  - examples/ch03/few-shot-builder.ts: Added countTokens import, updated estimateTokenUsage()
+  - examples/ch15/cost-protector.ts: Fixed inline outputTokens estimate in protectedApiCall()
+  - examples/ch15/provider-router.ts: Updated ClaudeProvider.complete() and MockProvider.complete()
+  - examples/ch15/progressive-escalation.ts: Updated tryWithEscalation() token counting
+  - examples/ch15/prompt-cacher.ts: Updated promptWithCaching() and analyzeCacheEfficiency()
+- Pattern: All files now import countTokens from ../shared/tokenizer (uses tiktoken cl100k_base)
+- Why: Character-based estimates (chars / 4) can be off by 20-40% depending on content type
+- Tests: ch03 (45 pass), ch15 (77 pass), TypeScript compiles cleanly
+- Iteration: 18 (18 % 3 == 0: queue curation due)
+- Stats: 8 pending, 53 complete (main tasks)
+- Outcome: All token counting now uses accurate tiktoken-based measurement
+- Next: Queue curation, then highest priority pending task
 
 ### 2026-01-29 21:00 - COMPLETED task-309: Add Wave 4 context to ch02 introduction
 - What: Added paragraph explaining Wave 3 → Wave 4 transition in AI-assisted development

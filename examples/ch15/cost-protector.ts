@@ -7,6 +7,7 @@
 
 import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
 import { estimateCost, type ModelTier } from './model-selector';
+import { countTokens } from '../shared/tokenizer';
 
 /**
  * Extract text content from an Agent SDK message
@@ -272,10 +273,12 @@ export function filterFiles(
 }
 
 /**
- * Estimate tokens for a piece of text
+ * Count tokens in text using tiktoken for accurate measurement
+ * @param text - Text to count tokens for
+ * @param _charsPerToken - Deprecated, kept for API compatibility
  */
-export function estimateTokens(text: string, charsPerToken: number = 4): number {
-  return Math.ceil(text.length / charsPerToken);
+export function estimateTokens(text: string, _charsPerToken: number = 4): number {
+  return countTokens(text);
 }
 
 /**
@@ -337,7 +340,7 @@ export async function protectedApiCall(
         const text = extractTextContent(message);
         if (text) {
           responseText += text;
-          outputTokens += Math.ceil(text.length / 4);
+          outputTokens += countTokens(text);
         }
       }
       inputTokens = estimateTokens(truncatedTask);

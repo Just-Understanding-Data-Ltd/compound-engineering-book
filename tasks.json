@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T15:40:07.232Z",
+  "lastUpdated": "2026-01-28T15:42:32.925Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1639,10 +1639,11 @@
       "type": "fix",
       "title": "Replace tokensPerChar estimate with tiktoken",
       "description": "Replace the hardcoded `tokensPerChar: 0.25` estimate with actual tiktoken counting for accurate token measurement. Find all instances of this pattern and use the tiktoken library instead.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 185,
-      "createdAt": "2026-01-29T00:00:00Z"
+      "createdAt": "2026-01-29T00:00:00Z",
+      "completedAt": "2026-01-29T21:30:00Z"
     },
     {
       "id": "task-255",
@@ -1900,18 +1901,19 @@
     ]
   },
   "stats": {
-    "pending": 9,
-    "complete": 52,
-    "in_progress": 0,
-    "blocked": 0
+    "pending": 8,
+    "inProgress": 0,
+    "complete": 53,
+    "blocked": 0,
+    "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "57158c75117dd2fbf1d540738376fa0c0440deb4",
-    "lastSuccessfulTask": "iteration-15",
-    "lastCheckpoint": "2026-01-28T15:40:07Z",
-    "consecutiveFailures": 0,
+    "lastGoodCommit": "55b3646074ad66d92c49a8b40cdf9e98cedfb301",
+    "lastSuccessfulTask": "iteration-16",
+    "lastCheckpoint": "2026-01-28T15:42:32Z",
+    "consecutiveFailures": 1,
     "circuitBreakerTripped": false,
-    "failedAttempts": 0,
+    "failedAttempts": 1,
     "lastQueueCuration": "2026-01-29T19:30:00Z"
   },
   "lastQueueCuration": "2026-01-29T19:30:00Z"
