@@ -622,17 +622,29 @@ Why two timeouts? The job timeout (15 min) catches everything including setup an
 
 **Layer 2: Request-Level Token Caps**
 
-Prevent individual API calls from generating excessive output:
+Prevent agent requests from generating excessive output by capping input size:
 
 ```typescript
-const response = await anthropic.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
-  max_tokens: 4096,  // Cap output tokens
-  messages: [{
-    role: 'user',
-    content: `Review this code:\n\n${code.slice(0, 10000)}`  // Cap input
-  }]
-})
+import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
+
+// Cap input to prevent excessive context consumption
+const truncatedCode = code.slice(0, 10000);  // ~2500 tokens
+
+const response = query({
+  prompt: `Review this code:\n\n${truncatedCode}`,
+  options: {
+    model: 'claude-sonnet-4-5-20250929',
+    allowedTools: [],  // Code review needs no tools
+  }
+});
+
+// Stream response and collect text
+let reviewText = '';
+for await (const msg of response) {
+  if (msg.type === 'assistant') {
+    reviewText += extractTextContent(msg);
+  }
+}
 ```
 
 Token limits by task type:
@@ -745,16 +757,25 @@ class CircuitBreaker {
 Use the circuit breaker to protect agent operations:
 
 ```typescript
+import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
+
 const breaker = new CircuitBreaker()
 
-async function reliableAgentCall(prompt: string) {
+async function reliableAgentCall(prompt: string): Promise<string> {
   return breaker.execute(async () => {
-    const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-5-20250929',
-      max_tokens: 4096,
-      messages: [{ role: 'user', content: prompt }]
-    })
-    return response.content
+    const response = query({
+      prompt,
+      options: { model: 'claude-sonnet-4-5-20250929', allowedTools: [] }
+    });
+
+    // Collect streaming response
+    let result = '';
+    for await (const msg of response) {
+      if (msg.type === 'assistant') {
+        result += extractTextContent(msg);
+      }
+    }
+    return result;
   })
 }
 ```

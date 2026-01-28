@@ -1613,12 +1613,13 @@
       "type": "review",
       "title": "Update chapter prose for Agent SDK focus",
       "description": "After code migration, update chapter text to reference Agent SDK concepts (sessions, streaming, resumption) instead of raw API calls.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 365,
       "scoreBreakdown": "high:750 + review:80 = 830",
       "createdAt": "2026-01-28T22:00:00Z",
-      "unblockNote": "Unblocked: task-216 (Agent SDK Migration) completed 2026-01-29T07:00:00Z"
+      "unblockNote": "Unblocked: task-216 (Agent SDK Migration) completed 2026-01-29T07:00:00Z",
+      "completedAt": "2026-01-29T20:00:00Z"
     },
     {
       "id": "task-309",
@@ -1898,9 +1899,9 @@
     ]
   },
   "stats": {
-    "pending": 20,
+    "pending": 10,
     "inProgress": 0,
-    "complete": 131,
+    "complete": 51,
     "blocked": 0,
     "total": 151
   },

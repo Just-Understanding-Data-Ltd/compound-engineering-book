@@ -262,21 +262,32 @@ Two timeouts provide defense in depth. The job timeout catches everything. The s
 
 ### Layer 2: Request-Level Token Caps
 
-Prevent individual API calls from generating excessive output:
+Prevent agent requests from consuming excessive tokens by capping input size:
 
 ```typescript
 // skip-validation
-const response = await anthropic.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
-  max_tokens: 4096,  // Cap output tokens
-  messages: [{
-    role: 'user',
-    content: code.slice(0, 10000)  // Also cap input
-  }]
-})
+import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
+
+// Cap input to control costs (10K chars ≈ 2500 tokens)
+const truncatedCode = code.slice(0, 10000);
+
+const response = query({
+  prompt: `Review this code:\n\n${truncatedCode}`,
+  options: {
+    model: 'claude-sonnet-4-5-20250929',
+    allowedTools: [],
+  }
+});
+
+// Stream and collect response
+for await (const msg of response) {
+  if (msg.type === 'assistant') {
+    // Process response content
+  }
+}
 ```
 
-Match token limits to task type:
+Match input limits to task type for cost control:
 
 | Task Type | Recommended max_tokens |
 |-----------|----------------------|
@@ -381,11 +392,13 @@ The key: stable content goes at the beginning. Dynamic content goes at the end. 
 
 ### Implementing Prompt Caching
 
+Prompt caching uses the `cache_control` parameter in the native Anthropic SDK. This low-level API feature provides fine-grained control over which content blocks get cached. While the Agent SDK handles many optimizations automatically, explicit cache control requires the native SDK:
+
 ```typescript
 // skip-validation
-import Anthropic from '@anthropic-ai/sdk'
+import Anthropic from '@anthropic-ai/sdk';
 
-const client = new Anthropic()
+const client = new Anthropic();
 
 // Load stable context once
 const stableContext = `
@@ -394,7 +407,7 @@ ${await readFile('CLAUDE.md', 'utf-8')}
 
 # Schemas
 ${await readFile('schemas/user.json', 'utf-8')}
-`
+`;
 
 // Make requests with cached context
 const response = await client.messages.create({
@@ -414,14 +427,14 @@ const response = await client.messages.create({
       }
     ]
   }]
-})
+});
 
 // Verify caching is working
 console.log('Cache metrics:', {
   cacheCreation: response.usage.cache_creation_input_tokens,
   cacheRead: response.usage.cache_read_input_tokens,
   regular: response.usage.input_tokens
-})
+});
 ```
 
 First request creates the cache. Subsequent requests (within 5 minutes) read from cache. Target: 80%+ cache hit rate.
@@ -448,7 +461,7 @@ The pattern: identify work that can wait, batch it together, submit before leavi
 
 ### How Batches Work
 
-The API follows a submit-poll-process pattern:
+The Batch API is a native Anthropic API feature not available through the Agent SDK. While the Agent SDK excels at interactive agent sessions with streaming and resumption, batch processing requires the native SDK for submitting multiple requests and polling for results:
 
 ```typescript
 // skip-validation
