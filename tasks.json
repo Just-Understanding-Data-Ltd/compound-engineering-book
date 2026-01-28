@@ -1495,11 +1495,12 @@
       "chapter": "ch08",
       "title": "Ch08: Create Circuit Breaker State Machine diagram",
       "description": "State machine showing Closed -> Open -> Half-Open transitions with triggers.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 600,
       "createdAt": "2026-01-28T15:00:00Z",
-      "suggestedFilename": "assets/diagrams/ch08-circuit-breaker.md"
+      "suggestedFilename": "assets/diagrams/ch08-circuit-breaker.md",
+      "completedAt": "2026-01-28T20:00:00Z"
     },
     {
       "id": "task-307",
@@ -2021,9 +2022,9 @@
     ]
   },
   "stats": {
-    "pending": 51,
+    "pending": 30,
     "inProgress": 1,
-    "complete": 114,
+    "complete": 35,
     "blocked": 1,
     "total": 167
   },

@@ -431,3 +431,31 @@ This separates research from writing, allowing each phase to be done well indepe
 4. Include the placement guidance (before which section, after which section)
 
 ---
+
+### 2026-01-28 - State Machine Diagrams Need Abstract and Concrete Views
+
+**Context**: Creating the circuit breaker state machine diagram for Chapter 8 (task-262), visualizing the Closed/Open/Half-Open pattern for resilience in AI agent systems.
+
+**Observation**: State machine diagrams benefit from two complementary views:
+
+1. **Abstract view**: The pure state diagram showing states and transitions
+2. **Concrete view**: A sequence diagram showing the pattern in action
+
+The circuit breaker diagram includes both:
+- Abstract: `stateDiagram-v2` showing Closed → Open → Half-Open → Closed loop
+- Concrete: `sequenceDiagram` showing 8 requests to an external API with transitions
+
+The abstract view explains "what the pattern is" (three states, four transitions). The concrete view explains "what it looks like when it runs" (request 1-5 fail, request 6 gets fast-fail, request 7 probes, request 8+ resume normal).
+
+Without the concrete example, readers understand the theory but may not intuit the timing. Without the abstract model, readers see the behavior but miss the general pattern.
+
+**Implication**: State machine diagrams should always include both an abstract model and at least one concrete example. The abstract model provides the mental framework. The concrete example provides the intuition.
+
+**Action**: When creating state machine diagrams:
+1. Start with `stateDiagram-v2` for the abstract model
+2. Add state descriptions inside state boxes (not just labels)
+3. Include a `sequenceDiagram` or `flowchart` showing a realistic scenario
+4. Add a reference table with typical configuration values
+5. Include domain-specific context (e.g., "why this matters for AI agents")
+
+---
