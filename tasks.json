@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T10:00:17.506Z",
+  "lastUpdated": "2026-01-29T00:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1241,8 +1241,10 @@
           "parentId": "task-085",
           "type": "milestone",
           "title": "diagrams complete",
-          "status": "pending",
-          "score": -110
+          "status": "complete",
+          "completedAt": "2026-01-29T00:30:00Z",
+          "score": -110,
+          "note": "Created 3 new diagram files: ch15-prompt-caching.md, ch15-skills-vs-subagents.md, ch15-cost-optimization-funnel.md. Combined with existing ch15-model-selection.md, all 5 PRD diagrams complete: Model Selection Decision Tree, Cost Protection Layers, Prompt Caching Architecture, Skills vs Sub-Agents, Cost Optimization Funnel."
         },
         {
           "id": "task-090",
@@ -1567,16 +1569,16 @@
     ]
   },
   "stats": {
-    "pending": 32,
+    "pending": 31,
     "inProgress": 0,
-    "complete": 101,
+    "complete": 102,
     "blocked": 0,
     "total": 133
   },
   "checkpoints": {
-    "lastGoodCommit": "9f66b2ba027854f01ab3a04c386fd95c2528be59",
-    "lastSuccessfulTask": "task-088",
-    "lastCheckpoint": "2026-01-29T00:00:00Z",
+    "lastGoodCommit": "f167a4a308b62c3cfa14f9f857701ace5438515f",
+    "lastSuccessfulTask": "iteration-4",
+    "lastCheckpoint": "2026-01-29T00:30:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
