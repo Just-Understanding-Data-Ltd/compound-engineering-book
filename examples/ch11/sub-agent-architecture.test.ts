@@ -148,7 +148,6 @@ describe("Sub-Agent Orchestration", () => {
     test("can be instantiated with config", () => {
       // Mock config (actual API calls mocked in integration tests)
       const mockConfig: OrchestratorConfig = {
-        client: {} as any, // Would be Anthropic client
         model: "claude-sonnet-4-5-20250929",
         maxTokens: 4096,
       };
@@ -446,7 +445,7 @@ describe("Actor-Critic Loop", () => {
     });
 
     test("can be instantiated with max rounds", () => {
-      const loop = new ActorCriticLoop({} as any, "claude-sonnet-4-5-20250929", 5);
+      const loop = new ActorCriticLoop("claude-sonnet-4-5-20250929", 5);
       expect(loop).toBeDefined();
     });
   });
@@ -624,7 +623,7 @@ describe("Context Hierarchy", () => {
   describe("ContextAwareAgent class", () => {
     test("exposes context info", () => {
       const context = loadAgentContext("backend-engineer", "api");
-      const agent = new ContextAwareAgent({} as any, context, "claude-sonnet-4-5-20250929");
+      const agent = new ContextAwareAgent(context, "claude-sonnet-4-5-20250929");
 
       const info = agent.getContextInfo();
       expect(info.role).toBe("backend-engineer");
@@ -634,7 +633,7 @@ describe("Context Hierarchy", () => {
 
     test("layer priorities are correct", () => {
       const context = loadAgentContext("qa-engineer");
-      const agent = new ContextAwareAgent({} as any, context, "claude-sonnet-4-5-20250929");
+      const agent = new ContextAwareAgent(context, "claude-sonnet-4-5-20250929");
 
       const info = agent.getContextInfo();
       const priorities = info.layers.map((l) => l.priority);

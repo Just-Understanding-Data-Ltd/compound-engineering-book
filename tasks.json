@@ -1,16 +1,16 @@
 {
-  "lastUpdated": "2026-01-28T12:21:44.345Z",
+  "lastUpdated": "2026-01-29T04:45:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T03:30:00Z",
-    "iteration": 25,
+    "lastRun": "2026-01-29T04:45:00Z",
+    "iteration": 27,
     "tasksRemoved": 0,
-    "tasksMerged": 1,
-    "prioritiesAdjusted": 0,
+    "tasksMerged": 0,
+    "prioritiesAdjusted": 1,
     "newTasksAdded": 0,
-    "recommendedNext": "task-223",
-    "reasoning": "Completed task-222 (ch10 Agent SDK migration). Migrated 4 files (ralph-loop.ts, task-management.ts, memory-architecture.ts, clean-slate-recovery.ts) using query() with streaming pattern. 92 tests pass. Added learning about extractTextContent helper pattern. Next: task-223 (ch11 SDK migration) is highest-priority pending subtask at score 605. Remaining SDK migrations: task-223 through task-228 (ch11-ch15 plus test suite). Quality fix tasks (320, 321) are quick wins that can run between SDK migrations."
+    "recommendedNext": "task-224",
+    "reasoning": "Completed task-223 (ch11 Agent SDK migration). Migrated 4 files (sub-agent-orchestration.ts, context-hierarchy.ts, actor-critic-loop.ts, agent-permissions.ts) using query() with streaming pattern. All 67 tests pass. Next: task-224 (ch12 SDK migration) is highest-priority pending subtask. Remaining SDK migrations: task-224-task-227 plus test suite task-228. Quality fix tasks (320, 321) are ready to execute in parallel."
   },
   "prds": {
     "index": {
@@ -1281,11 +1281,13 @@
           "type": "milestone",
           "title": "Rewrite ch11 examples with Agent SDK",
           "description": "Sub-Agent Architecture - convert to Agent SDK sub-agent spawning patterns.",
-          "status": "pending",
+          "status": "complete",
           "score": 605,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch11:30 + age:100 = 1130 (recalc with age bonus) → 705 (display score)",
           "priority": "critical",
-          "createdAt": "2026-01-28T22:00:00Z"
+          "createdAt": "2026-01-28T22:00:00Z",
+          "completedAt": "2026-01-29T04:45:00Z",
+          "note": "Migrated 4 files: sub-agent-orchestration.ts, context-hierarchy.ts, actor-critic-loop.ts, agent-permissions.ts. Uses query() function with streaming pattern. 67 tests pass, all demos run correctly."
         },
         {
           "id": "task-224",
@@ -1823,45 +1825,46 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 148,
-    "lastCompaction": "2026-01-29T03:15:00Z",
-    "note": "Count includes all completed tasks in tasks array after curation cycle 25 (46 main + 102 subtasks)",
+    "count": 149,
+    "lastCompaction": "2026-01-29T04:45:00Z",
+    "note": "Count includes all completed tasks in tasks array after curation cycle 27 (47 main + 102 subtasks)",
     "recentCompletions": [
+      {
+        "id": "task-223",
+        "type": "milestone",
+        "title": "Rewrite ch11 examples with Agent SDK",
+        "completedAt": "2026-01-29T04:45:00Z",
+        "note": "Migrated 4 files with Agent SDK streaming pattern. 67 tests pass."
+      },
+      {
+        "id": "task-306",
+        "type": "enhancement",
+        "title": "Update CLAUDE.md guidance with Less is More insights",
+        "completedAt": "2026-01-29T04:30:00Z"
+      },
       {
         "id": "task-322",
         "type": "fix",
         "title": "Fix 5 broken cross-reference links (duplicate/summary task)",
         "completedAt": "2026-01-29T03:00:00Z"
-      },
-      {
-        "id": "task-319",
-        "type": "enhancement",
-        "title": "Ch09 progressive disclosure skill loader example",
-        "completedAt": "2026-01-29T02:00:00Z"
-      },
-      {
-        "id": "task-318",
-        "type": "enhancement",
-        "title": "Ch09 context effectiveness measurement example",
-        "completedAt": "2026-01-29T01:00:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 41,
+    "pending": 40,
     "inProgress": 1,
-    "complete": 108,
+    "complete": 109,
     "blocked": 1,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "1c2014e9b6702e2827f675867e4418e271f139bc",
-    "lastSuccessfulTask": "iteration-25",
-    "lastCheckpoint": "2026-01-28T12:21:44Z",
+    "lastGoodCommit": "438af937a6cc65e8db5b100014cd293656c378c5",
+    "lastSuccessfulTask": "iteration-27-task-223",
+    "lastCheckpoint": "2026-01-29T04:45:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
-    "lastQueueCuration": "2026-01-29T03:15:00Z"
+    "lastQueueCuration": "2026-01-29T04:45:00Z"
   },
-  "lastQueueCuration": "2026-01-29T03:15:00Z"
+  "lastQueueCuration": "2026-01-29T04:45:00Z"
 }

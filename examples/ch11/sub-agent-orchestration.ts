@@ -3,9 +3,34 @@
  *
  * Demonstrates the core sub-agent architecture pattern: an orchestrator
  * that delegates work to specialized agents and aggregates results.
+ *
+ * Uses the Claude Agent SDK for building production sub-agent systems.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+
+// ============================================================================
+// HELPER FUNCTIONS
+// ============================================================================
+
+/**
+ * Extract text content from an SDK assistant message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+
+  // Extract text from content blocks
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // Agent role definitions
 export type AgentRole =
@@ -34,9 +59,9 @@ export interface AgentResult {
 }
 
 export interface OrchestratorConfig {
-  client: Anthropic;
   model: string;
   maxTokens: number;
+  workingDirectory?: string;
 }
 
 // System prompts for each agent role
@@ -115,7 +140,7 @@ Report findings with severity and specific locations.`,
 };
 
 /**
- * Run a single specialized agent
+ * Run a single specialized agent using Agent SDK
  */
 export async function runAgent(
   config: OrchestratorConfig,
@@ -145,15 +170,22 @@ Provide your output in a structured format with:
 3. Handoff data for the next agent
 `;
 
-  const response = await config.client.messages.create({
-    model: config.model,
-    max_tokens: config.maxTokens,
-    system: systemPrompt,
-    messages: [{ role: "user", content: userPrompt }],
+  // Use Agent SDK query() with streaming
+  const response = query({
+    prompt: userPrompt,
+    options: {
+      model: config.model,
+      systemPrompt,
+      maxTurns: 1,
+      allowedTools: [],
+    },
   });
 
-  const firstBlock = response.content[0];
-  const output = firstBlock && firstBlock.type === "text" ? firstBlock.text : "";
+  // Collect streaming response
+  let output = "";
+  for await (const message of response) {
+    output += extractTextContent(message);
+  }
 
   // Parse the response to extract structured data
   return parseAgentResponse(task.role, output);
@@ -323,10 +355,7 @@ export class SubAgentOrchestrator {
 
 // Demo: Show orchestration flow
 async function demo() {
-  const client = new Anthropic();
-
   const orchestrator = new SubAgentOrchestrator({
-    client,
     model: "claude-sonnet-4-5-20250929",
     maxTokens: 4096,
   });

@@ -5,9 +5,34 @@
  * - Layer 1: Root CLAUDE.md (shared patterns)
  * - Layer 2: Agent behavioral flows (agent-specific md files)
  * - Layer 3: Package-specific context (per-package CLAUDE.md)
+ *
+ * Uses the Claude Agent SDK for building production context-aware agents.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+
+// ============================================================================
+// HELPER FUNCTIONS
+// ============================================================================
+
+/**
+ * Extract text content from an SDK assistant message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+
+  // Extract text from content blocks
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // Context layer types
 export interface ContextLayer {
@@ -278,29 +303,36 @@ Each entity has a corresponding repository interface.
 }
 
 /**
- * Agent with context hierarchy support
+ * Agent with context hierarchy support using Agent SDK
  */
 export class ContextAwareAgent {
-  private client: Anthropic;
   private context: AgentContext;
   private model: string;
 
-  constructor(client: Anthropic, context: AgentContext, model: string) {
-    this.client = client;
+  constructor(context: AgentContext, model: string) {
     this.context = context;
     this.model = model;
   }
 
   async execute(task: string): Promise<string> {
-    const response = await this.client.messages.create({
-      model: this.model,
-      max_tokens: 4096,
-      system: this.context.mergedContext,
-      messages: [{ role: "user", content: task }],
+    // Use Agent SDK query() with streaming
+    const response = query({
+      prompt: task,
+      options: {
+        model: this.model,
+        systemPrompt: this.context.mergedContext,
+        maxTurns: 1,
+        allowedTools: [],
+      },
     });
 
-    const firstBlock = response.content[0];
-    return firstBlock && firstBlock.type === "text" ? firstBlock.text : "";
+    // Collect streaming response
+    let output = "";
+    for await (const message of response) {
+      output += extractTextContent(message);
+    }
+
+    return output;
   }
 
   getContextInfo(): {

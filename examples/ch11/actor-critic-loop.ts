@@ -4,9 +4,34 @@
  * Demonstrates the iterative refinement pattern where an actor generates code
  * and a critic reviews it across 8 dimensions. Each round catches more issues,
  * producing production-ready code before human review.
+ *
+ * Uses the Claude Agent SDK for building production actor-critic systems.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+
+// ============================================================================
+// HELPER FUNCTIONS
+// ============================================================================
+
+/**
+ * Extract text content from an SDK assistant message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+
+  // Extract text from content blocks
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // Critique dimensions with their checklists
 export interface CritiqueDimension {
@@ -146,21 +171,19 @@ export interface ActorCriticSession {
 }
 
 /**
- * Actor-Critic Loop implementation
+ * Actor-Critic Loop implementation using Agent SDK
  */
 export class ActorCriticLoop {
-  private client: Anthropic;
   private model: string;
   private maxRounds: number;
 
-  constructor(client: Anthropic, model: string, maxRounds: number = 5) {
-    this.client = client;
+  constructor(model: string, maxRounds: number = 5) {
     this.model = model;
     this.maxRounds = maxRounds;
   }
 
   /**
-   * Generate code (actor role)
+   * Generate code (actor role) using Agent SDK
    */
   private async actorGenerate(
     task: string,
@@ -174,19 +197,28 @@ ${previousFeedback || ""}
 Focus on correctness, security, and maintainability.
 Provide complete, runnable code.`;
 
-    const response = await this.client.messages.create({
-      model: this.model,
-      max_tokens: 4096,
-      system: systemPrompt,
-      messages: [{ role: "user", content: task }],
+    // Use Agent SDK query() with streaming
+    const response = query({
+      prompt: task,
+      options: {
+        model: this.model,
+        systemPrompt,
+        maxTurns: 1,
+        allowedTools: [],
+      },
     });
 
-    const firstBlock = response.content[0];
-    return firstBlock && firstBlock.type === "text" ? firstBlock.text : "";
+    // Collect streaming response
+    let output = "";
+    for await (const message of response) {
+      output += extractTextContent(message);
+    }
+
+    return output;
   }
 
   /**
-   * Review code (critic role)
+   * Review code (critic role) using Agent SDK
    */
   private async criticReview(
     code: string,
@@ -211,15 +243,22 @@ For each issue found, specify:
 Be thorough but fair. Only report real issues, not style preferences.
 At the end, determine if the code is APPROVED or NEEDS_REVISION.`;
 
-    const response = await this.client.messages.create({
-      model: this.model,
-      max_tokens: 4096,
-      system: systemPrompt,
-      messages: [{ role: "user", content: `Review this code:\n\n${code}` }],
+    // Use Agent SDK query() with streaming
+    const response = query({
+      prompt: `Review this code:\n\n${code}`,
+      options: {
+        model: this.model,
+        systemPrompt,
+        maxTurns: 1,
+        allowedTools: [],
+      },
     });
 
-    const firstBlock = response.content[0];
-    const output = firstBlock && firstBlock.type === "text" ? firstBlock.text : "";
+    // Collect streaming response
+    let output = "";
+    for await (const message of response) {
+      output += extractTextContent(message);
+    }
 
     return this.parseCritiqueResponse(output, round);
   }
@@ -337,12 +376,12 @@ At the end, determine if the code is APPROVED or NEEDS_REVISION.`;
 }
 
 /**
- * Quick critique without full loop (for simple reviews)
+ * Quick critique without full loop (for simple reviews) using Agent SDK
  */
 export async function quickCritique(
-  client: Anthropic,
   code: string,
-  dimensions?: string[]
+  dimensions?: string[],
+  model: string = "claude-sonnet-4-5-20250929"
 ): Promise<CritiqueIssue[]> {
   const selectedDimensions = dimensions
     ? CRITIQUE_DIMENSIONS.filter((d) => dimensions.includes(d.name))
@@ -352,19 +391,21 @@ export async function quickCritique(
     .map((d) => `${d.name}: ${d.items.join(", ")}`)
     .join("\n");
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 2048,
-    messages: [
-      {
-        role: "user",
-        content: `Review this code for issues in: ${dimensionsList}\n\nCode:\n${code}`,
-      },
-    ],
+  // Use Agent SDK query() with streaming
+  const response = query({
+    prompt: `Review this code for issues in: ${dimensionsList}\n\nCode:\n${code}`,
+    options: {
+      model,
+      maxTurns: 1,
+      allowedTools: [],
+    },
   });
 
-  const firstBlock = response.content[0];
-  const output = firstBlock && firstBlock.type === "text" ? firstBlock.text : "";
+  // Collect streaming response
+  let output = "";
+  for await (const message of response) {
+    output += extractTextContent(message);
+  }
 
   // Parse issues from response
   const issues: CritiqueIssue[] = [];
@@ -387,8 +428,6 @@ export async function quickCritique(
 
 // Demo: Show actor-critic loop in action
 async function demo() {
-  const client = new Anthropic();
-
   console.log("Actor-Critic Loop Demo\n");
   console.log("Critique Dimensions:");
   for (const dim of CRITIQUE_DIMENSIONS) {
@@ -397,7 +436,7 @@ async function demo() {
 
   console.log("\nStarting actor-critic loop for JWT authentication...\n");
 
-  const loop = new ActorCriticLoop(client, "claude-sonnet-4-5-20250929", 3);
+  const loop = new ActorCriticLoop("claude-sonnet-4-5-20250929", 3);
 
   const result = await loop.run(
     "Implement a JWT authentication function that validates email/password and returns a token"

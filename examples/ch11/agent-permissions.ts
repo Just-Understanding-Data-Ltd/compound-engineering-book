@@ -4,9 +4,34 @@
  * Demonstrates type-safe permission models for restricting agent capabilities
  * based on their role. Critical for preventing agents from straying into
  * domains where they lack expertise.
+ *
+ * Uses the Claude Agent SDK for building production permission-aware agents.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+
+// ============================================================================
+// HELPER FUNCTIONS
+// ============================================================================
+
+/**
+ * Extract text content from an SDK assistant message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+
+  // Extract text from content blocks
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // Available tools in the system
 export type Tool =
@@ -250,23 +275,21 @@ export class PermissionChecker {
 }
 
 /**
- * Permission-aware agent wrapper
+ * Permission-aware agent wrapper using Agent SDK
  */
 export class PermissionAwareAgent {
-  private client: Anthropic;
   private role: AgentRole;
   private checker: PermissionChecker;
   private model: string;
 
-  constructor(client: Anthropic, role: AgentRole, model: string) {
-    this.client = client;
+  constructor(role: AgentRole, model: string) {
     this.role = role;
     this.checker = new PermissionChecker(role);
     this.model = model;
   }
 
   /**
-   * Execute a task with permission enforcement
+   * Execute a task with permission enforcement using Agent SDK
    */
   async executeTask(task: string): Promise<{
     success: boolean;
@@ -289,15 +312,22 @@ IMPORTANT: Do not attempt operations outside your permissions.
 If you need something outside your scope, report it as a handoff requirement.
     `;
 
-    const response = await this.client.messages.create({
-      model: this.model,
-      max_tokens: 4096,
-      system: systemPrompt,
-      messages: [{ role: "user", content: task }],
+    // Use Agent SDK query() with streaming
+    const response = query({
+      prompt: task,
+      options: {
+        model: this.model,
+        systemPrompt,
+        maxTurns: 1,
+        allowedTools: [],
+      },
     });
 
-    const firstBlock = response.content[0];
-    const output = firstBlock && firstBlock.type === "text" ? firstBlock.text : "";
+    // Collect streaming response
+    let output = "";
+    for await (const message of response) {
+      output += extractTextContent(message);
+    }
 
     return {
       success: true,
