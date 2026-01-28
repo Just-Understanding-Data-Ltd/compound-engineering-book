@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T03:00:00Z",
+  "lastUpdated": "2026-01-29T00:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1309,8 +1309,9 @@
           "type": "milestone",
           "title": "Rewrite ch08 examples with Agent SDK",
           "description": "Error Handling & Debugging - convert to Agent SDK error patterns and recovery.",
-          "status": "pending",
-          "score": -145
+          "status": "complete",
+          "score": -145,
+          "completedAt": "2026-01-28T12:00:00Z"
         },
         {
           "id": "task-221",
@@ -1547,6 +1548,27 @@
         }
       ],
       "score": -295
+    },
+    {
+      "id": "task-231",
+      "type": "fix",
+      "title": "Replace tokensPerChar estimate with tiktoken",
+      "description": "Replace the hardcoded `tokensPerChar: 0.25` estimate with actual tiktoken counting for accurate token measurement. Find all instances of this pattern and use the tiktoken library instead.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 500,
+      "createdAt": "2026-01-29T00:00:00Z"
+    },
+    {
+      "id": "task-232",
+      "type": "fix",
+      "title": "Use structured outputs across all examples",
+      "description": "Replace manual text parsing with Anthropic structured outputs across 20 files. Current pattern: `response.content.find((c) => c.type === \"text\")`. Should use structured outputs with Zod schema for typed responses. Files: ch03(2), ch05(2), ch09(4), ch10(4), ch13(3), ch14(5). See: https://docs.anthropic.com/en/docs/build-with-claude/structured-output",
+      "status": "pending",
+      "priority": "high",
+      "score": 750,
+      "createdAt": "2026-01-29T00:00:00Z",
+      "file": "examples/ch09/entropy-measurement.ts"
     }
   ],
   "completed": {
@@ -1576,16 +1598,16 @@
     ]
   },
   "stats": {
-    "pending": 26,
+    "pending": 27,
     "inProgress": 0,
-    "complete": 106,
+    "complete": 107,
     "blocked": 1,
-    "total": 133
+    "total": 135
   },
   "checkpoints": {
-    "lastGoodCommit": "0dd5a5a37c551c1b87eb2b6a53054f61f3f33802",
-    "lastSuccessfulTask": "task-230",
-    "lastCheckpoint": "2026-01-29T03:00:00Z",
+    "lastGoodCommit": "14289817015c2721e459af882a3d95bb44671952",
+    "lastSuccessfulTask": "iteration-7",
+    "lastCheckpoint": "2026-01-28T10:33:49Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

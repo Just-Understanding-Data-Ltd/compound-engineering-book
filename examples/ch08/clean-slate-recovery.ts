@@ -12,10 +12,7 @@
  * - Cost-benefit analysis of clean slate vs continuing
  */
 
-import Anthropic from "@anthropic-ai/sdk";
-
-// Initialize the Anthropic client
-const client = new Anthropic();
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 
 // ============================================================================
 // CLEAN SLATE TYPES AND INTERFACES
@@ -400,6 +397,25 @@ export function analyzeCostBenefit(attempts: FailedAttempt[]): CostAnalysis {
 // ============================================================================
 
 /**
+ * Extract text content from an assistant message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+
+  // Extract text from content blocks
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
+
+/**
  * Use Claude to extract constraints from a failed implementation
  */
 export async function extractConstraintsWithClaude(
@@ -432,16 +448,26 @@ Respond in JSON format:
   "actualRequirements": ["requirement discovered"]
 }`;
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 1024,
-    messages: [{ role: "user", content: extractionPrompt }],
+  const response = query({
+    prompt: extractionPrompt,
+    options: {
+      cwd: process.cwd(),
+      allowedTools: [], // No tools needed for analysis
+    },
   });
 
-  const textContent = response.content.find((c) => c.type === "text");
-  const responseText = textContent ? textContent.text : "";
+  let fullText = "";
+  for await (const message of response) {
+    if (message.type === "assistant") {
+      fullText += extractTextContent(message);
+    }
+  }
 
-  const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+  if (!fullText) {
+    throw new Error("No text response from Claude");
+  }
+
+  const jsonMatch = fullText.match(/\{[\s\S]*\}/);
   if (!jsonMatch) {
     throw new Error("Failed to parse constraint extraction response");
   }
@@ -476,14 +502,22 @@ Create a clear, concise prompt that:
 
 Output only the prompt text, no JSON.`;
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 1024,
-    messages: [{ role: "user", content: buildPrompt }],
+  const response = query({
+    prompt: buildPrompt,
+    options: {
+      cwd: process.cwd(),
+      allowedTools: [], // No tools needed for analysis
+    },
   });
 
-  const textContent = response.content.find((c) => c.type === "text");
-  return textContent ? textContent.text : "";
+  let fullText = "";
+  for await (const message of response) {
+    if (message.type === "assistant") {
+      fullText += extractTextContent(message);
+    }
+  }
+
+  return fullText || "";
 }
 
 // ============================================================================

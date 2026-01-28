@@ -11,10 +11,7 @@
  * - Context debugging with hierarchical layers
  */
 
-import Anthropic from "@anthropic-ai/sdk";
-
-// Initialize the Anthropic client
-const client = new Anthropic();
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 
 // ============================================================================
 // ERROR DIAGNOSTIC TYPES AND INTERFACES
@@ -317,6 +314,25 @@ export function getPreventionStrategy(category: ErrorCategory): {
 // ============================================================================
 
 /**
+ * Extract text content from an assistant message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+
+  // Extract text from content blocks
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
+
+/**
  * Use Claude to perform automated error diagnosis
  */
 export async function diagnoseErrorWithClaude(
@@ -351,18 +367,27 @@ Analyze this error and respond in JSON format:
   "preventionStrategy": "how to prevent this class of errors"
 }`;
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 1024,
-    messages: [{ role: "user", content: diagnosticPrompt }],
+  const response = query({
+    prompt: diagnosticPrompt,
+    options: {
+      cwd: process.cwd(),
+      allowedTools: [], // No tools needed for analysis
+    },
   });
 
-  // Extract text from response
-  const textContent = response.content.find((c) => c.type === "text");
-  const responseText = textContent ? textContent.text : "";
+  let fullText = "";
+  for await (const message of response) {
+    if (message.type === "assistant") {
+      fullText += extractTextContent(message);
+    }
+  }
+
+  if (!fullText) {
+    throw new Error("No text response from Claude");
+  }
 
   // Parse JSON from response (handle potential markdown code blocks)
-  const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+  const jsonMatch = fullText.match(/\{[\s\S]*\}/);
   if (!jsonMatch) {
     throw new Error("Failed to parse diagnostic response");
   }
@@ -432,16 +457,26 @@ Respond in JSON format:
   }
 }`;
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 2048,
-    messages: [{ role: "user", content: diagnosticPrompt }],
+  const response = query({
+    prompt: diagnosticPrompt,
+    options: {
+      cwd: process.cwd(),
+      allowedTools: [], // No tools needed for analysis
+    },
   });
 
-  const textContent = response.content.find((c) => c.type === "text");
-  const responseText = textContent ? textContent.text : "";
+  let fullText = "";
+  for await (const message of response) {
+    if (message.type === "assistant") {
+      fullText += extractTextContent(message);
+    }
+  }
 
-  const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+  if (!fullText) {
+    throw new Error("No text response from Claude");
+  }
+
+  const jsonMatch = fullText.match(/\{[\s\S]*\}/);
   if (!jsonMatch) {
     throw new Error("Failed to parse five-point diagnostic response");
   }
