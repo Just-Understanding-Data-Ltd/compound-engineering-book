@@ -1,21 +1,21 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 23:00)
-- Phase: Agent SDK Migration (ch06-ch15 code rewrite)
-- Active: task-219 (Rewrite ch07 examples with Agent SDK) → NEXT
-- Last Completed: task-218 (Created ch06 examples with Agent SDK)
+## Current Status (Updated: 2026-01-28 23:30)
+- Phase: Ch15 Completion (testing complete, review pending)
+- Active: task-088 (ch15: reviewed) → NEXT
+- Last Completed: task-087 (ch15 code_tested milestone)
 - Blockers: None active
-- Queue Health: Agent SDK migration in progress (1/10 chapters done)
-- Publishing Readiness: On hold pending SDK migration
+- Queue Health: Ch15 milestones in progress
+- Publishing Readiness: Ch15 needs 3 more milestones (reviewed, diagrams, final)
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
 - Chapter Drafts: 15/15 complete (100%)
 - Chapters Complete: 14/15 (ch01-ch14, 93%)
-- Code Examples: 14/15 with code (93%) - ch15 code DONE, testing needed
+- Code Examples: 15/15 with code (100%) - ch15 code TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 59/63 created (94%)
-- Tasks Complete: 97/118 (82%)
+- Tasks Complete: 100/133 (75%)
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Review Cycle - COMPREHENSIVE)
@@ -27,10 +27,10 @@
 - Diagrams Created: 59/63 (55 ch01-13, 4 ch14 complete; 4 pending in ch15)
 
 ## Next Task Priority (VERIFIED)
-1. task-087 (ch15: code_tested) - READY NOW ← HIGHEST
-2. task-088 (ch15: reviewed) - READY AFTER
-3. task-089 (ch15: diagrams) - READY AFTER
-4. task-090 (ch15: final) - READY AFTER
+1. task-088 (ch15: reviewed) - READY NOW ← HIGHEST
+2. task-089 (ch15: diagrams) - READY AFTER
+3. task-090 (ch15: final) - READY AFTER
+4. task-219 (Rewrite ch07 examples with Agent SDK) - AFTER ch15
 
 ## Timeline to Publication
 - Ch15 code_tested: 1-2 hours
@@ -42,6 +42,18 @@
 - **Publication target**: 2026-02-01 to 2026-02-03
 
 ## Recent Activity
+
+### 2026-01-28 23:30 - COMPLETED task-087: Ch15 code_tested milestone - ITERATION 2
+- What: Fixed TypeScript compilation errors and verified all ch15 code examples
+- Files fixed:
+  - examples/ch15/progressive-escalation.ts: Added getTextContent helper, fixed type narrowing for content blocks, used type-only import for ModelTier, added non-null assertion for array access
+  - examples/ch15/cost-dashboard.ts: Fixed undefined key access in taskCosts and dailyData maps, added null coalescing for array index access
+  - examples/ch15/ch15.test.ts: Added non-null assertions for array access in tests
+- Verification: TypeScript compiles cleanly (tsc --noEmit), 61 tests pass (117 assertions), all 6 demo scripts run correctly (model-selector, progressive-escalation, cost-protector, prompt-cacher, provider-router, cost-dashboard)
+- Tasks: task-087 marked complete
+- Stats: pending 33, complete 100 (75%)
+- Outcome: Ch15 code testing complete, ready for review milestone
+- Next: task-088 (ch15: reviewed)
 
 ### 2026-01-28 23:00 - COMPLETED task-218: Created ch06 examples with Agent SDK - WARMUP
 - What: Created ch06 examples directory and wrote Agent SDK code examples for The Verification Ladder chapter

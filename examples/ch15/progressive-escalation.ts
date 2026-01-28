@@ -7,7 +7,8 @@
  */
 
 import Anthropic from '@anthropic-ai/sdk';
-import { ModelTier, MODEL_CONFIGS, getModelConfig, estimateCost } from './model-selector';
+import type { ModelTier } from './model-selector';
+import { MODEL_CONFIGS, getModelConfig, estimateCost } from './model-selector';
 
 // Quality gate result
 export interface QualityCheck {
@@ -35,15 +36,24 @@ export interface EscalationResult {
 export type QualityGate = (response: Anthropic.Message) => QualityCheck;
 
 /**
+ * Helper to extract text from first content block
+ */
+function getTextContent(response: Anthropic.Message): string | null {
+  const content = response.content[0];
+  if (content && content.type === 'text') {
+    return content.text;
+  }
+  return null;
+}
+
+/**
  * Check if response contains valid code (basic syntax check)
  */
 export function syntaxGate(response: Anthropic.Message): QualityCheck {
-  const content = response.content[0];
-  if (content.type !== 'text') {
+  const text = getTextContent(response);
+  if (text === null) {
     return { name: 'syntax', passed: false, message: 'No text response' };
   }
-
-  const text = content.text;
 
   // Check for obvious syntax errors in code blocks
   const codeBlocks = text.match(/```[\s\S]*?```/g) || [];
@@ -88,12 +98,10 @@ export function completenessGate(response: Anthropic.Message): QualityCheck {
     return { name: 'completeness', passed: false, message: 'Response was truncated' };
   }
 
-  const content = response.content[0];
-  if (content.type !== 'text') {
+  const text = getTextContent(response);
+  if (text === null) {
     return { name: 'completeness', passed: true };
   }
-
-  const text = content.text;
 
   // Check for incomplete sentences
   if (text.endsWith('...') || text.endsWith('etc')) {
@@ -114,12 +122,12 @@ export function completenessGate(response: Anthropic.Message): QualityCheck {
  */
 export function relevanceGate(task: string): QualityGate {
   return (response: Anthropic.Message): QualityCheck => {
-    const content = response.content[0];
-    if (content.type !== 'text') {
+    const rawText = getTextContent(response);
+    if (rawText === null) {
       return { name: 'relevance', passed: false, message: 'No text response' };
     }
 
-    const text = content.text.toLowerCase();
+    const text = rawText.toLowerCase();
     const taskWords = task.toLowerCase().split(/\s+/)
       .filter(w => w.length > 3)
       .slice(0, 5);
@@ -145,16 +153,16 @@ export function relevanceGate(task: string): QualityGate {
  */
 export function lengthGate(minLength: number): QualityGate {
   return (response: Anthropic.Message): QualityCheck => {
-    const content = response.content[0];
-    if (content.type !== 'text') {
+    const text = getTextContent(response);
+    if (text === null) {
       return { name: 'length', passed: false, message: 'No text response' };
     }
 
-    if (content.text.length < minLength) {
+    if (text.length < minLength) {
       return {
         name: 'length',
         passed: false,
-        message: `Response too short (${content.text.length} < ${minLength})`
+        message: `Response too short (${text.length} < ${minLength})`
       };
     }
 
@@ -210,7 +218,7 @@ export async function executeWithEscalation(
   const opusOnlyCost = estimateCost('opus', 5000, 1000);
 
   for (let i = startIndex; i < tierOrder.length; i++) {
-    const tier = tierOrder[i];
+    const tier = tierOrder[i]!; // Safe: loop bounds guarantee valid index
     const config = getModelConfig(tier);
 
     console.log(`Trying ${tier}...`);

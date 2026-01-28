@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T23:00:00Z",
+  "lastUpdated": "2026-01-28T23:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1221,8 +1221,10 @@
           "parentId": "task-085",
           "type": "milestone",
           "title": "code tested",
-          "status": "pending",
-          "score": -100
+          "status": "complete",
+          "completedAt": "2026-01-28T23:30:00Z",
+          "score": -100,
+          "note": "Fixed TypeScript errors (undefined checks in progressive-escalation.ts, cost-dashboard.ts, ch15.test.ts). All TypeScript compiles (tsc --noEmit). 61 tests pass (117 assertions). All 6 demo scripts run correctly."
         },
         {
           "id": "task-088",
@@ -1250,6 +1252,153 @@
         }
       ],
       "score": 875
+    },
+    {
+      "id": "task-216",
+      "type": "refactor",
+      "title": "Agent SDK Migration: Ch06-Ch15 Code Examples",
+      "description": "Migrate all code examples in chapters 06-15 from native Anthropic SDK to Claude Agent SDK. This teaches readers to build custom agents rather than just API calls.",
+      "status": "pending",
+      "priority": "critical",
+      "score": 630,
+      "createdAt": "2026-01-28T22:00:00Z",
+      "subtasks": [
+        {
+          "id": "task-217",
+          "parentId": "task-216",
+          "type": "milestone",
+          "title": "Audit ch06-ch15 for native SDK usage",
+          "description": "Read all code examples in ch06-ch15 and identify files using @anthropic-ai/sdk that should use @anthropic-ai/claude-agent-sdk instead.",
+          "status": "complete",
+          "score": 1150,
+          "completedAt": "2026-01-28T22:30:00Z",
+          "note": "AUDIT COMPLETE: 39 files in ch06-ch15 use native @anthropic-ai/sdk and need migration to @anthropic-ai/claude-agent-sdk. Breakdown: ch06(2), ch07(2), ch08(4), ch09(4), ch10(4), ch11(4), ch12(5), ch13(4), ch14(5), ch15(5). Test files excluded from migration count."
+        },
+        {
+          "id": "task-218",
+          "parentId": "task-216",
+          "type": "milestone",
+          "title": "Rewrite ch06 examples with Agent SDK",
+          "description": "The Verification Ladder - convert examples to use Agent SDK sessions and streaming.",
+          "status": "complete",
+          "completedAt": "2026-01-28T23:00:00Z",
+          "score": 1100,
+          "note": "Created ch06 examples (folder was missing): verification-analyzer.ts, schema-generator.ts, ch06.test.ts. 54 tests pass, both demos run. Uses query() function from Agent SDK."
+        },
+        {
+          "id": "task-219",
+          "parentId": "task-216",
+          "type": "milestone",
+          "title": "Rewrite ch07 examples with Agent SDK",
+          "description": "Quality Gates That Compound - convert examples to Agent SDK patterns.",
+          "status": "pending",
+          "score": -145
+        },
+        {
+          "id": "task-220",
+          "parentId": "task-216",
+          "type": "milestone",
+          "title": "Rewrite ch08 examples with Agent SDK",
+          "description": "Error Handling & Debugging - convert to Agent SDK error patterns and recovery.",
+          "status": "pending",
+          "score": -145
+        },
+        {
+          "id": "task-221",
+          "parentId": "task-216",
+          "type": "milestone",
+          "title": "Rewrite ch09 examples with Agent SDK",
+          "description": "Context Engineering Deep Dive - convert to Agent SDK context management.",
+          "status": "pending",
+          "score": -145
+        },
+        {
+          "id": "task-222",
+          "parentId": "task-216",
+          "type": "milestone",
+          "title": "Rewrite ch10 examples with Agent SDK",
+          "description": "The RALPH Loop - convert to Agent SDK session resumption and checkpoints.",
+          "status": "pending",
+          "score": -145
+        },
+        {
+          "id": "task-223",
+          "parentId": "task-216",
+          "type": "milestone",
+          "title": "Rewrite ch11 examples with Agent SDK",
+          "description": "Sub-Agent Architecture - convert to Agent SDK sub-agent spawning patterns.",
+          "status": "pending",
+          "score": -145
+        },
+        {
+          "id": "task-224",
+          "parentId": "task-216",
+          "type": "milestone",
+          "title": "Rewrite ch12 examples with Agent SDK",
+          "description": "Development Workflows - convert to Agent SDK workflow patterns.",
+          "status": "pending",
+          "score": -145
+        },
+        {
+          "id": "task-225",
+          "parentId": "task-216",
+          "type": "milestone",
+          "title": "Rewrite ch13 examples with Agent SDK",
+          "description": "Building the Harness - convert to Agent SDK harness patterns.",
+          "status": "pending",
+          "score": -145
+        },
+        {
+          "id": "task-226",
+          "parentId": "task-216",
+          "type": "milestone",
+          "title": "Rewrite ch14 examples with Agent SDK",
+          "description": "The Meta-Engineer Playbook - convert to Agent SDK meta-engineering patterns.",
+          "status": "pending",
+          "score": -145
+        },
+        {
+          "id": "task-227",
+          "parentId": "task-216",
+          "type": "milestone",
+          "title": "Rewrite ch15 examples with Agent SDK",
+          "description": "Model Strategy & Cost Optimization - convert to Agent SDK cost patterns.",
+          "status": "pending",
+          "score": -145
+        },
+        {
+          "id": "task-228",
+          "parentId": "task-216",
+          "type": "milestone",
+          "title": "Test all migrated examples",
+          "description": "Run all migrated examples through exercise-validator to confirm they compile and work.",
+          "status": "pending",
+          "score": -145
+        }
+      ]
+    },
+    {
+      "id": "task-230",
+      "type": "fix",
+      "title": "Fix simulated tool outputs to use exact text format",
+      "description": "Audit all code examples that simulate git diffs, shell output, or file contents. Replace any structured array/object representations with exact text format matching real tool output.",
+      "status": "pending",
+      "priority": "high",
+      "score": 435,
+      "createdAt": "2026-01-28T22:00:00Z"
+    },
+    {
+      "id": "task-229",
+      "type": "review",
+      "title": "Update chapter prose for Agent SDK focus",
+      "description": "After code migration, update chapter text to reference Agent SDK concepts (sessions, streaming, resumption) instead of raw API calls.",
+      "status": "pending",
+      "priority": "high",
+      "score": 365,
+      "createdAt": "2026-01-28T22:00:00Z",
+      "blockedBy": [
+        "task-216"
+      ]
     },
     {
       "id": "task-091",
@@ -1387,153 +1536,6 @@
         }
       ],
       "score": -295
-    },
-    {
-      "id": "task-216",
-      "type": "refactor",
-      "title": "Agent SDK Migration: Ch06-Ch15 Code Examples",
-      "description": "Migrate all code examples in chapters 06-15 from native Anthropic SDK to Claude Agent SDK. This teaches readers to build custom agents rather than just API calls.",
-      "status": "pending",
-      "priority": "critical",
-      "score": 1200,
-      "createdAt": "2026-01-28T22:00:00Z",
-      "subtasks": [
-        {
-          "id": "task-217",
-          "parentId": "task-216",
-          "type": "milestone",
-          "title": "Audit ch06-ch15 for native SDK usage",
-          "description": "Read all code examples in ch06-ch15 and identify files using @anthropic-ai/sdk that should use @anthropic-ai/claude-agent-sdk instead.",
-          "status": "complete",
-          "score": 1150,
-          "completedAt": "2026-01-28T22:30:00Z",
-          "note": "AUDIT COMPLETE: 39 files in ch06-ch15 use native @anthropic-ai/sdk and need migration to @anthropic-ai/claude-agent-sdk. Breakdown: ch06(2), ch07(2), ch08(4), ch09(4), ch10(4), ch11(4), ch12(5), ch13(4), ch14(5), ch15(5). Test files excluded from migration count."
-        },
-        {
-          "id": "task-218",
-          "parentId": "task-216",
-          "type": "milestone",
-          "title": "Rewrite ch06 examples with Agent SDK",
-          "description": "The Verification Ladder - convert examples to use Agent SDK sessions and streaming.",
-          "status": "complete",
-          "completedAt": "2026-01-28T23:00:00Z",
-          "score": 1100,
-          "note": "Created ch06 examples (folder was missing): verification-analyzer.ts, schema-generator.ts, ch06.test.ts. 54 tests pass, both demos run. Uses query() function from Agent SDK."
-        },
-        {
-          "id": "task-219",
-          "parentId": "task-216",
-          "type": "milestone",
-          "title": "Rewrite ch07 examples with Agent SDK",
-          "description": "Quality Gates That Compound - convert examples to Agent SDK patterns.",
-          "status": "pending",
-          "score": 1095
-        },
-        {
-          "id": "task-220",
-          "parentId": "task-216",
-          "type": "milestone",
-          "title": "Rewrite ch08 examples with Agent SDK",
-          "description": "Error Handling & Debugging - convert to Agent SDK error patterns and recovery.",
-          "status": "pending",
-          "score": 1090
-        },
-        {
-          "id": "task-221",
-          "parentId": "task-216",
-          "type": "milestone",
-          "title": "Rewrite ch09 examples with Agent SDK",
-          "description": "Context Engineering Deep Dive - convert to Agent SDK context management.",
-          "status": "pending",
-          "score": 1085
-        },
-        {
-          "id": "task-222",
-          "parentId": "task-216",
-          "type": "milestone",
-          "title": "Rewrite ch10 examples with Agent SDK",
-          "description": "The RALPH Loop - convert to Agent SDK session resumption and checkpoints.",
-          "status": "pending",
-          "score": 1080
-        },
-        {
-          "id": "task-223",
-          "parentId": "task-216",
-          "type": "milestone",
-          "title": "Rewrite ch11 examples with Agent SDK",
-          "description": "Sub-Agent Architecture - convert to Agent SDK sub-agent spawning patterns.",
-          "status": "pending",
-          "score": 1075
-        },
-        {
-          "id": "task-224",
-          "parentId": "task-216",
-          "type": "milestone",
-          "title": "Rewrite ch12 examples with Agent SDK",
-          "description": "Development Workflows - convert to Agent SDK workflow patterns.",
-          "status": "pending",
-          "score": 1070
-        },
-        {
-          "id": "task-225",
-          "parentId": "task-216",
-          "type": "milestone",
-          "title": "Rewrite ch13 examples with Agent SDK",
-          "description": "Building the Harness - convert to Agent SDK harness patterns.",
-          "status": "pending",
-          "score": 1065
-        },
-        {
-          "id": "task-226",
-          "parentId": "task-216",
-          "type": "milestone",
-          "title": "Rewrite ch14 examples with Agent SDK",
-          "description": "The Meta-Engineer Playbook - convert to Agent SDK meta-engineering patterns.",
-          "status": "pending",
-          "score": 1060
-        },
-        {
-          "id": "task-227",
-          "parentId": "task-216",
-          "type": "milestone",
-          "title": "Rewrite ch15 examples with Agent SDK",
-          "description": "Model Strategy & Cost Optimization - convert to Agent SDK cost patterns.",
-          "status": "pending",
-          "score": 1055
-        },
-        {
-          "id": "task-228",
-          "parentId": "task-216",
-          "type": "milestone",
-          "title": "Test all migrated examples",
-          "description": "Run all migrated examples through exercise-validator to confirm they compile and work.",
-          "status": "pending",
-          "score": 1050
-        }
-      ]
-    },
-    {
-      "id": "task-229",
-      "type": "review",
-      "title": "Update chapter prose for Agent SDK focus",
-      "description": "After code migration, update chapter text to reference Agent SDK concepts (sessions, streaming, resumption) instead of raw API calls.",
-      "status": "pending",
-      "priority": "high",
-      "score": 900,
-      "createdAt": "2026-01-28T22:00:00Z",
-      "blockedBy": [
-        "task-216"
-      ]
-    },
-    {
-      "id": "task-230",
-      "type": "fix",
-      "title": "Fix simulated tool outputs to use exact text format",
-      "description": "Audit all code examples that simulate git diffs, shell output, or file contents. Replace any structured array/object representations with exact text format matching real tool output.",
-      "status": "pending",
-      "priority": "high",
-      "score": 850,
-      "createdAt": "2026-01-28T22:00:00Z"
     }
   ],
   "completed": {
@@ -1563,16 +1565,16 @@
     ]
   },
   "stats": {
-    "pending": 34,
+    "pending": 33,
     "inProgress": 0,
-    "complete": 99,
+    "complete": 100,
     "blocked": 0,
     "total": 133
   },
   "checkpoints": {
-    "lastGoodCommit": "b722d57b7592021537d39ef83841a8448a01c886",
-    "lastSuccessfulTask": "task-218",
-    "lastCheckpoint": "2026-01-28T23:00:00Z",
+    "lastGoodCommit": "1c9d37ff1173048eedbe48053f2389d27ceee856",
+    "lastSuccessfulTask": "task-087",
+    "lastCheckpoint": "2026-01-28T23:30:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

@@ -611,7 +611,7 @@ describe('Cost Dashboard', () => {
 
       const logs = getUsageLogs();
       expect(logs.length).toBe(1);
-      expect(logs[0].model).toBe('claude-sonnet');
+      expect(logs[0]!.model).toBe('claude-sonnet');
     });
   });
 
@@ -666,7 +666,7 @@ describe('Cost Dashboard', () => {
       const allocation = generateTeamAllocation(sampleData);
 
       for (let i = 1; i < allocation.length; i++) {
-        expect(allocation[i].cost).toBeLessThanOrEqual(allocation[i - 1].cost);
+        expect(allocation[i]!.cost).toBeLessThanOrEqual(allocation[i - 1]!.cost);
       }
     });
   });

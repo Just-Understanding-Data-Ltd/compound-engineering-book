@@ -147,8 +147,9 @@ function findTopExpensive(
     if (!taskCosts[log.taskCategory]) {
       taskCosts[log.taskCategory] = { cost: 0, count: 0 };
     }
-    taskCosts[log.taskCategory].cost += log.cost;
-    taskCosts[log.taskCategory].count++;
+    const taskEntry = taskCosts[log.taskCategory]!;
+    taskEntry.cost += log.cost;
+    taskEntry.count++;
   }
 
   return Object.entries(taskCosts)
@@ -166,12 +167,14 @@ function calculateDailyTrend(
   const dailyData: Record<string, { cost: number; requests: number }> = {};
 
   for (const log of logs) {
-    const date = log.timestamp.toISOString().split('T')[0];
+    const datePart = log.timestamp.toISOString().split('T')[0];
+    const date = datePart ?? 'unknown';
     if (!dailyData[date]) {
       dailyData[date] = { cost: 0, requests: 0 };
     }
-    dailyData[date].cost += log.cost;
-    dailyData[date].requests++;
+    const dailyEntry = dailyData[date]!;
+    dailyEntry.cost += log.cost;
+    dailyEntry.requests++;
   }
 
   return Object.entries(dailyData)
@@ -387,12 +390,12 @@ export function generateSampleData(count: number): UsageMetrics[] {
       tokensOut,
       cost,
       task: `Task ${i}`,
-      taskCategory: taskCategories[Math.floor(Math.random() * taskCategories.length)],
+      taskCategory: taskCategories[Math.floor(Math.random() * taskCategories.length)] ?? 'unknown',
       durationMs: Math.floor(Math.random() * 5000) + 500,
       cacheHitRate: Math.random() * 0.5 + 0.3,  // 30-80%
       escalated: Math.random() < 0.15,  // 15% escalation rate
-      developer: developers[Math.floor(Math.random() * developers.length)],
-      project: projects[Math.floor(Math.random() * projects.length)]
+      developer: developers[Math.floor(Math.random() * developers.length)] ?? 'unknown',
+      project: projects[Math.floor(Math.random() * projects.length)] ?? 'unknown'
     });
   }
 
