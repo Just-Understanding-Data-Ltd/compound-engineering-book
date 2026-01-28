@@ -84,19 +84,21 @@ table {
   width: 100%;
   margin: 1em 0;
   font-size: 0.9em;
+  border: 1px solid #999;
 }
 
 th {
   background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  padding: 0.5em 0.8em;
+  border: 1px solid #999;
+  border-bottom: 2px solid #999;
+  padding: 0.8em;
   text-align: left;
   font-weight: bold;
 }
 
 td {
-  border: 1px solid #ddd;
-  padding: 0.5em 0.8em;
+  border: 1px solid #999;
+  padding: 0.8em;
   vertical-align: top;
 }
 
