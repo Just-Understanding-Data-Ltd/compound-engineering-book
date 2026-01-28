@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 19:00)
+## Current Status (Updated: 2026-01-28 19:30)
 - Phase: Chapter Milestones (14 of 15 complete, 93%)
-- Active: task-085 (ch15: all milestones) → Final chapter completion
-- Last Completed: task-084 (ch14: final) - ITERATION 26
+- Active: task-087 (ch15: code_tested) → Next milestone
+- Last Completed: task-086 (ch15: code_written) - ITERATION 27
 - Blockers: None active
-- Queue Health: CURATED - scores verified, priority order correct
-- Publishing Readiness: 95% (14/15 chapters complete, ch15 remaining)
+- Queue Health: CURATED - iteration 27 % 3 = 0, queue curated
+- Publishing Readiness: 95% (14/15 chapters complete, ch15 in progress)
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
@@ -40,6 +40,24 @@
 - **Publication target**: 2026-02-01 to 2026-02-04
 
 ## Recent Activity
+
+### 2026-01-28 19:30 - COMPLETED task-086: Ch15 code_written milestone - ITERATION 27
+- What: Created all code examples for Chapter 15 (Model Strategy & Cost Optimization)
+- Files created (6 TypeScript modules + 1 test file):
+  - examples/ch15/model-selector.ts (task classification, model routing)
+  - examples/ch15/progressive-escalation.ts (try cheap models first, escalate)
+  - examples/ch15/cost-protector.ts (multi-layer timeout/budget protection)
+  - examples/ch15/prompt-cacher.ts (cache-friendly prompt structures)
+  - examples/ch15/provider-router.ts (multi-provider abstraction, fallback)
+  - examples/ch15/cost-dashboard.ts (usage metrics, team allocation)
+  - examples/ch15/ch15.test.ts (61 tests, 117 assertions)
+- Tests: All 61 tests pass, all demos run correctly
+- TypeScript: Compiles with bun
+- Queue Curation: Iteration 27 % 3 = 0, queue curated (no issues found)
+- Tasks: task-086 marked complete
+- Stats: pending 21, complete 97 (82%)
+- Outcome: Ch15 code complete, ready for testing milestone
+- Next: task-087 (ch15: code_tested)
 
 ### 2026-01-28 19:00 - COMPLETED task-084: Ch14 final milestone - ITERATION 26
 - What: Completed final milestone for Chapter 14 (The Meta-Engineer Playbook)

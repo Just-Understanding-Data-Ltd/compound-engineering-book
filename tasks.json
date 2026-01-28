@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T19:00:00Z",
+  "lastUpdated": "2026-01-28T19:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1211,8 +1211,10 @@
           "parentId": "task-085",
           "type": "milestone",
           "title": "code written",
-          "status": "pending",
-          "score": -95
+          "status": "complete",
+          "completedAt": "2026-01-28T19:30:00Z",
+          "score": -95,
+          "note": "6 TypeScript files created: model-selector.ts, progressive-escalation.ts, cost-protector.ts, prompt-cacher.ts, provider-router.ts, cost-dashboard.ts. Test file with 61 tests (117 assertions). All demos run correctly."
         },
         {
           "id": "task-087",
@@ -1414,16 +1416,16 @@
     ]
   },
   "stats": {
-    "pending": 22,
+    "pending": 21,
     "inProgress": 0,
-    "complete": 96,
+    "complete": 97,
     "blocked": 0,
     "total": 118
   },
   "checkpoints": {
-    "lastGoodCommit": "23434c7673cf4a64ef336961233cf1c740d43a5b",
-    "lastSuccessfulTask": "task-084",
-    "lastCheckpoint": "2026-01-28T19:00:00Z",
+    "lastGoodCommit": "c9168e4ce85fa0585afaf8783babab5c4bcbca81",
+    "lastSuccessfulTask": "task-086",
+    "lastCheckpoint": "2026-01-28T19:30:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
