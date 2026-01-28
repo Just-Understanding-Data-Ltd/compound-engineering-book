@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T07:00:00Z",
+  "lastUpdated": "2026-01-28T14:44:28.152Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1414,10 +1414,11 @@
       "type": "enhancement",
       "title": "ch13: Add doctrine harness component list",
       "description": "Add emphasized list: the harness, the agent workflows, the observability, the math, and the taste you are developing all persist.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 535,
-      "chapter": "ch13"
+      "chapter": "ch13",
+      "completedAt": "2026-01-29T08:00:00Z"
     },
     {
       "id": "task-250",
@@ -1590,7 +1591,7 @@
       "description": "After code migration, update chapter text to reference Agent SDK concepts (sessions, streaming, resumption) instead of raw API calls.",
       "status": "pending",
       "priority": "high",
-      "score": 830,
+      "score": 365,
       "scoreBreakdown": "high:750 + review:80 = 830",
       "createdAt": "2026-01-28T22:00:00Z",
       "unblockNote": "Unblocked: task-216 (Agent SDK Migration) completed 2026-01-29T07:00:00Z"
@@ -1865,16 +1866,16 @@
     ]
   },
   "stats": {
-    "pending": 36,
+    "pending": 35,
     "inProgress": 0,
-    "complete": 115,
+    "complete": 116,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "540743e128d460e6e9bf020b049c087b7b255bed",
-    "lastSuccessfulTask": "task-228",
-    "lastCheckpoint": "2026-01-29T07:00:00Z",
+    "lastGoodCommit": "9a4e9bd472b4519cb665925135cb03ced024e76b",
+    "lastSuccessfulTask": "iteration-3",
+    "lastCheckpoint": "2026-01-28T14:44:28Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

@@ -601,6 +601,20 @@ Define three resources you want your MCP server to expose. Implement one analyze
 
 Pick a real system and define one performance constraint (memory, latency, or error rate). Build a load test that exercises the system. Implement a constraint checker that reads metrics and evaluates violations. Write an optimizer agent prompt that receives violations and proposes fixes. Wire it into CI/CD and test with three scenarios: two violations that get fixed, one pass, one escalation.
 
+## What Persists
+
+You are building the machine that builds products. Even if a specific product fails, what persists is not tied to that product:
+
+- **The harness**: Your four-layer infrastructure for constraining and amplifying AI outputs
+- **The agent workflows**: Your Claude Code scripts, hooks, and orchestration patterns
+- **The observability**: Your tracing, metrics, and feedback loop infrastructure
+- **The math**: Your constraint definitions, optimization loops, and quality gate formulas
+- **The taste**: Your intuition for what works, what fails, and what compounds
+
+Each subsequent product becomes cheaper, faster, and more stable to build. That is why this path compounds: not because any single idea is guaranteed to win, but because the cost of exploration keeps dropping.
+
+The harness is not a product feature. It is organizational capability. The infrastructure outlasts any individual project.
+
 ## Summary
 
 The four-layer harness transforms unreliable AI outputs into production-quality code. Layer 1 configures Claude Code through CLAUDE.md and hooks. Layer 2 engineers the repository for clarity through observability, testing, and structure. Layer 3 automates processes through workflows, meta-testing, and orchestration. Layer 4 closes the feedback loop through constraint-driven optimization.
