@@ -51,7 +51,9 @@ pandoc \
   --metadata subtitle="Building Autonomous AI Systems with Claude Code" \
   --metadata author="James Phoenix" \
   --epub-cover-image=leanpub/images/cover.jpg \
+  --css=leanpub/epub-style.css \
   --from markdown-yaml_metadata_block \
+  --highlight-style=tango \
   --toc \
   --toc-depth=2 \
   -o the-meta-engineer.epub
