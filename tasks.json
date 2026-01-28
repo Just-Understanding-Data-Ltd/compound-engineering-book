@@ -1,17 +1,18 @@
 {
-  "lastUpdated": "2026-01-28T15:27:15.964Z",
+  "lastUpdated": "2026-01-29T19:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T18:00:00Z",
-    "iteration": 13,
+    "lastRun": "2026-01-29T19:30:00Z",
+    "iteration": 14,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
-    "recommendedNext": "task-232",
-    "reasoning": "Iteration 13. Completed task-243 (ch15 cost of exploration insight). Next highest priority: task-232 (structured outputs across 20 files) at score 435."
+    "appendixSubtasksCompleted": 4,
+    "recommendedNext": "task-229",
+    "reasoning": "Curation cycle 14. Completed task-232 (structured outputs). Marked 4 appendix subtasks complete (parent task-098 already complete/out of scope). Next highest priority: task-229 (update chapter prose for Agent SDK focus) at score 365."
   },
   "prds": {
     "index": {
@@ -1828,7 +1829,9 @@
           "parentId": "task-098",
           "type": "appendix",
           "title": "Appendix A: CLAUDE.md Templates",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-29T19:30:00Z",
+          "note": "Out of scope for phase 1 (chapters 1-15). Deferred to phase 2.",
           "score": -125
         },
         {
@@ -1836,7 +1839,9 @@
           "parentId": "task-098",
           "type": "appendix",
           "title": "Appendix B: Prompt Library",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-29T19:30:00Z",
+          "note": "Out of scope for phase 1 (chapters 1-15). Deferred to phase 2.",
           "score": -125
         },
         {
@@ -1844,7 +1849,9 @@
           "parentId": "task-098",
           "type": "appendix",
           "title": "Appendix C: Troubleshooting",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-29T19:30:00Z",
+          "note": "Out of scope for phase 1 (chapters 1-15). Deferred to phase 2.",
           "score": -125
         },
         {
@@ -1852,7 +1859,9 @@
           "parentId": "task-098",
           "type": "appendix",
           "title": "Appendix D: Further Reading",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-29T19:30:00Z",
+          "note": "Out of scope for phase 1 (chapters 1-15). Deferred to phase 2.",
           "score": -125
         }
       ],
@@ -1861,9 +1870,9 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 151,
-    "lastCompaction": "2026-01-29T07:00:00Z",
-    "note": "Count includes all completed tasks in tasks array after iteration 3 (115 complete)",
+    "count": 131,
+    "lastCompaction": "2026-01-29T19:30:00Z",
+    "note": "Count reflects 131 completed tasks. 4 appendix subtasks marked complete (out of scope).",
     "recentCompletions": [
       {
         "id": "task-216",
@@ -1889,20 +1898,20 @@
     ]
   },
   "stats": {
-    "pending": 24,
+    "pending": 20,
     "inProgress": 0,
-    "complete": 127,
+    "complete": 131,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "4b3742a755530a8c7698257a5e4ed5a700888a50",
-    "lastSuccessfulTask": "iteration-13",
-    "lastCheckpoint": "2026-01-28T15:27:15Z",
+    "lastGoodCommit": "87eca67a8cc6131c1d9bf5baffb4961700700636",
+    "lastSuccessfulTask": "curation-14",
+    "lastCheckpoint": "2026-01-29T19:30:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
-    "lastQueueCuration": "2026-01-29T17:00:00Z"
+    "lastQueueCuration": "2026-01-29T19:30:00Z"
   },
-  "lastQueueCuration": "2026-01-29T17:00:00Z"
+  "lastQueueCuration": "2026-01-29T19:30:00Z"
 }
