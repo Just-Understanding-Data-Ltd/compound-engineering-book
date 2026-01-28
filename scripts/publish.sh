@@ -53,7 +53,8 @@ pandoc \
   --epub-cover-image=leanpub/images/cover.jpg \
   --css=leanpub/epub-style.css \
   --from markdown-yaml_metadata_block \
-  --highlight-style=tango \
+  --lua-filter=leanpub/filters/strip-md-links.lua \
+  --syntax-highlighting=tango \
   --toc \
   --toc-depth=2 \
   -o the-meta-engineer.epub
