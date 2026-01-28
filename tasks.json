@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T11:25:19.573Z",
+  "lastUpdated": "2026-01-28T11:27:37.969Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1521,11 +1521,12 @@
       "chapter": "ch02",
       "title": "Add Trust But Verify workflow example",
       "description": "Based on trust-but-verify-protocol.md: Enhance Pattern 3 with verification workflow. Request verification alongside implementation, review test output not code, fix failures immediately, verification becomes quality gates.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 590,
       "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "trust-but-verify-protocol.md"
+      "sourceArticle": "trust-but-verify-protocol.md",
+      "completedAt": "2026-01-28T21:30:00Z"
     },
     {
       "id": "task-300",
@@ -2023,16 +2024,16 @@
     ]
   },
   "stats": {
-    "pending": 29,
+    "pending": 28,
     "inProgress": 1,
-    "complete": 36,
+    "complete": 37,
     "blocked": 1,
     "total": 167
   },
   "checkpoints": {
-    "lastGoodCommit": "d1f2659108762ab066122ca2f2a835051fa47244",
-    "lastSuccessfulTask": "iteration-15",
-    "lastCheckpoint": "2026-01-28T11:25:19Z",
+    "lastGoodCommit": "a3169359b8aa4abe5d17a20d6c4f257a73974dad",
+    "lastSuccessfulTask": "iteration-16",
+    "lastCheckpoint": "2026-01-28T11:27:37Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 1,

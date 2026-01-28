@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 21:00)
+## Current Status (Updated: 2026-01-28 21:30)
 - Phase: Final Quality Polish & Publication Preparation
 - Active: All 15 chapters COMPLETE, focus on quality fixes
-- Last Completed: task-307: Add Incremental Development prompting pattern to ch02
+- Last Completed: task-308: Add Trust But Verify workflow example to ch02
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
 - Publishing Readiness: 92% (content complete, quality gates identified)
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 36/66 (55%) with clear prioritization
+- Tasks Complete: 37/65 (57%) with clear prioritization
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -59,6 +59,21 @@
 - **Confidence**: HIGH (95%)
 
 ## Recent Activity
+
+### 2026-01-28 21:30 - COMPLETED task-308: Trust But Verify workflow example
+- What: Enhanced Pattern 3 (Tests as Specification) with verification workflow in Chapter 2
+- File: chapters/ch02-getting-started-with-claude-code.md
+- Content added:
+  - "The Verification Workflow" subsection after Pattern 3
+  - 3-step workflow example: request with verification, review output, fix immediately
+  - Example test output showing pass/fail format
+  - 4 key benefits: shifted burden, immediate fixes, quality gates, compound learning
+- Source: trust-but-verify-protocol.md KB article (verification workflow patterns)
+- Word count: 3,866 (within 2,500-4,000 target)
+- Quality: No em dashes, no AI slop phrases
+- Stats: 37 complete, 28 pending
+- Outcome: Ch02 Pattern 3 enhanced with practical verification workflow
+- Next: task-300 (integration testing patterns for ch06) or other priority task
 
 ### 2026-01-28 21:00 - COMPLETED task-307: Incremental Development prompting pattern
 - What: Added Pattern 5: Incremental Development to Chapter 2's Basic Prompting Patterns section

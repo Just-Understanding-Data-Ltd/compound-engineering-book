@@ -287,6 +287,61 @@ After tests pass review, implement src/utils/validation.ts:validateEmail() to pa
 
 Why it works: Tests define concrete behavior. Claude Code writes code to pass tests, not to match vague descriptions.
 
+**The Verification Workflow**
+
+The tests-as-specification pattern becomes more powerful when you request verification alongside implementation. Instead of reviewing 500 lines of generated code, you review 10 lines of test output.
+
+The prompt structure:
+```
+"[Implementation request]
+
+After implementation, run the tests and show me the output."
+```
+
+Example workflow:
+
+**Step 1: Request implementation with verification:**
+```
+"Implement email validation in src/utils/validation.ts to pass the tests in tests/validation.test.ts.
+
+After implementation:
+1. Run npm test tests/validation.test.ts
+2. Show me the test output"
+```
+
+**Step 2: Review test output, not code.**
+
+Claude Code responds with:
+```
+✅ validates standard email format: PASSED
+✅ validates email with plus addressing: PASSED
+✅ rejects missing @ symbol: PASSED
+✅ rejects empty string: PASSED
+❌ handles international domains: FAILED
+   Expected: true for "user@例え.jp"
+   Actual: false
+5/6 tests passed, 1 failed
+```
+
+Your review: Scan output for failures. Takes 10 seconds instead of reading 200 lines of regex code.
+
+**Step 3: Fix failures immediately:**
+```
+"Fix the international domain handling and re-run tests."
+```
+
+After fix:
+```
+✅ 6/6 tests passed
+```
+
+Why the verification workflow works:
+
+- **Shifted burden**: You review test output, not implementation code. 10 lines versus 200 lines.
+- **Immediate fixes**: Context is fresh when failures appear. Fixes take minutes, not hours.
+- **Quality gates**: Tests become permanent artifacts. Future changes must pass them.
+- **Compound learning**: Claude Code sees what "correct" looks like through passing tests. Each verification cycle improves future generations.
+
 ### Pattern 4: Exploration Before Implementation
 
 Bad prompt (mixing modes):
