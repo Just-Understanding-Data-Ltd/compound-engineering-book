@@ -535,3 +535,36 @@ Every chapter with SDK calls (ch06-ch15) needs this helper. The pattern is consi
 6. Estimate tokens from text length since Agent SDK doesn't expose usage directly
 
 ---
+
+### 2026-01-29 - Em Dash Removal Follows Predictable Context-Based Patterns
+
+**Context**: Fixing em dashes (—) in PRD files for publication readiness. Task reported 13 em dashes but actual count was ~45 across 9 files.
+
+**Observation**: Em dashes appear in predictable locations and require context-specific replacements:
+
+| Location | Example | Replacement Strategy |
+|----------|---------|---------------------|
+| Section headings | "Case Study—AI Rank Tracker" | Colon: "Case Study: AI Rank Tracker" |
+| Cross-reference lists | "Chapter 1 — Meta-engineering is..." | Colon: "Chapter 1: Meta-engineering..." |
+| Inline parenthetical | "coding agents—treating AI code" | Comma: "coding agents, treating AI code" |
+| Explanatory aside | "This is physics—it's not a question" | Period: "This is physics. It's not a question" |
+| Contrast/addition | "don't just add—they multiply" | Semicolon: "don't just add; they multiply" |
+| Definitional | "capacity—the context window—as" | Parentheses: "capacity (the context window) as" |
+
+The original task underreported the count because grep's "[Omitted long matching line]" message hid em dashes in long paragraphs. The actual count was 3.5x higher than reported.
+
+**Implication**: AI slop detection reports may undercount when using grep on files with long lines. When a slop-checker reports N issues, expect actual count to be 2-4x higher if files contain lengthy paragraphs. The fix pattern is mechanical once you recognize the context categories.
+
+**Action**: When fixing em dashes at scale:
+1. Run `grep -c "—" file` to get accurate count per file before starting
+2. Categorize each em dash by context (heading, list, inline, aside)
+3. Apply replacement systematically by category:
+   - Headings → colons
+   - Lists → colons
+   - Parenthetical → commas or parentheses
+   - Explanatory → periods
+   - Additive/contrast → semicolons
+4. Verify with `grep "—" file` after each file (should return 0 matches)
+5. Budget 2-3x the estimated time if original count came from grep with line omissions
+
+---
