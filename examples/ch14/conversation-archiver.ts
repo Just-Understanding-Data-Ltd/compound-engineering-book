@@ -8,7 +8,21 @@
  * Key concept: Code is derivative. Specs + prompts are the source.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+
+// Extract text content from Agent SDK streaming messages
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // Conversation structure
 interface ConversationMessage {
@@ -91,7 +105,6 @@ export const PRESERVATION_STRATEGIES = {
 
 // Extract insights from a conversation using Claude
 export async function extractInsights(
-  client: Anthropic,
   conversation: Conversation
 ): Promise<ExtractedInsights> {
   // Format conversation for analysis
@@ -102,13 +115,7 @@ export async function extractInsights(
     )
     .join("\n\n");
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 2048,
-    messages: [
-      {
-        role: "user",
-        content: `Review this conversation about "${conversation.feature}" and extract key insights:
+  const prompt = `Review this conversation about "${conversation.feature}" and extract key insights:
 
 ${formattedConversation}
 
@@ -121,13 +128,24 @@ Extract and format as JSON:
   "regenerationPrompt": "A prompt that could regenerate the code from this conversation"
 }
 
-Respond only with valid JSON.`,
-      },
-    ],
+Respond only with valid JSON.`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const textBlock = response.content.find((block) => block.type === "text");
-  if (!textBlock) {
+  const textParts: string[] = [];
+  for await (const message of response) {
+    const text = extractTextContent(message);
+    if (text) textParts.push(text);
+  }
+
+  const responseText = textParts.join("");
+  if (!responseText) {
     return {
       decisions: [],
       problems: [],
@@ -139,7 +157,7 @@ Respond only with valid JSON.`,
 
   try {
     // Extract JSON from the response
-    const jsonMatch = textBlock.text.match(/\{[\s\S]*\}/);
+    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
       return JSON.parse(jsonMatch[0]);
     }

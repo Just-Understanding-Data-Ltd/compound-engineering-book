@@ -1,16 +1,16 @@
 {
-  "lastUpdated": "2026-01-29T05:15:00.000Z",
+  "lastUpdated": "2026-01-29T05:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T05:15:00Z",
-    "iteration": 29,
+    "lastRun": "2026-01-29T05:30:00Z",
+    "iteration": 30,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
-    "recommendedNext": "task-226",
-    "reasoning": "Completed task-225 (ch13 Agent SDK migration). Migrated 4 files (constraint-optimization.ts, agent-swarm.ts, harness-configuration.ts, mcp-project-context.ts). All 61 tests pass, all 4 demos run correctly. Next: task-226 (ch14 SDK migration) continues the systematic SDK migration. Remaining: task-226-task-227 (ch14-ch15) plus test suite task-228. Parent task-216 now 9/11 subtasks complete (82%)."
+    "recommendedNext": "task-227",
+    "reasoning": "Completed task-226 (ch14 Agent SDK migration). Migrated 5 files (meta-builder.ts, workflow-converter.ts, conversation-archiver.ts, skill-auditor.ts, task-decomposer.ts). All 60 tests pass, all demos run correctly. Next: task-227 (ch15 SDK migration) continues the systematic SDK migration. Remaining: task-227 (ch15) plus test suite task-228. Parent task-216 now 10/11 subtasks complete (91%)."
   },
   "prds": {
     "index": {
@@ -1323,11 +1323,13 @@
           "type": "milestone",
           "title": "Rewrite ch14 examples with Agent SDK",
           "description": "The Meta-Engineer Playbook - convert to Agent SDK meta-engineering patterns.",
-          "status": "pending",
+          "status": "complete",
           "score": 605,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch14:15 + age:100 = 1115 (recalc with age bonus) → 705 (display score)",
           "priority": "critical",
-          "createdAt": "2026-01-28T22:00:00Z"
+          "createdAt": "2026-01-28T22:00:00Z",
+          "completedAt": "2026-01-29T05:30:00Z",
+          "note": "Migrated 5 files: meta-builder.ts, workflow-converter.ts, conversation-archiver.ts, skill-auditor.ts, task-decomposer.ts. Uses query() function with streaming pattern. 60 tests pass, all demos run correctly."
         },
         {
           "id": "task-227",
@@ -1834,6 +1836,13 @@
     "note": "Count includes all completed tasks in tasks array after curation cycle 27 (47 main + 102 subtasks)",
     "recentCompletions": [
       {
+        "id": "task-226",
+        "type": "milestone",
+        "title": "Rewrite ch14 examples with Agent SDK",
+        "completedAt": "2026-01-29T05:30:00Z",
+        "note": "Migrated 5 files with Agent SDK streaming pattern. 60 tests pass."
+      },
+      {
         "id": "task-223",
         "type": "milestone",
         "title": "Rewrite ch11 examples with Agent SDK",
@@ -1845,26 +1854,20 @@
         "type": "enhancement",
         "title": "Update CLAUDE.md guidance with Less is More insights",
         "completedAt": "2026-01-29T04:30:00Z"
-      },
-      {
-        "id": "task-322",
-        "type": "fix",
-        "title": "Fix 5 broken cross-reference links (duplicate/summary task)",
-        "completedAt": "2026-01-29T03:00:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 38,
+    "pending": 37,
     "inProgress": 1,
-    "complete": 111,
+    "complete": 112,
     "blocked": 1,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "f4931da997bb4647e2e0a08a7de6485f72782cd5",
-    "lastSuccessfulTask": "iteration-28",
-    "lastCheckpoint": "2026-01-28T12:40:20Z",
+    "lastGoodCommit": "c979f4b40a056c0e5d4b392f5056a9b01728a545",
+    "lastSuccessfulTask": "interrupted-30",
+    "lastCheckpoint": "2026-01-28T13:02:05Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

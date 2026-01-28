@@ -7,7 +7,21 @@
  * Key concept: The product is the output. The system is the asset.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+
+// Extract text content from Agent SDK streaming messages
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // System constraints that define success
 interface SystemConstraints {
@@ -312,16 +326,9 @@ export function calculateROI(
 
 // Generate a meta-engineering plan
 export async function generateMetaPlan(
-  client: Anthropic,
   currentPain: string
 ): Promise<string> {
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 1024,
-    messages: [
-      {
-        role: "user",
-        content: `As a meta-engineer, I want to eliminate this recurring pain:
+  const prompt = `As a meta-engineer, I want to eliminate this recurring pain:
 
 "${currentPain}"
 
@@ -331,13 +338,23 @@ Design a meta-solution that:
 3. Considers a Level 3 system (what system could generate such tools?)
 4. Calculates approximate ROI
 
-Format as a structured plan with clear steps.`,
-      },
-    ],
+Format as a structured plan with clear steps.`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const textBlock = response.content.find((block) => block.type === "text");
-  return textBlock ? textBlock.text : "No plan generated";
+  const textParts: string[] = [];
+  for await (const message of response) {
+    const text = extractTextContent(message);
+    if (text) textParts.push(text);
+  }
+
+  return textParts.join("") || "No plan generated";
 }
 
 // Builder vs Meta-Builder comparison

@@ -8,7 +8,21 @@
  * long-term career safety in the AI era.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+
+// Extract text content from Agent SDK streaming messages
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // The four self-check questions
 interface SelfCheckResult {
@@ -303,16 +317,9 @@ export function generatePreventionPlan(level: AtrophyLevel): string[] {
 
 // Generate skill audit questions for a specific code feature
 export async function generateAuditQuestions(
-  client: Anthropic,
   codeDescription: string
 ): Promise<string[]> {
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 1024,
-    messages: [
-      {
-        role: "user",
-        content: `For code that implements: "${codeDescription}"
+  const prompt = `For code that implements: "${codeDescription}"
 
 Generate 4 questions to test if a developer truly understands it:
 1. A question testing if they can explain it without looking
@@ -320,16 +327,27 @@ Generate 4 questions to test if a developer truly understands it:
 3. A question about worst-case behavior
 4. A question about design tradeoffs
 
-Format as a numbered list with just the questions.`,
-      },
-    ],
+Format as a numbered list with just the questions.`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const textBlock = response.content.find((block) => block.type === "text");
-  if (!textBlock) return [];
+  const textParts: string[] = [];
+  for await (const message of response) {
+    const text = extractTextContent(message);
+    if (text) textParts.push(text);
+  }
+
+  const responseText = textParts.join("");
+  if (!responseText) return [];
 
   // Parse questions from response
-  const lines = textBlock.text.split("\n").filter((line) => line.trim());
+  const lines = responseText.split("\n").filter((line) => line.trim());
   return lines
     .filter((line) => /^\d+\./.test(line))
     .map((line) => line.replace(/^\d+\.\s*/, ""));

@@ -7,7 +7,21 @@
  * Key concept: Tasks should have 3-20 steps with clear boundaries.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
+
+// Extract text content from Agent SDK streaming messages
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // Task size categories
 type TaskSize = "too-small" | "optimal" | "too-large";
@@ -182,7 +196,6 @@ export function estimateTaskSize(description: string): TaskAnalysis {
 
 // Decompose a large task using Claude
 export async function decomposeTask(
-  client: Anthropic,
   taskDescription: string
 ): Promise<DecompositionResult> {
   const analysis = estimateTaskSize(taskDescription);
@@ -209,13 +222,7 @@ export async function decomposeTask(
   }
 
   // Use Claude to decompose
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 2048,
-    messages: [
-      {
-        role: "user",
-        content: `Decompose this large task into 4-8 smaller, agent-executable tasks:
+  const prompt = `Decompose this large task into 4-8 smaller, agent-executable tasks:
 
 "${taskDescription}"
 
@@ -242,13 +249,24 @@ Format as JSON:
 }
 
 The executionOrder array shows which tasks can run in parallel (same inner array).
-Respond only with valid JSON.`,
-      },
-    ],
+Respond only with valid JSON.`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const textBlock = response.content.find((block) => block.type === "text");
-  if (!textBlock) {
+  const textParts: string[] = [];
+  for await (const message of response) {
+    const text = extractTextContent(message);
+    if (text) textParts.push(text);
+  }
+
+  const responseText = textParts.join("");
+  if (!responseText) {
     return {
       originalTask: taskDescription,
       analysis,
@@ -259,7 +277,7 @@ Respond only with valid JSON.`,
   }
 
   try {
-    const jsonMatch = textBlock.text.match(/\{[\s\S]*\}/);
+    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
       const parsed = JSON.parse(jsonMatch[0]);
       const totalSteps = (parsed.tasks || []).reduce(
