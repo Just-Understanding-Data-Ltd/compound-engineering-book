@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T22:00:00Z",
+  "lastUpdated": "2026-01-28T22:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1404,8 +1404,10 @@
           "type": "milestone",
           "title": "Audit ch06-ch15 for native SDK usage",
           "description": "Read all code examples in ch06-ch15 and identify files using @anthropic-ai/sdk that should use @anthropic-ai/claude-agent-sdk instead.",
-          "status": "pending",
-          "score": 1150
+          "status": "complete",
+          "score": 1150,
+          "completedAt": "2026-01-28T22:30:00Z",
+          "note": "AUDIT COMPLETE: 39 files in ch06-ch15 use native @anthropic-ai/sdk and need migration to @anthropic-ai/claude-agent-sdk. Breakdown: ch06(2), ch07(2), ch08(4), ch09(4), ch10(4), ch11(4), ch12(5), ch13(4), ch14(5), ch15(5). Test files excluded from migration count."
         },
         {
           "id": "task-218",
@@ -1559,9 +1561,9 @@
     ]
   },
   "stats": {
-    "pending": 36,
+    "pending": 35,
     "inProgress": 0,
-    "complete": 97,
+    "complete": 98,
     "blocked": 0,
     "total": 133
   },

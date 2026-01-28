@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 21:30)
-- Phase: Final Chapter Push (14 of 15 complete, 93% → targeting 100%)
-- Active: task-087 (ch15: code_tested) → READY TO START
-- Last Completed: Summary Report Generated (SPECIAL TASK)
+## Current Status (Updated: 2026-01-28 22:30)
+- Phase: Agent SDK Migration (NEW PRIORITY - ch06-ch15 code rewrite)
+- Active: task-218 (Rewrite ch06 examples with Agent SDK) → NEXT
+- Last Completed: task-217 (Audit ch06-ch15 for native SDK usage)
 - Blockers: None active
-- Queue Health: CURATED - ready for final push
-- Publishing Readiness: 92% (14/15 chapters complete, ch15 code done)
+- Queue Health: 15 new tasks added for Agent SDK migration
+- Publishing Readiness: On hold pending SDK migration
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
@@ -42,6 +42,25 @@
 - **Publication target**: 2026-02-01 to 2026-02-03
 
 ## Recent Activity
+
+### 2026-01-28 22:30 - COMPLETED task-217: Audit ch06-ch15 for native SDK usage - ITERATION 28
+- What: Audited all code examples in ch06-ch15 for SDK usage patterns
+- Findings:
+  - 50 total TypeScript files in ch06-ch15
+  - 39 files use native @anthropic-ai/sdk (need migration)
+  - 0 files use @anthropic-ai/claude-agent-sdk
+  - 11 test files (no SDK imports)
+- Breakdown by chapter:
+  - ch06: 2 files | ch07: 2 files | ch08: 4 files
+  - ch09: 4 files | ch10: 4 files | ch11: 4 files
+  - ch12: 5 files | ch13: 4 files | ch14: 5 files | ch15: 5 files
+- Also updated CLAUDE.md:
+  - Added SDK usage by chapter (native ch01-05, Agent SDK ch06-15)
+  - Added guidance for simulating tool outputs with exact text format
+- Tasks: task-217 marked complete
+- Stats: pending 35, complete 98 (74%)
+- Outcome: Audit complete, migration scope defined
+- Next: task-218 (Rewrite ch06 examples with Agent SDK)
 
 ### 2026-01-28 21:30 - CREATED: Comprehensive Progress Summary - SPECIAL TASK
 - What: Generated comprehensive progress report synthesizing all project data
