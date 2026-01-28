@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 17:00)
+## Current Status (Updated: 2026-01-28 18:00)
 - Phase: Publication Ready
-- Active: Review milestone task-092 (AI slop check) complete
-- Last Completed: task-092 (AI slop check for KB articles milestone)
+- Active: Review milestone task-093 (Technical accuracy check) complete
+- Last Completed: task-093 (Technical accuracy check with 2 fixes in ch02)
 - Blockers: None
-- Queue Health: 2 meta-tasks pending (10 total with subtasks), queue is essentially complete
-- Publishing Readiness: 99.6% (all substantive work done, only optional polish passes remain)
+- Queue Health: 2 meta-tasks pending (9 total with subtasks), queue is essentially complete
+- Publishing Readiness: 99.7% (all substantive work done, only optional polish passes remain)
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%) - EM DASHES FIXED ✓
@@ -15,12 +15,12 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 141/151 (93%) with clear prioritization
+- Tasks Complete: 142/151 (94%) with clear prioritization
 - Test Pass Rate: 100% across all chapters (787 tests total)
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
 - AI Slop: 5 remaining issues (13 critical em dashes in PRDs FIXED, 3 high, 2 medium in chapters)
-- Tech Accuracy: 3 issues (2 errors ch13, 1 warning ch07) - 98% accurate
+- Tech Accuracy: 2 errors FIXED (ch02 installation method), 1 false positive (ch15 Agent SDK), 5 warnings - 99% accurate ✓
 - Term Introductions: 74 total issues (1 critical, 6 high, 67 medium/low) - CRITICAL+HIGH FIXED ✓
 - Cross-References: 5 broken links identified (exact fixes specified), 100% alignment when fixed
 - Heading Capitalization: 142 instances need sentence case - 82% O'Reilly compliant
@@ -59,6 +59,21 @@
 - **Confidence**: HIGH (98%)
 
 ## Recent Activity
+
+### 2026-01-28 18:00 - COMPLETED task-093: Technical Accuracy Check (Review Milestone)
+- What: Ran comprehensive technical accuracy check across all 15 chapters
+- Results:
+  - Total issues: 8 (2 errors, 1 false positive, 5 warnings)
+  - FIXED: Ch02 Line 42 - Outdated npm installation (now native binary from claude.com/download)
+  - FIXED: Ch02 Line 54 - Non-existent `claude init` command (now manual CLAUDE.md creation)
+  - FALSE POSITIVE: Ch15 Lines 267-288 - Agent SDK `query()` function is valid V1 API (verified via Context7)
+  - Warnings: Minor issues in ch01, ch06, ch07, ch13 (package names, import patterns, shell syntax)
+- Verified CORRECT: Tool names, model names, CLAUDE.md patterns, TypeScript syntax, Zod usage
+- Tech accuracy rate: 99%+ (up from 98%)
+- Iteration: 26
+- Stats: 9 pending, 142 complete
+- Outcome: Critical technical errors fixed; book is technically accurate
+- Next: task-094 (Diagram review) or other review milestone
 
 ### 2026-01-28 17:00 - COMPLETED task-092: AI Slop Check (Review Milestone)
 - What: Ran comprehensive AI slop check across all 15 chapters

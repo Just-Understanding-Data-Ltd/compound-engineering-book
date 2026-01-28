@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T17:00:00Z",
+  "lastUpdated": "2026-01-28T18:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1751,8 +1751,9 @@
           "parentId": "task-091",
           "type": "review",
           "title": "Technical accuracy check",
-          "status": "pending",
-          "score": -135
+          "status": "complete",
+          "score": -135,
+          "completedAt": "2026-01-28T18:00:00Z"
         },
         {
           "id": "task-094",
@@ -1908,16 +1909,16 @@
     ]
   },
   "stats": {
-    "pending": 10,
+    "pending": 9,
     "inProgress": 0,
-    "complete": 141,
+    "complete": 142,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "b3bc7c0b61a638e7d649cbdaab768e0a7ba79572",
-    "lastSuccessfulTask": "curation-25",
-    "lastCheckpoint": "2026-01-28T16:30:00Z",
+    "lastGoodCommit": "59c5dcffbe2a7b0b82904d407c23bf73b814878a",
+    "lastSuccessfulTask": "iteration-25",
+    "lastCheckpoint": "2026-01-28T16:31:20Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

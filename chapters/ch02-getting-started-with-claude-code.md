@@ -32,29 +32,23 @@ Claude Code runs on macOS 11+, Linux (Ubuntu 20+), and Windows 10+ (with WSL2 (W
 
 ### Installation Steps
 
-1. Verify Node.js is installed:
-```bash
-node --version  # Should show v18.0.0 or higher
-```
+1. Download Claude Code from the official website:
+   - Visit https://claude.com/download
+   - Select your platform (macOS, Windows, or Linux)
+   - Run the installer
 
-2. Install Claude Code globally:
-```bash
-npm install -g @anthropic-ai/claude-code
-```
-
-3. Verify installation:
+2. Verify installation:
 ```bash
 claude --version
 claude --help
 ```
 
-4. Navigate to your project and initialize:
+3. Navigate to your project:
 ```bash
 cd your-project
-claude init
 ```
 
-The `claude init` command creates a starter CLAUDE.md file in your project root. This file provides context about your project: what language you use, how to run tests, what patterns to follow. Claude Code reads it automatically at the start of every conversation.
+4. Create a CLAUDE.md file in your project root. This file provides context about your project: what language you use, how to run tests, what patterns to follow. Claude Code reads it automatically at the start of every conversation.
 
 ### Your First CLAUDE.md
 
