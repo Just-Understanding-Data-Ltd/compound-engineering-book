@@ -11,9 +11,7 @@
  * - Scalable skill system without context explosion
  */
 
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 
 // ============================================================================
 // PROGRESSIVE DISCLOSURE TYPES
@@ -442,6 +440,25 @@ export function calculateEfficiency(results: ContextLoadResult[]): {
 // ============================================================================
 
 /**
+ * Extract text content from an assistant message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+
+  // Extract text from content blocks
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
+
+/**
  * Execute a task with progressive context loading
  */
 export async function executeWithProgressiveContext(
@@ -450,15 +467,23 @@ export async function executeWithProgressiveContext(
 ): Promise<{ response: string; contextStats: ContextLoadResult }> {
   const contextResult = loadProgressiveContext(task, loadSupplementary);
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 1024,
-    system: contextResult.context,
-    messages: [{ role: "user", content: task }],
+  // Combine system context with user task
+  const fullPrompt = `${contextResult.context}\n\nUser Task: ${task}`;
+
+  const response = query({
+    prompt: fullPrompt,
+    options: {
+      cwd: process.cwd(),
+      allowedTools: [], // No tools needed for this operation
+    },
   });
 
-  const textContent = response.content.find((c) => c.type === "text");
-  const responseText = textContent ? textContent.text : "";
+  let responseText = "";
+  for await (const message of response) {
+    if (message.type === "assistant") {
+      responseText += extractTextContent(message);
+    }
+  }
 
   return {
     response: responseText,

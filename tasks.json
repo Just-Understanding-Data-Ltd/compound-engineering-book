@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T00:00:00Z",
+  "lastUpdated": "2026-01-28T13:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1319,8 +1319,10 @@
           "type": "milestone",
           "title": "Rewrite ch09 examples with Agent SDK",
           "description": "Context Engineering Deep Dive - convert to Agent SDK context management.",
-          "status": "pending",
-          "score": -145
+          "status": "complete",
+          "score": -145,
+          "completedAt": "2026-01-28T13:00:00Z",
+          "note": "Migrated 4 files: entropy-measurement.ts, progressive-disclosure.ts, context-backpressure.ts, context-debugger.ts. Uses query() function with streaming. 67 tests pass, all demos run correctly."
         },
         {
           "id": "task-222",
@@ -1400,6 +1402,17 @@
       "outcome": "AUDIT COMPLETE: No issues found. All code examples correctly use exact text format for tool outputs. Searched for structured git diff patterns (additions/deletions arrays), structured shell output (stdout/stderr arrays), explicit gitDiff={} patterns - none found except WRONG example in CLAUDE.md which correctly shows what NOT to do."
     },
     {
+      "id": "task-232",
+      "type": "fix",
+      "title": "Use structured outputs across all examples",
+      "description": "Replace manual text parsing with Anthropic structured outputs across 20 files. Current pattern: `response.content.find((c) => c.type === \"text\")`. Should use structured outputs with Zod schema for typed responses. Files: ch03(2), ch05(2), ch09(4), ch10(4), ch13(3), ch14(5). See: https://docs.anthropic.com/en/docs/build-with-claude/structured-output",
+      "status": "pending",
+      "priority": "high",
+      "score": 435,
+      "createdAt": "2026-01-29T00:00:00Z",
+      "file": "examples/ch09/entropy-measurement.ts"
+    },
+    {
       "id": "task-229",
       "type": "review",
       "title": "Update chapter prose for Agent SDK focus",
@@ -1411,6 +1424,16 @@
       "blockedBy": [
         "task-216"
       ]
+    },
+    {
+      "id": "task-231",
+      "type": "fix",
+      "title": "Replace tokensPerChar estimate with tiktoken",
+      "description": "Replace the hardcoded `tokensPerChar: 0.25` estimate with actual tiktoken counting for accurate token measurement. Find all instances of this pattern and use the tiktoken library instead.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 185,
+      "createdAt": "2026-01-29T00:00:00Z"
     },
     {
       "id": "task-091",
@@ -1550,25 +1573,28 @@
       "score": -295
     },
     {
-      "id": "task-231",
-      "type": "fix",
-      "title": "Replace tokensPerChar estimate with tiktoken",
-      "description": "Replace the hardcoded `tokensPerChar: 0.25` estimate with actual tiktoken counting for accurate token measurement. Find all instances of this pattern and use the tiktoken library instead.",
+      "id": "task-233",
+      "type": "chapter",
+      "title": "Add simple tool usage notebook to ch05 and update chapter",
+      "description": "Create a Jupyter notebook (or interactive TypeScript examples) for Chapter 5 that explains tool usage in a simpler, step-by-step format. Should cover: basic tool definitions, tool calling patterns, handling tool results, and common tool use cases. Make it beginner-friendly with progressive examples. Also update chapters/ch05-*.md to reference and integrate the new notebook content.",
       "status": "pending",
       "priority": "medium",
-      "score": 500,
-      "createdAt": "2026-01-29T00:00:00Z"
+      "score": 550,
+      "createdAt": "2026-01-29T00:00:00Z",
+      "chapter": "ch05",
+      "path": "examples/ch05/"
     },
     {
-      "id": "task-232",
+      "id": "task-234",
       "type": "fix",
-      "title": "Use structured outputs across all examples",
-      "description": "Replace manual text parsing with Anthropic structured outputs across 20 files. Current pattern: `response.content.find((c) => c.type === \"text\")`. Should use structured outputs with Zod schema for typed responses. Files: ch03(2), ch05(2), ch09(4), ch10(4), ch13(3), ch14(5). See: https://docs.anthropic.com/en/docs/build-with-claude/structured-output",
+      "title": "Use structured outputs in ch06/schema-generator.ts",
+      "description": "Update examples/ch06/schema-generator.ts to use Anthropic structured outputs (beta). Use output_format with json_schema for guaranteed valid JSON responses. Requires beta header: structured-outputs-2025-11-13. Use client.beta.messages.create() with betas array. Can use Zod with betaZodOutputFormat helper for TypeScript.",
       "status": "pending",
       "priority": "high",
-      "score": 750,
+      "score": 700,
       "createdAt": "2026-01-29T00:00:00Z",
-      "file": "examples/ch09/entropy-measurement.ts"
+      "file": "examples/ch06/schema-generator.ts",
+      "reference": "https://docs.anthropic.com/en/docs/build-with-claude/structured-output"
     }
   ],
   "completed": {
@@ -1598,16 +1624,16 @@
     ]
   },
   "stats": {
-    "pending": 27,
+    "pending": 28,
     "inProgress": 0,
-    "complete": 107,
+    "complete": 108,
     "blocked": 1,
-    "total": 135
+    "total": 137
   },
   "checkpoints": {
-    "lastGoodCommit": "14289817015c2721e459af882a3d95bb44671952",
-    "lastSuccessfulTask": "iteration-7",
-    "lastCheckpoint": "2026-01-28T10:33:49Z",
+    "lastGoodCommit": "1db6d7fecde4a2221faac9d8fa270bdcf80e3914",
+    "lastSuccessfulTask": "iteration-8",
+    "lastCheckpoint": "2026-01-28T10:39:30Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

@@ -11,9 +11,7 @@
  * - Systematic approach saves 10x debugging time
  */
 
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 
 // ============================================================================
 // DEBUGGING TYPES AND INTERFACES
@@ -386,13 +384,32 @@ export function analyzeSession(session: DebugSession): {
 // ============================================================================
 
 /**
+ * Extract text content from an assistant message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+
+  // Extract text from content blocks
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
+
+/**
  * Use Claude to diagnose an issue
  */
 export async function diagnoseWithClaude(
   problemDescription: string,
   codeContext: string
 ): Promise<IssueDiagnosis> {
-  const prompt = `You are diagnosing why AI-generated code doesn't meet expectations.
+  const diagPrompt = `You are diagnosing why AI-generated code doesn't meet expectations.
 
 PROBLEM:
 ${problemDescription}
@@ -415,14 +432,20 @@ Which layer is most likely the issue? Respond in JSON:
   "estimatedTime": number (minutes)
 }`;
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 512,
-    messages: [{ role: "user", content: prompt }],
+  const response = query({
+    prompt: diagPrompt,
+    options: {
+      cwd: process.cwd(),
+      allowedTools: [], // No tools needed for analysis
+    },
   });
 
-  const textContent = response.content.find((c) => c.type === "text");
-  const responseText = textContent ? textContent.text : "";
+  let responseText = "";
+  for await (const message of response) {
+    if (message.type === "assistant") {
+      responseText += extractTextContent(message);
+    }
+  }
 
   const jsonMatch = responseText.match(/\{[\s\S]*\}/);
   if (!jsonMatch) {
@@ -449,7 +472,7 @@ export async function suggestFixes(
 ): Promise<string[]> {
   const layerConfig = getLayerConfig(layer);
 
-  const prompt = `Given this problem:
+  const fixPrompt = `Given this problem:
 ${problemDescription}
 
 And that it's a ${layer.toUpperCase()} issue, suggest 3 specific fixes based on this checklist:
@@ -457,18 +480,24 @@ ${layerConfig.checklist.map((item, i) => `${i + 1}. ${item}`).join("\n")}
 
 Respond with 3 actionable suggestions, one per line.`;
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 512,
-    messages: [{ role: "user", content: prompt }],
+  const response = query({
+    prompt: fixPrompt,
+    options: {
+      cwd: process.cwd(),
+      allowedTools: [], // No tools needed for suggestions
+    },
   });
 
-  const textContent = response.content.find((c) => c.type === "text");
-  const responseText = textContent ? textContent.text : "";
+  let responseText = "";
+  for await (const message of response) {
+    if (message.type === "assistant") {
+      responseText += extractTextContent(message);
+    }
+  }
 
   return responseText
     .split("\n")
-    .filter((line) => line.trim().length > 0)
+    .filter((line: string) => line.trim().length > 0)
     .slice(0, 3);
 }
 

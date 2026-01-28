@@ -12,9 +12,7 @@
  * - Mutual information captures how much context determines output
  */
 
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic();
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 
 // ============================================================================
 // ENTROPY TYPES AND INTERFACES
@@ -157,6 +155,25 @@ export function assessMutualInformation(
 }
 
 /**
+ * Extract text content from an assistant message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+
+  // Extract text from content blocks
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
+
+/**
  * Generate code multiple times and measure entropy
  */
 export async function measureEntropy(
@@ -172,20 +189,31 @@ export async function measureEntropy(
     : prompt;
 
   for (let i = 0; i < iterations; i++) {
-    const response = await client.messages.create({
-      model: "claude-sonnet-4-5-20250929",
-      max_tokens: 1024,
-      messages: [{ role: "user", content: fullPrompt }],
+    const response = query({
+      prompt: fullPrompt,
+      options: {
+        cwd: process.cwd(),
+        allowedTools: [], // No tools needed for generation
+      },
     });
 
-    const textContent = response.content.find((c) => c.type === "text");
-    const code = textContent ? textContent.text : "";
+    let code = "";
+    let tokenCount = 0;
+
+    for await (const message of response) {
+      if (message.type === "assistant") {
+        code += extractTextContent(message);
+      }
+      // Estimate tokens from text length (Agent SDK doesn't expose usage directly)
+      tokenCount = Math.ceil(code.length * 0.25);
+    }
+
     const hash = hashCode(code);
 
     results.push({
       code,
       hash,
-      tokens: response.usage.output_tokens,
+      tokens: tokenCount,
     });
 
     uniqueHashes.add(hash);

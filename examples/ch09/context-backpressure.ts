@@ -12,10 +12,8 @@
  * - Keep context within optimal 75K token range
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 import { spawn } from "child_process";
-
-const client = new Anthropic();
 
 // ============================================================================
 // BACKPRESSURE TYPES AND INTERFACES
@@ -334,6 +332,25 @@ export function simulateProgressiveTests(
 // ============================================================================
 
 /**
+ * Extract text content from an assistant message
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+
+  // Extract text from content blocks
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
+
+/**
  * Execute with context budget awareness
  */
 export async function executeWithBudget(
@@ -346,15 +363,23 @@ export async function executeWithBudget(
     throw new Error(`Task would exceed context budget (${taskTokens} tokens needed, ${contextBudget.remainingTokens} available)`);
   }
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 1024,
-    messages: [{ role: "user", content: task }],
+  const response = query({
+    prompt: task,
+    options: {
+      cwd: process.cwd(),
+      allowedTools: [], // No tools needed for this operation
+    },
   });
 
-  const textContent = response.content.find((c) => c.type === "text");
-  const responseText = textContent ? textContent.text : "";
-  const responseTokens = response.usage.output_tokens;
+  let responseText = "";
+  for await (const message of response) {
+    if (message.type === "assistant") {
+      responseText += extractTextContent(message);
+    }
+  }
+
+  // Estimate response tokens from text length
+  const responseTokens = estimateTokens(responseText);
 
   const budgetAfter = updateBudget(
     updateBudget(contextBudget, taskTokens),
@@ -379,14 +404,22 @@ ${testResults.summary}
 
 Total: ${testResults.total} tests, ${testResults.passed} passed, ${testResults.failed} failed`;
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 256,
-    messages: [{ role: "user", content: prompt }],
+  const response = query({
+    prompt,
+    options: {
+      cwd: process.cwd(),
+      allowedTools: [], // No tools needed for summarization
+    },
   });
 
-  const textContent = response.content.find((c) => c.type === "text");
-  return textContent ? textContent.text : "";
+  let responseText = "";
+  for await (const message of response) {
+    if (message.type === "assistant") {
+      responseText += extractTextContent(message);
+    }
+  }
+
+  return responseText;
 }
 
 // ============================================================================
