@@ -280,3 +280,94 @@ a {
   font-family: 'Source Sans 3', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
 }
+
+/* === Dark Mode Support === */
+/* For EPUB readers that support prefers-color-scheme (Apple Books, Kobo, etc.) */
+
+@media (prefers-color-scheme: dark) {
+
+  body {
+    color: #e0e0e0;
+    background-color: #121212;
+  }
+
+  /* Headings: slightly brighter than body text for hierarchy */
+  h1, h2, h3, h4, h5, h6 {
+    color: #f0f0f0;
+  }
+
+  h1 {
+    border-bottom-color: #444;
+  }
+
+  /* Code blocks: VS Code dark-inspired palette */
+  pre {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    border-color: #444;
+  }
+
+  /* Inline code */
+  code {
+    background-color: #2d2d2d;
+    color: #d4d4d4;
+    border-color: #555;
+  }
+
+  /* Ensure pre code inherits dark parent */
+  pre code {
+    background: none;
+    border: none;
+    color: inherit;
+  }
+
+  /* Blockquotes: dark blue tint */
+  blockquote {
+    background-color: #1a2233;
+    border-left-color: #3a7bd5;
+    color: #d0d8e0;
+  }
+
+  /* Inline code inside dark blockquotes */
+  blockquote code {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: #3a5570;
+  }
+
+  /* Tables */
+  table {
+    border-color: #555;
+  }
+
+  th {
+    background-color: #2a2a2a;
+    border-color: #555;
+    border-bottom-color: #555;
+    color: #e8e8e8;
+  }
+
+  td {
+    border-color: #555;
+    color: #e0e0e0;
+  }
+
+  tr:nth-child(even) {
+    background-color: #1a1a1a;
+  }
+
+  /* Links: brighter blue for dark backgrounds */
+  a {
+    color: #6db3f2;
+  }
+
+  /* Horizontal rules */
+  hr {
+    border-top-color: #444;
+  }
+
+  /* Part titles */
+  .part-title {
+    color: #f0f0f0;
+  }
+
+}
