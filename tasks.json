@@ -1,16 +1,16 @@
 {
-  "lastUpdated": "2026-01-29T05:30:00Z",
+  "lastUpdated": "2026-01-29T06:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T05:30:00Z",
-    "iteration": 30,
+    "lastRun": "2026-01-29T06:00:00Z",
+    "iteration": 31,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
-    "recommendedNext": "task-227",
-    "reasoning": "Completed task-226 (ch14 Agent SDK migration). Migrated 5 files (meta-builder.ts, workflow-converter.ts, conversation-archiver.ts, skill-auditor.ts, task-decomposer.ts). All 60 tests pass, all demos run correctly. Next: task-227 (ch15 SDK migration) continues the systematic SDK migration. Remaining: task-227 (ch15) plus test suite task-228. Parent task-216 now 10/11 subtasks complete (91%)."
+    "recommendedNext": "task-228",
+    "reasoning": "Completed task-227 (ch15 Agent SDK migration). Migrated 6 files (model-selector.ts, prompt-cacher.ts, cost-protector.ts, provider-router.ts, progressive-escalation.ts, batch-processor.ts). All 75 tests pass. Next: task-228 (test all migrated examples) completes the SDK migration parent task. Parent task-216 now 11/11 subtasks complete (100%)."
   },
   "prds": {
     "index": {
@@ -1337,11 +1337,13 @@
           "type": "milestone",
           "title": "Rewrite ch15 examples with Agent SDK",
           "description": "Model Strategy & Cost Optimization - convert to Agent SDK cost patterns.",
-          "status": "pending",
+          "status": "complete",
           "score": 605,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch15:10 + age:100 = 1110 (recalc with age bonus) → 705 (display score)",
           "priority": "critical",
-          "createdAt": "2026-01-28T22:00:00Z"
+          "createdAt": "2026-01-28T22:00:00Z",
+          "completedAt": "2026-01-29T06:00:00Z",
+          "note": "Migrated 6 files: model-selector.ts, prompt-cacher.ts, cost-protector.ts, provider-router.ts, progressive-escalation.ts, batch-processor.ts. Uses query() function with streaming pattern. All 75 tests pass. Updated test file to use new ResponseWrapper interface."
         },
         {
           "id": "task-228",
@@ -1858,16 +1860,16 @@
     ]
   },
   "stats": {
-    "pending": 37,
-    "inProgress": 1,
-    "complete": 112,
+    "pending": 36,
+    "inProgress": 0,
+    "complete": 113,
     "blocked": 1,
-    "total": 151
+    "total": 150
   },
   "checkpoints": {
-    "lastGoodCommit": "c979f4b40a056c0e5d4b392f5056a9b01728a545",
-    "lastSuccessfulTask": "interrupted-30",
-    "lastCheckpoint": "2026-01-28T13:02:05Z",
+    "lastGoodCommit": "99d0bae27fb4f69cefe98cc703f15739e7764953",
+    "lastSuccessfulTask": "iteration-1",
+    "lastCheckpoint": "2026-01-28T14:29:05Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

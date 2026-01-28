@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 05:30)
+## Current Status (Updated: 2026-01-29 06:00)
 - Phase: Final Quality Polish & Agent SDK Migration
-- Active: Agent SDK migration (ch06-ch15 examples)
-- Last Completed: task-226: Rewrite ch14 examples with Agent SDK
+- Active: Agent SDK migration COMPLETE - test remaining examples
+- Last Completed: task-227: Rewrite ch15 examples with Agent SDK
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
-- Publishing Readiness: 97% (content complete, SDK migration 10/11 done)
+- Publishing Readiness: 98% (content complete, SDK migration 11/11 done)
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 112/151 (74%) with clear prioritization
+- Tasks Complete: 113/150 (75%) with clear prioritization
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -59,6 +59,27 @@
 - **Confidence**: HIGH (95%)
 
 ## Recent Activity
+
+### 2026-01-29 06:00 - COMPLETED task-227: Ch15 Agent SDK migration
+- What: Migrated ch15 examples from native Anthropic SDK to Claude Agent SDK
+- Files modified:
+  - examples/ch15/model-selector.ts (Intelligent model selection by complexity)
+  - examples/ch15/prompt-cacher.ts (Cache-friendly prompt structure)
+  - examples/ch15/cost-protector.ts (Multi-layer cost protection)
+  - examples/ch15/provider-router.ts (Multi-provider routing with fallback)
+  - examples/ch15/progressive-escalation.ts (Quality gates with model escalation)
+  - examples/ch15/batch-processor.ts (Batch API simulation for cost savings)
+  - examples/ch15/ch15.test.ts (Updated test mocks for new ResponseWrapper)
+- Changes:
+  - Replaced `import Anthropic from "@anthropic-ai/sdk"` with `import { query, type SDKMessage }`
+  - Added extractTextContent helper function for streaming responses
+  - Added ResponseWrapper interface for quality gate checking
+  - Updated all API calls to use query() with streaming pattern
+  - Simulated batch operations using Agent SDK (batch API is native SDK feature)
+- Tests: All 75 tests pass
+- Stats: 113 complete, 36 pending
+- Parent task: task-216 (Agent SDK Migration) now 11/11 subtasks complete (100%)
+- Next: task-228 (test all migrated examples)
 
 ### 2026-01-29 05:30 - COMPLETED task-226: Ch14 Agent SDK migration
 - What: Migrated ch14 examples from native Anthropic SDK to Claude Agent SDK
