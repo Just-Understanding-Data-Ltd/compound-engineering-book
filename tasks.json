@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T16:00:00Z",
+  "lastUpdated": "2026-01-28T17:30:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1416,11 +1416,12 @@
     "total": 118
   },
   "checkpoints": {
-    "lastGoodCommit": "6e3c7294b4f25a8230449144cade28e5e8de378d",
-    "lastSuccessfulTask": "task-082",
-    "lastCheckpoint": "2026-01-28T16:00:00Z",
+    "lastGoodCommit": "419c10866605a32353be0da5c952c4f80ea56ed6",
+    "lastSuccessfulTask": "iteration-24",
+    "lastCheckpoint": "2026-01-28T17:30:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
-    "failedAttempts": 0
+    "failedAttempts": 0,
+    "lastQueueCuration": "2026-01-28T17:30:00Z"
   }
 }
