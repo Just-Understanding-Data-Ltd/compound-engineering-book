@@ -288,6 +288,94 @@ export default {
 
 Dependency updates, performance benchmarks, and security audits happen automatically. When something fails, the system creates issues or notifications. Work continues while you sleep.
 
+### Agent State and Checkpoint Patterns
+
+Long-running agents face three challenges: human-in-the-loop workflows requiring approval, fault tolerance when processes crash, and context degradation over extended sessions. Checkpoint patterns solve all three by externalizing state to durable storage.
+
+**The Three-Tier Memory Hierarchy**
+
+Agent memory operates across three complementary tiers:
+
+| Tier | Storage | Durability | Use Case |
+|------|---------|------------|----------|
+| Session | In-memory | Lost on termination | Quick sub-agent tasks |
+| File-based | TASKS.md, progress.txt | Survives process boundaries | RALPH loop iterations |
+| Event-sourced | Append-only event log | Full history reconstruction | Production agents with audit needs |
+
+Most production agents combine file-based memory (human-readable, git-tracked) with event-sourcing (complete audit trail, time-travel debugging). The RALPH loop uses file-based memory because each iteration spawns a fresh agent that needs cross-session continuity.
+
+**Checkpoint After Every Tool Call**
+
+The key pattern for fault tolerance is checkpointing after each significant action:
+
+```typescript
+async function runWithCheckpoints(thread: AgentThread): Promise<void> {
+  while (thread.status === "running") {
+    const toolCall = await getNextAction(thread);
+
+    // Append to event log
+    thread.events.push({
+      type: "tool_called",
+      tool: toolCall.name,
+      params: toolCall.params,
+      timestamp: new Date(),
+    });
+
+    // Execute the tool
+    const result = await executeToolCall(toolCall);
+
+    // Checkpoint immediately after execution
+    thread.events.push({
+      type: "tool_result",
+      result,
+      timestamp: new Date(),
+    });
+    await saveThread(thread);  // Durable checkpoint
+
+    // If process crashes here, we can resume from last checkpoint
+  }
+}
+```
+
+Without this pattern, a crash at 80% completion loses all progress. With checkpoints, the agent resumes from the last successful tool call.
+
+**Webhook Integration for Human Approval**
+
+When an agent needs approval before proceeding, it cannot block indefinitely. Instead, it checkpoints state and notifies humans via webhook:
+
+```typescript
+// Agent pauses and exits cleanly
+if (requiresApproval(toolCall)) {
+  thread.events.push({
+    type: "approval_requested",
+    action: toolCall.name,
+    timestamp: new Date(),
+  });
+  thread.status = "paused";
+  await saveThread(thread);
+  await notifyHuman(thread.id, toolCall);
+  return thread;  // Process exits, webhook resumes later
+}
+
+// Webhook endpoint resumes the agent
+app.post("/webhook/resume/:threadId", async (req, res) => {
+  const { threadId } = req.params;
+  const { approved, feedback, approver } = req.body;
+
+  if (approved) {
+    thread.events.push({
+      type: "approval_granted",
+      by: approver,
+      timestamp: new Date(),
+    });
+    agent.resume(threadId, feedback);  // Resume in background
+    res.json({ status: "resuming", threadId });
+  }
+});
+```
+
+This pattern enables deployment gates, PR reviews, and any workflow requiring human judgment without blocking API connections for hours.
+
 ## Layer 4: Closed-Loop Optimization
 
 The outermost layer uses telemetry as active feedback control. Instead of passive monitoring, the system measures behavior, detects constraint violations, and automatically fixes problems.

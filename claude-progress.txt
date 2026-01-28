@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 11:00)
+## Current Status (Updated: 2026-01-29 12:00)
 - Phase: Final Quality Polish
 - Active: Content enhancements from KB articles
-- Last Completed: task-250: Enrich ch13 with CI/CD agent patterns
+- Last Completed: task-251: Add checkpoint/resume patterns to ch13
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
 - Publishing Readiness: 99% (content complete, SDK migration 12/12 done, ch13 enhanced)
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 119/151 (79%) with clear prioritization
+- Tasks Complete: 120/151 (79%) with clear prioritization
 - Test Pass Rate: 100% across all chapters (787 tests total)
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -57,6 +57,20 @@
 - **Confidence**: HIGH (98%)
 
 ## Recent Activity
+
+### 2026-01-29 12:00 - COMPLETED task-251: Add checkpoint/resume patterns to ch13
+- What: Added Agent State and Checkpoint Patterns subsection to Chapter 13 Layer 3
+- File: chapters/ch13-building-the-harness.md
+- Content added:
+  - Three-tier memory hierarchy table (session, file-based, event-sourced)
+  - Checkpoint-after-every-tool-call pattern with TypeScript example
+  - Webhook integration for human approval with code examples
+- Source: agent-memory-patterns.md KB article
+- Word count: 4,462 (slightly over 4,000 target, acceptable for enhanced content)
+- Quality: No em dashes, no AI slop phrases
+- Stats: 120 complete, 31 pending
+- Outcome: Ch13 Layer 3 enhanced with durability and checkpoint patterns
+- Next: task-252 (cost protection patterns) or other priority task
 
 ### 2026-01-29 11:00 - COMPLETED task-250: Enrich ch13 with CI/CD agent patterns
 - What: Added Agent-Specific CI/CD Patterns subsection to Chapter 13 Layer 4

@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-01-28T15:04:00.671Z",
+  "lastUpdated": "2026-01-28T15:07:27.661Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T11:00:00Z",
-    "iteration": 7,
+    "lastRun": "2026-01-29T12:00:00Z",
+    "iteration": 8,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
-    "recommendedNext": "task-251",
-    "reasoning": "Completed task-250 (ch13 CI/CD agent patterns). Added Agent-Specific CI/CD Patterns subsection covering tiered verification, response caching, cost budget enforcement, behavioral regression tests. Next highest priority: task-251 (ch13 checkpoint/resume patterns) at score 535."
+    "recommendedNext": "task-252",
+    "reasoning": "Completed task-251 (ch13 checkpoint/resume patterns). Added Agent State and Checkpoint Patterns subsection covering three-tier memory hierarchy, checkpoint-after-every-tool-call pattern, webhook integration for human approval. Next highest priority: task-252 (ch13 cost protection patterns) at score 535."
   },
   "prds": {
     "index": {
@@ -1459,11 +1459,13 @@
       "chapter": "ch13",
       "title": "Add checkpoint/resume patterns from agent-memory-patterns.md",
       "description": "Three-tier memory hierarchy (session, file-based, event-sourced), checkpoint-after-every-tool-call pattern, webhook integration for human approval.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-29T12:00:00Z",
       "priority": "medium",
       "score": 535,
       "createdAt": "2026-01-28T14:30:00Z",
-      "sourceArticle": "agent-memory-patterns.md"
+      "sourceArticle": "agent-memory-patterns.md",
+      "outcome": "Added 'Agent State and Checkpoint Patterns' subsection to Layer 3 covering: three-tier memory hierarchy table, checkpoint-after-every-tool-call pattern with TypeScript example, webhook integration for human approval with code examples. Word count 4,462 (slightly over target, acceptable)."
     },
     {
       "id": "task-252",
@@ -1874,16 +1876,16 @@
     ]
   },
   "stats": {
-    "pending": 32,
+    "pending": 31,
     "inProgress": 0,
-    "complete": 119,
+    "complete": 120,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "14db991ed7c4d298d6a19ed4b0b0f2ba11ecbae7",
-    "lastSuccessfulTask": "iteration-6",
-    "lastCheckpoint": "2026-01-28T15:04:00Z",
+    "lastGoodCommit": "b09802c9aa54e5a5535f3ec7ee55ea692c2dfe31",
+    "lastSuccessfulTask": "iteration-7",
+    "lastCheckpoint": "2026-01-28T15:07:27Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
