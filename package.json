@@ -14,8 +14,10 @@
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.2.22",
     "@anthropic-ai/sdk": "^0.71.2",
+    "@google/genai": "^1.38.0",
     "fast-check": "^4.5.3",
     "js-tiktoken": "^1.0.21",
+    "playwright": "^1.58.0",
     "zod": "^4.3.6"
   }
 }
