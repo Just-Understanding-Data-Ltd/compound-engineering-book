@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T12:00:00.000Z",
+  "lastUpdated": "2026-01-28T13:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -150,6 +150,24 @@
   },
   "tasks": [
     {
+      "id": "task-213",
+      "type": "fix",
+      "title": "CRITICAL: Fix broken markdown links in ch09 Related Chapters",
+      "description": "Chapter 9 (Context Engineering Deep Dive) has 2 broken markdown links in the Related Chapters section. Lines 591-592 need fixing: 1) ch08-error-handling-debugging.md → ch08-error-handling-and-debugging.md, 2) ch10-ralph-loop.md → ch10-the-ralph-loop.md. Flagged by cross-ref-validator-2026-01-28.",
+      "status": "complete",
+      "completedAt": "2026-01-28T12:00:00Z",
+      "priority": "critical",
+      "score": 1330,
+      "scoreBreakdown": "critical:1000 + fix:80 + ch09:50 + reviewFlagged:200 = 1330",
+      "chapter": "ch09",
+      "flaggedByReview": "cross-ref-validator-2026-01-28",
+      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
+      "estimatedMinutes": 3,
+      "breakdownCount": 2,
+      "breakdownDetails": "Fix 2 broken links (ch08, ch10 references)",
+      "outcome": "Fixed 2 broken links: ch08-error-handling-debugging.md → ch08-error-handling-and-debugging.md, ch10-ralph-loop.md → ch10-the-ralph-loop.md"
+    },
+    {
       "id": "task-212",
       "type": "fix",
       "title": "CRITICAL: Fix broken markdown links in ch07 Related Chapters",
@@ -179,24 +197,6 @@
       "chapter": "ch01",
       "reviewReference": "reviews/term-intro-2026-01-27.md",
       "outcome": "Fixed 5 term introductions: invariants (line 84), IaC/Terraform/Docker/Kubernetes (line 89), SQL (line 90), bounded contexts (line 186), idempotency (line 291)"
-    },
-    {
-      "id": "task-213",
-      "type": "fix",
-      "title": "CRITICAL: Fix broken markdown links in ch09 Related Chapters",
-      "description": "Chapter 9 (Context Engineering Deep Dive) has 2 broken markdown links in the Related Chapters section. Lines 591-592 need fixing: 1) ch08-error-handling-debugging.md → ch08-error-handling-and-debugging.md, 2) ch10-ralph-loop.md → ch10-the-ralph-loop.md. Flagged by cross-ref-validator-2026-01-28.",
-      "status": "complete",
-      "completedAt": "2026-01-28T12:00:00Z",
-      "priority": "critical",
-      "score": 1330,
-      "scoreBreakdown": "critical:1000 + fix:80 + ch09:50 + reviewFlagged:200 = 1330",
-      "chapter": "ch09",
-      "flaggedByReview": "cross-ref-validator-2026-01-28",
-      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
-      "estimatedMinutes": 3,
-      "breakdownCount": 2,
-      "breakdownDetails": "Fix 2 broken links (ch08, ch10 references)",
-      "outcome": "Fixed 2 broken links: ch08-error-handling-debugging.md → ch08-error-handling-and-debugging.md, ch10-ralph-loop.md → ch10-the-ralph-loop.md"
     },
     {
       "id": "task-104",
@@ -1211,7 +1211,8 @@
       "type": "fix",
       "title": "CRITICAL: Resolve PRD title mismatch for ch07",
       "description": "prds/ch07.md is titled 'Chapter 7 PRD: Context Engineering Deep Dive' but the actual Chapter 7 is 'Quality Gates That Compound'. This is a major alignment issue. The PRD content discusses information theory, entropy, context windows, and progressive disclosure - which matches Chapter 9's actual content, not Chapter 7. Section numbering (4.1, 4.2) suggests file was copied without proper renumbering. Either: 1) Rename file to prds/ch09.md and update PRD numbering, OR 2) Rewrite ch07.md PRD to match Quality Gates content. Review flagged the mismatch. Flagged by cross-ref-validator-2026-01-28.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-28T13:00:00Z",
       "priority": "critical",
       "score": 1280,
       "scoreBreakdown": "critical:1000 + fix:80 + reviewFlagged:200 = 1280",
@@ -1219,7 +1220,8 @@
       "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
       "estimatedMinutes": 120,
       "relatedFile": "prds/ch07.md",
-      "action": "Investigate and resolve PRD-chapter misalignment"
+      "action": "Investigate and resolve PRD-chapter misalignment",
+      "outcome": "Updated prds/ch07.md title from 'Chapter 7 PRD' to 'Chapter 9 PRD' and added note explaining historical numbering. PRD content correctly aligns with ch09-context-engineering-deep-dive.md."
     },
     {
       "id": "task-215",
@@ -1401,16 +1403,16 @@
     ]
   },
   "stats": {
-    "pending": 29,
+    "pending": 28,
     "inProgress": 0,
-    "complete": 89,
+    "complete": 90,
     "blocked": 0,
     "total": 118
   },
   "checkpoints": {
-    "lastGoodCommit": "50943f9",
-    "lastSuccessfulTask": "task-213",
-    "lastCheckpoint": "2026-01-28T12:00:00Z",
+    "lastGoodCommit": "4590aadca0d1e6c9b3414759e574662dd83ccc50",
+    "lastSuccessfulTask": "task-214",
+    "lastCheckpoint": "2026-01-28T13:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0

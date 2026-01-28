@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 12:00)
+## Current Status (Updated: 2026-01-28 13:00)
 - Phase: Chapter Milestones (13 of 15 complete, 87%)
-- Active: Critical fixes → Ch14 code_tested → Ch14-15 completion
-- Last Completed: task-213 (Fix ch09 broken links) - ITERATION 20
+- Active: task-215 (PRD ch09 mismatch) → Ch14 code_tested → Ch14-15 completion
+- Last Completed: task-214 (Fix PRD ch07 mismatch) - ITERATION 21
 - Blockers: None active
-- Queue Health: CURATED - scores recalculated, priorities verified
+- Queue Health: CURATED - scores verified, priority order correct
 - Publishing Readiness: 92%
 
 ## Project State Summary
@@ -15,7 +15,7 @@
 - Code Examples: 14 chapters with code (93%)
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 59/63 created (94%)
-- Tasks Complete: 88/118 (75%)
+- Tasks Complete: 90/118 (76%)
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Review Cycle)
@@ -27,11 +27,11 @@
 - Diagrams Created: 59/63 (7 high-priority done; 0 pending from review cycle; 4 remaining for ch13-15 completion)
 
 ## Next Task Priority
-1. task-214 (CRITICAL: Resolve PRD mismatch ch07) - score 1280 ← HIGHEST
-2. task-215 (CRITICAL: Resolve PRD mismatch ch09) - score 1280
-3. task-079 (ch14: milestones remaining) - score 880
-4. task-085 (ch15: all milestones) - score 875
-5. task-081 (ch14: code_tested) - next ch14 milestone
+1. task-215 (CRITICAL: Resolve PRD mismatch ch09) - score 1280 ← HIGHEST
+2. task-079 (ch14: milestones remaining) - score 880
+3. task-085 (ch15: all milestones) - score 875
+4. task-081 (ch14: code_tested) - next ch14 milestone
+5. task-091 (KB articles) - score -85
 
 ## Estimated Timeline to Completion
 - Ch14 completion (code + testing + review + diagrams): 8-10 hours
@@ -41,6 +41,19 @@
 - **Publication target**: 2026-02-01 to 2026-02-04
 
 ## Recent Activity
+
+### 2026-01-28 13:00 - COMPLETED task-214: Fix PRD ch07 mismatch - ITERATION 21
+- What: Fixed PRD title mismatch for ch07/ch09
+- Issue: prds/ch07.md titled "Chapter 7 PRD" but serves actual Chapter 9 (Context Engineering)
+- Resolution: Updated title from "Chapter 7 PRD" to "Chapter 9 PRD", added note explaining historical numbering
+- File: prds/ch07.md
+- Flagged by: cross-ref-validator-2026-01-28
+- Verified: PRD content aligns with ch09-context-engineering-deep-dive.md
+- Tasks: task-214 marked complete
+- Stats: pending 28, complete 90 (76%)
+- Special: Iteration 21 (21 % 3 = 0) → Queue curated, scores verified
+- Outcome: Success
+- Next: task-215 (Resolve PRD mismatch ch09) or task-079 (ch14 code_tested)
 
 ### 2026-01-28 12:00 - COMPLETED task-213: Fix ch09 broken links - ITERATION 20
 - What: Fixed 2 broken markdown links in Chapter 9's Related Chapters section
