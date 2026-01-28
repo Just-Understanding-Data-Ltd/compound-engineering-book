@@ -400,3 +400,34 @@ The key pattern: run all checks in sequence, document results, and only mark com
 5. Document the verification in the commit message ("All quality gates passed: X words, Y tests, Z diagrams")
 
 ---
+
+### 2026-01-28 - Knowledge-Driven Content Enhancement from KB Scans
+
+**Context**: Adding a "Common Pitfalls for Newcomers" section to Chapter 2 based on a knowledge base scan that identified recurring patterns from source articles.
+
+**Observation**: Content enhancement tasks work best when they cite specific metrics from source material. The task specified:
+1. Oversized tasks: 90% error reduction through incremental development
+2. Skipping exploration: 60% fewer iterations with explore-first
+3. Long conversations: context accumulates noise
+4. Bloated CLAUDE.md: 150-200 instruction limit
+5. Manual review: use verification instead
+
+These numbers (90%, 60%, 150-200) came from KB articles like `incremental-development-pattern.md` and `writing-a-good-claude-md.md`. Having concrete metrics makes the content actionable rather than vague advice.
+
+The pattern: KB scans identify gaps, create tasks with specific guidance from source articles, then execution fills those gaps with verifiable content. This is more effective than asking "what should I add to chapter 2?" because the research phase already distilled the key points.
+
+**Implication**: Future content enhancement should follow this workflow:
+1. KB scan identifies gap (missing section, outdated advice)
+2. Task creation includes specific content requirements from source articles
+3. Execution adds the content with metrics/specifics from sources
+4. Quality gates verify the addition fits (word count, style)
+
+This separates research from writing, allowing each phase to be done well independently.
+
+**Action**: When creating content enhancement tasks:
+1. Always include source articles that inform the content
+2. Extract specific metrics or numbers from sources (not vague "it helps")
+3. Specify estimated word count so chapters stay in range
+4. Include the placement guidance (before which section, after which section)
+
+---

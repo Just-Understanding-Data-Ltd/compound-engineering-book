@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 14:30)
-- Phase: All Chapters COMPLETE - Agent SDK Migration Phase
-- Active: task-216 (Agent SDK Migration) in_progress, task-222 (ch10) next subtask
-- Last Completed: task-221 (Rewrite ch09 examples with Agent SDK)
+## Current Status (Updated: 2026-01-28 15:00)
+- Phase: All Chapters COMPLETE - Content Enhancement Phase
+- Active: task-304 complete, next task per scoring
+- Last Completed: task-304 (Add Common Pitfalls section to ch02)
 - Blockers: task-229 blocked by task-216 (Agent SDK migration)
-- Queue Health: Curated - 1 blocked task, 39 pending, 1 in_progress, 149 total
+- Queue Health: 57 pending, 1 in_progress, 1 blocked, 189 total
 - Publishing Readiness: ALL CHAPTERS COMPLETE (ch01-ch15)
 
 ## Project State Summary
@@ -42,6 +42,23 @@
 - **Publication target**: 2026-02-01 to 2026-02-03
 
 ## Recent Activity
+
+### 2026-01-28 15:00 - COMPLETED task-304: Add Common Pitfalls section to ch02 - ITERATION 10
+- What: Added "Common Pitfalls for Newcomers" section to Chapter 2
+- Content: 5 common pitfalls newcomers face:
+  1. Oversized tasks - 90% error reduction through incremental development
+  2. Skipping exploration - 60% fewer iterations with explore-first
+  3. Long conversations - context accumulates noise, restart for clarity
+  4. Bloated CLAUDE.md - 150-200 instruction limit
+  5. Manual review instead of verification - use tests/linters
+- Location: Added before Exercises section (~lines 400-455)
+- Word count: 3,337 (in range 2,500-4,000) ✓
+- Quality: No em dashes, no AI slop phrases ✓
+- Tasks: task-304 marked complete
+- Stats: pending 57, complete 30
+- Iteration 10 special: Learning to be added to @LEARNINGS.md
+- Outcome: Ch02 enhanced with practical guidance for newcomers
+- Next: Per scoring system
 
 ### 2026-01-28 14:30 - Queue Curation
 - What: Curated task queue per RALPH protocol

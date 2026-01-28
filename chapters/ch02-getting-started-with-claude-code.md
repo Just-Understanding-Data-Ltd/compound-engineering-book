@@ -397,6 +397,60 @@ Use implementation when you understand the patterns, are repeating established w
 
 Use both for complex features. Explore the architecture, then implement with informed context.
 
+## Common Pitfalls for Newcomers
+
+Learning Claude Code involves unlearning habits that work fine with traditional coding but cause friction with agents. Here are the five mistakes that trip up nearly every newcomer.
+
+### Pitfall 1: Oversized Tasks
+
+The instinct is to batch work into large requests. "Build me a complete user authentication system with registration, login, password reset, and OAuth integration." This approach fails reliably.
+
+Large tasks have exponential error surfaces. Each component interacts with others, and a mistake in one propagates through all. When the result does not work, debugging becomes archaeology: which of the fifteen changes caused the problem?
+
+The fix: incremental development. Break the authentication system into discrete tasks. First, add the User model. Verify it works. Then add registration. Verify. Then add login. Each step is small enough that errors are obvious and fixes are simple. This pattern reduces errors by roughly 90% compared to large batch requests.
+
+A good rule of thumb: if your prompt describes more than one logical change, split it.
+
+### Pitfall 2: Skipping Exploration
+
+Newcomers often jump directly to implementation. "Add a payment provider that integrates with Stripe." Claude Code generates something, but it does not match your existing payment abstractions, error handling conventions, or test patterns. You spend the next hour fixing inconsistencies.
+
+The fix was covered earlier: explore first. Five minutes of exploration questions ("How is payment processing structured? Show me the PaymentProvider interface.") produces understanding that makes implementation accurate on the first try. Teams that adopt explore-first patterns report 60% fewer iterations to working code.
+
+Exploration is not wasted time. It is an investment that pays off in reduced rework.
+
+### Pitfall 3: Long Conversations Without Restart
+
+Context accumulates noise over a conversation. Early turns contain stale information about files that have since changed. Failed experiments clutter the history. Claude Code continues referencing outdated context because it has no way to know what is still relevant.
+
+The fix: restart conversations when context becomes stale. A good signal is when Claude Code makes mistakes about things it understood earlier, or when you notice it referencing old versions of code. Fresh context is more valuable than accumulated history.
+
+Some practitioners restart after every major feature. Others restart when hitting three consecutive confusing responses. Find what works for your workflow, but recognize that "just keep going" in a long conversation often costs more time than starting fresh.
+
+### Pitfall 4: Bloated CLAUDE.md Files
+
+The temptation is to document everything. Every convention, every edge case, every historical decision. CLAUDE.md files balloon to thousands of lines.
+
+The problem: agent context windows have limits. A 2,000-line CLAUDE.md consumes tokens that could hold actual code. Worse, important instructions get buried in noise. Claude Code reads everything but cannot prioritize buried critical rules over verbose explanations.
+
+The fix: keep CLAUDE.md concise. Target 150 to 200 instructions maximum. Use bullet points, not paragraphs. Front-load the most important rules. If you need extensive documentation, link to external files and tell Claude Code when to read them.
+
+A lean CLAUDE.md that fits in 500 lines will outperform a comprehensive one at 3,000 lines because the important rules remain prominent.
+
+### Pitfall 5: Manual Review Instead of Verification
+
+Newcomers read generated code line by line, searching for bugs by visual inspection. This is slow and unreliable. Humans miss subtle issues that automated tools catch instantly.
+
+The fix: let agents verify through tests, linters, and type checkers. Instead of reading the generated authentication code, run `npm test` and `npm run lint`. If tests pass and types check, the code meets your specifications. If they fail, the error messages tell you exactly what is wrong.
+
+This is not laziness; it is leverage. Your eyes are expensive. Automated verification is cheap and more accurate. Save manual review for architecture decisions and code style, not catching typos and type errors.
+
+### The Common Thread
+
+All five pitfalls share a root cause: applying human coding habits to agent workflows. Humans batch work for efficiency. Humans skip exploration because they remember past projects. Humans maintain long context because their brains synthesize well. Humans review code visually because they always have.
+
+Agents work differently. They benefit from small tasks, explicit context, fresh starts, concise instructions, and automated verification. Adapting to these patterns is the real learning curve with Claude Code.
+
 ## Exercises
 
 ### Exercise 1: Exploration Practice (15 minutes)

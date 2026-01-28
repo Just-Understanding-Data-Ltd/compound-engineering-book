@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T14:30:00.000Z",
+  "lastUpdated": "2026-01-28T15:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1920,84 +1920,6 @@
       ]
     },
     {
-      "id": "task-236",
-      "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Add Common Pitfalls for Newcomers section to ch02",
-      "description": "Based on KB scan (Jan 28 2026), add new section covering 5 common pitfalls: (1) Oversized tasks - 90% error reduction through incremental development, (2) Skipping exploration - 60% fewer iterations with explore-first, (3) Long conversations - context accumulates noise, (4) Bloated CLAUDE.md - 150-200 instruction limit, (5) Manual review - use verification instead.",
-      "status": "pending",
-      "priority": "high",
-      "score": 800,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticles": [
-        "incremental-development-pattern.md",
-        "writing-a-good-claude-md.md",
-        "cursor-agent-workflows.md",
-        "trust-but-verify-protocol.md"
-      ],
-      "estimatedWords": 500
-    },
-    {
-      "id": "task-237",
-      "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Update CLAUDE.md guidance with Less is More insights",
-      "description": "Based on writing-a-good-claude-md.md: Update section 4.2 to emphasize brevity. Add: (1) 150-200 instruction limit before degradation, (2) System prompt uses ~50 instructions, (3) Optimal length < 100 lines, (4) Progressive disclosure pattern, (5) Never use Claude as linter.",
-      "status": "pending",
-      "priority": "high",
-      "score": 790,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "writing-a-good-claude-md.md"
-    },
-    {
-      "id": "task-238",
-      "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Add setup validation to installation section",
-      "description": "Based on zero-friction-onboarding.md: Add subsection on validating setup works. If junior dev can get system running in 5 minutes, Claude Code will too. Add validation checklist, common setup issues, environment variable verification.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 550,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "zero-friction-onboarding.md"
-    },
-    {
-      "id": "task-239",
-      "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Add Incremental Development prompting pattern",
-      "description": "Based on incremental-development-pattern.md: Add Pattern 5 covering incremental development. Include why large requests fail, the 20-100 lines per increment pattern, validation loop, context accumulation, 90% error reduction.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 540,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "incremental-development-pattern.md"
-    },
-    {
-      "id": "task-240",
-      "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Add Trust But Verify workflow example",
-      "description": "Based on trust-but-verify-protocol.md: Enhance Pattern 3 with verification workflow. Request verification alongside implementation, review test output not code, fix failures immediately, verification becomes quality gates.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 530,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "trust-but-verify-protocol.md"
-    },
-    {
-      "id": "task-241",
-      "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Add Wave 4 context to introduction",
-      "description": "Based on six-waves-of-ai-coding.md: Add brief context explaining Wave 4 coding agents vs Wave 3 chat-based coding. Key skill shift is task decomposition for agent delegation.",
-      "status": "pending",
-      "priority": "low",
-      "score": 340,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "six-waves-of-ai-coding.md"
-    },
-    {
       "id": "task-240",
       "type": "enhancement",
       "title": "ch01: Add doctrine Final Invariant quotes",
@@ -2036,6 +1958,326 @@
       "priority": "medium",
       "score": 540,
       "chapter": "ch15"
+    },
+    {
+      "id": "task-257",
+      "type": "enhancement",
+      "chapter": "ch08",
+      "title": "Ch08 Enhancement: Add circuit breaker and reliability patterns",
+      "description": "Update ch08 to incorporate new content from PRD expansion: Section 8.6 (Circuit Breakers and Reliability), Section 8.8 (Recovery Patterns for Long-Running Agents). Based on KB analysis finding 7 additional source articles.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 585,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "kbSources": [
+        "ai-cost-protection-timeouts.md",
+        "agent-reliability-chasm.md",
+        "checkpoint-commit-patterns.md",
+        "orchestration-patterns.md"
+      ]
+    },
+    {
+      "id": "task-258",
+      "type": "code",
+      "chapter": "ch08",
+      "title": "Ch08: Add circuit breaker implementation example",
+      "description": "Create examples/ch08/circuit-breaker.ts implementing the three-state circuit breaker pattern (closed/open/half-open) with configurable failure thresholds.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 540,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "file": "examples/ch08/circuit-breaker.ts"
+    },
+    {
+      "id": "task-259",
+      "type": "code",
+      "chapter": "ch08",
+      "title": "Ch08: Add multi-layer timeout protection example",
+      "description": "Create examples/ch08/timeout-protection.ts implementing nested timeout layers (task/request/budget) with exponential backoff retry.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 540,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "file": "examples/ch08/timeout-protection.ts"
+    },
+    {
+      "id": "task-260",
+      "type": "diagram",
+      "chapter": "ch08",
+      "title": "Ch08: Create Agent Reliability Compounding diagram",
+      "description": "Visualize the 95% per-action reliability degrading: 5 actions=77%, 10=60%, 20=36%, 30=21%. Based on agent-reliability-chasm.md.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 525,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "suggestedFilename": "assets/diagrams/ch08-reliability-compounding.md"
+    },
+    {
+      "id": "task-261",
+      "type": "diagram",
+      "chapter": "ch08",
+      "title": "Ch08: Create Multi-Layer Timeout Protection diagram",
+      "description": "Nested circles showing protection layers: Job timeout -> Step timeout -> Request timeout -> Budget cap.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 525,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "suggestedFilename": "assets/diagrams/ch08-timeout-layers.md"
+    },
+    {
+      "id": "task-262",
+      "type": "diagram",
+      "chapter": "ch08",
+      "title": "Ch08: Create Circuit Breaker State Machine diagram",
+      "description": "State machine showing Closed -> Open -> Half-Open transitions with triggers.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 525,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "suggestedFilename": "assets/diagrams/ch08-circuit-breaker.md"
+    },
+    {
+      "id": "task-304",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Add Common Pitfalls for Newcomers section to ch02",
+      "description": "Based on KB scan (Jan 28 2026), add new section covering 5 common pitfalls: (1) Oversized tasks - 90% error reduction through incremental development, (2) Skipping exploration - 60% fewer iterations with explore-first, (3) Long conversations - context accumulates noise, (4) Bloated CLAUDE.md - 150-200 instruction limit, (5) Manual review - use verification instead.",
+      "status": "complete",
+      "priority": "high",
+      "score": 800,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticles": [
+        "incremental-development-pattern.md",
+        "writing-a-good-claude-md.md",
+        "cursor-agent-workflows.md",
+        "trust-but-verify-protocol.md"
+      ],
+      "estimatedWords": 500,
+      "completedAt": "2026-01-28T15:00:00Z"
+    },
+    {
+      "id": "task-305",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Update CLAUDE.md guidance with Less is More insights",
+      "description": "Based on writing-a-good-claude-md.md: Update section 4.2 to emphasize brevity. Add: (1) 150-200 instruction limit before degradation, (2) System prompt uses ~50 instructions, (3) Optimal length < 100 lines, (4) Progressive disclosure pattern, (5) Never use Claude as linter.",
+      "status": "pending",
+      "priority": "high",
+      "score": 790,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "writing-a-good-claude-md.md"
+    },
+    {
+      "id": "task-306",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Add setup validation to installation section",
+      "description": "Based on zero-friction-onboarding.md: Add subsection on validating setup works. If junior dev can get system running in 5 minutes, Claude Code will too. Add validation checklist, common setup issues, environment variable verification.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 550,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "zero-friction-onboarding.md"
+    },
+    {
+      "id": "task-307",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Add Incremental Development prompting pattern",
+      "description": "Based on incremental-development-pattern.md: Add Pattern 5 covering incremental development. Include why large requests fail, the 20-100 lines per increment pattern, validation loop, context accumulation, 90% error reduction.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 540,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "incremental-development-pattern.md"
+    },
+    {
+      "id": "task-308",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Add Trust But Verify workflow example",
+      "description": "Based on trust-but-verify-protocol.md: Enhance Pattern 3 with verification workflow. Request verification alongside implementation, review test output not code, fix failures immediately, verification becomes quality gates.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 530,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "trust-but-verify-protocol.md"
+    },
+    {
+      "id": "task-309",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Add Wave 4 context to introduction",
+      "description": "Based on six-waves-of-ai-coding.md: Add brief context explaining Wave 4 coding agents vs Wave 3 chat-based coding. Key skill shift is task decomposition for agent delegation.",
+      "status": "pending",
+      "priority": "low",
+      "score": 340,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "six-waves-of-ai-coding.md"
+    },
+    {
+      "id": "task-304",
+      "type": "chapter",
+      "title": "ch15: Add Prompt Caching implementation with Context7 docs",
+      "description": "Implement prompt caching examples for ch15. MUST use Context7 to fetch latest Anthropic prompt caching API docs before writing. Query: mcp__plugin_context7_context7__query-docs for prompt caching, cache_control, ephemeral blocks. Target 90% cost savings pattern.",
+      "status": "complete",
+      "priority": "high",
+      "score": 700,
+      "chapter": "ch15",
+      "requiresContext7": true,
+      "completedAt": "2026-01-28T15:00:00Z"
+    },
+    {
+      "id": "task-305",
+      "type": "chapter",
+      "title": "ch15: Add Batch API implementation with Context7 docs",
+      "description": "Implement batch API examples for ch15. MUST use Context7 to fetch latest Anthropic batch API docs before writing. Query for: batch creation, polling, 50% discount, 24h turnaround, submit/poll/process pattern.",
+      "status": "pending",
+      "priority": "high",
+      "score": 700,
+      "chapter": "ch15",
+      "requiresContext7": true
+    },
+    {
+      "id": "task-310",
+      "type": "prd",
+      "title": "KB GAP: Add mathematical foundations (03-Math-Reference) to relevant PRDs",
+      "description": "The 3 Math Reference articles (control-theory.md, probability.md, optimisation.md) are NOT referenced in any chapter PRD. These provide rigorous foundations: (1) Control theory for Ch10 (RALPH feedback loops), Ch13 (harness telemetry). (2) Probability for Ch14 (decision-making under uncertainty), Ch15 (cost optimization). (3) Optimisation for Ch15 (trade-offs). Update PRDs. See prds/kb-mapping-analysis.md.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 550,
+      "createdAt": "2026-01-28T18:00:00Z",
+      "kbSources": [
+        "control-theory.md",
+        "probability.md",
+        "optimisation.md"
+      ],
+      "affectedPRDs": [
+        "ch10",
+        "ch13",
+        "ch14",
+        "ch15"
+      ],
+      "gapAnalysis": "prds/kb-mapping-analysis.md"
+    },
+    {
+      "id": "task-311",
+      "type": "prd",
+      "title": "KB GAP: Add systems-thinking.md as primary source to Ch13 PRD",
+      "description": "systems-thinking.md covers OTEL, telemetry, tests vs physics, feedback loops, and dynamical systems. Relevant to Ch13 for closed-loop telemetry. Currently only in Ch01. Add as primary source to Ch13 PRD. See prds/kb-mapping-analysis.md.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 550,
+      "createdAt": "2026-01-28T18:00:00Z",
+      "kbSource": "systems-thinking.md",
+      "targetPRD": "prds/ch10.md",
+      "gapAnalysis": "prds/kb-mapping-analysis.md"
+    },
+    {
+      "id": "task-312",
+      "type": "prd",
+      "title": "KB GAP: Create Appendix E PRD for Mathematical Foundations",
+      "description": "Create PRD for optional Appendix E: Mathematical Foundations for Compound Engineering. Synthesize: control theory, probability, optimisation. Target: readers wanting rigorous foundations. 2,000-3,000 words. See prds/kb-mapping-analysis.md.",
+      "status": "pending",
+      "priority": "low",
+      "score": 150,
+      "createdAt": "2026-01-28T18:00:00Z",
+      "kbSources": [
+        "control-theory.md",
+        "probability.md",
+        "optimisation.md"
+      ],
+      "targetPath": "prds/appendix-e-math-foundations.md",
+      "gapAnalysis": "prds/kb-mapping-analysis.md"
+    },
+    {
+      "id": "task-313",
+      "type": "kb-article",
+      "title": "KB GAP (CRITICAL): Create agent-sdk-patterns.md article",
+      "description": "MOST REFERENCED MISSING ARTICLE. Referenced by Ch05, Ch11, Ch12, Ch13. Cover: Agent SDK v2 patterns, sub-agent coordination, checkpoint/resume, tool validation, HITL patterns. See prds/kb-mapping-analysis.md.",
+      "status": "pending",
+      "priority": "high",
+      "score": 810,
+      "createdAt": "2026-01-28T18:00:00Z",
+      "targetPath": "context-engineering/agent-sdk-patterns.md",
+      "referencedBy": [
+        "ch05",
+        "ch11",
+        "ch12",
+        "ch13"
+      ],
+      "gapAnalysis": "prds/kb-mapping-analysis.md"
+    },
+    {
+      "id": "task-314",
+      "type": "kb-article",
+      "title": "KB GAP: Create ci-cd-agent-patterns.md article",
+      "description": "Referenced by Ch06, Ch07. Cover: GitHub Actions integration, LLM code review in CI, pre-commit hooks, quality gates, cost management. See prds/kb-mapping-analysis.md.",
+      "status": "pending",
+      "priority": "high",
+      "score": 800,
+      "createdAt": "2026-01-28T18:00:00Z",
+      "targetPath": "context-engineering/ci-cd-agent-patterns.md",
+      "referencedBy": [
+        "ch06",
+        "ch07"
+      ],
+      "gapAnalysis": "prds/kb-mapping-analysis.md"
+    },
+    {
+      "id": "task-315",
+      "type": "kb-article",
+      "title": "KB GAP: Create errors-md-pattern.md article",
+      "description": "Referenced by Ch08. Cover: ERRORS.md as persistent agent memory, structure, learning loop integration, cleanup rules. See prds/kb-mapping-analysis.md.",
+      "status": "pending",
+      "priority": "high",
+      "score": 795,
+      "createdAt": "2026-01-28T18:00:00Z",
+      "targetPath": "context-engineering/errors-md-pattern.md",
+      "referencedBy": [
+        "ch08"
+      ],
+      "gapAnalysis": "prds/kb-mapping-analysis.md"
+    },
+    {
+      "id": "task-310",
+      "type": "enhancement",
+      "title": "ch10: Add Clean Slate Recovery example",
+      "description": "Add TypeScript implementation for clean slate trajectory recovery pattern (3-attempt threshold, cost: 35K broken vs 8K fresh)",
+      "status": "pending",
+      "priority": "medium",
+      "score": 550,
+      "chapter": "ch10"
+    },
+    {
+      "id": "task-311",
+      "type": "enhancement",
+      "title": "ch11: Add SDK Stacking for Swarms example",
+      "description": "Add code example demonstrating SDK stacking with Promise.all(), swarm strategies, confidence scoring (3/4 > 2/4 > 1/4)",
+      "status": "pending",
+      "priority": "medium",
+      "score": 545,
+      "chapter": "ch11"
+    },
+    {
+      "id": "task-312",
+      "type": "review",
+      "title": "ch05: 12-Factor Audit",
+      "description": "Verify all 12 factors from 12-factor-agents.md are covered in chapter, create follow-up tasks for gaps",
+      "status": "pending",
+      "priority": "medium",
+      "score": 540,
+      "chapter": "ch05"
+    },
+    {
+      "id": "task-313",
+      "type": "enhancement",
+      "title": "ch10: Add Gas Town multi-agent example",
+      "description": "Add multi-agent coordination code example for Gas Town pattern from ralph-loop.md",
+      "status": "pending",
+      "priority": "medium",
+      "score": 535,
+      "chapter": "ch10"
     }
   ],
   "completed": {
@@ -2065,11 +2307,11 @@
     ]
   },
   "stats": {
-    "pending": 35,
+    "pending": 57,
     "inProgress": 1,
-    "complete": 108,
+    "complete": 30,
     "blocked": 1,
-    "total": 158
+    "total": 189
   },
   "checkpoints": {
     "lastGoodCommit": "d6a8ba0de340064e4275b225f464360e2bc28a6e",
