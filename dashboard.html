@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RALPH Dashboard</title>
+  <meta http-equiv='refresh' content='30'>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      background: #fafafa;
+    }
+    h1 { margin-bottom: 0.5rem; }
+    .subtitle { color: #666; margin-bottom: 2rem; }
+    .stats { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .stat {
+      flex: 1;
+      min-width: 150px;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .stat-value { font-size: 2.5rem; font-weight: bold; }
+    .stat-label { color: #666; margin-top: 0.25rem; }
+    .complete .stat-value { color: #22c55e; }
+    .pending .stat-value { color: #eab308; }
+    .in-progress .stat-value { color: #3b82f6; }
+    .blocked .stat-value { color: #ef4444; }
+
+    .section {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .section h2 { margin-top: 0; margin-bottom: 1rem; font-size: 1.25rem; }
+
+    table { width: 100%; border-collapse: collapse; }
+    td, th { padding: 0.75rem; text-align: left; border-bottom: 1px solid #eee; }
+    th { color: #666; font-weight: 500; font-size: 0.875rem; }
+    tr:last-child td { border-bottom: none; }
+
+    .status {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .status-complete { background: #dcfce7; color: #166534; }
+    .status-pending { background: #fef9c3; color: #854d0e; }
+    .status-in_progress { background: #dbeafe; color: #1e40af; }
+
+    .score {
+      font-family: monospace;
+      background: #f0f0f0;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+    }
+
+    .refresh-note {
+      text-align: center;
+      color: #999;
+      font-size: 0.875rem;
+      margin-top: 2rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      transition: width 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 RALPH Dashboard</h1>
+  <p class='subtitle'>Last updated: 28/01/2026, 17:19:18</p>
+
+  <div class='stats'>
+    <div class='stat complete'>
+      <div class='stat-value'>151</div>
+      <div class='stat-label'>Complete</div>
+    </div>
+    <div class='stat in-progress'>
+      <div class='stat-value'>0</div>
+      <div class='stat-label'>In Progress</div>
+    </div>
+    <div class='stat pending'>
+      <div class='stat-value'>0</div>
+      <div class='stat-label'>Pending</div>
+    </div>
+    <div class='stat blocked'>
+      <div class='stat-value'>0</div>
+      <div class='stat-label'>Blocked</div>
+    </div>
+  </div>
+
+  <div class='section'>
+    <h2>Overall Progress</h2>
+    <div class='progress-bar'>
+      <div class='progress-fill' style='width: 100%'></div>
+    </div>
+    <p style='text-align: center; margin-top: 0.5rem; color: #666;'>
+      100% complete (151 / 151)
+    </p>
+  </div>
+
+  
+
+  <div class='section'>
+    <h2>📋 Next Up (Top 10 by Score)</h2>
+    <table>
+      <tr><th>ID</th><th>Title</th><th>Priority</th><th>Score</th></tr>
+      
+    </table>
+  </div>
+
+  <div class='section'>
+    <h2>✅ Recently Completed</h2>
+    <table>
+      <tr><th>ID</th><th>Title</th><th>Type</th></tr>
+      
+        <tr>
+          <td><code>task-098</code></td>
+          <td>Write all appendices</td>
+          <td>appendices</td>
+        </tr>
+      
+        <tr>
+          <td><code>task-097</code></td>
+          <td>Finalize all chapter exercises</td>
+          <td>exercises</td>
+        </tr>
+      
+        <tr>
+          <td><code>task-091</code></td>
+          <td>Write all KB articles</td>
+          <td>kb-article</td>
+        </tr>
+      
+        <tr>
+          <td><code>task-317</code></td>
+          <td>Create KB: prompt-injection-prevention.md</td>
+          <td>kb-article</td>
+        </tr>
+      
+        <tr>
+          <td><code>task-316</code></td>
+          <td>Create KB: context-pollution-recovery.md</td>
+          <td>kb-article</td>
+        </tr>
+      
+        <tr>
+          <td><code>task-303</code></td>
+          <td>ch07: Expand Trust But Verify Protocol section</td>
+          <td>enhancement</td>
+        </tr>
+      
+        <tr>
+          <td><code>task-301</code></td>
+          <td>ch06: Add flaky test diagnosis content</td>
+          <td>enhancement</td>
+        </tr>
+      
+        <tr>
+          <td><code>task-256</code></td>
+          <td>Create Cost Protection Layers diagram</td>
+          <td>diagram</td>
+        </tr>
+      
+        <tr>
+          <td><code>task-255</code></td>
+          <td>Create Agent Memory Tiers diagram</td>
+          <td>diagram</td>
+        </tr>
+      
+        <tr>
+          <td><code>task-231</code></td>
+          <td>Replace tokensPerChar estimate with tiktoken</td>
+          <td>fix</td>
+        </tr>
+      
+    </table>
+  </div>
+
+  <p class='refresh-note'>Auto-refreshes every 30 seconds</p>
+</body>
+</html>

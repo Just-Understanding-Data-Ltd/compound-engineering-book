@@ -35,3 +35,4 @@ ralph-output.log
 .exercise-validation-tmp/
 .code-validation-cache.json
 .code-validation-tmp/
+.env

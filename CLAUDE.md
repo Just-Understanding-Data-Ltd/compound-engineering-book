@@ -13,6 +13,8 @@ This project uses a **two-phase agent harness** for long-running work:
 1. **Initializer Agent** (first run): Sets up environment, creates tracking files
 2. **Coding Agent** (each iteration): Makes incremental progress, commits, updates tracking
 
+Never create a TASKS.md file. It is not used. Only use tasks.json.
+
 ### Getting Up to Speed Protocol
 
 Every session, run these steps FIRST:
@@ -51,6 +53,7 @@ The prompt tells you the iteration number. Use it to decide what to do:
 ```
 
 **Parallel reviews:** Use Task tool to launch all 7 at once:
+
 - slop-checker, diagram-reviewer, tech-accuracy, term-intro-checker
 - oreilly-style, cross-ref-validator, progress-summarizer
 
@@ -68,6 +71,7 @@ The prompt tells you the iteration number. Use it to decide what to do:
 ## Context Recovery After Compaction
 
 When context is compacted, the RALPH loop re-injects:
+
 1. **Full CLAUDE.md** - All project instructions
 2. **tasks.json** - Flat task list with all pending work
 3. **@LEARNINGS.md** - Accumulated insights from previous iterations
@@ -79,12 +83,14 @@ This means you always have what you need to continue, even after compaction.
 ## PRDs vs Tasks
 
 **PRDs (Product Requirements Documents)** are reference specs stored in `tasks.json.prds`:
+
 - Define chapter scope, learning objectives, and structure
 - Include word count targets, diagrams needed, code examples
 - Are completed once and serve as reference for chapter work
 - Located in `prds/` folder as markdown files
 
 **Tasks** are work items stored in `tasks.json.tasks`:
+
 - Flat list with dynamic scoring
 - Each task has: id, type, title, status, priority, score
 - Status: "pending" → "in_progress" → "complete" | "blocked"
@@ -98,25 +104,28 @@ This means you always have what you need to continue, even after compaction.
 Tasks are scored automatically. Always pick the **highest-scored pending task**.
 
 **Score calculation:**
+
 ```
 score = priority + type + chapter_sequence + blocking_bonus + age_bonus
 ```
 
-| Factor | Values |
-|--------|--------|
-| Priority | critical: 1000, high: 750, medium: 500, normal: 250, low: 100 |
-| Type | chapter: 100, fix: 80, kb-article: 60, diagram: 40, appendix: 20 |
-| Chapter | Earlier chapters score higher (ch01 > ch15) |
-| Blocking | +25 per task this blocks |
-| Age | +50 if waiting 24h+, +100 if 48h+ |
-| Review flagged | +200 |
+| Factor         | Values                                                           |
+| -------------- | ---------------------------------------------------------------- |
+| Priority       | critical: 1000, high: 750, medium: 500, normal: 250, low: 100    |
+| Type           | chapter: 100, fix: 80, kb-article: 60, diagram: 40, appendix: 20 |
+| Chapter        | Earlier chapters score higher (ch01 > ch15)                      |
+| Blocking       | +25 per task this blocks                                         |
+| Age            | +50 if waiting 24h+, +100 if 48h+                                |
+| Review flagged | +200                                                             |
 
 **Get next task:**
+
 ```bash
 jq '.tasks | map(select(.status == "pending")) | sort_by(-.score) | first | {id, score, title}' tasks.json
 ```
 
 **Queue updates automatically** after each task via `scripts/update-queue.cjs`:
+
 1. Marks completed dependencies
 2. Unblocks waiting tasks
 3. Recalculates all scores
@@ -141,6 +150,7 @@ jq '.tasks | map(select(.status == "pending")) | sort_by(-.score) | first | {id,
 ### PRD Completion
 
 A PRD is **COMPLETE** when:
+
 - Status in `tasks.json.prds[chXX].status` = "complete"
 - The .md file exists in `prds/`
 - All required sections are filled out per `prds/index.md` structure:
@@ -159,16 +169,16 @@ A PRD is **COMPLETE** when:
 
 A chapter is **COMPLETE** when all milestones in `tasks.json.prds[chXX].milestones` are true:
 
-| Milestone | Criteria |
-|-----------|----------|
-| `prd_complete` | PRD exists and is finalized |
-| `first_draft` | Content written to `chapters/chXX-title.md` |
-| `code_written` | All code examples written to `examples/chXX/` |
-| `code_tested` | All code compiles/runs, tests pass with cached responses |
-| `reviewed` | Passed review (no AI slop, technical accuracy) |
-| `diagrams_complete` | All required diagrams created in `assets/diagrams/` |
-| `exercises_added` | 2-3 "Try It Yourself" exercises included |
-| `final` | Ready for Leanpub publishing |
+| Milestone           | Criteria                                                 |
+| ------------------- | -------------------------------------------------------- |
+| `prd_complete`      | PRD exists and is finalized                              |
+| `first_draft`       | Content written to `chapters/chXX-title.md`              |
+| `code_written`      | All code examples written to `examples/chXX/`            |
+| `code_tested`       | All code compiles/runs, tests pass with cached responses |
+| `reviewed`          | Passed review (no AI slop, technical accuracy)           |
+| `diagrams_complete` | All required diagrams created in `assets/diagrams/`      |
+| `exercises_added`   | 2-3 "Try It Yourself" exercises included                 |
+| `final`             | Ready for Leanpub publishing                             |
 
 ### Code Testing Requirements
 
@@ -176,40 +186,54 @@ All code examples use **TypeScript only** with the Anthropic SDK or Agent SDK.
 
 **CRITICAL: SDK Usage by Chapter**
 
-| Chapters | SDK | Focus |
-|----------|-----|-------|
-| Ch01-Ch05 | Native Anthropic SDK (`@anthropic-ai/sdk`) | API fundamentals, basic prompting, CLAUDE.md |
-| Ch06-Ch15 | Claude Agent SDK (`@anthropic-ai/claude-agent-sdk`) | Custom agents, sub-agents, agentic patterns |
+| Chapters  | SDK                                                 | Focus                                        |
+| --------- | --------------------------------------------------- | -------------------------------------------- |
+| Ch01-Ch05 | Native Anthropic SDK (`@anthropic-ai/sdk`)          | API fundamentals, basic prompting, CLAUDE.md |
+| Ch06-Ch15 | Claude Agent SDK (`@anthropic-ai/claude-agent-sdk`) | Custom agents, sub-agents, agentic patterns  |
 
 **Ch01-Ch05: Native SDK (API Fundamentals)**
+
 ```typescript
 // Native Anthropic SDK for learning API basics
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 const client = new Anthropic();
 const response = await client.messages.create({
-  model: 'claude-sonnet-4-5-20250929',
+  model: "claude-sonnet-4-5-20250929",
   max_tokens: 1024,
-  messages: [{ role: 'user', content: prompt }]
+  messages: [{ role: "user", content: prompt }],
 });
 ```
 
 **Ch06-Ch15: Agent SDK (Custom Agents)**
+
 ```typescript
 // Agent SDK v2 for building custom agents
-import { unstable_v2_prompt, unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk';
+import {
+  unstable_v2_prompt,
+  unstable_v2_createSession,
+} from "@anthropic-ai/claude-agent-sdk";
 
 // One-shot agent prompt
-const result = await unstable_v2_prompt(prompt, { model: 'claude-sonnet-4-5-20250929' });
+const result = await unstable_v2_prompt(prompt, {
+  model: "claude-sonnet-4-5-20250929",
+});
 
 // Multi-turn agent session
-await using session = unstable_v2_createSession({ model: 'claude-sonnet-4-5-20250929' });
-await session.send('message');
-for await (const msg of session.stream()) { /* handle response */ }
+await using session = unstable_v2_createSession({
+  model: "claude-sonnet-4-5-20250929",
+});
+await session.send("message");
+for await (const msg of session.stream()) {
+  /* handle response */
+}
 ```
 
 **WRONG: Standalone utility without SDK**
+
 ```typescript
-function buildPrompt(config) { return `...`; }  // NO - must show SDK usage
+function buildPrompt(config) {
+  return `...`;
+} // NO - must show SDK usage
 ```
 
 **Why this matters:** Readers learn API basics first (Ch01-05), then graduate to building custom agents (Ch06-15). The Agent SDK is the focus for the majority of the book because it teaches agentic patterns.
@@ -234,15 +258,16 @@ index 1234567..abcdef0 100644
 
 // WRONG: Structured representation
 const gitDiff = {
-  file: 'src/app.ts',
-  additions: ['const logger = createLogger();'],
-  deletions: []
-};  // NO - agents see raw text, not structured data
+  file: "src/app.ts",
+  additions: ["const logger = createLogger();"],
+  deletions: [],
+}; // NO - agents see raw text, not structured data
 ```
 
 **Why this matters:** Claude Code and custom agents receive tool outputs as raw text. Teaching structured representations misleads readers about how agents actually process information. Always show the exact text format that tools produce.
 
 **Testing requirements:**
+
 1. All TypeScript examples must compile with `tsc --noEmit`
 2. Examples must import and use `@anthropic-ai/sdk` or `@anthropic-ai/claude-agent-sdk`
 3. Use mock API responses stored in `examples/.cache/` for offline testing
@@ -252,6 +277,7 @@ const gitDiff = {
 **Anthropic SDK reference:** https://docs.anthropic.com/en/api/client-sdks
 
 Code examples live in `examples/chXX/` with structure:
+
 ```
 examples/
 ├── ch04/
@@ -263,20 +289,29 @@ examples/
 ```
 
 **Key v2 SDK patterns:**
+
 ```typescript
 // One-shot prompt
-import { unstable_v2_prompt } from '@anthropic-ai/claude-agent-sdk'
-const result = await unstable_v2_prompt('query', { model: 'claude-sonnet-4-5-20250929' })
+import { unstable_v2_prompt } from "@anthropic-ai/claude-agent-sdk";
+const result = await unstable_v2_prompt("query", {
+  model: "claude-sonnet-4-5-20250929",
+});
 
 // Multi-turn session
-import { unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk'
-await using session = unstable_v2_createSession({ model: 'claude-sonnet-4-5-20250929' })
-await session.send('message')
-for await (const msg of session.stream()) { /* handle response */ }
+import { unstable_v2_createSession } from "@anthropic-ai/claude-agent-sdk";
+await using session = unstable_v2_createSession({
+  model: "claude-sonnet-4-5-20250929",
+});
+await session.send("message");
+for await (const msg of session.stream()) {
+  /* handle response */
+}
 
 // Resume session
-import { unstable_v2_resumeSession } from '@anthropic-ai/claude-agent-sdk'
-await using session = unstable_v2_resumeSession(sessionId, { model: 'claude-sonnet-4-5-20250929' })
+import { unstable_v2_resumeSession } from "@anthropic-ai/claude-agent-sdk";
+await using session = unstable_v2_resumeSession(sessionId, {
+  model: "claude-sonnet-4-5-20250929",
+});
 ```
 
 ### Exercises Structure
@@ -310,44 +345,51 @@ exercises/
 # Exercise: [Title]
 
 ## Objective
+
 [1-2 sentences: what the reader will learn/build]
 
 ## Prerequisites
+
 - [Required knowledge/setup]
 - [Files or tools needed]
 
 ## Scenario
+
 [Real-world context for the exercise]
 
 ## Tasks
+
 1. [Specific, actionable step]
 2. [Next step with clear success criteria]
 3. [Final step]
 
 ## Hints
+
 <details>
 <summary>Hint 1: [Topic]</summary>
 [Guidance without giving away the answer]
 </details>
 
 ## Success Criteria
+
 - [ ] [Measurable outcome 1]
 - [ ] [Measurable outcome 2]
 
 ## Stretch Goals (Optional)
+
 - [Advanced extension]
 ```
 
 **Exercise Conventions:**
 
-| Aspect | Convention |
-|--------|------------|
-| Difficulty | Progressive within chapter (easy → medium → hard) |
-| Time | 10-30 minutes per exercise |
-| Code | All code must be testable with Exercise Validator |
-| Solutions | Provide in `solutions/` subfolder, not inline |
-| Real-world | Base on realistic scenarios, not toy examples |
-| Self-contained | Each exercise works independently |
+| Aspect         | Convention                                        |
+| -------------- | ------------------------------------------------- |
+| Difficulty     | Progressive within chapter (easy → medium → hard) |
+| Time           | 10-30 minutes per exercise                        |
+| Code           | All code must be testable with Exercise Validator |
+| Solutions      | Provide in `solutions/` subfolder, not inline     |
+| Real-world     | Base on realistic scenarios, not toy examples     |
+| Self-contained | Each exercise works independently                 |
 
 **Creating Exercises:**
 
@@ -362,6 +404,7 @@ exercises/
 When writing exercises or code examples, ALWAYS verify accuracy by:
 
 1. **Use Context7** to fetch latest SDK documentation:
+
    ```
    mcp__plugin_context7_context7__resolve-library-id("Anthropic SDK")
    mcp__plugin_context7_context7__query-docs("/anthropics/anthropic-sdk-python", "messages API create")
@@ -374,20 +417,21 @@ When writing exercises or code examples, ALWAYS verify accuracy by:
 
 3. **Use WebSearch** for recent patterns and best practices
 
-This ensures all code examples use current API signatures, correct model names, and up-to-date patterns. Never assume SDK methods exist - verify them first.
-6. Validate all code with `bun infra/scripts/exercise-validator.ts`
+This ensures all code examples use current API signatures, correct model names, and up-to-date patterns. Never assume SDK methods exist - verify them first. 6. Validate all code with `bun infra/scripts/exercise-validator.ts`
 
 ### Exercise Validator (Unified Code Testing Tool)
 
 The Exercise Validator (`infra/scripts/exercise-validator.ts`) provides hash-based caching for all code execution. Use it to:
 
 1. **Run individual scripts** (exercises, examples):
+
    ```bash
    bun infra/scripts/exercise-validator.ts run examples/ch04/agent.ts
    bun infra/scripts/exercise-validator.ts run --force examples/ch04/agent.ts  # Force re-run
    ```
 
 2. **Validate markdown code blocks** (end-to-end book testing):
+
    ```bash
    bun infra/scripts/exercise-validator.ts validate chapters/ch04.md -v
    bun infra/scripts/exercise-validator.ts validate --all -v  # All chapters
@@ -402,6 +446,7 @@ The Exercise Validator (`infra/scripts/exercise-validator.ts`) provides hash-bas
    ```
 
 **How it works:**
+
 - Computes SHA256 hash of script/code block content
 - Skips execution if hash matches cached entry
 - Stores results in `.exercise-cache.json`
@@ -409,12 +454,14 @@ The Exercise Validator (`infra/scripts/exercise-validator.ts`) provides hash-bas
 - Validates bash, typescript, and javascript code blocks
 
 **Skip markers** (add to code blocks to skip validation):
+
 - `# skip-validation`
 - `// skip-validation`
 - `<!-- skip-validation -->`
 
 **Use in RALPH loop:**
 After writing code examples, validate them:
+
 ```bash
 bun infra/scripts/exercise-validator.ts validate chapters/ch04.md -v
 ```
@@ -422,6 +469,7 @@ bun infra/scripts/exercise-validator.ts validate chapters/ch04.md -v
 ### How to Update tasks.json
 
 When completing a task:
+
 ```json
 // Before
 {
@@ -439,6 +487,7 @@ When completing a task:
 ```
 
 Also update:
+
 - `stats`: Aggregate counts at bottom of tasks.json
 - Run `node scripts/update-queue.cjs` to recalculate scores
 
@@ -502,6 +551,7 @@ wc -l claude-progress.txt
 ```
 
 Compaction preserves:
+
 - Current status and blockers
 - Last 10 detailed session entries
 - Weekly summaries of older work
@@ -542,6 +592,7 @@ Compaction preserves:
 ### Task Priority (from tasks.json)
 
 Work through tasks by priority:
+
 1. **Blocked tasks** - Check if any tasks are blocked
 2. **High priority** - Chapter work, critical fixes
 3. **Medium priority** - Diagrams, cross-refs
@@ -555,6 +606,7 @@ Work through tasks by priority:
 When you discover new work items, add them to tasks.json:
 
 **Adding a new task:**
+
 ```json
 {
   "id": "task-XXX",
@@ -567,6 +619,7 @@ When you discover new work items, add them to tasks.json:
 ```
 
 **Adding a subtask to existing task:**
+
 ```json
 {
   "id": "task-XXX-sub",
@@ -582,6 +635,7 @@ When you discover new work items, add them to tasks.json:
 **When completing a task:** Update status in tasks.json, update stats, then commit.
 
 **Sources of new tasks:**
+
 - Review agent outputs in `reviews/`
 - Errors encountered during work
 - Missing cross-references or term introductions
@@ -633,6 +687,7 @@ node scripts/update-queue.cjs
 ### @LEARNINGS.md (Accumulated Insights)
 
 Every 5 iterations, capture learnings:
+
 ```markdown
 ### [Date] - [Brief Title]
 
@@ -688,6 +743,7 @@ Run manually or automatically every review cycle:
 ```
 
 **Checks:**
+
 - RALPH process running
 - Recent git commits
 - Task progress
@@ -705,6 +761,7 @@ node scripts/validate-tasks.cjs --fix  # Fix stats
 ```
 
 **Validates:**
+
 - Task structure (id, type, title, status)
 - Dependency references exist
 - No circular dependencies
@@ -723,6 +780,7 @@ Tasks can declare blockers:
 ```
 
 **Rules:**
+
 - Don't start blocked tasks
 - When blocker completes, update blocked task status
 - Circular dependencies are errors
@@ -741,6 +799,7 @@ Tasks track timestamps:
 ```
 
 **Update when:**
+
 - `startedAt`: Set when changing status to `in_progress`
 - `completedAt`: Set when changing status to `complete`
 
@@ -779,6 +838,7 @@ compound-engineering-book/
 The knowledge base is located at `~/Desktop/knowledge-base`. Use `@` imports to reference source material:
 
 Key sources (use these `@` imports in CLAUDE.md or when referencing):
+
 - `@~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/` - 90+ articles
 - `@~/Desktop/knowledge-base/01-Compound-Engineering/my-doctrine.md` - Core philosophy
 - `@~/Desktop/knowledge-base/01-Compound-Engineering/index.md` - Topic overview
@@ -798,6 +858,7 @@ Key sources (use these `@` imports in CLAUDE.md or when referencing):
 ### AI Slop Blacklist
 
 Never use these words/phrases:
+
 - "delve", "crucial", "pivotal", "robust"
 - "cutting-edge", "game-changer", "leverage" (as verb)
 - "Additionally", "Furthermore", "Moreover"
@@ -823,34 +884,44 @@ All agents are defined in `.claude/agents/` and can be used both in the RALPH lo
 These agents run in the review cycle to catch issues early.
 
 #### slop-checker
+
 Scans for AI-generated text tells:
+
 - Words: delve, crucial, pivotal, robust, cutting-edge, game-changer
 - Phrases: Additionally, Furthermore, Moreover, It's important to note
 - Repetitive patterns and overused terms
 
 #### diagram-reviewer
+
 Identifies diagram opportunities:
+
 - Process flows (3+ steps)
 - Architecture layers and components
 - Decision trees and state machines
 - Generates Mermaid code drafts
 
 #### tech-accuracy
+
 Validates technical correctness:
+
 - Code syntax for stated language
 - Claude Code tool names and CLI syntax
 - Configuration and API accuracy
 - Terminology consistency
 
 #### term-intro-checker
+
 Ensures acronyms and technical terms are properly introduced:
+
 - Acronyms defined on first use (e.g., "Domain-Driven Design (DDD)")
 - Technical jargon explained in context
 - Tool names introduced with brief descriptions
 - Common acronyms: DDD, OTEL, API, CRUD, CLI, CI/CD, K8s, LLM, PRD, MCP
 
 #### oreilly-style
+
 Applies O'Reilly Media publishing standards:
+
 - Heading capitalization (Title Case for A/B, sentence case for C)
 - Cross-reference formatting (specific refs before figures/tables)
 - Typography conventions (italic for filenames, constant width for code)
@@ -858,14 +929,18 @@ Applies O'Reilly Media publishing standards:
 - Inclusive language checks
 
 #### cross-ref-validator
+
 Checks internal references:
+
 - Chapter links work
 - PRD to chapter alignment
 - Broken markdown links
 - Section reference accuracy
 
 #### progress-summarizer
+
 Creates status reports:
+
 - Completion percentage by milestone
 - Quality metrics from other reviews
 - Velocity and estimated sessions remaining
@@ -915,6 +990,7 @@ Before marking a chapter complete:
 ## Git Conventions
 
 Commit message format:
+
 ```
 [chapter/prd/review/infra]: Brief description
 
@@ -925,6 +1001,7 @@ Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
 ```
 
 Examples:
+
 ```
 [chapter]: Add first draft of ch07 context engineering
 
@@ -940,17 +1017,20 @@ Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
 ## Failure Recovery
 
 ### If agent gets stuck:
+
 1. Document the blocker in TASKS.md under "Blockers & Notes"
 2. Move to the next task
 3. Create a specific task to resolve the blocker later
 
 ### If environment is broken:
+
 1. Run `git status` to see uncommitted changes
 2. If needed, `git stash` or `git checkout .` to reset
 3. Read `claude-progress.txt` for last known good state
 4. Resume from there
 
 ### If progress.txt is corrupted:
+
 1. Reconstruct from `git log`
 2. Read `tasks.json` for task and milestone status
 3. Create fresh progress.txt with current state
@@ -965,6 +1045,7 @@ Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
 EPIPE is a Unix error that occurs when a process tries to write to a pipe whose reading end has been closed. In Node.js, this manifests as `Error: write EPIPE` or `Error [ERR_STREAM_DESTROYED]: Cannot call write after a stream was destroyed`.
 
 **When it happens:**
+
 - Claude Code CLI running in print mode (`-p`) for long-running operations
 - The timeout command (gtimeout) terminates the process before output completes
 - Parent shell/script closes stdout before Claude finishes writing
@@ -974,16 +1055,19 @@ EPIPE is a Unix error that occurs when a process tries to write to a pipe whose 
 The Claude CLI writes output asynchronously. When the receiving pipe closes (due to timeout, parent exit, or signal), pending writes fail with EPIPE. This is a race condition between output generation and pipe lifecycle.
 
 **Affected versions:**
+
 - Claude Code 2.1.17-2.1.20 (all have this issue in print mode)
 - More frequent with complex prompts that generate lots of output
 
 **Workarounds:**
+
 1. Capture output to file first, then cat: `cmd > file 2>&1; cat file`
 2. Increase timeout significantly (600s+ for review cycles)
 3. Detect EPIPE in output and treat as retryable failure
 4. Use `--signal=TERM --kill-after=30` for graceful timeout
 
 **TypeScript port considerations:**
+
 - Use proper stream error handling with `.on('error', handler)`
 - Consider buffering output before writing to avoid partial writes
 - Implement retry logic for EPIPE errors
@@ -995,16 +1079,19 @@ The Claude CLI writes output asynchronously. When the receiving pipe closes (due
 Claude API returns HTTP 400 with message about "tool use concurrency issues" or "tool_use ids were found without tool_result blocks".
 
 **When it happens:**
+
 - Multiple parallel tool calls in a single prompt
 - Multiple Claude sessions competing for API slots
 - Bug in Claude Code 2.1.18-2.1.20 print mode
 
 **Workaround:**
+
 - Downgrade to Claude Code 2.1.17: `npm install -g @anthropic-ai/claude-code@2.1.17`
 - Run tool calls sequentially instead of parallel
 - Close other Claude sessions
 
 **TypeScript port considerations:**
+
 - Implement request queuing to avoid concurrent tool calls
 - Add exponential backoff for 400 errors
 - Track tool_use IDs and ensure matching tool_result blocks
@@ -1022,7 +1109,11 @@ Claude API returns HTTP 400 with message about "tool use concurrency issues" or 
 
 ## Book Details
 
-**Title**: Compound Engineering: Master AI-Assisted Development with Claude Code
+**Title**: The Meta-Engineer: 10x Was the Floor
+
+**Subtitle**: Building Autonomous AI Systems with Claude Code
+
+**URL**: https://leanpub.com/the-meta-engineer
 
 **Target Audience**: Software engineers transitioning to AI-assisted development
 
@@ -1033,18 +1124,27 @@ This book teaches three interrelated skills together:
 
 2. **Systems Thinking**: Understanding information theory, context engineering, verification ladders, and quality gates as interconnected systems that compound over time
 
-3. **Compound Engineering Leverage**: The meta-skill of orchestrating AI tools to build systems that build systems. Moving from typing code to directing AI agents that compound your engineering output.
+3. **Meta-Engineering**: The practice of orchestrating AI tools to build systems that build systems. Moving from typing code to directing AI agents that compound your engineering output.
 
 **Structure**:
+
 - Part I: Foundations (Ch 1-3) - Beginner
 - Part II: Core Techniques (Ch 4-6) - Intermediate
 - Part III: Advanced Patterns (Ch 7-9) - Advanced
-- Part IV: Production Systems (Ch 10-12) - Expert
-- Appendices A-D
+- Part IV: Production Systems (Ch 10-15) - Expert
 
-**Word Count Target**: 45,000-57,000 words
+**Word Count**: 54,132 words (target 45,000-57,000)
 
-**Publishing**: Leanpub (Markua format)
+**Status**: ALL 151 TASKS COMPLETE - Ready for publication
+
+**Publishing**: Leanpub (EPUB upload)
+
+**Build Pipeline**:
+```bash
+./scripts/leanpub-build.sh    # Convert chapters to Markua
+pandoc ... -o the-meta-engineer.epub  # Generate EPUB
+# Upload to Leanpub
+```
 
 ---
 
@@ -1066,11 +1166,11 @@ mcp__plugin_context7_context7__query-docs("/anthropics/claude-agent-sdk-typescri
 
 **Key Library IDs for this book:**
 
-| Library | ID | Snippets | Use For |
-|---------|-----|----------|---------|
-| Agent SDK Docs | `/websites/platform_claude_en_agent-sdk` | 868 | Concepts, architecture |
-| Agent SDK TypeScript | `/anthropics/claude-agent-sdk-typescript` | 31 | TypeScript code patterns |
-| Agent SDK Python | `/anthropics/claude-agent-sdk-python` | 59 | Python examples |
+| Library              | ID                                        | Snippets | Use For                  |
+| -------------------- | ----------------------------------------- | -------- | ------------------------ |
+| Agent SDK Docs       | `/websites/platform_claude_en_agent-sdk`  | 868      | Concepts, architecture   |
+| Agent SDK TypeScript | `/anthropics/claude-agent-sdk-typescript` | 31       | TypeScript code patterns |
+| Agent SDK Python     | `/anthropics/claude-agent-sdk-python`     | 59       | Python examples          |
 
 **Common Context7 Queries for Agent SDK Migration:**
 
@@ -1099,23 +1199,28 @@ import { query } from "@anthropic-ai/claude-agent-sdk";
 
 const response = query({
   prompt: "Analyze this code",
-  options: { model: "claude-sonnet-4-5", workingDirectory: "/path" }
+  options: { model: "claude-sonnet-4-5", workingDirectory: "/path" },
 });
 
 for await (const message of response) {
-  if (message.type === 'assistant') console.log(message.content);
+  if (message.type === "assistant") console.log(message.content);
 }
 
 // Multi-turn session
-import { unstable_v2_createSession, unstable_v2_prompt } from "@anthropic-ai/claude-agent-sdk";
+import {
+  unstable_v2_createSession,
+  unstable_v2_prompt,
+} from "@anthropic-ai/claude-agent-sdk";
 
 const session = await unstable_v2_createSession({
   model: "claude-sonnet-4-5",
-  systemPrompt: "You are a coding assistant."
+  systemPrompt: "You are a coding assistant.",
 });
 
 const response = unstable_v2_prompt(session, { prompt: "Help me refactor" });
-for await (const msg of response) { /* handle */ }
+for await (const msg of response) {
+  /* handle */
+}
 
 // Custom MCP tools
 import { createSdkMcpServer, tool } from "@anthropic-ai/claude-agent-sdk";
@@ -1126,18 +1231,21 @@ const tools = createSdkMcpServer({
   tools: [
     tool("my_tool", "Description", { param: z.string() }, async (args) => {
       return { content: [{ type: "text", text: "result" }] };
-    })
-  ]
+    }),
+  ],
 });
 ```
 
 ### Knowledge Base (`~/Desktop/knowledge-base`)
+
 Source articles for all chapters. Key directories:
+
 - `01-Compound-Engineering/context-engineering/` - 90+ articles on context, agents, verification
 - `01-Compound-Engineering/my-doctrine.md` - Core philosophy
 - `01-Compound-Engineering/index.md` - Topic overview
 
 **Workflow for Agent SDK Migration (ch06-ch15):**
+
 1. Read the existing code file to understand current patterns
 2. **Query Context7** for equivalent Agent SDK patterns
 3. Identify which Agent SDK imports to use:

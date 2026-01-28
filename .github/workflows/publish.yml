@@ -1,0 +1,134 @@
+name: Leanpub Publish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'chapters/**'
+      - 'leanpub/**'
+      - 'assets/**'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'preview'
+        type: choice
+        options:
+          - preview
+          - publish
+      notify_readers:
+        description: 'Email readers on publish'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+
+      - name: Build manuscript
+        run: |
+          chmod +x scripts/leanpub-build.sh
+          ./scripts/leanpub-build.sh
+
+      - name: Generate EPUB
+        run: |
+          pandoc \
+            leanpub/frontmatter.md \
+            leanpub/part1.md \
+            leanpub/chapters/ch01-the-compound-systems-engineer.md \
+            leanpub/chapters/ch02-getting-started-with-claude-code.md \
+            leanpub/chapters/ch03-prompting-fundamentals.md \
+            leanpub/part2.md \
+            leanpub/chapters/ch04-writing-your-first-claude-md.md \
+            leanpub/chapters/ch05-the-12-factor-agent.md \
+            leanpub/chapters/ch06-the-verification-ladder.md \
+            leanpub/part3.md \
+            leanpub/chapters/ch07-quality-gates-that-compound.md \
+            leanpub/chapters/ch08-error-handling-and-debugging.md \
+            leanpub/chapters/ch09-context-engineering-deep-dive.md \
+            leanpub/part4.md \
+            leanpub/chapters/ch10-the-ralph-loop.md \
+            leanpub/chapters/ch11-sub-agent-architecture.md \
+            leanpub/chapters/ch12-development-workflows.md \
+            leanpub/chapters/ch13-building-the-harness.md \
+            leanpub/chapters/ch14-the-meta-engineer-playbook.md \
+            leanpub/chapters/ch15-model-strategy-and-cost-optimization.md \
+            leanpub/backmatter.md \
+            --metadata title="The Meta-Engineer: 10x Was the Floor" \
+            --metadata subtitle="Building Autonomous AI Systems with Claude Code" \
+            --metadata author="James Phoenix" \
+            --epub-cover-image=leanpub/images/cover.jpg \
+            --from markdown-yaml_metadata_block \
+            --toc \
+            --toc-depth=2 \
+            -o the-meta-engineer.epub
+
+      - name: Upload EPUB artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: the-meta-engineer-epub
+          path: the-meta-engineer.epub
+
+      - name: Determine action
+        id: action
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "action=${{ inputs.action }}" >> $GITHUB_OUTPUT
+            echo "notify=${{ inputs.notify_readers }}" >> $GITHUB_OUTPUT
+          else
+            echo "action=preview" >> $GITHUB_OUTPUT
+            echo "notify=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Trigger Leanpub Preview
+        if: steps.action.outputs.action == 'preview'
+        run: |
+          echo "Triggering Leanpub preview..."
+          curl -s -X POST \
+            -d "api_key=${{ secrets.LEANPUB_API_KEY }}" \
+            "https://leanpub.com/the-meta-engineer/preview.json"
+
+      - name: Publish to Leanpub
+        if: steps.action.outputs.action == 'publish'
+        run: |
+          NOTES="Published from commit ${{ github.sha }} on $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "Publishing to Leanpub..."
+          curl -s -X POST \
+            -d "api_key=${{ secrets.LEANPUB_API_KEY }}" \
+            -d "publish[email_readers]=${{ steps.action.outputs.notify }}" \
+            -d "publish[release_notes]=$NOTES" \
+            "https://leanpub.com/the-meta-engineer/publish.json"
+
+      - name: Wait for Leanpub job
+        run: |
+          echo "Waiting for Leanpub job to complete..."
+          for i in $(seq 1 60); do
+            STATUS=$(curl -s "https://leanpub.com/the-meta-engineer/job_status.json?api_key=${{ secrets.LEANPUB_API_KEY }}")
+            if [ "$STATUS" = "{}" ] || [ -z "$STATUS" ]; then
+              echo "Job complete!"
+              exit 0
+            fi
+            echo "  Step $(echo $STATUS | jq -r '.num // "?"')/$(echo $STATUS | jq -r '.total // "?"'): $(echo $STATUS | jq -r '.message // "Processing..."')"
+            sleep 5
+          done
+          echo "Warning: Job may still be running"
+
+      - name: Get book info
+        run: |
+          INFO=$(curl -s "https://leanpub.com/the-meta-engineer.json?api_key=${{ secrets.LEANPUB_API_KEY }}")
+          echo "### Book Info" >> $GITHUB_STEP_SUMMARY
+          echo "| Field | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| URL | https://leanpub.com/the-meta-engineer |" >> $GITHUB_STEP_SUMMARY
+          echo "| Words | $(echo $INFO | jq -r '.word_count // "N/A"') |" >> $GITHUB_STEP_SUMMARY
+          echo "| Pages | $(echo $INFO | jq -r '.page_count // "N/A"') |" >> $GITHUB_STEP_SUMMARY
+          echo "| Copies Sold | $(echo $INFO | jq -r '.total_copies_sold // "0"') |" >> $GITHUB_STEP_SUMMARY
+          echo "| Last Published | $(echo $INFO | jq -r '.last_published_at // "Never"') |" >> $GITHUB_STEP_SUMMARY
