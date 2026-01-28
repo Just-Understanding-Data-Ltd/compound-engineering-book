@@ -651,6 +651,77 @@ describe('Code Review Agent Regression', () => {
 
 Golden sets contain known issues that the agent should find. Precision and recall thresholds catch quality degradation without requiring exact output matching. A prompt change that silently reduces feedback quality by 40% now fails CI.
 
+### Multi-Layer Cost Protection
+
+Autonomous LLM workflows can enter infinite loops, process excessive files, or generate bloated responses. Without hard limits, a single misconfigured job can consume an entire monthly budget in hours. A real-world failure: an agent tasked with "review and fix all failing tests" burned $87 before manual intervention because tests kept failing due to an environment issue, and the agent kept regenerating fixes.
+
+**The Five-Layer Protection Model**
+
+Cost protection requires defense in depth. No single layer is sufficient; each catches failures the others miss:
+
+| Layer | Protection | Example Limit | Catches |
+|-------|-----------|---------------|---------|
+| 1. Job timeout | GitHub Actions `timeout-minutes` | 15 minutes | Infinite loops |
+| 2. Request tokens | API `max_tokens` parameter | 4,096 tokens | Verbose responses |
+| 3. Input size | File count, lines per file | 50 files, 500 lines each | File explosions |
+| 4. Budget alerts | Daily and monthly caps | $10/day, $100/month | Sustained overuse |
+| 5. Model selection | Use cheaper models for simple tasks | Haiku for grep/rename | Unnecessary expense |
+
+The outer layers (job timeout) catch catastrophic failures. The inner layers (model selection) optimize normal operations. Together, they make costs predictable.
+
+**Implementing the Protection Stack**
+
+Wrap all AI operations in a budget-aware function:
+
+```typescript
+interface BudgetConfig {
+  dailyLimit: number;
+  alertThreshold: number;  // 0.8 = alert at 80%
+}
+
+const BUDGET: BudgetConfig = { dailyLimit: 10, alertThreshold: 0.8 };
+
+async function safeAIOperation<T>(
+  operation: () => Promise<T>
+): Promise<T> {
+  const spent = await getTodaySpend();
+
+  if (spent >= BUDGET.dailyLimit) {
+    throw new Error(`Daily budget exceeded: $${spent.toFixed(2)}`);
+  }
+
+  if (spent >= BUDGET.dailyLimit * BUDGET.alertThreshold) {
+    console.warn(`Budget alert: $${spent.toFixed(2)} of $${BUDGET.dailyLimit}`);
+  }
+
+  return operation();
+}
+```
+
+Every AI call goes through `safeAIOperation`. When the budget is exceeded, operations stop immediately. This prevents a broken loop from burning $500 overnight.
+
+**Cost Calculation Example**
+
+Predictable costs require predictable inputs:
+
+```text
+Configuration:
+- Model: Sonnet ($3/MTok input, $15/MTok output)
+- Max input: 50 files × 500 lines × 40 chars = 1M chars ≈ 250K tokens
+- Max output: 4,096 tokens
+- Frequency: 4 PRs/day
+
+Cost per review:
+- Input: 250K tokens × $0.000003 = $0.75
+- Output: 4K tokens × $0.000015 = $0.06
+- Total: $0.81 per review
+
+Daily cost: 4 PRs × $0.81 = $3.24
+Monthly cost: $3.24 × 22 workdays = $71.28
+```
+
+With model switching (Haiku for 80% of work, Sonnet for complex files only), the same workflow costs $20.24/month, a 72% savings. Chapter 15 covers model selection strategies in depth.
+
 ## Building the Factory, Not Just the Product
 
 Most developers use AI to build features. Advanced developers use AI to build infrastructure that builds features. Elite developers build infrastructure that builds infrastructure.
