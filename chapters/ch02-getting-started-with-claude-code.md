@@ -593,7 +593,7 @@ Agents work differently. They benefit from small tasks, explicit context, fresh 
 
 ## Exercises
 
-### Exercise 1: Exploration Practice (15 minutes)
+### Exercise 1: Exploration Practice
 
 Using a real project:
 
@@ -605,7 +605,7 @@ Using a real project:
 
 Success criteria: You can name 3+ patterns, 2 design decisions, and you read actual code.
 
-### Exercise 2: Prompt Quality Comparison (20 minutes)
+### Exercise 2: Prompt Quality Comparison
 
 1. Write a vague prompt: "Add a utility function."
 2. Rewrite it using Context + Goal + Success Criteria pattern.
@@ -614,7 +614,7 @@ Success criteria: You can name 3+ patterns, 2 design decisions, and you read act
 
 Success criteria: Rewritten prompt is 3+ sentences, includes file paths, specifies success criteria, requires fewer iterations.
 
-### Exercise 3: Full Explore + Implement Workflow (30 minutes)
+### Exercise 3: Full Explore + Implement Workflow
 
 Pick a feature to add to your project.
 

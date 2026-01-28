@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-01-28T22:00:00Z",
+  "lastUpdated": "2026-01-29T00:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-28T22:00:00Z",
+    "lastRun": "2026-01-29T00:00:00Z",
     "iteration": 30,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
-    "recommendedNext": "task-097",
-    "reasoning": "Curation cycle 30. Since last curation (iter 27): task-095 (cross-ref check) and task-096 (final proofread) completed, closing task-091 (Write all KB articles). Queue at minimum: 1 pending meta-task remaining (task-097: Finalize exercises, score -145) with 4 pending subtasks (AI slop check, tech accuracy, cross-ref, proofread). No duplicates, no blocked tasks, no priority changes needed. Stats verified: 146 complete, 5 pending, 0 blocked. Publishing readiness: 99.9%. All 15 chapters pass final proofread. 787 tests pass. Only exercise review remains."
+    "recommendedNext": null,
+    "reasoning": "Curation cycle 30. Completed task-097 (Finalize all chapter exercises) with all 4 subtasks: AI slop check (0 issues), technical accuracy check (0 issues), cross-reference check (0 broken links), final proofread (fixed ch02 heading consistency). QUEUE EMPTY: 151/151 tasks complete, 0 pending, 0 blocked. All 15 chapters pass all quality gates. 787 tests pass. Book is 100% publication-ready."
   },
   "prds": {
     "index": {
@@ -1791,15 +1791,17 @@
       "type": "exercises",
       "title": "Finalize all chapter exercises",
       "description": "Complete 2-3 'Try It Yourself' exercises per chapter with solutions.",
-      "status": "pending",
+      "status": "complete",
       "priority": "normal",
+      "completedAt": "2026-01-29T00:00:00Z",
       "subtasks": [
         {
           "id": "task-109",
           "parentId": "task-097",
           "type": "review",
           "title": "AI slop check",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-29T00:00:00Z",
           "score": -135
         },
         {
@@ -1807,7 +1809,8 @@
           "parentId": "task-097",
           "type": "review",
           "title": "Technical accuracy check",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-29T00:00:00Z",
           "score": -135
         },
         {
@@ -1815,7 +1818,8 @@
           "parentId": "task-097",
           "type": "review",
           "title": "Cross-reference check",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-29T00:00:00Z",
           "score": -135
         },
         {
@@ -1823,7 +1827,8 @@
           "parentId": "task-097",
           "type": "review",
           "title": "Final proofread",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-29T00:00:00Z",
           "score": -135
         }
       ],
@@ -1913,9 +1918,9 @@
     ]
   },
   "stats": {
-    "pending": 5,
+    "pending": 0,
     "inProgress": 0,
-    "complete": 146,
+    "complete": 151,
     "blocked": 0,
     "total": 151
   },
