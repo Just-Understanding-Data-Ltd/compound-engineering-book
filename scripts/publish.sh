@@ -50,9 +50,12 @@ pandoc \
   --metadata title="The Meta-Engineer: 10x Was the Floor" \
   --metadata subtitle="Building Autonomous AI Systems with Claude Code" \
   --metadata author="James Phoenix" \
+  --metadata lang=en \
+  --template=leanpub/template.html \
   --epub-cover-image=leanpub/images/cover.jpg \
   --css=leanpub/epub-style.css \
   --from markdown-yaml_metadata_block \
+  --lua-filter=leanpub/filters/class-hooks.lua \
   --lua-filter=leanpub/filters/strip-md-links.lua \
   --syntax-highlighting=tango \
   --epub-embed-font=leanpub/fonts/JetBrainsMono-Regular.ttf \

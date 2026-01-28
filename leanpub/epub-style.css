@@ -281,6 +281,57 @@ a {
   font-weight: 700;
 }
 
+/* Part header (h1 with "Part" text, added by class-hooks filter) */
+h1.part-header {
+  text-align: center;
+  font-size: 2em;
+  margin-top: 3em;
+  margin-bottom: 0.3em;
+  border-bottom: none;
+  page-break-before: always;
+}
+
+/* Chapter opener (h1 for chapter titles, added by class-hooks filter) */
+h1.chapter-opener {
+  page-break-before: always;
+}
+
+/* Callout boxes (from blockquotes with Tip/Note/Warning markers) */
+.callout {
+  border-radius: 4px;
+  margin: 1.2em 0;
+  padding: 0.8em 1.2em;
+  font-size: 0.95em;
+  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+}
+
+.callout p {
+  margin: 0.3em 0;
+}
+
+.callout-tip {
+  border-left: 4px solid #38a169;
+  background-color: #f0fff4;
+  color: #2d3748;
+}
+
+.callout-note {
+  border-left: 4px solid #4a90d9;
+  background-color: #f0f6ff;
+  color: #2d3748;
+}
+
+.callout-warning {
+  border-left: 4px solid #dd6b20;
+  background-color: #fffaf0;
+  color: #2d3748;
+}
+
+.callout code {
+  background-color: rgba(255, 255, 255, 0.6);
+  font-style: normal;
+}
+
 /* === Dark Mode Support === */
 /* For EPUB readers that support prefers-color-scheme (Apple Books, Kobo, etc.) */
 
@@ -365,9 +416,33 @@ a {
     border-top-color: #444;
   }
 
-  /* Part titles */
-  .part-title {
+  /* Part titles and headers */
+  .part-title,
+  h1.part-header {
     color: #f0f0f0;
+  }
+
+  /* Callout boxes in dark mode */
+  .callout-tip {
+    background-color: #1a2e1a;
+    border-left-color: #48bb78;
+    color: #d0e8d0;
+  }
+
+  .callout-note {
+    background-color: #1a2233;
+    border-left-color: #3a7bd5;
+    color: #d0d8e0;
+  }
+
+  .callout-warning {
+    background-color: #2e1a0a;
+    border-left-color: #ed8936;
+    color: #e8d8c0;
+  }
+
+  .callout code {
+    background-color: rgba(255, 255, 255, 0.08);
   }
 
 }
