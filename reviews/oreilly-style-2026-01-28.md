@@ -11,6 +11,76 @@
 
 ---
 
+## Supplemental Focused Review: Chapters 13-15
+
+### Additional Issues Found (Beyond C-level Heading Capitalization)
+
+**Chapter 13: Building the Harness**
+
+| Priority | Line | Issue | Fix |
+|----------|------|-------|-----|
+| HIGH | 470 | ROI used without definition | "return on investment (ROI)" on first use |
+| MEDIUM | 472 | MCP in heading without expansion (first occurrence) | "Queryable Project Context with Model Context Protocol (MCP)" |
+| LOW | 478, 489 | Subsequent MCP headings | Acceptable if MCP defined in line 472 heading |
+| MEDIUM | 596 | MCP in exercise heading (readers may skip ahead) | "Exercise 2: Build a Model Context Protocol (MCP) server" |
+
+**Chapter 14: The Meta-Engineer Playbook**
+
+| Priority | Line | Issue | Fix |
+|----------|------|-------|-----|
+| HIGH | 538 | K8s undefined in this chapter | "Kubernetes (K8s)" on first use |
+| HIGH | 560 | MCP undefined in this chapter | "Model Context Protocol (MCP) server" - each chapter should define |
+| HIGH | 563 | CRUD undefined in this chapter | "Create, Read, Update, Delete (CRUD)" on first use |
+| MEDIUM | 393 | Inconsistent range format | "$10-$12" (use consistent separator) |
+| HIGH | 582 | ROI undefined | "return on investment (ROI)" on first use |
+
+**Chapter 15: Model Strategy and Cost Optimization**
+
+| Priority | Line | Issue | Fix |
+|----------|------|-------|-----|
+| HIGH | 18 | MTok defined inline, should be earlier | Restructure: "At Claude Sonnet pricing ($3 per million tokens, abbreviated MTok, for input; $15/MTok output)" |
+| HIGH | 433 | YOLO never expanded | Change heading to "YOLO (You Only Live Once) Mode: When to Skip Permissions" |
+| LOW | 443 | YOLO explanation assumes knowledge | Consider adding footnote or context note |
+
+### Typography: Inline Code in Headings
+
+| File | Line | Issue | Fix |
+|------|------|-------|-----|
+| ch13 | 87 | "auth.ts" appears in example | Acceptable in body text ✓ |
+
+**Note**: O'Reilly discourages code formatting in headings themselves, but code examples in body text are fine.
+
+### Code Block Introduction Quality Assessment
+
+All three chapters introduce code blocks properly with:
+- Colons after introductory sentences ✓
+- Contextual explanations ✓
+- Proper syntax highlighting (typescript, yaml, bash, python) ✓
+
+### List Formatting Assessment
+
+All lists checked:
+- Sentence-capped ✓
+- Consistent punctuation within each list ✓
+- Appropriate use of numbered vs bulleted ✓
+
+### Cross-Reference Quality
+
+All three chapters include proper "Related Chapters" sections:
+- Ch13 (lines 614-618): 5 specific chapter references ✓
+- Ch14 (lines 671-677): 5 specific chapter references ✓
+- Ch15 (lines 917-920): 3 specific chapter references ✓
+
+### Strengths Specific to Chapters 13-15
+
+- **Excellent use of tables** for comparisons and specifications
+- **Strong progressive complexity** from foundational (ch13) to strategic (ch15)
+- **Practical code examples** that are syntactically correct
+- **Good use of mathematical notation** in ch15 for ROI calculations
+- **Conversational tone** maintained throughout while staying professional
+
+---
+
 ## Issues by Category
 
 ### Heading Capitalization (142 instances - HIGH PRIORITY)
@@ -154,7 +224,7 @@
 
 ---
 
-### Acronyms & Abbreviations (MEDIUM PRIORITY)
+### Acronyms & Abbreviations (MEDIUM-HIGH PRIORITY)
 
 | File | Line | Issue | Fix |
 |------|------|-------|-----|
@@ -168,12 +238,17 @@
 | ch13 | 100 | OTEL expansion correct ✓ | "OpenTelemetry (OTEL)" |
 | ch13 | 157 | "Domain-Driven Design (DDD)" | Should be lowercase: "domain-driven design (DDD)" |
 | ch13 | 376 | CI/CD not defined | Define as "Continuous Integration/Continuous Deployment (CI/CD)" or verify defined earlier |
+| ch13 | 470 | **ROI not defined** | **"return on investment (ROI)" on first use** |
+| ch13 | 472 | **MCP in heading (first)** | **"Queryable Project Context with Model Context Protocol (MCP)"** |
 | ch13 | 476 | MCP defined inline | Correct ✓ |
+| ch13 | 596 | **MCP in exercise** | **"Exercise 2: Build a Model Context Protocol (MCP) server"** |
 | ch14 | 392 | LLM not defined in chapter | Verify defined in earlier chapter or expand here |
-| ch14 | 537 | K8s not defined | "Kubernetes (K8s)" |
-| ch14 | 582 | ROI not defined | "return on investment (ROI)" |
-| ch15 | 18 | MTok defined correctly ✓ | "million tokens (MTok)" |
-| ch15 | 437 | YOLO not expanded | "You Only Live Once (YOLO)" or explain term in context |
+| ch14 | 537 | **K8s not defined** | **"Kubernetes (K8s)"** |
+| ch14 | 560 | **MCP not defined in ch14** | **"Model Context Protocol (MCP) server"** |
+| ch14 | 563 | **CRUD not defined in ch14** | **"Create, Read, Update, Delete (CRUD)"** |
+| ch14 | 582 | **ROI not defined** | **"return on investment (ROI)"** |
+| ch15 | 18 | **MTok defined inline** | **Restructure: "At Claude Sonnet pricing ($3 per million tokens, abbreviated MTok, for input; $15/MTok output)"** |
+| ch15 | 437 | **YOLO not expanded** | **"YOLO (You Only Live Once) mode" or explain in heading** |
 
 **Note on capitalization**: When expanding acronyms, only capitalize if the full term is a proper noun. "Large Language Model" should be "large language model (LLM)" and "Domain-Driven Design" should be "domain-driven design (DDD)" unless these are trademarked terms.
 
@@ -224,6 +299,7 @@ All chapters include "Related Chapters" sections with specific chapter numbers a
 |------|------|---------|-----------|-------|
 | ch12 | Multiple | ad-hoc | ad hoc | O'Reilly prefers two words, no hyphen (noun form) |
 | ch14 | 118 | "ad-hoc" | "ad hoc" | Same issue |
+| ch14 | 393 | **"$10-12"** | **"$10-$12"** | **Consistent range separator** |
 | ch12 | 148 | "master configuration" | "primary configuration" | Inclusive language |
 | ch14 | Multiple | "Wave 3", "Wave 4" ✓ | - | Correct (numerals for sequences) |
 
@@ -312,7 +388,7 @@ find chapters/ch1[2-5]*.md -exec sed -i '' 's/master configuration/primary confi
    - Product names that should stay capitalized
 
 2. **Acronym verification** (1 hour):
-   - Add missing expansions for LLM, CI/CD, ROI, K8s, YOLO
+   - Add missing expansions for ROI, MCP (in headings), K8s, CRUD, MTok, YOLO
    - Verify lowercase for non-proper-noun expansions
    - Check cross-chapter consistency
 
@@ -344,10 +420,10 @@ find chapters/ch1[2-5]*.md -exec sed -i '' 's/master configuration/primary confi
 
 ### Priority 1 (Must Fix)
 - **142 C-level headings**: Highest impact, most visible to readers and editors
-- **10 undefined acronyms**: Reader comprehension
+- **10 undefined acronyms in ch13-15**: Reader comprehension (ROI, MCP in headings, K8s, CRUD, MTok, YOLO)
 
 ### Priority 2 (Should Fix)
-- **Word choices**: "ad-hoc" → "ad hoc", inclusive language
+- **Word choices**: "ad-hoc" → "ad hoc", "$10-12" → "$10-$12", inclusive language
 - **Number formatting**: Add comma to "1,000+"
 
 ### Priority 3 (Nice to Have)
@@ -361,7 +437,7 @@ find chapters/ch1[2-5]*.md -exec sed -i '' 's/master configuration/primary confi
 | Task | Time | Difficulty |
 |------|------|-----------|
 | C-level heading fixes | 3 hours | Medium (requires judgment) |
-| Acronym expansion | 1 hour | Low (mechanical) |
+| Acronym expansion (ch13-15) | 1 hour | Low (mechanical) |
 | Word choice cleanup | 30 min | Low (find-replace) |
 | Typography decision | 30 min | Low (document choice) |
 | Testing & validation | 30 min | Low |
@@ -385,6 +461,8 @@ find chapters/ch1[2-5]*.md -exec sed -i '' 's/master configuration/primary confi
 ## Recommendation
 
 **Focus first on C-level headings** (142 instances). This single systematic fix addresses 76% of all issues and has the highest visibility impact. The remaining issues are straightforward mechanical fixes or low-priority style decisions.
+
+**For chapters 13-15 specifically**, the high-priority acronym fixes (ROI, MCP in headings, K8s, CRUD, MTok, YOLO) should be done simultaneously with heading fixes since they often appear in the same sections.
 
 **Timeline**:
 - Week 1: Complete heading fixes and acronym expansion
