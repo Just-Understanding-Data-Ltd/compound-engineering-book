@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T23:55:00Z",
+  "lastUpdated": "2026-01-28T16:21:55.639Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1718,14 +1718,16 @@
       "type": "kb-article",
       "title": "Create KB: prompt-injection-prevention.md",
       "description": "AI prompt security. Cover: injection attacks, defense patterns. TO BE CREATED per kb-article-index.md. Focus: prompt engineering patterns.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 165,
       "createdAt": "2026-01-28T16:30:00Z",
+      "completedAt": "2026-01-29T23:59:00Z",
       "chapters": [
         "ch03"
       ],
-      "targetPath": "~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/prompt-injection-prevention.md"
+      "targetPath": "~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/prompt-injection-prevention.md",
+      "note": "Article already existed (created 2026-01-28). Covers: injection types (direct, indirect, jailbreak), 6 defense layers, complete implementation, 5 best practices, 5 common pitfalls."
     },
     {
       "id": "task-091",
@@ -1905,16 +1907,16 @@
     ]
   },
   "stats": {
-    "pending": 12,
+    "pending": 11,
     "inProgress": 0,
-    "complete": 139,
+    "complete": 140,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "4b9a1562fb1f8a8d6859b4de433e80e77d896544",
-    "lastSuccessfulTask": "iteration-22",
-    "lastCheckpoint": "2026-01-28T16:17:42Z",
+    "lastGoodCommit": "bea22522a4246722517ecd70c51bb7b10c8a57c2",
+    "lastSuccessfulTask": "iteration-23",
+    "lastCheckpoint": "2026-01-28T16:21:55Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
