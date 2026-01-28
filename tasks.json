@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-01-28T15:10:17.256Z",
+  "lastUpdated": "2026-01-29T14:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T13:00:00Z",
-    "iteration": 9,
+    "lastRun": "2026-01-29T14:30:00Z",
+    "iteration": 10,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
     "recommendedNext": "task-253",
-    "reasoning": "Completed task-252 (ch13 cost protection patterns). Added Multi-Layer Cost Protection subsection covering five-layer protection model (job timeout, request tokens, input limits, budget alerts, model selection), safeAIOperation wrapper pattern, and cost calculation examples. Next highest priority: task-253 (agent reliability patterns) at score 535."
+    "reasoning": "Queue curation iteration 10. Verified 17 pending tasks, no duplicates found. task-232 (structured outputs for 20 files) and task-234 (ch06/schema-generator.ts) are separate tasks covering different scopes. Stats corrected from 30→17 pending. Next highest priority: task-253 (agent reliability patterns) at score 535, followed by task-254 (12-factor agent patterns) also at 535."
   },
   "prds": {
     "index": {
@@ -1878,20 +1878,20 @@
     ]
   },
   "stats": {
-    "pending": 30,
+    "pending": 17,
     "inProgress": 0,
-    "complete": 121,
+    "complete": 134,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "pending-iteration-9",
-    "lastSuccessfulTask": "task-252",
-    "lastCheckpoint": "2026-01-29T13:00:00Z",
+    "lastGoodCommit": "6a50a8e2d009e5fba03f6126ce4111c5a731d692",
+    "lastSuccessfulTask": "iteration-10",
+    "lastCheckpoint": "2026-01-29T14:30:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
-    "lastQueueCuration": "2026-01-29T13:00:00Z"
+    "lastQueueCuration": "2026-01-29T14:30:00Z"
   },
-  "lastQueueCuration": "2026-01-29T13:00:00Z"
+  "lastQueueCuration": "2026-01-29T14:30:00Z"
 }

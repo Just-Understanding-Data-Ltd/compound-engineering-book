@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 13:00)
+## Current Status (Updated: 2026-01-29 14:30)
 - Phase: Final Quality Polish
 - Active: Content enhancements from KB articles
-- Last Completed: task-252: Add cost protection patterns to ch13
+- Last Completed: Queue curation iteration 10
 - Blockers: None - all quality issues have identified solutions
-- Queue Health: All critical work identified and prioritized
+- Queue Health: 17 pending tasks, clean queue, no duplicates
 - Publishing Readiness: 99% (content complete, SDK migration 12/12 done, ch13 fully enhanced)
 
 ## Project State Summary
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 121/151 (80%) with clear prioritization
+- Tasks Complete: 134/151 (89%) with clear prioritization
 - Test Pass Rate: 100% across all chapters (787 tests total)
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -57,6 +57,23 @@
 - **Confidence**: HIGH (98%)
 
 ## Recent Activity
+
+### 2026-01-29 14:30 - Queue Curation (Iteration 10)
+- What: Curated task queue, verified no duplicates, updated stats
+- Analysis:
+  - Verified 17 pending tasks (stats previously showed 30 - corrected)
+  - Checked task-232 vs task-234: NOT duplicates (different file scopes)
+  - task-232 covers ch03, ch05, ch09, ch10, ch13, ch14 (20 files)
+  - task-234 covers ch06/schema-generator.ts specifically
+- Priority queue (top 5 by score):
+  1. task-253: Add agent reliability patterns to ch13 (score 535)
+  2. task-254: Integrate 12-factor agents patterns into ch13 (score 535)
+  3. task-242: ch14 full identity definition callout (score 530)
+  4. task-243: ch15 cost of exploration insight (score 525)
+  5. task-232: Use structured outputs (20 files, score 435)
+- Stats: 17 pending, 0 in_progress, 134 complete, 0 blocked
+- Outcome: Queue is clean, stats corrected, priorities verified
+- Next: task-253 (agent reliability patterns) is highest priority
 
 ### 2026-01-29 13:00 - COMPLETED task-252: Add cost protection patterns to ch13
 - What: Added Multi-Layer Cost Protection subsection to Chapter 13 Layer 4
