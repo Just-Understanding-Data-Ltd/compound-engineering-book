@@ -76,6 +76,39 @@ import {
   type CircuitMetrics,
 } from "./circuit-breaker";
 
+// Import from timeout-protection.ts
+import {
+  MODEL_COSTS,
+  MODEL_IDS,
+  DEFAULT_INPUT_LIMITS,
+  DEFAULT_BUDGET,
+  DEFAULT_TIMEOUT,
+  TOKEN_LIMITS_BY_TASK,
+  logUsage,
+  getUsage,
+  resetUsage,
+  checkBudget,
+  estimateTokens,
+  truncateFile,
+  matchesExcludePattern,
+  processFilesWithLimits,
+  selectModelForTask,
+  estimateCost,
+  createTimeout,
+  withTimeout as withTimeoutProtection,
+  calculateBackoffDelay,
+  withRetry,
+  isRetryableError,
+  calculateOperationCost,
+  calculateMonthlyCost,
+  generateUsageReport,
+  type ModelTier,
+  type BudgetStatus,
+  type UsageMetrics,
+  type FileContent,
+  type RetryResult,
+} from "./timeout-protection";
+
 // ============================================================================
 // ERROR DIAGNOSTIC TESTS
 // ============================================================================
@@ -1666,6 +1699,600 @@ describe("Circuit Breaker Pattern", () => {
       } catch {}
 
       expect(breaker.getState()).toBe("open");
+    });
+  });
+});
+
+// ============================================================================
+// TIMEOUT PROTECTION TESTS
+// ============================================================================
+
+describe("Timeout Protection Framework", () => {
+  beforeEach(() => {
+    resetUsage();
+  });
+
+  describe("MODEL_COSTS", () => {
+    test("should have all three model tiers", () => {
+      expect(MODEL_COSTS).toHaveProperty("haiku");
+      expect(MODEL_COSTS).toHaveProperty("sonnet");
+      expect(MODEL_COSTS).toHaveProperty("opus");
+    });
+
+    test("haiku should be cheapest", () => {
+      expect(MODEL_COSTS.haiku.input).toBeLessThan(MODEL_COSTS.sonnet.input);
+      expect(MODEL_COSTS.sonnet.input).toBeLessThan(MODEL_COSTS.opus.input);
+    });
+
+    test("output should cost more than input for all models", () => {
+      expect(MODEL_COSTS.haiku.output).toBeGreaterThan(MODEL_COSTS.haiku.input);
+      expect(MODEL_COSTS.sonnet.output).toBeGreaterThan(MODEL_COSTS.sonnet.input);
+      expect(MODEL_COSTS.opus.output).toBeGreaterThan(MODEL_COSTS.opus.input);
+    });
+  });
+
+  describe("MODEL_IDS", () => {
+    test("should have valid model IDs", () => {
+      expect(MODEL_IDS.haiku).toContain("haiku");
+      expect(MODEL_IDS.sonnet).toContain("sonnet");
+      expect(MODEL_IDS.opus).toContain("opus");
+    });
+  });
+
+  describe("DEFAULT_INPUT_LIMITS", () => {
+    test("should have reasonable defaults", () => {
+      expect(DEFAULT_INPUT_LIMITS.maxFiles).toBe(50);
+      expect(DEFAULT_INPUT_LIMITS.maxLinesPerFile).toBe(500);
+      expect(DEFAULT_INPUT_LIMITS.maxTotalTokens).toBe(50000);
+    });
+
+    test("should exclude common large directories", () => {
+      expect(DEFAULT_INPUT_LIMITS.excludePatterns).toContain("node_modules/**");
+      expect(DEFAULT_INPUT_LIMITS.excludePatterns).toContain("dist/**");
+      expect(DEFAULT_INPUT_LIMITS.excludePatterns).toContain(".git/**");
+    });
+  });
+
+  describe("DEFAULT_BUDGET", () => {
+    test("should have conservative defaults", () => {
+      expect(DEFAULT_BUDGET.dailyLimit).toBe(10);
+      expect(DEFAULT_BUDGET.monthlyLimit).toBe(100);
+      expect(DEFAULT_BUDGET.alertThreshold).toBe(0.8);
+    });
+  });
+
+  describe("TOKEN_LIMITS_BY_TASK", () => {
+    test("should have limits for common tasks", () => {
+      expect(TOKEN_LIMITS_BY_TASK.code_review).toBe(4096);
+      expect(TOKEN_LIMITS_BY_TASK.bug_fix).toBe(2048);
+      expect(TOKEN_LIMITS_BY_TASK.documentation).toBe(8192);
+      expect(TOKEN_LIMITS_BY_TASK.simple_edit).toBe(1024);
+    });
+
+    test("documentation should have highest limit", () => {
+      expect(TOKEN_LIMITS_BY_TASK.documentation).toBeGreaterThan(
+        TOKEN_LIMITS_BY_TASK.code_review
+      );
+    });
+  });
+
+  describe("Usage Tracking", () => {
+    test("should start with zero usage", () => {
+      const usage = getUsage();
+      expect(usage.daily).toBe(0);
+      expect(usage.monthly).toBe(0);
+      expect(usage.logs).toHaveLength(0);
+    });
+
+    test("should track logged usage", () => {
+      const metrics: UsageMetrics = {
+        timestamp: new Date(),
+        tokensIn: 1000,
+        tokensOut: 500,
+        cost: 0.05,
+        model: "claude-sonnet-4-5-20250929",
+        task: "code_review",
+        durationMs: 2000,
+        success: true,
+      };
+
+      logUsage(metrics);
+
+      const usage = getUsage();
+      expect(usage.daily).toBe(0.05);
+      expect(usage.monthly).toBe(0.05);
+      expect(usage.logs).toHaveLength(1);
+    });
+
+    test("should accumulate multiple logs", () => {
+      logUsage({
+        timestamp: new Date(),
+        tokensIn: 1000,
+        tokensOut: 500,
+        cost: 0.05,
+        model: "claude-sonnet-4-5-20250929",
+        task: "code_review",
+        durationMs: 2000,
+        success: true,
+      });
+
+      logUsage({
+        timestamp: new Date(),
+        tokensIn: 2000,
+        tokensOut: 1000,
+        cost: 0.10,
+        model: "claude-sonnet-4-5-20250929",
+        task: "bug_fix",
+        durationMs: 3000,
+        success: true,
+      });
+
+      const usage = getUsage();
+      expect(usage.daily).toBeCloseTo(0.15, 2);
+      expect(usage.logs).toHaveLength(2);
+    });
+
+    test("should reset usage correctly", () => {
+      logUsage({
+        timestamp: new Date(),
+        tokensIn: 1000,
+        tokensOut: 500,
+        cost: 0.05,
+        model: "claude-sonnet-4-5-20250929",
+        task: "code_review",
+        durationMs: 2000,
+        success: true,
+      });
+
+      resetUsage();
+
+      const usage = getUsage();
+      expect(usage.daily).toBe(0);
+      expect(usage.logs).toHaveLength(0);
+    });
+  });
+
+  describe("Budget Protection", () => {
+    test("should pass when under budget", () => {
+      const status = checkBudget();
+      expect(status.ok).toBe(true);
+      expect(status.alert).toBe(false);
+    });
+
+    test("should alert when approaching limit", () => {
+      // Spend 85% of daily budget
+      logUsage({
+        timestamp: new Date(),
+        tokensIn: 100000,
+        tokensOut: 50000,
+        cost: 8.5, // 85% of $10 limit
+        model: "claude-sonnet-4-5-20250929",
+        task: "code_review",
+        durationMs: 10000,
+        success: true,
+      });
+
+      const status = checkBudget();
+      expect(status.ok).toBe(true);
+      expect(status.alert).toBe(true);
+      expect(status.message).toContain("Budget alert");
+    });
+
+    test("should block when over budget", () => {
+      // Spend over daily budget
+      logUsage({
+        timestamp: new Date(),
+        tokensIn: 100000,
+        tokensOut: 50000,
+        cost: 12, // Over $10 limit
+        model: "claude-sonnet-4-5-20250929",
+        task: "code_review",
+        durationMs: 10000,
+        success: true,
+      });
+
+      const status = checkBudget();
+      expect(status.ok).toBe(false);
+      expect(status.alert).toBe(true);
+      expect(status.message).toContain("exceeded");
+    });
+
+    test("should work with custom budget config", () => {
+      const status = checkBudget({
+        dailyLimit: 5,
+        monthlyLimit: 50,
+        alertThreshold: 0.5,
+      });
+      expect(status.ok).toBe(true);
+      expect(status.remaining).toBe(5);
+    });
+  });
+
+  describe("Token Estimation", () => {
+    test("should estimate 1 token per 4 chars", () => {
+      expect(estimateTokens("1234")).toBe(1);
+      expect(estimateTokens("12345678")).toBe(2);
+    });
+
+    test("should round up partial tokens", () => {
+      expect(estimateTokens("12345")).toBe(2); // 5 chars = 1.25 tokens, rounds to 2
+    });
+
+    test("should handle empty string", () => {
+      expect(estimateTokens("")).toBe(0);
+    });
+  });
+
+  describe("File Truncation", () => {
+    test("should not truncate short files", () => {
+      const content = "line1\nline2\nline3";
+      const result = truncateFile(content, 10);
+      expect(result.truncated).toBe(false);
+      expect(result.content).toBe(content);
+      expect(result.originalLines).toBe(3);
+    });
+
+    test("should truncate long files", () => {
+      const lines = Array.from({ length: 100 }, (_, i) => `line ${i + 1}`);
+      const content = lines.join("\n");
+      const result = truncateFile(content, 10);
+
+      expect(result.truncated).toBe(true);
+      expect(result.originalLines).toBe(100);
+      expect(result.content).toContain("truncated 90 lines");
+    });
+
+    test("should keep first N lines when truncating", () => {
+      const lines = ["first", "second", "third", "fourth", "fifth"];
+      const content = lines.join("\n");
+      const result = truncateFile(content, 3);
+
+      expect(result.content).toContain("first");
+      expect(result.content).toContain("second");
+      expect(result.content).toContain("third");
+      expect(result.content).not.toContain("fourth");
+    });
+  });
+
+  describe("Exclude Pattern Matching", () => {
+    test("should match node_modules", () => {
+      expect(
+        matchesExcludePattern("node_modules/lodash/index.js", ["node_modules/**"])
+      ).toBe(true);
+    });
+
+    test("should match dist directory", () => {
+      expect(matchesExcludePattern("dist/bundle.js", ["dist/**"])).toBe(true);
+    });
+
+    test("should not match regular files", () => {
+      expect(
+        matchesExcludePattern("src/app.ts", ["node_modules/**", "dist/**"])
+      ).toBe(false);
+    });
+
+    test("should match .git directory", () => {
+      expect(matchesExcludePattern(".git/config", [".git/**"])).toBe(true);
+    });
+  });
+
+  describe("File Processing", () => {
+    test("should process files within limits", () => {
+      const files = [
+        { path: "src/app.ts", content: "const x = 1;" },
+        { path: "src/utils.ts", content: "export const y = 2;" },
+      ];
+
+      const { files: processed, warnings } = processFilesWithLimits(files);
+
+      expect(processed).toHaveLength(2);
+      expect(warnings).toHaveLength(0);
+    });
+
+    test("should exclude node_modules", () => {
+      const files = [
+        { path: "src/app.ts", content: "const x = 1;" },
+        { path: "node_modules/lodash/index.js", content: "module.exports = {};" },
+      ];
+
+      const { files: processed, warnings } = processFilesWithLimits(files);
+
+      expect(processed).toHaveLength(1);
+      expect(processed[0].path).toBe("src/app.ts");
+      expect(warnings).toContain("Excluded: node_modules/lodash/index.js");
+    });
+
+    test("should limit file count", () => {
+      const files = Array.from({ length: 100 }, (_, i) => ({
+        path: `src/file${i}.ts`,
+        content: `const x${i} = ${i};`,
+      }));
+
+      const { files: processed, warnings } = processFilesWithLimits(files, {
+        ...DEFAULT_INPUT_LIMITS,
+        maxFiles: 10,
+      });
+
+      expect(processed).toHaveLength(10);
+      expect(warnings.some((w) => w.includes("truncating to 10"))).toBe(true);
+    });
+
+    test("should throw on context too large", () => {
+      const largeContent = "x".repeat(300000); // ~75K tokens
+      const files = [{ path: "large.ts", content: largeContent }];
+
+      expect(() =>
+        processFilesWithLimits(files, {
+          ...DEFAULT_INPUT_LIMITS,
+          maxTotalTokens: 10000,
+        })
+      ).toThrow("Context too large");
+    });
+  });
+
+  describe("Model Selection", () => {
+    test("should select haiku for simple tasks", () => {
+      expect(selectModelForTask("read the file")).toBe("haiku");
+      expect(selectModelForTask("find all tests")).toBe("haiku");
+      expect(selectModelForTask("add comment to function")).toBe("haiku");
+      expect(selectModelForTask("rename variable")).toBe("haiku");
+      expect(selectModelForTask("format code")).toBe("haiku");
+    });
+
+    test("should select opus for complex tasks", () => {
+      expect(selectModelForTask("design authentication system")).toBe("opus");
+      expect(selectModelForTask("security audit")).toBe("opus");
+      expect(selectModelForTask("payment integration")).toBe("opus");
+      expect(selectModelForTask("performance optimization")).toBe("opus");
+    });
+
+    test("should select sonnet by default", () => {
+      expect(selectModelForTask("implement feature")).toBe("sonnet");
+      expect(selectModelForTask("write unit tests")).toBe("sonnet");
+      expect(selectModelForTask("code review")).toBe("sonnet");
+    });
+  });
+
+  describe("Cost Estimation", () => {
+    test("should calculate haiku costs correctly", () => {
+      const cost = estimateCost(1000000, 500000, "haiku");
+      // Input: 1M tokens * $0.25/MTok = $0.25
+      // Output: 0.5M tokens * $1.25/MTok = $0.625
+      expect(cost).toBeCloseTo(0.875, 2);
+    });
+
+    test("should calculate sonnet costs correctly", () => {
+      const cost = estimateCost(1000000, 500000, "sonnet");
+      // Input: 1M tokens * $3/MTok = $3
+      // Output: 0.5M tokens * $15/MTok = $7.5
+      expect(cost).toBeCloseTo(10.5, 2);
+    });
+
+    test("should calculate opus costs correctly", () => {
+      const cost = estimateCost(1000000, 500000, "opus");
+      // Input: 1M tokens * $15/MTok = $15
+      // Output: 0.5M tokens * $75/MTok = $37.5
+      expect(cost).toBeCloseTo(52.5, 2);
+    });
+  });
+
+  describe("Timeout Functions", () => {
+    test("createTimeout should reject after specified time", async () => {
+      const start = Date.now();
+      try {
+        await createTimeout(50, "test timeout");
+        expect(true).toBe(false); // Should not reach here
+      } catch (error) {
+        const elapsed = Date.now() - start;
+        expect(elapsed).toBeGreaterThanOrEqual(45);
+        expect((error as Error).message).toBe("test timeout");
+      }
+    });
+
+    test("withTimeoutProtection should succeed within timeout", async () => {
+      const result = await withTimeoutProtection(
+        async () => "success",
+        100,
+        "timeout"
+      );
+      expect(result).toBe("success");
+    });
+
+    test("withTimeoutProtection should timeout slow operations", async () => {
+      try {
+        await withTimeoutProtection(
+          () => new Promise((r) => setTimeout(r, 200)),
+          50,
+          "operation timeout"
+        );
+        expect(true).toBe(false); // Should not reach here
+      } catch (error) {
+        expect((error as Error).message).toBe("operation timeout");
+      }
+    });
+  });
+
+  describe("Backoff Calculation", () => {
+    test("should calculate exponential delays", () => {
+      const delay0 = calculateBackoffDelay(0, 1000, 60000);
+      const delay1 = calculateBackoffDelay(1, 1000, 60000);
+      const delay2 = calculateBackoffDelay(2, 1000, 60000);
+
+      // Base delay is 1000, so:
+      // Attempt 0: 1000 * 2^0 = 1000 (plus jitter)
+      // Attempt 1: 1000 * 2^1 = 2000 (plus jitter)
+      // Attempt 2: 1000 * 2^2 = 4000 (plus jitter)
+      expect(delay0).toBeGreaterThanOrEqual(1000);
+      expect(delay0).toBeLessThan(2000);
+      expect(delay1).toBeGreaterThanOrEqual(2000);
+      expect(delay1).toBeLessThan(3000);
+      expect(delay2).toBeGreaterThanOrEqual(4000);
+      expect(delay2).toBeLessThan(5000);
+    });
+
+    test("should cap at max delay", () => {
+      const delay = calculateBackoffDelay(10, 1000, 30000);
+      expect(delay).toBeLessThanOrEqual(31000); // 30000 + 1000 jitter max
+    });
+  });
+
+  describe("Retry Logic", () => {
+    test("should succeed on first try", async () => {
+      const result = await withRetry(async () => "success", 3, 10);
+      expect(result.success).toBe(true);
+      expect(result.result).toBe("success");
+      expect(result.attempts).toBe(1);
+      expect(result.errors).toHaveLength(0);
+    });
+
+    test("should retry on failure", async () => {
+      let attempt = 0;
+      const result = await withRetry(
+        async () => {
+          attempt++;
+          if (attempt < 3) throw new Error("fail");
+          return "success";
+        },
+        3,
+        10
+      );
+
+      expect(result.success).toBe(true);
+      expect(result.result).toBe("success");
+      expect(result.attempts).toBe(3);
+      expect(result.errors).toHaveLength(2);
+    });
+
+    test("should fail after max retries", async () => {
+      const result = await withRetry(
+        async () => {
+          throw new Error("always fail");
+        },
+        2,
+        10
+      );
+
+      expect(result.success).toBe(false);
+      expect(result.result).toBeUndefined();
+      expect(result.attempts).toBe(3); // Initial + 2 retries
+      expect(result.errors).toHaveLength(3);
+    });
+
+    test("should not retry non-retryable errors", async () => {
+      const result = await withRetry(
+        async () => {
+          throw new Error("invalid api key");
+        },
+        3,
+        10,
+        isRetryableError
+      );
+
+      expect(result.success).toBe(false);
+      expect(result.attempts).toBe(1); // No retries for auth errors
+    });
+  });
+
+  describe("Retryable Error Detection", () => {
+    test("should identify rate limit errors as retryable", () => {
+      expect(isRetryableError(new Error("rate limit exceeded"))).toBe(true);
+    });
+
+    test("should identify timeout errors as retryable", () => {
+      expect(isRetryableError(new Error("request timeout"))).toBe(true);
+    });
+
+    test("should identify network errors as retryable", () => {
+      expect(isRetryableError(new Error("network error"))).toBe(true);
+      expect(isRetryableError(new Error("ECONNRESET"))).toBe(true);
+    });
+
+    test("should identify 529 overloaded as retryable", () => {
+      expect(isRetryableError(new Error("529 overloaded"))).toBe(true);
+    });
+
+    test("should not retry authentication errors", () => {
+      expect(isRetryableError(new Error("invalid api key"))).toBe(false);
+      expect(isRetryableError(new Error("authentication failed"))).toBe(false);
+    });
+
+    test("should not retry budget errors", () => {
+      expect(isRetryableError(new Error("budget exceeded"))).toBe(false);
+    });
+  });
+
+  describe("Cost Calculation Utilities", () => {
+    test("should calculate operation cost", () => {
+      const cost = calculateOperationCost({
+        inputChars: 40000, // ~10K tokens
+        outputChars: 8000, // ~2K tokens
+        model: "sonnet",
+      });
+
+      expect(cost.inputCost).toBeCloseTo(0.03, 4); // 10K tokens * $3/MTok
+      expect(cost.outputCost).toBeCloseTo(0.03, 4); // 2K tokens * $15/MTok
+      expect(cost.total).toBeCloseTo(0.06, 4);
+    });
+
+    test("should calculate monthly cost estimate", () => {
+      const estimate = calculateMonthlyCost({
+        operationsPerDay: 10,
+        avgInputChars: 40000,
+        avgOutputChars: 8000,
+        model: "sonnet",
+        workDaysPerMonth: 22,
+      });
+
+      expect(estimate.daily).toBeGreaterThan(0);
+      expect(estimate.monthly).toBe(estimate.daily * 22);
+      expect(estimate.breakdown).toContain("ops/day");
+    });
+  });
+
+  describe("Usage Report Generation", () => {
+    test("should generate empty report with no usage", () => {
+      const report = generateUsageReport(7);
+
+      expect(report.totalCost).toBe(0);
+      expect(report.totalOperations).toBe(0);
+      expect(report.avgCostPerOp).toBe(0);
+      expect(report.successRate).toBe(1); // Default to 100% with no data
+    });
+
+    test("should generate report with usage data", () => {
+      // Add some usage
+      logUsage({
+        timestamp: new Date(),
+        tokensIn: 1000,
+        tokensOut: 500,
+        cost: 0.05,
+        model: "claude-sonnet-4-5-20250929",
+        task: "code_review",
+        durationMs: 2000,
+        success: true,
+      });
+
+      logUsage({
+        timestamp: new Date(),
+        tokensIn: 2000,
+        tokensOut: 1000,
+        cost: 0.10,
+        model: "claude-3-5-haiku-20241022",
+        task: "simple_edit",
+        durationMs: 1000,
+        success: false,
+        error: "test error",
+      });
+
+      const report = generateUsageReport(7);
+
+      expect(report.totalCost).toBeCloseTo(0.15, 2);
+      expect(report.totalOperations).toBe(2);
+      expect(report.avgCostPerOp).toBeCloseTo(0.075, 3);
+      expect(report.successRate).toBe(0.5);
+      expect(report.avgDurationMs).toBe(1500);
+      expect(Object.keys(report.byModel)).toHaveLength(2);
+      expect(Object.keys(report.byTask)).toHaveLength(2);
     });
   });
 });

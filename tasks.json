@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T11:43:24.159Z",
+  "lastUpdated": "2026-01-28T11:48:42.048Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1595,11 +1595,12 @@
       "chapter": "ch08",
       "title": "Ch08: Add multi-layer timeout protection example",
       "description": "Create examples/ch08/timeout-protection.ts implementing nested timeout layers (task/request/budget) with exponential backoff retry.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 560,
       "createdAt": "2026-01-28T15:00:00Z",
-      "file": "examples/ch08/timeout-protection.ts"
+      "file": "examples/ch08/timeout-protection.ts",
+      "completedAt": "2026-01-29T00:30:00Z"
     },
     {
       "id": "task-318",
@@ -2028,16 +2029,16 @@
     ]
   },
   "stats": {
-    "pending": 24,
+    "pending": 23,
     "inProgress": 1,
-    "complete": 41,
+    "complete": 42,
     "blocked": 1,
     "total": 167
   },
   "checkpoints": {
-    "lastGoodCommit": "f8dbfacbb2c04edbbb86f844fd99826c7dd75272",
-    "lastSuccessfulTask": "iteration-20",
-    "lastCheckpoint": "2026-01-28T11:43:24Z",
+    "lastGoodCommit": "199c8c8947414dec8edb4bd485fa3413b9ae896a",
+    "lastSuccessfulTask": "iteration-21",
+    "lastCheckpoint": "2026-01-28T11:48:42Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 1,
