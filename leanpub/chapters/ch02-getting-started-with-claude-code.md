@@ -647,7 +647,7 @@ The key insights:
 
 The agent mindset is: every prompt should reference what exists, specify where changes go, and define how success is measured. Five minutes of exploration saves thirty minutes of iteration.
 
-The next chapter covers prompting fundamentals in depth. You will learn information theory concepts that explain why some prompts work better than others, and you will develop techniques for maximizing the value per token. See [Chapter 3: Prompting Fundamentals](ch03-prompting-fundamentals.md).
+The next chapter covers prompting fundamentals in depth. You will learn information theory concepts that explain why some prompts work better than others, and you will develop techniques for maximizing the value per token. See Chapter 3: Prompting Fundamentals.
 
 ---
 
@@ -655,6 +655,6 @@ The next chapter covers prompting fundamentals in depth. You will learn informat
 
 
 *Related chapters:*
-- [Chapter 1: The Compound Systems Engineer](ch01-the-compound-systems-engineer.md) for the meta-engineering philosophy
-- [Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md) for deep dives on project context files
-- [Chapter 6: The Verification Ladder](ch06-the-verification-ladder.md) for test-driven agent workflows
+- Chapter 1: The Compound Systems Engineer for the meta-engineering philosophy
+- Chapter 4: Writing Your First CLAUDE.md for deep dives on project context files
+- Chapter 6: The Verification Ladder for test-driven agent workflows

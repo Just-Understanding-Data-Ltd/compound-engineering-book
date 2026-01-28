@@ -716,6 +716,6 @@ Each verification layer compounds with the others. Together they catch bugs that
 
 *Related chapters:*
 
-- **[Chapter 5: The 12-Factor Agent](ch05-the-12-factor-agent.md)** for the reliability principles that verification enforces
-- **[Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md)** for building verification systems that improve over time
-- **[Chapter 3: Prompting Fundamentals](ch03-prompting-fundamentals.md)** for structuring prompts that produce testable code
+- **Chapter 5: The 12-Factor Agent** for the reliability principles that verification enforces
+- **Chapter 7: Quality Gates That Compound** for building verification systems that improve over time
+- **Chapter 3: Prompting Fundamentals** for structuring prompts that produce testable code

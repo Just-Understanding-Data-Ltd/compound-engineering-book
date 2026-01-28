@@ -275,7 +275,7 @@ The solution is ERRORS.md. A persistent document that serves as memory for your 
 
 ### Structure of ERRORS.md
 
-```markdown
+````markdown
 # Common Errors & Solutions
 
 Last Updated: 2026-01-27
@@ -310,7 +310,7 @@ console.log(user.email) // Works
 3. Include this example when working with async code
 
 ---
-```
+````
 
 ### Using ERRORS.md
 
@@ -346,7 +346,7 @@ The goal isn't zero errors. It's zero repeated errors.
 Document common error patterns specific to AI-assisted development:
 
 **Schema Mismatches**:
-```markdown
+````markdown
 ## Error: Zod schema doesn't match database types
 
 **Frequency**: 8 occurrences
@@ -369,10 +369,10 @@ const UserSchema = z.object({
 ```
 
 **Prevention**: Use z.coerce.date() for all timestamp fields by default.
-```
+````
 
 **Missing Null Checks**:
-```markdown
+````markdown
 ## Error: Cannot read property of null
 
 **Frequency**: 15 occurrences
@@ -396,7 +396,7 @@ return { success: true, email: user.email }
 ```
 
 **Prevention**: Enable strictNullChecks in tsconfig.json.
-```
+````
 
 These documented patterns become context for future tasks. When the AI starts working on database queries, it sees the null check pattern. When it creates Zod schemas, it sees the coerce pattern. Mistakes become guardrails.
 

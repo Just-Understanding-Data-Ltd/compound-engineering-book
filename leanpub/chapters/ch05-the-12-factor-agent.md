@@ -579,7 +579,7 @@ Production agents are not smarter than demo agents. They are more carefully arch
 
 
 *Related chapters:*
-- **[Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md)** for context engineering fundamentals that support Factor 3
-- **[Chapter 6: The Verification Ladder](ch06-the-verification-ladder.md)** for building on the verification concepts in Factors 6-9
-- **[Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md)** for long-running agent patterns that apply the 12 factors
-- **[Chapter 11: Sub-Agent Architecture](ch11-sub-agent-architecture.md)** for expanding on Factor 10's focused agent approach
+- **Chapter 4: Writing Your First CLAUDE.md** for context engineering fundamentals that support Factor 3
+- **Chapter 6: The Verification Ladder** for building on the verification concepts in Factors 6-9
+- **Chapter 10: The RALPH Loop** for long-running agent patterns that apply the 12 factors
+- **Chapter 11: Sub-Agent Architecture** for expanding on Factor 10's focused agent approach

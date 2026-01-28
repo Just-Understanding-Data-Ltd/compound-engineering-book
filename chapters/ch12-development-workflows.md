@@ -322,7 +322,7 @@ fi
 
 **Step 3: Make it a slash command**
 
-```markdown
+````markdown
 # .claude/commands/deploy-staging.md
 Run the staging deployment script:
 
@@ -331,7 +331,7 @@ Run the staging deployment script:
 ```
 
 Report the outcome.
-```
+````
 
 Now instead of explaining the flow, you type `/deploy-staging`.
 

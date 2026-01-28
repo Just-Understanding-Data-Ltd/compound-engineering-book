@@ -589,7 +589,7 @@ The goal is code generation that is predictable, correct, and efficient. Not by 
 
 
 *Related chapters:*
-- [Chapter 3: Prompting Fundamentals](ch03-prompting-fundamentals.md) for foundational techniques that maximize information density
-- [Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md) for how verification stages reduce entropy exponentially
-- [Chapter 8: Error Handling & Debugging](ch08-error-handling-and-debugging.md) for the Five-Point Diagnostic protocol
-- [Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md) for managing context in long-running agent sessions
+- Chapter 3: Prompting Fundamentals for foundational techniques that maximize information density
+- Chapter 7: Quality Gates That Compound for how verification stages reduce entropy exponentially
+- Chapter 8: Error Handling & Debugging for the Five-Point Diagnostic protocol
+- Chapter 10: The RALPH Loop for managing context in long-running agent sessions

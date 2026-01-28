@@ -29,7 +29,10 @@ for src in chapters/ch*.md; do
     # Convert > **Note:** to information blurbs
     sed -E 's/^> \*\*Note:\*\* (.+)$/{blurb, class: information}\n\1\n{\/blurb}/' | \
     # Add width to images
-    sed -E 's/^!\[([^]]*)\]\(([^)]+)\)$/{width=80%}\n![\1](\2)/' \
+    sed -E 's/^!\[([^]]*)\]\(([^)]+)\)$/{width=80%}\n![\1](\2)/' | \
+    # Strip .md cross-reference links (keep text, remove link)
+    # Converts [Chapter Title](chXX-filename.md) to Chapter Title
+    sed -E 's/\[([^]]+)\]\(ch[0-9]+[^)]*\.md\)/\1/g' \
     > "$dest"
 done
 

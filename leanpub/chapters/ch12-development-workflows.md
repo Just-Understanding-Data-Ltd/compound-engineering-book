@@ -322,7 +322,7 @@ fi
 
 **Step 3: Make it a slash command**
 
-```markdown
+````markdown
 # .claude/commands/deploy-staging.md {#ch12-development-workflows}
 Run the staging deployment script:
 
@@ -331,7 +331,7 @@ Run the staging deployment script:
 ```
 
 Report the outcome.
-```
+````
 
 Now instead of explaining the flow, you type `/deploy-staging`.
 
@@ -622,7 +622,7 @@ The key insight: workflows are force multipliers. A 10% improvement in each work
 
 *Related chapters:*
 
-- **[Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md)** for long-running agent automation built on workflows
-- **[Chapter 11: Sub-Agent Architecture](ch11-sub-agent-architecture.md)** for skills evolving into specialized sub-agents
-- **[Chapter 13: Building the Harness](ch13-building-the-harness.md)** for codifying workflows into production infrastructure
-- **[Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md)** for project instructions that workflows reference
+- **Chapter 10: The RALPH Loop** for long-running agent automation built on workflows
+- **Chapter 11: Sub-Agent Architecture** for skills evolving into specialized sub-agents
+- **Chapter 13: Building the Harness** for codifying workflows into production infrastructure
+- **Chapter 4: Writing Your First CLAUDE.md** for project instructions that workflows reference

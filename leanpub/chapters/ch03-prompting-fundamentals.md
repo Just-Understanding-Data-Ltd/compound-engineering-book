@@ -486,7 +486,7 @@ Four techniques produce consistently better results:
 
 The underlying principle: every constraint you add eliminates possible outputs. Enough constraints and only correct outputs remain.
 
-The next chapter applies these prompting fundamentals to CLAUDE.md files. You will learn to structure project context that makes every prompt more effective without additional effort. See [Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md).
+The next chapter applies these prompting fundamentals to CLAUDE.md files. You will learn to structure project context that makes every prompt more effective without additional effort. See Chapter 4: Writing Your First CLAUDE.md.
 
 ---
 
@@ -494,6 +494,6 @@ The next chapter applies these prompting fundamentals to CLAUDE.md files. You wi
 
 
 *Related chapters:*
-- [Chapter 2: Getting Started with Claude Code](ch02-getting-started-with-claude-code.md) for tool usage and basic patterns
-- [Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md) for project context configuration
-- [Chapter 9: Context Engineering Deep Dive](ch09-context-engineering-deep-dive.md) for advanced information theory applications
+- Chapter 2: Getting Started with Claude Code for tool usage and basic patterns
+- Chapter 4: Writing Your First CLAUDE.md for project context configuration
+- Chapter 9: Context Engineering Deep Dive for advanced information theory applications

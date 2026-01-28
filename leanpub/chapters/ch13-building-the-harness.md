@@ -1256,8 +1256,8 @@ The LLM is the least controllable part of the system. Everything else is enginee
 
 *Related chapters:*
 
-- **[Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md)** for CLAUDE.md fundamentals
-- **[Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md)** for quality gates in depth
-- **[Chapter 9: Context Engineering Deep Dive](ch09-context-engineering-deep-dive.md)** for context engineering principles
-- **[Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md)** for the RALPH loop in long-running work
-- **[Chapter 11: Sub-Agent Architecture](ch11-sub-agent-architecture.md)** for sub-agent architecture patterns
+- **Chapter 4: Writing Your First CLAUDE.md** for CLAUDE.md fundamentals
+- **Chapter 7: Quality Gates That Compound** for quality gates in depth
+- **Chapter 9: Context Engineering Deep Dive** for context engineering principles
+- **Chapter 10: The RALPH Loop** for the RALPH loop in long-running work
+- **Chapter 11: Sub-Agent Architecture** for sub-agent architecture patterns

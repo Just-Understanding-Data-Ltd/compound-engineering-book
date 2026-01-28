@@ -1116,6 +1116,6 @@ That is why this path compounds: not because any single idea is guaranteed to wi
 
 *Related chapters:*
 
-- **[Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md)** for automated gates that validate cheaper models
-- **[Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md)** for cost management in long-running agents
-- **[Chapter 13: Building the Harness](ch13-building-the-harness.md)** for production cost optimization and telemetry
+- **Chapter 7: Quality Gates That Compound** for automated gates that validate cheaper models
+- **Chapter 10: The RALPH Loop** for cost management in long-running agents
+- **Chapter 13: Building the Harness** for production cost optimization and telemetry

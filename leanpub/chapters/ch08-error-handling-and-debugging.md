@@ -275,7 +275,7 @@ The solution is ERRORS.md. A persistent document that serves as memory for your 
 
 ### Structure of ERRORS.md
 
-```markdown
+````markdown
 # Common Errors & Solutions {#ch08-error-handling-and-debugging}
 
 Last Updated: 2026-01-27
@@ -310,7 +310,7 @@ console.log(user.email) // Works
 3. Include this example when working with async code
 
 ---
-```
+````
 
 ### Using ERRORS.md
 
@@ -346,7 +346,7 @@ The goal isn't zero errors. It's zero repeated errors.
 Document common error patterns specific to AI-assisted development:
 
 **Schema Mismatches**:
-```markdown
+````markdown
 ## Error: Zod schema doesn't match database types
 
 **Frequency**: 8 occurrences
@@ -369,10 +369,10 @@ const UserSchema = z.object({
 ```
 
 **Prevention**: Use z.coerce.date() for all timestamp fields by default.
-```
+````
 
 **Missing Null Checks**:
-```markdown
+````markdown
 ## Error: Cannot read property of null
 
 **Frequency**: 15 occurrences
@@ -396,7 +396,7 @@ return { success: true, email: user.email }
 ```
 
 **Prevention**: Enable strictNullChecks in tsconfig.json.
-```
+````
 
 These documented patterns become context for future tasks. When the AI starts working on database queries, it sees the null check pattern. When it creates Zod schemas, it sees the coerce pattern. Mistakes become guardrails.
 
@@ -1196,8 +1196,8 @@ Errors are inevitable. Repeated errors are a choice.
 
 *Related chapters:*
 
-- **[Chapter 6: The Verification Ladder](ch06-the-verification-ladder.md)** for the verification patterns that catch errors early
-- **[Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md)** for quality gates that automate prevention
-- **[Chapter 9: Context Engineering Deep Dive](ch09-context-engineering-deep-dive.md)** for context engineering principles that improve AI output
-- **[Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md)** for error recovery in long-running agent workflows
-- **[Chapter 15: Model Strategy & Cost Optimization](ch15-model-strategy-and-cost-optimization.md)** for cost optimization and budget protection strategies
+- **Chapter 6: The Verification Ladder** for the verification patterns that catch errors early
+- **Chapter 7: Quality Gates That Compound** for quality gates that automate prevention
+- **Chapter 9: Context Engineering Deep Dive** for context engineering principles that improve AI output
+- **Chapter 10: The RALPH Loop** for error recovery in long-running agent workflows
+- **Chapter 15: Model Strategy & Cost Optimization** for cost optimization and budget protection strategies

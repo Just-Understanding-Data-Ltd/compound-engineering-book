@@ -6,9 +6,6 @@
 
 by James Phoenix
 
-{width=60%}
-![Cover](images/cover.png)
-
 ## About This Book
 
 What if you could mass-produce software? Not by hiring more engineers, but by building systems that compound your output.
