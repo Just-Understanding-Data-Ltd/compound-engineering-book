@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-01-29T09:00:00.000Z",
+  "lastUpdated": "2026-01-29T09:30:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T09:00:00Z",
-    "iteration": 4,
+    "lastRun": "2026-01-29T09:30:00Z",
+    "iteration": 5,
     "tasksRemoved": 0,
     "tasksMerged": 0,
-    "prioritiesAdjusted": 4,
+    "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
-    "recommendedNext": "task-320",
-    "reasoning": "Recalculated scores for pending tasks. Fixed score misalignments: task-320 and task-321 now correctly scored at 1030 (review-flagged fixes). task-229 updated to 830 (unblocked after SDK migration). task-232/234 (structured outputs) also at 830. Top priority: Fix PRD em dashes (task-320) as highest-impact quality fix."
+    "recommendedNext": "task-321",
+    "reasoning": "Completed task-320 (PRD em dash fixes). Fixed ~45 em dashes across 9 PRD files. Next highest priority: task-321 (fix 7 high-priority term introductions) at score 1030."
   },
   "prds": {
     "index": {
@@ -1505,7 +1505,8 @@
       "type": "fix",
       "title": "Fix 13 critical PRD em dashes",
       "description": "Replace all em dashes (—) in PRD files with periods or commas. Identified 13 instances across 9 PRD files. Em dashes are AI text tells that must be eliminated for publication. This is a quick find-and-replace task. Flagged by slop-checker-2026-01-28.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-29T09:30:00Z",
       "priority": "high",
       "score": 1030,
       "scoreBreakdown": "high:750 + fix:80 + reviewFlagged:200 = 1030",
@@ -1515,7 +1516,8 @@
       "estimatedMinutes": 45,
       "estimatedEffort": "30-45 min",
       "createdAt": "2026-01-29T02:30:00Z",
-      "note": "Created during curation cycle iteration 24. 13 em dashes in PRDs: ch02.md (2), ch03.md (1), ch05.md (2), ch06.md (1), ch08-error-handling.md (2), ch10.md (1), ch11.md (2), ch12-development-workflows.md (1), ch15-model-strategy.md (1)"
+      "note": "Created during curation cycle iteration 24. 13 em dashes in PRDs: ch02.md (2), ch03.md (1), ch05.md (2), ch06.md (1), ch08-error-handling.md (2), ch10.md (1), ch11.md (2), ch12-development-workflows.md (1), ch15-model-strategy.md (1)",
+      "outcome": "Fixed ~45 em dashes across 9 PRD files (ch01, ch02, ch04, ch06, ch07, ch09, ch10, ch11, ch12). More em dashes found than originally reported. All replaced with periods, commas, colons, semicolons, or parentheses as appropriate."
     },
     {
       "id": "task-321",
@@ -1868,9 +1870,9 @@
     ]
   },
   "stats": {
-    "pending": 35,
+    "pending": 34,
     "inProgress": 0,
-    "complete": 116,
+    "complete": 117,
     "blocked": 0,
     "total": 151
   },

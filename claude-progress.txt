@@ -1,25 +1,25 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 08:00)
+## Current Status (Updated: 2026-01-29 09:30)
 - Phase: Final Quality Polish
-- Active: Content enhancements from KB articles
-- Last Completed: task-241: Ch13 doctrine harness component list
+- Active: Quality fixes from review cycle
+- Last Completed: task-320: Fix PRD em dashes (~45 instances across 9 files)
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
-- Publishing Readiness: 99% (content complete, SDK migration 12/12 done, all tests pass)
+- Publishing Readiness: 99% (content complete, SDK migration 12/12 done, PRD slop fixed)
 
 ## Project State Summary
-- PRDs: 15/15 complete (100%)
+- PRDs: 15/15 complete (100%) - EM DASHES FIXED ✓
 - Chapter Drafts: 15/15 complete (100%)
 - Chapters Complete: 15/15 (ch01-ch15, 100%) ✓ ALL DONE
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 116/151 (77%) with clear prioritization
+- Tasks Complete: 117/151 (77%) with clear prioritization
 - Test Pass Rate: 100% across all chapters (787 tests total)
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
-- AI Slop: 18 issues (13 critical em dashes in PRDs, 3 high, 2 medium) - All chapters publication-ready
+- AI Slop: 5 remaining issues (13 critical em dashes in PRDs FIXED, 3 high, 2 medium in chapters)
 - Tech Accuracy: 3 issues (2 errors ch13, 1 warning ch07) - 98% accurate
 - Term Introductions: 74 total issues (1 critical, 6 high, 67 medium/low) - All identified with specific line numbers
 - Cross-References: 5 broken links identified (exact fixes specified), 100% alignment when fixed
@@ -31,9 +31,9 @@
    - All 12/12 subtasks done, 787 tests pass
    - 39 files migrated across ch06-ch15
 
-2. HIGH: Fix Critical PRD Em Dashes (task-320, 13 instances, 30-45 min)
-   - Batch find-and-replace across 9 PRD files
-   - Highest-scored pending task
+2. ✓ COMPLETE: Fix Critical PRD Em Dashes (task-320)
+   - Fixed ~45 em dashes across 9 PRD files
+   - All PRDs now publication-ready
 
 3. HIGH: Fix High-Priority Term Introductions (task-321, 7 items, 45 min)
    - Specific line numbers identified
@@ -57,6 +57,25 @@
 - **Confidence**: HIGH (98%)
 
 ## Recent Activity
+
+### 2026-01-29 09:30 - COMPLETED task-320: Fix PRD em dashes
+- What: Removed all em dashes (—) from PRD files, replacing with appropriate punctuation
+- Files modified (9 PRDs):
+  - prds/ch01.md: 1 em dash fixed
+  - prds/ch02.md: 1 em dash fixed
+  - prds/ch04.md: 4 em dashes fixed
+  - prds/ch06.md: 6 em dashes fixed
+  - prds/ch07.md: 2 em dashes fixed (parenthetical format)
+  - prds/ch09.md: 3 em dashes fixed
+  - prds/ch10.md: 3 em dashes fixed
+  - prds/ch11.md: 13 em dashes fixed (including 9 in cross-refs)
+  - prds/ch12.md: 12 em dashes fixed (section headings + inline)
+- Total: ~45 em dashes fixed (more than originally reported 13)
+- Replacements: periods, commas, colons, semicolons, parentheses as appropriate
+- Verification: `grep -r "—" prds/` returns 0 matches
+- Stats: 117 complete, 34 pending
+- Outcome: All PRD files now publication-ready (no AI slop tells)
+- Next: task-321 (Fix 7 high-priority term introductions)
 
 ### 2026-01-29 08:00 - COMPLETED task-241: Ch13 doctrine harness component list
 - What: Added "What Persists" section to Chapter 13 emphasizing compound engineering philosophy
