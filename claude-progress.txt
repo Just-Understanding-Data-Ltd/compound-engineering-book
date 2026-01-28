@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 01:00)
+## Current Status (Updated: 2026-01-29 02:00)
 - Phase: Final Quality Polish & Publication Preparation
 - Active: All 15 chapters COMPLETE, focus on quality fixes
-- Last Completed: task-318: Ch09 context effectiveness measurement
+- Last Completed: task-319: Ch09 progressive disclosure skill loader
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
 - Publishing Readiness: 92% (content complete, quality gates identified)
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 43/65 (66%) with clear prioritization
+- Tasks Complete: 44/65 (68%) with clear prioritization
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -59,6 +59,24 @@
 - **Confidence**: HIGH (95%)
 
 ## Recent Activity
+
+### 2026-01-29 02:00 - COMPLETED task-319: Ch09 progressive disclosure skill loader
+- What: Created examples/ch09/progressive-disclosure-loader.ts for dynamic skill loading
+- File: examples/ch09/progressive-disclosure-loader.ts (new, ~1100 lines)
+- Content:
+  - SkillLoader class with three-level loading architecture (metadata/core/supplementary)
+  - File-based skill registry with simulated filesystem
+  - Lazy loading of Level 3 supplementary resources
+  - Caching layer with TTL and LRU eviction
+  - Metrics tracking (loads, cache hits, token savings)
+  - ModelAwareLoader for model-tier selection (Haiku/Sonnet/Opus)
+  - CachedComboLoader for predefined skill combinations
+  - generateMetricsReport for performance analysis
+- Tests: Added 28 new tests to context-engineering.test.ts (115 total, all pass)
+- Source: progressive-disclosure-context.md KB article
+- Stats: 44 complete, 21 pending
+- Outcome: Ch09 enhanced with dynamic skill loading infrastructure
+- Next: Queue curation (iteration 24 % 3 == 0) + review cycle (24 % 6 == 0)
 
 ### 2026-01-29 01:00 - COMPLETED task-318: Ch09 context effectiveness measurement
 - What: Created examples/ch09/context-effectiveness.ts for measuring MI via output variance

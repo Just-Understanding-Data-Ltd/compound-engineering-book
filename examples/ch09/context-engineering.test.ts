@@ -848,3 +848,290 @@ describe("Integration Tests", () => {
     }
   });
 });
+
+// ============================================================================
+// PROGRESSIVE DISCLOSURE LOADER TESTS
+// ============================================================================
+
+// Import from progressive-disclosure-loader.ts
+import {
+  parseSkillMetadata,
+  estimateTokens as estimateTokensLoader,
+  buildSkillRegistry,
+  SkillLoader,
+  CachedComboLoader,
+  generateMetricsReport,
+  SKILL_COMBOS,
+  DEFAULT_CONFIG,
+} from "./progressive-disclosure-loader";
+
+describe("Progressive Disclosure Loader", () => {
+  describe("parseSkillMetadata", () => {
+    test("parses valid YAML frontmatter", () => {
+      const content = `---
+name: test-skill
+description: A test skill
+triggers:
+  - "test"
+  - "example"
+---
+
+# Test Skill Content`;
+
+      const metadata = parseSkillMetadata(content, "skills/test/SKILL.md");
+
+      expect(metadata).not.toBeNull();
+      expect(metadata?.name).toBe("test-skill");
+      expect(metadata?.description).toBe("A test skill");
+      expect(metadata?.triggers).toEqual(["test", "example"]);
+      expect(metadata?.path).toBe("skills/test/SKILL.md");
+    });
+
+    test("returns null for invalid frontmatter", () => {
+      const content = "# No frontmatter here";
+      const metadata = parseSkillMetadata(content, "test.md");
+      expect(metadata).toBeNull();
+    });
+
+    test("returns null for incomplete frontmatter", () => {
+      const content = `---
+name: test-skill
+---`;
+      const metadata = parseSkillMetadata(content, "test.md");
+      expect(metadata).toBeNull();
+    });
+  });
+
+  describe("estimateTokens (loader)", () => {
+    test("estimates roughly 4 chars per token", () => {
+      expect(estimateTokensLoader("1234")).toBe(1);
+      expect(estimateTokensLoader("12345678")).toBe(2);
+      expect(estimateTokensLoader("hello world")).toBe(3); // 11 chars = ceil(11/4) = 3
+    });
+
+    test("handles empty string", () => {
+      expect(estimateTokensLoader("")).toBe(0);
+    });
+  });
+
+  describe("buildSkillRegistry", () => {
+    test("builds registry from simulated filesystem", () => {
+      const registry = buildSkillRegistry("skills");
+
+      expect(registry.length).toBeGreaterThan(0);
+      expect(registry.some((s) => s.name === "pdf-manipulation")).toBe(true);
+      expect(registry.some((s) => s.name === "git-operations")).toBe(true);
+      expect(registry.some((s) => s.name === "testing-framework")).toBe(true);
+    });
+  });
+
+  describe("SkillLoader", () => {
+    const loader = new SkillLoader({
+      skillsDir: "skills",
+      enableCache: true,
+      enableMetrics: true,
+    });
+
+    describe("getMetadataContext", () => {
+      test("returns context with all skills", () => {
+        const result = loader.getMetadataContext();
+
+        expect(result.context).toContain("pdf-manipulation");
+        expect(result.context).toContain("git-operations");
+        expect(result.context).toContain("testing-framework");
+        expect(result.tokens).toBeGreaterThan(0);
+      });
+    });
+
+    describe("detectRelevantSkills", () => {
+      test("detects PDF skill for PDF tasks", () => {
+        const skills = loader.detectRelevantSkills("Extract text from document.pdf");
+        expect(skills).toContain("pdf-manipulation");
+      });
+
+      test("detects git skill for git tasks", () => {
+        const skills = loader.detectRelevantSkills("commit and push changes");
+        expect(skills).toContain("git-operations");
+      });
+
+      test("detects testing skill for test tasks", () => {
+        const skills = loader.detectRelevantSkills("run the jest tests");
+        expect(skills).toContain("testing-framework");
+      });
+
+      test("detects multiple skills for multi-domain tasks", () => {
+        const skills = loader.detectRelevantSkills("commit the PDF extraction code and add tests");
+        expect(skills).toContain("pdf-manipulation");
+        expect(skills).toContain("git-operations");
+        expect(skills).toContain("testing-framework");
+      });
+
+      test("returns empty for unrelated tasks", () => {
+        const skills = loader.detectRelevantSkills("Hello, how are you?");
+        expect(skills.length).toBe(0);
+      });
+    });
+
+    describe("loadSkillCore", () => {
+      test("loads skill core content", () => {
+        const loaded = loader.loadSkillCore("pdf-manipulation");
+
+        expect(loaded).not.toBeNull();
+        expect(loaded?.name).toBe("pdf-manipulation");
+        expect(loaded?.coreContent).toContain("PDF Manipulation Skill");
+        expect(loaded?.coreTokens).toBeGreaterThan(0);
+      });
+
+      test("returns null for unknown skill", () => {
+        const loaded = loader.loadSkillCore("nonexistent-skill");
+        expect(loaded).toBeNull();
+      });
+    });
+
+    describe("loadSupplementary", () => {
+      test("loads supplementary resources", () => {
+        const resource = loader.loadSupplementary("pdf-manipulation", "forms.md");
+
+        expect(resource).not.toBeNull();
+        expect(resource?.name).toBe("forms.md");
+        expect(resource?.content).toContain("Field Types");
+        expect(resource?.tokens).toBeGreaterThan(0);
+      });
+
+      test("returns null for unknown resource", () => {
+        const resource = loader.loadSupplementary("pdf-manipulation", "nonexistent.md");
+        expect(resource).toBeNull();
+      });
+    });
+
+    describe("loadContextForTask", () => {
+      test("loads metadata only for generic tasks", () => {
+        const result = loader.loadContextForTask("Hello, how are you?");
+
+        expect(result.levelsLoaded).toEqual([1]);
+        expect(result.skillsLoaded.length).toBe(0);
+        expect(result.tokensLoaded).toBeGreaterThan(0);
+      });
+
+      test("loads core for triggered skills", () => {
+        const result = loader.loadContextForTask("Extract text from report.pdf");
+
+        expect(result.levelsLoaded).toContain(1);
+        expect(result.levelsLoaded).toContain(2);
+        expect(result.skillsLoaded).toContain("pdf-manipulation");
+      });
+
+      test("loads supplementary when requested", () => {
+        const result = loader.loadContextForTask("Fill a PDF form", {
+          "pdf-manipulation": ["forms.md"],
+        });
+
+        expect(result.levelsLoaded).toContain(3);
+        expect(result.context).toContain("Field Types");
+      });
+
+      test("calculates token savings", () => {
+        const result = loader.loadContextForTask("Hello");
+
+        expect(result.tokenSavings).toBeGreaterThan(0);
+      });
+    });
+
+    describe("getMetrics", () => {
+      test("tracks loading metrics", () => {
+        const freshLoader = new SkillLoader({
+          skillsDir: "skills",
+          enableMetrics: true,
+        });
+
+        // Perform some operations that trigger skill loading
+        freshLoader.loadContextForTask("Extract text from document.pdf");
+        freshLoader.loadContextForTask("Git commit changes");
+
+        const metrics = freshLoader.getMetrics();
+
+        expect(metrics.totalLoads).toBeGreaterThan(0);
+        expect(metrics.totalTokensLoaded).toBeGreaterThan(0);
+      });
+    });
+
+    describe("getCacheStats", () => {
+      test("tracks cache statistics", () => {
+        const freshLoader = new SkillLoader({
+          skillsDir: "skills",
+          enableCache: true,
+        });
+
+        // Load same skill twice
+        freshLoader.loadSkillCore("pdf-manipulation");
+        freshLoader.loadSkillCore("pdf-manipulation");
+
+        const stats = freshLoader.getCacheStats();
+
+        expect(stats.size).toBeGreaterThan(0);
+        expect(stats.skills).toContain("pdf-manipulation");
+      });
+    });
+  });
+
+  describe("CachedComboLoader", () => {
+    test("loads skill combos", () => {
+      const comboLoader = new CachedComboLoader({ skillsDir: "skills" });
+      const result = comboLoader.loadSkillCombo("code-review");
+
+      expect(result.tokensLoaded).toBeGreaterThan(0);
+      expect(result.context).toContain("Git Operations");
+      expect(result.context).toContain("Testing Framework");
+    });
+
+    test("caches combo on second load", () => {
+      const freshLoader = new CachedComboLoader({ skillsDir: "skills" });
+
+      const first = freshLoader.loadSkillCombo("code-review");
+      expect(first.cached).toBe(false);
+
+      const second = freshLoader.loadSkillCombo("code-review");
+      expect(second.cached).toBe(true);
+    });
+
+    test("returns empty for unknown combo", () => {
+      const comboLoader = new CachedComboLoader({ skillsDir: "skills" });
+      const result = comboLoader.loadSkillCombo("nonexistent-combo");
+      expect(result.tokensLoaded).toBe(0);
+      expect(result.context).toBe("");
+    });
+  });
+
+  describe("generateMetricsReport", () => {
+    test("generates readable report", () => {
+      const loader = new SkillLoader({
+        skillsDir: "skills",
+        enableMetrics: true,
+      });
+      loader.loadContextForTask("Extract text from document.pdf and commit");
+
+      const report = generateMetricsReport(loader);
+
+      expect(report).toContain("Loading Statistics");
+      expect(report).toContain("Cache Performance");
+      expect(report).toContain("Skill Discovery");
+    });
+  });
+
+  describe("SKILL_COMBOS", () => {
+    test("contains predefined skill combinations", () => {
+      expect(SKILL_COMBOS["code-review"]).toContain("git-operations");
+      expect(SKILL_COMBOS["code-review"]).toContain("testing-framework");
+      expect(SKILL_COMBOS["development"]).toBeDefined();
+    });
+  });
+
+  describe("DEFAULT_CONFIG", () => {
+    test("has sensible defaults", () => {
+      expect(DEFAULT_CONFIG.skillsDir).toBe("./skills");
+      expect(DEFAULT_CONFIG.enableCache).toBe(true);
+      expect(DEFAULT_CONFIG.cacheTTL).toBeGreaterThan(0);
+      expect(DEFAULT_CONFIG.maxCachedSkills).toBeGreaterThan(0);
+    });
+  });
+});

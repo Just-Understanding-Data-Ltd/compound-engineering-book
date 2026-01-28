@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T11:56:33.847Z",
+  "lastUpdated": "2026-01-28T12:01:13.980Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1620,12 +1620,13 @@
       "type": "code-example",
       "title": "ch09: Progressive disclosure skill loader",
       "description": "TypeScript: 3-level progressive disclosure. Source: progressive-disclosure-context.md",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 555,
       "createdAt": "2026-01-28T16:30:00Z",
       "chapter": "ch09",
-      "targetPath": "examples/ch09/progressive-disclosure-loader.ts"
+      "targetPath": "examples/ch09/progressive-disclosure-loader.ts",
+      "completedAt": "2026-01-29T02:00:00Z"
     },
     {
       "id": "task-241",
@@ -2030,16 +2031,16 @@
     ]
   },
   "stats": {
-    "pending": 22,
+    "pending": 21,
     "inProgress": 1,
-    "complete": 43,
+    "complete": 44,
     "blocked": 1,
     "total": 167
   },
   "checkpoints": {
-    "lastGoodCommit": "22d9800f6daa754f15d764deed537bf68a638ffb",
-    "lastSuccessfulTask": "iteration-22",
-    "lastCheckpoint": "2026-01-28T11:56:33Z",
+    "lastGoodCommit": "b425d617245ce6bef1d90577624708d74f3a479a",
+    "lastSuccessfulTask": "iteration-23",
+    "lastCheckpoint": "2026-01-28T12:01:13Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 1,
