@@ -1,5 +1,3 @@
-{backmatter}
-
 # Appendix A: Quick Reference
 
 ## Essential Commands

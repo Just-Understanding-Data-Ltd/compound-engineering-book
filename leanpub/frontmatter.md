@@ -1,5 +1,3 @@
-{frontmatter}
-
 # The Meta-Engineer: 10x Was the Floor
 
 ## Building Autonomous AI Systems with Claude Code
@@ -48,5 +46,3 @@ npx tsx examples/ch04/agent.ts
 - **Part II (Chapters 4-6)**: Core Techniques - Essential patterns for daily work
 - **Part III (Chapters 7-9)**: Advanced Patterns - Deep dives for power users
 - **Part IV (Chapters 10-15)**: Production Systems - Building autonomous systems
-
-{mainmatter}
