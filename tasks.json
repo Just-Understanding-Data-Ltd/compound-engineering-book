@@ -1778,11 +1778,12 @@
       "chapter": "ch08",
       "title": "Ch08: Create Agent Reliability Compounding diagram",
       "description": "Visualize the 95% per-action reliability degrading: 5 actions=77%, 10=60%, 20=36%, 30=21%. Based on agent-reliability-chasm.md.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 600,
       "createdAt": "2026-01-28T15:00:00Z",
-      "suggestedFilename": "assets/diagrams/ch08-reliability-compounding.md"
+      "suggestedFilename": "assets/diagrams/ch08-reliability-compounding.md",
+      "completedAt": "2026-01-28T18:00:00Z"
     },
     {
       "id": "task-261",
@@ -2025,9 +2026,9 @@
     ]
   },
   "stats": {
-    "pending": 33,
+    "pending": 32,
     "inProgress": 1,
-    "complete": 33,
+    "complete": 34,
     "blocked": 1,
     "total": 68
   },
@@ -2035,9 +2036,9 @@
     "lastGoodCommit": "5c8b49d68d7bde5ce0d6de990f5f3bfc66e7bf63",
     "lastSuccessfulTask": "iteration-11",
     "lastCheckpoint": "2026-01-28T10:57:43Z",
-    "consecutiveFailures": 0,
+    "consecutiveFailures": 1,
     "circuitBreakerTripped": false,
-    "failedAttempts": 0,
+    "failedAttempts": 1,
     "lastQueueCuration": "2026-01-28T14:30:00Z"
   },
   "lastQueueCuration": "2026-01-28T17:45:00Z"
