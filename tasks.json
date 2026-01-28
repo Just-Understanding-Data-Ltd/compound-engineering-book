@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T16:00:00Z",
+  "lastUpdated": "2026-01-29T00:20:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1695,12 +1695,14 @@
       "type": "fix",
       "title": "EPUB Visual Review: Tables, lists, and blockquotes formatting",
       "description": "Use the epub-review skill (Gemini vision) to verify tables have no horizontal overflow, lists indent correctly, blockquotes have proper styling. Check rendering on narrow screens. Run: bun scripts/epub-review.ts then review the report.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 905,
       "scoreBreakdown": "high:750 + fix:80 + blocking(1×25):25 + age24h:50 = 905",
       "blockedBy": [],
-      "createdAt": "2026-01-28T22:14:22.978Z"
+      "createdAt": "2026-01-28T22:14:22.978Z",
+      "startedAt": "2026-01-28T23:45:00Z",
+      "completedAt": "2026-01-29T00:20:00Z"
     },
     {
       "id": "task-429",
@@ -2202,9 +2204,9 @@
     ]
   },
   "stats": {
-    "pending": 3,
+    "pending": 2,
     "inProgress": 0,
-    "complete": 171,
+    "complete": 172,
     "blocked": 0,
     "total": 174
   },
@@ -2212,9 +2214,9 @@
     "lastGoodCommit": "5f661c5c33af578eaf8bb4da22231aa0bddfcc6f",
     "lastSuccessfulTask": "iteration-9",
     "lastCheckpoint": "2026-01-28T22:55:07Z",
-    "consecutiveFailures": 0,
+    "consecutiveFailures": 1,
     "circuitBreakerTripped": false,
-    "failedAttempts": 1,
+    "failedAttempts": 2,
     "lastQueueCuration": "2026-01-28T23:30:00Z"
   },
   "lastQueueCuration": "2026-01-28T23:30:00Z"
