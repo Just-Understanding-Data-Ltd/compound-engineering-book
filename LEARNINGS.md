@@ -568,3 +568,30 @@ The original task underreported the count because grep's "[Omitted long matching
 5. Budget 2-3x the estimated time if original count came from grep with line omissions
 
 ---
+
+### 2026-01-29 - Reliability Math as Content Architecture Guide
+
+**Context**: Adding agent reliability patterns to Chapter 13 based on agent-reliability-chasm.md KB article. The core insight is that 95% per-action reliability yields only 36% overall success at 20 actions.
+
+**Observation**: Mathematical relationships (like reliability compounding) serve as natural content organization anchors. The agent-reliability-chasm.md article structured its entire argument around a single formula: `Overall = (Per-Action)^N`. Everything else flows from this:
+
+| Section | Relationship to Core Formula |
+|---------|----------------------------|
+| Exponential problem | The formula itself (0.95^20 = 0.36) |
+| Four-turn framework | How to improve per-action success |
+| Pre-action validation | Prevents actions that would fail anyway |
+| Post-action verification | Catches failures before they compound |
+| Reliability stack | Four layers that each improve per-action rate |
+| Improvement table | Shows 99% per-action → 90% overall at 10 actions |
+
+The formula provides a "why this matters" anchor. Readers understand abstract advice ("verify outcomes") better when they see the math showing how verification improves the exponent.
+
+**Implication**: When translating KB articles into chapter content, identify the mathematical core if one exists. Structure the content as: (1) the math, (2) what the math implies, (3) how to improve the variables. This creates a logical narrative flow rather than a list of tips.
+
+**Action**: For chapters covering reliability, performance, or optimization patterns:
+1. Find the underlying mathematical relationship (exponential decay, logarithmic growth, etc.)
+2. Lead with a simple table showing concrete numbers (not formulas)
+3. Structure subsequent sections as "ways to improve the variables in the formula"
+4. End with an improvement table showing the payoff of better inputs
+
+---

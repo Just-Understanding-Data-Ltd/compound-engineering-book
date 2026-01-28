@@ -376,6 +376,146 @@ app.post("/webhook/resume/:threadId", async (req, res) => {
 
 This pattern enables deployment gates, PR reviews, and any workflow requiring human judgment without blocking API connections for hours.
 
+### Agent Reliability Patterns
+
+Building a demo agent is easy. Building a reliable agent is exponentially harder. Up to 95% of AI agent proof-of-concepts fail to make it to production, primarily due to reliability issues.
+
+**The Exponential Reliability Problem**
+
+Individual action reliability compounds catastrophically across multi-step tasks:
+
+| Actions | Per-Action Success | Overall Success |
+|---------|-------------------|-----------------|
+| 5 | 95% | 77% |
+| 10 | 95% | 60% |
+| 20 | 95% | 36% (worse than coin flip) |
+| 30 | 95% | 21% |
+
+The formula is simple: `Overall = (Per-Action)^N`. At 95% per-action reliability, a 20-action workflow succeeds only 36% of the time. This explains why demo agents fail in production. Real workflows demand complex sequences where compound failures become inevitable.
+
+**The Four-Turn Framework**
+
+Reliable agents operate through structured turns. Each turn has four phases:
+
+1. **Understand State**: Verify context and requirements before acting
+2. **Decide Action**: Choose the appropriate response based on understanding
+3. **Execute**: Perform the task
+4. **Verify Outcome**: Confirm the action actually succeeded
+
+Most basic agents skip steps 1 and 4. They do not verify context before acting, and they trust API responses without checking outcomes. This is exactly where reliability collapses.
+
+```typescript
+class ReliableAgent {
+  async execute(task: Task): Promise<Result> {
+    // Step 1: Understand
+    const understanding = await this.understand(task);
+    if (!understanding.confident) {
+      return this.requestClarification(understanding.questions);
+    }
+
+    // Step 2: Decide
+    const plan = await this.decide(understanding);
+
+    // Step 3: Execute
+    const execution = await this.executeWithRetry(plan);
+
+    // Step 4: Verify (MANDATORY)
+    const verification = await this.verify(execution, task);
+    if (!verification.success) {
+      return this.handleFailure(verification, task);
+    }
+
+    return execution;
+  }
+}
+```
+
+**Pre-Action Validation**
+
+Before acting, agents should run explicit checks:
+
+| Check | Example |
+|-------|---------|
+| Required info available? | "Which order?" before shipping changes |
+| Ambiguous request? | Detect when clarification needed |
+| Prerequisites met? | Check code validity before applying changes |
+| Authorization confirmed? | Verify permissions before destructive action |
+
+```typescript
+async function preActionChecks(intent: Intent): Promise<CheckResult> {
+  const checks = [
+    verifyRequiredInfo(intent),
+    detectAmbiguity(intent),
+    validatePrerequisites(intent),
+    confirmAuthorization(intent),
+  ];
+
+  const results = await Promise.all(checks);
+  const failed = results.filter(r => !r.passed);
+
+  if (failed.length > 0) {
+    return { proceed: false, issues: failed };
+  }
+
+  return { proceed: true };
+}
+```
+
+**Post-Action Verification**
+
+Agents must confirm actions actually succeeded. APIs can return 200 but fail silently. Partial successes can look complete. Business logic in other systems can revert changes.
+
+```typescript
+// BAD: Trusting API response
+const response = await api.updateOrder(orderId, changes);
+if (response.status === 200) {
+  return "Order updated"; // Might not actually be true!
+}
+
+// GOOD: Verify actual outcome
+const response = await api.updateOrder(orderId, changes);
+if (response.status === 200) {
+  const order = await api.getOrder(orderId);
+  const verified = verifyChangesApplied(order, changes);
+
+  if (!verified) {
+    return { success: false, reason: "Changes not reflected in order state" };
+  }
+
+  return { success: true };
+}
+```
+
+**The Reliability Stack**
+
+Layer these defenses to improve overall reliability:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  Layer 4: Human Escalation                                  │
+│  "Know when to ask for help"                                │
+├─────────────────────────────────────────────────────────────┤
+│  Layer 3: Post-Action Verification                          │
+│  "Confirm the outcome, not just the response"               │
+├─────────────────────────────────────────────────────────────┤
+│  Layer 2: Pre-Action Validation                             │
+│  "Check before you act"                                     │
+├─────────────────────────────────────────────────────────────┤
+│  Layer 1: Task Decomposition                                │
+│  "Small tasks = fewer failure points"                       │
+└─────────────────────────────────────────────────────────────┘
+```
+
+Every 1% improvement in per-action reliability compounds dramatically:
+
+| Current | Target | 10-Action Workflow |
+|---------|--------|-------------------|
+| 95% | 99% | 60% → 90% |
+| 95% | 99.5% | 60% → 95% |
+| 95% | 99.9% | 60% → 99% |
+
+The RALPH loop (Chapter 10) helps reliability by starting each task with fresh context, avoiding context degradation and goal drift. Smaller tasks mean fewer actions per workflow, which directly improves overall success rates.
+
 ## Layer 4: Closed-Loop Optimization
 
 The outermost layer uses telemetry as active feedback control. Instead of passive monitoring, the system measures behavior, detects constraint violations, and automatically fixes problems.

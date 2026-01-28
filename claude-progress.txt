@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 14:30)
+## Current Status (Updated: 2026-01-29 15:00)
 - Phase: Final Quality Polish
 - Active: Content enhancements from KB articles
-- Last Completed: Queue curation iteration 10
+- Last Completed: task-253 (agent reliability patterns to ch13)
 - Blockers: None - all quality issues have identified solutions
-- Queue Health: 17 pending tasks, clean queue, no duplicates
+- Queue Health: 16 pending tasks, clean queue, no duplicates
 - Publishing Readiness: 99% (content complete, SDK migration 12/12 done, ch13 fully enhanced)
 
 ## Project State Summary
@@ -57,6 +57,24 @@
 - **Confidence**: HIGH (98%)
 
 ## Recent Activity
+
+### 2026-01-29 15:00 - COMPLETED task-253: Add agent reliability patterns to ch13
+- What: Added Agent Reliability Patterns subsection to Chapter 13 Layer 3
+- File: chapters/ch13-building-the-harness.md
+- Content added:
+  - Exponential reliability problem table (95% per-action → 36% at 20 actions)
+  - The four-turn framework (Understand, Decide, Execute, Verify)
+  - Pre-action validation checks with TypeScript example
+  - Post-action verification pattern (verify state, not just API response)
+  - The Reliability Stack (4 layers: task decomposition → pre-action → post-action → human escalation)
+  - Per-action reliability improvement table (95% → 99% = 60% → 90% overall)
+  - RALPH loop cross-reference for fresh context
+- Source: agent-reliability-chasm.md KB article
+- Word count: 5,506 (slightly over 4,000 target, acceptable for enhanced content)
+- Quality: No em dashes, no AI slop phrases
+- Stats: 16 pending, 45 complete
+- Outcome: Ch13 Layer 3 enhanced with comprehensive reliability patterns
+- Next: task-254 (12-factor agents patterns) is highest priority
 
 ### 2026-01-29 14:30 - Queue Curation (Iteration 10)
 - What: Curated task queue, verified no duplicates, updated stats

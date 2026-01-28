@@ -1487,11 +1487,12 @@
       "chapter": "ch13",
       "title": "Add agent reliability patterns to ch13",
       "description": "Exponential reliability problem (95% to 36%), four-turn framework (understand/decide/execute/verify), pre-action and post-action verification from agent-reliability-chasm.md.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 535,
       "createdAt": "2026-01-28T14:30:00Z",
-      "sourceArticle": "agent-reliability-chasm.md"
+      "sourceArticle": "agent-reliability-chasm.md",
+      "completedAt": "2026-01-29T15:00:00Z"
     },
     {
       "id": "task-254",
@@ -1878,11 +1879,10 @@
     ]
   },
   "stats": {
-    "pending": 17,
-    "inProgress": 0,
-    "complete": 134,
-    "blocked": 0,
-    "total": 151
+    "pending": 16,
+    "complete": 45,
+    "in_progress": 0,
+    "blocked": 0
   },
   "checkpoints": {
     "lastGoodCommit": "6a50a8e2d009e5fba03f6126ce4111c5a731d692",
