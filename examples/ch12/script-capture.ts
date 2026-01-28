@@ -11,9 +11,23 @@
  * - Cannot deviate or get confused
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 
-const client = new Anthropic();
+/**
+ * Extracts text content from an Agent SDK message.
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // Represents a step in an ad-hoc workflow
 interface WorkflowStep {
@@ -129,13 +143,7 @@ function calculateSimilarity(a: string, b: string): number {
  * Analyzes an ad-hoc workflow and extracts it into a scriptable format.
  */
 export async function captureWorkflow(workflowDescription: string): Promise<CapturedWorkflow> {
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 2048,
-    messages: [
-      {
-        role: "user",
-        content: `Analyze this ad-hoc workflow and extract it into scriptable steps:
+  const prompt = `Analyze this ad-hoc workflow and extract it into scriptable steps:
 
 ${workflowDescription}
 
@@ -158,17 +166,26 @@ Output as JSON:
     "adHoc": 45,
     "scripted": 5
   }
-}`,
-      },
-    ],
+}`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const content = response.content[0];
-  if (!content || content.type !== "text") {
-    throw new Error("Expected text response");
+  let fullText = "";
+  for await (const message of response) {
+    fullText += extractTextContent(message);
   }
 
-  let jsonText = (content as { type: "text"; text: string }).text;
+  if (!fullText) {
+    throw new Error("No response received");
+  }
+
+  let jsonText = fullText;
   const jsonMatch = jsonText.match(/```(?:json)?\n?([\s\S]*?)\n?```/);
   if (jsonMatch && jsonMatch[1]) {
     jsonText = jsonMatch[1];

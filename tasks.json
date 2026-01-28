@@ -1,16 +1,16 @@
 {
-  "lastUpdated": "2026-01-29T04:45:00Z",
+  "lastUpdated": "2026-01-29T05:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T04:45:00Z",
-    "iteration": 27,
+    "lastRun": "2026-01-29T05:00:00Z",
+    "iteration": 28,
     "tasksRemoved": 0,
     "tasksMerged": 0,
-    "prioritiesAdjusted": 1,
+    "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
-    "recommendedNext": "task-224",
-    "reasoning": "Completed task-223 (ch11 Agent SDK migration). Migrated 4 files (sub-agent-orchestration.ts, context-hierarchy.ts, actor-critic-loop.ts, agent-permissions.ts) using query() with streaming pattern. All 67 tests pass. Next: task-224 (ch12 SDK migration) is highest-priority pending subtask. Remaining SDK migrations: task-224-task-227 plus test suite task-228. Quality fix tasks (320, 321) are ready to execute in parallel."
+    "recommendedNext": "task-225",
+    "reasoning": "Completed task-224 (ch12 Agent SDK migration). Migrated 5 files (ast-grep-refactor.ts, incremental-development.ts, plan-mode-session.ts, playwright-automation.ts, script-capture.ts). All 59 tests pass. Next: task-225 (ch13 SDK migration) continues the systematic SDK migration. Remaining: task-225-task-227 (ch13-ch15) plus test suite task-228."
   },
   "prds": {
     "index": {
@@ -1295,11 +1295,13 @@
           "type": "milestone",
           "title": "Rewrite ch12 examples with Agent SDK",
           "description": "Development Workflows - convert to Agent SDK workflow patterns.",
-          "status": "pending",
+          "status": "complete",
           "score": 605,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch12:25 + age:100 = 1125 (recalc with age bonus) → 705 (display score)",
           "priority": "critical",
-          "createdAt": "2026-01-28T22:00:00Z"
+          "createdAt": "2026-01-28T22:00:00Z",
+          "completedAt": "2026-01-29T05:00:00Z",
+          "note": "Migrated 5 files: ast-grep-refactor.ts, incremental-development.ts, plan-mode-session.ts, playwright-automation.ts, script-capture.ts. Uses query() function with streaming pattern. 59 tests pass, all demos run correctly."
         },
         {
           "id": "task-225",
@@ -1858,9 +1860,9 @@
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "438af937a6cc65e8db5b100014cd293656c378c5",
-    "lastSuccessfulTask": "iteration-27-task-223",
-    "lastCheckpoint": "2026-01-29T04:45:00Z",
+    "lastGoodCommit": "4b0533dbff7589b3a28c1e3a13d91ba02bf60d19",
+    "lastSuccessfulTask": "iteration-27",
+    "lastCheckpoint": "2026-01-28T12:33:31Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

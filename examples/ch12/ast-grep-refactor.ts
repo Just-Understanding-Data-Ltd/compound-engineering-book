@@ -8,9 +8,23 @@
  * This file demonstrates pattern generation and refactoring with AST-grep.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 
-const client = new Anthropic();
+/**
+ * Extracts text content from an Agent SDK message.
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // AST-grep pattern specification
 interface AstGrepPattern {
@@ -75,13 +89,7 @@ export async function generatePattern(
   description: string,
   language: AstGrepPattern["language"]
 ): Promise<AstGrepPattern> {
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 1024,
-    messages: [
-      {
-        role: "user",
-        content: `Generate an AST-grep pattern for ${language}:
+  const prompt = `Generate an AST-grep pattern for ${language}:
 
 Description: ${description}
 
@@ -96,17 +104,22 @@ Output as JSON:
   "language": "${language}",
   "pattern": "the ast-grep pattern",
   "metavariables": { "$VAR": "what this metavariable captures" }
-}`,
-      },
-    ],
+}`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const content = response.content[0];
-  if (!content || content.type !== "text") {
-    throw new Error("Expected text response");
+  let fullText = "";
+  for await (const message of response) {
+    fullText += extractTextContent(message);
   }
 
-  let jsonText = (content as { type: "text"; text: string }).text;
+  let jsonText = fullText;
   const jsonMatch = jsonText.match(/```(?:json)?\n?([\s\S]*?)\n?```/);
   if (jsonMatch && jsonMatch[1]) {
     jsonText = jsonMatch[1];
@@ -127,13 +140,7 @@ export async function generateRefactorRule(
     ? `\n\nExample transformation:\nBefore: ${examples.before}\nAfter: ${examples.after}`
     : "";
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 2048,
-    messages: [
-      {
-        role: "user",
-        content: `Generate an AST-grep refactoring rule for ${language}:
+  const prompt = `Generate an AST-grep refactoring rule for ${language}:
 
 Description: ${description}${exampleText}
 
@@ -153,17 +160,22 @@ Output as JSON:
   "testCases": [
     { "input": "code before", "expectedOutput": "code after" }
   ]
-}`,
-      },
-    ],
+}`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const content = response.content[0];
-  if (!content || content.type !== "text") {
-    throw new Error("Expected text response");
+  let fullText = "";
+  for await (const message of response) {
+    fullText += extractTextContent(message);
   }
 
-  let jsonText = (content as { type: "text"; text: string }).text;
+  let jsonText = fullText;
   const jsonMatch = jsonText.match(/```(?:json)?\n?([\s\S]*?)\n?```/);
   if (jsonMatch && jsonMatch[1]) {
     jsonText = jsonMatch[1];

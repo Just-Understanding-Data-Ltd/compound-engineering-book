@@ -9,9 +9,23 @@
  * architectural complexity before writing code.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 
-const client = new Anthropic();
+/**
+ * Extracts text content from an Agent SDK message.
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // Plan document structure for tracking planning output
 export interface PlanDocument {
@@ -66,25 +80,34 @@ DO NOT write any implementation code. Only output the plan.`;
  * Returns a structured plan document.
  */
 export async function createPlan(featureDescription: string): Promise<PlanDocument> {
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 4096,
-    system: PLAN_MODE_SYSTEM,
-    messages: [
-      {
-        role: "user",
-        content: `Plan the following feature:\n\n${featureDescription}\n\nOutput ONLY valid JSON.`,
-      },
-    ],
+  // Combine system prompt with user prompt for Agent SDK
+  const prompt = `${PLAN_MODE_SYSTEM}
+
+Plan the following feature:
+
+${featureDescription}
+
+Output ONLY valid JSON.`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const content = response.content[0];
-  if (!content || content.type !== "text") {
-    throw new Error("Expected text response from Claude");
+  let fullText = "";
+  for await (const message of response) {
+    fullText += extractTextContent(message);
+  }
+
+  if (!fullText) {
+    throw new Error("No response received from Claude");
   }
 
   // Extract JSON from response (handle markdown code blocks)
-  let jsonText = (content as { type: "text"; text: string }).text;
+  let jsonText = fullText;
   const jsonMatch = jsonText.match(/```(?:json)?\n?([\s\S]*?)\n?```/);
   if (jsonMatch && jsonMatch[1]) {
     jsonText = jsonMatch[1];
@@ -149,24 +172,37 @@ export async function refinePlan(
   originalPlan: PlanDocument,
   feedback: string
 ): Promise<PlanDocument> {
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 4096,
-    system: PLAN_MODE_SYSTEM,
-    messages: [
-      {
-        role: "user",
-        content: `Here is an existing plan:\n\n${JSON.stringify(originalPlan, null, 2)}\n\nRefine this plan based on the following feedback:\n\n${feedback}\n\nOutput the complete refined plan as valid JSON.`,
-      },
-    ],
+  // Combine system prompt with user prompt for Agent SDK
+  const prompt = `${PLAN_MODE_SYSTEM}
+
+Here is an existing plan:
+
+${JSON.stringify(originalPlan, null, 2)}
+
+Refine this plan based on the following feedback:
+
+${feedback}
+
+Output the complete refined plan as valid JSON.`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const content = response.content[0];
-  if (!content || content.type !== "text") {
-    throw new Error("Expected text response from Claude");
+  let fullText = "";
+  for await (const message of response) {
+    fullText += extractTextContent(message);
   }
 
-  let jsonText = (content as { type: "text"; text: string }).text;
+  if (!fullText) {
+    throw new Error("No response received from Claude");
+  }
+
+  let jsonText = fullText;
   const jsonMatch = jsonText.match(/```(?:json)?\n?([\s\S]*?)\n?```/);
   if (jsonMatch && jsonMatch[1]) {
     jsonText = jsonMatch[1];
@@ -192,13 +228,7 @@ export async function compareApproaches(
   approachB: { pros: string[]; cons: string[] };
   recommendation: string;
 }> {
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 2048,
-    messages: [
-      {
-        role: "user",
-        content: `Compare two approaches for implementing: ${feature}
+  const prompt = `Compare two approaches for implementing: ${feature}
 
 Approach A: ${approachA}
 Approach B: ${approachB}
@@ -208,17 +238,26 @@ Output as JSON:
   "approachA": { "pros": [], "cons": [] },
   "approachB": { "pros": [], "cons": [] },
   "recommendation": "Which approach to use and why"
-}`,
-      },
-    ],
+}`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const content = response.content[0];
-  if (!content || content.type !== "text") {
-    throw new Error("Expected text response");
+  let fullText = "";
+  for await (const message of response) {
+    fullText += extractTextContent(message);
   }
 
-  let jsonText = (content as { type: "text"; text: string }).text;
+  if (!fullText) {
+    throw new Error("No response received");
+  }
+
+  let jsonText = fullText;
   const jsonMatch = jsonText.match(/```(?:json)?\n?([\s\S]*?)\n?```/);
   if (jsonMatch && jsonMatch[1]) {
     jsonText = jsonMatch[1];
@@ -238,13 +277,7 @@ export async function executePlan(
   let completedSteps = 0;
 
   for (const step of plan.steps) {
-    const response = await client.messages.create({
-      model: "claude-sonnet-4-5-20250929",
-      max_tokens: 4096,
-      messages: [
-        {
-          role: "user",
-          content: `Execute step ${step.number} of the plan:
+    const prompt = `Execute step ${step.number} of the plan:
 
 Step: ${step.description}
 Expected output: ${step.output}
@@ -253,22 +286,31 @@ Verification: ${step.verification}
 Previous steps completed: ${completedSteps}
 Total steps: ${plan.steps.length}
 
-Implement ONLY this step. Output the implementation code and confirm verification.`,
-        },
-      ],
+Implement ONLY this step. Output the implementation code and confirm verification.`;
+
+    const response = query({
+      prompt,
+      options: {
+        model: "claude-sonnet-4-5-20250929",
+        allowedTools: [],
+      },
     });
 
-    const content = response.content[0];
-    if (!content || content.type !== "text") {
+    let stepOutput = "";
+    for await (const message of response) {
+      stepOutput += extractTextContent(message);
+    }
+
+    if (!stepOutput) {
       return {
         success: false,
         completedSteps,
-        error: `Step ${step.number} failed: unexpected response type`,
+        error: `Step ${step.number} failed: no response received`,
       };
     }
 
     completedSteps++;
-    onStepComplete?.(step, (content as { type: "text"; text: string }).text);
+    onStepComplete?.(step, stepOutput);
   }
 
   return {

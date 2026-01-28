@@ -9,9 +9,23 @@
  * artifacts for fast iteration loops.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 
-const client = new Anthropic();
+/**
+ * Extracts text content from an Agent SDK message.
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // Validation result from running a Playwright test
 interface ValidationResult {
@@ -125,13 +139,7 @@ export async function generatePlaywrightFromDescription(
   description: string,
   baseUrl: string
 ): Promise<{ spec: PlaywrightSpec; script: string }> {
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 2048,
-    messages: [
-      {
-        role: "user",
-        content: `Generate a Playwright test specification for the following validation:
+  const prompt = `Generate a Playwright test specification for the following validation:
 
 ${description}
 
@@ -152,17 +160,26 @@ Output as JSON:
   ]
 }
 
-Use data-testid attributes when possible for reliable selectors.`,
-      },
-    ],
+Use data-testid attributes when possible for reliable selectors.`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const content = response.content[0];
-  if (!content || content.type !== "text") {
-    throw new Error("Expected text response");
+  let fullText = "";
+  for await (const message of response) {
+    fullText += extractTextContent(message);
   }
 
-  let jsonText = (content as { type: "text"; text: string }).text;
+  if (!fullText) {
+    throw new Error("No response received");
+  }
+
+  let jsonText = fullText;
   const jsonMatch = jsonText.match(/```(?:json)?\n?([\s\S]*?)\n?```/);
   if (jsonMatch && jsonMatch[1]) {
     jsonText = jsonMatch[1];

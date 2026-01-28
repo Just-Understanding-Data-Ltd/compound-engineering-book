@@ -10,9 +10,23 @@
  * This pattern prevents the "1000+ lines of code to debug" problem.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { query, type SDKMessage } from "@anthropic-ai/claude-agent-sdk";
 
-const client = new Anthropic();
+/**
+ * Extracts text content from an Agent SDK message.
+ */
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
 
 // Increment represents a single step in the development process
 interface Increment {
@@ -57,13 +71,7 @@ export function calculateErrorProbability(linesOfCode: number, errorRatePer100Li
  * Returns an ordered list of implementation steps.
  */
 export async function decomposeFeature(featureDescription: string): Promise<IncrementalFeature> {
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 4096,
-    messages: [
-      {
-        role: "user",
-        content: `Break down this feature into the smallest possible increments:
+  const prompt = `Break down this feature into the smallest possible increments:
 
 ${featureDescription}
 
@@ -87,17 +95,22 @@ Output as JSON:
       "dependsOn": [/* increment numbers this depends on */]
     }
   ]
-}`,
-      },
-    ],
+}`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const content = response.content[0];
-  if (!content || content.type !== "text") {
-    throw new Error("Expected text response");
+  let fullText = "";
+  for await (const message of response) {
+    fullText += extractTextContent(message);
   }
 
-  let jsonText = (content as { type: "text"; text: string }).text;
+  let jsonText = fullText;
   const jsonMatch = jsonText.match(/```(?:json)?\n?([\s\S]*?)\n?```/);
   if (jsonMatch && jsonMatch[1]) {
     jsonText = jsonMatch[1];
@@ -121,13 +134,7 @@ export async function executeIncrement(
       ? `\n\nCode from previous increments (use as reference):\n${priorContext.join("\n\n---\n\n")}`
       : "";
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 4096,
-    messages: [
-      {
-        role: "user",
-        content: `Feature: ${feature.name}
+  const prompt = `Feature: ${feature.name}
 
 Current increment (#${increment.number}): ${increment.description}
 
@@ -142,23 +149,30 @@ Implement ONLY this increment. Output:
 1. The code for this increment
 2. How it satisfies each verification criterion
 
-Keep the code focused and minimal (20-50 lines target).`,
-      },
-    ],
+Keep the code focused and minimal (20-50 lines target).`;
+
+  const response = query({
+    prompt,
+    options: {
+      model: "claude-sonnet-4-5-20250929",
+      allowedTools: [],
+    },
   });
 
-  const content = response.content[0];
-  if (!content || content.type !== "text") {
+  let output = "";
+  for await (const message of response) {
+    output += extractTextContent(message);
+  }
+
+  if (!output) {
     return {
       increment,
       success: false,
       output: "",
       verificationResults: [],
-      error: "Unexpected response type",
+      error: "No response received",
     };
   }
-
-  const output = (content as { type: "text"; text: string }).text;
 
   // Extract code blocks from response
   const codeMatch = output.match(/```(?:typescript|ts)?\n?([\s\S]*?)\n?```/);

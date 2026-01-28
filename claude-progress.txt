@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 05:00)
+## Current Status (Updated: 2026-01-29 05:05)
 - Phase: Final Quality Polish & Agent SDK Migration
 - Active: Agent SDK migration (ch06-ch15 examples)
-- Last Completed: task-223: Rewrite ch11 examples with Agent SDK
+- Last Completed: task-224: Rewrite ch12 examples with Agent SDK
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
-- Publishing Readiness: 94% (content complete, SDK migration 7/11 done)
+- Publishing Readiness: 95% (content complete, SDK migration 8/11 done)
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
@@ -59,6 +59,27 @@
 - **Confidence**: HIGH (95%)
 
 ## Recent Activity
+
+### 2026-01-29 05:05 - COMPLETED task-224: Ch12 Agent SDK migration
+- What: Migrated ch12 examples from native Anthropic SDK to Claude Agent SDK
+- Files modified:
+  - examples/ch12/ast-grep-refactor.ts (AST-grep pattern generation)
+  - examples/ch12/incremental-development.ts (Feature decomposition)
+  - examples/ch12/plan-mode-session.ts (Plan creation/refinement/execution)
+  - examples/ch12/playwright-automation.ts (Test generation)
+  - examples/ch12/script-capture.ts (Workflow capture)
+- Changes:
+  - Replaced `import Anthropic from "@anthropic-ai/sdk"` with `import { query, type SDKMessage }`
+  - Added extractTextContent helper function for streaming responses
+  - Updated all API calls: generatePattern, generateRefactorRule, decomposeFeature, executeIncrement, createPlan, refinePlan, compareApproaches, executePlan, generatePlaywrightFromDescription, captureWorkflow
+  - Removed Anthropic client instantiation (Agent SDK manages connections)
+  - Removed maxTokens option (Agent SDK handles token limits automatically)
+- Tests: All 59 tests pass
+- Demos: ast-grep demo runs correctly
+- Stats: 110 complete, 39 pending
+- Parent task: task-216 (Agent SDK Migration) now 8/11 subtasks complete (73%)
+- Outcome: Ch12 development workflow patterns now use Agent SDK
+- Next: task-225 (ch13 SDK migration)
 
 ### 2026-01-29 05:00 - COMPLETED task-223: Ch11 Agent SDK migration
 - What: Migrated ch11 examples from native Anthropic SDK to Claude Agent SDK
