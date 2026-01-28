@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T17:45:00Z",
+  "lastUpdated": "2026-01-28T11:15:27.633Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -150,6 +150,193 @@
   },
   "tasks": [
     {
+      "id": "task-213",
+      "type": "fix",
+      "title": "CRITICAL: Fix broken markdown links in ch09 Related Chapters",
+      "description": "Chapter 9 (Context Engineering Deep Dive) has 2 broken markdown links in the Related Chapters section. Lines 591-592 need fixing: 1) ch08-error-handling-debugging.md → ch08-error-handling-and-debugging.md, 2) ch10-ralph-loop.md → ch10-the-ralph-loop.md. Flagged by cross-ref-validator-2026-01-28.",
+      "status": "complete",
+      "completedAt": "2026-01-28T12:00:00Z",
+      "priority": "critical",
+      "score": 1330,
+      "scoreBreakdown": "critical:1000 + fix:80 + ch09:50 + reviewFlagged:200 = 1330",
+      "chapter": "ch09",
+      "flaggedByReview": "cross-ref-validator-2026-01-28",
+      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
+      "estimatedMinutes": 3,
+      "breakdownCount": 2,
+      "breakdownDetails": "Fix 2 broken links (ch08, ch10 references)",
+      "outcome": "Fixed 2 broken links: ch08-error-handling-debugging.md → ch08-error-handling-and-debugging.md, ch10-ralph-loop.md → ch10-the-ralph-loop.md"
+    },
+    {
+      "id": "task-214",
+      "type": "fix",
+      "title": "CRITICAL: Resolve PRD title mismatch for ch07",
+      "description": "prds/ch07.md is titled 'Chapter 7 PRD: Context Engineering Deep Dive' but the actual Chapter 7 is 'Quality Gates That Compound'. This is a major alignment issue. The PRD content discusses information theory, entropy, context windows, and progressive disclosure - which matches Chapter 9's actual content, not Chapter 7. Section numbering (4.1, 4.2) suggests file was copied without proper renumbering. Either: 1) Rename file to prds/ch09.md and update PRD numbering, OR 2) Rewrite ch07.md PRD to match Quality Gates content. Review flagged the mismatch. Flagged by cross-ref-validator-2026-01-28.",
+      "status": "complete",
+      "completedAt": "2026-01-28T13:00:00Z",
+      "priority": "critical",
+      "score": 1280,
+      "scoreBreakdown": "critical:1000 + fix:80 + reviewFlagged:200 = 1280",
+      "flaggedByReview": "cross-ref-validator-2026-01-28",
+      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
+      "estimatedMinutes": 120,
+      "relatedFile": "prds/ch07.md",
+      "action": "Investigate and resolve PRD-chapter misalignment",
+      "outcome": "Updated prds/ch07.md title from 'Chapter 7 PRD' to 'Chapter 9 PRD' and added note explaining historical numbering. PRD content correctly aligns with ch09-context-engineering-deep-dive.md."
+    },
+    {
+      "id": "task-215",
+      "type": "fix",
+      "title": "CRITICAL: Resolve PRD title mismatch for ch09",
+      "description": "prds/ch09.md is titled 'Chapter 9 PRD: Sub-Agent Architecture' but actual Chapter 9 is 'Context Engineering Deep Dive'. Sub-Agent Architecture is actually Chapter 11. This indicates PRD files are misaligned with chapter numbers. The ch09.md PRD may belong to ch11 OR the ch07.md 'Context Engineering' content belongs to ch09. This is critical for PRD-chapter alignment verification. Flagged by cross-ref-validator-2026-01-28.",
+      "status": "complete",
+      "completedAt": "2026-01-28T14:00:00Z",
+      "priority": "critical",
+      "score": 1280,
+      "scoreBreakdown": "critical:1000 + fix:80 + reviewFlagged:200 = 1280",
+      "flaggedByReview": "cross-ref-validator-2026-01-28",
+      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
+      "estimatedMinutes": 120,
+      "relatedFile": "prds/ch09.md",
+      "action": "Investigate PRD numbering (ch07 and ch09 may be swapped or mislabeled)",
+      "outcome": "Updated prds/ch09.md title from 'Chapter 9 PRD' to 'Chapter 11 PRD' and added note explaining historical numbering. PRD content correctly aligns with ch11-sub-agent-architecture.md."
+    },
+    {
+      "id": "task-212",
+      "type": "fix",
+      "title": "CRITICAL: Fix broken markdown links in ch07 Related Chapters",
+      "description": "Chapter 7 (Quality Gates That Compound) has 3 broken markdown links in the Related Chapters section. These links will fail when the book is processed or when readers click them. Lines 564-566 need fixing: 1) ch06-verification-ladder.md → ch06-the-verification-ladder.md, 2) ch08-error-handling.md → ch08-error-handling-and-debugging.md, 3) ch04-writing-your-first-claudemd.md → ch04-writing-your-first-claude-md.md. Flagged by cross-ref-validator-2026-01-28.",
+      "status": "complete",
+      "completedAt": "2026-01-28T11:00:00Z",
+      "priority": "critical",
+      "score": 1250,
+      "chapter": "ch07",
+      "flaggedByReview": "cross-ref-validator-2026-01-28",
+      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
+      "estimatedMinutes": 5,
+      "breakdownCount": 3,
+      "breakdownDetails": "Fix 3 broken links (ch06, ch08, ch04 references)",
+      "outcome": "Fixed all 3 broken links: ch06-verification-ladder.md → ch06-the-verification-ladder.md, ch08-error-handling.md → ch08-error-handling-and-debugging.md, ch04-writing-your-first-claudemd.md → ch04-writing-your-first-claude-md.md"
+    },
+    {
+      "id": "task-103",
+      "type": "fix",
+      "title": "CRITICAL: Fix undefined technical terms in Ch01",
+      "description": "Chapter 1 uses several domain-driven design and infrastructure concepts without introducing them. Add definitions on first use for: 1) invariants (line 84), 2) bounded contexts (line 198), 3) idempotency/idempotent (line 291), 4) Infrastructure as code (line 89), 5) Terraform, Docker, Kubernetes (line 89 - add brief descriptions), 6) SQL (line 90). Review flagged by term-intro-checker-2026-01-27.",
+      "status": "complete",
+      "completedAt": "2026-01-27T19:30:00Z",
+      "priority": "critical",
+      "score": 1175,
+      "flaggedByReview": "term-intro-2026-01-27",
+      "chapter": "ch01",
+      "reviewReference": "reviews/term-intro-2026-01-27.md",
+      "outcome": "Fixed 5 term introductions: invariants (line 84), IaC/Terraform/Docker/Kubernetes (line 89), SQL (line 90), bounded contexts (line 186), idempotency (line 291)"
+    },
+    {
+      "id": "task-104",
+      "type": "fix",
+      "title": "CRITICAL: Fix undefined MTok abbreviation in Ch15",
+      "description": "Chapter 15 (Model Strategy & Cost Optimization) uses 'MTok' (million tokens) as abbreviation throughout pricing examples (lines 18-234) without ever defining what it means. Add clear definition at first occurrence in line 18: 'Million tokens (MTok)'. Critical for reader comprehension when explaining API pricing. Review flagged by term-intro-checker-2026-01-27.",
+      "status": "complete",
+      "completedAt": "2026-01-27T20:00:00Z",
+      "priority": "critical",
+      "score": 1105,
+      "flaggedByReview": "term-intro-2026-01-27",
+      "chapter": "ch15",
+      "reviewReference": "reviews/term-intro-2026-01-27.md",
+      "outcome": "Added definition 'million tokens (MTok)' at first use on line 18"
+    },
+    {
+      "id": "task-206",
+      "type": "infrastructure",
+      "title": "Create exercises folder structure",
+      "description": "Set up exercises/ folder with per-chapter subfolders. Create exercises/README.md explaining structure. Update CLAUDE.md with exercise conventions. Each chapter should have 2-3 Try It Yourself exercises.",
+      "status": "complete",
+      "completedAt": "2026-01-27T20:43:00Z",
+      "priority": "critical",
+      "score": 1000,
+      "outcome": "Created 15 chapter folders (ch01-ch15), each with README.md and solutions/ subfolder. Main exercises/README.md already existed."
+    },
+    {
+      "id": "task-207",
+      "type": "diagram",
+      "chapter": "ch13",
+      "title": "Create Signal Processing Harness diagram",
+      "description": "Visualize the four-layer harness model as a signal processing system that filters noise and amplifies signal. Shows noise reduction at each layer with failure rate improvements (30-50% → <1%). Lines 7-17 in chapter.",
+      "status": "complete",
+      "priority": "high",
+      "score": 1000,
+      "flaggedByReview": "diagram-review-2026-01-28",
+      "reviewReference": "reviews/diagram-review-2026-01-28.md",
+      "suggestedFilename": "assets/diagrams/ch13-signal-processing-harness.mmd",
+      "scoreBreakdown": "high:750 + diagram:40 + ch13:10 + reviewFlagged:200 = 1000",
+      "completedAt": "2026-01-28T01:00:00Z"
+    },
+    {
+      "id": "task-208",
+      "type": "diagram",
+      "chapter": "ch13",
+      "title": "Create Four Levels of Automation diagram",
+      "description": "Visualization of productivity progression from Level 0 (manual, 1x) through Level 3 (meta-infrastructure, 100-500x). Shows ROI and where most developers stop. Lines 433-441 in chapter.",
+      "status": "complete",
+      "completedAt": "2026-01-28T01:30:00Z",
+      "priority": "high",
+      "score": 1000,
+      "flaggedByReview": "diagram-review-2026-01-28",
+      "reviewReference": "reviews/diagram-review-2026-01-28.md",
+      "suggestedFilename": "assets/diagrams/ch13-four-automation-levels.md",
+      "scoreBreakdown": "high:750 + diagram:40 + ch13:10 + reviewFlagged:200 = 1000",
+      "outcome": "Created multi-view diagram: productivity staircase (primary), multiplier ladder, ROI table, opportunity cost visualization, and 'why developers stop' analysis"
+    },
+    {
+      "id": "task-209",
+      "type": "diagram",
+      "chapter": "ch14",
+      "title": "Create Leverage Stack pyramid diagram",
+      "description": "Stacked pyramid showing what to keep sharp (understanding, design, verification), what to delegate (implementation patterns), and what to forget (syntax, boilerplate). Lines 250-266 in chapter. Already exists as ASCII art.",
+      "status": "complete",
+      "completedAt": "2026-01-28T02:00:00Z",
+      "priority": "high",
+      "score": 995,
+      "flaggedByReview": "diagram-review-2026-01-28",
+      "reviewReference": "reviews/diagram-review-2026-01-28.md",
+      "suggestedFilename": "assets/diagrams/ch14-leverage-stack.md",
+      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
+      "outcome": "Created multi-view diagram: skill pyramid (primary), action-oriented categories, self-check questions table, atrophy consequences, investment vs returns table, three pillars visualization"
+    },
+    {
+      "id": "task-210",
+      "type": "diagram",
+      "chapter": "ch14",
+      "title": "Create Atrophy Ladder career ceiling diagram",
+      "description": "Ladder showing 5 career levels based on skill retention during AI-assisted development. Shows Level 4 (Senior Engineer) as minimum safe level, Level 5 (Architect) with no ceiling. Lines 281-300 in chapter. Already exists as ASCII art.",
+      "status": "complete",
+      "completedAt": "2026-01-28T03:00:00Z",
+      "priority": "high",
+      "score": 995,
+      "flaggedByReview": "diagram-review-2026-01-28",
+      "reviewReference": "reviews/diagram-review-2026-01-28.md",
+      "suggestedFilename": "assets/diagrams/ch14-atrophy-ladder.md",
+      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
+      "outcome": "Created multi-view diagram: career ladder (primary), skill capability matrix, three core skills, career safety zone, self-assessment questions, what each level looks like, career trajectory over time"
+    },
+    {
+      "id": "task-211",
+      "type": "diagram",
+      "chapter": "ch14",
+      "title": "Create Task Decomposition comparison diagram",
+      "description": "Before/after comparison: monolithic task (agent fails) vs decomposed tasks (agent succeeds). Shows 8 smaller tasks with clear boundaries vs one 15-step block. Lines 333-356 in chapter.",
+      "status": "complete",
+      "completedAt": "2026-01-28T04:00:00Z",
+      "priority": "high",
+      "score": 995,
+      "flaggedByReview": "diagram-review-2026-01-28",
+      "reviewReference": "reviews/diagram-review-2026-01-28.md",
+      "suggestedFilename": "assets/diagrams/ch14-task-decomposition.md",
+      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
+      "outcome": "Created multi-view diagram: before/after comparison (primary), task sizing guidelines, decomposition decision tree, failure mode analysis table, 8-task migration example, why oversizing causes failure, task designer mindset table"
+    },
+    {
       "id": "task-001",
       "type": "chapter",
       "chapter": "ch01",
@@ -268,6 +455,65 @@
         }
       ],
       "score": 940
+    },
+    {
+      "id": "task-025",
+      "type": "chapter",
+      "chapter": "ch05",
+      "title": "ch05: The 12-Factor Agent",
+      "description": "Complete remaining milestones for The 12-Factor Agent",
+      "status": "complete",
+      "completedAt": "2026-01-27T23:00:00Z",
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": "task-026",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "code written",
+          "status": "complete",
+          "completedAt": "2026-01-27T19:30:00Z",
+          "score": -95
+        },
+        {
+          "id": "task-027",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "code tested",
+          "status": "complete",
+          "completedAt": "2026-01-27T20:15:00Z",
+          "score": -100
+        },
+        {
+          "id": "task-028",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "reviewed",
+          "status": "complete",
+          "completedAt": "2026-01-27T21:00:00Z",
+          "score": -105,
+          "note": "Passed AI slop check. Fixed term introductions: LLM (line 5), JWT (line 91), idempotency (line 126), DAG (line 391)"
+        },
+        {
+          "id": "task-029",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "diagrams complete",
+          "status": "complete",
+          "completedAt": "2026-01-27T20:30:00Z",
+          "score": -110
+        },
+        {
+          "id": "task-030",
+          "parentId": "task-025",
+          "type": "milestone",
+          "title": "final",
+          "status": "complete",
+          "completedAt": "2026-01-27T23:00:00Z",
+          "score": -115
+        }
+      ],
+      "score": 935
     },
     {
       "id": "task-013",
@@ -391,65 +637,6 @@
         }
       ],
       "score": 925
-    },
-    {
-      "id": "task-025",
-      "type": "chapter",
-      "chapter": "ch05",
-      "title": "ch05: The 12-Factor Agent",
-      "description": "Complete remaining milestones for The 12-Factor Agent",
-      "status": "complete",
-      "completedAt": "2026-01-27T23:00:00Z",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-026",
-          "parentId": "task-025",
-          "type": "milestone",
-          "title": "code written",
-          "status": "complete",
-          "completedAt": "2026-01-27T19:30:00Z",
-          "score": -95
-        },
-        {
-          "id": "task-027",
-          "parentId": "task-025",
-          "type": "milestone",
-          "title": "code tested",
-          "status": "complete",
-          "completedAt": "2026-01-27T20:15:00Z",
-          "score": -100
-        },
-        {
-          "id": "task-028",
-          "parentId": "task-025",
-          "type": "milestone",
-          "title": "reviewed",
-          "status": "complete",
-          "completedAt": "2026-01-27T21:00:00Z",
-          "score": -105,
-          "note": "Passed AI slop check. Fixed term introductions: LLM (line 5), JWT (line 91), idempotency (line 126), DAG (line 391)"
-        },
-        {
-          "id": "task-029",
-          "parentId": "task-025",
-          "type": "milestone",
-          "title": "diagrams complete",
-          "status": "complete",
-          "completedAt": "2026-01-27T20:30:00Z",
-          "score": -110
-        },
-        {
-          "id": "task-030",
-          "parentId": "task-025",
-          "type": "milestone",
-          "title": "final",
-          "status": "complete",
-          "completedAt": "2026-01-27T23:00:00Z",
-          "score": -115
-        }
-      ],
-      "score": 935
     },
     {
       "id": "task-031",
@@ -1074,328 +1261,62 @@
       "score": 875
     },
     {
-      "id": "task-091",
-      "type": "kb-article",
-      "title": "Write all KB articles",
-      "description": "Convert knowledge base articles to the book format. Include in-chapter references to KB articles where relevant.",
-      "status": "pending",
-      "priority": "normal",
-      "subtasks": [
-        {
-          "id": "task-092",
-          "parentId": "task-091",
-          "type": "review",
-          "title": "AI slop check",
-          "status": "pending",
-          "score": -135
-        },
-        {
-          "id": "task-093",
-          "parentId": "task-091",
-          "type": "review",
-          "title": "Technical accuracy check",
-          "status": "pending",
-          "score": -135
-        },
-        {
-          "id": "task-094",
-          "parentId": "task-091",
-          "type": "review",
-          "title": "Diagram review",
-          "status": "pending",
-          "score": -135
-        },
-        {
-          "id": "task-095",
-          "parentId": "task-091",
-          "type": "review",
-          "title": "Cross-reference check",
-          "status": "pending",
-          "score": -135
-        },
-        {
-          "id": "task-096",
-          "parentId": "task-091",
-          "type": "review",
-          "title": "Final proofread",
-          "status": "pending",
-          "score": -135
-        }
-      ],
-      "score": -85
-    },
-    {
-      "id": "task-097",
-      "type": "exercises",
-      "title": "Finalize all chapter exercises",
-      "description": "Complete 2-3 'Try It Yourself' exercises per chapter with solutions.",
-      "status": "pending",
-      "priority": "normal",
-      "subtasks": [
-        {
-          "id": "task-109",
-          "parentId": "task-097",
-          "type": "review",
-          "title": "AI slop check",
-          "status": "pending",
-          "score": -135
-        },
-        {
-          "id": "task-110",
-          "parentId": "task-097",
-          "type": "review",
-          "title": "Technical accuracy check",
-          "status": "pending",
-          "score": -135
-        },
-        {
-          "id": "task-111",
-          "parentId": "task-097",
-          "type": "review",
-          "title": "Cross-reference check",
-          "status": "pending",
-          "score": -135
-        },
-        {
-          "id": "task-113",
-          "parentId": "task-097",
-          "type": "review",
-          "title": "Final proofread",
-          "status": "pending",
-          "score": -135
-        }
-      ],
-      "score": -145
-    },
-    {
-      "id": "task-098",
-      "type": "appendices",
-      "title": "Write all appendices",
-      "description": "Complete appendices A-D",
-      "status": "pending",
-      "priority": "low",
-      "subtasks": [
-        {
-          "id": "task-099",
-          "parentId": "task-098",
-          "type": "appendix",
-          "title": "Appendix A: CLAUDE.md Templates",
-          "status": "pending",
-          "score": -125
-        },
-        {
-          "id": "task-100",
-          "parentId": "task-098",
-          "type": "appendix",
-          "title": "Appendix B: Prompt Library",
-          "status": "pending",
-          "score": -125
-        },
-        {
-          "id": "task-101",
-          "parentId": "task-098",
-          "type": "appendix",
-          "title": "Appendix C: Troubleshooting",
-          "status": "pending",
-          "score": -125
-        },
-        {
-          "id": "task-102",
-          "parentId": "task-098",
-          "type": "appendix",
-          "title": "Appendix D: Further Reading",
-          "status": "pending",
-          "score": -125
-        }
-      ],
-      "score": -295
-    },
-    {
-      "id": "task-103",
-      "type": "fix",
-      "title": "CRITICAL: Fix undefined technical terms in Ch01",
-      "description": "Chapter 1 uses several domain-driven design and infrastructure concepts without introducing them. Add definitions on first use for: 1) invariants (line 84), 2) bounded contexts (line 198), 3) idempotency/idempotent (line 291), 4) Infrastructure as code (line 89), 5) Terraform, Docker, Kubernetes (line 89 - add brief descriptions), 6) SQL (line 90). Review flagged by term-intro-checker-2026-01-27.",
+      "id": "task-305",
+      "type": "chapter",
+      "title": "ch15: Add Batch API implementation with Context7 docs",
+      "description": "Implement batch API examples for ch15. MUST use Context7 to fetch latest Anthropic batch API docs before writing. Query for: batch creation, polling, 50% discount, 24h turnaround, submit/poll/process pattern.",
       "status": "complete",
-      "completedAt": "2026-01-27T19:30:00Z",
-      "priority": "critical",
-      "score": 1175,
-      "flaggedByReview": "term-intro-2026-01-27",
-      "chapter": "ch01",
-      "reviewReference": "reviews/term-intro-2026-01-27.md",
-      "outcome": "Fixed 5 term introductions: invariants (line 84), IaC/Terraform/Docker/Kubernetes (line 89), SQL (line 90), bounded contexts (line 186), idempotency (line 291)"
-    },
-    {
-      "id": "task-104",
-      "type": "fix",
-      "title": "CRITICAL: Fix undefined MTok abbreviation in Ch15",
-      "description": "Chapter 15 (Model Strategy & Cost Optimization) uses 'MTok' (million tokens) as abbreviation throughout pricing examples (lines 18-234) without ever defining what it means. Add clear definition at first occurrence in line 18: 'Million tokens (MTok)'. Critical for reader comprehension when explaining API pricing. Review flagged by term-intro-checker-2026-01-27.",
-      "status": "complete",
-      "completedAt": "2026-01-27T20:00:00Z",
-      "priority": "critical",
-      "score": 1105,
-      "flaggedByReview": "term-intro-2026-01-27",
+      "priority": "high",
+      "score": 875,
       "chapter": "ch15",
-      "reviewReference": "reviews/term-intro-2026-01-27.md",
-      "outcome": "Added definition 'million tokens (MTok)' at first use on line 18"
+      "requiresContext7": true,
+      "completedAt": "2026-01-28T16:00:00Z"
     },
     {
-      "id": "task-206",
-      "type": "infrastructure",
-      "title": "Create exercises folder structure",
-      "description": "Set up exercises/ folder with per-chapter subfolders. Create exercises/README.md explaining structure. Update CLAUDE.md with exercise conventions. Each chapter should have 2-3 Try It Yourself exercises.",
-      "status": "complete",
-      "completedAt": "2026-01-27T20:43:00Z",
-      "priority": "critical",
-      "score": 1000,
-      "outcome": "Created 15 chapter folders (ch01-ch15), each with README.md and solutions/ subfolder. Main exercises/README.md already existed."
-    },
-    {
-      "id": "task-207",
-      "type": "diagram",
-      "chapter": "ch13",
-      "title": "Create Signal Processing Harness diagram",
-      "description": "Visualize the four-layer harness model as a signal processing system that filters noise and amplifies signal. Shows noise reduction at each layer with failure rate improvements (30-50% → <1%). Lines 7-17 in chapter.",
+      "id": "task-306",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Update CLAUDE.md guidance with Less is More insights",
+      "description": "Based on writing-a-good-claude-md.md: Update section 4.2 to emphasize brevity. Add: (1) 150-200 instruction limit before degradation, (2) System prompt uses ~50 instructions, (3) Optimal length < 100 lines, (4) Progressive disclosure pattern, (5) Never use Claude as linter.",
       "status": "complete",
       "priority": "high",
-      "score": 1000,
-      "flaggedByReview": "diagram-review-2026-01-28",
-      "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch13-signal-processing-harness.mmd",
-      "scoreBreakdown": "high:750 + diagram:40 + ch13:10 + reviewFlagged:200 = 1000",
-      "completedAt": "2026-01-28T01:00:00Z"
+      "score": 840,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "writing-a-good-claude-md.md",
+      "completedAt": "2026-01-28T17:00:00Z",
+      "note": "Content already present in Chapter 4"
     },
     {
-      "id": "task-208",
-      "type": "diagram",
-      "chapter": "ch13",
-      "title": "Create Four Levels of Automation diagram",
-      "description": "Visualization of productivity progression from Level 0 (manual, 1x) through Level 3 (meta-infrastructure, 100-500x). Shows ROI and where most developers stop. Lines 433-441 in chapter.",
+      "id": "task-304",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Add Common Pitfalls for Newcomers section to ch02",
+      "description": "Based on KB scan (Jan 28 2026), add new section covering 5 common pitfalls: (1) Oversized tasks - 90% error reduction through incremental development, (2) Skipping exploration - 60% fewer iterations with explore-first, (3) Long conversations - context accumulates noise, (4) Bloated CLAUDE.md - 150-200 instruction limit, (5) Manual review - use verification instead.",
       "status": "complete",
-      "completedAt": "2026-01-28T01:30:00Z",
       "priority": "high",
-      "score": 1000,
-      "flaggedByReview": "diagram-review-2026-01-28",
-      "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch13-four-automation-levels.md",
-      "scoreBreakdown": "high:750 + diagram:40 + ch13:10 + reviewFlagged:200 = 1000",
-      "outcome": "Created multi-view diagram: productivity staircase (primary), multiplier ladder, ROI table, opportunity cost visualization, and 'why developers stop' analysis"
+      "score": 800,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticles": [
+        "incremental-development-pattern.md",
+        "writing-a-good-claude-md.md",
+        "cursor-agent-workflows.md",
+        "trust-but-verify-protocol.md"
+      ],
+      "estimatedWords": 500,
+      "completedAt": "2026-01-28T15:00:00Z"
     },
     {
-      "id": "task-209",
-      "type": "diagram",
-      "chapter": "ch14",
-      "title": "Create Leverage Stack pyramid diagram",
-      "description": "Stacked pyramid showing what to keep sharp (understanding, design, verification), what to delegate (implementation patterns), and what to forget (syntax, boilerplate). Lines 250-266 in chapter. Already exists as ASCII art.",
+      "id": "task-233",
+      "type": "chapter",
+      "title": "Add simple tool usage notebook to ch05 and update chapter",
+      "description": "Create a Jupyter notebook (or interactive TypeScript examples) for Chapter 5 that explains tool usage in a simpler, step-by-step format. Should cover: basic tool definitions, tool calling patterns, handling tool results, and common tool use cases. Make it beginner-friendly with progressive examples. Also update chapters/ch05-*.md to reference and integrate the new notebook content.",
       "status": "complete",
-      "completedAt": "2026-01-28T02:00:00Z",
-      "priority": "high",
-      "score": 995,
-      "flaggedByReview": "diagram-review-2026-01-28",
-      "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch14-leverage-stack.md",
-      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
-      "outcome": "Created multi-view diagram: skill pyramid (primary), action-oriented categories, self-check questions table, atrophy consequences, investment vs returns table, three pillars visualization"
-    },
-    {
-      "id": "task-210",
-      "type": "diagram",
-      "chapter": "ch14",
-      "title": "Create Atrophy Ladder career ceiling diagram",
-      "description": "Ladder showing 5 career levels based on skill retention during AI-assisted development. Shows Level 4 (Senior Engineer) as minimum safe level, Level 5 (Architect) with no ceiling. Lines 281-300 in chapter. Already exists as ASCII art.",
-      "status": "complete",
-      "completedAt": "2026-01-28T03:00:00Z",
-      "priority": "high",
-      "score": 995,
-      "flaggedByReview": "diagram-review-2026-01-28",
-      "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch14-atrophy-ladder.md",
-      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
-      "outcome": "Created multi-view diagram: career ladder (primary), skill capability matrix, three core skills, career safety zone, self-assessment questions, what each level looks like, career trajectory over time"
-    },
-    {
-      "id": "task-211",
-      "type": "diagram",
-      "chapter": "ch14",
-      "title": "Create Task Decomposition comparison diagram",
-      "description": "Before/after comparison: monolithic task (agent fails) vs decomposed tasks (agent succeeds). Shows 8 smaller tasks with clear boundaries vs one 15-step block. Lines 333-356 in chapter.",
-      "status": "complete",
-      "completedAt": "2026-01-28T04:00:00Z",
-      "priority": "high",
-      "score": 995,
-      "flaggedByReview": "diagram-review-2026-01-28",
-      "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch14-task-decomposition.md",
-      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
-      "outcome": "Created multi-view diagram: before/after comparison (primary), task sizing guidelines, decomposition decision tree, failure mode analysis table, 8-task migration example, why oversizing causes failure, task designer mindset table"
-    },
-    {
-      "id": "task-212",
-      "type": "fix",
-      "title": "CRITICAL: Fix broken markdown links in ch07 Related Chapters",
-      "description": "Chapter 7 (Quality Gates That Compound) has 3 broken markdown links in the Related Chapters section. These links will fail when the book is processed or when readers click them. Lines 564-566 need fixing: 1) ch06-verification-ladder.md → ch06-the-verification-ladder.md, 2) ch08-error-handling.md → ch08-error-handling-and-debugging.md, 3) ch04-writing-your-first-claudemd.md → ch04-writing-your-first-claude-md.md. Flagged by cross-ref-validator-2026-01-28.",
-      "status": "complete",
-      "completedAt": "2026-01-28T11:00:00Z",
-      "priority": "critical",
-      "score": 1250,
-      "chapter": "ch07",
-      "flaggedByReview": "cross-ref-validator-2026-01-28",
-      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
-      "estimatedMinutes": 5,
-      "breakdownCount": 3,
-      "breakdownDetails": "Fix 3 broken links (ch06, ch08, ch04 references)",
-      "outcome": "Fixed all 3 broken links: ch06-verification-ladder.md → ch06-the-verification-ladder.md, ch08-error-handling.md → ch08-error-handling-and-debugging.md, ch04-writing-your-first-claudemd.md → ch04-writing-your-first-claude-md.md"
-    },
-    {
-      "id": "task-213",
-      "type": "fix",
-      "title": "CRITICAL: Fix broken markdown links in ch09 Related Chapters",
-      "description": "Chapter 9 (Context Engineering Deep Dive) has 2 broken markdown links in the Related Chapters section. Lines 591-592 need fixing: 1) ch08-error-handling-debugging.md → ch08-error-handling-and-debugging.md, 2) ch10-ralph-loop.md → ch10-the-ralph-loop.md. Flagged by cross-ref-validator-2026-01-28.",
-      "status": "complete",
-      "completedAt": "2026-01-28T12:00:00Z",
-      "priority": "critical",
-      "score": 1330,
-      "scoreBreakdown": "critical:1000 + fix:80 + ch09:50 + reviewFlagged:200 = 1330",
-      "chapter": "ch09",
-      "flaggedByReview": "cross-ref-validator-2026-01-28",
-      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
-      "estimatedMinutes": 3,
-      "breakdownCount": 2,
-      "breakdownDetails": "Fix 2 broken links (ch08, ch10 references)",
-      "outcome": "Fixed 2 broken links: ch08-error-handling-debugging.md → ch08-error-handling-and-debugging.md, ch10-ralph-loop.md → ch10-the-ralph-loop.md"
-    },
-    {
-      "id": "task-214",
-      "type": "fix",
-      "title": "CRITICAL: Resolve PRD title mismatch for ch07",
-      "description": "prds/ch07.md is titled 'Chapter 7 PRD: Context Engineering Deep Dive' but the actual Chapter 7 is 'Quality Gates That Compound'. This is a major alignment issue. The PRD content discusses information theory, entropy, context windows, and progressive disclosure - which matches Chapter 9's actual content, not Chapter 7. Section numbering (4.1, 4.2) suggests file was copied without proper renumbering. Either: 1) Rename file to prds/ch09.md and update PRD numbering, OR 2) Rewrite ch07.md PRD to match Quality Gates content. Review flagged the mismatch. Flagged by cross-ref-validator-2026-01-28.",
-      "status": "complete",
-      "completedAt": "2026-01-28T13:00:00Z",
-      "priority": "critical",
-      "score": 1280,
-      "scoreBreakdown": "critical:1000 + fix:80 + reviewFlagged:200 = 1280",
-      "flaggedByReview": "cross-ref-validator-2026-01-28",
-      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
-      "estimatedMinutes": 120,
-      "relatedFile": "prds/ch07.md",
-      "action": "Investigate and resolve PRD-chapter misalignment",
-      "outcome": "Updated prds/ch07.md title from 'Chapter 7 PRD' to 'Chapter 9 PRD' and added note explaining historical numbering. PRD content correctly aligns with ch09-context-engineering-deep-dive.md."
-    },
-    {
-      "id": "task-215",
-      "type": "fix",
-      "title": "CRITICAL: Resolve PRD title mismatch for ch09",
-      "description": "prds/ch09.md is titled 'Chapter 9 PRD: Sub-Agent Architecture' but actual Chapter 9 is 'Context Engineering Deep Dive'. Sub-Agent Architecture is actually Chapter 11. This indicates PRD files are misaligned with chapter numbers. The ch09.md PRD may belong to ch11 OR the ch07.md 'Context Engineering' content belongs to ch09. This is critical for PRD-chapter alignment verification. Flagged by cross-ref-validator-2026-01-28.",
-      "status": "complete",
-      "completedAt": "2026-01-28T14:00:00Z",
-      "priority": "critical",
-      "score": 1280,
-      "scoreBreakdown": "critical:1000 + fix:80 + reviewFlagged:200 = 1280",
-      "flaggedByReview": "cross-ref-validator-2026-01-28",
-      "reviewReference": "reviews/cross-refs-validation-2026-01-28.md",
-      "estimatedMinutes": 120,
-      "relatedFile": "prds/ch09.md",
-      "action": "Investigate PRD numbering (ch07 and ch09 may be swapped or mislabeled)",
-      "outcome": "Updated prds/ch09.md title from 'Chapter 9 PRD' to 'Chapter 11 PRD' and added note explaining historical numbering. PRD content correctly aligns with ch11-sub-agent-architecture.md."
+      "priority": "medium",
+      "score": 675,
+      "createdAt": "2026-01-29T00:00:00Z",
+      "chapter": "ch05",
+      "path": "examples/ch05/",
+      "completedAt": "2026-01-28T17:30:00Z"
     },
     {
       "id": "task-216",
@@ -1536,77 +1457,6 @@
       ]
     },
     {
-      "id": "task-229",
-      "type": "review",
-      "title": "Update chapter prose for Agent SDK focus",
-      "description": "After code migration, update chapter text to reference Agent SDK concepts (sessions, streaming, resumption) instead of raw API calls.",
-      "status": "blocked",
-      "priority": "high",
-      "score": 365,
-      "createdAt": "2026-01-28T22:00:00Z",
-      "blockedBy": [
-        "task-216"
-      ]
-    },
-    {
-      "id": "task-230",
-      "type": "fix",
-      "title": "Fix simulated tool outputs to use exact text format",
-      "description": "Audit all code examples that simulate git diffs, shell output, or file contents. Replace any structured array/object representations with exact text format matching real tool output.",
-      "status": "complete",
-      "completedAt": "2026-01-29T03:00:00Z",
-      "priority": "high",
-      "score": 435,
-      "createdAt": "2026-01-28T22:00:00Z",
-      "outcome": "AUDIT COMPLETE: No issues found. All code examples correctly use exact text format for tool outputs. Searched for structured git diff patterns (additions/deletions arrays), structured shell output (stdout/stderr arrays), explicit gitDiff={} patterns - none found except WRONG example in CLAUDE.md which correctly shows what NOT to do."
-    },
-    {
-      "id": "task-231",
-      "type": "fix",
-      "title": "Replace tokensPerChar estimate with tiktoken",
-      "description": "Replace the hardcoded `tokensPerChar: 0.25` estimate with actual tiktoken counting for accurate token measurement. Find all instances of this pattern and use the tiktoken library instead.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 185,
-      "createdAt": "2026-01-29T00:00:00Z"
-    },
-    {
-      "id": "task-232",
-      "type": "fix",
-      "title": "Use structured outputs across all examples",
-      "description": "Replace manual text parsing with Anthropic structured outputs across 20 files. Current pattern: `response.content.find((c) => c.type === \"text\")`. Should use structured outputs with Zod schema for typed responses. Files: ch03(2), ch05(2), ch09(4), ch10(4), ch13(3), ch14(5). See: https://docs.anthropic.com/en/docs/build-with-claude/structured-output",
-      "status": "pending",
-      "priority": "high",
-      "score": 435,
-      "createdAt": "2026-01-29T00:00:00Z",
-      "file": "examples/ch09/entropy-measurement.ts"
-    },
-    {
-      "id": "task-233",
-      "type": "chapter",
-      "title": "Add simple tool usage notebook to ch05 and update chapter",
-      "description": "Create a Jupyter notebook (or interactive TypeScript examples) for Chapter 5 that explains tool usage in a simpler, step-by-step format. Should cover: basic tool definitions, tool calling patterns, handling tool results, and common tool use cases. Make it beginner-friendly with progressive examples. Also update chapters/ch05-*.md to reference and integrate the new notebook content.",
-      "status": "complete",
-      "priority": "medium",
-      "score": 675,
-      "createdAt": "2026-01-29T00:00:00Z",
-      "chapter": "ch05",
-      "path": "examples/ch05/",
-      "completedAt": "2026-01-28T17:30:00Z"
-    },
-    {
-      "id": "task-234",
-      "type": "fix",
-      "title": "Use structured outputs in ch06/schema-generator.ts",
-      "description": "Update examples/ch06/schema-generator.ts to use Anthropic structured outputs (beta). Use output_format with json_schema for guaranteed valid JSON responses. Requires beta header: structured-outputs-2025-11-13. Use client.beta.messages.create() with betas array. Can use Zod with betaZodOutputFormat helper for TypeScript.",
-      "status": "pending",
-      "priority": "high",
-      "score": 435,
-      "createdAt": "2026-01-29T00:00:00Z",
-      "file": "examples/ch06/schema-generator.ts",
-      "reference": "https://docs.anthropic.com/en/docs/build-with-claude/structured-output"
-    },
-    {
       "id": "task-235",
       "type": "chapter",
       "chapter": "ch15",
@@ -1620,6 +1470,161 @@
       "completedAt": "2026-01-28T16:00:00Z"
     },
     {
+      "id": "task-260",
+      "type": "diagram",
+      "chapter": "ch08",
+      "title": "Ch08: Create Agent Reliability Compounding diagram",
+      "description": "Visualize the 95% per-action reliability degrading: 5 actions=77%, 10=60%, 20=36%, 30=21%. Based on agent-reliability-chasm.md.",
+      "status": "complete",
+      "priority": "medium",
+      "score": 600,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "suggestedFilename": "assets/diagrams/ch08-reliability-compounding.md",
+      "completedAt": "2026-01-28T18:00:00Z"
+    },
+    {
+      "id": "task-261",
+      "type": "diagram",
+      "chapter": "ch08",
+      "title": "Ch08: Create Multi-Layer Timeout Protection diagram",
+      "description": "Nested circles showing protection layers: Job timeout -> Step timeout -> Request timeout -> Budget cap.",
+      "status": "complete",
+      "priority": "medium",
+      "score": 600,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "suggestedFilename": "assets/diagrams/ch08-timeout-layers.md",
+      "completedAt": "2026-01-28T19:00:00Z"
+    },
+    {
+      "id": "task-262",
+      "type": "diagram",
+      "chapter": "ch08",
+      "title": "Ch08: Create Circuit Breaker State Machine diagram",
+      "description": "State machine showing Closed -> Open -> Half-Open transitions with triggers.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 600,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "suggestedFilename": "assets/diagrams/ch08-circuit-breaker.md"
+    },
+    {
+      "id": "task-307",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Add Incremental Development prompting pattern",
+      "description": "Based on incremental-development-pattern.md: Add Pattern 5 covering incremental development. Include why large requests fail, the 20-100 lines per increment pattern, validation loop, context accumulation, 90% error reduction.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 590,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "incremental-development-pattern.md"
+    },
+    {
+      "id": "task-308",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Add Trust But Verify workflow example",
+      "description": "Based on trust-but-verify-protocol.md: Enhance Pattern 3 with verification workflow. Request verification alongside implementation, review test output not code, fix failures immediately, verification becomes quality gates.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 590,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "trust-but-verify-protocol.md"
+    },
+    {
+      "id": "task-300",
+      "type": "enhancement",
+      "chapter": "ch06",
+      "title": "ch06: Add integration testing patterns section",
+      "description": "Enhance The Verification Ladder chapter with content from integration-testing-patterns.md KB article. Key insights: Integration tests provide 10-20x better signal-to-noise ratio for LLM verification, inverted test pyramid for AI-assisted development.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 570,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "kbSources": [
+        "integration-testing-patterns.md"
+      ]
+    },
+    {
+      "id": "task-302",
+      "type": "enhancement",
+      "chapter": "ch07",
+      "title": "ch07: Add stateless verification loops content",
+      "description": "Enhance Quality Gates chapter with stateless-verification-loops.md KB content. Add to section 4.8: stateless execution, clean slate verification, prevent ghost failures.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 565,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "kbSources": [
+        "stateless-verification-loops.md"
+      ]
+    },
+    {
+      "id": "task-257",
+      "type": "enhancement",
+      "chapter": "ch08",
+      "title": "Ch08 Enhancement: Add circuit breaker and reliability patterns",
+      "description": "Update ch08 to incorporate new content from PRD expansion: Section 8.6 (Circuit Breakers and Reliability), Section 8.8 (Recovery Patterns for Long-Running Agents). Based on KB analysis finding 7 additional source articles.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 560,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "kbSources": [
+        "ai-cost-protection-timeouts.md",
+        "agent-reliability-chasm.md",
+        "checkpoint-commit-patterns.md",
+        "orchestration-patterns.md"
+      ]
+    },
+    {
+      "id": "task-258",
+      "type": "code",
+      "chapter": "ch08",
+      "title": "Ch08: Add circuit breaker implementation example",
+      "description": "Create examples/ch08/circuit-breaker.ts implementing the three-state circuit breaker pattern (closed/open/half-open) with configurable failure thresholds.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 560,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "file": "examples/ch08/circuit-breaker.ts"
+    },
+    {
+      "id": "task-259",
+      "type": "code",
+      "chapter": "ch08",
+      "title": "Ch08: Add multi-layer timeout protection example",
+      "description": "Create examples/ch08/timeout-protection.ts implementing nested timeout layers (task/request/budget) with exponential backoff retry.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 560,
+      "createdAt": "2026-01-28T15:00:00Z",
+      "file": "examples/ch08/timeout-protection.ts"
+    },
+    {
+      "id": "task-318",
+      "type": "code-example",
+      "title": "ch09: Context effectiveness measurement",
+      "description": "TypeScript: measure MI via output variance. Source: information-theory-coding-agents.md",
+      "status": "pending",
+      "priority": "medium",
+      "score": 555,
+      "createdAt": "2026-01-28T16:30:00Z",
+      "chapter": "ch09",
+      "targetPath": "examples/ch09/context-effectiveness.ts"
+    },
+    {
+      "id": "task-319",
+      "type": "code-example",
+      "title": "ch09: Progressive disclosure skill loader",
+      "description": "TypeScript: 3-level progressive disclosure. Source: progressive-disclosure-context.md",
+      "status": "pending",
+      "priority": "medium",
+      "score": 555,
+      "createdAt": "2026-01-28T16:30:00Z",
+      "chapter": "ch09",
+      "targetPath": "examples/ch09/progressive-disclosure-loader.ts"
+    },
+    {
       "id": "task-241",
       "type": "enhancement",
       "title": "ch13: Add doctrine harness component list",
@@ -1628,26 +1633,6 @@
       "priority": "medium",
       "score": 535,
       "chapter": "ch13"
-    },
-    {
-      "id": "task-242",
-      "type": "enhancement",
-      "title": "ch14: Add full identity definition callout",
-      "description": "Add complete Compound Systems Engineer definition with not socially legible note as callout box.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 530,
-      "chapter": "ch14"
-    },
-    {
-      "id": "task-243",
-      "type": "enhancement",
-      "title": "ch15: Add cost of exploration insight",
-      "description": "Add: That is why this path compounds: not because any single idea is guaranteed to win, but because the cost of exploration keeps dropping.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 525,
-      "chapter": "ch15"
     },
     {
       "id": "task-250",
@@ -1710,6 +1695,96 @@
       "sourceArticle": "12-factor-agents.md"
     },
     {
+      "id": "task-242",
+      "type": "enhancement",
+      "title": "ch14: Add full identity definition callout",
+      "description": "Add complete Compound Systems Engineer definition with not socially legible note as callout box.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 530,
+      "chapter": "ch14"
+    },
+    {
+      "id": "task-243",
+      "type": "enhancement",
+      "title": "ch15: Add cost of exploration insight",
+      "description": "Add: That is why this path compounds: not because any single idea is guaranteed to win, but because the cost of exploration keeps dropping.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 525,
+      "chapter": "ch15"
+    },
+    {
+      "id": "task-230",
+      "type": "fix",
+      "title": "Fix simulated tool outputs to use exact text format",
+      "description": "Audit all code examples that simulate git diffs, shell output, or file contents. Replace any structured array/object representations with exact text format matching real tool output.",
+      "status": "complete",
+      "completedAt": "2026-01-29T03:00:00Z",
+      "priority": "high",
+      "score": 435,
+      "createdAt": "2026-01-28T22:00:00Z",
+      "outcome": "AUDIT COMPLETE: No issues found. All code examples correctly use exact text format for tool outputs. Searched for structured git diff patterns (additions/deletions arrays), structured shell output (stdout/stderr arrays), explicit gitDiff={} patterns - none found except WRONG example in CLAUDE.md which correctly shows what NOT to do."
+    },
+    {
+      "id": "task-232",
+      "type": "fix",
+      "title": "Use structured outputs across all examples",
+      "description": "Replace manual text parsing with Anthropic structured outputs across 20 files. Current pattern: `response.content.find((c) => c.type === \"text\")`. Should use structured outputs with Zod schema for typed responses. Files: ch03(2), ch05(2), ch09(4), ch10(4), ch13(3), ch14(5). See: https://docs.anthropic.com/en/docs/build-with-claude/structured-output",
+      "status": "pending",
+      "priority": "high",
+      "score": 435,
+      "createdAt": "2026-01-29T00:00:00Z",
+      "file": "examples/ch09/entropy-measurement.ts"
+    },
+    {
+      "id": "task-234",
+      "type": "fix",
+      "title": "Use structured outputs in ch06/schema-generator.ts",
+      "description": "Update examples/ch06/schema-generator.ts to use Anthropic structured outputs (beta). Use output_format with json_schema for guaranteed valid JSON responses. Requires beta header: structured-outputs-2025-11-13. Use client.beta.messages.create() with betas array. Can use Zod with betaZodOutputFormat helper for TypeScript.",
+      "status": "pending",
+      "priority": "high",
+      "score": 435,
+      "createdAt": "2026-01-29T00:00:00Z",
+      "file": "examples/ch06/schema-generator.ts",
+      "reference": "https://docs.anthropic.com/en/docs/build-with-claude/structured-output"
+    },
+    {
+      "id": "task-229",
+      "type": "review",
+      "title": "Update chapter prose for Agent SDK focus",
+      "description": "After code migration, update chapter text to reference Agent SDK concepts (sessions, streaming, resumption) instead of raw API calls.",
+      "status": "blocked",
+      "priority": "high",
+      "score": 365,
+      "createdAt": "2026-01-28T22:00:00Z",
+      "blockedBy": [
+        "task-216"
+      ]
+    },
+    {
+      "id": "task-309",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Add Wave 4 context to introduction",
+      "description": "Based on six-waves-of-ai-coding.md: Add brief context explaining Wave 4 coding agents vs Wave 3 chat-based coding. Key skill shift is task decomposition for agent delegation.",
+      "status": "pending",
+      "priority": "low",
+      "score": 190,
+      "createdAt": "2026-01-28T14:00:00Z",
+      "sourceArticle": "six-waves-of-ai-coding.md"
+    },
+    {
+      "id": "task-231",
+      "type": "fix",
+      "title": "Replace tokensPerChar estimate with tiktoken",
+      "description": "Replace the hardcoded `tokensPerChar: 0.25` estimate with actual tiktoken counting for accurate token measurement. Find all instances of this pattern and use the tiktoken library instead.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 185,
+      "createdAt": "2026-01-29T00:00:00Z"
+    },
+    {
       "id": "task-255",
       "type": "diagram",
       "chapter": "ch13",
@@ -1732,98 +1807,6 @@
       "createdAt": "2026-01-28T14:30:00Z"
     },
     {
-      "id": "task-257",
-      "type": "enhancement",
-      "chapter": "ch08",
-      "title": "Ch08 Enhancement: Add circuit breaker and reliability patterns",
-      "description": "Update ch08 to incorporate new content from PRD expansion: Section 8.6 (Circuit Breakers and Reliability), Section 8.8 (Recovery Patterns for Long-Running Agents). Based on KB analysis finding 7 additional source articles.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 560,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "kbSources": [
-        "ai-cost-protection-timeouts.md",
-        "agent-reliability-chasm.md",
-        "checkpoint-commit-patterns.md",
-        "orchestration-patterns.md"
-      ]
-    },
-    {
-      "id": "task-258",
-      "type": "code",
-      "chapter": "ch08",
-      "title": "Ch08: Add circuit breaker implementation example",
-      "description": "Create examples/ch08/circuit-breaker.ts implementing the three-state circuit breaker pattern (closed/open/half-open) with configurable failure thresholds.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 560,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "file": "examples/ch08/circuit-breaker.ts"
-    },
-    {
-      "id": "task-259",
-      "type": "code",
-      "chapter": "ch08",
-      "title": "Ch08: Add multi-layer timeout protection example",
-      "description": "Create examples/ch08/timeout-protection.ts implementing nested timeout layers (task/request/budget) with exponential backoff retry.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 560,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "file": "examples/ch08/timeout-protection.ts"
-    },
-    {
-      "id": "task-260",
-      "type": "diagram",
-      "chapter": "ch08",
-      "title": "Ch08: Create Agent Reliability Compounding diagram",
-      "description": "Visualize the 95% per-action reliability degrading: 5 actions=77%, 10=60%, 20=36%, 30=21%. Based on agent-reliability-chasm.md.",
-      "status": "complete",
-      "priority": "medium",
-      "score": 600,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "suggestedFilename": "assets/diagrams/ch08-reliability-compounding.md",
-      "completedAt": "2026-01-28T18:00:00Z"
-    },
-    {
-      "id": "task-261",
-      "type": "diagram",
-      "chapter": "ch08",
-      "title": "Ch08: Create Multi-Layer Timeout Protection diagram",
-      "description": "Nested circles showing protection layers: Job timeout -> Step timeout -> Request timeout -> Budget cap.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 600,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "suggestedFilename": "assets/diagrams/ch08-timeout-layers.md"
-    },
-    {
-      "id": "task-262",
-      "type": "diagram",
-      "chapter": "ch08",
-      "title": "Ch08: Create Circuit Breaker State Machine diagram",
-      "description": "State machine showing Closed -> Open -> Half-Open transitions with triggers.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 600,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "suggestedFilename": "assets/diagrams/ch08-circuit-breaker.md"
-    },
-    {
-      "id": "task-300",
-      "type": "enhancement",
-      "chapter": "ch06",
-      "title": "ch06: Add integration testing patterns section",
-      "description": "Enhance The Verification Ladder chapter with content from integration-testing-patterns.md KB article. Key insights: Integration tests provide 10-20x better signal-to-noise ratio for LLM verification, inverted test pyramid for AI-assisted development.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 570,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "kbSources": [
-        "integration-testing-patterns.md"
-      ]
-    },
-    {
       "id": "task-301",
       "type": "enhancement",
       "chapter": "ch06",
@@ -1835,20 +1818,6 @@
       "createdAt": "2026-01-28T15:00:00Z",
       "kbSources": [
         "flaky-test-diagnosis-script.md"
-      ]
-    },
-    {
-      "id": "task-302",
-      "type": "enhancement",
-      "chapter": "ch07",
-      "title": "ch07: Add stateless verification loops content",
-      "description": "Enhance Quality Gates chapter with stateless-verification-loops.md KB content. Add to section 4.8: stateless execution, clean slate verification, prevent ghost failures.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 565,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "kbSources": [
-        "stateless-verification-loops.md"
       ]
     },
     {
@@ -1864,87 +1833,6 @@
       "kbSources": [
         "trust-but-verify-protocol.md"
       ]
-    },
-    {
-      "id": "task-304",
-      "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Add Common Pitfalls for Newcomers section to ch02",
-      "description": "Based on KB scan (Jan 28 2026), add new section covering 5 common pitfalls: (1) Oversized tasks - 90% error reduction through incremental development, (2) Skipping exploration - 60% fewer iterations with explore-first, (3) Long conversations - context accumulates noise, (4) Bloated CLAUDE.md - 150-200 instruction limit, (5) Manual review - use verification instead.",
-      "status": "complete",
-      "priority": "high",
-      "score": 800,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticles": [
-        "incremental-development-pattern.md",
-        "writing-a-good-claude-md.md",
-        "cursor-agent-workflows.md",
-        "trust-but-verify-protocol.md"
-      ],
-      "estimatedWords": 500,
-      "completedAt": "2026-01-28T15:00:00Z"
-    },
-    {
-      "id": "task-305",
-      "type": "chapter",
-      "title": "ch15: Add Batch API implementation with Context7 docs",
-      "description": "Implement batch API examples for ch15. MUST use Context7 to fetch latest Anthropic batch API docs before writing. Query for: batch creation, polling, 50% discount, 24h turnaround, submit/poll/process pattern.",
-      "status": "complete",
-      "priority": "high",
-      "score": 875,
-      "chapter": "ch15",
-      "requiresContext7": true,
-      "completedAt": "2026-01-28T16:00:00Z"
-    },
-    {
-      "id": "task-306",
-      "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Update CLAUDE.md guidance with Less is More insights",
-      "description": "Based on writing-a-good-claude-md.md: Update section 4.2 to emphasize brevity. Add: (1) 150-200 instruction limit before degradation, (2) System prompt uses ~50 instructions, (3) Optimal length < 100 lines, (4) Progressive disclosure pattern, (5) Never use Claude as linter.",
-      "status": "complete",
-      "priority": "high",
-      "score": 840,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "writing-a-good-claude-md.md",
-      "completedAt": "2026-01-28T17:00:00Z",
-      "note": "Content already present in Chapter 4"
-    },
-    {
-      "id": "task-307",
-      "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Add Incremental Development prompting pattern",
-      "description": "Based on incremental-development-pattern.md: Add Pattern 5 covering incremental development. Include why large requests fail, the 20-100 lines per increment pattern, validation loop, context accumulation, 90% error reduction.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 590,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "incremental-development-pattern.md"
-    },
-    {
-      "id": "task-308",
-      "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Add Trust But Verify workflow example",
-      "description": "Based on trust-but-verify-protocol.md: Enhance Pattern 3 with verification workflow. Request verification alongside implementation, review test output not code, fix failures immediately, verification becomes quality gates.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 590,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "trust-but-verify-protocol.md"
-    },
-    {
-      "id": "task-309",
-      "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Add Wave 4 context to introduction",
-      "description": "Based on six-waves-of-ai-coding.md: Add brief context explaining Wave 4 coding agents vs Wave 3 chat-based coding. Key skill shift is task decomposition for agent delegation.",
-      "status": "pending",
-      "priority": "low",
-      "score": 190,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "six-waves-of-ai-coding.md"
     },
     {
       "id": "task-316",
@@ -1975,28 +1863,141 @@
       "targetPath": "~/Desktop/knowledge-base/01-Compound-Engineering/context-engineering/prompt-injection-prevention.md"
     },
     {
-      "id": "task-318",
-      "type": "code-example",
-      "title": "ch09: Context effectiveness measurement",
-      "description": "TypeScript: measure MI via output variance. Source: information-theory-coding-agents.md",
+      "id": "task-091",
+      "type": "kb-article",
+      "title": "Write all KB articles",
+      "description": "Convert knowledge base articles to the book format. Include in-chapter references to KB articles where relevant.",
       "status": "pending",
-      "priority": "medium",
-      "score": 555,
-      "createdAt": "2026-01-28T16:30:00Z",
-      "chapter": "ch09",
-      "targetPath": "examples/ch09/context-effectiveness.ts"
+      "priority": "normal",
+      "subtasks": [
+        {
+          "id": "task-092",
+          "parentId": "task-091",
+          "type": "review",
+          "title": "AI slop check",
+          "status": "pending",
+          "score": -135
+        },
+        {
+          "id": "task-093",
+          "parentId": "task-091",
+          "type": "review",
+          "title": "Technical accuracy check",
+          "status": "pending",
+          "score": -135
+        },
+        {
+          "id": "task-094",
+          "parentId": "task-091",
+          "type": "review",
+          "title": "Diagram review",
+          "status": "pending",
+          "score": -135
+        },
+        {
+          "id": "task-095",
+          "parentId": "task-091",
+          "type": "review",
+          "title": "Cross-reference check",
+          "status": "pending",
+          "score": -135
+        },
+        {
+          "id": "task-096",
+          "parentId": "task-091",
+          "type": "review",
+          "title": "Final proofread",
+          "status": "pending",
+          "score": -135
+        }
+      ],
+      "score": -85
     },
     {
-      "id": "task-319",
-      "type": "code-example",
-      "title": "ch09: Progressive disclosure skill loader",
-      "description": "TypeScript: 3-level progressive disclosure. Source: progressive-disclosure-context.md",
+      "id": "task-097",
+      "type": "exercises",
+      "title": "Finalize all chapter exercises",
+      "description": "Complete 2-3 'Try It Yourself' exercises per chapter with solutions.",
       "status": "pending",
-      "priority": "medium",
-      "score": 555,
-      "createdAt": "2026-01-28T16:30:00Z",
-      "chapter": "ch09",
-      "targetPath": "examples/ch09/progressive-disclosure-loader.ts"
+      "priority": "normal",
+      "subtasks": [
+        {
+          "id": "task-109",
+          "parentId": "task-097",
+          "type": "review",
+          "title": "AI slop check",
+          "status": "pending",
+          "score": -135
+        },
+        {
+          "id": "task-110",
+          "parentId": "task-097",
+          "type": "review",
+          "title": "Technical accuracy check",
+          "status": "pending",
+          "score": -135
+        },
+        {
+          "id": "task-111",
+          "parentId": "task-097",
+          "type": "review",
+          "title": "Cross-reference check",
+          "status": "pending",
+          "score": -135
+        },
+        {
+          "id": "task-113",
+          "parentId": "task-097",
+          "type": "review",
+          "title": "Final proofread",
+          "status": "pending",
+          "score": -135
+        }
+      ],
+      "score": -145
+    },
+    {
+      "id": "task-098",
+      "type": "appendices",
+      "title": "Write all appendices",
+      "description": "Complete appendices A-D",
+      "status": "pending",
+      "priority": "low",
+      "subtasks": [
+        {
+          "id": "task-099",
+          "parentId": "task-098",
+          "type": "appendix",
+          "title": "Appendix A: CLAUDE.md Templates",
+          "status": "pending",
+          "score": -125
+        },
+        {
+          "id": "task-100",
+          "parentId": "task-098",
+          "type": "appendix",
+          "title": "Appendix B: Prompt Library",
+          "status": "pending",
+          "score": -125
+        },
+        {
+          "id": "task-101",
+          "parentId": "task-098",
+          "type": "appendix",
+          "title": "Appendix C: Troubleshooting",
+          "status": "pending",
+          "score": -125
+        },
+        {
+          "id": "task-102",
+          "parentId": "task-098",
+          "type": "appendix",
+          "title": "Appendix D: Further Reading",
+          "status": "pending",
+          "score": -125
+        }
+      ],
+      "score": -295
     }
   ],
   "completed": {
@@ -2026,17 +2027,17 @@
     ]
   },
   "stats": {
-    "pending": 32,
+    "pending": 51,
     "inProgress": 1,
-    "complete": 34,
+    "complete": 115,
     "blocked": 1,
-    "total": 68
+    "total": 168
   },
   "checkpoints": {
-    "lastGoodCommit": "5c8b49d68d7bde5ce0d6de990f5f3bfc66e7bf63",
-    "lastSuccessfulTask": "iteration-11",
-    "lastCheckpoint": "2026-01-28T10:57:43Z",
-    "consecutiveFailures": 1,
+    "lastGoodCommit": "088ab961298d9120240606334e5fd7ee237861e0",
+    "lastSuccessfulTask": "iteration-13",
+    "lastCheckpoint": "2026-01-28T11:15:27Z",
+    "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 1,
     "lastQueueCuration": "2026-01-28T14:30:00Z"

@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 18:00)
+## Current Status (Updated: 2026-01-28 19:00)
 - Phase: Final Quality Polish & Publication Preparation
 - Active: All 15 chapters COMPLETE, focus on quality fixes
-- Last Completed: task-260: Agent Reliability Compounding diagram for ch08
+- Last Completed: task-261: Multi-Layer Timeout Protection diagram for ch08
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
 - Publishing Readiness: 92% (content complete, quality gates identified)
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 63/63 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 34/68 (50%) with clear prioritization
+- Tasks Complete: 35/68 (51%) with clear prioritization
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -59,6 +59,20 @@
 - **Confidence**: HIGH (95%)
 
 ## Recent Activity
+
+### 2026-01-28 19:00 - COMPLETED task-261: Multi-Layer Timeout Protection diagram
+- What: Created diagram visualizing defense-in-depth cost protection for AI workflows
+- File: assets/diagrams/ch08-multi-layer-timeout-protection.md
+- Content:
+  - Primary view: Nested circles showing 5 protection layers
+  - Alternative view: Linear protection flow with blocking points
+  - Defense in depth view: Threat scenarios and defenses
+  - Reference table with layer details and cost impact
+  - Configuration quick reference
+- Source: ai-cost-protection-timeouts.md KB article
+- Stats: 35 complete, 51 pending
+- Outcome: Ch08 diagram set complete with timeout protection visualization
+- Next: task-262 (Circuit Breaker State Machine diagram) or other priority task
 
 ### 2026-01-28 18:00 - COMPLETED task-260: Agent Reliability Compounding diagram
 - What: Created diagram visualizing reliability degradation in multi-step agent workflows
