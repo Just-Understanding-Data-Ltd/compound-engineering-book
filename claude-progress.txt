@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 11:00)
+## Current Status (Updated: 2026-01-28 11:30)
 - Phase: Chapter Milestones (13 of 15 complete, 87%)
 - Active: Critical fixes → Ch14 code_tested → Ch14-15 completion
-- Last Completed: Fix ch07 broken links (task-212, iteration 19)
+- Last Completed: Queue curation (post-iteration 19)
 - Blockers: None active
-- Queue Health: CURATED - verified, no duplicates, scores correct
+- Queue Health: CURATED - scores recalculated, priorities verified
 - Publishing Readiness: 92%
 
 ## Project State Summary
@@ -27,11 +27,11 @@
 - Diagrams Created: 59/63 (7 high-priority done; 0 pending from review cycle; 4 remaining for ch13-15 completion)
 
 ## Next Task Priority
-1. task-213 (CRITICAL: Fix broken links in ch09) - score 1250 ← HIGHEST
-2. task-214 (CRITICAL: Resolve PRD mismatch ch07) - score 1200
-3. task-215 (CRITICAL: Resolve PRD mismatch ch09) - score 1200
-4. task-081 (ch14: code_tested) - score 880
-5. task-082 (ch14: reviewed) - score 875
+1. task-213 (CRITICAL: Fix broken links in ch09) - score 1330 ← HIGHEST
+2. task-214 (CRITICAL: Resolve PRD mismatch ch07) - score 1280
+3. task-215 (CRITICAL: Resolve PRD mismatch ch09) - score 1280
+4. task-079 (ch14: milestones remaining) - score 880
+5. task-085 (ch15: all milestones) - score 875
 
 ## Estimated Timeline to Completion
 - Ch14 completion (code + testing + review + diagrams): 8-10 hours
@@ -41,6 +41,24 @@
 - **Publication target**: 2026-02-01 to 2026-02-04
 
 ## Recent Activity
+
+### 2026-01-28 11:30 - QUEUE CURATION - Post-Iteration 19
+- What: Curated task queue, recalculated scores, verified no duplicates
+- Issues Fixed:
+  - task-213 score: 1135 → 1330 (added missing reviewFlagged +200)
+  - task-214 score: 685 → 1280 (recalculated with critical priority + reviewFlagged)
+  - task-215 score: 685 → 1280 (recalculated with critical priority + reviewFlagged)
+- Stats Verified: pending 30, complete 88, total 118 ✓
+- Duplicates: None found
+- Updated: lastUpdated, checkpoints, scoreBreakdown fields added
+- Priority Order (correct):
+  1. task-213: Fix ch09 broken links (1330)
+  2. task-214: Resolve PRD mismatch ch07 (1280)
+  3. task-215: Resolve PRD mismatch ch09 (1280)
+  4. task-079: ch14 remaining milestones (880)
+  5. task-085: ch15 all milestones (875)
+- Outcome: Queue healthy, ready for next iteration
+- Next: task-213 (highest priority critical fix)
 
 ### 2026-01-28 11:00 - COMPLETED task-212: Fix ch07 broken links - ITERATION 19
 - What: Fixed 3 broken markdown links in Chapter 7's Related Chapters section
