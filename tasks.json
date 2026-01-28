@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T16:30:00Z",
+  "lastUpdated": "2026-01-28T17:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1742,8 +1742,9 @@
           "parentId": "task-091",
           "type": "review",
           "title": "AI slop check",
-          "status": "pending",
-          "score": -135
+          "status": "complete",
+          "score": -135,
+          "completedAt": "2026-01-28T17:00:00Z"
         },
         {
           "id": "task-093",
@@ -1907,9 +1908,9 @@
     ]
   },
   "stats": {
-    "pending": 11,
+    "pending": 10,
     "inProgress": 0,
-    "complete": 140,
+    "complete": 141,
     "blocked": 0,
     "total": 151
   },

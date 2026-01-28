@@ -619,3 +619,31 @@ The diagrams are not duplicates. They are complementary views that reinforce und
 5. Ensure key metrics/examples align with the chapter's narrative (e.g., ch08 shows failure costs, ch13 shows optimization savings)
 
 ---
+
+### 2026-01-28 - AI Slop Checks Require Category Separation and False Positive Awareness
+
+**Context**: Running AI slop check (task-092) across all 15 chapters as part of the KB article integration review milestone. Checking for em dashes, blacklisted words, transition phrases, and hedging phrases.
+
+**Observation**: AI slop checks should be structured as four independent category scans rather than one combined check:
+
+| Category | Pattern | False Positive Risk |
+|----------|---------|---------------------|
+| Em dashes | `grep "—"` | Low (unambiguous character) |
+| Blacklisted words | `grep -i "delve\|crucial\|pivotal\|robust"` | Medium (meta-examples in code) |
+| Transition phrases | `grep "^Additionally,\|^Furthermore,"` | Low (line-start anchor) |
+| Hedging phrases | `grep "It's important to note"` | Low (exact phrase match) |
+
+The key insight: code examples that demonstrate quality gates can contain the very words being scanned for. Chapter 13's harness configuration example includes `! grep -r "delve|crucial|leverage" prompts/` as a quality gate. This is a meta-example showing readers how to check for slop, not actual slop in the prose.
+
+Also, "leverage" as a noun is acceptable throughout technical writing (high-leverage investments, leverage multiplier, leverage compounding). Only the verb form "to leverage" is problematic AI slop. The blacklist should target verb patterns like "leveraged" or "leveraging" rather than all uses.
+
+**Implication**: AI slop scanners need context awareness. A word in a code block or grep pattern is categorically different from the same word in prose. Automated scanners that don't distinguish between code and prose will produce false positives that erode trust in the checking process.
+
+**Action**: When running AI slop checks:
+1. Run four separate category scans rather than one combined pattern
+2. Exclude code blocks from prose checks (or manually review code block matches)
+3. For "leverage" specifically, search for verb forms: `leveraged|leveraging|to leverage`
+4. Document meta-examples (quality gate examples) as intentional false positives
+5. Create a whitelist of known false positives with file:line references
+
+---
