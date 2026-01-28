@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 16:00)
+## Current Status (Updated: 2026-01-28 17:45)
 - Phase: All Chapters COMPLETE - Content Enhancement Phase
-- Active: task-305 complete, next task per scoring
-- Last Completed: task-305 (Add Batch API implementation to ch15)
+- Active: task-233 complete, review cycle running
+- Last Completed: task-233 (Add tool usage basics to ch05)
 - Blockers: task-229 blocked by task-216 (Agent SDK migration)
-- Queue Health: 75 pending, 1 in_progress, 1 blocked, 189 total
+- Queue Health: 33 pending, 1 in_progress, 1 blocked, 68 total (cleaned duplicates)
 - Publishing Readiness: ALL CHAPTERS COMPLETE (ch01-ch15)
 
 ## Project State Summary
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 63/63 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 108/149 (72%), 1 blocked, 1 in_progress
+- Tasks Complete: 33/68 (49%), 1 blocked, 1 in_progress (after queue cleanup)
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Review Cycle - COMPREHENSIVE)
@@ -42,6 +42,29 @@
 - **Publication target**: 2026-02-01 to 2026-02-03
 
 ## Recent Activity
+
+### 2026-01-28 17:45 - COMPLETED task-233: Add tool usage basics to ch05 - ITERATION 12
+- What: Created beginner-friendly tool usage examples for Chapter 5
+- Files created:
+  - examples/ch05/tool-usage-basics.ts: Progressive introduction to tool usage
+    - Section 1-2: What are tools, basic tool definitions
+    - Section 3-4: Tool execution, simple tool call pattern
+    - Section 5-6: Multiple tools, tool call loop
+    - Section 7-8: Error handling, common patterns (lookup, action, confirmation)
+- Tests added: 29 new tests for tool-usage-basics (68 total ch05 tests, 121 assertions)
+- Chapter updated: Added references to new examples in ch05-the-12-factor-agent.md
+  - Beginner tip box after Factor 1 section
+  - Prerequisite note before exercises
+- Queue Curation (iteration % 3 == 0):
+  - Fixed duplicate task IDs (task-305, task-306, etc.)
+  - Removed null/invalid task entries
+  - Reduced from 96 tasks to 68 unique tasks
+- Review Cycle (iteration % 6 == 0):
+  - Launched 7 review agents in parallel (slop-checker, diagram-reviewer, tech-accuracy, term-intro-checker, oreilly-style, cross-ref-validator, progress-summarizer)
+  - Results pending in reviews/ folder
+- Stats: pending 33, complete 33, blocked 1, in_progress 1, total 68
+- Outcome: Ch05 enhanced with beginner-friendly tool examples, queue cleaned
+- Next: Per scoring system (likely KB article tasks)
 
 ### 2026-01-28 16:00 - COMPLETED task-305: Add Batch API implementation to ch15 - ITERATION 11
 - What: Added Batch API section to Chapter 15 with Context7 documentation

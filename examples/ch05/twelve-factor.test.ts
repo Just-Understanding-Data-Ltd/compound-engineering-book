@@ -490,3 +490,207 @@ describe('Integration: Event Sourcing + Approval Flow', () => {
     expect(state.lastError).toBe('Error 3');
   });
 });
+
+// ============================================================================
+// Tool Usage Basics Tests
+// ============================================================================
+
+import {
+  calculatorTool,
+  weatherTool,
+  databaseTool,
+  executeCalculator,
+  executeWeather,
+  executeDatabase,
+  executeTool,
+  commonPatterns,
+  type CalculatorInput,
+} from './tool-usage-basics';
+
+describe('Tool Usage Basics', () => {
+  describe('calculatorTool definition', () => {
+    it('has correct name', () => {
+      expect(calculatorTool.name).toBe('calculator');
+    });
+
+    it('has description', () => {
+      expect(calculatorTool.description).toContain('arithmetic');
+    });
+
+    it('has required input_schema properties', () => {
+      const schema = calculatorTool.input_schema as {
+        properties: Record<string, unknown>;
+        required: string[];
+      };
+      expect(schema.properties).toHaveProperty('operation');
+      expect(schema.properties).toHaveProperty('a');
+      expect(schema.properties).toHaveProperty('b');
+      expect(schema.required).toContain('operation');
+      expect(schema.required).toContain('a');
+      expect(schema.required).toContain('b');
+    });
+  });
+
+  describe('executeCalculator', () => {
+    it('adds two numbers', () => {
+      const result = executeCalculator({ operation: 'add', a: 5, b: 3 });
+      expect(result).toBe('8');
+    });
+
+    it('subtracts two numbers', () => {
+      const result = executeCalculator({ operation: 'subtract', a: 10, b: 4 });
+      expect(result).toBe('6');
+    });
+
+    it('multiplies two numbers', () => {
+      const result = executeCalculator({ operation: 'multiply', a: 6, b: 7 });
+      expect(result).toBe('42');
+    });
+
+    it('divides two numbers', () => {
+      const result = executeCalculator({ operation: 'divide', a: 20, b: 4 });
+      expect(result).toBe('5');
+    });
+
+    it('handles division by zero', () => {
+      const result = executeCalculator({ operation: 'divide', a: 10, b: 0 });
+      expect(result).toContain('Error');
+      expect(result).toContain('zero');
+    });
+
+    it('handles decimal results', () => {
+      const result = executeCalculator({ operation: 'divide', a: 7, b: 2 });
+      expect(result).toBe('3.5');
+    });
+  });
+
+  describe('executeWeather', () => {
+    it('returns weather for San Francisco', () => {
+      const result = executeWeather({ location: 'San Francisco' });
+      expect(result).toContain('Foggy');
+      expect(result).toContain('62F');
+    });
+
+    it('returns weather for New York', () => {
+      const result = executeWeather({ location: 'New York' });
+      expect(result).toContain('Cloudy');
+    });
+
+    it('handles unknown location', () => {
+      const result = executeWeather({ location: 'Mars' });
+      expect(result).toContain('unavailable');
+      expect(result).toContain('Mars');
+    });
+  });
+
+  describe('executeDatabase', () => {
+    it('counts users', () => {
+      const result = executeDatabase({ query_type: 'count_users' });
+      expect(result).toContain('1,542');
+    });
+
+    it('gets user by ID', () => {
+      const result = executeDatabase({ query_type: 'get_user', user_id: 'user_123' });
+      expect(result).toContain('user_123');
+      expect(result).toContain('Jane Smith');
+    });
+
+    it('lists recent signups', () => {
+      const result = executeDatabase({ query_type: 'list_recent' });
+      expect(result).toContain('user_101');
+    });
+
+    it('handles unknown query type', () => {
+      const result = executeDatabase({ query_type: 'invalid' });
+      expect(result).toContain('Unknown');
+    });
+  });
+
+  describe('executeTool router', () => {
+    it('routes to calculator', () => {
+      const result = executeTool('calculator', {
+        operation: 'add',
+        a: 2,
+        b: 2,
+      });
+      expect(result).toBe('4');
+    });
+
+    it('routes to weather', () => {
+      const result = executeTool('get_weather', { location: 'Los Angeles' });
+      expect(result).toContain('Sunny');
+    });
+
+    it('routes to database', () => {
+      const result = executeTool('query_database', { query_type: 'count_users' });
+      expect(result).toContain('1,542');
+    });
+
+    it('handles unknown tool', () => {
+      const result = executeTool('unknown_tool', {});
+      expect(result).toContain('Unknown tool');
+    });
+  });
+
+  describe('weatherTool definition', () => {
+    it('has correct name', () => {
+      expect(weatherTool.name).toBe('get_weather');
+    });
+
+    it('requires location parameter', () => {
+      const schema = weatherTool.input_schema as {
+        required: string[];
+      };
+      expect(schema.required).toContain('location');
+    });
+  });
+
+  describe('databaseTool definition', () => {
+    it('has correct name', () => {
+      expect(databaseTool.name).toBe('query_database');
+    });
+
+    it('has query_type options', () => {
+      const schema = databaseTool.input_schema as {
+        properties: {
+          query_type: { enum: string[] };
+        };
+      };
+      expect(schema.properties.query_type.enum).toContain('count_users');
+      expect(schema.properties.query_type.enum).toContain('get_user');
+    });
+  });
+
+  describe('commonPatterns', () => {
+    it('has lookup pattern', () => {
+      expect(commonPatterns.lookup.name).toBe('lookup_product');
+    });
+
+    it('has action pattern', () => {
+      expect(commonPatterns.action.name).toBe('send_email');
+    });
+
+    it('has confirmation pattern', () => {
+      expect(commonPatterns.confirmation.name).toBe('request_approval');
+    });
+
+    it('action pattern requires to, subject, body', () => {
+      const schema = commonPatterns.action.input_schema as {
+        required: string[];
+      };
+      expect(schema.required).toContain('to');
+      expect(schema.required).toContain('subject');
+      expect(schema.required).toContain('body');
+    });
+
+    it('confirmation pattern has urgency levels', () => {
+      const schema = commonPatterns.confirmation.input_schema as {
+        properties: {
+          urgency: { enum: string[] };
+        };
+      };
+      expect(schema.properties.urgency.enum).toContain('low');
+      expect(schema.properties.urgency.enum).toContain('high');
+    });
+  });
+});

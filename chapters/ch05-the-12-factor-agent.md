@@ -59,6 +59,8 @@ The LLM decides *what* to do. Your code controls *how* it executes.
 
 Instead of letting the LLM generate arbitrary code, constrain it to outputting structured JSON tool calls. Your deterministic code handles the actual execution.
 
+> **Beginner Tip**: If you are new to tool usage, start with `examples/ch05/tool-usage-basics.ts`. It provides a progressive introduction to defining tools, handling tool calls, and executing tool results. The file covers single-turn tool calls, multi-tool routing, looping patterns, and error handling with clear explanations at each step.
+
 ```typescript
 // User says: "Create a payment link for $750"
 // LLM outputs structured tool call:
@@ -502,6 +504,8 @@ These investments show the highest Return on Investment (ROI) earliest:
 3. **Factor 10 + Scope reduction**: 15% effort, 35% performance improvement
 
 ## Try It Yourself
+
+**Prerequisite**: Before starting these exercises, review `examples/ch05/tool-usage-basics.ts` for a beginner-friendly introduction to tool definitions, tool calling patterns, and handling tool results. It covers the fundamentals you will build upon in these exercises.
 
 ### Exercise 1: Build an Event-Sourced Agent Thread
 
