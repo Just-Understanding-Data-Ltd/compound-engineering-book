@@ -457,6 +457,70 @@ LLM generates → Gates auto-validate → LLM auto-fixes → Done
 
 Human context switching eliminated. Faster iterations.
 
+## Trust But Verify: AI-Generated Tests Over Manual Review
+
+Quality gates automate validation, but what about code review? Manually reviewing AI-generated code creates a bottleneck that undermines the speed gains from automation. The answer is not to review code. Instead, review verification output.
+
+### The Manual Review Problem
+
+When an LLM generates 1,000 lines of code, manual review takes 2-4 hours. You mentally execute edge cases, hunt for bugs, and try to spot security vulnerabilities. But human review has fundamental limitations:
+
+| Problem | Impact |
+|---------|--------|
+| Scale mismatch | AI generates 10-100x faster than humans can review |
+| Context loss | By line 800, you have forgotten the logic from line 100 |
+| False confidence | Code that looks correct often has 5-10 hidden issues |
+| No regression protection | Tomorrow's changes can break today's reviewed code |
+
+The result: 37% of developer time spent reading AI-generated code, with a 40-60% bug detection rate.
+
+### The Trust But Verify Pattern
+
+Do not trust AI output. Do not manually review everything either. Instead, ask AI to create verification:
+
+```
+1. AI writes implementation code
+2. AI writes verification (tests, scripts, visual checks)
+3. AI runs verification
+4. You review 10 lines of output (not 1000 lines of code)
+5. Fix failures immediately while context is fresh
+```
+
+The shift: from **reading code** to **validating behavior**.
+
+### Four Verification Patterns
+
+**Runtime Verification**: Ask AI to generate a verification script that starts the server, tests endpoints with valid and invalid data, checks response codes and database state, and reports results. Review the output, not the API code.
+
+**Visual Verification**: For UI components, ask AI to generate a Playwright script that takes screenshots of all states (empty, filled, error, success). Review 5 screenshots instead of reading 500 lines of React.
+
+**Data Verification**: For migrations and bulk operations, ask AI to count records before and after, verify data integrity, check for duplicates and orphaned foreign keys, then generate a report. Review the report, not the migration logic.
+
+**API Verification**: Ask AI to create a comprehensive test suite covering all endpoints, authentication, rate limiting, and error handling. Review test output, not implementation.
+
+### The Compound Learning Effect
+
+Trust But Verify creates compound learning. Each verification cycle teaches the AI what "correct" looks like:
+
+```
+Iteration 1: Code → Tests fail (missing rate limiting) → Fix → Pass
+Iteration 2: Code → Tests pass first time (rate limiting included)
+Iteration 3+: AI generates increasingly correct code on first attempt
+```
+
+The quality gate becomes a teaching mechanism. Over time, the LLM internalizes your quality standards through verification feedback.
+
+### Metrics That Matter
+
+| Metric | Manual Review | Trust But Verify |
+|--------|---------------|------------------|
+| Review time | 2-4 hours | 30 seconds |
+| Bug detection | 40-60% | 80-95% |
+| Iteration speed | 1-2/day | 10-20/day |
+| Regression rate | 20-30% | Less than 5% |
+
+The Trust But Verify pattern reduces review burden by 99% while doubling bug detection. Combined with automated quality gates, it transforms code review from a bottleneck into a compounding advantage.
+
 ## Building the Gate Stack
 
 ### The Six-Gate Architecture

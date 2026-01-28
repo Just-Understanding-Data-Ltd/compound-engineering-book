@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T16:10:45.899Z",
+  "lastUpdated": "2026-01-29T23:45:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1689,10 +1689,11 @@
       "chapter": "ch07",
       "title": "ch07: Expand Trust But Verify Protocol section",
       "description": "Incorporate trust-but-verify-protocol.md content: AI-generated tests, visual verification, 99% review reduction. Strengthens section 4.6 Automated Code Review.",
-      "status": "pending",
+      "status": "complete",
       "priority": "low",
       "score": 165,
       "createdAt": "2026-01-28T15:00:00Z",
+      "completedAt": "2026-01-29T23:45:00Z",
       "kbSources": [
         "trust-but-verify-protocol.md"
       ]
@@ -1903,15 +1904,16 @@
     ]
   },
   "stats": {
-    "pending": 5,
-    "complete": 56,
+    "pending": 13,
+    "inProgress": 0,
+    "complete": 138,
     "blocked": 0,
-    "in_progress": 0
+    "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "b8aee71aaaae0ac77d5db0603f037ed1801aefa7",
-    "lastSuccessfulTask": "iteration-20",
-    "lastCheckpoint": "2026-01-28T16:10:45Z",
+    "lastGoodCommit": "093a7232a2e646d93599e2fa402512aff08b171f",
+    "lastSuccessfulTask": "iteration-21",
+    "lastCheckpoint": "2026-01-28T16:14:23Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
