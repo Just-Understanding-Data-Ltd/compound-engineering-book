@@ -55,6 +55,16 @@ pandoc \
   --from markdown-yaml_metadata_block \
   --lua-filter=leanpub/filters/strip-md-links.lua \
   --syntax-highlighting=tango \
+  --epub-embed-font=leanpub/fonts/JetBrainsMono-Regular.ttf \
+  --epub-embed-font=leanpub/fonts/JetBrainsMono-Bold.ttf \
+  --epub-embed-font=leanpub/fonts/JetBrainsMono-Italic.ttf \
+  --epub-embed-font=leanpub/fonts/source-serif-4-latin-400-normal.woff2 \
+  --epub-embed-font=leanpub/fonts/source-serif-4-latin-400-italic.woff2 \
+  --epub-embed-font=leanpub/fonts/source-serif-4-latin-600-normal.woff2 \
+  --epub-embed-font=leanpub/fonts/source-serif-4-latin-700-normal.woff2 \
+  --epub-embed-font=leanpub/fonts/source-sans-3-latin-400-normal.woff2 \
+  --epub-embed-font=leanpub/fonts/source-sans-3-latin-600-normal.woff2 \
+  --epub-embed-font=leanpub/fonts/source-sans-3-latin-700-normal.woff2 \
   --toc \
   --toc-depth=2 \
   -o the-meta-engineer.epub

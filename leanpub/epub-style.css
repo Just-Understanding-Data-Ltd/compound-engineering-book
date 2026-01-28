@@ -1,5 +1,82 @@
 /* EPUB Custom Stylesheet - The Meta-Engineer */
 
+/* === Embedded Font Declarations === */
+
+/* JetBrains Mono - Code font */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Italic.ttf');
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* Source Serif 4 - Body text font */
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('../fonts/source-serif-4-latin-400-normal.woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('../fonts/source-serif-4-latin-400-italic.woff2');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('../fonts/source-serif-4-latin-600-normal.woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('../fonts/source-serif-4-latin-700-normal.woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Source Sans 3 - Heading font */
+@font-face {
+  font-family: 'Source Sans 3';
+  src: url('../fonts/source-sans-3-latin-400-normal.woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Sans 3';
+  src: url('../fonts/source-sans-3-latin-600-normal.woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Sans 3';
+  src: url('../fonts/source-sans-3-latin-700-normal.woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* === Layout Styles === */
+
 /* Body typography */
 body {
   font-family: Georgia, "Times New Roman", serif;
