@@ -498,6 +498,77 @@ Track these metrics:
 
 **Late Linting Introduction**: Try to add linting to 3-month-old codebase with 847 violations. Solution: enable day 0, prevent accumulation (30 min upfront cost, save 60 hours later).
 
+## Stateless Verification: Preventing Ghost Failures
+
+Quality gates that depend on accumulated state produce ghost failures. Tests pass locally but fail in CI. Tests fail on first run but pass on third. Tests that passed yesterday fail today without code changes. These ghosts waste hours debugging environment differences when the problem is state accumulation.
+
+### The State Accumulation Problem
+
+Each verification cycle leaves artifacts:
+
+```
+Generate code → Test → Fix → Test → Fix → Test → Deploy
+                 ↓       ↓       ↓
+              State    State   State   (accumulating)
+```
+
+Build artifacts, cached modules, test database rows, TypeScript build info, orphaned server processes. This state pollutes subsequent verification cycles. A test that expects an empty database fails because the previous test inserted records. A type check passes because stale cache hides a new error. A linter auto-fixes a file that masks a real problem.
+
+### The Clean Slate Principle
+
+Every verification run should be indistinguishable from the first run ever executed.
+
+If Test Run 1 and Test Run 100 behave differently, you have state accumulation. The fix is simple: reset state before each verification cycle, not just at the start of the session.
+
+```typescript
+async function verifyWithCleanSlate(code: string): Promise<VerifyResult> {
+  // 1. Reset environment (clean slate)
+  await resetEnvironment();
+
+  // 2. Write generated code
+  await fs.writeFile('src/generated.ts', code);
+
+  // 3. Run all quality gates
+  const buildResult = await runBuild();
+  const testResult = await runTests();
+  const lintResult = await runLint();
+
+  // 4. Clean up (no state persists)
+  await resetEnvironment();
+
+  return {
+    success: buildResult.ok && testResult.ok && lintResult.ok,
+    errors: [...buildResult.errors, ...testResult.errors, ...lintResult.errors],
+  };
+}
+```
+
+Key insight: the reset happens before every verification, not just once at session start.
+
+### What State to Reset
+
+For reliable gates, reset these between cycles:
+
+| State Type | Reset Command | Why |
+|------------|---------------|-----|
+| Build artifacts | `rm -rf dist/ build/` | Stale artifacts mask missing files |
+| TypeScript cache | `rm -rf tsconfig.tsbuildinfo` | Stale cache hides type errors |
+| Test database | `beforeEach: db.truncateAll()` | Leftover data causes false failures |
+| Node module cache | `rm -rf node_modules/.cache/` | Cached modules hide dependency issues |
+| Process state | `afterEach: server.close()` | Orphaned processes hold ports/locks |
+
+### Measuring Statelessness
+
+Track these metrics to verify your gates are truly stateless:
+
+**Flaky test rate**: Tests that sometimes pass, sometimes fail without code changes. Target: 0%.
+
+**Local vs CI pass rate gap**: If local passes 100% but CI passes 95%, you have 5% state difference. Target: less than 1% gap.
+
+**Consecutive run consistency**: Run tests 10 times consecutively. All 10 should produce identical results.
+
+Stateless verification is the difference between "works on my machine" and "works everywhere." It transforms unreliable gates into deterministic filters that compound reliably.
+
 ## Try It Yourself
 
 ### Exercise 1: Set Up Claude Code Hooks
