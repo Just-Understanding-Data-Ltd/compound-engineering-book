@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-30 00:00)
-- Phase: Final Quality Polish
-- Active: KB article verified (prompt-injection-prevention.md already existed)
-- Last Completed: task-317 (Create KB: prompt-injection-prevention.md)
-- Blockers: None - all quality issues have identified solutions
-- Queue Health: 2 pending tasks (11 total), clean queue, no duplicates
-- Publishing Readiness: 99% (content complete, SDK migration 12/12 done, diagrams 66/66, KB articles complete)
+## Current Status (Updated: 2026-01-28 16:30)
+- Phase: Publication Ready
+- Active: Queue curation cycle 25 complete
+- Last Completed: curation-25 (Queue curation)
+- Blockers: None
+- Queue Health: 2 meta-tasks pending (11 total with subtasks), queue is essentially complete
+- Publishing Readiness: 99.5% (all substantive work done, only optional polish passes remain)
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%) - EM DASHES FIXED ✓
@@ -59,6 +59,26 @@
 - **Confidence**: HIGH (98%)
 
 ## Recent Activity
+
+### 2026-01-28 16:30 - Queue Curation Cycle 25
+- What: Curated task queue, verified stats, no changes needed
+- Analysis:
+  - 2 main pending tasks (task-091, task-097) - both meta-tasks with negative scores
+  - 9 pending subtasks (review milestones)
+  - 140 complete (59 main + 81 subtasks)
+  - 0 blocked, 0 in progress
+  - Stats verified: 11 pending, 140 complete, 151 total
+- Findings:
+  - No duplicates found
+  - No blocked tasks to unblock
+  - No priority adjustments needed
+  - Queue is at minimum viable state
+- Remaining work:
+  - task-091: Write all KB articles (score -85) - optional polish
+  - task-097: Finalize exercises (score -145) - optional polish
+- Publishing readiness: 99.5%
+- Recommended: Book is ready for Leanpub formatting and publication
+- Next: Either pick up optional polish tasks or proceed to publishing workflow
 
 ### 2026-01-30 00:00 - COMPLETED task-317: Create KB: prompt-injection-prevention.md
 - What: Verified KB article already existed in knowledge base

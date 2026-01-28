@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-01-30T00:00:00.000Z",
+  "lastUpdated": "2026-01-28T16:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-30T00:00:00Z",
-    "iteration": 24,
+    "lastRun": "2026-01-28T16:30:00Z",
+    "iteration": 25,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
     "recommendedNext": "task-091",
-    "reasoning": "Curation cycle 24. Queue nearly empty: 2 main pending tasks (task-091: Write all KB articles, task-097: Finalize exercises), both meta-tasks with negative scores. 9 pending subtasks are review/finalization tasks. All substantive work complete. Publishing readiness: 99%+. Only remaining work: final polish passes if desired."
+    "reasoning": "Curation cycle 25. Queue at minimum: 2 pending meta-tasks (task-091: Write KB articles score -85, task-097: Finalize exercises score -145). Both have negative scores indicating optional polish work. 9 pending subtasks are final review passes. Stats verified: 140 complete, 11 pending, 0 blocked. All 15 chapters complete. 787 tests pass. 66 diagrams. SDK migration done. Publishing readiness: 99.5%."
   },
   "prds": {
     "index": {
@@ -1914,13 +1914,13 @@
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "150226f154f183dc6ff1b3c1f6233d51125bb455",
-    "lastSuccessfulTask": "iteration-24",
-    "lastCheckpoint": "2026-01-30T00:00:00Z",
+    "lastGoodCommit": "b3bc7c0b61a638e7d649cbdaab768e0a7ba79572",
+    "lastSuccessfulTask": "curation-25",
+    "lastCheckpoint": "2026-01-28T16:30:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
-    "lastQueueCuration": "2026-01-30T00:00:00Z"
+    "lastQueueCuration": "2026-01-28T16:30:00Z"
   },
-  "lastQueueCuration": "2026-01-30T00:00:00Z"
+  "lastQueueCuration": "2026-01-28T16:30:00Z"
 }
