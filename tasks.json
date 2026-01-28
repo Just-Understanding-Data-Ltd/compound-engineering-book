@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T11:32:14.755Z",
+  "lastUpdated": "2026-01-28T23:45:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1391,7 +1391,7 @@
           "title": "Rewrite ch10 examples with Agent SDK",
           "description": "The RALPH Loop - convert to Agent SDK session resumption and checkpoints.",
           "status": "pending",
-          "score": 605,
+          "score": 1035,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch10:35 = 1035",
           "priority": "critical"
         },
@@ -1402,7 +1402,7 @@
           "title": "Rewrite ch11 examples with Agent SDK",
           "description": "Sub-Agent Architecture - convert to Agent SDK sub-agent spawning patterns.",
           "status": "pending",
-          "score": 605,
+          "score": 1030,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch11:30 = 1030",
           "priority": "critical"
         },
@@ -1413,7 +1413,7 @@
           "title": "Rewrite ch12 examples with Agent SDK",
           "description": "Development Workflows - convert to Agent SDK workflow patterns.",
           "status": "pending",
-          "score": 605,
+          "score": 1025,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch12:25 = 1025",
           "priority": "critical"
         },
@@ -1424,7 +1424,7 @@
           "title": "Rewrite ch13 examples with Agent SDK",
           "description": "Building the Harness - convert to Agent SDK harness patterns.",
           "status": "pending",
-          "score": 605,
+          "score": 1020,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch13:20 = 1020",
           "priority": "critical"
         },
@@ -1435,7 +1435,7 @@
           "title": "Rewrite ch14 examples with Agent SDK",
           "description": "The Meta-Engineer Playbook - convert to Agent SDK meta-engineering patterns.",
           "status": "pending",
-          "score": 605,
+          "score": 1015,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch14:15 = 1015",
           "priority": "critical"
         },
@@ -1446,7 +1446,7 @@
           "title": "Rewrite ch15 examples with Agent SDK",
           "description": "Model Strategy & Cost Optimization - convert to Agent SDK cost patterns.",
           "status": "pending",
-          "score": 605,
+          "score": 1010,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch15:10 = 1010",
           "priority": "critical"
         },
@@ -1457,7 +1457,7 @@
           "title": "Test all migrated examples",
           "description": "Run all migrated examples through exercise-validator to confirm they compile and work.",
           "status": "pending",
-          "score": 605,
+          "score": 1005,
           "scoreBreakdown": "critical:1000 + milestone:0 + verification:5 = 1005",
           "priority": "critical"
         }
@@ -2026,20 +2026,20 @@
     ]
   },
   "stats": {
-    "pending": 26,
+    "pending": 46,
     "inProgress": 1,
-    "complete": 39,
+    "complete": 119,
     "blocked": 1,
     "total": 167
   },
   "checkpoints": {
-    "lastGoodCommit": "cb3b9591578f47e00dc39a4c0ff5a2d69ad9fed3",
-    "lastSuccessfulTask": "iteration-18",
-    "lastCheckpoint": "2026-01-28T11:32:14Z",
+    "lastGoodCommit": "c19b544f7d66ac3d38feecc1c1b146934240f96b",
+    "lastSuccessfulTask": "iteration-19",
+    "lastCheckpoint": "2026-01-28T11:34:36Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 1,
-    "lastQueueCuration": "2026-01-28T22:00:00Z"
+    "lastQueueCuration": "2026-01-28T23:45:00Z"
   },
-  "lastQueueCuration": "2026-01-28T22:00:00Z"
+  "lastQueueCuration": "2026-01-28T23:45:00Z"
 }
