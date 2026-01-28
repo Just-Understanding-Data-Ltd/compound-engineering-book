@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-01-28T21:00:00Z",
+  "lastUpdated": "2026-01-28T22:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-28T19:00:00Z",
-    "iteration": 27,
+    "lastRun": "2026-01-28T22:00:00Z",
+    "iteration": 30,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
-    "recommendedNext": "task-095",
-    "reasoning": "Curation cycle 27. Completed task-094 (diagram review): 56 diagrams, all valid Mermaid, 100% coverage. Queue at minimum: 2 pending meta-tasks (task-091 score -85, task-097 score -145). 6 pending subtasks remain (2 under task-091: cross-ref check + final proofread; 4 under task-097: slop check + tech accuracy + cross-ref + proofread). No duplicates, no blocked tasks, no priority changes needed. Stats verified: 143 complete, 8 pending, 0 blocked. Publishing readiness: 99.7%."
+    "recommendedNext": "task-097",
+    "reasoning": "Curation cycle 30. Since last curation (iter 27): task-095 (cross-ref check) and task-096 (final proofread) completed, closing task-091 (Write all KB articles). Queue at minimum: 1 pending meta-task remaining (task-097: Finalize exercises, score -145) with 4 pending subtasks (AI slop check, tech accuracy, cross-ref, proofread). No duplicates, no blocked tasks, no priority changes needed. Stats verified: 146 complete, 5 pending, 0 blocked. Publishing readiness: 99.9%. All 15 chapters pass final proofread. 787 tests pass. Only exercise review remains."
   },
   "prds": {
     "index": {
@@ -1885,9 +1885,9 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 131,
-    "lastCompaction": "2026-01-29T19:30:00Z",
-    "note": "Count reflects 131 completed tasks. 4 appendix subtasks marked complete (out of scope).",
+    "count": 146,
+    "lastCompaction": "2026-01-28T22:00:00Z",
+    "note": "Count reflects 146 completed tasks. All 15 chapters complete, all KB articles done, all diagrams done, Agent SDK migration done. Only exercise reviews pending.",
     "recentCompletions": [
       {
         "id": "task-216",
@@ -1914,22 +1914,19 @@
   },
   "stats": {
     "pending": 5,
+    "inProgress": 0,
     "complete": 146,
     "blocked": 0,
-    "total": 151,
-    "mainPending": 1,
-    "mainComplete": 60,
-    "subtaskPending": 4,
-    "subtaskComplete": 86
+    "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "4424cb49572e99f7feffe67a4364e0b0af4a120b",
-    "lastSuccessfulTask": "iteration-28",
-    "lastCheckpoint": "2026-01-28T16:58:35Z",
+    "lastGoodCommit": "cd6ab79dd51e1c272a688c68d1d48fe5f8de1bcb",
+    "lastSuccessfulTask": "iteration-30-curation",
+    "lastCheckpoint": "2026-01-28T22:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
-    "lastQueueCuration": "2026-01-28T16:30:00Z"
+    "lastQueueCuration": "2026-01-28T22:00:00Z"
   },
-  "lastQueueCuration": "2026-01-28T16:30:00Z"
+  "lastQueueCuration": "2026-01-28T22:00:00Z"
 }
