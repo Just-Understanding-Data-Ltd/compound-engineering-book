@@ -1170,11 +1170,11 @@ Think of a time you got stuck debugging with AI. Practice the clean slate patter
 
 ## Related Chapters
 
-- Chapter 6 covers the verification ladder that catches errors early
-- Chapter 7 explains quality gates that automate prevention
-- Chapter 9 dives deeper into context engineering for better AI output
-- Chapter 10 shows how the RALPH loop uses error recovery in long-running agents
-- Chapter 15 covers cost optimization and budget protection strategies
+- [Chapter 6: The Verification Ladder](ch06-the-verification-ladder.md) for the verification patterns that catch errors early
+- [Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md) for quality gates that automate prevention
+- [Chapter 9: Context Engineering Deep Dive](ch09-context-engineering-deep-dive.md) for context engineering principles that improve AI output
+- [Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md) for error recovery in long-running agent workflows
+- [Chapter 15: Model Strategy & Cost Optimization](ch15-model-strategy-and-cost-optimization.md) for cost optimization and budget protection strategies
 
 ## Summary
 

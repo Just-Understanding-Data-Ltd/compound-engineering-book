@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 19:00)
+## Current Status (Updated: 2026-01-28 20:00)
 - Phase: Publication Ready
-- Active: Review milestone task-094 (Diagram review) complete
-- Last Completed: task-094 (Diagram review: 56 diagrams, all valid, 100% coverage)
+- Active: Review milestone task-095 (Cross-reference check) complete
+- Last Completed: task-095 (Cross-reference check: 7 chapters fixed, 33 links verified, 100% markdown format)
 - Blockers: None
-- Queue Health: 2 meta-tasks pending (8 total with subtasks), queue is essentially complete
-- Publishing Readiness: 99.7% (all substantive work done, only optional polish passes remain)
+- Queue Health: 2 meta-tasks pending (7 total with subtasks), queue is essentially complete
+- Publishing Readiness: 99.8% (all substantive work done, only optional polish passes remain)
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%) - EM DASHES FIXED ✓
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 143/151 (95%) with clear prioritization
+- Tasks Complete: 144/151 (95%) with clear prioritization
 - Test Pass Rate: 100% across all chapters (787 tests total)
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -59,6 +59,28 @@
 - **Confidence**: HIGH (98%)
 
 ## Recent Activity
+
+### 2026-01-28 20:00 - COMPLETED task-095: Cross-Reference Check (Review Milestone)
+- What: Ran cross-reference validation and fixed format inconsistencies across 7 chapters
+- Results:
+  - Ran cross-ref-validator agent across all 15 chapters
+  - 0 broken links confirmed (all 50+ markdown links valid)
+  - 7 chapters had plain text references (ch08, ch10-ch15) instead of markdown links
+  - Converted all 7 chapters to consistent markdown link format
+  - 33 total links updated and verified against actual filenames
+  - All 15 chapters now use `[Chapter N: Title](chNN-filename.md)` format
+- Files modified:
+  - chapters/ch08-error-handling-and-debugging.md (5 links)
+  - chapters/ch10-the-ralph-loop.md (6 links)
+  - chapters/ch11-sub-agent-architecture.md (5 links)
+  - chapters/ch12-development-workflows.md (4 links)
+  - chapters/ch13-building-the-harness.md (5 links)
+  - chapters/ch14-the-meta-engineer-playbook.md (5 links)
+  - chapters/ch15-model-strategy-and-cost-optimization.md (3 links)
+- Iteration: 28
+- Stats: 7 pending, 144 complete
+- Outcome: All chapters now have consistent, clickable cross-references
+- Next: task-096 (Final proofread) under task-091
 
 ### 2026-01-28 19:00 - COMPLETED task-094: Diagram Review (Review Milestone)
 - What: Ran comprehensive diagram review across all 15 chapters and 56 diagrams

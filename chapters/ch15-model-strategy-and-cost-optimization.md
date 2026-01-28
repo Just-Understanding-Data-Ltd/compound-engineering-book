@@ -1115,6 +1115,6 @@ For related patterns, see Chapter 10 (The RALPH Loop) for cost management in lon
 
 ## Related Chapters
 
-- **Chapter 7: Quality Gates That Compound** - Automated gates validate cheaper models
-- **Chapter 10: The RALPH Loop** - Cost management for long-running agents
-- **Chapter 13: Building the Harness** - Production cost optimization and telemetry
+- [Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md) for automated gates that validate cheaper models
+- [Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md) for cost management in long-running agents
+- [Chapter 13: Building the Harness](ch13-building-the-harness.md) for production cost optimization and telemetry

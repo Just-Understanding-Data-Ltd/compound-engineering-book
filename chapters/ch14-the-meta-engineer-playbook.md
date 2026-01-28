@@ -679,8 +679,8 @@ The product is the output. The system is the asset. Build the factory.
 
 ## Related Chapters
 
-- **Chapter 1** introduced the compound systems engineer identity. This chapter operationalizes it.
-- **Chapter 7** covered quality gates. Meta-engineers automate gate enforcement.
-- **Chapter 10** covered the RALPH loop. Meta-engineers build the infrastructure that makes RALPH loops run themselves.
-- **Chapter 11** covered sub-agent architecture. Meta-engineers design the orchestration layer.
-- **Chapter 13** covered building the harness. This chapter explains why the harness matters.
+- [Chapter 1: The Compound Systems Engineer](ch01-the-compound-systems-engineer.md) introduced the identity. This chapter operationalizes it.
+- [Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md) covered quality gates. Meta-engineers automate gate enforcement.
+- [Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md) covered the RALPH loop. Meta-engineers build infrastructure that makes it run autonomously.
+- [Chapter 11: Sub-Agent Architecture](ch11-sub-agent-architecture.md) covered sub-agents. Meta-engineers design the orchestration layer.
+- [Chapter 13: Building the Harness](ch13-building-the-harness.md) covered harness construction. This chapter explains why the harness matters.

@@ -537,9 +537,9 @@ The compound effect emerges over time. Each iteration feeds the next through doc
 
 ## Related Chapters
 
-- Chapter 4: Writing Your First CLAUDE.md covers the documentation layer in depth
-- Chapter 7: Quality Gates That Compound explains the verification mechanisms
-- Chapter 8: Error Handling and Debugging covers the clean slate recovery pattern
-- Chapter 9: Context Engineering Deep Dive explores context degradation theory
-- Chapter 11: Sub-Agent Architecture extends to multi-agent coordination
-- Chapter 13: Building the Harness shows the complete orchestration system
+- [Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md) for the documentation layer in depth
+- [Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md) for the verification mechanisms
+- [Chapter 8: Error Handling & Debugging](ch08-error-handling-and-debugging.md) for the clean slate recovery pattern
+- [Chapter 9: Context Engineering Deep Dive](ch09-context-engineering-deep-dive.md) for context degradation theory
+- [Chapter 11: Sub-Agent Architecture](ch11-sub-agent-architecture.md) for multi-agent coordination
+- [Chapter 13: Building the Harness](ch13-building-the-harness.md) for the complete orchestration system

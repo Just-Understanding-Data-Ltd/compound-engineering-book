@@ -717,8 +717,8 @@ The cost is orchestration complexity. The benefit is dramatically higher quality
 
 ## Related Chapters
 
-- Chapter 4 (Writing Your First CLAUDE.md) covers the foundation for three-layer context hierarchy
-- Chapter 6 (The Verification Ladder) provides the verification patterns sub-agents enforce
-- Chapter 7 (Quality Gates That Compound) shows how sub-agent output flows through quality gates
-- Chapter 10 (The RALPH Loop) demonstrates how sub-agents integrate into the autonomous development cycle
-- Chapter 15 (Model Strategy) covers using different model tiers for different agent roles
+- [Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md) for the foundation of three-layer context hierarchy
+- [Chapter 6: The Verification Ladder](ch06-the-verification-ladder.md) for the verification patterns sub-agents enforce
+- [Chapter 7: Quality Gates That Compound](ch07-quality-gates-that-compound.md) for how sub-agent output flows through quality gates
+- [Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md) for how sub-agents integrate into the autonomous development cycle
+- [Chapter 15: Model Strategy & Cost Optimization](ch15-model-strategy-and-cost-optimization.md) for using different model tiers for different agent roles

@@ -617,7 +617,7 @@ The key insight: workflows are force multipliers. A 10% improvement in each work
 
 ## Related Chapters
 
-- **Chapter 10: The RALPH Loop** - Workflows become the foundation for long-running agent automation
-- **Chapter 11: Sub-Agent Architecture** - Skills evolve into specialized sub-agents for complex tasks
-- **Chapter 13: Building the Harness** - Workflows get codified into production infrastructure
-- **Chapter 4: Writing Your First CLAUDE.md** - Workflows reference project instructions for context
+- [Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md) for long-running agent automation built on workflows
+- [Chapter 11: Sub-Agent Architecture](ch11-sub-agent-architecture.md) for skills evolving into specialized sub-agents
+- [Chapter 13: Building the Harness](ch13-building-the-harness.md) for codifying workflows into production infrastructure
+- [Chapter 4: Writing Your First CLAUDE.md](ch04-writing-your-first-claude-md.md) for project instructions that workflows reference

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T19:00:00Z",
+  "lastUpdated": "2026-01-28T20:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1769,8 +1769,9 @@
           "parentId": "task-091",
           "type": "review",
           "title": "Cross-reference check",
-          "status": "pending",
-          "score": -135
+          "status": "complete",
+          "score": -135,
+          "completedAt": "2026-01-28T20:00:00Z"
         },
         {
           "id": "task-096",
@@ -1910,16 +1911,16 @@
     ]
   },
   "stats": {
-    "pending": 8,
+    "pending": 7,
     "inProgress": 0,
-    "complete": 143,
+    "complete": 144,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "12f5ee4e07a4bbc16e029fec0ebf7a88b147981f",
-    "lastSuccessfulTask": "iteration-26",
-    "lastCheckpoint": "2026-01-28T16:43:12Z",
+    "lastGoodCommit": "7e7c1fca867c64e43a090ad2efecb9198dd1e741",
+    "lastSuccessfulTask": "iteration-27",
+    "lastCheckpoint": "2026-01-28T16:51:11Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
