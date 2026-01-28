@@ -96,8 +96,10 @@ blockquote code {
 table {
   border-collapse: collapse;
   width: 100%;
+  max-width: 100%;
+  table-layout: fixed;
   margin: 1em 0;
-  font-size: 0.9em;
+  font-size: 0.85em;
   border: 1px solid #999;
 }
 
@@ -108,12 +110,16 @@ th {
   padding: 0.8em;
   text-align: left;
   font-weight: bold;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 td {
   border: 1px solid #999;
   padding: 0.8em;
   vertical-align: top;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 tr:nth-child(even) {
