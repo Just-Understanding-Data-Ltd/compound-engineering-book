@@ -52,6 +52,15 @@ import {
   DEBUGGING_LAYERS,
 } from "./context-debugger";
 
+// Import from context-effectiveness.ts
+import {
+  normalizeCode,
+  calculateTextSimilarity,
+  generateImprovementSuggestions,
+  type ContextEffectivenessDashboard,
+  type TestSuite,
+} from "./context-effectiveness";
+
 // ============================================================================
 // ENTROPY MEASUREMENT TESTS
 // ============================================================================
@@ -495,6 +504,307 @@ describe("Context Debugger", () => {
     test("all layers have checklists", () => {
       for (const layer of DEBUGGING_LAYERS) {
         expect(layer.checklist.length).toBeGreaterThan(0);
+      }
+    });
+  });
+});
+
+// ============================================================================
+// CONTEXT EFFECTIVENESS TESTS
+// ============================================================================
+
+describe("Context Effectiveness", () => {
+  describe("normalizeCode", () => {
+    test("removes single-line comments", () => {
+      const code = "function foo() { return 42; } // comment";
+      const normalized = normalizeCode(code);
+      expect(normalized).not.toContain("comment");
+    });
+
+    test("removes multi-line comments", () => {
+      const code = "function foo() { /* multi\nline */ return 42; }";
+      const normalized = normalizeCode(code);
+      expect(normalized).not.toContain("multi");
+      expect(normalized).not.toContain("line");
+    });
+
+    test("collapses whitespace", () => {
+      const code = "function   foo()   {   return   42;   }";
+      const normalized = normalizeCode(code);
+      expect(normalized).not.toContain("   ");
+    });
+
+    test("normalizes semicolons", () => {
+      const code = "return 42;   const x = 1;";
+      const normalized = normalizeCode(code);
+      expect(normalized).toContain(";const");
+    });
+
+    test("converts to lowercase", () => {
+      const code = "function FOO() { return BAR; }";
+      const normalized = normalizeCode(code);
+      expect(normalized).toBe(normalizeCode("function foo() { return bar; }"));
+    });
+
+    test("produces same output for semantically identical code", () => {
+      const code1 = "function foo() { return 42; }";
+      const code2 = "function  foo()  {  return  42;  }  // ignored";
+      expect(normalizeCode(code1)).toBe(normalizeCode(code2));
+    });
+  });
+
+  describe("calculateTextSimilarity", () => {
+    test("returns 1 for identical strings", () => {
+      const text = "function foo() { return 42; }";
+      const similarity = calculateTextSimilarity(text, text);
+      expect(similarity).toBe(1);
+    });
+
+    test("returns 0 for completely different strings", () => {
+      const text1 = "aaa";
+      const text2 = "zzz";
+      const similarity = calculateTextSimilarity(text1, text2);
+      expect(similarity).toBe(0);
+    });
+
+    test("returns higher similarity for similar strings", () => {
+      const text1 = "function foo() { return 42; }";
+      const text2 = "function foo() { return 43; }";
+      const text3 = "class Bar { constructor() {} }";
+
+      const similar = calculateTextSimilarity(text1, text2);
+      const different = calculateTextSimilarity(text1, text3);
+
+      expect(similar).toBeGreaterThan(different);
+    });
+
+    test("handles empty strings", () => {
+      expect(calculateTextSimilarity("", "")).toBe(0);
+      expect(calculateTextSimilarity("hello", "")).toBe(0);
+      expect(calculateTextSimilarity("", "hello")).toBe(0);
+    });
+
+    test("is symmetric", () => {
+      const text1 = "function foo() { return 42; }";
+      const text2 = "function bar() { return 43; }";
+
+      expect(calculateTextSimilarity(text1, text2))
+        .toBe(calculateTextSimilarity(text2, text1));
+    });
+  });
+
+  describe("generateImprovementSuggestions", () => {
+    test("suggests examples for high variance", () => {
+      const dashboard: ContextEffectivenessDashboard = {
+        varianceTest: {
+          uniqueOutputs: 7,
+          totalGenerations: 10,
+          entropyEstimate: 2.8,
+          effectiveness: "low",
+          samples: [],
+          varianceRatio: 0.7,
+        },
+        testPassRate: {
+          passRate: 0.8,
+          failedTests: [],
+          estimatedMI: "medium",
+          passCountsByTest: new Map(),
+        },
+        overallScore: 60,
+        recommendations: [],
+        measuredAt: new Date(),
+      };
+
+      const suggestions = generateImprovementSuggestions(dashboard);
+      const hasExampleSuggestion = suggestions.some(
+        (s) => s.area === "examples" && s.expectedImpact === "high"
+      );
+      expect(hasExampleSuggestion).toBe(true);
+    });
+
+    test("suggests anti-patterns for medium variance", () => {
+      const dashboard: ContextEffectivenessDashboard = {
+        varianceTest: {
+          uniqueOutputs: 4,
+          totalGenerations: 10,
+          entropyEstimate: 2.0,
+          effectiveness: "medium",
+          samples: [],
+          varianceRatio: 0.4,
+        },
+        testPassRate: {
+          passRate: 0.85,
+          failedTests: [],
+          estimatedMI: "medium",
+          passCountsByTest: new Map(),
+        },
+        overallScore: 70,
+        recommendations: [],
+        measuredAt: new Date(),
+      };
+
+      const suggestions = generateImprovementSuggestions(dashboard);
+      const hasAntiPatternSuggestion = suggestions.some(
+        (s) => s.area === "anti-patterns"
+      );
+      expect(hasAntiPatternSuggestion).toBe(true);
+    });
+
+    test("suggests fixes for failing tests", () => {
+      const dashboard: ContextEffectivenessDashboard = {
+        varianceTest: {
+          uniqueOutputs: 2,
+          totalGenerations: 10,
+          entropyEstimate: 1.0,
+          effectiveness: "high",
+          samples: [],
+          varianceRatio: 0.2,
+        },
+        testPassRate: {
+          passRate: 0.6,
+          failedTests: ["Returns correct error type", "Handles type validation"],
+          estimatedMI: "low",
+          passCountsByTest: new Map(),
+        },
+        overallScore: 65,
+        recommendations: [],
+        measuredAt: new Date(),
+      };
+
+      const suggestions = generateImprovementSuggestions(dashboard);
+      expect(suggestions.length).toBeGreaterThanOrEqual(2);
+
+      const hasErrorSuggestion = suggestions.some(
+        (s) => s.suggestion.includes("error")
+      );
+      const hasTypeSuggestion = suggestions.some(
+        (s) => s.suggestion.includes("type")
+      );
+      expect(hasErrorSuggestion).toBe(true);
+      expect(hasTypeSuggestion).toBe(true);
+    });
+
+    test("suggests reference for low similarity", () => {
+      const dashboard: ContextEffectivenessDashboard = {
+        varianceTest: {
+          uniqueOutputs: 2,
+          totalGenerations: 10,
+          entropyEstimate: 1.0,
+          effectiveness: "high",
+          samples: [],
+          varianceRatio: 0.2,
+        },
+        testPassRate: {
+          passRate: 0.9,
+          failedTests: [],
+          estimatedMI: "high",
+          passCountsByTest: new Map(),
+        },
+        semanticSimilarity: {
+          avgSimilarity: 0.5,
+          minSimilarity: 0.3,
+          maxSimilarity: 0.7,
+          variance: 0.04,
+          estimatedMI: "low",
+        },
+        overallScore: 75,
+        recommendations: [],
+        measuredAt: new Date(),
+      };
+
+      const suggestions = generateImprovementSuggestions(dashboard);
+      const hasSimilaritySuggestion = suggestions.some(
+        (s) => s.suggestion.includes("reference")
+      );
+      expect(hasSimilaritySuggestion).toBe(true);
+    });
+
+    test("returns empty suggestions for perfect context", () => {
+      const dashboard: ContextEffectivenessDashboard = {
+        varianceTest: {
+          uniqueOutputs: 1,
+          totalGenerations: 10,
+          entropyEstimate: 0,
+          effectiveness: "high",
+          samples: [],
+          varianceRatio: 0.1,
+        },
+        testPassRate: {
+          passRate: 1.0,
+          failedTests: [],
+          estimatedMI: "high",
+          passCountsByTest: new Map(),
+        },
+        semanticSimilarity: {
+          avgSimilarity: 0.95,
+          minSimilarity: 0.9,
+          maxSimilarity: 1.0,
+          variance: 0.005,
+          estimatedMI: "high",
+        },
+        overallScore: 98,
+        recommendations: [],
+        measuredAt: new Date(),
+      };
+
+      const suggestions = generateImprovementSuggestions(dashboard);
+      expect(suggestions.length).toBe(0);
+    });
+  });
+
+  describe("TestSuite and TestCase types", () => {
+    test("test suite can validate code", () => {
+      const testSuite: TestSuite = {
+        name: "Error Handling",
+        tests: [
+          {
+            name: "Returns Result type",
+            validate: (code) => code.includes("Result<") || code.includes("success:"),
+          },
+          {
+            name: "No throw statements",
+            validate: (code) => !code.includes("throw new"),
+          },
+        ],
+      };
+
+      const goodCode = "function validate(): Result<User, Error> { return { success: true }; }";
+      const badCode = "function validate() { throw new Error('fail'); }";
+
+      expect(testSuite.tests[0].validate(goodCode)).toBe(true);
+      expect(testSuite.tests[1].validate(goodCode)).toBe(true);
+
+      expect(testSuite.tests[0].validate(badCode)).toBe(false);
+      expect(testSuite.tests[1].validate(badCode)).toBe(false);
+    });
+  });
+
+  describe("Mutual Information assessment", () => {
+    test("high MI corresponds to 1-2 unique outputs", () => {
+      // Based on the chapter content: 1-2 unique outputs = high MI
+      const uniqueOutputs = [1, 2];
+      for (const count of uniqueOutputs) {
+        const ratio = count / 10;
+        const effectiveness = ratio <= 0.2 ? "high" : ratio <= 0.5 ? "medium" : "low";
+        expect(effectiveness).toBe("high");
+      }
+    });
+
+    test("medium MI corresponds to 3-5 unique outputs", () => {
+      const uniqueOutputs = [3, 4, 5];
+      for (const count of uniqueOutputs) {
+        const ratio = count / 10;
+        const effectiveness = ratio <= 0.2 ? "high" : ratio <= 0.5 ? "medium" : "low";
+        expect(effectiveness).toBe("medium");
+      }
+    });
+
+    test("low MI corresponds to 6+ unique outputs", () => {
+      const uniqueOutputs = [6, 7, 8, 9, 10];
+      for (const count of uniqueOutputs) {
+        const ratio = count / 10;
+        const effectiveness = ratio <= 0.2 ? "high" : ratio <= 0.5 ? "medium" : "low";
+        expect(effectiveness).toBe("low");
       }
     });
   });

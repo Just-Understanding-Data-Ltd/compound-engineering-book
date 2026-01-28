@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 00:30)
+## Current Status (Updated: 2026-01-29 01:00)
 - Phase: Final Quality Polish & Publication Preparation
 - Active: All 15 chapters COMPLETE, focus on quality fixes
-- Last Completed: task-259: Ch08 multi-layer timeout protection example
+- Last Completed: task-318: Ch09 context effectiveness measurement
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
 - Publishing Readiness: 92% (content complete, quality gates identified)
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 42/65 (65%) with clear prioritization
+- Tasks Complete: 43/65 (66%) with clear prioritization
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -59,6 +59,23 @@
 - **Confidence**: HIGH (95%)
 
 ## Recent Activity
+
+### 2026-01-29 01:00 - COMPLETED task-318: Ch09 context effectiveness measurement
+- What: Created examples/ch09/context-effectiveness.ts for measuring MI via output variance
+- File: examples/ch09/context-effectiveness.ts (new, ~650 lines)
+- Content:
+  - Method 1: Output variance testing (measure uniqueOutputs across generations)
+  - Method 2: A/B testing contexts (compare two contexts with statistical confidence)
+  - Method 3: Test pass rate as MI proxy (>90% = high MI, <50% = low MI)
+  - Method 4: Semantic similarity scoring (trigram-based Jaccard similarity)
+  - Combined measurement dashboard (fullContextAudit function)
+  - Context improvement suggestions generator
+  - Quality gate validation for context changes
+- Tests: Added 20 new tests to context-engineering.test.ts (87 total, all pass)
+- Source: mutual-information-context.md KB article
+- Stats: 43 complete, 22 pending
+- Outcome: Ch09 enhanced with comprehensive MI measurement utilities
+- Next: Next highest priority task from queue
 
 ### 2026-01-29 00:30 - COMPLETED task-259: Ch08 multi-layer timeout protection example
 - What: Created examples/ch08/timeout-protection.ts implementing multi-layer cost protection

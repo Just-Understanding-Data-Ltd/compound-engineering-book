@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T11:48:42.048Z",
+  "lastUpdated": "2026-01-28T11:56:33.847Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1607,12 +1607,13 @@
       "type": "code-example",
       "title": "ch09: Context effectiveness measurement",
       "description": "TypeScript: measure MI via output variance. Source: information-theory-coding-agents.md",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 555,
       "createdAt": "2026-01-28T16:30:00Z",
       "chapter": "ch09",
-      "targetPath": "examples/ch09/context-effectiveness.ts"
+      "targetPath": "examples/ch09/context-effectiveness.ts",
+      "completedAt": "2026-01-28T01:00:00Z"
     },
     {
       "id": "task-319",
@@ -2029,16 +2030,16 @@
     ]
   },
   "stats": {
-    "pending": 23,
+    "pending": 22,
     "inProgress": 1,
-    "complete": 42,
+    "complete": 43,
     "blocked": 1,
     "total": 167
   },
   "checkpoints": {
-    "lastGoodCommit": "199c8c8947414dec8edb4bd485fa3413b9ae896a",
-    "lastSuccessfulTask": "iteration-21",
-    "lastCheckpoint": "2026-01-28T11:48:42Z",
+    "lastGoodCommit": "22d9800f6daa754f15d764deed537bf68a638ffb",
+    "lastSuccessfulTask": "iteration-22",
+    "lastCheckpoint": "2026-01-28T11:56:33Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 1,
