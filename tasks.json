@@ -1,16 +1,17 @@
 {
-  "lastUpdated": "2026-01-29T06:00:00Z",
+  "lastUpdated": "2026-01-29T07:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T06:00:00Z",
-    "iteration": 31,
+    "lastRun": "2026-01-29T07:00:00Z",
+    "iteration": 3,
     "tasksRemoved": 0,
     "tasksMerged": 0,
-    "prioritiesAdjusted": 0,
+    "prioritiesAdjusted": 1,
     "newTasksAdded": 0,
-    "recommendedNext": "task-228",
-    "reasoning": "Completed task-227 (ch15 Agent SDK migration). Migrated 6 files (model-selector.ts, prompt-cacher.ts, cost-protector.ts, provider-router.ts, progressive-escalation.ts, batch-processor.ts). All 75 tests pass. Next: task-228 (test all migrated examples) completes the SDK migration parent task. Parent task-216 now 11/11 subtasks complete (100%)."
+    "tasksUnblocked": 1,
+    "recommendedNext": "task-229",
+    "reasoning": "Completed task-228 (test all migrated examples). MILESTONE: Agent SDK Migration (task-216) COMPLETE. Unblocked task-229 (update chapter prose for Agent SDK focus) since its blocker task-216 is now complete. task-229 (score 830) is now highest-scored pending task, followed by task-320 (PRD em dashes)."
   },
   "prds": {
     "index": {
@@ -1200,12 +1201,14 @@
       "type": "refactor",
       "title": "Agent SDK Migration: Ch06-Ch15 Code Examples",
       "description": "Migrate all code examples in chapters 06-15 from native Anthropic SDK to Claude Agent SDK. This teaches readers to build custom agents rather than just API calls.",
-      "status": "in_progress",
+      "status": "complete",
       "startedAt": "2026-01-28T22:30:00Z",
+      "completedAt": "2026-01-29T07:00:00Z",
       "priority": "critical",
       "score": 630,
       "scoreBreakdown": "critical:1000 + refactor:80 + blocks:25 + age:100 = 1205 (after recalc with age bonus)",
       "createdAt": "2026-01-28T22:00:00Z",
+      "note": "COMPLETE: All 12 subtasks done. Migrated 39 files across ch06-ch15 from native @anthropic-ai/sdk to @anthropic-ai/claude-agent-sdk. 787 tests pass. TypeScript compiles cleanly.",
       "subtasks": [
         {
           "id": "task-217",
@@ -1351,11 +1354,13 @@
           "type": "milestone",
           "title": "Test all migrated examples",
           "description": "Run all migrated examples through exercise-validator to confirm they compile and work.",
-          "status": "pending",
+          "status": "complete",
+          "completedAt": "2026-01-29T07:00:00Z",
           "score": 605,
           "scoreBreakdown": "critical:1000 + milestone:0 + verification:5 + age:100 = 1105 (recalc with age bonus) → 705 (display score)",
           "priority": "critical",
-          "createdAt": "2026-01-28T22:00:00Z"
+          "createdAt": "2026-01-28T22:00:00Z",
+          "note": "All 10 chapters tested: ch06 (54 tests), ch07 (51 tests), ch08 (153 tests), ch09 (115 tests), ch10 (92 tests), ch11 (67 tests), ch12 (59 tests), ch13 (61 tests), ch14 (60 tests), ch15 (75 tests). Total: 787 tests pass. TypeScript compiles cleanly with tsc --noEmit."
         }
       ]
     },
@@ -1583,13 +1588,12 @@
       "type": "review",
       "title": "Update chapter prose for Agent SDK focus",
       "description": "After code migration, update chapter text to reference Agent SDK concepts (sessions, streaming, resumption) instead of raw API calls.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
-      "score": 365,
+      "score": 830,
+      "scoreBreakdown": "high:750 + review:80 = 830",
       "createdAt": "2026-01-28T22:00:00Z",
-      "blockedBy": [
-        "task-216"
-      ]
+      "unblockNote": "Unblocked: task-216 (Agent SDK Migration) completed 2026-01-29T07:00:00Z"
     },
     {
       "id": "task-309",
@@ -1833,47 +1837,48 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 149,
-    "lastCompaction": "2026-01-29T04:45:00Z",
-    "note": "Count includes all completed tasks in tasks array after curation cycle 27 (47 main + 102 subtasks)",
+    "count": 151,
+    "lastCompaction": "2026-01-29T07:00:00Z",
+    "note": "Count includes all completed tasks in tasks array after iteration 3 (115 complete)",
     "recentCompletions": [
       {
-        "id": "task-226",
-        "type": "milestone",
-        "title": "Rewrite ch14 examples with Agent SDK",
-        "completedAt": "2026-01-29T05:30:00Z",
-        "note": "Migrated 5 files with Agent SDK streaming pattern. 60 tests pass."
+        "id": "task-216",
+        "type": "refactor",
+        "title": "Agent SDK Migration: Ch06-Ch15 Code Examples",
+        "completedAt": "2026-01-29T07:00:00Z",
+        "note": "MILESTONE: All 12/12 subtasks complete. 39 files migrated across ch06-ch15. 787 tests pass."
       },
       {
-        "id": "task-223",
+        "id": "task-228",
         "type": "milestone",
-        "title": "Rewrite ch11 examples with Agent SDK",
-        "completedAt": "2026-01-29T04:45:00Z",
-        "note": "Migrated 4 files with Agent SDK streaming pattern. 67 tests pass."
+        "title": "Test all migrated examples",
+        "completedAt": "2026-01-29T07:00:00Z",
+        "note": "787 tests pass across 10 chapters. TypeScript compiles cleanly."
       },
       {
-        "id": "task-306",
-        "type": "enhancement",
-        "title": "Update CLAUDE.md guidance with Less is More insights",
-        "completedAt": "2026-01-29T04:30:00Z"
+        "id": "task-227",
+        "type": "milestone",
+        "title": "Rewrite ch15 examples with Agent SDK",
+        "completedAt": "2026-01-29T06:00:00Z",
+        "note": "Migrated 6 files with Agent SDK streaming pattern. 75 tests pass."
       }
     ]
   },
   "stats": {
     "pending": 36,
     "inProgress": 0,
-    "complete": 113,
-    "blocked": 1,
-    "total": 150
+    "complete": 115,
+    "blocked": 0,
+    "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "99d0bae27fb4f69cefe98cc703f15739e7764953",
-    "lastSuccessfulTask": "iteration-1",
-    "lastCheckpoint": "2026-01-28T14:29:05Z",
+    "lastGoodCommit": "540743e128d460e6e9bf020b049c087b7b255bed",
+    "lastSuccessfulTask": "task-228",
+    "lastCheckpoint": "2026-01-29T07:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
-    "lastQueueCuration": "2026-01-29T04:45:00Z"
+    "lastQueueCuration": "2026-01-29T07:00:00Z"
   },
-  "lastQueueCuration": "2026-01-29T04:45:00Z"
+  "lastQueueCuration": "2026-01-29T07:00:00Z"
 }

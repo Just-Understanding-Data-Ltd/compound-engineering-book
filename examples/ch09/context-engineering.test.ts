@@ -771,11 +771,11 @@ describe("Context Effectiveness", () => {
       const goodCode = "function validate(): Result<User, Error> { return { success: true }; }";
       const badCode = "function validate() { throw new Error('fail'); }";
 
-      expect(testSuite.tests[0].validate(goodCode)).toBe(true);
-      expect(testSuite.tests[1].validate(goodCode)).toBe(true);
+      expect(testSuite.tests[0]!.validate(goodCode)).toBe(true);
+      expect(testSuite.tests[1]!.validate(goodCode)).toBe(true);
 
-      expect(testSuite.tests[0].validate(badCode)).toBe(false);
-      expect(testSuite.tests[1].validate(badCode)).toBe(false);
+      expect(testSuite.tests[0]!.validate(badCode)).toBe(false);
+      expect(testSuite.tests[1]!.validate(badCode)).toBe(false);
     });
   });
 

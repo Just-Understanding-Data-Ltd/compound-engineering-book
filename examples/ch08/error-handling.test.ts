@@ -1770,8 +1770,8 @@ describe("Timeout Protection Framework", () => {
     });
 
     test("documentation should have highest limit", () => {
-      expect(TOKEN_LIMITS_BY_TASK.documentation).toBeGreaterThan(
-        TOKEN_LIMITS_BY_TASK.code_review
+      expect(TOKEN_LIMITS_BY_TASK.documentation!).toBeGreaterThan(
+        TOKEN_LIMITS_BY_TASK.code_review!
       );
     });
   });
@@ -1998,7 +1998,7 @@ describe("Timeout Protection Framework", () => {
       const { files: processed, warnings } = processFilesWithLimits(files);
 
       expect(processed).toHaveLength(1);
-      expect(processed[0].path).toBe("src/app.ts");
+      expect(processed[0]!.path).toBe("src/app.ts");
       expect(warnings).toContain("Excluded: node_modules/lodash/index.js");
     });
 
