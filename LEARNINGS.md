@@ -647,3 +647,29 @@ Also, "leverage" as a noun is acceptable throughout technical writing (high-leve
 5. Create a whitelist of known false positives with file:line references
 
 ---
+
+### 2026-01-28 - EPUB CSS: Distinguishing Visual Elements Through Layered Specificity
+
+**Context**: Improving EPUB inline code and callout/blockquote styling (task-404). The CSS needed to handle three overlapping contexts: inline code in prose, code inside blockquotes, and code blocks (pre).
+
+**Observation**: EPUB styling requires careful CSS specificity layering because the same HTML element (`code`) appears in three distinct contexts with different visual needs:
+
+| Context | Selector | Visual Goal |
+|---------|----------|-------------|
+| Prose | `code` | Stand out with background, border, padding |
+| Code block | `pre code` | Inherit parent styling, no double-decoration |
+| Blockquote | `blockquote code` | Lighter background to avoid clutter against blue tint |
+
+The existing CSS already handled `pre code` correctly (resetting background, border, padding to `none/0`). But `blockquote code` had no override, meaning inline code inside callouts showed the full `#f0f0f0` background against the `#f0f6ff` blue-tinted blockquote background. This created a jarring contrast where the code appeared to "float" on a gray island inside a blue box.
+
+The fix uses `rgba(255, 255, 255, 0.6)` for blockquote code background, which creates a subtle white overlay that remains visually distinct as code while harmonizing with the blockquote's blue tint.
+
+**Implication**: When styling elements for EPUB, always consider the containment hierarchy. Any element that appears inside multiple parent contexts needs explicit CSS overrides for each context. The three contexts for `code` (prose, pre, blockquote) are the most common example, but the same principle applies to `strong`, `em`, and `a` tags inside different parent elements.
+
+**Action**: When adding new EPUB CSS rules:
+1. Identify all parent contexts where the element appears (prose, code block, blockquote, table, list)
+2. Add explicit overrides for each context where the default styling creates visual conflicts
+3. Use `rgba()` backgrounds for elements inside colored containers to maintain harmony
+4. Test with `pre code` reset pattern: always reset `background: none; border: none; padding: 0` for code inside pre
+
+---
