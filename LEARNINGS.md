@@ -459,3 +459,37 @@ Without the concrete example, readers understand the theory but may not intuit t
 5. Include domain-specific context (e.g., "why this matters for AI agents")
 
 ---
+
+### 2026-01-28 - Synthesizing Multiple KB Sources into Cohesive Sections
+
+**Context**: Adding circuit breakers and reliability patterns to Chapter 8 (task-257), which required synthesizing content from 4 KB sources: agent-reliability-chasm.md, ai-cost-protection-timeouts.md, checkpoint-commit-patterns.md, and orchestration-patterns.md.
+
+**Observation**: When a chapter section draws from multiple KB sources, the synthesis challenge is finding the unifying thread that connects disparate concepts. For Chapter 8's new sections, the thread was "reliability compounding":
+
+| KB Source | Core Concept | Connection to Thread |
+|-----------|--------------|---------------------|
+| agent-reliability-chasm.md | 95% per-action = 36% at 20 actions | The problem statement |
+| ai-cost-protection-timeouts.md | Multi-layer timeout protection | Defense layer 1-4 |
+| checkpoint-commit-patterns.md | Git as external memory | Recovery mechanism |
+| orchestration-patterns.md | Retry with exponential backoff | Tactical response |
+
+Each source provided a piece: the problem (reliability compounding), the defenses (timeouts), the recovery mechanism (checkpoints), and the tactical response (retries). The synthesis created a coherent narrative: "Here's the problem → here's how to defend → here's how to recover → here's how to improve."
+
+Without the unifying thread, the content reads like disconnected facts. With it, readers understand how the pieces fit together.
+
+**Implication**: Multi-source sections need explicit narrative architecture before writing. Identify:
+1. What problem does this section solve? (find the source that states the problem)
+2. What layers of defense exist? (find sources that provide solutions)
+3. What's the recovery path? (find sources on error handling)
+4. What's the improvement trajectory? (find sources on optimization)
+
+This framework (Problem → Defense → Recovery → Improvement) works for most reliability-focused content.
+
+**Action**: When synthesizing multiple KB sources:
+1. List each source's core concept in a table
+2. Identify the unifying thread that connects all concepts
+3. Order content by narrative flow (problem → solution → recovery → optimization)
+4. Cross-reference related concepts explicitly ("As we saw in Section X...")
+5. End with actionable improvement strategies (the "what now?" for readers)
+
+---

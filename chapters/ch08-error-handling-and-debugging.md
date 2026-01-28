@@ -576,6 +576,239 @@ Cost analysis shows clean slate becomes profitable after attempt 3:
 - Continuing a broken trajectory: ~40 minutes, ~40K tokens, 30% success
 - Clean slate recovery: ~25 minutes, ~20K tokens, 80% success
 
+## Circuit Breakers and Reliability Patterns
+
+Building a demo agent is easy. Building a reliable agent is exponentially harder. Up to 95% of AI agent proof-of-concepts fail to make it to production, primarily due to reliability issues.
+
+### The Reliability Compounding Problem
+
+Individual action reliability compounds catastrophically across multi-step tasks. Even with 95% success per action, the overall success rate drops dramatically:
+
+| Actions | Per-Action Success | Overall Success |
+|---------|-------------------|-----------------|
+| 5 | 95% | 77% |
+| 10 | 95% | **60%** |
+| 20 | 95% | **36%** (worse than coin flip) |
+| 30 | 95% | **21%** |
+
+The math is simple: `Overall = (Per-Action)^N`. At 20 actions with 95% per-action reliability, you get `0.95^20 = 0.36`. This explains why demo agents fail in production. Real workflows demand complex sequences where compound failures become inevitable.
+
+### Multi-Layer Timeout Protection
+
+Runaway Large Language Model (LLM) workflows can rack up hundreds of dollars in unexpected API costs. A single misconfigured job can consume an entire monthly budget in hours. Implement multi-layer timeout protection to cap costs at predictable levels.
+
+**Layer 1: Job-Level Timeouts**
+
+The outermost protection layer. If everything else fails, the job dies.
+
+```yaml
+# .github/workflows/ai-review.yml
+name: AI Code Review
+
+on: [pull_request]
+
+jobs:
+  ai-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15  # Hard cap on job duration
+
+    steps:
+      - name: Run AI Review
+        timeout-minutes: 10  # Step-level timeout (inner limit)
+        run: bun scripts/ai-review.ts
+```
+
+Why two timeouts? The job timeout (15 min) catches everything including setup and teardown. The step timeout (10 min) catches the actual AI work and leaves buffer for cleanup.
+
+**Layer 2: Request-Level Token Caps**
+
+Prevent individual API calls from generating excessive output:
+
+```typescript
+const response = await anthropic.messages.create({
+  model: 'claude-sonnet-4-5-20250929',
+  max_tokens: 4096,  // Cap output tokens
+  messages: [{
+    role: 'user',
+    content: `Review this code:\n\n${code.slice(0, 10000)}`  // Cap input
+  }]
+})
+```
+
+Token limits by task type:
+- Code review: 2048-4096 tokens
+- Bug fix: 1024-2048 tokens
+- Documentation: 4096-8192 tokens
+- Simple edits: 512-1024 tokens
+
+**Layer 3: Input Size Limits**
+
+Cap the amount of context you send to the model:
+
+```typescript
+const DEFAULT_LIMITS = {
+  maxFiles: 50,
+  maxLinesPerFile: 500,
+  maxTotalTokens: 50000,
+  excludePatterns: [
+    'node_modules/**',
+    '*.lock',
+    '*.min.js',
+    'dist/**'
+  ]
+}
+```
+
+**Layer 4: Budget Alerts and Hard Caps**
+
+The final safety net stops operations when approaching budget limits:
+
+```typescript
+interface BudgetConfig {
+  dailyLimit: number      // $ per day
+  monthlyLimit: number    // $ per month
+  alertThreshold: number  // Percentage to alert (0.8 = 80%)
+}
+
+const BUDGET: BudgetConfig = {
+  dailyLimit: 10,
+  monthlyLimit: 100,
+  alertThreshold: 0.8
+}
+
+async function checkBudget(): Promise<{ ok: boolean; remaining: number }> {
+  const usage = await getUsageFromTracking()
+  const spent = usage.today
+
+  if (spent >= BUDGET.dailyLimit) {
+    console.error(`Daily budget exceeded: $${spent.toFixed(2)}`)
+    return { ok: false, remaining: 0 }
+  }
+
+  return { ok: true, remaining: BUDGET.dailyLimit - spent }
+}
+```
+
+### The Circuit Breaker Pattern
+
+Circuit breakers prevent cascading failures by stopping operations after consecutive failures. The pattern has three states:
+
+**Closed**: Normal operation. Requests flow through. Track failures.
+
+**Open**: After N consecutive failures, stop all requests immediately. Return fast-fail response without attempting the operation.
+
+**Half-Open**: After a reset period, allow a single probe request. If it succeeds, return to Closed. If it fails, return to Open.
+
+```typescript
+class CircuitBreaker {
+  private state: 'closed' | 'open' | 'half-open' = 'closed'
+  private failures = 0
+  private lastFailureTime = 0
+  private readonly maxFailures = 3
+  private readonly resetTimeMs = 30000  // 30 seconds
+
+  async execute<T>(operation: () => Promise<T>): Promise<T> {
+    // Check if circuit should transition from open to half-open
+    if (this.state === 'open') {
+      if (Date.now() - this.lastFailureTime > this.resetTimeMs) {
+        this.state = 'half-open'
+      } else {
+        throw new Error('Circuit breaker is open')
+      }
+    }
+
+    try {
+      const result = await operation()
+      this.onSuccess()
+      return result
+    } catch (error) {
+      this.onFailure()
+      throw error
+    }
+  }
+
+  private onSuccess() {
+    this.failures = 0
+    this.state = 'closed'
+  }
+
+  private onFailure() {
+    this.failures++
+    this.lastFailureTime = Date.now()
+    if (this.failures >= this.maxFailures) {
+      this.state = 'open'
+    }
+  }
+}
+```
+
+Use the circuit breaker to protect agent operations:
+
+```typescript
+const breaker = new CircuitBreaker()
+
+async function reliableAgentCall(prompt: string) {
+  return breaker.execute(async () => {
+    const response = await anthropic.messages.create({
+      model: 'claude-sonnet-4-5-20250929',
+      max_tokens: 4096,
+      messages: [{ role: 'user', content: prompt }]
+    })
+    return response.content
+  })
+}
+```
+
+### Retry Patterns with Exponential Backoff
+
+When operations fail, retry with increasing delays:
+
+```typescript
+async function withRetry<T>(
+  operation: () => Promise<T>,
+  maxRetries = 3,
+  initialDelayMs = 1000
+): Promise<T> {
+  let lastError: Error
+
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      return await operation()
+    } catch (error) {
+      lastError = error as Error
+      console.log(`Attempt ${attempt + 1} failed: ${lastError.message}`)
+
+      if (attempt < maxRetries - 1) {
+        const delay = initialDelayMs * Math.pow(2, attempt)
+        await new Promise(r => setTimeout(r, delay))
+      }
+    }
+  }
+
+  throw lastError!
+}
+```
+
+The exponential backoff pattern (1s, 2s, 4s, 8s...) gives temporary issues time to resolve while preventing thundering herd problems.
+
+### Improving Per-Action Reliability
+
+The key to compound reliability is improving per-action success rate:
+
+| Current | Target | 10-Action Workflow |
+|---------|--------|-------------------|
+| 95% | 99% | 60% → 90% |
+| 95% | 99.5% | 60% → 95% |
+| 95% | 99.9% | 60% → 99% |
+
+Every 1% improvement in per-action reliability compounds dramatically. Strategies to improve:
+
+1. **Reduce task complexity**: Fewer steps per task means fewer failure points
+2. **Add pre-action validation**: Check constraints before attempting
+3. **Add post-action verification**: Confirm the outcome, not just the response
+4. **Implement retry with learning**: Adapt approach based on failure reason
+5. **Use fresh context**: The RALPH loop pattern clears context rot between tasks
+
 ## Learning Loops: Encoding Prevention
 
 Every problem is a lesson. Encode it so it never happens again.
@@ -619,6 +852,228 @@ Session N: Harness is strong, new problems are rare
 ```
 
 This is how the harness grows organically. Problems become barriers. Mistakes become infrastructure. Sessions strengthen the system.
+
+## Recovery Patterns for Long-Running Agents
+
+Long-running agents face unique challenges. Context degrades over time. Goals drift. State accumulates. When these agents fail, you need recovery patterns that preserve progress while providing fresh starts.
+
+### Checkpoint Commit Patterns
+
+Git commits serve as checkpoints in AI-assisted development. Frequent, atomic commits after each successful change enable rapid recovery when AI-generated code fails.
+
+**The Ratchet Effect**
+
+Commit after every successful change to lock in progress:
+
+```
+┌────────────────────────────────────────────────────────────┐
+│  AI generates code                                          │
+│           ↓                                                 │
+│  Run validation (compile, lint, test)                      │
+│           ↓                                                 │
+│  Passes? ─┬─► Yes → COMMIT immediately (ratchet forward)   │
+│           │                                                 │
+│           └─► No → Fix before proceeding (no commit)       │
+└────────────────────────────────────────────────────────────┘
+```
+
+This creates a "ratchet effect" where progress is locked in and cannot be lost.
+
+**Checkpoint Before Risk**
+
+Before any operation that might break things, create a safety checkpoint:
+
+```bash
+# Before major refactoring
+git add -A && git commit -m "checkpoint: before refactoring auth module"
+
+# Before running unfamiliar AI suggestions
+git add -A && git commit -m "checkpoint: before applying AI caching suggestion"
+```
+
+If the risky operation fails, recovery is instant: `git checkout .`
+
+**End-of-Session Commits for RALPH**
+
+In RALPH loop workflows, always commit before the session ends:
+
+```bash
+git add -A
+git commit -m "[progress]: end of session - completed tasks 1-3
+
+Completed:
+- Task 1: Add user validation (src/validators/user.ts)
+- Task 2: Update API endpoint (src/routes/users.ts)
+- Task 3: Add integration tests (tests/users.test.ts)
+
+Next session should:
+- Start with Task 4: Add rate limiting
+- Review test coverage for edge cases
+
+All tests passing. Build successful.
+
+Co-Authored-By: Claude <noreply@anthropic.com>"
+```
+
+This commit message gives the next agent full context to continue.
+
+### The Four-Turn Reliability Framework
+
+Reliable agents operate through structured turns. Most demo agents skip understanding and verification, which is exactly where reliability collapses.
+
+**Turn 1: Understand State**
+
+Before acting, verify context and requirements:
+
+```typescript
+async function preActionChecks(intent: Intent): Promise<CheckResult> {
+  const checks = [
+    verifyRequiredInfo(intent),    // Do we have what we need?
+    detectAmbiguity(intent),       // Is the request clear?
+    validatePrerequisites(intent), // Are dependencies met?
+    confirmAuthorization(intent),  // Do we have permission?
+  ]
+
+  const results = await Promise.all(checks)
+  const failed = results.filter(r => !r.passed)
+
+  if (failed.length > 0) {
+    return { proceed: false, issues: failed }
+  }
+
+  return { proceed: true }
+}
+```
+
+**Turn 2: Decide Action**
+
+Choose the appropriate response based on understanding.
+
+**Turn 3: Execute**
+
+Perform the task.
+
+**Turn 4: Verify Outcome**
+
+Confirm the outcome, not just the response:
+
+```typescript
+// Bad: Trusting API response
+const response = await api.updateOrder(orderId, changes)
+if (response.status === 200) {
+  return "Order updated"  // Might not actually be true!
+}
+
+// Good: Verify actual outcome
+const response = await api.updateOrder(orderId, changes)
+if (response.status === 200) {
+  const order = await api.getOrder(orderId)
+  const verified = verifyChangesApplied(order, changes)
+
+  if (!verified) {
+    return { success: false, reason: "Changes not reflected in order state" }
+  }
+
+  return { success: true }
+}
+```
+
+APIs can return 200 but fail silently. Always verify the actual state.
+
+### Human Escalation Patterns
+
+Know when to stop and ask for help. Agents should escalate when:
+
+```typescript
+const ESCALATION_TRIGGERS = {
+  consecutiveFailures: 3,      // Three strikes, you're out
+  confidenceThreshold: 0.5,    // Below 50% confidence
+  riskLevel: 'high',           // High-risk operations
+  ambiguousRequirements: true  // Unclear instructions
+}
+
+function shouldEscalate(state: AgentState): boolean {
+  return (
+    state.consecutiveFailures >= ESCALATION_TRIGGERS.consecutiveFailures ||
+    state.currentConfidence < ESCALATION_TRIGGERS.confidenceThreshold ||
+    state.currentAction.riskLevel === ESCALATION_TRIGGERS.riskLevel ||
+    state.requirementsClear === false
+  )
+}
+```
+
+Escalation is not failure. It's recognizing the limits of autonomous operation.
+
+### Context Degradation and Goal Drift
+
+Long-running agents face two enemies:
+
+**Context Degradation**: The agent forgets previous information, forcing repetition.
+
+Solution: Explicit state tracking.
+
+```typescript
+interface AgentState {
+  originalGoal: string
+  currentStep: number
+  completedSteps: Step[]
+  gatheredContext: Map<string, any>
+  checkpoints: Checkpoint[]
+}
+```
+
+**Goal Drift**: The agent loses original objectives and gets sidetracked.
+
+Solution: Progress monitoring.
+
+```typescript
+function checkGoalAlignment(
+  currentAction: Action,
+  originalGoal: string
+): boolean {
+  const alignment = scoreAlignment(currentAction, originalGoal)
+
+  if (alignment < DRIFT_THRESHOLD) {
+    console.warn(`Action "${currentAction.name}" may not serve goal "${originalGoal}"`)
+    return false
+  }
+
+  return true
+}
+```
+
+### RALPH Loop Recovery Pattern
+
+The RALPH (Read, Act, Log, Persist, Halt) loop uses fresh context for each iteration:
+
+```
+┌────────────────────────────────────────────────────────────┐
+│ RALPH Iteration N                                           │
+├────────────────────────────────────────────────────────────┤
+│ 1. Read git log to understand recent progress              │
+│ 2. Read tasks.json for current state                       │
+│ 3. Complete ONE task                                       │
+│ 4. Commit with descriptive message                         │
+│ 5. Update tracking files                                   │
+│ 6. Exit (fresh context next iteration)                     │
+└────────────────────────────────────────────────────────────┘
+```
+
+Git commits become the "save game" between iterations. Each fresh start eliminates context rot while preserving progress:
+
+```bash
+# What previous agent did (memory reconstruction)
+git log --oneline -5
+
+# f8bd993 [progress]: add user validation - all tests pass
+# b1c32b7 [progress]: add password hashing utilities
+# 0b6ebd0 [progress]: create User model
+# 3922f65 [progress]: initial project setup
+
+# Current agent continues from last commit
+```
+
+The key insight: you don't need the full conversation history. You need the outcomes, constraints discovered, and next steps. Git provides this external memory without the context window costs.
 
 ## Common Debugging Pitfalls
 
@@ -698,6 +1153,7 @@ Think of a time you got stuck debugging with AI. Practice the clean slate patter
 - Chapter 7 explains quality gates that automate prevention
 - Chapter 9 dives deeper into context engineering for better AI output
 - Chapter 10 shows how the RALPH loop uses error recovery in long-running agents
+- Chapter 15 covers cost optimization and budget protection strategies
 
 ## Summary
 
@@ -708,7 +1164,12 @@ Error handling in AI-assisted development requires systematic approaches:
 3. **ERRORS.md** creates persistent memory so mistakes don't repeat
 4. **Flaky test diagnosis** identifies and fixes intermittent failures
 5. **Clean slate recovery** escapes broken trajectories after 3+ failed attempts
-6. **Learning loops** encode every problem into permanent prevention
+6. **Circuit breakers** prevent cascading failures by stopping after consecutive failures
+7. **Multi-layer timeout protection** caps costs at job, request, input, and budget levels
+8. **Recovery patterns** use checkpoint commits and the four-turn framework for long-running agent reliability
+9. **Learning loops** encode every problem into permanent prevention
+
+The reliability compounding problem explains why demo agents fail in production: 95% per-action success becomes just 36% at 20 actions. The solution is improving per-action reliability through pre-action validation, post-action verification, and the RALPH loop's fresh context approach.
 
 The goal isn't perfection. It's compounding improvement. Every error you diagnose correctly becomes a barrier against future errors. Every lesson you encode strengthens your harness.
 

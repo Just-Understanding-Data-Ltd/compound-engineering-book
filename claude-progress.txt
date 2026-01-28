@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-28 22:30)
+## Current Status (Updated: 2026-01-28 23:00)
 - Phase: Final Quality Polish & Publication Preparation
 - Active: All 15 chapters COMPLETE, focus on quality fixes
-- Last Completed: task-302: Add stateless verification loops to ch07
+- Last Completed: task-257: Add circuit breakers and reliability patterns to ch08
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
 - Publishing Readiness: 92% (content complete, quality gates identified)
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 39/67 (58%) with clear prioritization
+- Tasks Complete: 40/67 (60%) with clear prioritization
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -59,6 +59,31 @@
 - **Confidence**: HIGH (95%)
 
 ## Recent Activity
+
+### 2026-01-28 23:00 - COMPLETED task-257: Circuit breakers and reliability patterns for ch08
+- What: Added two major sections to Chapter 8: Circuit Breakers and Reliability Patterns (Section 8.6) and Recovery Patterns for Long-Running Agents (Section 8.8)
+- File: chapters/ch08-error-handling-and-debugging.md
+- Content added:
+  - Section 8.6: Circuit Breakers and Reliability Patterns
+    - The reliability compounding problem (95% per-action = 36% at 20 actions)
+    - Multi-layer timeout protection (job, request, input, budget levels)
+    - Circuit breaker state machine (Closed/Open/Half-Open)
+    - Retry patterns with exponential backoff
+    - Improving per-action reliability strategies
+  - Section 8.8: Recovery Patterns for Long-Running Agents
+    - Checkpoint commit patterns (git as external memory)
+    - The four-turn reliability framework (Understand, Decide, Execute, Verify)
+    - Human escalation patterns
+    - Context degradation and goal drift solutions
+    - RALPH loop recovery pattern
+  - Updated summary section with new concepts
+  - Added Chapter 15 cross-reference for cost optimization
+- Sources: agent-reliability-chasm.md, ai-cost-protection-timeouts.md, checkpoint-commit-patterns.md
+- Word count: 5,002 (slightly over target, acceptable for expanded content)
+- Quality: No em dashes, no AI slop phrases
+- Stats: 40 complete, 25 pending
+- Outcome: Ch08 significantly enhanced with reliability and recovery patterns
+- Next: Next highest priority task from queue
 
 ### 2026-01-28 22:30 - COMPLETED task-302: Stateless verification loops for ch07
 - What: Added "Stateless Verification: Preventing Ghost Failures" section to Chapter 7

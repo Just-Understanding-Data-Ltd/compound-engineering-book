@@ -1564,7 +1564,7 @@
       "chapter": "ch08",
       "title": "Ch08 Enhancement: Add circuit breaker and reliability patterns",
       "description": "Update ch08 to incorporate new content from PRD expansion: Section 8.6 (Circuit Breakers and Reliability), Section 8.8 (Recovery Patterns for Long-Running Agents). Based on KB analysis finding 7 additional source articles.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 560,
       "createdAt": "2026-01-28T15:00:00Z",
@@ -1573,7 +1573,8 @@
         "agent-reliability-chasm.md",
         "checkpoint-commit-patterns.md",
         "orchestration-patterns.md"
-      ]
+      ],
+      "completedAt": "2026-01-28T23:00:00Z"
     },
     {
       "id": "task-258",
@@ -2026,11 +2027,11 @@
     ]
   },
   "stats": {
-    "pending": 46,
+    "pending": 25,
     "inProgress": 1,
-    "complete": 119,
+    "complete": 40,
     "blocked": 1,
-    "total": 167
+    "total": 67
   },
   "checkpoints": {
     "lastGoodCommit": "c19b544f7d66ac3d38feecc1c1b146934240f96b",
