@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T03:15:00.000Z",
+  "lastUpdated": "2026-01-28T12:21:44.345Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1388,10 +1388,11 @@
       "chapter": "ch02",
       "title": "Update CLAUDE.md guidance with Less is More insights",
       "description": "From the KB, less is more when it comes to agent instructions. Add guidance that 150-200 instructions is the safe limit, beyond which quality degrades. Include typical patterns (3 sections, 1 subsection each) vs bloated patterns (8+ sections). Show the inverse relationship between instruction count and reliability.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 590,
-      "createdAt": "2026-01-28T14:00:00Z"
+      "createdAt": "2026-01-28T14:00:00Z",
+      "completedAt": "2026-01-29T04:30:00Z"
     },
     {
       "id": "task-241",
@@ -1847,16 +1848,16 @@
     ]
   },
   "stats": {
-    "pending": 42,
+    "pending": 41,
     "inProgress": 1,
-    "complete": 107,
+    "complete": 108,
     "blocked": 1,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "c607361858f829fa67a81ce476271ae7ea41818f",
-    "lastSuccessfulTask": "iteration-25-curation",
-    "lastCheckpoint": "2026-01-29T03:15:00Z",
+    "lastGoodCommit": "1c2014e9b6702e2827f675867e4418e271f139bc",
+    "lastSuccessfulTask": "iteration-25",
+    "lastCheckpoint": "2026-01-28T12:21:44Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

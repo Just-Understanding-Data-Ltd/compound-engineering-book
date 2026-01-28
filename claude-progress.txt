@@ -1,9 +1,9 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 03:30)
+## Current Status (Updated: 2026-01-29 04:30)
 - Phase: Final Quality Polish & Agent SDK Migration
-- Active: Agent SDK migration for ch10-ch15, focus on quality fixes
-- Last Completed: task-222: Ch10 Agent SDK migration (ralph-loop examples)
+- Active: Content enhancements and SDK migration
+- Last Completed: task-306: CLAUDE.md guidance with Less is More insights (ch02)
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
 - Publishing Readiness: 93% (content complete, SDK migration in progress)
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 44/65 (68%) with clear prioritization
+- Tasks Complete: 108/151 (72%) with clear prioritization
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Comprehensive Review)
@@ -59,6 +59,23 @@
 - **Confidence**: HIGH (95%)
 
 ## Recent Activity
+
+### 2026-01-29 04:30 - COMPLETED task-306: CLAUDE.md guidance with Less is More insights
+- What: Enhanced Pitfall 4 in Chapter 2 with detailed CLAUDE.md sizing guidance
+- File: chapters/ch02-getting-started-with-claude-code.md
+- Content added:
+  - Inverse relationship: instruction-following degrades as count increases
+  - 150-200 instruction limit (research-backed)
+  - Claude Code system prompt uses ~50 instructions (1/3 of budget)
+  - Structure comparison: lean (3 sections, ~12 instructions) vs bloated (8+ sections, 175+ instructions)
+  - Progressive disclosure pattern with agent_docs/ folder
+  - Code examples showing both patterns
+- Source: writing-a-good-claude-md.md KB article
+- Word count: 4,063 (slightly over 4,000, acceptable for enhanced content)
+- Quality: No em dashes, no AI slop phrases
+- Stats: 108 complete, 41 pending
+- Outcome: Ch02 enhanced with actionable CLAUDE.md sizing guidance
+- Next: Next highest priority task from queue
 
 ### 2026-01-29 02:00 - COMPLETED task-319: Ch09 progressive disclosure skill loader
 - What: Created examples/ch09/progressive-disclosure-loader.ts for dynamic skill loading

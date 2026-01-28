@@ -522,11 +522,64 @@ Some practitioners restart after every major feature. Others restart when hittin
 
 The temptation is to document everything. Every convention, every edge case, every historical decision. CLAUDE.md files balloon to thousands of lines.
 
-The problem: agent context windows have limits. A 2,000-line CLAUDE.md consumes tokens that could hold actual code. Worse, important instructions get buried in noise. Claude Code reads everything but cannot prioritize buried critical rules over verbose explanations.
+The problem: instruction-following degrades as instruction count increases. Research shows frontier LLMs reliably follow approximately 150 to 200 instructions before quality drops. Past that threshold, compliance becomes unpredictable. Smaller models degrade exponentially. Frontier reasoning models degrade linearly, but they still degrade.
 
-The fix: keep CLAUDE.md concise. Target 150 to 200 instructions maximum. Use bullet points, not paragraphs. Front-load the most important rules. If you need extensive documentation, link to external files and tell Claude Code when to read them.
+There is another constraint you may not have considered: Claude Code's system prompt already contains roughly 50 instructions. That consumes one-third of your reliable instruction budget before you write a single line of CLAUDE.md. A 300-instruction CLAUDE.md puts you 100 instructions over the reliability threshold.
 
-A lean CLAUDE.md that fits in 500 lines will outperform a comprehensive one at 3,000 lines because the important rules remain prominent.
+**The Structure Comparison**
+
+Lean CLAUDE.md (works reliably):
+```markdown
+# Project Context
+
+## Stack (5 items)
+## Commands (4 items)
+## Conventions (3 items)
+
+Total: ~12 instructions across 3 sections
+```
+
+Bloated CLAUDE.md (degrades quality):
+```markdown
+# Project Context
+
+## Stack (15 items)
+## Commands (20 items)
+## Conventions (40 items)
+## Database Schema (30 items)
+## API Patterns (25 items)
+## Error Handling (20 items)
+## Testing Patterns (15 items)
+## Deployment (10 items)
+
+Total: ~175+ instructions across 8+ sections
+```
+
+The bloated version looks thorough, but Claude Code will miss critical rules buried in the noise. Section 7 gets less attention than section 1 because attention mechanisms have finite capacity.
+
+**The Fix: Progressive Disclosure**
+
+Instead of embedding everything, maintain task-specific documentation separately:
+
+```
+agent_docs/
+  ├── database_schema.md
+  ├── testing_patterns.md
+  ├── deployment.md
+  └── api_conventions.md
+```
+
+Then in CLAUDE.md, add pointers:
+
+```markdown
+## Documentation
+- Database work: see `agent_docs/database_schema.md`
+- Testing: see `agent_docs/testing_patterns.md`
+```
+
+This keeps CLAUDE.md under 100 lines while preserving access to detailed guidance. Claude Code reads the relevant file when working in that area, keeping context focused and instruction count low.
+
+A lean CLAUDE.md that fits in 100 lines will outperform a comprehensive one at 1,000 lines because the important rules remain within the reliable instruction threshold.
 
 ### Pitfall 5: Manual Review Instead of Verification
 
