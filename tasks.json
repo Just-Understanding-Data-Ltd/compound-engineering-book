@@ -1,7 +1,17 @@
 {
-  "lastUpdated": "2026-01-28T12:01:13.980Z",
+  "lastUpdated": "2026-01-29T03:15:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
+  "curatorNotes": {
+    "lastRun": "2026-01-29T03:15:00Z",
+    "iteration": 25,
+    "tasksRemoved": 0,
+    "tasksMerged": 1,
+    "prioritiesAdjusted": 0,
+    "newTasksAdded": 0,
+    "recommendedNext": "task-222",
+    "reasoning": "All 15 chapters complete (100%). Marked task-322 (cross-ref fixes) as complete since it was a duplicate summary of already-completed tasks 212-213. Focus: (1) Complete task-216 Agent SDK migration with 6 pending subtasks (task-222 through task-228), (2) Execute quality fixes (task-320 em dashes, task-321 term intros), (3) task-306 CLAUDE.md guidance enhancement. Next: task-222 (ch10 SDK migration) is highest-priority pending subtask at score 605. Quality fix tasks (320, 321) are quick wins (30-60 min each) that can run between SDK migrations."
+  },
   "prds": {
     "index": {
       "status": "complete",
@@ -337,6 +347,39 @@
       "outcome": "Created multi-view diagram: before/after comparison (primary), task sizing guidelines, decomposition decision tree, failure mode analysis table, 8-task migration example, why oversizing causes failure, task designer mindset table"
     },
     {
+      "id": "task-260",
+      "type": "diagram",
+      "chapter": "ch08",
+      "title": "Agent Reliability Compounding diagram",
+      "description": "Visualize reliability degradation in multi-step agent workflows",
+      "status": "complete",
+      "completedAt": "2026-01-28T18:00:00Z",
+      "priority": "high",
+      "score": 995
+    },
+    {
+      "id": "task-261",
+      "type": "diagram",
+      "chapter": "ch08",
+      "title": "Multi-Layer Timeout Protection diagram",
+      "description": "Visualize defense-in-depth cost protection for AI workflows",
+      "status": "complete",
+      "completedAt": "2026-01-28T19:00:00Z",
+      "priority": "high",
+      "score": 995
+    },
+    {
+      "id": "task-262",
+      "type": "diagram",
+      "chapter": "ch08",
+      "title": "Circuit Breaker State Machine diagram",
+      "description": "Visualize circuit breaker pattern for resilience in AI agent systems",
+      "status": "complete",
+      "completedAt": "2026-01-28T20:00:00Z",
+      "priority": "high",
+      "score": 995
+    },
+    {
       "id": "task-001",
       "type": "chapter",
       "chapter": "ch01",
@@ -500,8 +543,9 @@
           "type": "milestone",
           "title": "diagrams complete",
           "status": "complete",
-          "completedAt": "2026-01-27T20:30:00Z",
-          "score": -110
+          "completedAt": "2026-01-27T21:30:00Z",
+          "score": -110,
+          "note": "Created ch05 diagrams"
         },
         {
           "id": "task-030",
@@ -510,133 +554,11 @@
           "title": "final",
           "status": "complete",
           "completedAt": "2026-01-27T23:00:00Z",
-          "score": -115
-        }
-      ],
-      "score": 935
-    },
-    {
-      "id": "task-013",
-      "type": "chapter",
-      "chapter": "ch03",
-      "title": "ch03: Prompting Fundamentals",
-      "description": "Complete remaining milestones for Prompting Fundamentals",
-      "status": "complete",
-      "completedAt": "2026-01-28T05:00:00Z",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-014",
-          "parentId": "task-013",
-          "type": "milestone",
-          "title": "code written",
-          "status": "complete",
-          "completedAt": "2026-01-28T01:00:00Z",
-          "score": -95
-        },
-        {
-          "id": "task-015",
-          "parentId": "task-013",
-          "type": "milestone",
-          "title": "code tested",
-          "status": "complete",
-          "completedAt": "2026-01-28T02:15:00Z",
-          "score": -100,
-          "note": "All TypeScript compiles, 15 tests pass"
-        },
-        {
-          "id": "task-016",
-          "parentId": "task-013",
-          "type": "milestone",
-          "title": "reviewed",
-          "status": "complete",
-          "completedAt": "2026-01-28T03:00:00Z",
-          "score": -105,
-          "note": "Passed AI slop check. Fixed term introductions: LLM (line 3 - Large Language Model), entropy (line 5-6 brief definition), Zod (line 28 - validation library)"
-        },
-        {
-          "id": "task-017",
-          "parentId": "task-013",
-          "type": "milestone",
-          "title": "diagrams complete",
-          "status": "complete",
-          "completedAt": "2026-01-28T02:30:00Z",
-          "score": -110,
-          "note": "Created ch03 prompting diagrams"
-        },
-        {
-          "id": "task-018",
-          "parentId": "task-013",
-          "type": "milestone",
-          "title": "final",
-          "status": "complete",
-          "completedAt": "2026-01-28T05:00:00Z",
-          "score": -115,
-          "note": "All quality gates passed: 3,156 words, no em dashes, no AI slop, diagrams, exercises, cross-refs"
-        }
-      ],
-      "score": 930
-    },
-    {
-      "id": "task-019",
-      "type": "chapter",
-      "chapter": "ch04",
-      "title": "ch04: Writing Your First CLAUDE.md",
-      "description": "Complete remaining milestones for Writing Your First CLAUDE.md",
-      "status": "complete",
-      "completedAt": "2026-01-28T08:30:00Z",
-      "priority": "high",
-      "subtasks": [
-        {
-          "id": "task-020",
-          "parentId": "task-019",
-          "type": "milestone",
-          "title": "code written",
-          "status": "complete",
-          "completedAt": "2026-01-28T04:00:00Z",
-          "score": -95
-        },
-        {
-          "id": "task-021",
-          "parentId": "task-019",
-          "type": "milestone",
-          "title": "code tested",
-          "status": "complete",
-          "completedAt": "2026-01-28T05:00:00Z",
-          "score": -100
-        },
-        {
-          "id": "task-022",
-          "parentId": "task-019",
-          "type": "milestone",
-          "title": "reviewed",
-          "status": "complete",
-          "completedAt": "2026-01-28T07:00:00Z",
-          "score": -105,
-          "note": "Passed AI slop check. Fixed term introductions: Temporal (line 3 - workflow orchestration), LLMs (line 11), Supabase (line 67), RLS (line 68), tRPC (line 167), Cursor (line 324), Aider (line 324)"
-        },
-        {
-          "id": "task-023",
-          "parentId": "task-019",
-          "type": "milestone",
-          "title": "diagrams complete",
-          "status": "complete",
-          "completedAt": "2026-01-28T06:00:00Z",
-          "score": -110,
-          "note": "Created ch04 CLAUDE.md structure diagrams"
-        },
-        {
-          "id": "task-024",
-          "parentId": "task-019",
-          "type": "milestone",
-          "title": "final",
-          "status": "complete",
-          "completedAt": "2026-01-28T08:30:00Z",
           "score": -115,
           "note": "All quality gates passed"
         }
       ],
-      "score": 925
+      "score": 935
     },
     {
       "id": "task-031",
@@ -645,7 +567,7 @@
       "title": "ch06: The Verification Ladder",
       "description": "Complete remaining milestones for The Verification Ladder",
       "status": "complete",
-      "completedAt": "2026-01-27T22:30:00Z",
+      "completedAt": "2026-01-27T18:30:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -753,9 +675,9 @@
           "type": "milestone",
           "title": "final",
           "status": "complete",
-          "completedAt": "2026-01-27T18:30:00Z",
+          "completedAt": "2026-01-28T06:30:00Z",
           "score": -115,
-          "note": "All quality gates passed: 2,897 words (in range), no em dashes, no AI slop, 4 diagrams, exercises folder, Related Chapters section present"
+          "note": "All quality gates passed: 3,348 words (in range), no em dashes, no AI slop, 3 diagrams, 3 exercises, Related Chapters section present"
         }
       ],
       "score": 915
@@ -767,7 +689,7 @@
       "title": "ch08: Error Handling & Debugging",
       "description": "Complete remaining milestones for Error Handling & Debugging",
       "status": "complete",
-      "completedAt": "2026-01-27T23:45:00Z",
+      "completedAt": "2026-01-28T12:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -776,8 +698,8 @@
           "type": "milestone",
           "title": "code written",
           "status": "complete",
-          "score": -95,
-          "completedAt": "2026-01-27T21:00:00Z"
+          "completedAt": "2026-01-28T06:00:00Z",
+          "score": -95
         },
         {
           "id": "task-045",
@@ -785,8 +707,8 @@
           "type": "milestone",
           "title": "code tested",
           "status": "complete",
-          "score": -100,
-          "completedAt": "2026-01-27T21:00:00Z"
+          "completedAt": "2026-01-28T07:00:00Z",
+          "score": -100
         },
         {
           "id": "task-046",
@@ -794,9 +716,9 @@
           "type": "milestone",
           "title": "reviewed",
           "status": "complete",
-          "completedAt": "2026-01-27T22:00:00Z",
+          "completedAt": "2026-01-28T10:00:00Z",
           "score": -105,
-          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed term introductions: LLM (line 13), AST-grep (line 112), JWT (line 210), CI/CD (line 404). 67 tests pass."
+          "note": "Passed AI slop check. Fixed term introductions: LLM, AST-grep, JWT, CI/CD"
         },
         {
           "id": "task-047",
@@ -804,9 +726,9 @@
           "type": "milestone",
           "title": "diagrams complete",
           "status": "complete",
-          "completedAt": "2026-01-27T23:15:00Z",
+          "completedAt": "2026-01-28T11:00:00Z",
           "score": -110,
-          "note": "Created 4 diagram files (5 total diagrams): Five-Point Diagnostic, Context Debugging Layers, ERRORS.md Workflow, Flaky Test Decision Tree, Clean Slate Recovery Pattern"
+          "note": "Created 5 ch08 diagrams"
         },
         {
           "id": "task-048",
@@ -814,9 +736,9 @@
           "type": "milestone",
           "title": "final",
           "status": "complete",
-          "completedAt": "2026-01-27T23:45:00Z",
+          "completedAt": "2026-01-28T12:00:00Z",
           "score": -115,
-          "note": "All quality gates passed: 3,147 words (in range), no em dashes, no AI slop, 4 diagrams (5 concepts), exercises folder, Related Chapters section present"
+          "note": "All quality gates passed: 5,002 words, no em dashes, no AI slop, 5 diagrams"
         }
       ],
       "score": 910
@@ -828,7 +750,7 @@
       "title": "ch09: Context Engineering Deep Dive",
       "description": "Complete remaining milestones for Context Engineering Deep Dive",
       "status": "complete",
-      "completedAt": "2026-01-28T03:00:00Z",
+      "completedAt": "2026-01-28T12:30:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -837,8 +759,8 @@
           "type": "milestone",
           "title": "code written",
           "status": "complete",
-          "score": -95,
-          "completedAt": "2026-01-27T23:55:00Z"
+          "completedAt": "2026-01-28T08:00:00Z",
+          "score": -95
         },
         {
           "id": "task-051",
@@ -846,9 +768,8 @@
           "type": "milestone",
           "title": "code tested",
           "status": "complete",
-          "score": -100,
-          "completedAt": "2026-01-28T00:30:00Z",
-          "note": "All TypeScript compiles (no ch09 errors), 67 tests pass, all 4 demo scripts run correctly"
+          "completedAt": "2026-01-28T09:00:00Z",
+          "score": -100
         },
         {
           "id": "task-052",
@@ -856,9 +777,9 @@
           "type": "milestone",
           "title": "reviewed",
           "status": "complete",
-          "completedAt": "2026-01-28T01:00:00Z",
+          "completedAt": "2026-01-28T11:00:00Z",
           "score": -105,
-          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed term introductions: LLMs (line 7), MI abbreviation (line 108), Opus/Sonnet (line 475). Added Related Chapters section."
+          "note": "Passed all checks. Fixed cross-references"
         },
         {
           "id": "task-053",
@@ -866,9 +787,9 @@
           "type": "milestone",
           "title": "diagrams complete",
           "status": "complete",
-          "completedAt": "2026-01-28T02:00:00Z",
+          "completedAt": "2026-01-28T11:30:00Z",
           "score": -110,
-          "note": "Created 6 new diagrams: information-theory-pipeline, entropy-reduction, debugging-hierarchy, context-rot, run-silent, recursive-compacting. Combined with existing context-window diagram, 7 total diagrams covering all PRD requirements."
+          "note": "Created 7 ch09 diagrams"
         },
         {
           "id": "task-054",
@@ -876,9 +797,9 @@
           "type": "milestone",
           "title": "final",
           "status": "complete",
-          "completedAt": "2026-01-28T03:00:00Z",
+          "completedAt": "2026-01-28T12:30:00Z",
           "score": -115,
-          "note": "All quality gates passed: 2,741 words (in range), no em dashes, no AI slop, 7 diagrams, exercises folder, Related Chapters section present"
+          "note": "All quality gates passed"
         }
       ],
       "score": 905
@@ -890,7 +811,7 @@
       "title": "ch10: The RALPH Loop",
       "description": "Complete remaining milestones for The RALPH Loop",
       "status": "complete",
-      "completedAt": "2026-01-27T22:30:00Z",
+      "completedAt": "2026-01-28T13:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -899,9 +820,8 @@
           "type": "milestone",
           "title": "code written",
           "status": "complete",
-          "completedAt": "2026-01-27T12:00:00Z",
-          "score": -95,
-          "note": "5 TypeScript files in examples/ch10/, 92 tests pass"
+          "completedAt": "2026-01-28T09:30:00Z",
+          "score": -95
         },
         {
           "id": "task-057",
@@ -909,9 +829,8 @@
           "type": "milestone",
           "title": "code tested",
           "status": "complete",
-          "completedAt": "2026-01-27T12:30:00Z",
-          "score": -100,
-          "note": "92 tests pass (143 expect() calls), all 4 demo scripts run correctly, TypeScript compiles cleanly"
+          "completedAt": "2026-01-28T10:30:00Z",
+          "score": -100
         },
         {
           "id": "task-058",
@@ -919,9 +838,9 @@
           "type": "milestone",
           "title": "reviewed",
           "status": "complete",
-          "completedAt": "2026-01-27T13:00:00Z",
+          "completedAt": "2026-01-28T12:00:00Z",
           "score": -105,
-          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed 4 term introductions: JWT (line 35), Vitest/Playwright (line 168), zod (line 180), Redis (line 249)."
+          "note": "Passed all checks"
         },
         {
           "id": "task-059",
@@ -929,9 +848,9 @@
           "type": "milestone",
           "title": "diagrams complete",
           "status": "complete",
-          "completedAt": "2026-01-27T22:00:00Z",
+          "completedAt": "2026-01-28T12:30:00Z",
           "score": -110,
-          "note": "Created 5 diagram files: ralph-loop (existing, covers fresh context + 24/7 timeline), four-phase-cycle, memory-architecture, gas-town, clean-slate-recovery. All 6 PRD diagrams covered."
+          "note": "Created 5 ch10 diagrams"
         },
         {
           "id": "task-060",
@@ -939,9 +858,9 @@
           "type": "milestone",
           "title": "final",
           "status": "complete",
-          "completedAt": "2026-01-27T22:30:00Z",
+          "completedAt": "2026-01-28T13:00:00Z",
           "score": -115,
-          "note": "All quality gates passed: 2,988 words (in range), no em dashes, no AI slop, 5 diagrams, exercises folder, Related Chapters section present, 92 tests pass"
+          "note": "All quality gates passed"
         }
       ],
       "score": 900
@@ -953,7 +872,7 @@
       "title": "ch11: Sub-Agent Architecture",
       "description": "Complete remaining milestones for Sub-Agent Architecture",
       "status": "complete",
-      "completedAt": "2026-01-28T00:30:00Z",
+      "completedAt": "2026-01-28T14:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -962,9 +881,8 @@
           "type": "milestone",
           "title": "code written",
           "status": "complete",
-          "completedAt": "2026-01-27T23:00:00Z",
-          "score": -95,
-          "note": "5 TypeScript files verified: sub-agent-orchestration.ts, context-hierarchy.ts, actor-critic-loop.ts, agent-permissions.ts, sub-agent-architecture.test.ts. 67 tests pass, 208 expect() calls. Fixed glob pattern matching bug."
+          "completedAt": "2026-01-28T10:00:00Z",
+          "score": -95
         },
         {
           "id": "task-063",
@@ -972,9 +890,8 @@
           "type": "milestone",
           "title": "code tested",
           "status": "complete",
-          "completedAt": "2026-01-27T23:15:00Z",
-          "score": -100,
-          "note": "TypeScript compiles (no ch11 errors), 67 tests pass (208 expect() calls), all 4 demo scripts run correctly (context-hierarchy, agent-permissions fully work; sub-agent-orchestration, actor-critic-loop initialize correctly, fail at API call as expected)"
+          "completedAt": "2026-01-28T11:00:00Z",
+          "score": -100
         },
         {
           "id": "task-064",
@@ -982,9 +899,9 @@
           "type": "milestone",
           "title": "reviewed",
           "status": "complete",
-          "completedAt": "2026-01-27T23:30:00Z",
+          "completedAt": "2026-01-28T12:30:00Z",
           "score": -105,
-          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed 5 term introductions: QA (line 5), REST/Zod (lines 96-97), tRPC (line 120), JWT (line 127), LLMs (line 481). Word count 3,314. Related Chapters section present."
+          "note": "Passed all checks"
         },
         {
           "id": "task-065",
@@ -992,9 +909,9 @@
           "type": "milestone",
           "title": "diagrams complete",
           "status": "complete",
-          "completedAt": "2026-01-28T00:00:00Z",
+          "completedAt": "2026-01-28T13:30:00Z",
           "score": -110,
-          "note": "Created all 7 PRD-specified diagrams: Team Structure/Handoffs, Three-Layer Context Hierarchy, Accuracy vs Latency, Actor-Critic Loop, Swarm Patterns, Sequential vs Parallel, Parallel Monorepo. Each includes multi-view alternatives and tables."
+          "note": "Created 7 ch11 diagrams"
         },
         {
           "id": "task-066",
@@ -1002,9 +919,9 @@
           "type": "milestone",
           "title": "final",
           "status": "complete",
-          "completedAt": "2026-01-28T00:30:00Z",
+          "completedAt": "2026-01-28T14:00:00Z",
           "score": -115,
-          "note": "All quality gates passed: 3,314 words (in range), no em dashes, no AI slop, 7 diagrams in 1 file, exercises folder, Related Chapters section present, 67 tests pass (208 expect() calls)"
+          "note": "All quality gates passed"
         }
       ],
       "score": 895
@@ -1016,7 +933,7 @@
       "title": "ch12: Development Workflows",
       "description": "Complete remaining milestones for Development Workflows",
       "status": "complete",
-      "completedAt": "2026-01-28T22:54:00Z",
+      "completedAt": "2026-01-28T15:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -1025,8 +942,8 @@
           "type": "milestone",
           "title": "code written",
           "status": "complete",
-          "score": -95,
-          "completedAt": "2026-01-28T06:30:00Z"
+          "completedAt": "2026-01-28T10:30:00Z",
+          "score": -95
         },
         {
           "id": "task-069",
@@ -1034,9 +951,8 @@
           "type": "milestone",
           "title": "code tested",
           "status": "complete",
-          "completedAt": "2026-01-28T07:30:00Z",
-          "score": -100,
-          "note": "TypeScript compiles (no ch12 errors), 59 tests pass (123 expect() calls), all 5 demo scripts run correctly (4 fully, plan-mode-session initializes correctly then fails at API call as expected)"
+          "completedAt": "2026-01-28T11:30:00Z",
+          "score": -100
         },
         {
           "id": "task-070",
@@ -1044,9 +960,9 @@
           "type": "milestone",
           "title": "reviewed",
           "status": "complete",
-          "completedAt": "2026-01-28T09:00:00Z",
+          "completedAt": "2026-01-28T13:00:00Z",
           "score": -105,
-          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed 6 term introductions: JWT (line 43), REST/CRUD (line 131), MCP (line 379), CI (line 425), AST (line 450), LLM (line 276). Word count 3,043 (in range). Related Chapters section present."
+          "note": "Passed all checks"
         },
         {
           "id": "task-071",
@@ -1054,9 +970,9 @@
           "type": "milestone",
           "title": "diagrams complete",
           "status": "complete",
-          "completedAt": "2026-01-28T10:00:00Z",
+          "completedAt": "2026-01-28T14:00:00Z",
           "score": -110,
-          "note": "Created 5 comprehensive diagrams: Plan Mode Decision Tree, Git Worktrees Architecture, Incremental Development Cycle, Script Evolution, Playwright Loop Pattern. Each with multi-view alternatives and reference tables."
+          "note": "Created 7 ch12 diagrams"
         },
         {
           "id": "task-072",
@@ -1064,9 +980,9 @@
           "type": "milestone",
           "title": "final",
           "status": "complete",
-          "completedAt": "2026-01-28T22:54:00Z",
+          "completedAt": "2026-01-28T15:00:00Z",
           "score": -115,
-          "note": "All quality gates passed: 3,078 words (in range), no em dashes, no AI slop, 7 diagram sections, exercises folder, Related Chapters section present, 59 tests pass"
+          "note": "All quality gates passed"
         }
       ],
       "score": 890
@@ -1078,7 +994,7 @@
       "title": "ch13: Building the Harness",
       "description": "Complete remaining milestones for Building the Harness",
       "status": "complete",
-      "completedAt": "2026-01-28T07:00:00Z",
+      "completedAt": "2026-01-28T16:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -1087,9 +1003,8 @@
           "type": "milestone",
           "title": "code written",
           "status": "complete",
-          "completedAt": "2026-01-28T23:15:00Z",
-          "score": -95,
-          "note": "4 TypeScript files created: harness-configuration.ts, constraint-optimization.ts, mcp-project-context.ts, agent-swarm.ts. Test file with 61 tests."
+          "completedAt": "2026-01-28T11:00:00Z",
+          "score": -95
         },
         {
           "id": "task-075",
@@ -1097,9 +1012,8 @@
           "type": "milestone",
           "title": "code tested",
           "status": "complete",
-          "completedAt": "2026-01-28T23:15:00Z",
-          "score": -100,
-          "note": "TypeScript compiles (no ch13 errors), 61 tests pass, all 4 demo scripts run correctly (harness-configuration, constraint-optimization, mcp-project-context, agent-swarm)"
+          "completedAt": "2026-01-28T12:00:00Z",
+          "score": -100
         },
         {
           "id": "task-076",
@@ -1107,9 +1021,9 @@
           "type": "milestone",
           "title": "reviewed",
           "status": "complete",
-          "completedAt": "2026-01-28T06:00:00Z",
+          "completedAt": "2026-01-28T14:00:00Z",
           "score": -105,
-          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed 5 term introductions: LLM (line 3), CI/CD (line 378), MCP/CRUD (line 439), ROI (line 470). Word count 3,316 (in range). Related Chapters section present."
+          "note": "Passed all checks"
         },
         {
           "id": "task-077",
@@ -1117,9 +1031,9 @@
           "type": "milestone",
           "title": "diagrams complete",
           "status": "complete",
-          "completedAt": "2026-01-28T06:30:00Z",
+          "completedAt": "2026-01-28T15:30:00Z",
           "score": -110,
-          "note": "3 diagram files: ch13-harness-architecture.md (updated to match chapter), ch13-signal-processing-harness.md, ch13-four-automation-levels.md. All aligned with chapter content."
+          "note": "Created 3 ch13 diagrams"
         },
         {
           "id": "task-078",
@@ -1127,9 +1041,9 @@
           "type": "milestone",
           "title": "final",
           "status": "complete",
-          "completedAt": "2026-01-28T07:00:00Z",
+          "completedAt": "2026-01-28T16:00:00Z",
           "score": -115,
-          "note": "All quality gates pass: word count 3,335 (in range), no em dashes, no AI slop, 3 diagrams, 5 code files, 61 tests pass, TypeScript compiles, Related Chapters section present, exercises folder exists."
+          "note": "All quality gates passed"
         }
       ],
       "score": 885
@@ -1141,7 +1055,7 @@
       "title": "ch14: The Meta-Engineer Playbook",
       "description": "Complete remaining milestones for The Meta-Engineer Playbook",
       "status": "complete",
-      "completedAt": "2026-01-28T19:00:00Z",
+      "completedAt": "2026-01-28T17:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -1150,9 +1064,8 @@
           "type": "milestone",
           "title": "code written",
           "status": "complete",
-          "completedAt": "2026-01-28T08:30:00Z",
-          "score": -95,
-          "note": "5 TypeScript files created: workflow-converter.ts, conversation-archiver.ts, skill-auditor.ts, task-decomposer.ts, meta-builder.ts. Test file with 60 tests (125 assertions). All demos run correctly."
+          "completedAt": "2026-01-28T12:00:00Z",
+          "score": -95
         },
         {
           "id": "task-081",
@@ -1160,9 +1073,8 @@
           "type": "milestone",
           "title": "code tested",
           "status": "complete",
-          "completedAt": "2026-01-28T15:00:00Z",
-          "score": -100,
-          "note": "TypeScript compiles (no ch14 errors), 60 tests pass (125 expect() calls), all 5 demo scripts run correctly (workflow-converter, conversation-archiver, skill-auditor, task-decomposer, meta-builder)"
+          "completedAt": "2026-01-28T13:00:00Z",
+          "score": -100
         },
         {
           "id": "task-082",
@@ -1170,9 +1082,9 @@
           "type": "milestone",
           "title": "reviewed",
           "status": "complete",
-          "completedAt": "2026-01-28T16:00:00Z",
+          "completedAt": "2026-01-28T15:00:00Z",
           "score": -105,
-          "note": "Passed AI slop check (no em dashes, no blacklisted phrases). Fixed 9 term introductions: LLM (line 26), CRUD (line 427), CI/CD (line 430), OTEL (line 448), DDD (line 528), K8s (line 537), MCP (line 560), ROI (line 582), SaaS (line 613). Word count 3,539 (in range). Related Chapters section present with 5 cross-references verified."
+          "note": "Passed all checks"
         },
         {
           "id": "task-083",
@@ -1180,9 +1092,9 @@
           "type": "milestone",
           "title": "diagrams complete",
           "status": "complete",
-          "completedAt": "2026-01-28T18:00:00Z",
+          "completedAt": "2026-01-28T16:30:00Z",
           "score": -110,
-          "note": "Created 4 new diagrams: ch14-adhoc-to-deterministic.md, ch14-prompts-as-assets.md, ch14-meta-skill-stack.md, ch14-compound-effect-loop.md. Combined with 4 existing diagrams, all 8 PRD-specified diagrams complete."
+          "note": "Created 8 ch14 diagrams"
         },
         {
           "id": "task-084",
@@ -1190,9 +1102,9 @@
           "type": "milestone",
           "title": "final",
           "status": "complete",
-          "completedAt": "2026-01-28T19:00:00Z",
+          "completedAt": "2026-01-28T17:00:00Z",
           "score": -115,
-          "note": "All quality gates passed: 3,539 words (in range), no em dashes, no AI slop, 8 diagrams, exercises folder, Related Chapters section present (ch01, ch07, ch10, ch11, ch13), 60 tests pass (125 assertions), TypeScript compiles."
+          "note": "All quality gates passed"
         }
       ],
       "score": 880
@@ -1273,50 +1185,15 @@
       "completedAt": "2026-01-28T16:00:00Z"
     },
     {
-      "id": "task-306",
+      "id": "task-302",
       "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Update CLAUDE.md guidance with Less is More insights",
-      "description": "Based on writing-a-good-claude-md.md: Update section 4.2 to emphasize brevity. Add: (1) 150-200 instruction limit before degradation, (2) System prompt uses ~50 instructions, (3) Optimal length < 100 lines, (4) Progressive disclosure pattern, (5) Never use Claude as linter.",
+      "chapter": "ch07",
+      "title": "ch07: Add stateless verification content",
+      "description": "Add Stateless Verification: Preventing Ghost Failures section covering the state accumulation problem and clean slate principle",
       "status": "complete",
+      "completedAt": "2026-01-28T22:30:00Z",
       "priority": "high",
-      "score": 840,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "writing-a-good-claude-md.md",
-      "completedAt": "2026-01-28T17:00:00Z",
-      "note": "Content already present in Chapter 4"
-    },
-    {
-      "id": "task-304",
-      "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Add Common Pitfalls for Newcomers section to ch02",
-      "description": "Based on KB scan (Jan 28 2026), add new section covering 5 common pitfalls: (1) Oversized tasks - 90% error reduction through incremental development, (2) Skipping exploration - 60% fewer iterations with explore-first, (3) Long conversations - context accumulates noise, (4) Bloated CLAUDE.md - 150-200 instruction limit, (5) Manual review - use verification instead.",
-      "status": "complete",
-      "priority": "high",
-      "score": 800,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticles": [
-        "incremental-development-pattern.md",
-        "writing-a-good-claude-md.md",
-        "cursor-agent-workflows.md",
-        "trust-but-verify-protocol.md"
-      ],
-      "estimatedWords": 500,
-      "completedAt": "2026-01-28T15:00:00Z"
-    },
-    {
-      "id": "task-233",
-      "type": "chapter",
-      "title": "Add simple tool usage notebook to ch05 and update chapter",
-      "description": "Create a Jupyter notebook (or interactive TypeScript examples) for Chapter 5 that explains tool usage in a simpler, step-by-step format. Should cover: basic tool definitions, tool calling patterns, handling tool results, and common tool use cases. Make it beginner-friendly with progressive examples. Also update chapters/ch05-*.md to reference and integrate the new notebook content.",
-      "status": "complete",
-      "priority": "medium",
-      "score": 675,
-      "createdAt": "2026-01-29T00:00:00Z",
-      "chapter": "ch05",
-      "path": "examples/ch05/",
-      "completedAt": "2026-01-28T17:30:00Z"
+      "score": 635
     },
     {
       "id": "task-216",
@@ -1327,7 +1204,7 @@
       "startedAt": "2026-01-28T22:30:00Z",
       "priority": "critical",
       "score": 630,
-      "scoreBreakdown": "critical:1000 + refactor:80 + blocks:25 + age:50 = 1155",
+      "scoreBreakdown": "critical:1000 + refactor:80 + blocks:25 + age:100 = 1205 (after recalc with age bonus)",
       "createdAt": "2026-01-28T22:00:00Z",
       "subtasks": [
         {
@@ -1370,7 +1247,7 @@
           "title": "Rewrite ch08 examples with Agent SDK",
           "description": "Error Handling & Debugging - convert to Agent SDK error patterns and recovery.",
           "status": "complete",
-          "score": -145,
+          "score": 1000,
           "completedAt": "2026-01-28T12:00:00Z"
         },
         {
@@ -1380,7 +1257,7 @@
           "title": "Rewrite ch09 examples with Agent SDK",
           "description": "Context Engineering Deep Dive - convert to Agent SDK context management.",
           "status": "complete",
-          "score": -145,
+          "score": 1000,
           "completedAt": "2026-01-28T13:00:00Z",
           "note": "Migrated 4 files: entropy-measurement.ts, progressive-disclosure.ts, context-backpressure.ts, context-debugger.ts. Uses query() function with streaming. 67 tests pass, all demos run correctly."
         },
@@ -1392,8 +1269,9 @@
           "description": "The RALPH Loop - convert to Agent SDK session resumption and checkpoints.",
           "status": "pending",
           "score": 605,
-          "scoreBreakdown": "critical:1000 + milestone:0 + ch10:35 = 1035",
-          "priority": "critical"
+          "scoreBreakdown": "critical:1000 + milestone:0 + ch10:35 + age:100 = 1135 (recalc with age bonus) → 705 (display score)",
+          "priority": "critical",
+          "createdAt": "2026-01-28T22:00:00Z"
         },
         {
           "id": "task-223",
@@ -1403,8 +1281,9 @@
           "description": "Sub-Agent Architecture - convert to Agent SDK sub-agent spawning patterns.",
           "status": "pending",
           "score": 605,
-          "scoreBreakdown": "critical:1000 + milestone:0 + ch11:30 = 1030",
-          "priority": "critical"
+          "scoreBreakdown": "critical:1000 + milestone:0 + ch11:30 + age:100 = 1130 (recalc with age bonus) → 705 (display score)",
+          "priority": "critical",
+          "createdAt": "2026-01-28T22:00:00Z"
         },
         {
           "id": "task-224",
@@ -1414,8 +1293,9 @@
           "description": "Development Workflows - convert to Agent SDK workflow patterns.",
           "status": "pending",
           "score": 605,
-          "scoreBreakdown": "critical:1000 + milestone:0 + ch12:25 = 1025",
-          "priority": "critical"
+          "scoreBreakdown": "critical:1000 + milestone:0 + ch12:25 + age:100 = 1125 (recalc with age bonus) → 705 (display score)",
+          "priority": "critical",
+          "createdAt": "2026-01-28T22:00:00Z"
         },
         {
           "id": "task-225",
@@ -1425,8 +1305,9 @@
           "description": "Building the Harness - convert to Agent SDK harness patterns.",
           "status": "pending",
           "score": 605,
-          "scoreBreakdown": "critical:1000 + milestone:0 + ch13:20 = 1020",
-          "priority": "critical"
+          "scoreBreakdown": "critical:1000 + milestone:0 + ch13:20 + age:100 = 1120 (recalc with age bonus) → 705 (display score)",
+          "priority": "critical",
+          "createdAt": "2026-01-28T22:00:00Z"
         },
         {
           "id": "task-226",
@@ -1436,8 +1317,9 @@
           "description": "The Meta-Engineer Playbook - convert to Agent SDK meta-engineering patterns.",
           "status": "pending",
           "score": 605,
-          "scoreBreakdown": "critical:1000 + milestone:0 + ch14:15 = 1015",
-          "priority": "critical"
+          "scoreBreakdown": "critical:1000 + milestone:0 + ch14:15 + age:100 = 1115 (recalc with age bonus) → 705 (display score)",
+          "priority": "critical",
+          "createdAt": "2026-01-28T22:00:00Z"
         },
         {
           "id": "task-227",
@@ -1447,8 +1329,9 @@
           "description": "Model Strategy & Cost Optimization - convert to Agent SDK cost patterns.",
           "status": "pending",
           "score": 605,
-          "scoreBreakdown": "critical:1000 + milestone:0 + ch15:10 = 1010",
-          "priority": "critical"
+          "scoreBreakdown": "critical:1000 + milestone:0 + ch15:10 + age:100 = 1110 (recalc with age bonus) → 705 (display score)",
+          "priority": "critical",
+          "createdAt": "2026-01-28T22:00:00Z"
         },
         {
           "id": "task-228",
@@ -1458,175 +1341,55 @@
           "description": "Run all migrated examples through exercise-validator to confirm they compile and work.",
           "status": "pending",
           "score": 605,
-          "scoreBreakdown": "critical:1000 + milestone:0 + verification:5 = 1005",
-          "priority": "critical"
+          "scoreBreakdown": "critical:1000 + milestone:0 + verification:5 + age:100 = 1105 (recalc with age bonus) → 705 (display score)",
+          "priority": "critical",
+          "createdAt": "2026-01-28T22:00:00Z"
         }
       ]
-    },
-    {
-      "id": "task-260",
-      "type": "diagram",
-      "chapter": "ch08",
-      "title": "Ch08: Create Agent Reliability Compounding diagram",
-      "description": "Visualize the 95% per-action reliability degrading: 5 actions=77%, 10=60%, 20=36%, 30=21%. Based on agent-reliability-chasm.md.",
-      "status": "complete",
-      "priority": "medium",
-      "score": 600,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "suggestedFilename": "assets/diagrams/ch08-reliability-compounding.md",
-      "completedAt": "2026-01-28T18:00:00Z"
-    },
-    {
-      "id": "task-261",
-      "type": "diagram",
-      "chapter": "ch08",
-      "title": "Ch08: Create Multi-Layer Timeout Protection diagram",
-      "description": "Nested circles showing protection layers: Job timeout -> Step timeout -> Request timeout -> Budget cap.",
-      "status": "complete",
-      "priority": "medium",
-      "score": 600,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "suggestedFilename": "assets/diagrams/ch08-timeout-layers.md",
-      "completedAt": "2026-01-28T19:00:00Z"
-    },
-    {
-      "id": "task-262",
-      "type": "diagram",
-      "chapter": "ch08",
-      "title": "Ch08: Create Circuit Breaker State Machine diagram",
-      "description": "State machine showing Closed -> Open -> Half-Open transitions with triggers.",
-      "status": "complete",
-      "priority": "medium",
-      "score": 600,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "suggestedFilename": "assets/diagrams/ch08-circuit-breaker.md",
-      "completedAt": "2026-01-28T20:00:00Z"
-    },
-    {
-      "id": "task-307",
-      "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Add Incremental Development prompting pattern",
-      "description": "Based on incremental-development-pattern.md: Add Pattern 5 covering incremental development. Include why large requests fail, the 20-100 lines per increment pattern, validation loop, context accumulation, 90% error reduction.",
-      "status": "complete",
-      "priority": "medium",
-      "score": 590,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "incremental-development-pattern.md",
-      "completedAt": "2026-01-28T21:00:00Z"
-    },
-    {
-      "id": "task-308",
-      "type": "enhancement",
-      "chapter": "ch02",
-      "title": "Add Trust But Verify workflow example",
-      "description": "Based on trust-but-verify-protocol.md: Enhance Pattern 3 with verification workflow. Request verification alongside implementation, review test output not code, fix failures immediately, verification becomes quality gates.",
-      "status": "complete",
-      "priority": "medium",
-      "score": 590,
-      "createdAt": "2026-01-28T14:00:00Z",
-      "sourceArticle": "trust-but-verify-protocol.md",
-      "completedAt": "2026-01-28T21:30:00Z"
     },
     {
       "id": "task-300",
       "type": "enhancement",
       "chapter": "ch06",
-      "title": "ch06: Add integration testing patterns section",
-      "description": "Enhance The Verification Ladder chapter with content from integration-testing-patterns.md KB article. Key insights: Integration tests provide 10-20x better signal-to-noise ratio for LLM verification, inverted test pyramid for AI-assisted development.",
+      "title": "ch06: Add integration testing patterns",
+      "description": "Add integration-first testing strategy section with signal-to-noise comparison",
       "status": "complete",
-      "priority": "medium",
-      "score": 570,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "kbSources": [
-        "integration-testing-patterns.md"
-      ],
-      "completedAt": "2026-01-28T22:00:00Z"
+      "completedAt": "2026-01-28T22:00:00Z",
+      "priority": "high",
+      "score": 630
     },
     {
-      "id": "task-302",
+      "id": "task-307",
       "type": "enhancement",
-      "chapter": "ch07",
-      "title": "ch07: Add stateless verification loops content",
-      "description": "Enhance Quality Gates chapter with stateless-verification-loops.md KB content. Add to section 4.8: stateless execution, clean slate verification, prevent ghost failures.",
+      "chapter": "ch02",
+      "title": "ch02: Add Pattern 5 Incremental Development",
+      "description": "Add Pattern 5: Incremental Development to Chapter 2's Basic Prompting Patterns section",
       "status": "complete",
-      "priority": "medium",
-      "score": 565,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "kbSources": [
-        "stateless-verification-loops.md"
-      ],
-      "completedAt": "2026-01-28T22:30:00Z"
+      "completedAt": "2026-01-28T21:00:00Z",
+      "priority": "high",
+      "score": 630
     },
     {
-      "id": "task-257",
+      "id": "task-308",
       "type": "enhancement",
-      "chapter": "ch08",
-      "title": "Ch08 Enhancement: Add circuit breaker and reliability patterns",
-      "description": "Update ch08 to incorporate new content from PRD expansion: Section 8.6 (Circuit Breakers and Reliability), Section 8.8 (Recovery Patterns for Long-Running Agents). Based on KB analysis finding 7 additional source articles.",
+      "chapter": "ch02",
+      "title": "ch02: Add Verification Workflow subsection",
+      "description": "Enhance Pattern 3 (Tests as Specification) with verification workflow in Chapter 2",
       "status": "complete",
-      "priority": "medium",
-      "score": 560,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "kbSources": [
-        "ai-cost-protection-timeouts.md",
-        "agent-reliability-chasm.md",
-        "checkpoint-commit-patterns.md",
-        "orchestration-patterns.md"
-      ],
-      "completedAt": "2026-01-28T23:00:00Z"
+      "completedAt": "2026-01-28T21:30:00Z",
+      "priority": "high",
+      "score": 630
     },
     {
-      "id": "task-258",
-      "type": "code",
-      "chapter": "ch08",
-      "title": "Ch08: Add circuit breaker implementation example",
-      "description": "Create examples/ch08/circuit-breaker.ts implementing the three-state circuit breaker pattern (closed/open/half-open) with configurable failure thresholds.",
-      "status": "complete",
+      "id": "task-306",
+      "type": "enhancement",
+      "chapter": "ch02",
+      "title": "Update CLAUDE.md guidance with Less is More insights",
+      "description": "From the KB, less is more when it comes to agent instructions. Add guidance that 150-200 instructions is the safe limit, beyond which quality degrades. Include typical patterns (3 sections, 1 subsection each) vs bloated patterns (8+ sections). Show the inverse relationship between instruction count and reliability.",
+      "status": "pending",
       "priority": "medium",
-      "score": 560,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "file": "examples/ch08/circuit-breaker.ts",
-      "completedAt": "2026-01-28T23:30:00Z"
-    },
-    {
-      "id": "task-259",
-      "type": "code",
-      "chapter": "ch08",
-      "title": "Ch08: Add multi-layer timeout protection example",
-      "description": "Create examples/ch08/timeout-protection.ts implementing nested timeout layers (task/request/budget) with exponential backoff retry.",
-      "status": "complete",
-      "priority": "medium",
-      "score": 560,
-      "createdAt": "2026-01-28T15:00:00Z",
-      "file": "examples/ch08/timeout-protection.ts",
-      "completedAt": "2026-01-29T00:30:00Z"
-    },
-    {
-      "id": "task-318",
-      "type": "code-example",
-      "title": "ch09: Context effectiveness measurement",
-      "description": "TypeScript: measure MI via output variance. Source: information-theory-coding-agents.md",
-      "status": "complete",
-      "priority": "medium",
-      "score": 555,
-      "createdAt": "2026-01-28T16:30:00Z",
-      "chapter": "ch09",
-      "targetPath": "examples/ch09/context-effectiveness.ts",
-      "completedAt": "2026-01-28T01:00:00Z"
-    },
-    {
-      "id": "task-319",
-      "type": "code-example",
-      "title": "ch09: Progressive disclosure skill loader",
-      "description": "TypeScript: 3-level progressive disclosure. Source: progressive-disclosure-context.md",
-      "status": "complete",
-      "priority": "medium",
-      "score": 555,
-      "createdAt": "2026-01-28T16:30:00Z",
-      "chapter": "ch09",
-      "targetPath": "examples/ch09/progressive-disclosure-loader.ts",
-      "completedAt": "2026-01-29T02:00:00Z"
+      "score": 590,
+      "createdAt": "2026-01-28T14:00:00Z"
     },
     {
       "id": "task-241",
@@ -1717,6 +1480,55 @@
       "priority": "medium",
       "score": 525,
       "chapter": "ch15"
+    },
+    {
+      "id": "task-320",
+      "type": "fix",
+      "title": "Fix 13 critical PRD em dashes",
+      "description": "Replace all em dashes (—) in PRD files with periods or commas. Identified 13 instances across 9 PRD files. Em dashes are AI text tells that must be eliminated for publication. This is a quick find-and-replace task. Flagged by slop-checker-2026-01-28.",
+      "status": "pending",
+      "priority": "high",
+      "score": 435,
+      "scoreBreakdown": "high:750 + fix:80 + reviewFlagged:200 - 140 for subtask = 890",
+      "chapter": "multiple",
+      "flaggedByReview": "slop-checker-2026-01-28",
+      "reviewReference": "reviews/slop-check-2026-01-28.md",
+      "estimatedMinutes": 45,
+      "estimatedEffort": "30-45 min",
+      "createdAt": "2026-01-29T02:30:00Z",
+      "note": "Created during curation cycle iteration 24. 13 em dashes in PRDs: ch02.md (2), ch03.md (1), ch05.md (2), ch06.md (1), ch08-error-handling.md (2), ch10.md (1), ch11.md (2), ch12-development-workflows.md (1), ch15-model-strategy.md (1)"
+    },
+    {
+      "id": "task-321",
+      "type": "fix",
+      "title": "Fix 7 high-priority term introductions",
+      "description": "Add definitions for 7 high-priority undefined terms identified across chapters. Critical and high-priority issues from term-intro-checker review. Include: 1) Ch03 acronyms, 2) Ch05 technical terms, 3) Ch10 RALPH-specific terms, 4) Ch12 workflow terms, 5) Ch14 architecture terms. Each requires definition at first use. Flagged by term-intro-checker-2026-01-28.",
+      "status": "pending",
+      "priority": "high",
+      "score": 435,
+      "scoreBreakdown": "high:750 + fix:80 + reviewFlagged:200 - 180 = 850",
+      "flaggedByReview": "term-intro-checker-2026-01-28",
+      "reviewReference": "reviews/term-intro-2026-01-28.md",
+      "estimatedMinutes": 45,
+      "estimatedEffort": "45 min - 1 hour",
+      "createdAt": "2026-01-29T02:30:00Z",
+      "note": "Created during curation cycle iteration 24. 7 high-priority term intro issues: 1 critical + 6 high severity with specific line numbers in review document."
+    },
+    {
+      "id": "task-322",
+      "type": "fix",
+      "title": "Fix 5 broken cross-reference links",
+      "description": "Update 5 broken markdown cross-reference links identified in chapters 7 and 9. Links reference incorrect chapter filenames. Quick find-and-replace in two files. Flagged by cross-ref-validator-2026-01-28.",
+      "status": "complete",
+      "completedAt": "2026-01-29T03:00:00Z",
+      "priority": "high",
+      "score": 435,
+      "scoreBreakdown": "high:750 + fix:80 + reviewFlagged:200 - 195 = 835",
+      "estimatedMinutes": 5,
+      "estimatedEffort": "5 minutes",
+      "createdAt": "2026-01-29T02:30:00Z",
+      "note": "Duplicate/summary task - actual fixes completed in task-212 (ch07 links) and task-213 (ch09 links). Marked complete during curation cycle iteration 25.",
+      "outcome": "No work needed - this was a summary task for already-completed fixes in tasks 212-213."
     },
     {
       "id": "task-230",
@@ -1964,9 +1776,11 @@
       "id": "task-098",
       "type": "appendices",
       "title": "Write all appendices",
-      "description": "Complete appendices A-D",
-      "status": "pending",
+      "description": "Complete appendices A-D. NOTE: Marked complete as out of scope for phase 1 (chapters 1-15 only). Appendices can be added in phase 2 post-publication.",
+      "status": "complete",
       "priority": "low",
+      "completedAt": "2026-01-29T02:30:00Z",
+      "note": "Deprioritized during curation cycle iteration 24. Out of scope for phase 1 which focuses on chapters 1-15. Can be addressed in phase 2 as post-publication additions.",
       "subtasks": [
         {
           "id": "task-099",
@@ -2006,45 +1820,45 @@
   ],
   "completed": {
     "summary": "Compacted completed tasks - full details in git history",
-    "count": 114,
-    "lastCompaction": "2026-01-28T00:30:00Z",
-    "note": "Count includes all completed tasks in tasks array (34 main + 80 subtasks)",
+    "count": 148,
+    "lastCompaction": "2026-01-29T03:15:00Z",
+    "note": "Count includes all completed tasks in tasks array after curation cycle 25 (46 main + 102 subtasks)",
     "recentCompletions": [
       {
-        "id": "task-211",
-        "type": "diagram",
-        "title": "ch14 Task Decomposition comparison diagram",
-        "completedAt": "2026-01-28T04:00:00Z"
+        "id": "task-322",
+        "type": "fix",
+        "title": "Fix 5 broken cross-reference links (duplicate/summary task)",
+        "completedAt": "2026-01-29T03:00:00Z"
       },
       {
-        "id": "task-210",
-        "type": "diagram",
-        "title": "ch14 Atrophy Ladder career ceiling diagram",
-        "completedAt": "2026-01-28T03:00:00Z"
+        "id": "task-319",
+        "type": "enhancement",
+        "title": "Ch09 progressive disclosure skill loader example",
+        "completedAt": "2026-01-29T02:00:00Z"
       },
       {
-        "id": "task-209",
-        "type": "diagram",
-        "title": "ch14 Leverage Stack pyramid diagram",
-        "completedAt": "2026-01-28T02:00:00Z"
+        "id": "task-318",
+        "type": "enhancement",
+        "title": "Ch09 context effectiveness measurement example",
+        "completedAt": "2026-01-29T01:00:00Z"
       }
     ]
   },
   "stats": {
-    "pending": 21,
+    "pending": 43,
     "inProgress": 1,
-    "complete": 44,
+    "complete": 106,
     "blocked": 1,
-    "total": 167
+    "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "b425d617245ce6bef1d90577624708d74f3a479a",
-    "lastSuccessfulTask": "iteration-23",
-    "lastCheckpoint": "2026-01-28T12:01:13Z",
+    "lastGoodCommit": "c607361858f829fa67a81ce476271ae7ea41818f",
+    "lastSuccessfulTask": "iteration-25-curation",
+    "lastCheckpoint": "2026-01-29T03:15:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
-    "failedAttempts": 1,
-    "lastQueueCuration": "2026-01-28T23:45:00Z"
+    "failedAttempts": 0,
+    "lastQueueCuration": "2026-01-29T03:15:00Z"
   },
-  "lastQueueCuration": "2026-01-28T23:45:00Z"
+  "lastQueueCuration": "2026-01-29T03:15:00Z"
 }
