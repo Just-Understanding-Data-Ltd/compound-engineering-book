@@ -368,3 +368,35 @@ The errors arise when authors write cross-references from memory rather than ver
    - Hyphen vs no-hyphen in compound words (claude-md vs claudemd)
 
 ---
+
+### 2026-01-29 - Final Quality Gates as Deterministic Verification
+
+**Context**: Completing the final milestone for Chapter 15 (Model Strategy & Cost Optimization), verifying all quality gates before marking the chapter complete.
+
+**Observation**: The "final" milestone is a compound verification step where each check is deterministic and scriptable:
+
+| Quality Gate | Command | Pass Criteria |
+|--------------|---------|--------------|
+| Word count | `wc -w chapter.md` | 2,500-4,000 |
+| Em dashes | `grep "—" chapter.md` | No matches |
+| AI slop phrases | `grep -iE "delve\|crucial\|pivotal..." chapter.md` | No matches |
+| Diagrams exist | `glob assets/diagrams/chXX-*.md` | ≥1 file |
+| Exercises folder | `ls exercises/chXX/` | Exists with README |
+| Cross-references | `tail -15 chapter.md \| grep "Related"` | Section present |
+| Tests pass | `bun test examples/chXX/` | All pass |
+| TypeScript compiles | `tsc --noEmit` | No errors |
+
+Every check produces a binary result: pass or fail. There is no judgment call. A chapter either meets all criteria or it doesn't. This makes the "final" milestone the most reliable milestone in the workflow.
+
+The key pattern: run all checks in sequence, document results, and only mark complete when all pass. If any check fails, the chapter stays in progress. This eliminates the ambiguity that plagues "subjective" reviews.
+
+**Implication**: The "final" milestone should be treated as a verification script, not a human review. Human judgment was already applied during writing and the "reviewed" milestone. The final check is purely mechanical: did the work product meet all specified criteria?
+
+**Action**: When running the "final" milestone:
+1. Create a mental or written checklist of all 8 quality gates
+2. Run each check in order, recording pass/fail
+3. If any check fails, stop and fix before proceeding
+4. Only mark complete after all 8 checks pass
+5. Document the verification in the commit message ("All quality gates passed: X words, Y tests, Z diagrams")
+
+---

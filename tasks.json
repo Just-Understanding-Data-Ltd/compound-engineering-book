@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T10:35:00.000Z",
+  "lastUpdated": "2026-01-29T01:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1203,7 +1203,8 @@
       "chapter": "ch15",
       "title": "ch15: Model Strategy & Cost Optimization",
       "description": "Complete remaining milestones for Model Strategy & Cost Optimization",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-29T01:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -1251,8 +1252,10 @@
           "parentId": "task-085",
           "type": "milestone",
           "title": "final",
-          "status": "pending",
-          "score": -115
+          "status": "complete",
+          "completedAt": "2026-01-29T01:00:00Z",
+          "score": -115,
+          "note": "All quality gates passed: 3,692 words (in range), no em dashes, no AI slop, 4 diagrams, exercises folder, Related Chapters section present (ch07, ch10, ch13), 61 tests pass (117 assertions), TypeScript compiles cleanly."
         }
       ],
       "score": 875
@@ -1569,16 +1572,16 @@
     ]
   },
   "stats": {
-    "pending": 30,
+    "pending": 28,
     "inProgress": 0,
-    "complete": 102,
+    "complete": 104,
     "blocked": 1,
     "total": 133
   },
   "checkpoints": {
-    "lastGoodCommit": "de6bc93ba59300dacd9824166b84a06f23079fec",
-    "lastSuccessfulTask": "iteration-4",
-    "lastCheckpoint": "2026-01-28T10:08:41Z",
+    "lastGoodCommit": "25456d8",
+    "lastSuccessfulTask": "task-090",
+    "lastCheckpoint": "2026-01-29T01:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
