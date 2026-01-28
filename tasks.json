@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T00:30:00Z",
+  "lastUpdated": "2026-01-28T10:35:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1396,7 +1396,7 @@
       "type": "review",
       "title": "Update chapter prose for Agent SDK focus",
       "description": "After code migration, update chapter text to reference Agent SDK concepts (sessions, streaming, resumption) instead of raw API calls.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 365,
       "createdAt": "2026-01-28T22:00:00Z",
@@ -1569,19 +1569,19 @@
     ]
   },
   "stats": {
-    "pending": 31,
+    "pending": 30,
     "inProgress": 0,
     "complete": 102,
-    "blocked": 0,
+    "blocked": 1,
     "total": 133
   },
   "checkpoints": {
-    "lastGoodCommit": "f167a4a308b62c3cfa14f9f857701ace5438515f",
+    "lastGoodCommit": "de6bc93ba59300dacd9824166b84a06f23079fec",
     "lastSuccessfulTask": "iteration-4",
-    "lastCheckpoint": "2026-01-29T00:30:00Z",
+    "lastCheckpoint": "2026-01-28T10:08:41Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
-    "lastQueueCuration": "2026-01-29T00:00:00Z"
+    "lastQueueCuration": "2026-01-28T10:35:00Z"
   }
 }

@@ -1,11 +1,11 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 00:30)
+## Current Status (Updated: 2026-01-28 10:35)
 - Phase: Ch15 Completion (diagrams complete, final pending)
 - Active: task-090 (ch15: final) → NEXT
 - Last Completed: task-089 (ch15 diagrams complete milestone)
-- Blockers: None active
-- Queue Health: Ch15 at final milestone
+- Blockers: task-229 blocked by task-216 (Agent SDK migration)
+- Queue Health: Curated - 1 blocked task, 30 pending
 - Publishing Readiness: Ch15 needs 1 more milestone (final)
 
 ## Project State Summary
@@ -15,7 +15,7 @@
 - Code Examples: 15/15 with code (100%) - ch15 code TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 63/63 created (100%) - ch15 diagrams complete
-- Tasks Complete: 102/133 (77%)
+- Tasks Complete: 102/133 (77%), 1 blocked
 - Test Pass Rate: 100% across all chapters
 
 ## Quality Summary (From 2026-01-28 Review Cycle - COMPREHENSIVE)
@@ -42,6 +42,18 @@
 - **Publication target**: 2026-02-01 to 2026-02-03
 
 ## Recent Activity
+
+### 2026-01-28 10:35 - Queue Curation
+- What: Curated task queue per RALPH protocol (iteration % 3 == 0)
+- Issues found:
+  - task-229 had status "pending" but blockedBy ["task-216"] - fixed to "blocked"
+  - Stats were 31 pending / 0 blocked - fixed to 30 pending / 1 blocked
+- No duplicates found
+- Score validation: Parent/subtask scoring patterns are consistent
+- Priority validation: task-090 (ch15: final) is correctly highest priority
+- Stats: pending 30, blocked 1, complete 102 (77%)
+- Outcome: Queue is clean, priorities correct
+- Next: task-090 (ch15: final)
 
 ### 2026-01-29 00:30 - COMPLETED task-089: Ch15 diagrams complete milestone - ITERATION 4
 - What: Created all required diagrams for Chapter 15 (Model Strategy & Cost Optimization)
