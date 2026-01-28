@@ -168,6 +168,57 @@ describe('User Registration Flow', () => {
 
 Prefer real dependencies over mocks when possible. Use in-memory databases instead of mock repositories. Test actual API calls instead of mocked responses.
 
+### The Integration-First Strategy for LLM Code
+
+For AI-assisted development, integration tests provide higher signal than unit tests. This inverts the traditional test pyramid.
+
+**Why?** LLMs rarely make isolated logic errors. They get the math right, handle basic edge cases, and use correct types. Where LLMs fail is at integration points: wrong database column names, incorrect API contracts, type mismatches across boundaries, missing side effects.
+
+Unit tests don't catch these failures. Only integration tests do.
+
+**The signal-to-noise comparison:**
+
+| Test Type | Tests Needed | Lines Verified | Signal per Test |
+|-----------|--------------|----------------|-----------------|
+| Unit tests | 47 tests | 5-10 lines each | Low |
+| Integration tests | 3 tests | 50-100 lines each | High |
+
+Integration tests verify 10-20x more code per test. When reviewing LLM-generated code, you can check 3 integration test results in 2 minutes instead of reviewing 47 unit tests in 30 minutes.
+
+**The inverted pyramid for LLM code:**
+
+```
+Traditional (human development):
+    /\
+   /E2E\       Few E2E tests
+  /------\
+ / Integ  \    Some integration tests
+/----------\
+/   Unit    \  MANY unit tests
+
+LLM-optimized:
+    /\
+   /E2E\       Few E2E tests
+  /------\
+ /        \
+/  INTEG   \   MANY integration tests
+/----------\
+/   Unit    \  Few unit tests (complex logic only)
+```
+
+**Practical guidance:**
+
+For every feature, write:
+1. **1-3 integration tests** that verify end-to-end behavior
+2. **0-2 unit tests** for genuinely complex algorithmic logic
+3. **0-1 E2E tests** for critical user journeys (optional)
+
+**When to still use unit tests:**
+
+Unit tests remain valuable for complex algorithms (sorting, parsing, financial calculations), security-critical functions (cryptographic operations), and property-based testing. If the logic is complex enough that isolated testing reveals bugs integration tests miss, write unit tests.
+
+But for typical LLM-generated code, integration tests catch the bugs that matter: the integration points where components fail to work together.
+
 ## Level 5: Property-Based Testing
 
 Property-based testing automatically discovers edge cases you didn't think of. Instead of writing individual test cases, you define properties that should always hold, and the framework generates thousands of inputs.

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T11:27:37.969Z",
+  "lastUpdated": "2026-01-28T11:30:02.534Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1534,13 +1534,14 @@
       "chapter": "ch06",
       "title": "ch06: Add integration testing patterns section",
       "description": "Enhance The Verification Ladder chapter with content from integration-testing-patterns.md KB article. Key insights: Integration tests provide 10-20x better signal-to-noise ratio for LLM verification, inverted test pyramid for AI-assisted development.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 570,
       "createdAt": "2026-01-28T15:00:00Z",
       "kbSources": [
         "integration-testing-patterns.md"
-      ]
+      ],
+      "completedAt": "2026-01-28T22:00:00Z"
     },
     {
       "id": "task-302",
@@ -2024,16 +2025,16 @@
     ]
   },
   "stats": {
-    "pending": 28,
+    "pending": 27,
     "inProgress": 1,
-    "complete": 37,
+    "complete": 38,
     "blocked": 1,
     "total": 167
   },
   "checkpoints": {
-    "lastGoodCommit": "a3169359b8aa4abe5d17a20d6c4f257a73974dad",
-    "lastSuccessfulTask": "iteration-16",
-    "lastCheckpoint": "2026-01-28T11:27:37Z",
+    "lastGoodCommit": "8ca207e753f89fa05853f9209d69d5e1597819c2",
+    "lastSuccessfulTask": "iteration-17",
+    "lastCheckpoint": "2026-01-28T11:30:02Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 1,
