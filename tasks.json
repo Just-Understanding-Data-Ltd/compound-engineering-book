@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T18:00:00.000Z",
+  "lastUpdated": "2026-01-28T19:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1140,7 +1140,8 @@
       "chapter": "ch14",
       "title": "ch14: The Meta-Engineer Playbook",
       "description": "Complete remaining milestones for The Meta-Engineer Playbook",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-28T19:00:00Z",
       "priority": "high",
       "subtasks": [
         {
@@ -1188,8 +1189,10 @@
           "parentId": "task-079",
           "type": "milestone",
           "title": "final",
-          "status": "pending",
-          "score": -115
+          "status": "complete",
+          "completedAt": "2026-01-28T19:00:00Z",
+          "score": -115,
+          "note": "All quality gates passed: 3,539 words (in range), no em dashes, no AI slop, 8 diagrams, exercises folder, Related Chapters section present (ch01, ch07, ch10, ch11, ch13), 60 tests pass (125 assertions), TypeScript compiles."
         }
       ],
       "score": 880
@@ -1411,16 +1414,16 @@
     ]
   },
   "stats": {
-    "pending": 24,
+    "pending": 22,
     "inProgress": 0,
-    "complete": 94,
+    "complete": 96,
     "blocked": 0,
     "total": 118
   },
   "checkpoints": {
-    "lastGoodCommit": "419c10866605a32353be0da5c952c4f80ea56ed6",
-    "lastSuccessfulTask": "task-083",
-    "lastCheckpoint": "2026-01-28T18:00:00Z",
+    "lastGoodCommit": "23434c7673cf4a64ef336961233cf1c740d43a5b",
+    "lastSuccessfulTask": "task-084",
+    "lastCheckpoint": "2026-01-28T19:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
