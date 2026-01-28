@@ -445,4 +445,63 @@ h1.chapter-opener {
     background-color: rgba(255, 255, 255, 0.08);
   }
 
+  /* === Syntax Highlighting: VS Code Dark+ Inspired === */
+  /* Overrides pandoc's inline highlight styles for dark backgrounds (#1e1e1e) */
+
+  div.sourceCode {
+    background-color: #1e1e1e;
+  }
+
+  /* Keywords and control flow: blue */
+  code span.kw { color: #569CD6; }
+  code span.cf { color: #C586C0; }
+
+  /* Strings and chars: salmon/rust */
+  code span.st { color: #CE9178; }
+  code span.ch { color: #CE9178; }
+  code span.ss { color: #CE9178; }
+  code span.vs { color: #CE9178; }
+  code span.sc { color: #D7BA7D; }
+
+  /* Comments: muted green, italic preserved */
+  code span.co { color: #6A9955; }
+  code span.cv { color: #6A9955; }
+  code span.an { color: #6A9955; }
+  code span.do { color: #6A9955; }
+  code span.in { color: #6A9955; }
+
+  /* Types and data: teal */
+  code span.dt { color: #4EC9B0; }
+
+  /* Numbers and constants: light green */
+  code span.dv { color: #B5CEA8; }
+  code span.fl { color: #B5CEA8; }
+  code span.bn { color: #B5CEA8; }
+  code span.cn { color: #4FC1FF; }
+
+  /* Functions: yellow */
+  code span.fu { color: #DCDCAA; }
+
+  /* Operators: light gray */
+  code span.op { color: #D4D4D4; }
+
+  /* Variables: light blue */
+  code span.va { color: #9CDCFE; }
+
+  /* Attributes: light blue */
+  code span.at { color: #9CDCFE; }
+
+  /* Preprocessor: magenta */
+  code span.pp { color: #C586C0; }
+
+  /* Errors and alerts: red */
+  code span.er { color: #F44747; }
+  code span.al { color: #F44747; }
+  code span.wa { color: #CCA700; }
+
+  /* Other/Import: inherit dark text */
+  code span.ot { color: #D4D4D4; }
+  code span.im { color: #D4D4D4; }
+  code span.ex { color: #D4D4D4; }
+
 }

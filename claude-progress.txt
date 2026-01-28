@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 14:30)
+## Current Status (Updated: 2026-01-29 15:00)
 - Phase: EPUB Polish - Final Review Pipeline
-- Active: EPUB visual review pipeline (6 pending, 168 complete)
-- Last Completed: task-423 (Custom pandoc template with class hooks)
+- Active: EPUB visual review pipeline (5 pending, 169 complete)
+- Last Completed: task-424 (Custom syntax highlighting theme for light/dark modes)
 - Blockers: None
-- Queue Health: 6 pending, 168 complete
-- Publishing Readiness: 99% - Template complete, syntax highlighting theme next
-- Next Task: task-424 (syntax highlighting theme) then task-425 (full rebuild)
+- Queue Health: 5 pending, 169 complete
+- Publishing Readiness: 99% - All CSS infrastructure complete, full rebuild next
+- Next Task: task-425 (full rebuild with all improvements) now UNBLOCKED
 - Publication Target: 2026-01-30 morning
 
 ## Project State Summary
@@ -30,6 +30,32 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 15:00 - COMPLETED task-424: Custom Syntax Highlighting Theme
+- What: Created custom pandoc highlight theme optimized for both light and dark EPUB modes
+- Files created:
+  - leanpub/highlight-theme.theme (custom pandoc theme, refined from tango base)
+- Files modified:
+  - leanpub/epub-style.css (added 50+ dark mode CSS overrides for syntax highlighting spans)
+  - scripts/publish.sh (updated --syntax-highlighting to use custom theme)
+- Light mode palette (GitHub Light-inspired, on #f5f5f5):
+  - Keywords/ControlFlow: #cf222e (red, bold) for visibility
+  - Strings: #0a3069 (dark indigo) for readability
+  - Comments: #6e7781 (gray, italic) instead of tango's brown
+  - Types: #8250df (purple) for modern convention
+  - Numbers: #0550ae (dark blue) for contrast
+  - Functions: #6639ba (purple, bold) distinct from types
+  - Variables: #953800 (dark orange) for identification
+- Dark mode palette (VS Code Dark+ inspired, on #1e1e1e):
+  - Keywords: #569CD6, Control flow: #C586C0, Strings: #CE9178
+  - Comments: #6A9955, Types: #4EC9B0, Numbers: #B5CEA8
+  - Functions: #DCDCAA, Variables: #9CDCFE, Operators: #D4D4D4
+- Technical note: Pandoc requires .theme extension (not .json) for custom themes
+- Verification: EPUB builds (1.0M), epubcheck 0 errors/0 warnings
+- Unblocked: task-425 (full rebuild) now fully unblocked
+- Iteration: 8
+- Stats: 5 pending, 169 complete
+- Next: task-425 (full rebuild with all improvements)
 
 ### 2026-01-29 14:30 - COMPLETED task-423: Custom Pandoc Template with Class Hooks
 - What: Created custom pandoc EPUB3 template with viewport meta, lang="en", and CSS class hooks

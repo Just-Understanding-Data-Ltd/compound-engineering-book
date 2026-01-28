@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T14:30:00Z",
+  "lastUpdated": "2026-01-29T15:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1599,7 +1599,6 @@
       "score": 535,
       "scoreBreakdown": "high:750 + fix:80 + blocking(3×25):75 + age24h:50 = 955",
       "blockedBy": [
-        "task-423",
         "task-424"
       ],
       "createdAt": "2026-01-28T22:10:00Z"
@@ -1878,11 +1877,12 @@
       "type": "fix",
       "title": "EPUB: Add syntax highlighting theme optimized for both light and dark modes",
       "description": "The tango theme works for light mode but may look poor in dark mode. Create a custom pandoc highlight theme JSON file at leanpub/highlight-theme.json. Base it on tango but adjust colors for better contrast in both modes. Export base: pandoc --print-highlight-style=tango > leanpub/highlight-theme.json. Adjust token colors: keywords blue (#569CD6), strings green (#6A9955), comments gray (#6A9955), types teal (#4EC9B0), numbers light green (#B5CEA8). Use --syntax-highlighting=leanpub/highlight-theme.json instead of --syntax-highlighting=tango.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 210,
       "scoreBreakdown": "medium:500 + fix:80 + blocking(1×25):25 + age24h:50 = 655",
-      "createdAt": "2026-01-28T22:10:00Z"
+      "createdAt": "2026-01-28T22:10:00Z",
+      "completedAt": "2026-01-29T15:00:00Z"
     },
     {
       "id": "task-309",
@@ -2210,16 +2210,16 @@
     ]
   },
   "stats": {
-    "pending": 6,
+    "pending": 5,
     "inProgress": 0,
-    "complete": 168,
+    "complete": 169,
     "blocked": 0,
     "total": 174
   },
   "checkpoints": {
-    "lastGoodCommit": "65bb95d9ac9892935b7b432fd2b446c8e745eabf",
-    "lastSuccessfulTask": "iteration-6",
-    "lastCheckpoint": "2026-01-28T22:37:15Z",
+    "lastGoodCommit": "7477293fde0cb4361e9f01934e8db38055808b73",
+    "lastSuccessfulTask": "iteration-7",
+    "lastCheckpoint": "2026-01-28T22:43:52Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 1,

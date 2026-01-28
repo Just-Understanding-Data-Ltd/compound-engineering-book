@@ -57,7 +57,7 @@ pandoc \
   --from markdown-yaml_metadata_block \
   --lua-filter=leanpub/filters/class-hooks.lua \
   --lua-filter=leanpub/filters/strip-md-links.lua \
-  --syntax-highlighting=tango \
+  --syntax-highlighting=leanpub/highlight-theme.theme \
   --epub-embed-font=leanpub/fonts/JetBrainsMono-Regular.ttf \
   --epub-embed-font=leanpub/fonts/JetBrainsMono-Bold.ttf \
   --epub-embed-font=leanpub/fonts/JetBrainsMono-Italic.ttf \
