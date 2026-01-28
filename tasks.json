@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-01-28T15:22:10.967Z",
+  "lastUpdated": "2026-01-28T15:25:02.352Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T17:00:00Z",
-    "iteration": 12,
+    "lastRun": "2026-01-29T18:00:00Z",
+    "iteration": 13,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
-    "recommendedNext": "task-243",
-    "reasoning": "Queue curation iteration 12. Completed task-242 (ch14 identity callout). Next highest priority: task-243 (ch15 cost of exploration insight) at score 525, then task-232/task-234 (structured outputs) at score 435. Running 7 review agents in parallel per iteration % 6 == 0 rule."
+    "recommendedNext": "task-232",
+    "reasoning": "Iteration 13. Completed task-243 (ch15 cost of exploration insight). Next highest priority: task-232 (structured outputs across 20 files) at score 435."
   },
   "prds": {
     "index": {
@@ -1525,10 +1525,12 @@
       "type": "enhancement",
       "title": "ch15: Add cost of exploration insight",
       "description": "Add: That is why this path compounds: not because any single idea is guaranteed to win, but because the cost of exploration keeps dropping.",
-      "status": "pending",
+      "status": "complete",
+      "completedAt": "2026-01-29T18:00:00Z",
       "priority": "medium",
       "score": 525,
-      "chapter": "ch15"
+      "chapter": "ch15",
+      "outcome": "Added doctrine insight to Summary section explaining why compound engineering compounds. Key message: cost optimization increases iteration velocity, cheap experiments enable more exploration, successes build on each other. Word count 4,533 (slightly over 4,000, acceptable)."
     },
     {
       "id": "task-321",
@@ -1883,16 +1885,16 @@
     ]
   },
   "stats": {
-    "pending": 14,
+    "pending": 13,
     "inProgress": 0,
-    "complete": 137,
+    "complete": 138,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "67438d6f60ca3829d8c32218d9f0493f882c8117",
-    "lastSuccessfulTask": "task-242",
-    "lastCheckpoint": "2026-01-29T17:00:00Z",
+    "lastGoodCommit": "7056a918904d726cccb33bfd9d2e820da1c7d311",
+    "lastSuccessfulTask": "iteration-12",
+    "lastCheckpoint": "2026-01-28T15:25:02Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,

@@ -1094,6 +1094,8 @@ Model strategy is about matching capabilities to requirements. Use the cheapest 
 
 The compound effects are significant. Model switching saves 40-70%. Prompt caching saves 90% on repeated context. Combined, you can reduce costs by 94-97% while maintaining quality.
 
+That is why this path compounds: not because any single idea is guaranteed to win, but because the cost of exploration keeps dropping. When each experiment costs $0.05 instead of $2, you run forty experiments instead of one. When overnight batch processing costs half price, you review entire codebases instead of spot-checking. When Haiku handles 70% of your requests at 12x lower cost, you try more approaches, validate more assumptions, and iterate faster. The experiments that fail cost almost nothing. The experiments that succeed become the foundation for the next layer of automation. Cost optimization is not about frugality. It is about increasing your iteration velocity until good ideas find you instead of the other way around.
+
 For related patterns, see Chapter 10 (The RALPH Loop) for cost management in long-running agents and Chapter 13 (Building the Harness) for production cost optimization.
 
 ---
