@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T17:30:00.000Z",
+  "lastUpdated": "2026-01-28T18:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "prds": {
@@ -1178,8 +1178,10 @@
           "parentId": "task-079",
           "type": "milestone",
           "title": "diagrams complete",
-          "status": "pending",
-          "score": -110
+          "status": "complete",
+          "completedAt": "2026-01-28T18:00:00Z",
+          "score": -110,
+          "note": "Created 4 new diagrams: ch14-adhoc-to-deterministic.md, ch14-prompts-as-assets.md, ch14-meta-skill-stack.md, ch14-compound-effect-loop.md. Combined with 4 existing diagrams, all 8 PRD-specified diagrams complete."
         },
         {
           "id": "task-084",
@@ -1409,16 +1411,16 @@
     ]
   },
   "stats": {
-    "pending": 25,
+    "pending": 24,
     "inProgress": 0,
-    "complete": 93,
+    "complete": 94,
     "blocked": 0,
     "total": 118
   },
   "checkpoints": {
     "lastGoodCommit": "419c10866605a32353be0da5c952c4f80ea56ed6",
-    "lastSuccessfulTask": "iteration-24",
-    "lastCheckpoint": "2026-01-28T17:30:00Z",
+    "lastSuccessfulTask": "task-083",
+    "lastCheckpoint": "2026-01-28T18:00:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
