@@ -493,3 +493,45 @@ This framework (Problem → Defense → Recovery → Improvement) works for most
 5. End with actionable improvement strategies (the "what now?" for readers)
 
 ---
+
+### 2026-01-28 - Agent SDK Migration Pattern: extractTextContent Helper
+
+**Context**: Migrating Chapter 10 examples from native Anthropic SDK to Claude Agent SDK (task-222). Four files needed migration: ralph-loop.ts, task-management.ts, memory-architecture.ts, clean-slate-recovery.ts.
+
+**Observation**: The Agent SDK uses a fundamentally different response pattern than the native Anthropic SDK:
+
+| SDK | Pattern | Content Access |
+|-----|---------|----------------|
+| Native Anthropic | `await client.messages.create({...})` | `response.content.find(c => c.type === "text")?.text` |
+| Agent SDK | `query({prompt, options})` → async generator | `for await (const msg of response)` + helper function |
+
+The Agent SDK returns an async generator that yields `SDKMessage` objects. The key insight is that assistant messages have content at `message.message.content`, not `message.content`. This requires a helper function:
+
+```typescript
+function extractTextContent(message: SDKMessage): string {
+  if (message.type !== "assistant") return "";
+  const content = message.message.content;
+  if (typeof content === "string") return content;
+  const textParts: string[] = [];
+  for (const block of content) {
+    if (block.type === "text" && "text" in block) {
+      textParts.push(block.text);
+    }
+  }
+  return textParts.join("");
+}
+```
+
+Every chapter with SDK calls (ch06-ch15) needs this helper. The pattern is consistent across all files, making migration mechanical once you understand it.
+
+**Implication**: Agent SDK migrations follow a predictable three-step pattern: (1) update imports, (2) add extractTextContent helper, (3) replace `client.messages.create()` with `query()` + streaming loop. This makes batch migrations efficient since the same pattern applies across all files.
+
+**Action**: When migrating from native SDK to Agent SDK:
+1. Replace `import Anthropic` with `import { query, type SDKMessage }`
+2. Remove `const client = new Anthropic();`
+3. Add `extractTextContent` helper function after imports
+4. Replace each `client.messages.create()` call with the streaming pattern
+5. Use `allowedTools: []` in options for pure conversation (no tool use)
+6. Estimate tokens from text length since Agent SDK doesn't expose usage directly
+
+---

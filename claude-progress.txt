@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 02:00)
-- Phase: Final Quality Polish & Publication Preparation
-- Active: All 15 chapters COMPLETE, focus on quality fixes
-- Last Completed: task-319: Ch09 progressive disclosure skill loader
+## Current Status (Updated: 2026-01-29 03:30)
+- Phase: Final Quality Polish & Agent SDK Migration
+- Active: Agent SDK migration for ch10-ch15, focus on quality fixes
+- Last Completed: task-222: Ch10 Agent SDK migration (ralph-loop examples)
 - Blockers: None - all quality issues have identified solutions
 - Queue Health: All critical work identified and prioritized
-- Publishing Readiness: 92% (content complete, quality gates identified)
+- Publishing Readiness: 93% (content complete, SDK migration in progress)
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%)
@@ -77,6 +77,25 @@
 - Stats: 44 complete, 21 pending
 - Outcome: Ch09 enhanced with dynamic skill loading infrastructure
 - Next: Queue curation (iteration 24 % 3 == 0) + review cycle (24 % 6 == 0)
+
+### 2026-01-29 03:30 - COMPLETED task-222: Ch10 Agent SDK migration
+- What: Migrated ch10 examples from native Anthropic SDK to Claude Agent SDK
+- Files modified:
+  - examples/ch10/ralph-loop.ts (replaced client.messages.create with query())
+  - examples/ch10/task-management.ts (replaced client.messages.create with query())
+  - examples/ch10/memory-architecture.ts (replaced client.messages.create with query())
+  - examples/ch10/clean-slate-recovery.ts (replaced client.messages.create with query())
+- Pattern used:
+  - Added extractTextContent helper function for processing SDKMessage types
+  - Replaced client.messages.create() with query({prompt, options})
+  - Used async generator pattern: for await (const msg of response)
+  - Added allowedTools: [] for pure conversation (no tool use)
+- Tests: 92 tests pass in ralph-loop.test.ts, demo() runs successfully
+- Iteration: 25 (25 % 5 == 0, added learning to LEARNINGS.md)
+- Learning: Agent SDK migration follows three-step pattern - update imports, add extractTextContent helper, convert API calls to streaming
+- Stats: 107 complete, 42 pending
+- Outcome: Ch10 RALPH Loop examples now use Agent SDK streaming pattern
+- Next: task-223 (ch11 Agent SDK migration)
 
 ### 2026-01-29 01:00 - COMPLETED task-318: Ch09 context effectiveness measurement
 - What: Created examples/ch09/context-effectiveness.ts for measuring MI via output variance

@@ -3,14 +3,14 @@
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-29T03:15:00Z",
+    "lastRun": "2026-01-29T03:30:00Z",
     "iteration": 25,
     "tasksRemoved": 0,
     "tasksMerged": 1,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
-    "recommendedNext": "task-222",
-    "reasoning": "All 15 chapters complete (100%). Marked task-322 (cross-ref fixes) as complete since it was a duplicate summary of already-completed tasks 212-213. Focus: (1) Complete task-216 Agent SDK migration with 6 pending subtasks (task-222 through task-228), (2) Execute quality fixes (task-320 em dashes, task-321 term intros), (3) task-306 CLAUDE.md guidance enhancement. Next: task-222 (ch10 SDK migration) is highest-priority pending subtask at score 605. Quality fix tasks (320, 321) are quick wins (30-60 min each) that can run between SDK migrations."
+    "recommendedNext": "task-223",
+    "reasoning": "Completed task-222 (ch10 Agent SDK migration). Migrated 4 files (ralph-loop.ts, task-management.ts, memory-architecture.ts, clean-slate-recovery.ts) using query() with streaming pattern. 92 tests pass. Added learning about extractTextContent helper pattern. Next: task-223 (ch11 SDK migration) is highest-priority pending subtask at score 605. Remaining SDK migrations: task-223 through task-228 (ch11-ch15 plus test suite). Quality fix tasks (320, 321) are quick wins that can run between SDK migrations."
   },
   "prds": {
     "index": {
@@ -1267,11 +1267,13 @@
           "type": "milestone",
           "title": "Rewrite ch10 examples with Agent SDK",
           "description": "The RALPH Loop - convert to Agent SDK session resumption and checkpoints.",
-          "status": "pending",
+          "status": "complete",
           "score": 605,
           "scoreBreakdown": "critical:1000 + milestone:0 + ch10:35 + age:100 = 1135 (recalc with age bonus) → 705 (display score)",
           "priority": "critical",
-          "createdAt": "2026-01-28T22:00:00Z"
+          "createdAt": "2026-01-28T22:00:00Z",
+          "completedAt": "2026-01-28T14:00:00Z",
+          "note": "Migrated 4 files: ralph-loop.ts, task-management.ts, memory-architecture.ts, clean-slate-recovery.ts. Uses query() function with streaming. 92 tests pass."
         },
         {
           "id": "task-223",
@@ -1845,9 +1847,9 @@
     ]
   },
   "stats": {
-    "pending": 43,
+    "pending": 42,
     "inProgress": 1,
-    "complete": 106,
+    "complete": 107,
     "blocked": 1,
     "total": 151
   },
