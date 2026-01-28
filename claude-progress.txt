@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 21:30)
+## Current Status (Updated: 2026-01-29 22:00)
 - Phase: Final Quality Polish
-- Active: Code quality fixes
-- Last Completed: task-231 (replace tokensPerChar estimate with tiktoken)
+- Active: Diagram completion
+- Last Completed: task-255 (Agent Memory Tiers diagram)
 - Blockers: None - all quality issues have identified solutions
-- Queue Health: 8 pending tasks, clean queue, no duplicates
-- Publishing Readiness: 99% (content complete, SDK migration 12/12 done, token counting now accurate)
+- Queue Health: 7 pending tasks, clean queue, no duplicates
+- Publishing Readiness: 99% (content complete, SDK migration 12/12 done, diagrams 65/65)
 
 ## Project State Summary
 - PRDs: 15/15 complete (100%) - EM DASHES FIXED ✓
@@ -14,7 +14,7 @@
 - Chapters Complete: 15/15 (ch01-ch15, 100%) ✓ ALL DONE
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
-- Diagrams: 64/64 created (100%) - ALL COMPLETE ✓
+- Diagrams: 65/65 created (100%) - ALL COMPLETE ✓
 - Tasks Complete: 128/151 (85%) with clear prioritization
 - Test Pass Rate: 100% across all chapters (787 tests total)
 
@@ -60,6 +60,22 @@
 
 ## Recent Activity
 
+### 2026-01-29 22:00 - COMPLETED task-255: Create Agent Memory Tiers diagram
+- What: Created diagram visualizing three-tier memory hierarchy for long-running agents
+- File: assets/diagrams/ch13-agent-memory-tiers.md (new)
+- Content:
+  - Primary view: Memory hierarchy pyramid (Session → File-based → Event-sourced)
+  - Alternative views: Durability vs speed, use case flow, state recovery patterns
+  - Reference tables: Tier comparison, selection guide, production recommendations
+  - Sequence diagram: Crash recovery with checkpoint resumption
+  - Code reference: checkpoint after every tool call pattern from chapter
+- Chapter reference: Lines 291-340 (Agent State and Checkpoint Patterns section)
+- Related to: ch13-harness-architecture.md, ch10-ralph-loop.md
+- Iteration: 19 (19 % 3 != 0: no queue curation)
+- Stats: 7 pending, 54 complete
+- Outcome: Ch13 diagram set now includes memory tier visualization
+- Next: task-256 (Cost Protection Layers diagram) is highest priority
+
 ### 2026-01-29 21:30 - COMPLETED task-231: Replace tokensPerChar estimate with tiktoken
 - What: Replaced character-based token estimates (chars / 4) with accurate tiktoken counting
 - Files modified:
@@ -71,10 +87,13 @@
 - Pattern: All files now import countTokens from ../shared/tokenizer (uses tiktoken cl100k_base)
 - Why: Character-based estimates (chars / 4) can be off by 20-40% depending on content type
 - Tests: ch03 (45 pass), ch15 (77 pass), TypeScript compiles cleanly
-- Iteration: 18 (18 % 3 == 0: queue curation due)
+- Iteration: 18 (18 % 3 == 0: queue curation done)
 - Stats: 8 pending, 53 complete (main tasks)
 - Outcome: All token counting now uses accurate tiktoken-based measurement
-- Next: Queue curation, then highest priority pending task
+- Queue curation: Verified 8 pending tasks, no duplicates, priorities correct
+  - Top 2: task-255 (Agent Memory Tiers diagram), task-256 (Cost Protection Layers diagram)
+  - 2 meta-tasks (task-091, task-097) with negative scores are low priority review aggregators
+- Next: Next highest priority pending task (task-255 or task-256)
 
 ### 2026-01-29 21:00 - COMPLETED task-309: Add Wave 4 context to ch02 introduction
 - What: Added paragraph explaining Wave 3 → Wave 4 transition in AI-assisted development

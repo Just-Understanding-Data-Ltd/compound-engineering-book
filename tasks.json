@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T15:42:32.925Z",
+  "lastUpdated": "2026-01-28T16:03:02.161Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1651,10 +1651,11 @@
       "chapter": "ch13",
       "title": "Create Agent Memory Tiers diagram",
       "description": "Visualize three-tier memory hierarchy: session (ephemeral), file-based (TASKS.md/progress.txt), event-sourced (full audit trail).",
-      "status": "pending",
+      "status": "complete",
       "priority": "low",
       "score": 175,
-      "createdAt": "2026-01-28T14:30:00Z"
+      "createdAt": "2026-01-28T14:30:00Z",
+      "completedAt": "2026-01-29T22:00:00Z"
     },
     {
       "id": "task-256",
@@ -1901,17 +1902,17 @@
     ]
   },
   "stats": {
-    "pending": 8,
+    "pending": 7,
     "inProgress": 0,
-    "complete": 53,
+    "complete": 54,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "55b3646074ad66d92c49a8b40cdf9e98cedfb301",
-    "lastSuccessfulTask": "iteration-16",
-    "lastCheckpoint": "2026-01-28T15:42:32Z",
-    "consecutiveFailures": 1,
+    "lastGoodCommit": "b12d73881dbafab752f89c52d1cc67e609a6b04b",
+    "lastSuccessfulTask": "iteration-18",
+    "lastCheckpoint": "2026-01-28T16:03:02Z",
+    "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 1,
     "lastQueueCuration": "2026-01-29T19:30:00Z"
