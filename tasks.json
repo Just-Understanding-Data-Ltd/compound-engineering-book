@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-01-28T18:00:00Z",
+  "lastUpdated": "2026-01-28T19:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
-    "lastRun": "2026-01-28T16:30:00Z",
-    "iteration": 25,
+    "lastRun": "2026-01-28T19:00:00Z",
+    "iteration": 27,
     "tasksRemoved": 0,
     "tasksMerged": 0,
     "prioritiesAdjusted": 0,
     "newTasksAdded": 0,
     "tasksUnblocked": 0,
-    "recommendedNext": "task-091",
-    "reasoning": "Curation cycle 25. Queue at minimum: 2 pending meta-tasks (task-091: Write KB articles score -85, task-097: Finalize exercises score -145). Both have negative scores indicating optional polish work. 9 pending subtasks are final review passes. Stats verified: 140 complete, 11 pending, 0 blocked. All 15 chapters complete. 787 tests pass. 66 diagrams. SDK migration done. Publishing readiness: 99.5%."
+    "recommendedNext": "task-095",
+    "reasoning": "Curation cycle 27. Completed task-094 (diagram review): 56 diagrams, all valid Mermaid, 100% coverage. Queue at minimum: 2 pending meta-tasks (task-091 score -85, task-097 score -145). 6 pending subtasks remain (2 under task-091: cross-ref check + final proofread; 4 under task-097: slop check + tech accuracy + cross-ref + proofread). No duplicates, no blocked tasks, no priority changes needed. Stats verified: 143 complete, 8 pending, 0 blocked. Publishing readiness: 99.7%."
   },
   "prds": {
     "index": {
@@ -1760,8 +1760,9 @@
           "parentId": "task-091",
           "type": "review",
           "title": "Diagram review",
-          "status": "pending",
-          "score": -135
+          "status": "complete",
+          "score": -135,
+          "completedAt": "2026-01-28T19:00:00Z"
         },
         {
           "id": "task-095",
@@ -1909,16 +1910,16 @@
     ]
   },
   "stats": {
-    "pending": 9,
+    "pending": 8,
     "inProgress": 0,
-    "complete": 142,
+    "complete": 143,
     "blocked": 0,
     "total": 151
   },
   "checkpoints": {
-    "lastGoodCommit": "59c5dcffbe2a7b0b82904d407c23bf73b814878a",
-    "lastSuccessfulTask": "iteration-25",
-    "lastCheckpoint": "2026-01-28T16:31:20Z",
+    "lastGoodCommit": "12f5ee4e07a4bbc16e029fec0ebf7a88b147981f",
+    "lastSuccessfulTask": "iteration-26",
+    "lastCheckpoint": "2026-01-28T16:43:12Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 0,
