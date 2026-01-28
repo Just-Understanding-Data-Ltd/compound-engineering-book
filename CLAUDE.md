@@ -174,12 +174,16 @@ A chapter is **COMPLETE** when all milestones in `tasks.json.prds[chXX].mileston
 
 All code examples use **TypeScript only** with the Anthropic SDK or Agent SDK.
 
-**CRITICAL: All examples MUST use Anthropic SDKs**
+**CRITICAL: SDK Usage by Chapter**
 
-Every code example must demonstrate real SDK usage. Do NOT write standalone utility functions without SDK integration. Examples should show:
+| Chapters | SDK | Focus |
+|----------|-----|-------|
+| Ch01-Ch05 | Native Anthropic SDK (`@anthropic-ai/sdk`) | API fundamentals, basic prompting, CLAUDE.md |
+| Ch06-Ch15 | Claude Agent SDK (`@anthropic-ai/claude-agent-sdk`) | Custom agents, sub-agents, agentic patterns |
 
+**Ch01-Ch05: Native SDK (API Fundamentals)**
 ```typescript
-// CORRECT: Uses Anthropic SDK
+// Native Anthropic SDK for learning API basics
 import Anthropic from '@anthropic-ai/sdk';
 const client = new Anthropic();
 const response = await client.messages.create({
@@ -187,16 +191,56 @@ const response = await client.messages.create({
   max_tokens: 1024,
   messages: [{ role: 'user', content: prompt }]
 });
+```
 
-// CORRECT: Uses Agent SDK v2
-import { unstable_v2_prompt } from '@anthropic-ai/claude-agent-sdk';
+**Ch06-Ch15: Agent SDK (Custom Agents)**
+```typescript
+// Agent SDK v2 for building custom agents
+import { unstable_v2_prompt, unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk';
+
+// One-shot agent prompt
 const result = await unstable_v2_prompt(prompt, { model: 'claude-sonnet-4-5-20250929' });
 
-// WRONG: Standalone utility without SDK
+// Multi-turn agent session
+await using session = unstable_v2_createSession({ model: 'claude-sonnet-4-5-20250929' });
+await session.send('message');
+for await (const msg of session.stream()) { /* handle response */ }
+```
+
+**WRONG: Standalone utility without SDK**
+```typescript
 function buildPrompt(config) { return `...`; }  // NO - must show SDK usage
 ```
 
-**Why this matters:** Readers are learning to build with Claude. Every example should demonstrate actual API/SDK patterns they'll use in production.
+**Why this matters:** Readers learn API basics first (Ch01-05), then graduate to building custom agents (Ch06-15). The Agent SDK is the focus for the majority of the book because it teaches agentic patterns.
+
+### Simulating Tool Outputs (Git, Shell, etc.)
+
+When code examples simulate tool outputs like git diffs, shell commands, or file contents:
+
+**ALWAYS output exact text format, NOT structured arrays or objects.**
+
+```typescript
+// CORRECT: Exact text output matching real tool behavior
+const gitDiff = `diff --git a/src/app.ts b/src/app.ts
+index 1234567..abcdef0 100644
+--- a/src/app.ts
++++ b/src/app.ts
+@@ -10,6 +10,7 @@ export function main() {
+   const config = loadConfig();
++  const logger = createLogger();
+   return run(config);
+ }`;
+
+// WRONG: Structured representation
+const gitDiff = {
+  file: 'src/app.ts',
+  additions: ['const logger = createLogger();'],
+  deletions: []
+};  // NO - agents see raw text, not structured data
+```
+
+**Why this matters:** Claude Code and custom agents receive tool outputs as raw text. Teaching structured representations misleads readers about how agents actually process information. Always show the exact text format that tools produce.
 
 **Testing requirements:**
 1. All TypeScript examples must compile with `tsc --noEmit`
