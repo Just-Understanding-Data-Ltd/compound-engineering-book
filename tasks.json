@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T23:30:00Z",
+  "lastUpdated": "2026-01-29T23:52:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 23:30: Recalculated 9 pending task scores. Fixed blockedBy format (string→null). Task-448 marked blocked (AppleScript). Priority order: task-482 (830, cross-refs), task-473-479 (815 each, DALL-E diagrams), task-483 (580, terms). Blocked: 6 tasks. Complete: 126.",
@@ -307,6 +307,17 @@
       "outcome": "Added definition 'million tokens (MTok)' at first use on line 18"
     },
     {
+      "id": "task-484",
+      "type": "fix",
+      "title": "CRITICAL: Fix malformed ++_++ underscore escaping in ch05-07",
+      "description": "Fix 7 instances of malformed ++_++ patterns from markdown-to-AsciiDoc conversion:\n- ch05:557 - user++_++input, tool++_++call, tool++_++result, human++_++response\n- ch05:569 - requires++_++approval\n- ch06:277 - MAX++_++INT\n- ch07:645 - node++_++modules\nReplace all ++_++ with just _ (underscore)",
+      "status": "complete",
+      "priority": "critical",
+      "score": 1100,
+      "createdAt": "2026-01-29T18:00:00Z",
+      "completedAt": "2026-01-29T18:10:00Z"
+    },
+    {
       "id": "task-439",
       "type": "fix",
       "title": "Fix all table column widths in AsciiDoc chapters",
@@ -473,6 +484,17 @@
       "completedAt": "2026-01-29T18:00:00Z"
     },
     {
+      "id": "task-485",
+      "type": "fix",
+      "title": "Define undefined acronyms in ch01-04",
+      "description": "Add parenthetical definitions for acronyms on first use:\n- ch01:79 API\n- ch02:115 CLI, ch02:138 JSON, ch02:198 API\n- ch03:24 API, ch03:40 RFC, ch03:85 CRUD, ch03:341 UX\n- ch04:165 LLM",
+      "status": "complete",
+      "priority": "high",
+      "score": 950,
+      "createdAt": "2026-01-29T18:00:00Z",
+      "completedAt": "2026-01-29T21:45:00Z"
+    },
+    {
       "id": "task-001",
       "type": "chapter",
       "chapter": "ch01",
@@ -591,6 +613,17 @@
         }
       ],
       "score": 940
+    },
+    {
+      "id": "task-486",
+      "type": "fix",
+      "title": "Define undefined acronyms in ch05-08",
+      "description": "Add parenthetical definitions:\n- ch05:7 LLM, ch05:40 API, ch05:65 JSON\n- ch06:35 TLA+, Z3 context\n- ch07:5 CI/CD early definition",
+      "status": "complete",
+      "priority": "high",
+      "score": 940,
+      "createdAt": "2026-01-29T18:00:00Z",
+      "completedAt": "2026-01-29T22:00:00Z"
     },
     {
       "id": "task-025",
@@ -1007,6 +1040,30 @@
       "completedAt": "2026-01-29T22:45:00Z"
     },
     {
+      "id": "task-481",
+      "type": "fix",
+      "title": "Scan AsciiDoc chapters for formatting errors",
+      "description": "Run asciidoctor on each chapter to check for syntax errors, broken links, and malformed markup. Check all 16 chapters in asciidoc/ directory. Log any errors found.",
+      "status": "complete",
+      "priority": "high",
+      "score": 900,
+      "createdAt": "2026-01-29T19:10:00Z",
+      "completedAt": "2026-01-29T21:30:00Z",
+      "result": "All 16 AsciiDoc chapters validated with zero errors. Checked code block delimiters, cross-references, and include directives."
+    },
+    {
+      "id": "task-487",
+      "type": "fix",
+      "title": "Define undefined acronyms in ch09-13",
+      "description": "Add parenthetical definitions:\n- ch09:357 API\n- ch10:206 CI\n- ch11:91 REST\n- ch12:137 REST\n- ch13:688 DAG (Directed Acyclic Graph)",
+      "status": "complete",
+      "priority": "medium",
+      "score": 900,
+      "createdAt": "2026-01-29T18:00:00Z",
+      "completedAt": "2026-01-29T22:15:00Z",
+      "completionNote": "No changes needed - all flagged acronyms were either inside code blocks (not prose) or already defined: API (ch01:73), DAG (ch05:389), CI/REST in code examples only"
+    },
+    {
       "id": "task-061",
       "type": "chapter",
       "chapter": "ch11",
@@ -1364,6 +1421,18 @@
       "score": 830,
       "createdAt": "2026-01-29T12:22:11.833Z",
       "completedAt": "2026-01-29T13:30:00Z"
+    },
+    {
+      "id": "task-482",
+      "type": "fix",
+      "title": "Verify all cross-references in AsciiDoc chapters",
+      "description": "Check all internal links, chapter references, and figure references across the 16 AsciiDoc chapter files. Ensure xref syntax is correct and targets exist.",
+      "status": "complete",
+      "priority": "high",
+      "score": 830,
+      "createdAt": "2026-01-29T19:10:00Z",
+      "scoreBreakdown": "high:750 + fix:80 = 830",
+      "completedAt": "2026-01-29T23:45:00Z"
     },
     {
       "id": "task-420",
@@ -2181,10 +2250,11 @@
       "type": "diagram",
       "title": "Regenerate ch06 Verification Ladder diagram with DALL-E",
       "description": "Use image-generator MCP to create a professional pyramid diagram for the Verification Ladder. Prompt: Professional pyramid diagram with 5 levels (Syntax, Runtime, Logic, Integration, End-to-End), widest at bottom, each level a distinct shade of blue, modern flat design, no text. Save to assets/images/ch06-verification-ladder.png",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
-      "score": 815,
+      "score": 420,
       "createdAt": "2026-01-29T17:25:21.916Z",
+      "completedAt": "2026-01-29T23:52:00Z",
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
     },
     {
@@ -2194,7 +2264,7 @@
       "description": "Use image-generator MCP to create a professional flow diagram for Quality Gates. Prompt: Horizontal pipeline with 5 gates/checkpoints, code flowing through each gate, gates as glowing portals or barriers, modern tech visualization, dark background with blue/green accents. Save to assets/images/ch07-quality-gates.png",
       "status": "pending",
       "priority": "high",
-      "score": 815,
+      "score": 420,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
     },
@@ -2205,7 +2275,7 @@
       "description": "Use image-generator MCP to create a professional debugging flow diagram. Prompt: Circular debugging cycle with 4 stages (Observe, Hypothesize, Test, Fix), arrows connecting stages, magnifying glass and code symbols, clean professional style. Save to assets/images/ch08-context-debugging.png",
       "status": "pending",
       "priority": "high",
-      "score": 815,
+      "score": 420,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
     },
@@ -2216,7 +2286,7 @@
       "description": "Use image-generator MCP to create a professional ratchet mechanism diagram. Prompt: Mechanical ratchet gear showing one-way progress, with progress arrow, quality level indicator, clean technical illustration style. Save to assets/images/ch07-ratchet-effect.png",
       "status": "pending",
       "priority": "high",
-      "score": 815,
+      "score": 420,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
     },
@@ -2227,7 +2297,7 @@
       "description": "Use image-generator MCP to create the RALPH loop architecture. Prompt: Circular autonomous loop diagram with Orchestrator, Executor, Task Queue, Memory components, arrows showing flow, modern DevOps style visualization. Save to assets/images/ch10-ralph-architecture.png",
       "status": "pending",
       "priority": "high",
-      "score": 815,
+      "score": 420,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedBy": null,
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
@@ -2239,7 +2309,7 @@
       "description": "Use image-generator MCP to visualize context window. Prompt: Layered rectangular diagram showing context window with system prompt, conversation history, and available space sections, gradient fills, capacity meter on side. Save to assets/images/ch09-context-window.png",
       "status": "pending",
       "priority": "high",
-      "score": 815,
+      "score": 420,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedBy": null,
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
@@ -2251,7 +2321,7 @@
       "description": "Use image-generator MCP to create flywheel effect diagram. Prompt: Circular flywheel with momentum arrows, showing acceleration, compound growth spiral emanating outward, energy/speed visualization. Save to assets/images/ch01-compound-flywheel.png",
       "status": "pending",
       "priority": "high",
-      "score": 815,
+      "score": 420,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedBy": null,
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
@@ -2512,6 +2582,17 @@
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z",
       "completedAt": "2026-01-29T21:30:00Z"
+    },
+    {
+      "id": "task-483",
+      "type": "fix",
+      "title": "Check for undefined terms and acronyms in AsciiDoc",
+      "description": "Scan all AsciiDoc chapters for acronyms (3+ uppercase letters) and verify they are defined on first use. Focus on: LLM, MCP, API, CLI, DDD, OTEL, CI/CD, JWT, REST, CRUD.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 185,
+      "createdAt": "2026-01-29T19:10:00Z",
+      "scoreBreakdown": "medium:500 + fix:80 = 580"
     },
     {
       "id": "task-255",
@@ -2810,86 +2891,6 @@
         "task-449"
       ],
       "createdAt": "2026-01-29T13:35:25.159Z"
-    },
-    {
-      "id": "task-481",
-      "type": "fix",
-      "title": "Scan AsciiDoc chapters for formatting errors",
-      "description": "Run asciidoctor on each chapter to check for syntax errors, broken links, and malformed markup. Check all 16 chapters in asciidoc/ directory. Log any errors found.",
-      "status": "complete",
-      "priority": "high",
-      "score": 900,
-      "createdAt": "2026-01-29T19:10:00Z",
-      "completedAt": "2026-01-29T21:30:00Z",
-      "result": "All 16 AsciiDoc chapters validated with zero errors. Checked code block delimiters, cross-references, and include directives."
-    },
-    {
-      "id": "task-482",
-      "type": "fix",
-      "title": "Verify all cross-references in AsciiDoc chapters",
-      "description": "Check all internal links, chapter references, and figure references across the 16 AsciiDoc chapter files. Ensure xref syntax is correct and targets exist.",
-      "status": "complete",
-      "priority": "high",
-      "score": 830,
-      "createdAt": "2026-01-29T19:10:00Z",
-      "scoreBreakdown": "high:750 + fix:80 = 830",
-      "completedAt": "2026-01-29T23:45:00Z"
-    },
-    {
-      "id": "task-483",
-      "type": "fix",
-      "title": "Check for undefined terms and acronyms in AsciiDoc",
-      "description": "Scan all AsciiDoc chapters for acronyms (3+ uppercase letters) and verify they are defined on first use. Focus on: LLM, MCP, API, CLI, DDD, OTEL, CI/CD, JWT, REST, CRUD.",
-      "status": "pending",
-      "priority": "medium",
-      "score": 580,
-      "createdAt": "2026-01-29T19:10:00Z",
-      "scoreBreakdown": "medium:500 + fix:80 = 580"
-    },
-    {
-      "id": "task-484",
-      "type": "fix",
-      "title": "CRITICAL: Fix malformed ++_++ underscore escaping in ch05-07",
-      "description": "Fix 7 instances of malformed ++_++ patterns from markdown-to-AsciiDoc conversion:\n- ch05:557 - user++_++input, tool++_++call, tool++_++result, human++_++response\n- ch05:569 - requires++_++approval\n- ch06:277 - MAX++_++INT\n- ch07:645 - node++_++modules\nReplace all ++_++ with just _ (underscore)",
-      "status": "complete",
-      "priority": "critical",
-      "score": 1100,
-      "createdAt": "2026-01-29T18:00:00Z",
-      "completedAt": "2026-01-29T18:10:00Z"
-    },
-    {
-      "id": "task-485",
-      "type": "fix",
-      "title": "Define undefined acronyms in ch01-04",
-      "description": "Add parenthetical definitions for acronyms on first use:\n- ch01:79 API\n- ch02:115 CLI, ch02:138 JSON, ch02:198 API\n- ch03:24 API, ch03:40 RFC, ch03:85 CRUD, ch03:341 UX\n- ch04:165 LLM",
-      "status": "complete",
-      "priority": "high",
-      "score": 950,
-      "createdAt": "2026-01-29T18:00:00Z",
-      "completedAt": "2026-01-29T21:45:00Z"
-    },
-    {
-      "id": "task-486",
-      "type": "fix",
-      "title": "Define undefined acronyms in ch05-08",
-      "description": "Add parenthetical definitions:\n- ch05:7 LLM, ch05:40 API, ch05:65 JSON\n- ch06:35 TLA+, Z3 context\n- ch07:5 CI/CD early definition",
-      "status": "complete",
-      "priority": "high",
-      "score": 940,
-      "createdAt": "2026-01-29T18:00:00Z",
-      "completedAt": "2026-01-29T22:00:00Z"
-    },
-    {
-      "id": "task-487",
-      "type": "fix",
-      "title": "Define undefined acronyms in ch09-13",
-      "description": "Add parenthetical definitions:\n- ch09:357 API\n- ch10:206 CI\n- ch11:91 REST\n- ch12:137 REST\n- ch13:688 DAG (Directed Acyclic Graph)",
-      "status": "complete",
-      "priority": "medium",
-      "score": 900,
-      "createdAt": "2026-01-29T18:00:00Z",
-      "completedAt": "2026-01-29T22:15:00Z",
-      "completionNote": "No changes needed - all flagged acronyms were either inside code blocks (not prose) or already defined: API (ch01:73), DAG (ch05:389), CI/REST in code examples only"
     }
   ],
   "completed": {
@@ -2923,14 +2924,15 @@
   },
   "stats": {
     "pending": 8,
-    "complete": 127,
-    "blocked": 6,
-    "total": 141
+    "inProgress": 0,
+    "complete": 218,
+    "blocked": 5,
+    "total": 231
   },
   "checkpoints": {
-    "lastGoodCommit": "b38218371e3aa0f1745baf3f7f304728064bf77b",
-    "lastSuccessfulTask": "iteration-4",
-    "lastCheckpoint": "2026-01-29T18:02:45Z",
+    "lastGoodCommit": "d29a62da38815b81094526bd46c06a913f870ede",
+    "lastSuccessfulTask": "iteration-5",
+    "lastCheckpoint": "2026-01-29T18:09:32Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,
