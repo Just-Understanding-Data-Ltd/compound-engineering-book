@@ -2876,15 +2876,15 @@
     ]
   },
   "stats": {
-    "pending": 0,
-    "blocked": 13,
+    "pending": 7,
+    "blocked": 9,
     "complete": 121,
-    "total": 134
+    "total": 137
   },
   "checkpoints": {
-    "lastGoodCommit": "11a9041b6f9c8b86e02d62146ac9ebc4147de8cb",
-    "lastSuccessfulTask": "interrupted-3",
-    "lastCheckpoint": "2026-01-29T17:29:34Z",
+    "lastGoodCommit": "b84acf7ee630a4aaf28fa817a72168f0a122a164",
+    "lastSuccessfulTask": "interrupted-1",
+    "lastCheckpoint": "2026-01-29T17:41:07Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,
