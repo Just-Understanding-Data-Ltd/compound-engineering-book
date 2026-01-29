@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-30T02:40:00Z",
+  "lastUpdated": "2026-01-30T02:57:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29: Recalculated 5 pending task scores using documented formula (priority + type + blocking bonus). Stats corrected. Complete count includes compacted tasks.",
@@ -354,6 +354,18 @@
       "blockedBy": null,
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815",
       "completedAt": "2026-01-30T02:31:00Z"
+    },
+    {
+      "id": "task-473",
+      "type": "diagram",
+      "title": "Regenerate ch06 Verification Ladder diagram with DALL-E",
+      "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing a 5-level verification pyramid for a technical book.\n\nTOPIC: Software Testing Verification Ladder\nTYPE: Pyramid/Staircase\n\nCONTENT (label each level clearly):\n- Level 1 (bottom): SYNTAX - Code compiles\n- Level 2: RUNTIME - Executes without crashes\n- Level 3: LOGIC - Correct behavior\n- Level 4: INTEGRATION - Components work together\n- Level 5 (top): E2E - Full workflows pass\n\nSTYLE: Vertical staircase ascending, each level a distinct bar with label, gradient blue (light to dark), white background, professional infographic NOT cartoon.\n\nSave to: assets/images/ch06-verification-ladder.png",
+      "status": "complete",
+      "priority": "critical",
+      "score": 1040,
+      "createdAt": "2026-01-29T17:25:21.916Z",
+      "completedAt": "2026-01-30T02:53:00Z",
+      "scoreBreakdown": "critical:1000 + diagram:40 = 1040"
     },
     {
       "id": "task-320",
@@ -1573,18 +1585,6 @@
       "completedAt": "2026-01-30T02:38:00Z"
     },
     {
-      "id": "task-473",
-      "type": "diagram",
-      "title": "Regenerate ch06 Verification Ladder diagram with DALL-E",
-      "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing a 5-level verification pyramid for a technical book.\n\nTOPIC: Software Testing Verification Ladder\nTYPE: Pyramid/Staircase\n\nCONTENT (label each level clearly):\n- Level 1 (bottom): SYNTAX - Code compiles\n- Level 2: RUNTIME - Executes without crashes\n- Level 3: LOGIC - Correct behavior\n- Level 4: INTEGRATION - Components work together\n- Level 5 (top): E2E - Full workflows pass\n\nSTYLE: Vertical staircase ascending, each level a distinct bar with label, gradient blue (light to dark), white background, professional infographic NOT cartoon.\n\nSave to: assets/images/ch06-verification-ladder.png",
-      "status": "complete",
-      "priority": "critical",
-      "score": 1040,
-      "createdAt": "2026-01-29T17:25:21.916Z",
-      "completedAt": "2026-01-30T02:53:00Z",
-      "scoreBreakdown": "critical:1000 + diagram:40 = 1040"
-    },
-    {
       "id": "task-302",
       "type": "enhancement",
       "chapter": "ch07",
@@ -2439,13 +2439,14 @@
       "type": "infra",
       "title": "Update AsciiDoc chapters to use new DALL-E generated images",
       "description": "Replace Mermaid diagram references in all AsciiDoc chapters with the new DALL-E generated PNG images. Update image:: directives to point to assets/images/ folder.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
-      "score": 830,
+      "score": 355,
       "blockedBy": null,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedReason": "Waiting on tasks 473-479 (DALL-E diagram generation) which require missing MCP server",
-      "scoreBreakdown": "high:750 + fix:80 = 830"
+      "scoreBreakdown": "high:750 + fix:80 = 830",
+      "completedAt": "2026-01-30T02:57:00Z"
     },
     {
       "id": "task-403",
@@ -2589,7 +2590,7 @@
       "description": "Scan all AsciiDoc chapters for acronyms (3+ uppercase letters) and verify they are defined on first use. Focus on: LLM, MCP, API, CLI, DDD, OTEL, CI/CD, JWT, REST, CRUD.",
       "status": "pending",
       "priority": "medium",
-      "score": 580,
+      "score": 185,
       "createdAt": "2026-01-29T19:10:00Z",
       "scoreBreakdown": "medium:500 + fix:80 = 580"
     },
@@ -2922,17 +2923,17 @@
     ]
   },
   "stats": {
-    "pending": 2,
+    "pending": 1,
     "inProgress": 0,
-    "complete": 134,
+    "complete": 225,
     "blocked": 5,
     "total": 231
   },
   "checkpoints": {
-    "lastGoodCommit": "22d2684fee5b4b569175946a6d8572a365fbfd9d",
-    "lastSuccessfulTask": "iteration-11",
-    "lastCheckpoint": "2026-01-29T18:37:03Z",
-    "consecutiveFailures": 1,
+    "lastGoodCommit": "e6bbe31aac5ace9dc5336412a826af1fc97a79ea",
+    "lastSuccessfulTask": "iteration-13",
+    "lastCheckpoint": "2026-01-29T18:54:47Z",
+    "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 8,
     "lastQueueCuration": "2026-01-28T23:30:00Z"

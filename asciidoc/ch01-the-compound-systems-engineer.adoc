@@ -267,6 +267,9 @@ Build the constraint system once. Agents verify it forever.
 
 ==== The Compound Effect in Action
 
+.The Compound Engineering Flywheel: Each phase reinforces the next
+image::ch01-compound-flywheel.png[Compound Engineering Flywheel,width=600,align=center]
+
 Here is how observability creates leverage:
 
 * *Session 1*: You build the observability harness. Cost: one week.

@@ -8,7 +8,10 @@ This is the verification problem. And solving it requires thinking in layers.
 
 === The Ladder Framework
 
-Verification isn’t a single check. It’s a hierarchy where each level catches what lower levels miss.
+Verification isn't a single check. It's a hierarchy where each level catches what lower levels miss.
+
+.The Verification Ladder: Each level catches what lower levels miss
+image::ch06-verification-ladder.png[Verification Ladder,width=600,align=center]
 
 ....
 ┌─────────────────────────────────────────────────────────────┐

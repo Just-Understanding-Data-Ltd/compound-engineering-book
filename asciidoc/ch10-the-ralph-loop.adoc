@@ -98,6 +98,9 @@ This mirrors effective human practices. Focused, discrete sessions outperform ma
 
 === The Four-Phase Cycle
 
+.The RALPH Loop: Four-phase autonomous iteration cycle
+image::ch10-ralph-loop.png[RALPH Loop Cycle,width=600,align=center]
+
 Each RALPH iteration follows a four-phase cycle. The time allocation might surprise you.
 
 [width="100%",cols="33%,36%,31%",options="header",]

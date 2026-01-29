@@ -163,6 +163,9 @@ The second context has much higher mutual information. It strongly constrains wh
 
 ==== Channel Capacity: Working Within Limits
 
+.Context Window Anatomy: How 200K tokens are allocated across system, history, context, and reasoning
+image::ch09-context-window.png[Context Window Anatomy,width=700,align=center]
+
 Channel capacity is the maximum information that can reliably pass through a context window:
 
 [source,python]
