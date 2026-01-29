@@ -2262,11 +2262,12 @@
       "type": "diagram",
       "title": "Regenerate ch07 Quality Gates diagram with DALL-E",
       "description": "Use image-generator MCP to create a professional flow diagram for Quality Gates. Prompt: Horizontal pipeline with 5 gates/checkpoints, code flowing through each gate, gates as glowing portals or barriers, modern tech visualization, dark background with blue/green accents. Save to assets/images/ch07-quality-gates.png",
-      "status": "pending",
+      "status": "complete",
       "priority": "critical",
       "score": 1200,
       "createdAt": "2026-01-29T17:25:21.916Z",
-      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
+      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815",
+      "completedAt": "2026-01-29T18:18:00Z"
     },
     {
       "id": "task-475",
@@ -2922,9 +2923,9 @@
     ]
   },
   "stats": {
-    "pending": 7,
+    "pending": 6,
     "inProgress": 0,
-    "complete": 218,
+    "complete": 129,
     "blocked": 6,
     "total": 231
   },
