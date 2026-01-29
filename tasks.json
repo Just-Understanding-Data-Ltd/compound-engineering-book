@@ -1942,7 +1942,7 @@
       "type": "fix",
       "title": "Run Kindle Previewer review and fix issues",
       "description": "Use kindle-review skill to test EPUB on Kindle. Document any rendering issues. Fix in AsciiDoc source. Iterate until Kindle rendering is clean.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
       "score": 460,
       "scoreBreakdown": "high:750 + fix:80 + blocks(1×25):25 = 855",
@@ -2885,10 +2885,12 @@
       "type": "fix",
       "title": "Define undefined acronyms in ch09-13",
       "description": "Add parenthetical definitions:\n- ch09:357 API\n- ch10:206 CI\n- ch11:91 REST\n- ch12:137 REST\n- ch13:688 DAG (Directed Acyclic Graph)",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 900,
-      "createdAt": "2026-01-29T18:00:00Z"
+      "createdAt": "2026-01-29T18:00:00Z",
+      "completedAt": "2026-01-29T22:15:00Z",
+      "completionNote": "No changes needed - all flagged acronyms were either inside code blocks (not prose) or already defined: API (ch01:73), DAG (ch05:389), CI/REST in code examples only"
     }
   ],
   "completed": {
@@ -2922,14 +2924,14 @@
   },
   "stats": {
     "pending": 10,
-    "complete": 125,
-    "blocked": 6,
+    "complete": 126,
+    "blocked": 5,
     "total": 141
   },
   "checkpoints": {
-    "lastGoodCommit": "86f6cc3456289cb57b401bcc5e619d2b28e3abac",
-    "lastSuccessfulTask": "iteration-2",
-    "lastCheckpoint": "2026-01-29T17:49:00Z",
+    "lastGoodCommit": "cdd88af5c3482ea05b909bb1a8c9760b2647698d",
+    "lastSuccessfulTask": "iteration-3",
+    "lastCheckpoint": "2026-01-29T17:55:20Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,
