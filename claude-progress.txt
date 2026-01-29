@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 12:52)
-- Phase: AsciiDoc Publishing Pipeline
-- Active: Converting Markdown chapters to AsciiDoc
-- Last Completed: task-432 (Markdown to AsciiDoc conversion script)
+## Current Status (Updated: 2026-01-29 12:54)
+- Phase: AsciiDoc Publishing Pipeline + Chapter 16 Completion
+- Active: AsciiDoc conversion and Ch16 finalization running in parallel
+- Last Completed: Queue curation iteration 4
 - Blockers: None
-- Queue Health: 35 pending, 88 complete
+- Queue Health: 8 pending, 27 blocked, 178 complete
 - Publishing Readiness: Ch01-Ch16 first drafts complete, EPUB done, AsciiDoc conversion script ready
-- Next Task: task-433 (Convert ch01-ch03 to AsciiDoc)
+- Next Task: task-433 (Convert ch01-ch03 to AsciiDoc) or any Ch16 task (462-466)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -29,6 +29,26 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 12:54 - Queue Curation Iteration 4
+- What: Curated task queue - marked blocked tasks, fixed dependencies
+- Changes:
+  - Marked 27 tasks as "blocked" (previously "pending" but with incomplete blockers)
+  - Fixed stats: 8 pending, 27 blocked, 178 complete, 213 total
+  - Added task-462, 463, 464 (diagrams) as blockers for task-468 (Ch16 final QA)
+  - Updated curatorNotes with actionable task summary
+- Dependency chain verified:
+  - AsciiDoc: task-433 → 434 → 435 → 436 → 437 → 438 → (themes 443/444) → (builds 445/446) → 449
+  - Chapter 16: diagrams (462-464) + code (465) + exercises (466) → review (467) → final (468) → TOC (469)
+- Truly actionable tasks (8 total):
+  1. task-433: Convert ch01-ch03 to AsciiDoc (score 480)
+  2. task-465: Chapter 16 code examples (score 460)
+  3. task-466: Chapter 16 exercises (score 460)
+  4. task-462/463/464: Chapter 16 diagrams (score 435 each)
+  5. task-443/444: AsciiDoc PDF/EPUB themes (score 380 each)
+- Outcome: Clean queue, correct blocked status, clear execution path
+- Stats: 8 pending, 27 blocked, 178 complete
+- Next: task-433 (highest score) or any Ch16 task
 
 ### 2026-01-29 12:52 - COMPLETED task-432: Create Markdown to AsciiDoc conversion script
 - What: Created scripts/convert-to-asciidoc.sh for converting Markdown chapters to AsciiDoc

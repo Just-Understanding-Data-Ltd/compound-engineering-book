@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-01-29T12:48:28.809Z",
+  "lastUpdated": "2026-01-29T12:54:04Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
-  "curatorNotes": "Iteration 3 curation: Removed task-431 from blockedBy arrays after completion. task-432 now unblocked and ready for execution. AsciiDoc pipeline proceeding in order.",
+  "curatorNotes": "Iteration 4 curation: Marked 27 tasks as blocked (have incomplete blockers). 8 tasks truly actionable: task-433 (ch01-03 conversion), task-443/444 (AsciiDoc themes), task-462-466 (Ch16 completion). Next: task-433 or any Ch16 task.",
   "prds": {
     "index": {
       "status": "complete",
@@ -1338,7 +1338,7 @@
       "type": "infra",
       "title": "Final AsciiDoc build: PDF, EPUB, Kindle validation",
       "description": "Full build of all formats. Run epubcheck on EPUB. Visual review of PDF. Kindle Previewer check. Copy final files to Desktop. Update build scripts in CI.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "critical",
       "score": 655,
       "blockedBy": [
@@ -1600,7 +1600,7 @@
       "type": "infra",
       "title": "Convert frontmatter and create book.adoc master file",
       "description": "Convert frontmatter.md to AsciiDoc. Create book.adoc master file with includes for all chapters. Set up document attributes (author, title, toc, etc).",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 580,
       "blockedBy": [
@@ -1729,7 +1729,7 @@
       "type": "fix",
       "title": "Fix all table column widths in AsciiDoc chapters",
       "description": "Review all tables across 15 chapters. Add cols attribute with appropriate widths. Ensure no table exceeds page width. Test in both PDF and EPUB output.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 510,
       "blockedBy": [
@@ -1745,9 +1745,7 @@
       "status": "pending",
       "priority": "high",
       "score": 480,
-      "blockedBy": [
-        "task-432"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
     {
@@ -1755,7 +1753,7 @@
       "type": "chapter",
       "title": "Convert ch04-ch06 to AsciiDoc",
       "description": "Convert chapters 4-6 from Markdown to AsciiDoc. Fix table column widths. Convert blockquotes to admonitions. Verify code blocks.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 480,
       "blockedBy": [
@@ -1768,7 +1766,7 @@
       "type": "chapter",
       "title": "Convert ch07-ch09 to AsciiDoc",
       "description": "Convert chapters 7-9 from Markdown to AsciiDoc. Fix table column widths. Convert blockquotes to admonitions. Verify code blocks.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 480,
       "blockedBy": [
@@ -1781,7 +1779,7 @@
       "type": "chapter",
       "title": "Convert ch10-ch12 to AsciiDoc",
       "description": "Convert chapters 10-12 from Markdown to AsciiDoc. Fix table column widths. Convert blockquotes to admonitions. Verify code blocks.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 480,
       "blockedBy": [
@@ -1794,7 +1792,7 @@
       "type": "chapter",
       "title": "Convert ch13-ch15 to AsciiDoc",
       "description": "Convert chapters 13-15 from Markdown to AsciiDoc. Fix table column widths. Convert blockquotes to admonitions. Verify code blocks.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 480,
       "blockedBy": [
@@ -1868,7 +1866,7 @@
       "type": "fix",
       "title": "Run Kindle Previewer review and fix issues",
       "description": "Use kindle-review skill to test EPUB on Kindle. Document any rendering issues. Fix in AsciiDoc source. Iterate until Kindle rendering is clean.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 460,
       "blockedBy": [
@@ -1901,7 +1899,7 @@
       "type": "fix",
       "title": "Chapter 16: Review pass - slop check, term intro, tech accuracy",
       "description": "Run all review checks on Chapter 16. Fix any AI slop, undefined terms, technical inaccuracies. Ensure code examples compile and match actual project files.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 460,
       "blockedBy": [
@@ -1915,11 +1913,14 @@
       "type": "fix",
       "title": "Chapter 16: Final quality gate and milestone completion",
       "description": "Run full quality gate: word count (3500-4500), no em dashes, no AI slop, diagrams exist, exercises exist, cross-refs valid. Mark chapter complete.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 460,
       "blockedBy": [
-        "task-467"
+        "task-467",
+        "task-462",
+        "task-463",
+        "task-464"
       ],
       "createdAt": "2026-01-29T12:22:11.833Z"
     },
@@ -2027,7 +2028,7 @@
       "type": "fix",
       "title": "Create responsive table strategy for small screens",
       "description": "For tables with 4+ columns: create AsciiDoc conditionals that show full table in PDF but simplified version (or stacked layout) in EPUB/Kindle. Document the pattern for future tables.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 435,
       "blockedBy": [
@@ -2040,7 +2041,7 @@
       "type": "fix",
       "title": "Audit and fix all code blocks for max line length",
       "description": "Scan all code blocks across 15 chapters. Any line over 65 characters risks overflow on small screens. Refactor long lines: break strings, add line continuations, or simplify. Target: 0 lines over 70 chars.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 435,
       "blockedBy": [
@@ -2083,7 +2084,7 @@
       "type": "fix",
       "title": "Update book TOC and cross-references for Chapter 16",
       "description": "Add Chapter 16 to table of contents. Update prds/toc.md. Add cross-references from earlier chapters (especially ch10, ch13, ch14) pointing to Chapter 16 for the full case study.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 435,
       "blockedBy": [
@@ -2096,7 +2097,7 @@
       "type": "infra",
       "title": "Build and validate AsciiDoc EPUB output",
       "description": "Run asciidoctor-epub3 on book.adoc. Validate in Apple Books and Kindle Previewer. Check tables, code blocks, admonitions render correctly.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 405,
       "blockedBy": [
@@ -2110,7 +2111,7 @@
       "type": "infra",
       "title": "Install Kindle Previewer and create preview skill",
       "description": "Download and install Kindle Previewer 3. Create scripts/kindle-preview.ts that opens EPUB in Kindle Previewer, takes screenshots, and analyzes with Gemini. Create .claude/skills/kindle-review/SKILL.md.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 405,
       "blockedBy": [
@@ -2143,7 +2144,7 @@
       "type": "infra",
       "title": "Build and validate AsciiDoc PDF output",
       "description": "Run asciidoctor-pdf on book.adoc. Validate all tables render without overflow. Check code blocks, fonts, page breaks. Compare quality to WeasyPrint PDF.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 380,
       "blockedBy": [
@@ -2157,7 +2158,7 @@
       "type": "infra",
       "title": "Create Kindle preview Gemini script (scripts/kindle-review.ts)",
       "description": "Build a script similar to epub-review.ts but for Kindle. Use Kindle Previewer CLI to export screenshots of each chapter on different device sizes (Kindle, Kindle Paperwhite, Kindle Fire). Send to Gemini for analysis of overflow, readability, font rendering.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 380,
       "blockedBy": [
@@ -2183,7 +2184,7 @@
       "type": "infra",
       "title": "Create Claude skill for Kindle review (.claude/skills/kindle-review)",
       "description": "Create SKILL.md for Kindle visual review. Document workflow: run kindle-review.ts, analyze Gemini report, create fix tasks. Include device size options and common Kindle rendering issues to check.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 355,
       "blockedBy": [
@@ -2196,7 +2197,7 @@
       "type": "infra",
       "title": "Create overflow detection script",
       "description": "Build scripts/detect-overflow.ts that parses AsciiDoc, measures table column content width, code line lengths, and flags potential overflow risks before build. Run as pre-commit hook.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 355,
       "blockedBy": [
@@ -2209,7 +2210,7 @@
       "type": "infra",
       "title": "Create unified build script with format selection",
       "description": "Create scripts/build-book.sh that accepts --format pdf|epub|kindle|all. Handles AsciiDoc toolchain, font embedding, validation, and copies output to Desktop. Single entry point for all builds.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 355,
       "blockedBy": [
@@ -2317,7 +2318,7 @@
       "type": "fix",
       "title": "Convert blockquotes to AsciiDoc admonitions",
       "description": "Find all blockquotes that are tips, warnings, or notes. Convert to native AsciiDoc admonitions (NOTE:, TIP:, WARNING:, IMPORTANT:). Improves EPUB/PDF rendering.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "medium",
       "score": 185,
       "blockedBy": [
@@ -2330,7 +2331,7 @@
       "type": "fix",
       "title": "Add code block callouts where beneficial",
       "description": "Review code examples. Add AsciiDoc callouts (numbered annotations) to complex code blocks that would benefit from inline explanations.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "medium",
       "score": 185,
       "blockedBy": [
@@ -2343,7 +2344,7 @@
       "type": "fix",
       "title": "Update cross-references to AsciiDoc format",
       "description": "Convert markdown links between chapters to AsciiDoc cross-references (<<chapter-id>>). Ensures proper linking in all output formats.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "medium",
       "score": 185,
       "blockedBy": [
@@ -2356,7 +2357,7 @@
       "type": "fix",
       "title": "Add syntax highlighting for all languages in code blocks",
       "description": "Audit code blocks for missing language tags. Add proper language hints (typescript, bash, yaml, json, etc). Ensure Asciidoctor rouge/pygments highlights all blocks correctly.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "medium",
       "score": 185,
       "blockedBy": [
@@ -2454,7 +2455,7 @@
       "type": "infra",
       "title": "Create multi-device visual regression test suite",
       "description": "Build scripts/visual-regression.ts that renders book on multiple viewport sizes (phone, tablet, e-reader, desktop). Compare screenshots between builds to catch regressions. Store baseline images in .visual-baseline/.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "medium",
       "score": 105,
       "blockedBy": [
@@ -2467,7 +2468,7 @@
       "type": "infra",
       "title": "Generate table of contents with chapter summaries",
       "description": "Create enhanced TOC that includes 1-sentence summary per chapter. Improves navigation in EPUB readers. Use AsciiDoc preamble or custom attributes.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "medium",
       "score": 105,
       "blockedBy": [
@@ -2638,7 +2639,7 @@
       "type": "infra",
       "title": "Add index generation for key terms",
       "description": "Use AsciiDoc indexterm markup to create a proper book index. Tag key concepts: Claude Code, RALPH, context engineering, verification ladder, etc. Generate index in PDF output.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "low",
       "score": -295,
       "blockedBy": [
@@ -2677,16 +2678,16 @@
     ]
   },
   "stats": {
-    "pending": 35,
+    "pending": 8,
     "inProgress": 0,
-    "complete": 88,
-    "blocked": 0,
+    "complete": 178,
+    "blocked": 27,
     "total": 213
   },
   "checkpoints": {
-    "lastGoodCommit": "bd7183e17a3b692873ca163a21fe4cf1e89ba363",
-    "lastSuccessfulTask": "iteration-3",
-    "lastCheckpoint": "2026-01-29T12:48:28Z",
+    "lastGoodCommit": "630cbea68bae23d33638827a08e17db3e01fa2ef",
+    "lastSuccessfulTask": "iteration-4",
+    "lastCheckpoint": "2026-01-29T12:51:51Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 4,
