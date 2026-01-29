@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-01-29T14:08:17.725Z",
+  "lastUpdated": "2026-01-29T18:00:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
-  "curatorNotes": "Curation cycle 2026-01-29 17:30: Fixed score mismatch for task-443 (380→880) and task-444 (380→905) to match scoreBreakdown. Added blocking bonus to task-463/464 (Ch16 diagrams block task-468, now 485 each). Next priorities: Ch16 diagrams (463, 464), then AsciiDoc themes (443, 444). Stats: 14 pending, 11 blocked, 189 complete.",
+  "curatorNotes": "Curation cycle 2026-01-29 18:00: Fixed score mismatches for task-463 (420→815), task-464 (420→815), task-443 (380→880), task-446 (405→780). Fixed task-470 status (pending→blocked). Priority order: task-443 (PDF theme, 880), task-463/464 (ch16 diagrams, 815 each), task-446 (EPUB build, 780). Stats: 11 pending, 11 blocked, 192 complete.",
   "prds": {
     "index": {
       "status": "complete",
@@ -2084,7 +2084,7 @@
       "description": "Create diagram showing 7 review agents running in parallel, each checking different quality dimensions, feeding issues back to task queue.",
       "status": "pending",
       "priority": "high",
-      "score": 420,
+      "score": 815,
       "scoreBreakdown": "high:750 + diagram:40 + blocking(1×25):25 = 815",
       "blocks": [
         "task-468"
@@ -2098,7 +2098,7 @@
       "description": "Create diagram showing anatomy of a Claude skill: SKILL.md structure, tool integration (Playwright, Gemini), output flow. Use epub-review as example.",
       "status": "pending",
       "priority": "high",
-      "score": 420,
+      "score": 815,
       "scoreBreakdown": "high:750 + diagram:40 + blocking(1×25):25 = 815",
       "blocks": [
         "task-468"
@@ -2112,7 +2112,9 @@
       "description": "Run asciidoctor-epub3 on book.adoc. Validate in Apple Books and Kindle Previewer. Check tables, code blocks, admonitions render correctly.",
       "status": "pending",
       "priority": "high",
-      "score": 405,
+      "score": 805,
+      "scoreBreakdown": "high:750 + infra:30 + blocking(1×25):25 = 805",
+      "blocks": ["task-447"],
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
@@ -2136,7 +2138,7 @@
       "description": "Create asciidoc/pdf-theme.yml with Source Serif 4, Source Sans 3, JetBrains Mono fonts. Match the styling from the current epub-style.css.",
       "status": "pending",
       "priority": "high",
-      "score": 380,
+      "score": 880,
       "scoreBreakdown": "high:750 + infra:30 + blocking(4×25):100 = 880",
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
@@ -2199,7 +2201,8 @@
       "description": "Build scripts/detect-overflow.ts that parses AsciiDoc, measures table column content width, code line lengths, and flags potential overflow risks before build. Run as pre-commit hook.",
       "status": "pending",
       "priority": "high",
-      "score": 355,
+      "score": 780,
+      "scoreBreakdown": "high:750 + infra:30 = 780",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
     },
@@ -2318,7 +2321,8 @@
       "description": "Find all blockquotes that are tips, warnings, or notes. Convert to native AsciiDoc admonitions (NOTE:, TIP:, WARNING:, IMPORTANT:). Improves EPUB/PDF rendering.",
       "status": "pending",
       "priority": "medium",
-      "score": 185,
+      "score": 580,
+      "scoreBreakdown": "medium:500 + fix:80 = 580",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
@@ -2329,7 +2333,8 @@
       "description": "Review code examples. Add AsciiDoc callouts (numbered annotations) to complex code blocks that would benefit from inline explanations.",
       "status": "pending",
       "priority": "medium",
-      "score": 185,
+      "score": 580,
+      "scoreBreakdown": "medium:500 + fix:80 = 580",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
@@ -2340,7 +2345,8 @@
       "description": "Convert markdown links between chapters to AsciiDoc cross-references (<<chapter-id>>). Ensures proper linking in all output formats.",
       "status": "pending",
       "priority": "medium",
-      "score": 185,
+      "score": 580,
+      "scoreBreakdown": "medium:500 + fix:80 = 580",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
@@ -2351,7 +2357,8 @@
       "description": "Audit code blocks for missing language tags. Add proper language hints (typescript, bash, yaml, json, etc). Ensure Asciidoctor rouge/pygments highlights all blocks correctly.",
       "status": "pending",
       "priority": "medium",
-      "score": 185,
+      "score": 580,
+      "scoreBreakdown": "medium:500 + fix:80 = 580",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
     },
@@ -2460,7 +2467,8 @@
       "description": "Create enhanced TOC that includes 1-sentence summary per chapter. Improves navigation in EPUB readers. Use AsciiDoc preamble or custom attributes.",
       "status": "pending",
       "priority": "medium",
-      "score": 105,
+      "score": 530,
+      "scoreBreakdown": "medium:500 + infra:30 = 530",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
     },
@@ -2629,7 +2637,8 @@
       "description": "Use AsciiDoc indexterm markup to create a proper book index. Tag key concepts: Claude Code, RALPH, context engineering, verification ladder, etc. Generate index in PDF output.",
       "status": "pending",
       "priority": "low",
-      "score": -295,
+      "score": 130,
+      "scoreBreakdown": "low:100 + infra:30 = 130",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
     },
@@ -2638,7 +2647,7 @@
       "type": "infra",
       "title": "Clean up: Archive old Markdown chapters folder",
       "description": "After AsciiDoc pipeline is validated and working: (1) Create archive/markdown-chapters/ folder, (2) Move chapters/*.md to archive, (3) Move leanpub/ to archive, (4) Update .gitignore if needed. Only do this after task-449 (final validation) confirms AsciiDoc output is good.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "low",
       "score": -295,
       "blockedBy": [
@@ -2677,17 +2686,17 @@
     ]
   },
   "stats": {
-    "pending": 12,
+    "pending": 11,
     "inProgress": 0,
     "complete": 192,
-    "blocked": 10,
+    "blocked": 11,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "fb9998734df281ecf8025eb5e54b84137188700e",
-    "lastSuccessfulTask": "iteration-11",
-    "lastCheckpoint": "2026-01-29T14:08:17Z",
-    "consecutiveFailures": 2,
+    "lastGoodCommit": "67a29af5456fb80faf13b00cd0633a1f80fd41ca",
+    "lastSuccessfulTask": "iteration-14",
+    "lastCheckpoint": "2026-01-29T14:45:28Z",
+    "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,
     "lastQueueCuration": "2026-01-28T23:30:00Z"
