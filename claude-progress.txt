@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 13:10)
+## Current Status (Updated: 2026-01-29 13:18)
 - Phase: AsciiDoc Publishing Pipeline + Chapter 16 Completion
-- Active: AsciiDoc conversion and Ch16 finalization running in parallel
-- Last Completed: task-437 (Convert ch13-ch15 to AsciiDoc)
+- Active: AsciiDoc conversion COMPLETE, Ch16 finalization pending
+- Last Completed: task-438 (Convert frontmatter and create book.adoc master file)
 - Blockers: None
-- Queue Health: 8 pending, 22 blocked, 93 complete
-- Publishing Readiness: Ch01-Ch16 first drafts complete, EPUB done, ch01-15 converted to AsciiDoc
-- Next Task: task-438 (Convert ch16 to AsciiDoc) or any Ch16 task (462-466)
+- Queue Health: 7 pending, 22 blocked, 94 complete
+- Publishing Readiness: ALL 16 chapters converted to AsciiDoc, book.adoc master file created
+- Next Task: task-465 (Ch16 code examples) or task-462/463/464 (Ch16 diagrams)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -16,8 +16,8 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~51,000 (target 45,000-57,000, 100% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
-- AsciiDoc Conversion: 15/16 chapters (94% complete - ch01-15)
-- Tasks Complete: 182/213 (85%)
+- AsciiDoc Conversion: 16/16 chapters (100% complete) + book.adoc master file
+- Tasks Complete: 94/123 (76%)
 - Test Pass Rate: 100% across all chapters (787 tests total)
 - Exercises: 44 total (2-3 per chapter), all reviewed and finalized ✓
 
@@ -30,6 +30,26 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 13:18 - COMPLETED task-438: Convert frontmatter and create book.adoc master file
+- What: Completed final AsciiDoc conversion phase
+- Files created:
+  - asciidoc/ch16-building-autonomous-systems.adoc (641 lines, 3571 words)
+  - asciidoc/frontmatter.adoc (converted from leanpub/frontmatter.md)
+  - asciidoc/backmatter.adoc (converted from leanpub/backmatter.md)
+  - asciidoc/book.adoc (master file with all includes)
+- Book.adoc features:
+  - doctype: book with TOC, section numbers, part numbers
+  - 4 parts with proper [part] markers and descriptions
+  - All 16 chapters included
+  - Frontmatter and backmatter included
+- Test output:
+  - output/book-test.html (737KB) generated successfully
+  - All includes validated with asciidoctor
+- AsciiDoc conversion status: 100% COMPLETE
+- Iteration: 4
+- Stats: 7 pending, 22 blocked, 94 complete
+- Next: Ch16 completion tasks (diagrams, code, exercises)
 
 ### 2026-01-29 13:10 - COMPLETED task-437: Convert ch13-ch15 to AsciiDoc
 - What: Converted chapters 13-15 from Markdown to AsciiDoc format

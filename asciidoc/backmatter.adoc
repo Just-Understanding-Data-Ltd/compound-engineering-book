@@ -1,0 +1,39 @@
+== Appendix A: Quick Reference
+
+=== Essential Commands
+
+[source,bash]
+----
+# Start Claude Code
+claude
+
+# Run with specific prompt
+claude -p "your prompt here"
+
+# Resume session
+claude --resume
+
+# Run RALPH loop
+./scripts/ralph.sh --max-hours 3
+----
+
+=== Key Patterns
+
+[cols=",",options="header",]
+|===
+|Pattern |Use Case
+|Progressive Disclosure |Load context on demand
+|Verification Ladder |Catch errors at each level
+|Circuit Breaker |Prevent runaway failures
+|Clean Slate Recovery |Reset corrupted context
+|===
+
+== Appendix B: Resources
+
+* https://docs.anthropic.com/en/docs/claude-code[Claude Code Documentation]
+* https://docs.anthropic.com/en/api[Anthropic API Reference]
+* https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/sdk[Claude Agent SDK]
+
+== About the Author
+
+James Phoenix is a software engineer focused on AI-assisted development and compound engineering systems.

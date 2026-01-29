@@ -1,0 +1,81 @@
+= The Meta-Engineer: 10x Was the Floor
+James Phoenix
+:doctype: book
+:toc: left
+:toclevels: 3
+:sectnums:
+:sectnumlevels: 3
+:partnums:
+:icons: font
+:source-highlighter: rouge
+:rouge-style: github
+:imagesdir: images
+:experimental:
+
+// Book metadata
+:description: Building Autonomous AI Systems with Claude Code
+:keywords: Claude Code, AI, agents, software engineering, automation
+:revnumber: 1.0
+:revdate: 2026-01-29
+
+// Frontmatter (preface content)
+include::frontmatter.adoc[]
+
+// Part I: Foundations
+[part]
+= Foundations
+
+The first three chapters establish the mental models and foundational skills you need for AI-assisted development. You'll understand what compound engineering means, get hands-on with Claude Code, and master the fundamentals of effective prompting.
+
+include::ch01-the-compound-systems-engineer.adoc[]
+
+include::ch02-getting-started-with-claude-code.adoc[]
+
+include::ch03-prompting-fundamentals.adoc[]
+
+// Part II: Core Techniques
+[part]
+= Core Techniques
+
+These three chapters cover the essential patterns you'll use daily. You'll learn to write effective CLAUDE.md files, build reliable agents using the 12-factor methodology, and implement verification ladders that catch errors before they compound.
+
+include::ch04-writing-your-first-claude-md.adoc[]
+
+include::ch05-the-12-factor-agent.adoc[]
+
+include::ch06-the-verification-ladder.adoc[]
+
+// Part III: Advanced Patterns
+[part]
+= Advanced Patterns
+
+Advanced techniques for power users. You'll implement quality gates that compound over time, master error handling and debugging strategies, and deep dive into context engineering to maximize Claude's effectiveness.
+
+include::ch07-quality-gates-that-compound.adoc[]
+
+include::ch08-error-handling-and-debugging.adoc[]
+
+include::ch09-context-engineering-deep-dive.adoc[]
+
+// Part IV: Production Systems
+[part]
+= Production Systems
+
+Building autonomous systems that work while you sleep. You'll implement the RALPH loop for long-running agents, design sub-agent architectures, master development workflows, build production harnesses, adopt the meta-engineer playbook, and optimize for cost and model selection.
+
+include::ch10-the-ralph-loop.adoc[]
+
+include::ch11-sub-agent-architecture.adoc[]
+
+include::ch12-development-workflows.adoc[]
+
+include::ch13-building-the-harness.adoc[]
+
+include::ch14-the-meta-engineer-playbook.adoc[]
+
+include::ch15-model-strategy-and-cost-optimization.adoc[]
+
+include::ch16-building-autonomous-systems.adoc[]
+
+// Backmatter (appendices)
+include::backmatter.adoc[]
