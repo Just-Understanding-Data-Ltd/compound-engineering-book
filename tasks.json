@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-01-29T13:46:48.510Z",
+  "lastUpdated": "2026-01-29T17:30:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
-  "curatorNotes": "Curation cycle: Updated blocking scores. task-439 (table widths) blocks 10+ tasks, now score 1080. task-443 (PDF theme) blocks 4 tasks, now score 880. task-444 (EPUB theme) blocks 5 tasks, now score 905. 16 pending, 13 blocked, 184 complete.",
+  "curatorNotes": "Curation cycle 2026-01-29 17:30: Fixed score mismatch for task-443 (380→880) and task-444 (380→905) to match scoreBreakdown. Added blocking bonus to task-463/464 (Ch16 diagrams block task-468, now 485 each). Next priorities: Ch16 diagrams (463, 464), then AsciiDoc themes (443, 444). Stats: 14 pending, 11 blocked, 189 complete.",
   "prds": {
     "index": {
       "status": "complete",
@@ -1913,8 +1913,6 @@
       "priority": "high",
       "score": 460,
       "blockedBy": [
-        "task-467",
-        "task-462",
         "task-463",
         "task-464"
       ],
@@ -1933,22 +1931,26 @@
     },
     {
       "id": "task-463",
-      "type": "fix",
+      "type": "diagram",
       "title": "Chapter 16: Add review agent parallel execution diagram",
       "description": "Create diagram showing 7 review agents running in parallel, each checking different quality dimensions, feeding issues back to task queue.",
       "status": "pending",
       "priority": "high",
-      "score": 460,
+      "score": 815,
+      "scoreBreakdown": "high:750 + diagram:40 + blocking(1×25):25 = 815",
+      "blocks": ["task-468"],
       "createdAt": "2026-01-29T12:22:11.833Z"
     },
     {
       "id": "task-464",
-      "type": "fix",
+      "type": "diagram",
       "title": "Chapter 16: Add skill anatomy diagram",
       "description": "Create diagram showing anatomy of a Claude skill: SKILL.md structure, tool integration (Playwright, Gemini), output flow. Use epub-review as example.",
       "status": "pending",
       "priority": "high",
-      "score": 460,
+      "score": 815,
+      "scoreBreakdown": "high:750 + diagram:40 + blocking(1×25):25 = 815",
+      "blocks": ["task-468"],
       "createdAt": "2026-01-29T12:22:11.833Z"
     },
     {
@@ -2118,7 +2120,7 @@
       "description": "Create asciidoc/pdf-theme.yml with Source Serif 4, Source Sans 3, JetBrains Mono fonts. Match the styling from the current epub-style.css.",
       "status": "pending",
       "priority": "high",
-      "score": 380,
+      "score": 880,
       "scoreBreakdown": "high:750 + infra:30 + blocking(4×25):100 = 880",
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
@@ -2129,7 +2131,7 @@
       "description": "Create asciidoc/epub-style.css for EPUB output. Include dark mode support. Embed custom fonts.",
       "status": "pending",
       "priority": "high",
-      "score": 380,
+      "score": 905,
       "scoreBreakdown": "high:750 + infra:30 + blocking(5×25):125 = 905",
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
@@ -2672,15 +2674,15 @@
   "stats": {
     "pending": 14,
     "inProgress": 0,
-    "complete": 99,
+    "complete": 189,
     "blocked": 11,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "d8937699d9deb913f357097f06dcb330b281ce21",
-    "lastSuccessfulTask": "iteration-7",
-    "lastCheckpoint": "2026-01-29T13:46:48Z",
-    "consecutiveFailures": 1,
+    "lastGoodCommit": "9102b5ce37b8d757738e92b7171933744e41f877",
+    "lastSuccessfulTask": "iteration-9",
+    "lastCheckpoint": "2026-01-29T13:53:41Z",
+    "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 5,
     "lastQueueCuration": "2026-01-28T23:30:00Z"
