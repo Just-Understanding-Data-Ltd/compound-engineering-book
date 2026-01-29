@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T13:05:20.888Z",
+  "lastUpdated": "2026-01-29T13:07:55.332Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Iteration 5: Completed task-433 (ch01-ch03 AsciiDoc conversion). 7 tasks pending, 27 blocked, 179 complete.",
@@ -1600,7 +1600,7 @@
       "type": "infra",
       "title": "Convert frontmatter and create book.adoc master file",
       "description": "Convert frontmatter.md to AsciiDoc. Create book.adoc master file with includes for all chapters. Set up document attributes (author, title, toc, etc).",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
       "score": 580,
       "blockedBy": [
@@ -1790,11 +1790,12 @@
       "type": "chapter",
       "title": "Convert ch13-ch15 to AsciiDoc",
       "description": "Convert chapters 13-15 from Markdown to AsciiDoc. Fix table column widths. Convert blockquotes to admonitions. Verify code blocks.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 480,
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:01.156Z"
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T13:10:00Z"
     },
     {
       "id": "task-402",
@@ -2676,14 +2677,14 @@
   "stats": {
     "pending": 8,
     "inProgress": 0,
-    "complete": 182,
-    "blocked": 23,
-    "total": 213
+    "complete": 93,
+    "blocked": 22,
+    "total": 123
   },
   "checkpoints": {
-    "lastGoodCommit": "709a0c82882cedd9af8b01f3f61e54e851c38a23",
-    "lastSuccessfulTask": "iteration-1",
-    "lastCheckpoint": "2026-01-29T13:05:20Z",
+    "lastGoodCommit": "12f07c076811b2e47fa28987ea1b486c501e86a7",
+    "lastSuccessfulTask": "iteration-2",
+    "lastCheckpoint": "2026-01-29T13:07:55Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 4,

@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 13:06)
+## Current Status (Updated: 2026-01-29 13:10)
 - Phase: AsciiDoc Publishing Pipeline + Chapter 16 Completion
 - Active: AsciiDoc conversion and Ch16 finalization running in parallel
-- Last Completed: task-436 (Convert ch10-ch12 to AsciiDoc)
+- Last Completed: task-437 (Convert ch13-ch15 to AsciiDoc)
 - Blockers: None
-- Queue Health: 8 pending, 23 blocked, 182 complete
-- Publishing Readiness: Ch01-Ch16 first drafts complete, EPUB done, ch01-12 converted to AsciiDoc
-- Next Task: task-437 (Convert ch13-ch15 to AsciiDoc) or any Ch16 task (462-466)
+- Queue Health: 8 pending, 22 blocked, 93 complete
+- Publishing Readiness: Ch01-Ch16 first drafts complete, EPUB done, ch01-15 converted to AsciiDoc
+- Next Task: task-438 (Convert ch16 to AsciiDoc) or any Ch16 task (462-466)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -16,7 +16,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~51,000 (target 45,000-57,000, 100% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
-- AsciiDoc Conversion: 12/16 chapters (75% complete - ch01-12)
+- AsciiDoc Conversion: 15/16 chapters (94% complete - ch01-15)
 - Tasks Complete: 182/213 (85%)
 - Test Pass Rate: 100% across all chapters (787 tests total)
 - Exercises: 44 total (2-3 per chapter), all reviewed and finalized ✓
@@ -30,6 +30,21 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 13:10 - COMPLETED task-437: Convert ch13-ch15 to AsciiDoc
+- What: Converted chapters 13-15 from Markdown to AsciiDoc format
+- Files created:
+  - asciidoc/ch13-building-the-harness.adoc (1332 lines, 6318 words)
+  - asciidoc/ch14-the-meta-engineer-playbook.adoc (712 lines, 3582 words)
+  - asciidoc/ch15-model-strategy-and-cost-optimization.adoc (1092 lines, 4588 words)
+- Verification:
+  - All three files validated with asciidoctor (0 errors)
+  - Code blocks correctly converted with [source,language] syntax
+  - Headings properly leveled (== for chapters, === for sections)
+- Unblocked: task-438 (Convert ch16 to AsciiDoc)
+- Iteration: 3
+- Stats: 8 pending, 22 blocked, 93 complete
+- Next: task-438 or any Ch16 task (462-466)
 
 ### 2026-01-29 13:06 - COMPLETED task-436: Convert ch10-ch12 to AsciiDoc
 - What: Converted chapters 10-12 from Markdown to AsciiDoc format
