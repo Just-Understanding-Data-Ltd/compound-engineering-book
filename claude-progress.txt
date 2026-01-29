@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 12:46)
+## Current Status (Updated: 2026-01-29 12:52)
 - Phase: AsciiDoc Publishing Pipeline
-- Active: Setting up AsciiDoc toolchain for PDF generation
-- Last Completed: task-431 (AsciiDoc toolchain setup)
+- Active: Converting Markdown chapters to AsciiDoc
+- Last Completed: task-432 (Markdown to AsciiDoc conversion script)
 - Blockers: None
-- Queue Health: 36 pending, 87 complete
-- Publishing Readiness: Ch01-Ch16 first drafts complete, EPUB done, AsciiDoc pipeline started
-- Next Task: task-449 or task-432 (AsciiDoc conversion)
+- Queue Health: 35 pending, 88 complete
+- Publishing Readiness: Ch01-Ch16 first drafts complete, EPUB done, AsciiDoc conversion script ready
+- Next Task: task-433 (Convert ch01-ch03 to AsciiDoc)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -29,6 +29,26 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 12:52 - COMPLETED task-432: Create Markdown to AsciiDoc conversion script
+- What: Created scripts/convert-to-asciidoc.sh for converting Markdown chapters to AsciiDoc
+- Features:
+  - Uses pandoc for Markdown to AsciiDoc conversion
+  - Post-processing for smart quotes and cleanup
+  - Single chapter mode (--chapter) or batch conversion
+  - Verbose output option (-v)
+- Test results:
+  - ch01 converted successfully (371 lines, 2612 words)
+  - PDF generation verified (164K output)
+  - Code blocks, tables, lists, blockquotes all render correctly
+- Files created:
+  - scripts/convert-to-asciidoc.sh (conversion script)
+  - asciidoc/ch01-the-compound-systems-engineer.adoc (test conversion)
+  - output/ch01-test.pdf (164K test PDF)
+- Unblocked: task-433, task-434, task-435, task-436 (chapter conversion tasks)
+- Iteration: 4
+- Stats: 35 pending, 88 complete
+- Next: task-433 (Convert ch01-ch03 to AsciiDoc)
 
 ### 2026-01-29 12:46 - COMPLETED task-431: Set up AsciiDoc toolchain
 - What: Installed Asciidoctor and asciidoctor-pdf for PDF generation

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T12:47:53Z",
+  "lastUpdated": "2026-01-29T12:48:28.809Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Iteration 3 curation: Removed task-431 from blockedBy arrays after completion. task-432 now unblocked and ready for execution. AsciiDoc pipeline proceeding in order.",
@@ -1565,10 +1565,11 @@
       "type": "infra",
       "title": "Create Markdown to AsciiDoc conversion script",
       "description": "Create scripts/convert-to-asciidoc.sh using pandoc or kramdoc. Handle: code blocks, tables, cross-references, blockquotes, images. Test on ch01 first.",
-      "status": "pending",
+      "status": "complete",
       "priority": "critical",
       "score": 630,
-      "createdAt": "2026-01-29T12:19:01.156Z"
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T12:52:00Z"
     },
     {
       "id": "task-404",
@@ -2676,16 +2677,16 @@
     ]
   },
   "stats": {
-    "pending": 36,
+    "pending": 35,
     "inProgress": 0,
-    "complete": 87,
+    "complete": 88,
     "blocked": 0,
     "total": 213
   },
   "checkpoints": {
-    "lastGoodCommit": "e88615a61a62d701b16c811fc8c89d38b85811d4",
-    "lastSuccessfulTask": "iteration-2",
-    "lastCheckpoint": "2026-01-29T12:39:22Z",
+    "lastGoodCommit": "bd7183e17a3b692873ca163a21fe4cf1e89ba363",
+    "lastSuccessfulTask": "iteration-3",
+    "lastCheckpoint": "2026-01-29T12:48:28Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 4,
