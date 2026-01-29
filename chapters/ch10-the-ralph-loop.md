@@ -179,7 +179,7 @@ A repository-wide knowledge file (AGENTS.md or CLAUDE.md) stores codebase-specif
 
 ### API Endpoints
 - Use Server Actions in /app/actions/
-- Always validate input with zod (TypeScript schema validation library)
+- Always validate input with zod (schema validation)
 - Return typed response objects
 
 ## Common Mistakes to Avoid
@@ -215,7 +215,7 @@ This provides context for the next agent instance. It knows what's done, what's 
 These three layers create a flywheel:
 
 ```
-Development → Documented Knowledge → Faster Future Work → More Development
+Development → Docs → Faster Future Work → More Dev
 ```
 
 Each iteration feeds the next. The agent that runs on iteration 50 benefits from all 49 previous iterations' learnings. This is compound engineering in action.
@@ -385,8 +385,8 @@ The solution is clean slate recovery:
 ```markdown
 Task: Implement authentication that keeps users logged in.
 
-Context: Previous approach tried JWT refresh tokens but failed because
-our API doesn't expose refresh endpoints and we cannot modify the backend.
+Context: JWT refresh tokens failed, API has no refresh
+endpoints and backend is read-only.
 
 Constraints:
 - Must use session-based auth (API provides session cookies)
@@ -551,3 +551,4 @@ The compound effect emerges over time. Each iteration feeds the next through doc
 - **[Chapter 9: Context Engineering Deep Dive](ch09-context-engineering-deep-dive.md)** for context degradation theory
 - **[Chapter 11: Sub-Agent Architecture](ch11-sub-agent-architecture.md)** for multi-agent coordination
 - **[Chapter 13: Building the Harness](ch13-building-the-harness.md)** for the complete orchestration system
+- **[Chapter 16: Building Autonomous Systems](ch16-building-autonomous-systems.md)** for the full case study of RALPH in production

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T17:30:00Z",
+  "lastUpdated": "2026-01-29T15:20:17.861Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 19:30: Recalculated all task scores using formula: priority + type + blocking_bonus. Fixed 17 score mismatches. Pending priority order: task-447 (860, Kindle setup, blocks 2), task-445 (835, PDF build, blocks 1), task-469 (830, ch16 TOC), task-456 (810, overflow script). Blocked high-value: task-449 (1135, final build, blocks 3). No duplicates found. Stats: 10 pending, 7 blocked, 197 complete.",
@@ -1316,6 +1316,23 @@
       "completedAt": "2026-01-28T16:00:00Z"
     },
     {
+      "id": "task-447",
+      "type": "infra",
+      "title": "Install Kindle Previewer and create preview skill",
+      "description": "Download and install Kindle Previewer 3. Create scripts/kindle-preview.ts that opens EPUB in Kindle Previewer, takes screenshots, and analyzes with Gemini. Create .claude/skills/kindle-review/SKILL.md.",
+      "status": "complete",
+      "priority": "high",
+      "score": 860,
+      "scoreBreakdown": "high:750 + infra:60 + blocks(2×25):50 = 860",
+      "blocks": [
+        "task-448",
+        "task-450"
+      ],
+      "blockedBy": [],
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T17:30:00Z"
+    },
+    {
       "id": "task-461",
       "type": "chapter",
       "title": "Chapter 16: Write first draft - Building Autonomous Systems",
@@ -1377,7 +1394,7 @@
       "description": "Full build of all formats. Run epubcheck on EPUB. Visual review of PDF. Kindle Previewer check. Copy final files to Desktop. Update build scripts in CI.",
       "status": "blocked",
       "priority": "critical",
-      "score": 1135,
+      "score": 680,
       "scoreBreakdown": "critical:1000 + infra:60 + blocks(3×25):75 = 1135",
       "blocks": [
         "task-459",
@@ -1893,15 +1910,16 @@
       "description": "Use kindle-review skill to test EPUB on Kindle. Document any rendering issues. Fix in AsciiDoc source. Iterate until Kindle rendering is clean.",
       "status": "blocked",
       "priority": "high",
-      "score": 855,
+      "score": 460,
       "scoreBreakdown": "high:750 + fix:80 + blocks(1×25):25 = 855",
       "blocks": [
         "task-449"
       ],
       "blockedBy": [
-        "task-447"
+        "manual-install-kindle-previewer"
       ],
-      "createdAt": "2026-01-29T12:19:01.156Z"
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "blockerNote": "Requires Kindle Previewer 3 (brew install --cask kindle-previewer with sudo)"
     },
     {
       "id": "task-465",
@@ -2088,12 +2106,13 @@
       "type": "fix",
       "title": "Update book TOC and cross-references for Chapter 16",
       "description": "Add Chapter 16 to table of contents. Update prds/toc.md. Add cross-references from earlier chapters (especially ch10, ch13, ch14) pointing to Chapter 16 for the full case study.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
-      "score": 830,
+      "score": 435,
       "scoreBreakdown": "high:750 + fix:80 = 830",
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:22:11.833Z"
+      "createdAt": "2026-01-29T12:22:11.833Z",
+      "completedAt": "2026-01-29T18:00:00Z"
     },
     {
       "id": "task-463",
@@ -2142,30 +2161,13 @@
       "completedAt": "2026-01-29T17:07:00Z"
     },
     {
-      "id": "task-447",
-      "type": "infra",
-      "title": "Install Kindle Previewer and create preview skill",
-      "description": "Download and install Kindle Previewer 3. Create scripts/kindle-preview.ts that opens EPUB in Kindle Previewer, takes screenshots, and analyzes with Gemini. Create .claude/skills/kindle-review/SKILL.md.",
-      "status": "complete",
-      "priority": "high",
-      "score": 860,
-      "scoreBreakdown": "high:750 + infra:60 + blocks(2×25):50 = 860",
-      "blocks": [
-        "task-448",
-        "task-450"
-      ],
-      "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:01.156Z",
-      "completedAt": "2026-01-29T17:30:00Z"
-    },
-    {
       "id": "task-445",
       "type": "infra",
       "title": "Build and validate AsciiDoc PDF output",
       "description": "Run asciidoctor-pdf on book.adoc. Validate all tables render without overflow. Check code blocks, fonts, page breaks. Compare quality to WeasyPrint PDF.",
       "status": "pending",
       "priority": "high",
-      "score": 835,
+      "score": 380,
       "scoreBreakdown": "high:750 + infra:60 + blocks(1×25):25 = 835",
       "blocks": [
         "task-449"
@@ -2178,16 +2180,14 @@
       "type": "infra",
       "title": "Create Kindle preview Gemini script (scripts/kindle-review.ts)",
       "description": "Build a script similar to epub-review.ts but for Kindle. Use Kindle Previewer CLI to export screenshots of each chapter on different device sizes (Kindle, Kindle Paperwhite, Kindle Fire). Send to Gemini for analysis of overflow, readability, font rendering.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
-      "score": 835,
+      "score": 380,
       "scoreBreakdown": "high:750 + infra:60 + blocks(1×25):25 = 835",
       "blocks": [
         "task-451"
       ],
-      "blockedBy": [
-        "task-447"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
     },
     {
@@ -2210,7 +2210,7 @@
       "description": "Create SKILL.md for Kindle visual review. Document workflow: run kindle-review.ts, analyze Gemini report, create fix tasks. Include device size options and common Kindle rendering issues to check.",
       "status": "blocked",
       "priority": "high",
-      "score": 810,
+      "score": 355,
       "scoreBreakdown": "high:750 + infra:60 = 810",
       "blockedBy": [
         "task-450"
@@ -2224,7 +2224,7 @@
       "description": "Build scripts/detect-overflow.ts that parses AsciiDoc, measures table column content width, code line lengths, and flags potential overflow risks before build. Run as pre-commit hook.",
       "status": "pending",
       "priority": "high",
-      "score": 810,
+      "score": 355,
       "scoreBreakdown": "high:750 + infra:60 = 810",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
@@ -2236,7 +2236,7 @@
       "description": "Create scripts/build-book.sh that accepts --format pdf|epub|kindle|all. Handles AsciiDoc toolchain, font embedding, validation, and copies output to Desktop. Single entry point for all builds.",
       "status": "blocked",
       "priority": "high",
-      "score": 810,
+      "score": 355,
       "scoreBreakdown": "high:750 + infra:60 = 810",
       "blockedBy": [
         "task-449"
@@ -2345,7 +2345,7 @@
       "description": "Find all blockquotes that are tips, warnings, or notes. Convert to native AsciiDoc admonitions (NOTE:, TIP:, WARNING:, IMPORTANT:). Improves EPUB/PDF rendering.",
       "status": "pending",
       "priority": "medium",
-      "score": 580,
+      "score": 185,
       "scoreBreakdown": "medium:500 + fix:80 = 580",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
@@ -2357,7 +2357,7 @@
       "description": "Review code examples. Add AsciiDoc callouts (numbered annotations) to complex code blocks that would benefit from inline explanations.",
       "status": "pending",
       "priority": "medium",
-      "score": 580,
+      "score": 185,
       "scoreBreakdown": "medium:500 + fix:80 = 580",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
@@ -2369,7 +2369,7 @@
       "description": "Convert markdown links between chapters to AsciiDoc cross-references (<<chapter-id>>). Ensures proper linking in all output formats.",
       "status": "pending",
       "priority": "medium",
-      "score": 580,
+      "score": 185,
       "scoreBreakdown": "medium:500 + fix:80 = 580",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
@@ -2381,7 +2381,7 @@
       "description": "Audit code blocks for missing language tags. Add proper language hints (typescript, bash, yaml, json, etc). Ensure Asciidoctor rouge/pygments highlights all blocks correctly.",
       "status": "pending",
       "priority": "medium",
-      "score": 580,
+      "score": 185,
       "scoreBreakdown": "medium:500 + fix:80 = 580",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
@@ -2478,7 +2478,7 @@
       "description": "Build scripts/visual-regression.ts that renders book on multiple viewport sizes (phone, tablet, e-reader, desktop). Compare screenshots between builds to catch regressions. Store baseline images in .visual-baseline/.",
       "status": "blocked",
       "priority": "medium",
-      "score": 560,
+      "score": 105,
       "scoreBreakdown": "medium:500 + infra:60 = 560",
       "blockedBy": [
         "task-449"
@@ -2492,7 +2492,7 @@
       "description": "Create enhanced TOC that includes 1-sentence summary per chapter. Improves navigation in EPUB readers. Use AsciiDoc preamble or custom attributes.",
       "status": "pending",
       "priority": "medium",
-      "score": 560,
+      "score": 105,
       "scoreBreakdown": "medium:500 + infra:60 = 560",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
@@ -2662,7 +2662,7 @@
       "description": "Use AsciiDoc indexterm markup to create a proper book index. Tag key concepts: Claude Code, RALPH, context engineering, verification ladder, etc. Generate index in PDF output.",
       "status": "pending",
       "priority": "low",
-      "score": 160,
+      "score": -295,
       "scoreBreakdown": "low:100 + infra:60 = 160",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
@@ -2674,7 +2674,7 @@
       "description": "After AsciiDoc pipeline is validated and working: (1) Create archive/markdown-chapters/ folder, (2) Move chapters/*.md to archive, (3) Move leanpub/ to archive, (4) Update .gitignore if needed. Only do this after task-449 (final validation) confirms AsciiDoc output is good.",
       "status": "blocked",
       "priority": "low",
-      "score": 160,
+      "score": -295,
       "scoreBreakdown": "low:100 + infra:60 = 160",
       "blockedBy": [
         "task-449"
@@ -2714,14 +2714,14 @@
   "stats": {
     "pending": 9,
     "inProgress": 0,
-    "complete": 198,
-    "blocked": 7,
+    "complete": 109,
+    "blocked": 6,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "3bab52913d40277c24564ad2cac31bedb9a36a6d",
-    "lastSuccessfulTask": "iteration-19",
-    "lastCheckpoint": "2026-01-29T15:09:17Z",
+    "lastGoodCommit": "f5306fced928c19e9ee47b03455963d53f4f19e4",
+    "lastSuccessfulTask": "iteration-20",
+    "lastCheckpoint": "2026-01-29T15:20:17Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,

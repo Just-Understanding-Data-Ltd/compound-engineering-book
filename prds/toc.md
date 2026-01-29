@@ -138,6 +138,15 @@
 - Measuring and optimizing AI spend
 - **Source**: `model-switching-strategy.md`, `ai-cost-protection-timeouts.md`, `model-provider-agnostic-approach.md`
 
+### Chapter 16: Building Autonomous Systems
+- The RALPH loop architecture in practice
+- Task scoring algorithms: priority, type, blocking, and age factors
+- Adversarial review agents (7 specialized reviewers)
+- Custom agentic skills (visual verification with Gemini)
+- Memory architecture: progress files, task queues, git checkpoints
+- Compound effects: infrastructure investment that pays dividends
+- **Source**: `ralph-loop.md`, `agent-swarm-patterns-for-thoroughness.md`, `building-the-harness.md`
+
 ---
 
 ## Appendices
@@ -173,7 +182,7 @@
 | Part I: Foundations | 10,000-14,000 | 4 |
 | Part II: Core Techniques | 14,000-18,000 | 4 |
 | Part III: Advanced Patterns | 14,000-18,000 | 4 |
-| Part IV: Production Systems | 10,000-14,000 | 3 |
+| Part IV: Production Systems | 12,000-18,000 | 4 |
 | Appendices | 5,000-8,000 | 4 |
 | **Total** | **53,000-72,000** | **19** |
 
@@ -197,6 +206,9 @@ Each chapter should have 2-4 diagrams. Priority diagrams:
 - [ ] Four-layer harness (Ch 13)
 - [ ] Six waves timeline (Ch 14)
 - [ ] Model selection decision tree (Ch 15)
+- [ ] RALPH architecture diagram (Ch 16)
+- [ ] Adversarial review agents flowchart (Ch 16)
+- [ ] Skill anatomy diagram (Ch 16)
 
 ---
 

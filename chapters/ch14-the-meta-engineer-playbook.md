@@ -692,3 +692,4 @@ The product is the output. The system is the asset. Build the factory.
 - **[Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md)** covered the RALPH loop. Meta-engineers build infrastructure that makes it run autonomously.
 - **[Chapter 11: Sub-Agent Architecture](ch11-sub-agent-architecture.md)** covered sub-agents. Meta-engineers design the orchestration layer.
 - **[Chapter 13: Building the Harness](ch13-building-the-harness.md)** covered harness construction. This chapter explains why the harness matters.
+- **[Chapter 16: Building Autonomous Systems](ch16-building-autonomous-systems.md)** demonstrates meta-engineering with a real production case study.

@@ -1388,3 +1388,4 @@ _Related chapters:_
 * *<<_chapter_9_context_engineering_deep_dive,Chapter 9: Context Engineering Deep Dive>>* for context engineering principles
 * *<<_chapter_10_the_ralph_loop,Chapter 10: The RALPH Loop>>* for the RALPH loop in long-running work
 * *<<_chapter_11_sub_agent_architecture,Chapter 11: Sub-Agent Architecture>>* for sub-agent architecture patterns
+* *<<_chapter_16_building_autonomous_systems,Chapter 16: Building Autonomous Systems>>* for a concrete implementation of these principles

@@ -313,7 +313,9 @@ Most production agents combine file-based memory (human-readable, git-tracked) w
 The key pattern for fault tolerance is checkpointing after each significant action:
 
 ```typescript
-async function runWithCheckpoints(thread: AgentThread): Promise<void> {
+async function runWithCheckpoints(
+  thread: AgentThread
+): Promise<void> {
   while (thread.status === "running") {
     const toolCall = await getNextAction(thread);
 
@@ -483,7 +485,7 @@ if (response.status === 200) {
   const verified = verifyChangesApplied(order, changes);
 
   if (!verified) {
-    return { success: false, reason: "Changes not reflected in order state" };
+    return { success: false, reason: "Changes not applied" };
   }
 
   return { success: true };
@@ -550,7 +552,8 @@ function deriveState(thread: AgentThread): ExecutionState {
       !approvalGrants.find(grant => grant.requestId === req.id)
     ),
     errors: thread.events.filter(e => e.type === "error"),
-    canResume: thread.status !== "completed" && thread.status !== "failed",
+    canResume:
+      thread.status !== "completed" && thread.status !== "failed",
   };
 }
 ```
@@ -566,8 +569,12 @@ const humanTools = [
   {
     name: "request_human_approval",
     parameters: {
-      action: { type: "string", description: "What action needs approval" },
-      context: { type: "string", description: "Relevant context for decision" },
+      action: {
+        type: "string", description: "Action needing approval"
+      },
+      context: {
+        type: "string", description: "Context for decision"
+      },
       urgency: { type: "string", enum: ["low", "medium", "high"] },
       channel: { type: "string", enum: ["slack", "email"] },
     },
@@ -576,14 +583,20 @@ const humanTools = [
     name: "request_human_input",
     parameters: {
       question: { type: "string" },
-      options: { type: "array", items: { type: "string" }, optional: true },
+      options: {
+        type: "array", items: { type: "string" }, optional: true
+      },
     },
   },
 ];
 
-async function executeHumanTool(toolCall: ToolCall, thread: AgentThread) {
+async function executeHumanTool(
+  toolCall: ToolCall,
+  thread: AgentThread
+) {
   // Route to appropriate channel based on urgency
-  const channel = toolCall.parameters.urgency === "high" ? "slack" : "email";
+  const urgent = toolCall.parameters.urgency === "high";
+  const channel = urgent ? "slack" : "email";
   await notifyHuman(toolCall, channel);
 
   // Structured pause with clear awaiting state
@@ -607,7 +620,10 @@ Monolithic agents that handle "deploy, test, monitor, rollback, notify, and audi
 ```typescript
 // BAD: Monolithic agent
 const megaAgent = new Agent({
-  capabilities: ["deploy", "test", "monitor", "rollback", "notify", "audit"],
+  capabilities: [
+    "deploy", "test", "monitor",
+    "rollback", "notify", "audit"
+  ],
 });
 
 // GOOD: Focused agents composed in a DAG
@@ -814,7 +830,9 @@ jobs:
         run: ./scripts/capture-metrics.sh > metrics.json
 
       - name: Evaluate constraints
-        run: ./scripts/check-constraints.sh metrics.json constraints.yaml
+        run: |
+          ./scripts/check-constraints.sh \
+            metrics.json constraints.yaml
 
       - name: Agent optimization loop
         if: failure()
@@ -883,7 +901,8 @@ import { readFile, writeFile, existsSync } from 'fs';
 
 function hashPrompt(prompt: string, systemPrompt?: string): string {
   const content = `${systemPrompt || ''}|||${prompt}`;
-  return createHash('sha256').update(content).digest('hex').slice(0, 16);
+  const hash = createHash('sha256').update(content).digest('hex');
+  return hash.slice(0, 16);
 }
 
 export async function runWithCache(
@@ -917,7 +936,9 @@ class CostTracker {
   private entries: Array<{ name: string; cost: number }> = [];
   private budget: number;
 
-  private pricing: Record<string, { input: number; output: number }> = {
+  private pricing: Record<
+    string, { input: number; output: number }
+  > = {
     'claude-3-haiku': { input: 0.25, output: 1.25 },
     'claude-sonnet-4-5-20250929': { input: 3.00, output: 15.00 },
   };
@@ -1030,7 +1051,7 @@ async function safeAIOperation<T>(
   }
 
   if (spent >= BUDGET.dailyLimit * BUDGET.alertThreshold) {
-    console.warn(`Budget alert: $${spent.toFixed(2)} of $${BUDGET.dailyLimit}`);
+    console.warn(`Budget alert: $${spent.toFixed(2)}`);
   }
 
   return operation();
@@ -1153,7 +1174,8 @@ const server = new Server({
   capabilities: { resources: {} },
 });
 
-server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
+server.setRequestHandler(
+  ReadResourceRequestSchema, async (request) => {
   const uri = request.params.uri;
 
   if (uri.startsWith('architecture-graph://')) {
@@ -1287,3 +1309,4 @@ The LLM is the least controllable part of the system. Everything else is enginee
 - **[Chapter 9: Context Engineering Deep Dive](ch09-context-engineering-deep-dive.md)** for context engineering principles
 - **[Chapter 10: The RALPH Loop](ch10-the-ralph-loop.md)** for the RALPH loop in long-running work
 - **[Chapter 11: Sub-Agent Architecture](ch11-sub-agent-architecture.md)** for sub-agent architecture patterns
+- **[Chapter 16: Building Autonomous Systems](ch16-building-autonomous-systems.md)** for a concrete implementation of these principles

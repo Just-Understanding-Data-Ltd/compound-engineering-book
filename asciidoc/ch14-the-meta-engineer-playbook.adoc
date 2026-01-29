@@ -729,3 +729,4 @@ _Related chapters:_
 * *<<_chapter_10_the_ralph_loop,Chapter 10: The RALPH Loop>>* covered the RALPH loop. Meta-engineers build infrastructure that makes it run autonomously.
 * *<<_chapter_11_sub_agent_architecture,Chapter 11: Sub-Agent Architecture>>* covered sub-agents. Meta-engineers design the orchestration layer.
 * *<<_chapter_13_building_the_harness,Chapter 13: Building the Harness>>* covered harness construction. This chapter explains why the harness matters.
+* *<<_chapter_16_building_autonomous_systems,Chapter 16: Building Autonomous Systems>>* demonstrates meta-engineering with a real production case study.

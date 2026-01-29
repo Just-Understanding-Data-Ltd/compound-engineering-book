@@ -545,3 +545,4 @@ _Related chapters:_
 * *<<_chapter_9_context_engineering_deep_dive,Chapter 9: Context Engineering Deep Dive>>* for context degradation theory
 * *<<_chapter_11_sub_agent_architecture,Chapter 11: Sub-Agent Architecture>>* for multi-agent coordination
 * *<<_chapter_13_building_the_harness,Chapter 13: Building the Harness>>* for the complete orchestration system
+* *<<_chapter_16_building_autonomous_systems,Chapter 16: Building Autonomous Systems>>* for the full case study of RALPH in production
