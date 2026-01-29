@@ -1,4 +1,6 @@
-# Chapter 3: Prompting Fundamentals {#ch03-prompting-fundamentals}
+# Chapter 3: Prompting Fundamentals {#_chapter_3:_prompting_fundamentals} {#ch03-prompting-fundamentals}
+
+[]{.index term="prompting"} []{.index term="entropy reduction"}
 
 Prompting is how you communicate intent to a Large Language Model (LLM). The difference between a good prompt and a bad one determines whether Claude Code generates working code on the first try or requires five iterations of refinement. This chapter teaches you four techniques that dramatically improve results: chain-of-thought prompting, constraint-based prompting, few-shot examples, and upfront questioning.
 
@@ -6,7 +8,7 @@ The underlying principle is entropy reduction. Every prompt you send creates a p
 
 This is not about being verbose. It is about being specific in ways that matter.
 
-## The Anatomy of an Effective Prompt
+## The Anatomy of an Effective Prompt {#_the_anatomy_of_an_effective_prompt}
 
 Every effective prompt has three components: context, instruction, and constraints.
 
@@ -18,77 +20,79 @@ Every effective prompt has three components: context, instruction, and constrain
 
 Here is a weak prompt:
 
-```
-Add user validation to the API
-```
+    Add user validation to the API
 
 This prompt has instruction but lacks context and constraints. The LLM must guess where validation goes, what patterns to follow, what errors to return, and how to test it. Each guess is a coin flip. The result is generic code that does not fit your project.
 
 Here is the same request with all three components:
 
-```
-Add validation to the createUser endpoint in src/api/users.ts
+    Add validation to the createUser endpoint in src/api/users.ts
 
-Context:
-- Validation patterns are in src/utils/validation.ts
-- Use Zod for schema validation
-- Return Result<T, ValidationError>, never throw
+    Context:
+    - Validation patterns are in src/utils/validation.ts
+    - Use Zod for schema validation
+    - Return Result<T, ValidationError>, never throw
 
-Constraints:
-- Validate email format (RFC 5322)
-- Validate password (min 8 chars, requires number)
-- Include JSDoc comments
-- Add tests in tests/api/users.test.ts
+    Constraints:
+    - Validate email format (RFC (Request for Comments) 5322)
+    - Validate password (min 8 chars, requires number)
+    - Include JSDoc comments
+    - Add tests in tests/api/users.test.ts
 
-Success criteria:
-- Invalid requests return 400 with error details
-- Valid requests proceed to user creation
-- All tests pass
-```
+    Success criteria:
+    - Invalid requests return 400 with error details
+    - Valid requests proceed to user creation
+    - All tests pass
 
 This prompt eliminates thousands of possible implementations. The LLM knows exactly what technology to use, what patterns to follow, and how to verify success. The result: working code on the first try.
 
-## Chain-of-Thought Prompting
+## Chain-of-Thought Prompting {#_chain_of_thought_prompting}
+
+[]{.index term="chain-of-thought"}
 
 LLMs have a tendency to jump straight to implementation. You ask for a function, they generate code. The problem: they skip the reasoning that catches edge cases, error handling, and state management issues.
 
 Chain-of-thought prompting forces the LLM to reason before implementing. Instead of asking for code directly, you ask for analysis first.
 
-### The Pattern
+### The Pattern {#_the_pattern}
 
-```
-Before implementing [FEATURE], think through:
+    Before implementing [FEATURE], think through:
 
-1. What are all the steps in this process?
-2. What can go wrong at each step?
-3. How should errors be handled?
-4. What state transitions occur?
-5. What needs to be logged?
+    1. What are all the steps in this process?
+    2. What can go wrong at each step?
+    3. How should errors be handled?
+    4. What state transitions occur?
+    5. What needs to be logged?
 
-After reasoning through this, implement the solution.
-```
+    After reasoning through this, implement the solution.
 
-### When Chain-of-Thought Matters
+### When Chain-of-Thought Matters {#_when_chain_of_thought_matters}
 
 Use chain-of-thought for complex logic where correctness matters:
 
 - **Multi-step workflows**: Payment processing, user onboarding, data pipelines
+
 - **External API integrations**: Network failures, rate limits, timeouts
+
 - **State machines**: Order status, subscription lifecycle, workflow stages
+
 - **Security-critical code**: Authentication, authorization, data validation
 
 Skip chain-of-thought for simple tasks:
 
 - CRUD operations with no business logic
+
 - Pure functions with obvious implementations
+
 - Configuration files
+
 - Simple utility functions
 
-### Example: Payment Processing
+### Example: Payment Processing {#_example:_payment_processing}
 
 Without chain-of-thought, you might get this:
 
-```typescript
+``` typescript
 async function processPayment(amount: number, userId: string) {
   const charge = await stripe.charges.create({
     amount,
@@ -103,21 +107,19 @@ This code works for the happy path and fails everywhere else. No input validatio
 
 With chain-of-thought, you get a different result. The prompt:
 
-```
-Before implementing the payment processing flow, think through:
+    Before implementing the payment processing flow, think through:
 
-1. What are all the steps in the payment flow?
-2. What can go wrong at each step?
-3. How should we handle each error?
-4. What state transitions happen?
-5. What needs to be logged/audited?
+    1. What are all the steps in the payment flow?
+    2. What can go wrong at each step?
+    3. How should we handle each error?
+    4. What state transitions happen?
+    5. What needs to be logged/audited?
 
-After reasoning through this, implement the solution.
-```
+    After reasoning through this, implement the solution.
 
 The LLM now produces reasoning before code:
 
-```markdown
+``` markdown
 ## Step 1: Payment Flow Steps
 
 1. Validate input (amount, userId, payment method)
@@ -147,88 +149,86 @@ The implementation that follows handles all these cases. The code is 10x longer 
 
 The mental model: chain-of-thought converts runtime bugs into compile-time requirements. Instead of discovering edge cases through crashes, you discover them during planning.
 
-## Constraint-Based Prompting
+## Constraint-Based Prompting {#_constraint_based_prompting}
+
+[]{.index term="constraints"}
 
 Constraints are rules that eliminate invalid outputs. Every constraint you add reduces entropy by narrowing the valid solution space.
 
-### Declarative Over Imperative
+### Declarative Over Imperative {#_declarative_over_imperative}
 
 Compare these two approaches:
 
 **Imperative** (tells HOW):
-```
-First, read schema.ts to understand the User type.
-Then, find the User type definition.
-Then, add an email field with type string.
-Then, add validation for email format using regex.
-Then, update the insert function to include email.
-```
+
+    First, read schema.ts to understand the User type.
+    Then, find the User type definition.
+    Then, add an email field with type string.
+    Then, add validation for email format using regex.
+    Then, update the insert function to include email.
 
 **Declarative** (tells WHAT):
-```
-User type MUST have email: string field.
-Email MUST be validated with RFC 5322 format.
-All type changes MUST have corresponding Zod schema updates.
-All type changes MUST have test coverage.
-```
+
+    User type MUST have email: string field.
+    Email MUST be validated with RFC 5322 format.
+    All type changes MUST have corresponding Zod schema updates.
+    All type changes MUST have test coverage.
 
 Imperative prompts are fragile. If any step fails or the codebase structure differs from expectations, the entire workflow breaks. Declarative constraints adapt. The LLM finds its own path to satisfy the constraints regardless of how the codebase is organized.
 
-### Types of Constraints
+### Types of Constraints {#_types_of_constraints}
 
 **Format constraints** specify output structure:
-```
-All functions MUST have JSDoc comments.
-All async functions MUST return Result<T, E>, never throw.
-All API responses MUST follow { success, data?, error? } shape.
-```
+
+    All functions MUST have JSDoc comments.
+    All async functions MUST return Result<T, E>, never throw.
+    All API responses MUST follow { success, data?, error? } shape.
 
 **Behavior constraints** specify what the code must do:
-```
-All user inputs MUST be validated before processing.
-All database operations MUST be wrapped in transactions.
-All external API calls MUST have timeout and retry logic.
-```
+
+    All user inputs MUST be validated before processing.
+    All database operations MUST be wrapped in transactions.
+    All external API calls MUST have timeout and retry logic.
 
 **Scope constraints** specify boundaries:
-```
-Do NOT modify files outside src/payments/.
-Do NOT change existing public interfaces.
-Do NOT add new dependencies without explicit approval.
-```
+
+    Do NOT modify files outside src/payments/.
+    Do NOT change existing public interfaces.
+    Do NOT add new dependencies without explicit approval.
 
 **Performance constraints** specify non-functional requirements:
-```
-Response time MUST be under 200ms for 95th percentile.
-Memory usage MUST not exceed 512MB.
-Batch processing MUST handle 10,000 records per minute.
-```
 
-### The Constraint Funnel
+    Response time MUST be under 200ms for 95th percentile.
+    Memory usage MUST not exceed 512MB.
+    Batch processing MUST handle 10,000 records per minute.
+
+### The Constraint Funnel {#_the_constraint_funnel}
 
 Think of constraints as a funnel. Each constraint eliminates possible outputs:
 
-```
-All syntactically valid programs         [1,000,000 possibilities]
-    ↓ Type constraints
-Type-safe programs                       [10,000 possibilities]
-    ↓ Format constraints
-Consistently formatted programs          [1,000 possibilities]
-    ↓ Behavior constraints (tests)
-Correct programs                         [100 possibilities]
-    ↓ Style constraints
-Programs matching your codebase          [10 possibilities]
-```
+::: {#fig-constraint-funnel wrapper="1" align="center" width="600"}
+![The Constraint Funnel: Each layer reduces possibilities by an order of magnitude](ch03-constraint-funnel.png){alt="Constraint Funnel"}
+:::
+
+    All syntactically valid programs         [1,000,000 possibilities]
+        ↓ Type constraints
+    Type-safe programs                       [10,000 possibilities]
+        ↓ Format constraints
+    Consistently formatted programs          [1,000 possibilities]
+        ↓ Behavior constraints (tests)
+    Correct programs                         [100 possibilities]
+        ↓ Style constraints
+    Programs matching your codebase          [10 possibilities]
 
 Each layer reduces entropy by an order of magnitude. The result: predictable, correct, maintainable code.
 
-## Few-Shot Prompting with Project Examples
+## Few-Shot Prompting with Project Examples {#_few_shot_prompting_with_project_examples}
 
 Abstract descriptions of patterns are ambiguous. Concrete examples are not.
 
 When you tell an LLM "use dependency injection with factory functions," it has many valid interpretations. When you show it two examples from your codebase that use dependency injection with factory functions, it has exactly one interpretation: match those examples.
 
-### How Many Examples?
+### How Many Examples? {#_how_many_examples?}
 
 Research and practice converge on 2-3 examples as the optimal number.
 
@@ -240,18 +240,21 @@ Research and practice converge on 2-3 examples as the optimal number.
 
 **4+ examples**: Diminishing returns. More tokens consumed, marginal accuracy improvement.
 
-### Example Selection Criteria
+### Example Selection Criteria {#_example_selection_criteria}
 
 Choose examples that:
 
-1. **Demonstrate the pattern clearly**: Pick typical cases, not edge cases
-2. **Show consistency**: All examples follow the same structure
-3. **Cover typical complexity**: Include at least one example with real business logic
-4. **Are current**: Reflect your latest conventions, not legacy code
+1.  **Demonstrate the pattern clearly**: Pick typical cases, not edge cases
 
-### The Few-Shot Template
+2.  **Show consistency**: All examples follow the same structure
 
-```markdown
+3.  **Cover typical complexity**: Include at least one example with real business logic
+
+4.  **Are current**: Reflect your latest conventions, not legacy code
+
+### The Few-Shot Template {#_the_few_shot_template}
+
+``` markdown
 # Pattern: Service Layer
 
 Here are examples of how we implement services in this codebase:
@@ -273,7 +276,8 @@ Here are examples of how we implement services in this codebase:
 # Your Task
 
 Now create a Post Service following the same pattern:
-- Factory function: createPostService(deps: PostServiceDeps): PostService
+- Factory function:
+  createPostService(deps: PostServiceDeps): PostService
 - Methods: createPost, publishPost, deletePost
 - Return Result<T, E> type (never throw)
 - Include JSDoc comments
@@ -281,61 +285,45 @@ Now create a Post Service following the same pattern:
 
 The LLM reads both examples, identifies the common structure, and generates a Post Service that matches exactly. First-try accuracy jumps from 50% to 90%.
 
-### Where to Store Examples
+### Where to Store Examples {#_where_to_store_examples}
 
 Put few-shot examples in domain-specific CLAUDE.md files:
 
-```
-packages/
-  domain/
-    CLAUDE.md  ← service and repository patterns
-  api/
-    CLAUDE.md  ← API route patterns
-  tests/
-    CLAUDE.md  ← test file patterns
-```
+    packages/
+      domain/
+        CLAUDE.md  ← service and repository patterns
+      api/
+        CLAUDE.md  ← API route patterns
+      tests/
+        CLAUDE.md  ← test file patterns
 
 Claude Code reads these automatically. You do not need to paste examples into every prompt.
 
-## Upfront Questioning
+## Upfront Questioning {#_upfront_questioning}
 
 When requirements are vague, asking questions before implementing reduces iteration cycles dramatically.
 
-### The Search Space Problem
+### The Search Space Problem {#_the_search_space_problem}
 
 Consider this request: "Add a settings page."
 
-Possible interpretations multiply:
-- Modal vs full page vs sidebar
-- Single form vs tabbed sections
-- Auto-save vs explicit save button
-- Dark mode support or not
-- Mobile responsive or desktop only
+Possible interpretations multiply: - Modal vs full page vs sidebar - Single form vs tabbed sections - Auto-save vs explicit save button - Dark mode support or not - Mobile responsive or desktop only
 
 Each unclarified dimension doubles the possibilities. Five dimensions means 32 different implementations, and you probably only want one.
 
-### The Pattern
+### The Pattern {#_the_pattern_2}
 
 Tell Claude Code explicitly:
 
-```
-Before implementing, ask me questions to clarify requirements.
-```
+    Before implementing, ask me questions to clarify requirements.
 
 The agent then interviews you about edge cases, preferences, and constraints. Only after gathering answers does it propose implementation.
 
-### Example Exchange
+### Example Exchange {#_example_exchange}
 
 **User**: Add a notifications system to the app.
 
-**Claude Code**: Before implementing, I have some questions:
-1. What types of notifications? (system alerts, user actions, reminders)
-2. In-app only, or email/push as well?
-3. Should users configure notification preferences?
-4. Real-time (WebSocket) or polling?
-5. How long should notifications persist?
-6. Any grouping/batching of similar notifications?
-7. What is the read/unread UX?
+**Claude Code**: Before implementing, I have some questions: 1. What types of notifications? (system alerts, user actions, reminders) 2. In-app only, or email/push as well? 3. Should users configure notification preferences? 4. Real-time (WebSocket) or polling? 5. How long should notifications persist? 6. Any grouping/batching of similar notifications? 7. What is the read/unread UX (User Experience)?
 
 **User**: Just in-app, real-time, user actions only, persist 7 days, no grouping, simple dot indicator for unread.
 
@@ -343,44 +331,47 @@ The agent then interviews you about edge cases, preferences, and constraints. On
 
 The search space collapsed from hundreds of combinations to one clear path. Implementation time drops. Iteration count drops to one.
 
-### When to Use Upfront Questioning
+### When to Use Upfront Questioning {#_when_to_use_upfront_questioning}
 
-| Scenario | Use Upfront Questioning? |
-|----------|-------------------------|
-| Vague feature request | Yes |
-| User Interface/User Experience (UI/UX) work | Yes |
-| New domain you are unfamiliar with | Yes |
-| Clear, well-specified task | No |
-| Bug fix with reproduction steps | No |
-| Refactoring with defined scope | No |
++---------------------------------------------+---------------------------+
+| Scenario                                    | Use Upfront Questioning?  |
++=============================================+===========================+
+| Vague feature request                       | Yes                       |
++---------------------------------------------+---------------------------+
+| User Interface/User Experience (UI/UX) work | Yes                       |
++---------------------------------------------+---------------------------+
+| New domain you are unfamiliar with          | Yes                       |
++---------------------------------------------+---------------------------+
+| Clear, well-specified task                  | No                        |
++---------------------------------------------+---------------------------+
+| Bug fix with reproduction steps             | No                        |
++=============================================+===========================+
+| Refactoring with defined scope              | No                        |
++=============================================+===========================+
 
 The cost of asking questions is linear. The cost of exploring wrong solutions is exponential. Front-load the questions.
 
-## Combining Techniques
+## Combining Techniques {#_combining_techniques}
 
 These four techniques work together. The most effective prompts combine multiple approaches.
 
 **Chain-of-thought + Constraints**: Ask the LLM to reason through requirements, then implement with explicit constraints based on that reasoning.
 
-```
-Think through what validation the payment endpoint needs.
-Then implement with these constraints:
-- Use Zod schemas
-- Return Result<T, PaymentError>
-- Log all validation failures
-```
+    Think through what validation the payment endpoint needs.
+    Then implement with these constraints:
+    - Use Zod schemas
+    - Return Result<T, PaymentError>
+    - Log all validation failures
 
 **Few-shot + Upfront Questioning**: Show examples of similar features, then ask clarifying questions about the differences.
 
-```
-Here are examples of how we implement notification handlers:
-[examples]
+    Here are examples of how we implement notification handlers:
+    [examples]
 
-Before implementing the new alert handler, what questions do you have about:
-- Alert severity levels
-- Notification channels
-- Retry behavior
-```
+    Before implementing the new alert handler, what questions do you have about:
+    - Alert severity levels
+    - Notification channels
+    - Retry behavior
 
 **Constraints + Few-shot**: Combine explicit rules with concrete examples. The constraints define what must be true. The examples show how to achieve it.
 
@@ -388,90 +379,71 @@ The combination reduces entropy more than any single technique. Constraints elim
 
 Start with one technique. Add others as needed. Complex features benefit from all four. Simple tasks need only constraints.
 
-## Anti-Patterns: What NOT to Do
+## Anti-Patterns: What NOT to Do {#_anti_patterns:_what_not_to_do}
 
 These patterns produce poor results. Avoid them.
 
-### Vague Prompts
+### Vague Prompts {#_vague_prompts}
 
-```
-Make it better.
-Add authentication.
-Fix the bugs.
-```
+    Make it better.
+    Add authentication.
+    Fix the bugs.
 
 These prompts have maximum entropy. Every possible implementation is equally likely. The result is generic code that does not fit your project.
 
-### Over-Constrained Prompts
+### Over-Constrained Prompts {#_over_constrained_prompts}
 
-```
-Use exactly bcrypt with salt rounds 10 for password hashing.
-Loop through users with a for-i loop.
-Store results in variable called 'finalResult'.
-```
+    Use exactly bcrypt with salt rounds 10 for password hashing.
+    Loop through users with a for-i loop.
+    Store results in variable called 'finalResult'.
 
 Over-specification prevents the LLM from choosing better approaches. Specify WHAT must be true, not HOW to achieve it.
 
-### Missing Context
+### Missing Context {#_missing_context}
 
-```
-Add validation to the handler.
-```
+    Add validation to the handler.
 
 Which handler? What validation rules? What patterns exist? Without context, the LLM cannot produce code that fits your codebase.
 
-### The "Just Do It" Trap
+### The "Just Do It" Trap {#_the_just_do_it_trap}
 
 Skipping exploration to save time costs more time in iteration. Five minutes of questions saves thirty minutes of revision.
 
-### Mixing Exploration and Implementation
+### Mixing Exploration and Implementation {#_mixing_exploration_and_implementation}
 
 Bad:
-```
-How does authentication work? Also implement a new login endpoint.
-```
+
+    How does authentication work? Also implement a new login endpoint.
 
 Good:
-```
-Step 1: How does authentication work in this codebase? Show me examples.
-Step 2 (after understanding):
-Implement the login endpoint following these patterns.
-```
+
+    Step 1: How does authentication work in this codebase? Show me examples.
+    Step 2 (after understanding):
+    Implement the login endpoint following these patterns.
 
 Separate the modes. Explore first, then implement with informed context.
 
-## Exercises
+## Exercises {#_exercises}
 
-### Exercise 1: Build a Prompting Toolkit
+### Exercise 1: Build a Prompting Toolkit {#_exercise_1:_build_a_prompting_toolkit}
 
-Create a personal prompting toolkit with:
-- 3 chain-of-thought templates for common tasks in your domain
-- A constraint checklist for code generation
-- 5 few-shot examples from your codebase
-- A list of upfront questions for new features
+Create a personal prompting toolkit with: - 3 chain-of-thought templates for common tasks in your domain - A constraint checklist for code generation - 5 few-shot examples from your codebase - A list of upfront questions for new features
 
 Test each component on a real task. Document what works.
 
-### Exercise 2: Prompt Comparison Experiment
+### Exercise 2: Prompt Comparison Experiment {#_exercise_2:_prompt_comparison_experiment}
 
-Take the same task and try it with:
-1. A vague prompt ("add user authentication")
-2. A constrained prompt (with specific requirements)
-3. A few-shot prompt (with examples)
+Take the same task and try it with: 1. A vague prompt ("add user authentication") 2. A constrained prompt (with specific requirements) 3. A few-shot prompt (with examples)
 
 Compare the results. Document iteration counts, code quality, and pattern adherence.
 
-### Exercise 3: The Clarification Challenge
+### Exercise 3: The Clarification Challenge {#_exercise_3:_the_clarification_challenge}
 
-Practice upfront questioning:
-1. Take a feature request from your backlog
-2. Write 5-7 clarifying questions
-3. Ask Claude to answer them based on your codebase
-4. Implement only after answers are complete
+Practice upfront questioning: 1. Take a feature request from your backlog 2. Write 5-7 clarifying questions 3. Ask Claude to answer them based on your codebase 4. Implement only after answers are complete
 
 Measure: How many iterations did this save compared to implementing immediately?
 
-## Summary
+## Summary {#_summary}
 
 Effective prompting reduces entropy by providing context, instructions, and constraints that eliminate invalid outputs before generation begins.
 
@@ -487,14 +459,16 @@ Four techniques produce consistently better results:
 
 The underlying principle: every constraint you add eliminates possible outputs. Enough constraints and only correct outputs remain.
 
-The next chapter applies these prompting fundamentals to CLAUDE.md files. You will learn to structure project context that makes every prompt more effective without additional effort. See Chapter 4: Writing Your First CLAUDE.md.
+The next chapter applies these prompting fundamentals to CLAUDE.md files. You will learn to structure project context that makes every prompt more effective without additional effort. See [Chapter 4: Writing Your First CLAUDE.md](#_chapter_4_writing_your_first_claude_md){.cross-reference}.
 
----
+'''''
 
-> **Companion Code**: All 3 code examples for this chapter are available at [examples/ch03/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch03)
+:::: note
+::: title
+Note
+:::
 
+**Companion Code**: All 3 code examples for this chapter are available at [examples/ch03/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch03)
+::::
 
-*Related chapters:*
-- Chapter 2: Getting Started with Claude Code for tool usage and basic patterns
-- Chapter 4: Writing Your First CLAUDE.md for project context configuration
-- Chapter 9: Context Engineering Deep Dive for advanced information theory applications
+*Related chapters:* - [Chapter 2: Getting Started with Claude Code](#_chapter_2_getting_started_with_claude_code){.cross-reference} for tool usage and basic patterns - [Chapter 4: Writing Your First CLAUDE.md](#_chapter_4_writing_your_first_claude_md){.cross-reference} for project context configuration - [Chapter 9: Context Engineering Deep Dive](#_chapter_9_context_engineering_deep_dive){.cross-reference} for advanced information theory applications

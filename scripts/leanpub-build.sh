@@ -1,25 +1,32 @@
 #!/bin/bash
-# Build Leanpub manuscript from source chapters
+# Build Leanpub manuscript from AsciiDoc source chapters
 
 set -e
 cd "$(dirname "$0")/.."
 
 echo "=== Leanpub Build ==="
-echo "Converting chapters to Markua format..."
+echo "Converting AsciiDoc chapters to Markua format..."
 
 # Clean and recreate chapters dir
 rm -rf leanpub/chapters
 mkdir -p leanpub/chapters leanpub/images
 
-# Copy and convert each chapter
-for src in chapters/ch*.md; do
-  filename=$(basename "$src")
+# Check for pandoc
+if ! command -v pandoc &> /dev/null; then
+  echo "Error: pandoc is required but not installed."
+  exit 1
+fi
+
+# Convert each AsciiDoc chapter to Markdown
+for src in asciidoc/ch*.adoc; do
+  basename_adoc=$(basename "$src")
+  filename="${basename_adoc%.adoc}.md"
   dest="leanpub/chapters/$filename"
 
-  echo "  Converting: $filename"
+  echo "  Converting: $basename_adoc -> $filename"
 
-  # Convert standard markdown to Markua
-  cat "$src" | \
+  # Convert AsciiDoc to Markdown with pandoc, then apply Markua transforms
+  pandoc -f asciidoc -t markdown --wrap=none "$src" | \
     # Add chapter anchor to first h1 header only (line 1)
     sed -E '1s/^# (.+)$/# \1 {#'"${filename%.md}"'}/' | \
     # Convert > blockquotes to {blurb} for tips
@@ -31,15 +38,14 @@ for src in chapters/ch*.md; do
     # Add width to images
     sed -E 's/^!\[([^]]*)\]\(([^)]+)\)$/{width=80%}\n![\1](\2)/' | \
     # Strip .md cross-reference links (keep text, remove link)
-    # Converts [Chapter Title](chXX-filename.md) to Chapter Title
     sed -E 's/\[([^]]+)\]\(ch[0-9]+[^)]*\.md\)/\1/g' \
     > "$dest"
 done
 
-# Copy diagrams as images
-echo "Copying diagrams..."
-if [ -d "assets/diagrams" ]; then
-  find assets/diagrams -type f \( -name "*.png" -o -name "*.svg" \) -exec cp {} leanpub/images/ \; 2>/dev/null || true
+# Copy images
+echo "Copying images..."
+if [ -d "assets/images" ]; then
+  find assets/images -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.svg" \) -exec cp {} leanpub/images/ \; 2>/dev/null || true
 fi
 
 # Generate word count report
@@ -57,9 +63,3 @@ printf "  %-50s %6d words\n" "TOTAL" "$total"
 echo ""
 echo "=== Build Complete ==="
 echo "Manuscript ready in: leanpub/"
-echo ""
-echo "Next steps:"
-echo "  1. Create book at https://leanpub.com/create/book"
-echo "  2. Connect GitHub repo or upload leanpub/ folder"
-echo "  3. Go to Preview > Generate Preview"
-echo "  4. Review PDF/EPUB and publish!"

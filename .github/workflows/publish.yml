@@ -59,6 +59,7 @@ jobs:
             leanpub/chapters/ch13-building-the-harness.md \
             leanpub/chapters/ch14-the-meta-engineer-playbook.md \
             leanpub/chapters/ch15-model-strategy-and-cost-optimization.md \
+            leanpub/chapters/ch16-building-autonomous-systems.md \
             leanpub/backmatter.md \
             --metadata title="The Meta-Engineer: 10x Was the Floor" \
             --metadata subtitle="Building Autonomous AI Systems with Claude Code" \

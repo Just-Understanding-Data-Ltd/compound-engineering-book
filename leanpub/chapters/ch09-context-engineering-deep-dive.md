@@ -1,24 +1,24 @@
-# Chapter 9: Context Engineering Deep Dive {#ch09-context-engineering-deep-dive}
+# Chapter 9: Context Engineering Deep Dive {#_chapter_9:_context_engineering_deep_dive} {#ch09-context-engineering-deep-dive}
+
+[]{.index term="context engineering"} []{.index term="context window"} []{.index term="information theory"}
 
 Context windows are the most constrained resource in AI-assisted development. You have 200,000 tokens at most, and everything the model knows about your task must fit within that space. This chapter treats context windows as information channels governed by mathematical principles. By understanding how information flows through these channels, you can predictably control model behavior, scale agent capabilities beyond context limits, and debug generation failures systematically.
 
-## Information Theory Foundations
+## Information Theory Foundations {#_information_theory_foundations}
 
 Claude Shannon founded information theory in 1948 to study communication systems. His insights about channels, noise, and uncertainty apply directly to working with Large Language Models (LLMs). When you provide context to Claude, you're transmitting information through a channel with hard capacity limits.
 
-### Entropy: Measuring Uncertainty
+### Entropy: Measuring Uncertainty {#_entropy:_measuring_uncertainty}
 
 Entropy measures uncertainty in a probability distribution. The formula is simple:
 
-```
-H(X) = -∑ P(x) log₂ P(x)
-```
+    H(X) = -∑ P(x) log₂ P(x)
 
 For code generation, entropy measures how many valid programs could satisfy your request. High entropy means many equally likely outputs. Low entropy means the model has converged on a few specific implementations.
 
 Consider this vague prompt:
 
-```typescript
+``` typescript
 // Prompt: "Write a function to process data"
 
 // Possible outputs (all equally likely):
@@ -33,7 +33,7 @@ function processData(data: unknown): never { ... }     // P = 0.2
 
 Now add constraints:
 
-```typescript
+``` typescript
 // Prompt + types + tests + context:
 function processData(
   data: Array<{ id: number; value: string }>
@@ -45,38 +45,39 @@ function processData(
 
 Quality gates work by filtering the state space:
 
-```
-All syntactically valid programs:  H = 20 bits  (1M+ programs)
-                ↓
-         [Type Checker]
-                ↓
-Type-safe programs:                H = 15 bits  (32K programs)
-                ↓
-           [Linter]
-                ↓
-Type-safe, clean programs:         H = 12 bits  (4K programs)
-                ↓
-           [Tests]
-                ↓
-Type-safe, clean, correct programs: H = 5 bits  (32 programs)
-```
+::: {#fig-entropy-reduction-pipeline wrapper="1" align="center" width="600"}
+![Entropy Reduction Pipeline: From 20 bits (1M+ programs) to 5 bits (32 programs)](ch09-entropy-reduction-pipeline.png){alt="Entropy Reduction Pipeline"}
+:::
+
+    All syntactically valid programs:  H = 20 bits  (1M+ programs)
+                    ↓
+             [Type Checker]
+                    ↓
+    Type-safe programs:                H = 15 bits  (32K programs)
+                    ↓
+               [Linter]
+                    ↓
+    Type-safe, clean programs:         H = 12 bits  (4K programs)
+                    ↓
+               [Tests]
+                    ↓
+    Type-safe, clean, correct programs: H = 5 bits  (32 programs)
 
 Each gate reduces entropy multiplicatively. Going from H=20 to H=5 eliminates 99.997% of possible programs.
 
 You can estimate entropy through test failure rates. High failure rates (30-50%) indicate high entropy and unpredictable behavior. Low rates (under 5%) indicate the model has converged on correct implementations.
 
-### Information Content: Why Types Beat Comments
+### Information Content: Why Types Beat Comments {#_information_content:_why_types_beat_comments}
 
 Information content measures how much you learn when a constraint is satisfied:
 
-```
-I(x) = -log₂ P(x)
-```
+    I(x) = -log₂ P(x)
 
 Different constraints provide vastly different amounts of information:
 
 **Types** (high information):
-```typescript
+
+``` typescript
 // This constraint eliminates ~90% of possible implementations
 function processUser(user: User): Promise<Result>
 
@@ -84,7 +85,8 @@ function processUser(user: User): Promise<Result>
 ```
 
 **Tests** (very high information):
-```typescript
+
+``` typescript
 // This test eliminates ~95% of type-safe implementations
 test('processUser returns success=true for valid user', () => {
   expect(result.success).toBe(true);
@@ -94,7 +96,8 @@ test('processUser returns success=true for valid user', () => {
 ```
 
 **Comments** (low information):
-```typescript
+
+``` typescript
 // This comment eliminates ~10% of implementations
 // Process the user data
 
@@ -103,30 +106,21 @@ test('processUser returns success=true for valid user', () => {
 
 Types provide 11 times more information per token than comments. This explains why showing the model type signatures and test cases produces better results than verbose documentation. When filling your context window, prioritize high-information content: type definitions, test cases, and working code examples.
 
-### Mutual Information: Measuring Context Effectiveness
+### Mutual Information: Measuring Context Effectiveness {#_mutual_information:_measuring_context_effectiveness}
 
 Mutual information (MI) captures how much knowing your context tells you about the output:
 
-```
-I(X;Y) = H(X) - H(X|Y)
-```
+    I(X;Y) = H(X) - H(X|Y)
 
 High mutual information means your context strongly determines the output. Low mutual information means the context isn't helping.
 
-You can measure mutual information through output variance. Generate the same prompt 10 times:
-- 1-2 unique outputs: High mutual information (good context)
-- 3-5 unique outputs: Medium mutual information (improve context)
-- 6+ unique outputs: Low mutual information (context needs work)
+You can measure mutual information through output variance. Generate the same prompt 10 times: - 1-2 unique outputs: High mutual information (good context) - 3-5 unique outputs: Medium mutual information (improve context) - 6+ unique outputs: Low mutual information (context needs work)
 
-High-MI patterns include:
-- Working examples over explanations
-- Concrete constraints over vague guidelines
-- Anti-patterns showing what NOT to do
-- Multiple examples rather than a single example
+High-MI patterns include: - Working examples over explanations - Concrete constraints over vague guidelines - Anti-patterns showing what NOT to do - Multiple examples rather than a single example
 
 Compare low-MI context:
 
-```markdown
+``` markdown
 # Context
 Write clean, maintainable code.
 Use good patterns.
@@ -135,7 +129,7 @@ Handle errors properly.
 
 With high-MI context:
 
-```markdown
+``` markdown
 # Context
 
 ✅ DO THIS:
@@ -155,11 +149,15 @@ function authenticate(email: string, password: string): User {
 
 The second context has much higher mutual information. It strongly constrains what the output should look like.
 
-### Channel Capacity: Working Within Limits
+### Channel Capacity: Working Within Limits {#_channel_capacity:_working_within_limits}
+
+::: {wrapper="1" align="center" width="700"}
+![Context Window Anatomy: How 200K tokens are allocated across system, history, context, and reasoning](ch09-context-window.png){alt="Context Window Anatomy"}
+:::
 
 Channel capacity is the maximum information that can reliably pass through a context window:
 
-```python
+``` python
 # Claude context window
 max_tokens = 200_000
 
@@ -169,25 +167,19 @@ channel_capacity = 200_000 * 4 = 800_000 bits = 100 KB
 
 You cannot exceed this capacity. If you try, either early context gets truncated, information density decreases, or data gets compressed lossy through summarization.
 
-Optimization strategies:
-1. **Maximize information density**: Use types and tests over verbose documentation
-2. **Hierarchical context loading**: Load only relevant context for the current task
-3. **Prompt caching**: Cache stable, high-information content
+Optimization strategies: 1. **Maximize information density**: Use types and tests over verbose documentation 2. **Hierarchical context loading**: Load only relevant context for the current task 3. **Prompt caching**: Cache stable, high-information content
 
-Target metrics:
-- Utilization: 60-80% of capacity (stay below limits)
-- Information density: 3.5+ bits/token
-- Output variance: Under 2 unique outputs for the same prompt
+Target metrics: - Utilization: 60-80% of capacity (stay below limits) - Information density: 3.5+ bits/token - Output variance: Under 2 unique outputs for the same prompt
 
-## Progressive Disclosure Patterns
+## Progressive Disclosure Patterns {#_progressive_disclosure_patterns}
 
 Progressive disclosure organizes context in layers that load on-demand. Instead of cramming everything into the system prompt, you provide minimal metadata upfront and expand to full instructions only when needed.
 
-### Three-Level Architecture
+### Three-Level Architecture {#_three_level_architecture}
 
 **Level 1: Metadata Layer** (always loaded)
 
-```yaml
+``` yaml
 # SKILL.md frontmatter
 ---
 name: pdf-manipulation
@@ -199,11 +191,11 @@ triggers:
 ---
 ```
 
-Cost: ~50-100 tokens per skill. You can have dozens of skills for under 2,000 tokens.
+Cost: \~50-100 tokens per skill. You can have dozens of skills for under 2,000 tokens.
 
 **Level 2: Core Instructions** (loaded when relevant)
 
-```markdown
+``` markdown
 # PDF Manipulation Skill
 
 ## Capabilities
@@ -220,122 +212,110 @@ Cost: ~50-100 tokens per skill. You can have dozens of skills for under 2,000 to
 See `forms.md` for detailed form-filling instructions.
 ```
 
-Cost: ~500-2000 tokens per skill, loaded only when triggered.
+Cost: \~500-2000 tokens per skill, loaded only when triggered.
 
 **Level 3: Supplementary Resources** (loaded as needed)
 
 Deep-dive information for edge cases, loaded only when explicitly referenced.
 
-### Implementation Structure
+### Implementation Structure {#_implementation_structure}
 
-```
-skills/
-├── pdf/
-│   ├── SKILL.md          # Level 1 + 2
-│   ├── forms.md          # Level 3
-│   └── reference.md      # Level 3
-├── git/
-│   ├── SKILL.md
-│   └── workflows.md
-└── testing/
-    ├── SKILL.md
-    └── fixtures.md
-```
+    skills/
+    ├── pdf/
+    │   ├── SKILL.md          # Level 1 + 2
+    │   ├── forms.md          # Level 3
+    │   └── reference.md      # Level 3
+    ├── git/
+    │   ├── SKILL.md
+    │   └── workflows.md
+    └── testing/
+        ├── SKILL.md
+        └── fixtures.md
 
 The agent starts with metadata from all skills. When it recognizes a PDF task, it loads the full PDF skill. When it encounters form-filling, it loads the supplementary forms reference.
 
-### Benefits
+### Benefits {#_benefits}
 
 **Scalability**: Add unlimited skills without context explosion
-```
-10 skills × 50 tokens metadata = 500 tokens always loaded
-vs.
-10 skills × 1500 tokens full = 15,000 tokens (30x more)
-```
+
+    10 skills × 50 tokens metadata = 500 tokens always loaded
+    vs.
+    10 skills × 1500 tokens full = 15,000 tokens (30x more)
 
 **Cost efficiency**: 87% savings by loading only relevant context
 
 **Unbounded capability**: Agents with filesystem access can read files on-demand, extending capability beyond the context window entirely.
 
-## Context Rot and Auto-Compacting
+## Context Rot and Auto-Compacting {#_context_rot_and_auto_compacting}
 
 Long sessions accumulate stale information. This is context rot.
 
-### Symptoms
+### Symptoms {#_symptoms}
 
-You know you have context rot when the AI:
-- References code you deleted 50 messages ago
-- Suggests old architecture patterns you abandoned
-- Confuses current state with historical state
-- Hallucinates about files that never existed
-- Decreases accuracy as the conversation grows
+You know you have context rot when the AI: - References code you deleted 50 messages ago - Suggests old architecture patterns you abandoned - Confuses current state with historical state - Hallucinates about files that never existed - Decreases accuracy as the conversation grows
 
-### Signal-to-Noise Degradation
+### Signal-to-Noise Degradation {#_signal_to_noise_degradation}
 
-```
-Messages 1-20:   90% signal (mostly relevant)
-Messages 21-50:  60% signal (mix of current and obsolete)
-Messages 51-100: 30% signal (stale context dominant)
-Messages 100+:   10% signal (buried in history)
-```
+    Messages 1-20:   90% signal (mostly relevant)
+    Messages 21-50:  60% signal (mix of current and obsolete)
+    Messages 51-100: 30% signal (stale context dominant)
+    Messages 100+:   10% signal (buried in history)
 
-### Claude Code's Auto-Compacting
+### Claude Code's Auto-Compacting {#_claude_code’s_auto_compacting}
 
 Claude Code monitors context size and automatically triggers compacting when context grows large. It summarizes completed work, preserves key decisions and current state, and removes intermediate debugging steps.
 
-```
-BEFORE compacting:
-- 150 messages
-- 100K tokens
-- References to deleted code
-- 60% generation accuracy
+    BEFORE compacting:
+    - 150 messages
+    - 100K tokens
+    - References to deleted code
+    - 60% generation accuracy
 
-AFTER compacting:
-- 10 messages
-- 15K tokens
-- Clear current state
-- 95% generation accuracy
-```
+    AFTER compacting:
+    - 10 messages
+    - 15K tokens
+    - Clear current state
+    - 95% generation accuracy
 
-### Manual Compacting Strategies
+### Manual Compacting Strategies {#_manual_compacting_strategies}
 
 **Task-driven compacting**: Summarize every 5-10 completed tasks
 
-**Recursive compacting** (multi-level):
-- Level 1: 1-2 sentences per completed task
-- Level 2: Paragraph per completed feature
-- Level 3: DIGEST.md per milestone
-- Level 4: Archive to CHANGELOG.md
+**Recursive compacting** (multi-level): - Level 1: 1-2 sentences per completed task - Level 2: Paragraph per completed feature - Level 3: DIGEST.md per milestone - Level 4: Archive to CHANGELOG.md
 
 **Compacting prompt pattern**:
-```
-"Summarize all completed work:
-1. What features were implemented?
-2. What architectural decisions were made?
-3. What's the current state?
-4. What's still pending?
 
-Output: Compact summary (max 500 words)"
-```
+    "Summarize all completed work:
+    1. What features were implemented?
+    2. What architectural decisions were made?
+    3. What's the current state?
+    4. What's still pending?
 
-### When to Compact
+    Output: Compact summary (max 500 words)"
+
+### When to Compact {#_when_to_compact}
 
 - After completing 5-10 tasks
+
 - After finishing a feature
+
 - When switching contexts to a different package
+
 - When AI references deleted or outdated code
+
 - After 100+ messages
+
 - Before starting a new major feature
 
-## Context-Efficient Backpressure
+## Context-Efficient Backpressure {#_context_efficient_backpressure}
 
 When tests pass, developers waste context conveying results that need fewer than 10 tokens to communicate. Claude models perform optimally within approximately 75K tokens. Beyond this, agents miss obvious errors and ignore instructions.
 
-### The run_silent Pattern
+### The run_silent Pattern {#_the_run_silent_pattern}
 
 Swallow output on success, dump on failure:
 
-```bash
+``` bash
 run_silent() {
     local description="$1"
     local command="$2"
@@ -361,77 +341,70 @@ run_silent "API tests" "pytest tests/api/"
 ```
 
 **Output on success:**
-```
-✓ Auth tests
-✓ Utils tests
-✓ API tests
-```
+
+    ✓ Auth tests
+    ✓ Utils tests
+    ✓ API tests
 
 **Output on failure:**
-```
-✓ Auth tests
-✓ Utils tests
-✗ API tests
 
-FAIL src/api/users.test.ts
-● should validate email format
-  Expected: true
-  Received: false
-```
+    ✓ Auth tests
+    ✓ Utils tests
+    ✗ API tests
 
-### Progressive Refinement
+    FAIL src/api/users.test.ts
+    ● should validate email format
+      Expected: true
+      Received: false
+
+### Progressive Refinement {#_progressive_refinement}
 
 Enable failFast to process one failure at a time:
 
-```bash
+``` bash
 pytest -x tests/           # Python
 jest --bail                 # JavaScript
 go test -failfast ./...     # Go
 ```
 
-### Key Principle
+### Key Principle {#_key_principle}
 
 If you already know what matters, don't leave it to a model to churn through thousands of junk tokens to decide. Deterministic output beats non-deterministic parsing.
 
-## Systematic Context Debugging Framework
+## Systematic Context Debugging Framework {#_systematic_context_debugging_framework}
 
 When AI doesn't produce desired output, follow a hierarchical debugging protocol ordered by likelihood of success.
 
-### The Four-Layer Hierarchy
+### The Four-Layer Hierarchy {#_the_four_layer_hierarchy}
 
-```
-Layer 1: CONTEXT (60% of issues)
-Add missing information, files, examples, architecture
-                         ↓
-Layer 2: PROMPTING (25% of issues)
-Refine instructions, add examples, clarify constraints
-                         ↓
-Layer 3: MODEL POWER (10% of issues)
-Escalate to more powerful model for complex reasoning
-                         ↓
-Layer 4: MANUAL OVERRIDE (5% of issues)
-Recognize when human intuition is needed
-```
+    Layer 1: CONTEXT (60% of issues)
+    Add missing information, files, examples, architecture
+                             ↓
+    Layer 2: PROMPTING (25% of issues)
+    Refine instructions, add examples, clarify constraints
+                             ↓
+    Layer 3: MODEL POWER (10% of issues)
+    Escalate to more powerful model for complex reasoning
+                             ↓
+    Layer 4: MANUAL OVERRIDE (5% of issues)
+    Recognize when human intuition is needed
 
-### Layer 1: Context (60% of Issues)
+### Layer 1: Context (60% of Issues) {#_layer_1:_context_(60%_of_issues)}
 
 **Problem signature**: AI produces plausible but incorrect code that doesn't fit the codebase.
 
-**Debugging checklist**:
-1. Include relevant code files showing existing patterns
-2. Provide system architecture and design decisions
-3. Include error messages and stack traces
-4. Show database schemas and API contracts
-5. Provide examples of expected behavior
+**Debugging checklist**: 1. Include relevant code files showing existing patterns 2. Provide system architecture and design decisions 3. Include error messages and stack traces 4. Show database schemas and API contracts 5. Provide examples of expected behavior
 
 **Example before**:
-```typescript
+
+``` typescript
 // Prompt: "Create a user authentication endpoint"
 // AI generates generic code that doesn't match project patterns
 ```
 
 **Example after**:
-```typescript
+
+``` typescript
 // Added context: Include existing auth endpoint as example
 // @src/api/auth/register.ts
 
@@ -441,155 +414,157 @@ Recognize when human intuition is needed
 // AI generates code matching project conventions
 ```
 
-### Layer 2: Prompting (25% of Issues)
+### Layer 2: Prompting (25% of Issues) {#_layer_2:_prompting_(25%_of_issues)}
 
 **Problem signature**: AI has context but output doesn't meet requirements.
 
-**Debugging checklist**:
-1. Add specific examples of desired output
-2. Include edge cases and constraints
-3. Provide clear success criteria
-4. Break complex tasks into steps
-5. Use structured formats
+**Debugging checklist**: 1. Add specific examples of desired output 2. Include edge cases and constraints 3. Provide clear success criteria 4. Break complex tasks into steps 5. Use structured formats
 
 **Example before**:
-```
-Prompt: "Format user data for display"
-AI generates: Generic JSON formatting
-```
+
+    Prompt: "Format user data for display"
+    AI generates: Generic JSON formatting
 
 **Example after**:
-```
-Prompt: "Format user data for display
 
-Expected output:
-Input: { id: 1, email: 'test@example.com', createdAt: '2025-01-15T10:30:00Z' }
-Output: 'test@example.com (joined Jan 15, 2025)'"
+    Prompt: "Format user data for display
 
-AI generates: Exact format specified
-```
+    Expected output:
+    Input: { id: 1, email: 'test@example.com', createdAt: '2025-01-15T10:30:00Z' }
+    Output: 'test@example.com (joined Jan 15, 2025)'"
 
-### Layer 3: Model Power (10% of Issues)
+    AI generates: Exact format specified
+
+### Layer 3: Model Power (10% of Issues) {#_layer_3:_model_power_(10%_of_issues)}
 
 Only escalate when Layers 1 and 2 are exhausted. Some tasks genuinely need stronger reasoning. A real-time collaborative editing system with conflict resolution may require Claude Opus (Anthropic's most capable model) where Claude Sonnet (the balanced cost-performance model) fails.
 
 **Cost consideration**:
-```
-Claude Sonnet: $3 per 1M input tokens
-Claude Opus: $15 per 1M input tokens (5x more expensive)
 
-Strategy:
-1. Try Sonnet with good context (90% success, low cost)
-2. Escalate to Opus only for remaining 10% (high cost, rare)
-```
+    Claude Sonnet: $3 per 1M input tokens
+    Claude Opus: $15 per 1M input tokens (5x more expensive)
 
-### Layer 4: Manual Override (5% of Issues)
+    Strategy:
+    1. Try Sonnet with good context (90% success, low cost)
+    2. Escalate to Opus only for remaining 10% (high cost, rare)
 
-**When to go manual**:
-- Deep domain expertise required (medical diagnosis, legal compliance)
-- Human intuition or creativity needed (brand identity, UX decisions)
-- Ambiguous or contradictory requirements
-- Legacy systems with tribal knowledge and no documentation
+### Layer 4: Manual Override (5% of Issues) {#_layer_4:_manual_override_(5%_of_issues)}
+
+**When to go manual**: - Deep domain expertise required (medical diagnosis, legal compliance) - Human intuition or creativity needed (brand identity, UX decisions) - Ambiguous or contradictory requirements - Legacy systems with tribal knowledge and no documentation
 
 **Hybrid approach**: Human solves core problem, documents solution clearly, AI implements and scales the solution.
 
-### Time Comparison
+### Time Comparison {#_time_comparison}
 
-```
-Scenario: Missing context issue (60% of cases)
+    Scenario: Missing context issue (60% of cases)
 
-Unsystematic approach:
-1. Try different model: 15 min ✗
-2. Rewrite prompt: 10 min ✗
-3. Try another tool: 20 min ✗
-4. Finally add context: 5 min ✓
-Total: 50 minutes
+    Unsystematic approach:
+    1. Try different model: 15 min ✗
+    2. Rewrite prompt: 10 min ✗
+    3. Try another tool: 20 min ✗
+    4. Finally add context: 5 min ✓
+    Total: 50 minutes
 
-Systematic approach:
-1. Add context first: 5 min ✓
-Total: 5 minutes
-```
+    Systematic approach:
+    1. Add context first: 5 min ✓
+    Total: 5 minutes
 
-## Bringing It Together
+## Bringing It Together {#_bringing_it_together}
 
-Information theory explains why patterns work:
-- Context fills the channel up to capacity
-- Generation produces output with entropy proportional to constraint quality
-- Quality gates filter by eliminating invalid states
-- Final output has low entropy when constraints compound
+Information theory explains why patterns work: - Context fills the channel up to capacity - Generation produces output with entropy proportional to constraint quality - Quality gates filter by eliminating invalid states - Final output has low entropy when constraints compound
 
-For long sessions:
-- Progressive disclosure scales capabilities beyond context limits
-- Auto-compacting maintains freshness in 100+ message sessions
-- Backpressure keeps signal-to-noise high for accuracy
+For long sessions: - Progressive disclosure scales capabilities beyond context limits - Auto-compacting maintains freshness in 100+ message sessions - Backpressure keeps signal-to-noise high for accuracy
 
-For cost optimization:
-- Prioritize high-density content: types and tests over documentation
-- Budget tokens by information density
-- Cache stable, high-MI content
-- Use Sonnet with good context before Opus
+For cost optimization: - Prioritize high-density content: types and tests over documentation - Budget tokens by information density - Cache stable, high-MI content - Use Sonnet with good context before Opus
 
-## Exercises
+## Exercises {#_exercises}
 
-### Exercise 1: Measure Entropy in Your Codebase
+### Exercise 1: Measure Entropy in Your Codebase {#_exercise_1:_measure_entropy_in_your_codebase}
 
-1. Pick a function you want to generate (user validation, API endpoint)
-2. Generate it 10 times with the same prompt, no context
-3. Count unique implementations produced
-4. Estimate entropy: H ≈ log₂(unique_outputs)
-5. Add one constraint (type signature)
-6. Repeat 10 times, count unique outputs
-7. Measure entropy reduction
-8. Add another constraint (test cases)
-9. Repeat and measure again
+1.  Pick a function you want to generate (user validation, API endpoint)
+
+2.  Generate it 10 times with the same prompt, no context
+
+3.  Count unique implementations produced
+
+4.  Estimate entropy: H ≈ log₂(unique_outputs)
+
+5.  Add one constraint (type signature)
+
+6.  Repeat 10 times, count unique outputs
+
+7.  Measure entropy reduction
+
+8.  Add another constraint (test cases)
+
+9.  Repeat and measure again
+
 10. Document how entropy dropped with each constraint
 
 **Expected outcome**: You should see exponential entropy reduction as constraints stack.
 
-### Exercise 2: Design a Progressive Disclosure Skill
+### Exercise 2: Design a Progressive Disclosure Skill {#_exercise_2:_design_a_progressive_disclosure_skill}
 
-1. Choose a domain (PDF processing, git operations, testing)
-2. Create Level 1 metadata (~50 tokens): name, description, triggers
-3. Write Level 2 core instructions (~1000 tokens): capabilities, common patterns
-4. Create Level 3 supplementary docs: advanced patterns, edge cases
-5. Simulate what the agent loads at each stage
-6. Compare token cost to flat loading (everything at once)
+1.  Choose a domain (PDF processing, git operations, testing)
+
+2.  Create Level 1 metadata (\~50 tokens): name, description, triggers
+
+3.  Write Level 2 core instructions (\~1000 tokens): capabilities, common patterns
+
+4.  Create Level 3 supplementary docs: advanced patterns, edge cases
+
+5.  Simulate what the agent loads at each stage
+
+6.  Compare token cost to flat loading (everything at once)
 
 **Expected outcome**: 70%+ reduction in average tokens loaded per task.
 
-### Exercise 3: Debug Using the Hierarchical Protocol
+### Exercise 3: Debug Using the Hierarchical Protocol {#_exercise_3:_debug_using_the_hierarchical_protocol}
 
-1. Find a real case where AI generated incorrect code
-2. Layer 1: Add relevant files, architecture, error logs. Fixed? Note time and stop.
-3. Layer 2: Add specific examples, edge cases, success criteria. Fixed? Note time and stop.
-4. Layer 3: Escalate to more powerful model. Fixed? Note time and stop.
-5. Layer 4: Manually implement core logic, have AI scale it.
-6. Analyze: Which layer fixed the issue? Time at each layer?
+1.  Find a real case where AI generated incorrect code
+
+2.  Layer 1: Add relevant files, architecture, error logs. Fixed? Note time and stop.
+
+3.  Layer 2: Add specific examples, edge cases, success criteria. Fixed? Note time and stop.
+
+4.  Layer 3: Escalate to more powerful model. Fixed? Note time and stop.
+
+5.  Layer 4: Manually implement core logic, have AI scale it.
+
+6.  Analyze: Which layer fixed the issue? Time at each layer?
 
 **Expected outcome**: Most issues resolve at Layer 1 (context), with faster resolution than trial-and-error.
 
-## Summary
+## Summary {#_summary}
 
 Context engineering is the discipline of managing finite information capacity. You've learned:
 
 - **Entropy** measures uncertainty. Quality gates reduce entropy exponentially by filtering invalid states.
+
 - **Information content** explains why types provide 11x more value per token than comments.
+
 - **Mutual information** captures context effectiveness. High MI means context strongly determines output.
+
 - **Channel capacity** is the hard limit. Maximize information density, not just token count.
+
 - **Progressive disclosure** scales capabilities beyond context limits by loading information on-demand.
+
 - **Auto-compacting** prevents context rot in long sessions by summarizing completed work.
+
 - **Backpressure** keeps the model in the optimal performance zone by suppressing noise from passing tests.
+
 - **Hierarchical debugging** resolves 60% of issues at the context layer, saving time and cost.
 
 The goal is code generation that is predictable, correct, and efficient. Not by luck, but by mathematical design.
 
----
+'''''
 
-> **Companion Code**: All 7 code examples for this chapter are available at [examples/ch09/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch09)
+:::: note
+::: title
+Note
+:::
 
+**Companion Code**: All 7 code examples for this chapter are available at [examples/ch09/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch09)
+::::
 
-*Related chapters:*
-- Chapter 3: Prompting Fundamentals for foundational techniques that maximize information density
-- Chapter 7: Quality Gates That Compound for how verification stages reduce entropy exponentially
-- Chapter 8: Error Handling & Debugging for the Five-Point Diagnostic protocol
-- Chapter 10: The RALPH Loop for managing context in long-running agent sessions
+*Related chapters:* - [Chapter 3: Prompting Fundamentals](#_chapter_3_prompting_fundamentals){.cross-reference} for foundational techniques that maximize information density - [Chapter 7: Quality Gates That Compound](#_chapter_7_quality_gates_that_compound){.cross-reference} for how verification stages reduce entropy exponentially - [Chapter 8: Error Handling & Debugging](#_chapter_8_error_handling_and_debugging){.cross-reference} for the Five-Point Diagnostic protocol - [Chapter 10: The RALPH Loop](#_chapter_10_the_ralph_loop){.cross-reference} for managing context in long-running agent sessions

@@ -1,133 +1,103 @@
-# Chapter 15: Model Strategy and Cost Optimization {#ch15-model-strategy-and-cost-optimization}
+# Chapter 15: Model Strategy and Cost Optimization {#_chapter_15:_model_strategy_and_cost_optimization} {#ch15-model-strategy-and-cost-optimization}
+
+[]{.index term="model strategy"} []{.index term="cost optimization"} []{.index term="token pricing"}
 
 Using a single model for everything is wasteful. Most teams default to mid-tier models out of habit, then wonder why their AI bills keep climbing. The economics of AI-assisted development reward strategic thinking. Match model capabilities to task complexity, and you can cut costs by 40-70% while maintaining or improving quality.
 
 This chapter teaches you to think about AI costs the same way you think about any engineering resource: where to spend, where to save, and how to measure the difference.
 
-## The Economics of AI-Assisted Development
+## The Economics of AI-Assisted Development {#_the_economics_of_ai_assisted_development}
 
 Before optimizing, you need to understand what you're optimizing. AI costs break down into three components: input tokens (the context you provide), output tokens (the response you receive), and compute time. Input tokens are cheapest. Output tokens cost more. Complex reasoning models cost even more.
 
 Consider a typical development day:
 
-```
-100 AI requests
-Average 5,000 tokens of context per request
-Average 500 tokens of output per request
+    100 AI requests
+    Average 5,000 tokens of context per request
+    Average 500 tokens of output per request
 
-At Claude Sonnet pricing ($3 per million tokens (MTok) input, $15/MTok output):
-Input: 100 × 5,000 × $0.000003 = $1.50
-Output: 100 × 500 × $0.000015 = $0.75
-Total: $2.25/day = $49.50/month = $594/year
-```
+    At Claude Sonnet pricing ($3 per million tokens (MTok) input, $15/MTok output):
+    Input: 100 × 5,000 × $0.000003 = $1.50
+    Output: 100 × 500 × $0.000015 = $0.75
+    Total: $2.25/day = $49.50/month = $594/year
 
-For a team of five developers, that's roughly $3,000/year just for mid-tier model usage. Not catastrophic, but meaningful. More important: that number can be halved with intelligent model selection.
+For a team of five developers, that's roughly \$3,000/year just for mid-tier model usage. Not catastrophic, but meaningful. More important: that number can be halved with intelligent model selection.
 
 The single-model problem compounds over time. Simple tasks like reading files, running grep searches, and adding type annotations don't need sophisticated reasoning. Complex tasks like architecture decisions and security implementations do. Using one model for both means you're either overpaying for simple work or underdelivering on complex work.
 
-### When AI Assistance Pays for Itself
+### When AI Assistance Pays for Itself {#_when_ai_assistance_pays_for_itself}
 
 The Return on Investment (ROI) calculation for AI tooling isn't just about API costs. Consider the full picture:
 
-```
-Developer hourly rate: $75/hour
-Time saved per AI-assisted task: 15-30 minutes
-Tasks per day: 10-20
+    Developer hourly rate: $75/hour
+    Time saved per AI-assisted task: 15-30 minutes
+    Tasks per day: 10-20
 
-Daily value delivered: 10 tasks × 0.25 hours × $75 = $187.50
-Daily AI cost: $2-5
-ROI: 37-93x return on AI spend
-```
+    Daily value delivered: 10 tasks × 0.25 hours × $75 = $187.50
+    Daily AI cost: $2-5
+    ROI: 37-93x return on AI spend
 
 Even at higher usage rates, AI assistance pays for itself many times over. The goal of cost optimization isn't to minimize AI spend. It's to maximize the return on that spend by allocating resources intelligently.
 
-## The Three-Tier Model Hierarchy
+## The Three-Tier Model Hierarchy {#_the_three_tier_model_hierarchy}
 
 Model selection works best with a clear framework. Think in three tiers:
 
-**Tier 1: Haiku ($0.25/MTok input, $1.25/MTok output)**
+**Tier 1: Haiku (\$0.25/MTok input, \$1.25/MTok output)**
 
-Fast and cheap. Use for tasks with clear right answers:
-- File reads and searches
-- Simple pattern matching
-- Documentation updates
-- Variable renames
-- Adding type annotations
-- Grepping for patterns
+Fast and cheap. Use for tasks with clear right answers: - File reads and searches - Simple pattern matching - Documentation updates - Variable renames - Adding type annotations - Grepping for patterns
 
 These tasks represent 60-80% of typical AI requests. A request like "Read src/api/users.ts" doesn't need sophisticated reasoning. It needs speed.
 
-**Tier 2: Sonnet ($3/MTok input, $15/MTok output)**
+**Tier 2: Sonnet (\$3/MTok input, \$15/MTok output)**
 
-The workhorse. Use for standard development work:
-- Feature implementation
-- Refactoring functions
-- Writing tests
-- Bug fixes
-- Code review
-- Multi-file changes (2-5 files)
+The workhorse. Use for standard development work: - Feature implementation - Refactoring functions - Writing tests - Bug fixes - Code review - Multi-file changes (2-5 files)
 
 Most development falls here. Sonnet handles context well, understands patterns, and produces reliable output.
 
-**Tier 3: Opus ($15/MTok input, $75/MTok output)**
+**Tier 3: Opus (\$15/MTok input, \$75/MTok output)**
 
-Maximum capability. Reserve for high-stakes work:
-- Architecture decisions
-- System design
-- Large refactors (6+ files)
-- Security implementations
-- Performance optimization
-- Complex debugging
+Maximum capability. Reserve for high-stakes work: - Architecture decisions - System design - Large refactors (6+ files) - Security implementations - Performance optimization - Complex debugging
 
 Opus costs 5-60x more than Haiku. Use it strategically.
 
-### Model-Specific Strengths
+### Model-Specific Strengths {#_model_specific_strengths}
 
 Each tier has distinct strengths that inform task routing:
 
-**Haiku excels at:**
-- File I/O operations and navigation
-- Pattern matching and text search
-- Simple text transformations
-- Abstract Syntax Tree (AST) navigation and symbol lookup
-- Quick edits to existing code
-- Documentation string updates
+**Haiku excels at:** - File I/O operations and navigation - Pattern matching and text search - Simple text transformations - Abstract Syntax Tree (AST) navigation and symbol lookup - Quick edits to existing code - Documentation string updates
 
-**Sonnet excels at:**
-- Feature implementation with clear requirements
-- Standard refactoring patterns
-- Test writing and test fixes
-- API endpoint creation
-- Bug fixes with known symptoms
-- Code review comments
+**Sonnet excels at:** - Feature implementation with clear requirements - Standard refactoring patterns - Test writing and test fixes - API endpoint creation - Bug fixes with known symptoms - Code review comments
 
-**Opus excels at:**
-- System design and architecture
-- Complex multi-step refactoring
-- Security implementations
-- Performance optimization
-- Debugging subtle issues
-- Cross-service debugging
+**Opus excels at:** - System design and architecture - Complex multi-step refactoring - Security implementations - Performance optimization - Debugging subtle issues - Cross-service debugging
 
 Understanding these strengths helps you route tasks accurately. A task like "find all usages of getUserById" maps to Haiku. A task like "redesign the authentication system to support OAuth" maps to Opus.
 
-### Latency Considerations
+::: {#fig-model-escalation wrapper="1" align="center" width="500"}
+![Model Escalation: Cost-optimized selection flow from Haiku to Opus](ch15-model-escalation.png){alt="Model Escalation"}
+:::
+
+### Latency Considerations {#_latency_considerations}
 
 Speed matters for interactive development:
 
-| Model | Typical Response Time |
-|-------|----------------------|
-| Haiku | 1-2 seconds |
-| Sonnet | 2-4 seconds |
-| Opus | 4-8 seconds |
++-----------------------------------+-----------------------------------+
+| Model                             | Typical Response Time             |
++===================================+===================================+
+| Haiku                             | 1-2 seconds                       |
++-----------------------------------+-----------------------------------+
+| Sonnet                            | 2-4 seconds                       |
++===================================+===================================+
+| Opus                              | 4-8 seconds                       |
++===================================+===================================+
 
 For time-sensitive tasks, prefer Haiku even when Sonnet might produce marginally better results. The speed advantage compounds during rapid iteration cycles.
 
-### Implementing Model Selection
+### Implementing Model Selection {#_implementing_model_selection}
 
 Build heuristics that route tasks automatically:
 
-```typescript
+``` typescript
 // skip-validation
 type ModelTier = 'haiku' | 'sonnet' | 'opus'
 
@@ -139,18 +109,23 @@ interface TaskAnalysis {
   multiStepPlan: boolean
 }
 
-function selectModel(task: string, analysis: TaskAnalysis): ModelTier {
+function selectModel(
+  task: string, analysis: TaskAnalysis
+): ModelTier {
   // Security and performance always use Opus
   if (analysis.securityCritical) return 'opus'
 
   // Architecture decisions use Opus
-  if (analysis.requiresArchitecture || analysis.multiStepPlan) return 'opus'
+  if (analysis.requiresArchitecture ||
+      analysis.multiStepPlan) return 'opus'
 
   // Large changes use Opus
-  if (analysis.filesAffected > 5 || analysis.linesOfCode > 500) return 'opus'
+  if (analysis.filesAffected > 5 ||
+      analysis.linesOfCode > 500) return 'opus'
 
   // Multi-file work uses Sonnet
-  if (analysis.filesAffected > 1 || analysis.linesOfCode > 50) return 'sonnet'
+  if (analysis.filesAffected > 1 ||
+      analysis.linesOfCode > 50) return 'sonnet'
 
   // Simple patterns use Haiku
   const simplePatterns = [
@@ -166,11 +141,11 @@ function selectModel(task: string, analysis: TaskAnalysis): ModelTier {
 
 The key insight: most tasks are simpler than you think. Track your actual usage for a week. You'll likely find 60-80% of requests could use Haiku.
 
-### Progressive Model Escalation
+### Progressive Model Escalation {#_progressive_model_escalation}
 
 Don't guess which model you need. Start cheap and escalate:
 
-```typescript
+``` typescript
 // skip-validation
 async function executeWithEscalation(task: string): Promise<Result> {
   // Try Haiku first
@@ -207,45 +182,47 @@ async function passesQualityGates(result: Result): Promise<boolean> {
 
 This approach works because quality gates catch failures automatically. If Haiku produces broken code, tests fail, and you escalate. No manual review needed.
 
-### Cost Savings Analysis
+### Cost Savings Analysis {#_cost_savings_analysis}
 
 With intelligent model switching (70% Haiku, 25% Sonnet, 5% Opus):
 
-```
-Daily requests: 100
+    Daily requests: 100
 
-Haiku (70 requests):
-  70 × 5,000 × $0.00000025 = $0.0875 input
-  70 × 500 × $0.00000125 = $0.044 output
-  Subtotal: $0.13
+    Haiku (70 requests):
+      70 × 5,000 × $0.00000025 = $0.0875 input
+      70 × 500 × $0.00000125 = $0.044 output
+      Subtotal: $0.13
 
-Sonnet (25 requests):
-  25 × 5,000 × $0.000003 = $0.375 input
-  25 × 500 × $0.000015 = $0.1875 output
-  Subtotal: $0.56
+    Sonnet (25 requests):
+      25 × 5,000 × $0.000003 = $0.375 input
+      25 × 500 × $0.000015 = $0.1875 output
+      Subtotal: $0.56
 
-Opus (5 requests):
-  5 × 5,000 × $0.000015 = $0.375 input
-  5 × 500 × $0.000075 = $0.1875 output
-  Subtotal: $0.56
+    Opus (5 requests):
+      5 × 5,000 × $0.000015 = $0.375 input
+      5 × 500 × $0.000075 = $0.1875 output
+      Subtotal: $0.56
 
-Total: $1.25/day vs $2.25/day baseline
-Savings: 44% ($360/year per developer)
-```
+    Total: $1.25/day vs $2.25/day baseline
+    Savings: 44% ($360/year per developer)
 
 For aggressive Haiku usage (80% Haiku, 15% Sonnet, 5% Opus), savings reach 53%.
 
-## Cost Protection with Multi-Layer Timeouts
+## Cost Protection with Multi-Layer Timeouts {#_cost_protection_with_multi_layer_timeouts}
 
 Runaway costs happen. An agent enters an infinite loop. A task processes more files than expected. A verbose response generates 50K tokens. Without limits, a single job can consume your monthly budget in hours.
 
+::: {#fig-cost-protection-layers wrapper="1" align="center" width="500"}
+![Four-Layer Cost Protection: Defense in depth against runaway API costs](ch15-cost-protection-layers.png){alt="Cost Protection Layers"}
+:::
+
 Build protection in layers:
 
-### Layer 1: Job-Level Timeouts
+### Layer 1: Job-Level Timeouts {#_layer_1:_job_level_timeouts}
 
 The outermost safety net. If everything else fails, the job dies:
 
-```yaml
+``` yaml
 # .github/workflows/ai-task.yml
 jobs:
   ai-task:
@@ -260,13 +237,15 @@ jobs:
 
 Two timeouts provide defense in depth. The job timeout catches everything. The step timeout catches the actual AI work and leaves room for cleanup.
 
-### Layer 2: Request-Level Token Caps
+### Layer 2: Request-Level Token Caps {#_layer_2:_request_level_token_caps}
 
 Prevent agent requests from consuming excessive tokens by capping input size:
 
-```typescript
+``` typescript
 // skip-validation
-import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
+import {
+  query, type SDKMessage
+} from '@anthropic-ai/claude-agent-sdk';
 
 // Cap input to control costs (10K chars ≈ 2500 tokens)
 const truncatedCode = code.slice(0, 10000);
@@ -289,18 +268,23 @@ for await (const msg of response) {
 
 Match input limits to task type for cost control:
 
-| Task Type | Recommended max_tokens |
-|-----------|----------------------|
-| Code review | 2048-4096 |
-| Bug fix | 1024-2048 |
-| Documentation | 4096-8192 |
-| Simple edits | 512-1024 |
++-----------------------------------+-----------------------------------+
+| Task Type                         | Recommended max_tokens            |
++===================================+===================================+
+| Code review                       | 2048-4096                         |
++-----------------------------------+-----------------------------------+
+| Bug fix                           | 1024-2048                         |
++-----------------------------------+-----------------------------------+
+| Documentation                     | 4096-8192                         |
++===================================+===================================+
+| Simple edits                      | 512-1024                          |
++===================================+===================================+
 
-### Layer 3: Input Size Limits
+### Layer 3: Input Size Limits {#_layer_3:_input_size_limits}
 
 Cap the context you send:
 
-```typescript
+``` typescript
 // skip-validation
 const INPUT_LIMITS = {
   maxFiles: 50,
@@ -334,11 +318,11 @@ async function gatherContext(patterns: string[]) {
 }
 ```
 
-### Layer 4: Budget Alerts and Hard Caps
+### Layer 4: Budget Alerts and Hard Caps {#_layer_4:_budget_alerts_and_hard_caps}
 
 The final safety net:
 
-```typescript
+``` typescript
 // skip-validation
 const BUDGET = {
   dailyLimit: 10,    // dollars
@@ -355,7 +339,9 @@ async function checkBudgetBeforeOperation(): Promise<boolean> {
   }
 
   if (usage.today >= BUDGET.dailyLimit * BUDGET.alertThreshold) {
-    console.warn(`Budget alert: $${usage.today} of $${BUDGET.dailyLimit}`)
+    console.warn(
+      `Budget alert: $${usage.today} of $${BUDGET.dailyLimit}`
+    )
   }
 
   return true
@@ -364,14 +350,15 @@ async function checkBudgetBeforeOperation(): Promise<boolean> {
 
 All four layers work together. Even if one fails, others prevent cost explosions.
 
-## Prompt Caching for 90% Cost Reduction
+## Prompt Caching for 90% Cost Reduction {#_prompt_caching_for_90%_cost_reduction}
 
 LLMs are stateless. Every request starts from scratch. You provide the same CLAUDE.md, schemas, and standards with every request. Without caching, you pay full price for repeated context.
 
-Claude automatically caches the first 1024+ tokens of identical content for 5 minutes. Cached tokens cost 10x less ($0.30/MTok vs $3/MTok for Sonnet input). Structure your prompts to maximize cache hits:
+Claude automatically caches the first 1024+ tokens of identical content for 5 minutes. Cached tokens cost 10x less (\$0.30/MTok vs \$3/MTok for Sonnet input). Structure your prompts to maximize cache hits:
 
 **Cache-friendly structure:**
-```markdown
+
+``` markdown
 # SYSTEM CONTEXT (CACHED - put first)
 
 ## Project Architecture
@@ -393,11 +380,11 @@ Claude automatically caches the first 1024+ tokens of identical content for 5 mi
 
 The key: stable content goes at the beginning. Dynamic content goes at the end. If you mix them, caching breaks.
 
-### Implementing Prompt Caching
+### Implementing Prompt Caching {#_implementing_prompt_caching}
 
 Prompt caching uses the `cache_control` parameter in the native Anthropic SDK. This low-level API feature provides fine-grained control over which content blocks get cached. While the Agent SDK handles many optimizations automatically, explicit cache control requires the native SDK:
 
-```typescript
+``` typescript
 // skip-validation
 import Anthropic from '@anthropic-ai/sdk';
 
@@ -442,33 +429,39 @@ console.log('Cache metrics:', {
 
 First request creates the cache. Subsequent requests (within 5 minutes) read from cache. Target: 80%+ cache hit rate.
 
-### Combined Savings
+### Combined Savings {#_combined_savings}
 
-Model switching (44%) combined with prompt caching (90% on cached tokens) yields 94-97% total cost reduction on repeated context. For a team of 20 developers, that's $10,000+/year in savings.
+Model switching (44%) combined with prompt caching (90% on cached tokens) yields 94-97% total cost reduction on repeated context. For a team of 20 developers, that's \$10,000+/year in savings.
 
-## The Batch API: 50% Discount for Async Work
+## The Batch API: 50% Discount for Async Work {#_the_batch_api:_50%_discount_for_async_work}
 
 Some tasks don't need immediate responses. Code reviews, documentation generation, test creation, and bulk refactoring suggestions can wait hours without blocking your workflow. The Batch API is built for these cases: submit requests now, get results within 24 hours, pay half price.
 
-### When to Use Batch Processing
+### When to Use Batch Processing {#_when_to_use_batch_processing}
 
 Batch processing works best for high-volume, low-urgency tasks:
 
-| Task Type | Example |
-|-----------|---------|
-| Code reviews | Review 50 files overnight at 50% cost |
-| Documentation | Generate docs for an entire codebase |
-| Test generation | Create test cases for multiple functions |
-| Refactoring analysis | Get improvement suggestions across many files |
-| Translation | Convert error messages or UI strings to multiple languages |
++--------------------------------------+------------------------------------------------------------+
+| Task Type                            | Example                                                    |
++======================================+============================================================+
+| Code reviews                         | Review 50 files overnight at 50% cost                      |
++--------------------------------------+------------------------------------------------------------+
+| Documentation                        | Generate docs for an entire codebase                       |
++--------------------------------------+------------------------------------------------------------+
+| Test generation                      | Create test cases for multiple functions                   |
++--------------------------------------+------------------------------------------------------------+
+| Refactoring analysis                 | Get improvement suggestions across many files              |
++======================================+============================================================+
+| Translation                          | Convert error messages or UI strings to multiple languages |
++======================================+============================================================+
 
 The pattern: identify work that can wait, batch it together, submit before leaving for the day.
 
-### How Batches Work
+### How Batches Work {#_how_batches_work}
 
 The Batch API is a native Anthropic API feature not available through the Agent SDK. While the Agent SDK excels at interactive agent sessions with streaming and resumption, batch processing requires the native SDK for submitting multiple requests and polling for results:
 
-```typescript
+``` typescript
 // skip-validation
 import Anthropic from '@anthropic-ai/sdk';
 
@@ -509,7 +502,9 @@ let status = await client.messages.batches.retrieve(batch.id);
 while (status.processing_status !== 'ended') {
   await sleep(30000); // Check every 30 seconds
   status = await client.messages.batches.retrieve(batch.id);
-  console.log(`Progress: ${status.request_counts.succeeded} complete`);
+  console.log(
+    `Progress: ${status.request_counts.succeeded} complete`
+  );
 }
 
 // Step 3: Process results
@@ -525,37 +520,91 @@ for await (const entry of results) {
 
 Each request needs a `custom_id` to correlate results with inputs. The batch processes within 24 hours, with most batches completing in 1-4 hours depending on size and system load.
 
-### Batch Cost Savings
+### Batch Cost Savings {#_batch_cost_savings}
 
 The economics are straightforward: batch requests cost 50% less per token.
 
-| Model | Standard Input | Batch Input | Standard Output | Batch Output |
-|-------|---------------|-------------|-----------------|--------------|
-| Haiku | $0.25/MTok | $0.125/MTok | $1.25/MTok | $0.625/MTok |
-| Sonnet | $3/MTok | $1.50/MTok | $15/MTok | $7.50/MTok |
-| Opus | $15/MTok | $7.50/MTok | $75/MTok | $37.50/MTok |
+ifdef
 
-For a 100-file code review (estimated 500K input tokens, 250K output tokens with Sonnet):
+:   backend-pdf\[\]
 
-```
-Standard API cost:
-  Input: 500,000 × $0.000003 = $1.50
-  Output: 250,000 × $0.000015 = $3.75
-  Total: $5.25
+    +--------+----------------+--------------+-----------------+--------------+
+    | Model  | Standard Input | Batch Input  | Standard Output | Batch Output |
+    +========+================+==============+=================+==============+
+    | Haiku  | \$0.25/MTok    | \$0.125/MTok | \$1.25/MTok     | \$0.625/MTok |
+    +--------+----------------+--------------+-----------------+--------------+
+    | Sonnet | \$3/MTok       | \$1.50/MTok  | \$15/MTok       | \$7.50/MTok  |
+    +========+================+==============+=================+==============+
+    | Opus   | \$15/MTok      | \$7.50/MTok  | \$75/MTok       | \$37.50/MTok |
+    +========+================+==============+=================+==============+
 
-Batch API cost:
-  Input: 500,000 × $0.0000015 = $0.75
-  Output: 250,000 × $0.0000075 = $1.875
-  Total: $2.625
+endif
 
-Savings: $2.625 (50%)
-```
+:   
 
-### Batch-Suitable Task Identification
+<!-- -->
+
+ifndef
+
+:   backend-pdf\[\] **Haiku Pricing:**
+
+    +-----------------------------------+-----------------------------------+
+    | Standard Input                    | \$0.25/MTok                       |
+    +===================================+===================================+
+    | Batch Input                       | \$0.125/MTok                      |
+    +-----------------------------------+-----------------------------------+
+    | Standard Output                   | \$1.25/MTok                       |
+    +===================================+===================================+
+    | Batch Output                      | \$0.625/MTok                      |
+    +===================================+===================================+
+
+    **Sonnet Pricing:**
+
+    +-----------------------------------+-----------------------------------+
+    | Standard Input                    | \$3/MTok                          |
+    +===================================+===================================+
+    | Batch Input                       | \$1.50/MTok                       |
+    +-----------------------------------+-----------------------------------+
+    | Standard Output                   | \$15/MTok                         |
+    +===================================+===================================+
+    | Batch Output                      | \$7.50/MTok                       |
+    +===================================+===================================+
+
+    **Opus Pricing:**
+
+    +-----------------------------------+-----------------------------------+
+    | Standard Input                    | \$15/MTok                         |
+    +===================================+===================================+
+    | Batch Input                       | \$7.50/MTok                       |
+    +-----------------------------------+-----------------------------------+
+    | Standard Output                   | \$75/MTok                         |
+    +===================================+===================================+
+    | Batch Output                      | \$37.50/MTok                      |
+    +===================================+===================================+
+
+endif
+
+:   For a 100-file code review (estimated 500K input tokens, 250K output tokens with Sonnet):
+
+<!-- -->
+
+    Standard API cost:
+      Input: 500,000 × $0.000003 = $1.50
+      Output: 250,000 × $0.000015 = $3.75
+      Total: $5.25
+
+    Batch API cost:
+      Input: 500,000 × $0.0000015 = $0.75
+      Output: 250,000 × $0.0000075 = $1.875
+      Total: $2.625
+
+    Savings: $2.625 (50%)
+
+### Batch-Suitable Task Identification {#_batch_suitable_task_identification}
 
 Not every task benefits from batching. Use this decision framework:
 
-```typescript
+``` typescript
 // skip-validation
 function shouldUseBatch(task: {
   urgency: 'immediate' | 'today' | 'this-week';
@@ -572,22 +621,15 @@ function shouldUseBatch(task: {
 }
 ```
 
-**Good batch candidates:**
-- End-of-day code reviews
-- Weekly documentation updates
-- Nightly test generation
-- Bulk data processing
+**Good batch candidates:** - End-of-day code reviews - Weekly documentation updates - Nightly test generation - Bulk data processing
 
-**Poor batch candidates:**
-- Interactive development (need immediate feedback)
-- Single-file changes
-- Time-sensitive bug fixes
+**Poor batch candidates:** - Interactive development (need immediate feedback) - Single-file changes - Time-sensitive bug fixes
 
-### Overnight Batch Workflow
+### Overnight Batch Workflow {#_overnight_batch_workflow}
 
 Maximize batch value by automating the submit-collect cycle:
 
-```bash
+``` bash
 #!/bin/bash
 # submit-batch.sh - Run before leaving work
 
@@ -608,7 +650,7 @@ echo "Submitted batch: $BATCH_ID"
 echo $BATCH_ID > .last-batch-id
 ```
 
-```bash
+``` bash
 #!/bin/bash
 # collect-batch.sh - Run in the morning
 
@@ -628,34 +670,39 @@ else
 fi
 ```
 
-### Combined Cost Strategy
+### Combined Cost Strategy {#_combined_cost_strategy}
 
 Layer batch processing with other optimizations:
 
-| Strategy | Savings | Cumulative |
-|----------|---------|------------|
-| Model switching | 44% | 44% |
-| Prompt caching | 90% on cached | 70% |
-| Batch processing | 50% | 85% |
++----------------------+-----------------------+----------------------+
+| Strategy             | Savings               | Cumulative           |
++======================+=======================+======================+
+| Model switching      | 44%                   | 44%                  |
++----------------------+-----------------------+----------------------+
+| Prompt caching       | 90% on cached         | 70%                  |
++======================+=======================+======================+
+| Batch processing     | 50%                   | 85%                  |
++======================+=======================+======================+
 
-For a team doing daily code reviews and weekly documentation updates, batch processing alone saves $500-1,000/year. Combined with model switching and caching, total savings exceed 80%.
+For a team doing daily code reviews and weekly documentation updates, batch processing alone saves \$500-1,000/year. Combined with model switching and caching, total savings exceed 80%.
 
-## YOLO Mode: When to Skip Permissions
+## YOLO Mode: When to Skip Permissions {#_yolo_mode:_when_to_skip_permissions}
 
 YOLO ("You Only Live Once") mode is a Claude Code configuration that skips permission prompts. Permission prompts kill flow state. Every "Allow this action?" dialog forces a context switch. Research shows it takes 3 minutes to recover focus after an interruption. With 50+ tool calls per hour, permission prompts create more disruption time than productive time.
 
 YOLO mode eliminates permission prompts:
 
-```bash
+``` bash
 claude --dangerously-skip-permissions --allowedTools "*"
 ```
 
 The flag sounds scary by design. It's safe with proper guardrails.
 
-### Why It's Safe
+### Why It's Safe {#_why_it’s_safe}
 
 **Git is your safety net.** Every change is tracked and reversible:
-```bash
+
+``` bash
 git diff        # See what changed
 git checkout .  # Revert everything
 git reset --hard HEAD^  # Nuclear option
@@ -665,11 +712,11 @@ git reset --hard HEAD^  # Nuclear option
 
 **You're still monitoring.** You watch the output in real-time. If something looks wrong, press Ctrl+C.
 
-### Safe YOLO Patterns
+### Safe YOLO Patterns {#_safe_yolo_patterns}
 
 Use YOLO mode in controlled environments:
 
-```bash
+``` bash
 #!/bin/bash
 # safe-yolo.sh
 
@@ -703,47 +750,31 @@ check_safety
 claude --dangerously-skip-permissions -p "Run tests and fix failures"
 ```
 
-### Unsafe YOLO Anti-Patterns
+### Unsafe YOLO Anti-Patterns {#_unsafe_yolo_anti_patterns}
 
-Never use YOLO mode for:
-- Production deployments
-- Database migrations on live data
-- Changes to authentication or authorization
-- Operations involving real money or user data
+Never use YOLO mode for: - Production deployments - Database migrations on live data - Changes to authentication or authorization - Operations involving real money or user data
 
 For these cases, manual review adds essential safety.
 
-### The Safety Hierarchy
+### The Safety Hierarchy {#_the_safety_hierarchy}
 
 Different environments call for different safety levels:
 
-**Level 1: Permission prompts (default)**
-- Safety: High (manual approval for everything)
-- Productivity: Very Low (constant interruptions)
-- Use case: Untrusted environments, shared machines
+**Level 1: Permission prompts (default)** - Safety: High (manual approval for everything) - Productivity: Very Low (constant interruptions) - Use case: Untrusted environments, shared machines
 
-**Level 2: YOLO mode + Git**
-- Safety: Medium (reversible via Git)
-- Productivity: High (no interruptions)
-- Use case: Personal experiments, throwaway branches
+**Level 2: YOLO mode + Git** - Safety: Medium (reversible via Git) - Productivity: High (no interruptions) - Use case: Personal experiments, throwaway branches
 
-**Level 3: YOLO mode + Git + Quality gates (recommended)**
-- Safety: High (automated verification)
-- Productivity: Very High (no interruptions, reliable output)
-- Use case: Daily development, Continuous Integration/Continuous Deployment (CI/CD) automation
+**Level 3: YOLO mode + Git + Quality gates (recommended)** - Safety: High (automated verification) - Productivity: Very High (no interruptions, reliable output) - Use case: Daily development, Continuous Integration/Continuous Deployment (CI/CD) automation
 
-**Level 4: YOLO mode + Git + Quality gates + Manual review**
-- Safety: Very High (multiple verification layers)
-- Productivity: High (review at the end, not during)
-- Use case: Critical systems, security-sensitive code
+**Level 4: YOLO mode + Git + Quality gates + Manual review** - Safety: Very High (multiple verification layers) - Productivity: High (review at the end, not during) - Use case: Critical systems, security-sensitive code
 
 Start with Level 3 for most work. Move to Level 4 for production deployments or security-critical features.
 
-### Overnight Automation with YOLO
+### Overnight Automation with YOLO {#_overnight_automation_with_yolo}
 
 YOLO mode enables unattended operation. Set up work before leaving:
 
-```bash
+``` bash
 # Before leaving (9pm)
 echo "Implement feature X based on spec.md" > task.txt
 
@@ -757,22 +788,19 @@ npm test
 
 Without YOLO mode, the first permission prompt would block indefinitely. With YOLO mode, Claude works through the night while you sleep.
 
-## The Skills System
+## The Skills System {#_the_skills_system}
 
 Skills are reusable workflow automations in Claude Code. They handle common tasks without requiring detailed prompts each time.
 
-### Built-In Skills
+### Built-In Skills {#_built_in_skills}
 
-Claude Code includes skills for common operations:
-- `/commit`: Stage and commit changes
-- `/review`: Review code for issues
-- Workflow-specific skills defined in your configuration
+Claude Code includes skills for common operations: - `/commit`: Stage and commit changes - `/review`: Review code for issues - Workflow-specific skills defined in your configuration
 
-### Creating Custom Skills
+### Creating Custom Skills {#_creating_custom_skills}
 
 Define skills for your team's workflows:
 
-```markdown
+``` markdown
 # .claude/skills/deploy.md
 
 ## Skill: Deploy
@@ -799,23 +827,29 @@ Deploy to staging or production environment.
 
 Skills compound over time. Each workflow you automate saves minutes per day. Those minutes accumulate into hours per month.
 
-### Skills vs Sub-Agents
+### Skills vs Sub-Agents {#_skills_vs_sub_agents}
 
 Use skills for linear, repeatable workflows. Use sub-agents for tasks requiring judgment or parallel execution. A deploy skill runs the same steps every time. A code review sub-agent applies judgment to different codebases.
 
-| Characteristic | Skills | Sub-Agents |
-|----------------|--------|------------|
-| Execution pattern | Linear, deterministic | Adaptive, iterative |
-| State management | Stateless | Can maintain state |
-| Context scope | Inherited from parent | Isolated context |
-| Best for | Repeatable workflows | Complex judgment tasks |
-| Examples | /commit, /deploy | Code reviewer, architect |
++----------------------+-----------------------+--------------------------+
+| Characteristic       | Skills                | Sub-Agents               |
++======================+=======================+==========================+
+| Execution pattern    | Linear, deterministic | Adaptive, iterative      |
++----------------------+-----------------------+--------------------------+
+| State management     | Stateless             | Can maintain state       |
++----------------------+-----------------------+--------------------------+
+| Context scope        | Inherited from parent | Isolated context         |
++----------------------+-----------------------+--------------------------+
+| Best for             | Repeatable workflows  | Complex judgment tasks   |
++======================+=======================+==========================+
+| Examples             | /commit, /deploy      | Code reviewer, architect |
++======================+=======================+==========================+
 
-### Skill Composition
+### Skill Composition {#_skill_composition}
 
 Skills can invoke other skills, creating powerful workflows:
 
-```markdown
+``` markdown
 # .claude/skills/release.md
 
 ## Skill: Release
@@ -832,18 +866,21 @@ Create a new release with version bump and changelog.
 7. If staging healthy, /deploy production
 ```
 
-Composed skills encode your team's release process. New team members run `/release patch` and the right things happen.
+Composed skills encode your team's release process. New team members run `/release` `patch` and the right things happen.
 
-## Provider-Agnostic Strategy
+## Provider-Agnostic Strategy {#_provider_agnostic_strategy}
 
 The AI ecosystem evolves rapidly. New model releases bring 5-10% improvements in quality, speed, or cost. Locking into a single provider prevents you from capturing these gains.
 
 Build abstraction layers:
 
-```typescript
+``` typescript
 // skip-validation
 interface AIProvider {
-  complete(prompt: string, options: CompletionOptions): Promise<string>
+  complete(
+    prompt: string,
+    options: CompletionOptions
+  ): Promise<string>
   model: string
   costs: { input: number; output: number }
 }
@@ -878,11 +915,11 @@ class ProviderRouter {
 
 Allocate 10% of time to evaluating new models. When a new release shows improvement on your benchmark tasks, switch immediately. Provider loyalty doesn't compound. Results do.
 
-### Fallback Strategies
+### Fallback Strategies {#_fallback_strategies}
 
 Build resilience into your AI infrastructure:
 
-```typescript
+``` typescript
 // skip-validation
 async function completeWithFallback(
   prompt: string,
@@ -910,11 +947,11 @@ const result = await completeWithFallback(prompt, providers)
 
 Fallbacks protect against outages and rate limits. When one provider has issues, your workflow continues with another.
 
-### Evaluating New Models
+### Evaluating New Models {#_evaluating_new_models}
 
 Create benchmark tasks that represent your actual usage:
 
-```typescript
+``` typescript
 // skip-validation
 interface BenchmarkTask {
   name: string
@@ -948,7 +985,9 @@ const BENCHMARKS: BenchmarkTask[] = [
   }
 ]
 
-async function evaluateModel(model: string): Promise<BenchmarkResult> {
+async function evaluateModel(
+  model: string
+): Promise<BenchmarkResult> {
   const results = await Promise.all(
     BENCHMARKS.map(b => runBenchmark(model, b))
   )
@@ -958,11 +997,11 @@ async function evaluateModel(model: string): Promise<BenchmarkResult> {
 
 Run benchmarks monthly against new model releases. Switch when a new model shows 10%+ improvement on your tasks.
 
-## Measuring and Optimizing Spend
+## Measuring and Optimizing Spend {#_measuring_and_optimizing_spend}
 
 What you don't measure, you can't optimize. Track every API call:
 
-```typescript
+``` typescript
 // skip-validation
 interface UsageMetrics {
   timestamp: Date
@@ -985,30 +1024,29 @@ async function logUsage(metrics: UsageMetrics) {
 }
 ```
 
-### Dashboard Metrics
+### Dashboard Metrics {#_dashboard_metrics}
 
 Track these weekly:
 
-1. **Model distribution**: % of requests by tier (target: 70%+ Haiku)
-2. **Cache hit rate**: % of tokens from cache (target: 80%+)
-3. **Cost per request**: average cost by task type
-4. **Escalation rate**: % of tasks needing model upgrade (target: <20%)
+1.  **Model distribution**: % of requests by tier (target: 70%+ Haiku)
 
-### Monthly Optimization Review
+2.  **Cache hit rate**: % of tokens from cache (target: 80%+)
 
-Each month:
-1. Review model distribution. Are you overusing expensive models?
-2. Check escalation patterns. Which tasks frequently escalate?
-3. Analyze cache hit rates. Can you restructure prompts for better caching?
-4. Update classification rules based on actual performance.
+3.  **Cost per request**: average cost by task type
+
+4.  **Escalation rate**: % of tasks needing model upgrade (target: \<20%)
+
+### Monthly Optimization Review {#_monthly_optimization_review}
+
+Each month: 1. Review model distribution. Are you overusing expensive models? 2. Check escalation patterns. Which tasks frequently escalate? 3. Analyze cache hit rates. Can you restructure prompts for better caching? 4. Update classification rules based on actual performance.
 
 Teams that measure consistently find 10-20% additional savings through optimization.
 
-### Building a Cost Dashboard
+### Building a Cost Dashboard {#_building_a_cost_dashboard}
 
 Aggregate metrics into an actionable dashboard:
 
-```typescript
+``` typescript
 // skip-validation
 interface CostDashboard {
   period: string
@@ -1021,7 +1059,9 @@ interface CostDashboard {
   topExpensiveTasks: Array<{ task: string; cost: number }>
 }
 
-async function generateDashboard(logs: UsageMetrics[]): Promise<CostDashboard> {
+async function generateDashboard(
+  logs: UsageMetrics[]
+): Promise<CostDashboard> {
   return {
     period: 'January 2026',
     totalCost: sumBy(logs, 'cost'),
@@ -1029,22 +1069,20 @@ async function generateDashboard(logs: UsageMetrics[]): Promise<CostDashboard> {
     costByTask: groupAndSum(logs, 'task', 'cost'),
     cacheHitRate: calculateCacheHitRate(logs),
     avgCostPerRequest: average(logs.map(l => l.cost)),
-    escalationRate: logs.filter(l => l.escalated).length / logs.length,
+    escalationRate:
+      logs.filter(l => l.escalated).length / logs.length,
     topExpensiveTasks: findTopExpensive(logs, 10)
   }
 }
 ```
 
-Review the dashboard weekly. Look for:
-- Tasks consistently using Opus that could use Sonnet
-- Low cache hit rates indicating prompt structure issues
-- High escalation rates suggesting overly aggressive Haiku usage
+Review the dashboard weekly. Look for: - Tasks consistently using Opus that could use Sonnet - Low cache hit rates indicating prompt structure issues - High escalation rates suggesting overly aggressive Haiku usage
 
-### Cost Allocation for Teams
+### Cost Allocation for Teams {#_cost_allocation_for_teams}
 
 For multi-developer teams, track costs by person and project:
 
-```typescript
+``` typescript
 // skip-validation
 interface TeamCostAllocation {
   developer: string
@@ -1069,7 +1107,7 @@ function allocateCosts(logs: UsageMetrics[]): TeamCostAllocation[] {
 
 Share cost data transparently. When developers see their usage, they naturally optimize. Competition for efficiency improves the whole team.
 
-### Common Optimization Mistakes
+### Common Optimization Mistakes {#_common_optimization_mistakes}
 
 **Mistake 1: Optimizing too early**
 
@@ -1085,49 +1123,44 @@ Classification rules that worked last month may not work this month. Review and 
 
 **Mistake 4: Penny-wise, pound-foolish**
 
-A developer blocked for an hour waiting for AI approval costs $75. A few extra dollars in API costs to maintain flow is almost always worth it.
+A developer blocked for an hour waiting for AI approval costs \$75. A few extra dollars in API costs to maintain flow is almost always worth it.
 
-## Exercises
+## Exercises {#_exercises}
 
-### Exercise 1: Audit Your Model Usage
+### Exercise 1: Audit Your Model Usage {#_exercise_1:_audit_your_model_usage}
 
-Track your AI requests for one week:
-- Log task description and model used
-- Classify each task by tier (Haiku/Sonnet/Opus)
-- Calculate actual cost vs optimal cost
-- Identify tasks that could use cheaper models
+Track your AI requests for one week: - Log task description and model used - Classify each task by tier (Haiku/Sonnet/Opus) - Calculate actual cost vs optimal cost - Identify tasks that could use cheaper models
 
-### Exercise 2: Implement Cost Protection
+### Exercise 2: Implement Cost Protection {#_exercise_2:_implement_cost_protection}
 
-Set up multi-layer protection:
-- Add job timeout to CI configuration
-- Set max_tokens on API requests
-- Implement input size limits
-- Configure budget alerts
+Set up multi-layer protection: - Add job timeout to CI configuration - Set max_tokens on API requests - Implement input size limits - Configure budget alerts
 
-### Exercise 3: Measure Cache Performance
+### Exercise 3: Measure Cache Performance {#_exercise_3:_measure_cache_performance}
 
-Monitor prompt caching for one week:
-- Track cache_read_input_tokens vs input_tokens
-- Calculate cache hit rate
-- Restructure prompts to improve caching
-- Measure cost savings
+Monitor prompt caching for one week: - Track cache_read_input_tokens vs input_tokens - Calculate cache hit rate - Restructure prompts to improve caching - Measure cost savings
 
-## Summary
+## Summary {#_summary}
 
 Model strategy is about matching capabilities to requirements. Use the cheapest model that produces acceptable results. Start with Haiku, escalate when quality gates fail. Cache repeated context. Protect against runaway costs with multiple timeout layers.
 
 The compound effects are significant. Model switching saves 40-70%. Prompt caching saves 90% on repeated context. Combined, you can reduce costs by 94-97% while maintaining quality.
 
-That is why this path compounds: not because any single idea is guaranteed to win, but because the cost of exploration keeps dropping. When each experiment costs $0.05 instead of $2, you run forty experiments instead of one. When overnight batch processing costs half price, you review entire codebases instead of spot-checking. When Haiku handles 70% of your requests at 12x lower cost, you try more approaches, validate more assumptions, and iterate faster. The experiments that fail cost almost nothing. The experiments that succeed become the foundation for the next layer of automation. Cost optimization is not about frugality. It is about increasing your iteration velocity until good ideas find you instead of the other way around.
+That is why this path compounds: not because any single idea is guaranteed to win, but because the cost of exploration keeps dropping. When each experiment costs \$0.05 instead of \$2, you run forty experiments instead of one. When overnight batch processing costs half price, you review entire codebases instead of spot-checking. When Haiku handles 70% of your requests at 12x lower cost, you try more approaches, validate more assumptions, and iterate faster. The experiments that fail cost almost nothing. The experiments that succeed become the foundation for the next layer of automation. Cost optimization is not about frugality. It is about increasing your iteration velocity until good ideas find you instead of the other way around.
 
----
+'''''
 
-> **Companion Code**: All 8 code examples for this chapter are available at [examples/ch15/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch15)
+:::: note
+::: title
+Note
+:::
 
+**Companion Code**: All 8 code examples for this chapter are available at [examples/ch15/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch15)
+::::
 
 *Related chapters:*
 
-- **Chapter 7: Quality Gates That Compound** for automated gates that validate cheaper models
-- **Chapter 10: The RALPH Loop** for cost management in long-running agents
-- **Chapter 13: Building the Harness** for production cost optimization and telemetry
+- **[Chapter 7: Quality Gates That Compound](#_chapter_7_quality_gates_that_compound){.cross-reference}** for automated gates that validate cheaper models
+
+- **[Chapter 10: The RALPH Loop](#_chapter_10_the_ralph_loop){.cross-reference}** for cost management in long-running agents
+
+- **[Chapter 13: Building the Harness](#_chapter_13_building_the_harness){.cross-reference}** for production cost optimization and telemetry

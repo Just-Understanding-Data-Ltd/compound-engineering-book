@@ -1,4 +1,6 @@
-# Chapter 4: Writing Your First CLAUDE.md {#ch04-writing-your-first-claude-md}
+# Chapter 4: Writing Your First CLAUDE.md {#_chapter_4:_writing_your_first_claude_md} {#ch04-writing-your-first-claude-md}
+
+[]{.index term="CLAUDE.md,writing"} []{.index term="context,project"}
 
 You ask Claude to implement a Temporal workflow, but it generates API patterns instead. You need database migration code, but it produces React components. Every session starts with a correction: "No, we use factory functions here, not classes."
 
@@ -6,12 +8,14 @@ This is the context problem. Without project-specific guidance, Claude has zero 
 
 This chapter teaches you to write effective CLAUDE.md files that solve this problem. You will learn the WHY-WHAT-HOW framework for structuring context, understand why less is more when it comes to instructions, and discover how to scale documentation through hierarchical files as your project grows.
 
-## Why CLAUDE.md Matters
+## Why CLAUDE.md Matters {#_why_claude_md_matters}
 
 Large Language Models (LLMs) function as stateless systems with frozen weights at inference time. Claude starts each session with:
 
 - Zero codebase knowledge
+
 - No memory of previous sessions
+
 - Only the knowledge contained within provided tokens
 
 This makes CLAUDE.md the preferred delivery mechanism for essential project context. Without it, every conversation requires manual explanation of your tech stack, conventions, and workflows. With it, Claude understands your project from the first prompt.
@@ -26,7 +30,7 @@ Good CLAUDE.md files multiply your effectiveness. A well-crafted 50-line file im
 
 There is a subtle but important point here about Claude's system prompt. Anthropic injects a reminder with your CLAUDE.md that says the context "may or may not be relevant" and Claude should not respond to it unless it is "highly relevant." This means vague or overly broad instructions get filtered out. Only specific, universally applicable guidance reliably influences Claude's behavior.
 
-## The Instruction-Following Degradation Curve
+## The Instruction-Following Degradation Curve {#_the_instruction_following_degradation_curve}
 
 Research on frontier models shows instruction-following accuracy degrades as instruction count increases. Smaller models degrade exponentially. Larger models degrade linearly but still degrade.
 
@@ -35,13 +39,16 @@ The reliable range sits around 150-200 instructions. Claude Code's system prompt
 This constraint shapes everything about how you write CLAUDE.md:
 
 - Keep files under 300 lines, ideally under 100
+
 - Include only universally applicable guidance
+
 - Avoid style rules that can be enforced with tooling
+
 - Use progressive disclosure instead of embedding everything
 
 The temptation to document everything fights against instruction-following limits. More documentation does not mean better results. Focused documentation means better results.
 
-## The WHY-WHAT-HOW Framework
+## The WHY-WHAT-HOW Framework {#_the_why_what_how_framework}
 
 Every effective CLAUDE.md covers three dimensions:
 
@@ -53,13 +60,14 @@ Every effective CLAUDE.md covers three dimensions:
 
 A minimal example demonstrates the pattern:
 
-```markdown
+``` markdown
 # Social Media Scheduler
 
 ## Why
 
-SaaS product helping marketers schedule social media posts across platforms.
-Saves 5+ hours per week through automated scheduling and content recycling.
+SaaS product helping marketers schedule social media
+posts across platforms. Saves 5+ hours per week through
+automated scheduling and content recycling.
 
 ## What
 
@@ -84,11 +92,11 @@ Monorepo structure:
 
 This file runs about 30 lines. It provides enough context for Claude to understand the project without overwhelming the instruction budget.
 
-## Anatomy of an Effective CLAUDE.md
+## Anatomy of an Effective CLAUDE.md {#_anatomy_of_an_effective_claude_md}
 
 Build your file around these sections:
 
-```markdown
+``` markdown
 # Project Name
 
 ## Stack
@@ -115,43 +123,39 @@ The optimal file lands under 100 lines. Yellow flag territory sits between 100-3
 Before shipping a CLAUDE.md, verify against this checklist:
 
 - Under 300 lines (ideally under 100)
+
 - Every instruction applies universally to all work
+
 - No style or linting rules (use tooling instead)
+
 - No inline code snippets (use file references instead)
+
 - Task-specific documentation lives in separate files
+
 - Manually crafted, not auto-generated
+
 - Covers WHY, WHAT, and HOW
 
-## What Belongs and What Does Not Belong
+## What Belongs and What Does Not Belong {#_what_belongs_and_what_does_not_belong}
 
 Apply the universal applicability test to every instruction: "Will every developer working on every file need to know this?"
 
-If yes, include it in CLAUDE.md:
-- Package manager and build tool
-- Monorepo structure and package purposes
-- Global architecture patterns
-- Verification procedures before committing
+If yes, include it in CLAUDE.md: - Package manager and build tool - Monorepo structure and package purposes - Global architecture patterns - Verification procedures before committing
 
-If no, create task-specific documentation instead:
-- Database schema details
-- API endpoint documentation
-- Framework-specific patterns for one domain
-- Domain-specific business rules
+If no, create task-specific documentation instead: - Database schema details - API endpoint documentation - Framework-specific patterns for one domain - Domain-specific business rules
 
 For content that fails the universal test, use progressive disclosure. Create an `agent_docs/` directory with focused files:
 
-```
-agent_docs/
-  ├── building_the_project.md
-  ├── running_tests.md
-  ├── database_schema.md
-  ├── service_architecture.md
-  └── deployment.md
-```
+    agent_docs/
+      ├── building_the_project.md
+      ├── running_tests.md
+      ├── database_schema.md
+      ├── service_architecture.md
+      └── deployment.md
 
 Then reference these from CLAUDE.md:
 
-```markdown
+``` markdown
 ## Documentation
 
 For specific work areas, read the relevant doc first:
@@ -162,64 +166,60 @@ For specific work areas, read the relevant doc first:
 
 This pattern keeps root CLAUDE.md lean while maintaining access to detailed documentation when needed.
 
-## Hierarchical CLAUDE.md for Scaling Codebases
+## Hierarchical CLAUDE.md for Scaling Codebases {#_hierarchical_claude_md_for_scaling_codebases}
 
 A 10,000-line monolithic CLAUDE.md creates a problem. When implementing a Temporal workflow, the LLM loads 10,000 lines but only 800 matter. The other 9,200 lines about API patterns, database migrations, and React components become noise that dilutes attention.
 
 The solution distributes documentation hierarchically across your codebase:
 
-```
-/
-├── CLAUDE.md (30-50 lines)
-│   ├── Global architecture
-│   ├── Core principles
-│   └── Links to domain docs
-│
-├── packages/
-│   ├── api/
-│   │   └── CLAUDE.md (200-300 lines)
-│   │       ├── tRPC patterns
-│   │       ├── Route conventions
-│   │       └── Validation approach
-│   │
-│   ├── database/
-│   │   └── CLAUDE.md (250-350 lines)
-│   │       ├── Schema patterns
-│   │       ├── Migration rules
-│   │       └── RLS policies
-│   │
-│   └── workflows/
-│       └── CLAUDE.md (300-400 lines)
-│           ├── Temporal patterns
-│           ├── Determinism requirements
-│           └── Activity patterns
-```
+    /
+    ├── CLAUDE.md (30-50 lines)
+    │   ├── Global architecture
+    │   ├── Core principles
+    │   └── Links to domain docs
+    │
+    ├── packages/
+    │   ├── api/
+    │   │   └── CLAUDE.md (200-300 lines)
+    │   │       ├── tRPC patterns
+    │   │       ├── Route conventions
+    │   │       └── Validation approach
+    │   │
+    │   ├── database/
+    │   │   └── CLAUDE.md (250-350 lines)
+    │   │       ├── Schema patterns
+    │   │       ├── Migration rules
+    │   │       └── RLS policies
+    │   │
+    │   └── workflows/
+    │       └── CLAUDE.md (300-400 lines)
+    │           ├── Temporal patterns
+    │           ├── Determinism requirements
+    │           └── Activity patterns
 
-When working on `packages/workflows/src/send-email.ts`, Claude loads:
-- Root CLAUDE.md (40 lines)
-- workflows/CLAUDE.md (300 lines)
-- Total: 340 lines, 95%+ relevant
+When working on `packages/workflows/src/send-email.ts`, Claude loads: - Root CLAUDE.md (40 lines) - workflows/CLAUDE.md (300 lines) - Total: 340 lines, 95%+ relevant
 
-Compare this to monolithic loading:
-- Root CLAUDE.md (10,000 lines)
-- Relevant content (~800 lines)
-- Relevance: 8%
+Compare this to monolithic loading: - Root CLAUDE.md (10,000 lines) - Relevant content (\~800 lines) - Relevance: 8%
 
 The hierarchical approach achieves 70-90% context reduction with 80-95% relevance improvement.
 
 Follow these guidelines for file sizes at each level:
 
-| Level | Target | Maximum |
-|-------|--------|---------|
-| Root | 20-50 lines | 100 lines |
-| Domain | 100-200 lines | 300 lines |
-| Subdomain | 50-150 lines | 200 lines |
++----------------------+-----------------------+----------------------+
+| Level                | Target                | Maximum              |
++======================+=======================+======================+
+| Root                 | 20-50 lines           | 100 lines            |
++----------------------+-----------------------+----------------------+
+| Domain               | 100-200 lines         | 300 lines            |
++======================+=======================+======================+
+| Subdomain            | 50-150 lines          | 200 lines            |
++======================+=======================+======================+
 
 Create domain-level files when patterns diverge between directories. Create subdomain files when a particular area has unique constraints that differ from its parent domain. Limit hierarchy to 3-4 levels maximum.
 
 Here is what a domain CLAUDE.md might look like for the workflows package:
 
-```markdown
+``` markdown
 # Workflows Package
 
 ## Architecture
@@ -261,14 +261,15 @@ export async function welcomeWorkflow(userId: string) {
 ## Related
 
 - Parent: See root CLAUDE.md for global architecture
-- Siblings: packages/api/CLAUDE.md for endpoints that trigger workflows
+- Siblings: packages/api/CLAUDE.md for endpoints
+  that trigger workflows
 ```
 
 This domain file runs about 60 lines. It focuses exclusively on Temporal patterns. API developers never need to read this file. Workflow developers always get relevant context.
 
 Always link between levels:
 
-```markdown
+``` markdown
 ## Related
 
 - Parent: See root CLAUDE.md for global architecture
@@ -276,57 +277,57 @@ Always link between levels:
 - Children: src/routes/campaigns/CLAUDE.md for campaign rules
 ```
 
-## Common Mistakes and How to Avoid Them
+## Common Mistakes and How to Avoid Them {#_common_mistakes_and_how_to_avoid_them}
 
-### Auto-Generating CLAUDE.md
+### Auto-Generating CLAUDE.md {#_auto_generating_claude_md}
 
 Tools that auto-generate CLAUDE.md files create generic, low-signal content. The output looks reasonable but lacks the specific context that makes AI assistance effective. Bad instructions cascade through planning and implementation phases, multiplying errors.
 
 Solution: Invest deliberate effort in crafting each line. Treat CLAUDE.md as first-class code that deserves thoughtful writing.
 
-### Using CLAUDE.md as a Style Guide
+### Using CLAUDE.md as a Style Guide {#_using_claude_md_as_a_style_guide}
 
 Instructions like "Use 2 spaces not 4" or "CamelCase for variables" consume instruction budget for rules that tooling handles better. Style enforcement through CLAUDE.md has high cognitive load and poor accuracy.
 
 Solution: Use auto-fixing linters. One line stating "We use Biome for formatting" replaces 50 lines of style rules with 100% enforcement accuracy.
 
-### Monolithic Growth
+### Monolithic Growth {#_monolithic_growth}
 
 CLAUDE.md starts at 100 lines and grows to 5,000+ as teams add domain-specific patterns. Different developers working on different domains see irrelevant context that dilutes attention.
 
 Solution: Extract domain patterns into domain CLAUDE.md files when root exceeds 100 lines. Audit regularly and move content closer to where it applies.
 
-### Inline Code Snippets That Rot
+### Inline Code Snippets That Rot {#_inline_code_snippets_that_rot}
 
 A 500-line code example embedded in CLAUDE.md becomes stale as the actual code evolves. The documentation drifts from reality, leading Claude to generate outdated patterns.
 
-Solution: Use file references instead. Write "See `src/routes/users.ts:45-80` for the pattern" instead of embedding the code. References stay current because they point to the actual source of truth.
+Solution: Use file references instead. Write \"\`See `src/routes/users.ts:45-80` for the pattern\`\" instead of embedding the code. References stay current because they point to the actual source of truth.
 
-### Duplicating Content Across Levels
+### Duplicating Content Across Levels {#_duplicating_content_across_levels}
 
 The same instruction appears in both root and domain files. This wastes instruction budget and creates maintenance burden when patterns change.
 
-Solution: Root states the principle; domain specializes it. Root might say "Use factory functions" while domain shows "Routes use factory pattern: `export const createHandler = (deps) => { ... }`"
+Solution: Root states the principle; domain specializes it. Root might say "Use factory functions" while domain shows \"\`Routes use factory pattern: \`export const createHandler = (deps) =\> { ... }\`\`\"
 
-### Not Linking Between Levels
+### Not Linking Between Levels {#_not_linking_between_levels}
 
 Claude does not automatically discover that `packages/api/src/routes/campaigns/CLAUDE.md` exists. Without explicit links, domain-specific context gets ignored.
 
 Solution: Always include a "Related" section with links to parent, children, and sibling files.
 
-### Stale Context
+### Stale Context {#_stale_context}
 
 Code patterns evolve but CLAUDE.md remains frozen. The documentation describes patterns from six months ago while the actual code has moved on. Claude generates code matching the stale documentation, creating inconsistency with the current codebase.
 
 Solution: Update CLAUDE.md in the same pull request as code changes. If you change how route handlers work, update the API CLAUDE.md in the same commit. Treat documentation as code that requires the same maintenance discipline. Some teams add git hooks that warn when code in a directory changes but its CLAUDE.md does not.
 
-## Multi-Tool Strategy
+## Multi-Tool Strategy {#_multi_tool_strategy}
 
 Teams using multiple AI tools face duplication problems. Claude Code reads CLAUDE.md, Cursor reads .cursorrules, Aider reads .aider/AGENTS.md. Maintaining separate files creates drift between tools.
 
 Symlinks solve this:
 
-```bash
+``` bash
 # Create master rules file
 touch RULES.md
 
@@ -336,25 +337,21 @@ ln -s RULES.md .cursorrules
 mkdir -p .aider && ln -s ../RULES.md .aider/AGENTS.md
 ```
 
-All tools now read from a single source. Updates to RULES.md propagate everywhere. Symlinks work in git on macOS and Linux. Windows developers need `git config core.symlinks true`.
+All tools now read from a single source. Updates to RULES.md propagate everywhere. Symlinks work in git on macOS and Linux. Windows developers need `git` `config` `core.symlinks` `true`.
 
-## Case Study: Before and After
+## Case Study: Before and After {#_case_study:_before_and_after}
 
 A real project demonstrates the impact. Before refactoring, the team had a single 8,500-line CLAUDE.md at the root. It documented everything: API patterns, database migrations, React components, Temporal workflows, command-line interface (CLI) tools, and deployment procedures.
 
 When a developer asked Claude to implement a new Temporal workflow, Claude loaded all 8,500 lines. The relevant Temporal section started at line 6,200. Claude often generated code using API error handling patterns instead of Temporal's `ApplicationFailure`. Code that compiled but violated workflow determinism requirements appeared frequently. Each task required 3-5 iterations to produce correct output.
 
-After refactoring to hierarchical structure:
-- Root CLAUDE.md: 45 lines (architecture overview, links to domains)
-- packages/workflows/CLAUDE.md: 180 lines (Temporal patterns, determinism rules)
-- packages/api/CLAUDE.md: 220 lines (tRPC patterns, validation)
-- packages/database/CLAUDE.md: 190 lines (migration rules, RLS policies)
+After refactoring to hierarchical structure: - Root CLAUDE.md: 45 lines (architecture overview, links to domains) - packages/workflows/CLAUDE.md: 180 lines (Temporal patterns, determinism rules) - packages/api/CLAUDE.md: 220 lines (tRPC patterns, validation) - packages/database/CLAUDE.md: 190 lines (migration rules, RLS policies)
 
 For the same Temporal workflow task, Claude now loads 45 + 180 = 225 lines. Context relevance improved from 8% to 92%. First-try correctness improved from 35% to 78%. The team stopped correcting pattern mismatches.
 
 The total documentation stayed roughly the same. The same information now lives closer to where developers need it, organized by domain rather than dumped into one file.
 
-## Measuring Success
+## Measuring Success {#_measuring_success}
 
 Track these metrics to evaluate your CLAUDE.md effectiveness:
 
@@ -368,48 +365,63 @@ Track this informally over a week. Each time Claude generates code, note whether
 
 **Time to Find Patterns**: How long to locate relevant documentation. Monolithic: 5-10 minutes searching thousands of lines. Hierarchical: under 30 seconds, file lives next to code.
 
-With hierarchical structure, developers can run `cat packages/workflows/CLAUDE.md` and immediately see all relevant patterns. No searching, no scrolling, no asking teammates.
+With hierarchical structure, developers can run `cat` `packages/workflows/CLAUDE.md` and immediately see all relevant patterns. No searching, no scrolling, no asking teammates.
 
 **Developer Adoption**: Survey your team with one question: "Do you actually read CLAUDE.md before starting work in a new area?" If fewer than 80% say yes, your documentation is probably too long, too generic, or too stale to be useful.
 
-## Exercises
+## Exercises {#_exercises}
 
-### Exercise 1: Audit Your CLAUDE.md
+### Exercise 1: Audit Your CLAUDE.md {#_exercise_1:_audit_your_claude_md}
 
 If you have an existing CLAUDE.md, analyze it against the checklist from this chapter:
 
-1. Count total lines
-2. Identify instructions that are not universally applicable
-3. Find any style guide rules that should use tooling instead
-4. Check for inline code snippets older than 6 months
-5. List what is missing from WHY, WHAT, or HOW
-6. Propose 3 specific improvements
+1.  Count total lines
 
-### Exercise 2: Write Your First CLAUDE.md
+2.  Identify instructions that are not universally applicable
+
+3.  Find any style guide rules that should use tooling instead
+
+4.  Check for inline code snippets older than 6 months
+
+5.  List what is missing from WHY, WHAT, or HOW
+
+6.  Propose 3 specific improvements
+
+### Exercise 2: Write Your First CLAUDE.md {#_exercise_2:_write_your_first_claude_md}
 
 If you do not have a CLAUDE.md, create one:
 
-1. Start with WHY: one paragraph on project purpose
-2. Add WHAT: tech stack and directory structure
-3. Add HOW: package manager, test commands, build commands
-4. Add conventions: 1-2 critical patterns maximum
-5. Review against the checklist
-6. Target under 60 lines
+1.  Start with WHY: one paragraph on project purpose
+
+2.  Add WHAT: tech stack and directory structure
+
+3.  Add HOW: package manager, test commands, build commands
+
+4.  Add conventions: 1-2 critical patterns maximum
+
+5.  Review against the checklist
+
+6.  Target under 60 lines
 
 Start a new Claude Code session and ask it to implement something in your codebase. Observe whether it uses correct patterns on the first try. If not, note what was missing from your CLAUDE.md and add it. Iterate until first-try correctness improves noticeably.
 
-### Exercise 3: Design Domain Hierarchy
+### Exercise 3: Design Domain Hierarchy {#_exercise_3:_design_domain_hierarchy}
 
 If your project exceeds 150 lines in root CLAUDE.md:
 
-1. List all domains in your project
-2. Estimate current lines per domain
-3. Sketch folder structure for domain files
-4. Design linking strategy between levels
-5. Calculate line counts before and after
-6. Identify which domain needs subdomain files
+1.  List all domains in your project
 
-## Summary
+2.  Estimate current lines per domain
+
+3.  Sketch folder structure for domain files
+
+4.  Design linking strategy between levels
+
+5.  Calculate line counts before and after
+
+6.  Identify which domain needs subdomain files
+
+## Summary {#_summary}
 
 CLAUDE.md provides essential project context to stateless LLMs. The WHY-WHAT-HOW framework structures documentation effectively. Instruction-following constraints demand keeping files under 100-300 lines.
 
@@ -419,12 +431,14 @@ Avoid common mistakes: auto-generation, style guide duplication, monolithic grow
 
 The investment in crafting effective CLAUDE.md files pays dividends across every AI-assisted coding session. One well-crafted file improves thousands of code generations.
 
----
+'''''
 
-> **Companion Code**: All 4 code examples for this chapter are available at [examples/ch04/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch04)
+:::: note
+::: title
+Note
+:::
 
+**Companion Code**: All 4 code examples for this chapter are available at [examples/ch04/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch04)
+::::
 
-*Related chapters:*
-- Chapter 2: Getting Started with Claude Code for installation and basic tool usage
-- Chapter 3: Prompting Fundamentals for techniques that make your CLAUDE.md instructions more effective
-- Chapter 9: Context Engineering Deep Dive for advanced information theory behind context optimization
+*Related chapters:* - [Chapter 2: Getting Started with Claude Code](#_chapter_2_getting_started_with_claude_code){.cross-reference} for installation and basic tool usage - [Chapter 3: Prompting Fundamentals](#_chapter_3_prompting_fundamentals){.cross-reference} for techniques that make your CLAUDE.md instructions more effective - [Chapter 9: Context Engineering Deep Dive](#_chapter_9_context_engineering_deep_dive){.cross-reference} for advanced information theory behind context optimization

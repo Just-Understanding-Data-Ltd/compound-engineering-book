@@ -1,44 +1,48 @@
-# Chapter 6: The Verification Ladder {#ch06-the-verification-ladder}
+# Chapter 6: The Verification Ladder {#_chapter_6:_the_verification_ladder} {#ch06-the-verification-ladder}
+
+[]{.index term="verification ladder"} []{.index term="testing"}
 
 AI generates code that compiles and runs. It also generates code that's wrong. The syntax is perfect. The logic is broken. A password validator passes "12345678" but crashes on emoji. An API endpoint returns the right data in tests but fails on unicode input. The types check. The behavior doesn't.
 
 This is the verification problem. And solving it requires thinking in layers.
 
-## The Ladder Framework
+## The Ladder Framework {#_the_ladder_framework}
 
 Verification isn't a single check. It's a hierarchy where each level catches what lower levels miss.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  LEVEL 6: Formal Verification (TLA+, Z3)                    │
-│  "Prove it's impossible to violate"                         │
-├─────────────────────────────────────────────────────────────┤
-│  LEVEL 5: Property-Based Testing (fast-check, Hypothesis)   │
-│  "Test with thousands of generated inputs"                  │
-├─────────────────────────────────────────────────────────────┤
-│  LEVEL 4: Integration Tests                                 │
-│  "Test components working together"                         │
-├─────────────────────────────────────────────────────────────┤
-│  LEVEL 3: Unit Tests                                        │
-│  "Test individual functions"                                │
-├─────────────────────────────────────────────────────────────┤
-│  LEVEL 2: Runtime Validation (Zod, io-ts)                   │
-│  "Validate data at boundaries"                              │
-├─────────────────────────────────────────────────────────────┤
-│  LEVEL 1: Static Types (TypeScript, mypy)                   │
-│  "Catch errors at compile time"                             │
-└─────────────────────────────────────────────────────────────┘
-```
+::: {wrapper="1" align="center" width="600"}
+![The Verification Ladder: Each level catches what lower levels miss](ch06-verification-ladder.png){alt="Verification Ladder"}
+:::
+
+    ┌─────────────────────────────────────────────────────────────┐
+    │  LEVEL 6: Formal Verification (TLA+, Z3)                    │
+    │  "Prove it's impossible to violate"                         │
+    ├─────────────────────────────────────────────────────────────┤
+    │  LEVEL 5: Property-Based Testing (fast-check, Hypothesis)   │
+    │  "Test with thousands of generated inputs"                  │
+    ├─────────────────────────────────────────────────────────────┤
+    │  LEVEL 4: Integration Tests                                 │
+    │  "Test components working together"                         │
+    ├─────────────────────────────────────────────────────────────┤
+    │  LEVEL 3: Unit Tests                                        │
+    │  "Test individual functions"                                │
+    ├─────────────────────────────────────────────────────────────┤
+    │  LEVEL 2: Runtime Validation (Zod, io-ts)                   │
+    │  "Validate data at boundaries"                              │
+    ├─────────────────────────────────────────────────────────────┤
+    │  LEVEL 1: Static Types (TypeScript, mypy)                   │
+    │  "Catch errors at compile time"                             │
+    └─────────────────────────────────────────────────────────────┘
 
 The tools mentioned here: Temporal Logic of Actions Plus (TLA+) and Z3 are specification languages for formal proofs. fast-check (JavaScript) and Hypothesis (Python) are property-based testing frameworks. Zod and io-ts are TypeScript runtime validation libraries. mypy is Python's static type checker.
 
 The question isn't "which level?" but "how high do you need to climb for this code?"
 
-## Level 1: Static Types
+## Level 1: Static Types {#_level_1:_static_types}
 
 Static types catch errors before your code runs. They verify shape, not behavior.
 
-```typescript
+``` typescript
 interface User {
   id: string;
   email: string;
@@ -49,8 +53,8 @@ function processUser(user: User): void {
   console.log(user.name.toUpperCase());
 }
 
-processUser({ id: "1" });           // ✗ Error: Property 'name' is missing
-processUser(null);                   // ✗ Error: Argument cannot be null
+processUser({ id: "1" });  // ✗ Error: 'name' missing
+processUser(null);         // ✗ Error: Cannot be null
 processUser({ id: 1, name: "Kim" }); // ✗ Error: id should be string
 ```
 
@@ -62,30 +66,42 @@ processUser({ id: 1, name: "Kim" }); // ✗ Error: id should be string
 
 Types are your first line of defense. They eliminate entire categories of bugs before your code runs. But they can't tell you if your authentication logic is correct or if your discount calculation returns the right percentage.
 
-## Level 2: Runtime Validation
+## Level 2: Runtime Validation {#_level_2:_runtime_validation}
 
 External data is always untrusted. User input, API payloads, database results, webhook events. Types can't validate what you receive at runtime.
 
-```typescript
+``` typescript
 import { z } from 'zod';
 
-const UserSchema = z.object({
-  id: z.string().uuid(),
+const UserSchema = z.object({  // ①
+  id: z.string().uuid(),  // ②
   email: z.string().email(),
-  age: z.number().int().min(0).max(150),
+  age: z.number().int().min(0).max(150),  // ③
   role: z.enum(['admin', 'user', 'guest']),
 });
 
 // At your API boundary
 app.post('/users', (req, res) => {
-  const result = UserSchema.safeParse(req.body);
+  const result = UserSchema.safeParse(req.body);  // ④
   if (!result.success) {
     return res.status(400).json({ errors: result.error.issues });
   }
   // result.data is now typed AND validated
-  createUser(result.data);
+  createUser(result.data);  // ⑤
 });
 ```
+
+::: callout-list
+1.  Define schema shape with `z.object()`
+
+2.  Chain validators: `string()` then `uuid()` format
+
+3.  Numeric constraints: integer, min 0, max 150
+
+4.  `safeParse` returns `{` `success,` `data,` `error` `}` instead of throwing
+
+5.  After validation, `result.data` is fully typed
+:::
 
 **What runtime validation catches:** Malformed input. Invalid email formats. Out-of-range numbers. Unexpected enum values. Injection attempts hidden in strings.
 
@@ -95,11 +111,11 @@ app.post('/users', (req, res) => {
 
 Runtime validation transforms "trust but hope" into "trust but verify at entry." The cost is minimal. The protection is substantial.
 
-## Level 3: Unit Tests
+## Level 3: Unit Tests {#_level_3:_unit_tests}
 
 Unit tests verify logic in isolated functions. They answer: "Does this function do what I expect?"
 
-```typescript
+``` typescript
 describe('calculateDiscount', () => {
   it('applies 10% discount for orders over $100', () => {
     expect(calculateDiscount(150)).toBe(15);
@@ -123,19 +139,15 @@ describe('calculateDiscount', () => {
 
 **What they miss:** Component interactions. Edge cases you didn't think of. System-wide constraints.
 
-**Best practices:**
-- Test behavior, not implementation
-- One assertion per test (or related assertions)
-- Descriptive names that document requirements
-- Cover happy path, error cases, and boundary values
+**Best practices:** - Test behavior, not implementation - One assertion per test (or related assertions) - Descriptive names that document requirements - Cover happy path, error cases, and boundary values
 
 The limitation of unit tests is they only verify what you thought to check. If you didn't write a test for emoji in passwords, you won't catch that bug.
 
-## Level 4: Integration Tests
+## Level 4: Integration Tests {#_level_4:_integration_tests}
 
 Integration tests verify components working together. They answer: "Does this flow work end-to-end?"
 
-```typescript
+``` typescript
 describe('User Registration Flow', () => {
   it('creates user and sends welcome email', async () => {
     const response = await request(app)
@@ -147,7 +159,8 @@ describe('User Registration Flow', () => {
     // Verify user in database
     const user = await db.users.findByEmail('test@example.com');
     expect(user).toBeTruthy();
-    expect(user.passwordHash).not.toBe('secure123'); // Hashed, not plaintext
+    // Hashed, not plaintext
+    expect(user.passwordHash).not.toBe('secure123');
 
     // Verify email sent
     expect(emailService.sent).toContainEqual(
@@ -168,7 +181,7 @@ describe('User Registration Flow', () => {
 
 Prefer real dependencies over mocks when possible. Use in-memory databases instead of mock repositories. Test actual API calls instead of mocked responses.
 
-### The Integration-First Strategy for LLM Code
+### The Integration-First Strategy for LLM Code {#_the_integration_first_strategy_for_llm_code}
 
 For AI-assisted development, integration tests provide higher signal than unit tests. This inverts the traditional test pyramid.
 
@@ -178,40 +191,66 @@ Unit tests don't catch these failures. Only integration tests do.
 
 **The signal-to-noise comparison:**
 
-| Test Type | Tests Needed | Lines Verified | Signal per Test |
-|-----------|--------------|----------------|-----------------|
-| Unit tests | 47 tests | 5-10 lines each | Low |
-| Integration tests | 3 tests | 50-100 lines each | High |
+ifdef
 
-Integration tests verify 10-20x more code per test. When reviewing LLM-generated code, you can check 3 integration test results in 2 minutes instead of reviewing 47 unit tests in 30 minutes.
+:   backend-pdf\[\]
+
+    +-------------------+-----------------+-------------------+-----------------+
+    | Test Type         | Tests Needed    | Lines Verified    | Signal per Test |
+    +===================+=================+===================+=================+
+    | Unit tests        | 47 tests        | 5-10 lines each   | Low             |
+    +===================+=================+===================+=================+
+    | Integration tests | 3 tests         | 50-100 lines each | High            |
+    +===================+=================+===================+=================+
+
+endif
+
+:   
+
+<!-- -->
+
+ifndef
+
+:   backend-pdf\[\]
+
+**Unit tests**
+
+:   47 tests needed, verifying 5-10 lines each. Signal per test: Low.
+
+**Integration tests**
+
+:   3 tests needed, verifying 50-100 lines each. Signal per test: High.
+
+endif
+
+:   Integration tests verify 10-20x more code per test. When reviewing LLM-generated code, you can check 3 integration test results in 2 minutes instead of reviewing 47 unit tests in 30 minutes.
 
 **The inverted pyramid for LLM code:**
 
-```
-Traditional (human development):
-    /\
-   /E2E\       Few E2E tests
-  /------\
- / Integ  \    Some integration tests
-/----------\
-/   Unit    \  MANY unit tests
+::: {#fig-test-pyramid-inversion wrapper="1" align="center" width="600"}
+![Test Pyramid Inversion: LLM-optimized testing emphasizes integration tests](ch06-test-pyramid-inversion.png){alt="Test Pyramid Inversion"}
+:::
 
-LLM-optimized:
-    /\
-   /E2E\       Few E2E tests
-  /------\
- /        \
-/  INTEG   \   MANY integration tests
-/----------\
-/   Unit    \  Few unit tests (complex logic only)
-```
+    Traditional (human development):
+        /\
+       /E2E\       Few E2E tests
+      /------\
+     / Integ  \    Some integration tests
+    /----------\
+    /   Unit    \  MANY unit tests
+
+    LLM-optimized:
+        /\
+       /E2E\       Few E2E tests
+      /------\
+     /        \
+    /  INTEG   \   MANY integration tests
+    /----------\
+    /   Unit    \  Few unit tests (complex logic only)
 
 **Practical guidance:**
 
-For every feature, write:
-1. **1-3 integration tests** that verify end-to-end behavior
-2. **0-2 unit tests** for genuinely complex algorithmic logic
-3. **0-1 E2E tests** for critical user journeys (optional)
+For every feature, write: 1. **1-3 integration tests** that verify end-to-end behavior 2. **0-2 unit tests** for genuinely complex algorithmic logic 3. **0-1 E2E (End-to-End) tests** for critical user journeys (optional)
 
 **When to still use unit tests:**
 
@@ -219,11 +258,11 @@ Unit tests remain valuable for complex algorithms (sorting, parsing, financial c
 
 But for typical LLM-generated code, integration tests catch the bugs that matter: the integration points where components fail to work together.
 
-## Level 5: Property-Based Testing
+## Level 5: Property-Based Testing {#_level_5:_property_based_testing}
 
 Property-based testing automatically discovers edge cases you didn't think of. Instead of writing individual test cases, you define properties that should always hold, and the framework generates thousands of inputs.
 
-```typescript
+``` typescript
 import { fc, test } from '@fast-check/vitest';
 
 // Property: serialization roundtrip
@@ -256,33 +295,29 @@ test.prop([fc.array(fc.integer())])(
 );
 ```
 
-**What the framework generates:**
-- Empty inputs
-- Very large inputs
-- Unicode edge cases including emoji
-- Boundary values (0, -1, MAX_INT)
-- Null and undefined
-- Deeply nested structures
-- Adversarial inputs
+**What the framework generates:** - Empty inputs - Very large inputs - Unicode edge cases including emoji - Boundary values (0, -1, MAX_INT) - Null and undefined - Deeply nested structures - Adversarial inputs
 
 **Common property patterns:**
 
-1. **Roundtrip**: `decode(encode(x)) === x`
-2. **Idempotence**: `f(f(x)) === f(x)`
-3. **Invariants**: Properties that must never break
-4. **Commutativity**: `f(a, b) === f(b, a)` when order shouldn't matter
+1.  **Roundtrip**: `decode(encode(x))` `===` `x`
+
+2.  **Idempotence**: `f(f(x))` `===` `f(x)`
+
+3.  **Invariants**: Properties that must never break
+
+4.  **Commutativity**: `f(a,` `b)` `===` `f(b,` `a)` when order shouldn't matter
 
 **When to use:** Financial calculations, security-critical code, data transformations, algorithms.
 
-**Test case shrinking:** When a property fails, the framework shrinks the input to find the minimal failing case. Instead of "failed with `[1, 2, 3, 7, 4, 5, 6, 9, 8]`" you get "failed with `[2, 1]`". This makes debugging much easier.
+**Test case shrinking:** When a property fails, the framework shrinks the input to find the minimal failing case. Instead of \"\`failed with \`\[1, 2, 3, 7, 4, 5, 6, 9, 8\]`"` `you` `get` `` "`failed `` `with` `` `[2, `` `1]`\". This makes debugging much easier.
 
 Property-based tests find the bugs that haunt production. The password validator that works for "password123" but breaks on "pass😀". The JSON parser that handles normal strings but explodes on null bytes.
 
-## Level 6: Formal Verification
+## Level 6: Formal Verification {#_level_6:_formal_verification}
 
 Formal verification proves properties hold for all possible inputs. Not "probably correct" but "mathematically proven correct."
 
-```tla
+``` plaintext
 ---- MODULE RateLimiter ----
 VARIABLES requests, window_start, count
 
@@ -305,34 +340,37 @@ THEOREM Spec => []SafetyInvariant
 ====
 ```
 
-**When you need formal verification:**
-- Distributed consensus systems
-- Life-critical systems
-- Security-critical protocols
-- Hard constraints that can never be violated
+**When you need formal verification:** - Distributed consensus systems - Life-critical systems - Security-critical protocols - Hard constraints that can never be violated
 
 **The cost:** Expensive to write. Requires specialized expertise. Limited to specific properties. Difficult to maintain.
 
 For most code, levels 1-5 provide sufficient confidence. Reserve formal verification for the code where bugs mean catastrophe, not inconvenience.
 
-## Choosing Your Level
+## Choosing Your Level {#_choosing_your_level}
 
 Here's the decision framework:
 
-| Scenario | Minimum Level |
-|----------|---------------|
-| Internal utility function | Level 3 (Unit tests) |
-| API endpoint | Level 2 (Schema) + Level 4 (Integration) |
-| Financial calculations | Level 5 (Property tests) |
-| Security-critical code | Level 5 + manual audit |
-| Distributed consensus | Level 6 (Formal verification) |
-| Life-critical systems | Level 6 (Formal verification) |
++------------------------------------------+------------------------------------------+
+| Scenario                                 | Minimum Level                            |
++==========================================+==========================================+
+| Internal utility function                | Level 3 (Unit tests)                     |
++------------------------------------------+------------------------------------------+
+| API endpoint                             | Level 2 (Schema) + Level 4 (Integration) |
++------------------------------------------+------------------------------------------+
+| Financial calculations                   | Level 5 (Property tests)                 |
++------------------------------------------+------------------------------------------+
+| Security-critical code                   | Level 5 + manual audit                   |
++------------------------------------------+------------------------------------------+
+| Distributed consensus                    | Level 6 (Formal verification)            |
++==========================================+==========================================+
+| Life-critical systems                    | Level 6 (Formal verification)            |
++==========================================+==========================================+
 
 **The key insight:** You get 80% confidence from levels 1-3 at low cost. Levels 5-6 give the last 20% but cost 5x more. Choose based on risk tolerance and cost of failure.
 
 Don't choose one level. Layer them. Types everywhere. Schema validation at boundaries. Unit tests for logic. Integration tests for flows. Property tests for critical algorithms.
 
-## The Verification Sandwich Pattern
+## The Verification Sandwich Pattern {#_the_verification_sandwich_pattern}
 
 When you ask Claude to add a feature and tests fail afterward, you face a question: Did Claude break something, or were those tests already failing?
 
@@ -340,26 +378,28 @@ Without knowing the baseline, you can't tell. This ambiguity wastes hours debugg
 
 The verification sandwich solves this.
 
-```
-┌─────────────────────────────────────────┐
-│  1. PRE-VERIFICATION (Baseline)          │
-│     ├─ Run tests → All pass ✓            │
-│     ├─ Run type check → Clean ✓          │
-│     └─ Run linter → Clean ✓              │
-├─────────────────────────────────────────┤
-│  2. GENERATION                           │
-│     └─ Make the code change              │
-├─────────────────────────────────────────┤
-│  3. POST-VERIFICATION (Delta)            │
-│     ├─ Run tests → Detect failures       │
-│     ├─ Run type check → Find errors      │
-│     └─ Run linter → Catch issues         │
-└─────────────────────────────────────────┘
-```
+::: {#fig-verification-sandwich wrapper="1" align="center" width="600"}
+![The Verification Sandwich: Establish baseline before generation, detect delta after](ch06-verification-sandwich.png){alt="Verification Sandwich"}
+:::
+
+    ┌─────────────────────────────────────────┐
+    │  1. PRE-VERIFICATION (Baseline)          │
+    │     ├─ Run tests → All pass ✓            │
+    │     ├─ Run type check → Clean ✓          │
+    │     └─ Run linter → Clean ✓              │
+    ├─────────────────────────────────────────┤
+    │  2. GENERATION                           │
+    │     └─ Make the code change              │
+    ├─────────────────────────────────────────┤
+    │  3. POST-VERIFICATION (Delta)            │
+    │     ├─ Run tests → Detect failures       │
+    │     ├─ Run type check → Find errors      │
+    │     └─ Run linter → Catch issues         │
+    └─────────────────────────────────────────┘
 
 **The key rule:** If pre-verification fails, stop immediately. Don't generate code on a broken baseline.
 
-```bash
+``` bash
 #!/bin/bash
 # scripts/verify.sh
 
@@ -384,7 +424,7 @@ echo "✅ All quality gates passed!"
 
 Run this before and after every code generation. When pre-verification passes, post-verification failures are guaranteed to be from the new code. No ambiguity. No wasted debugging.
 
-## Test-Driven Prompting
+## Test-Driven Prompting {#_test_driven_prompting}
 
 When you ask an LLM to "implement user authentication," you're asking it to sample from a probability distribution of millions of possible implementations. Most are wrong.
 
@@ -392,11 +432,13 @@ When you give an LLM failing tests and ask it to "make these tests pass," you're
 
 This is test-driven prompting: write tests before generating code.
 
-```typescript
+``` typescript
 // Step 1: Write tests FIRST
 describe('authenticateUser', () => {
   it('returns user object for valid credentials', async () => {
-    const result = await authenticateUser('user@example.com', 'password123');
+    const result = await authenticateUser(
+      'user@example.com', 'password123'
+    );
     expect(result).toMatchObject({
       id: expect.any(String),
       email: 'user@example.com',
@@ -404,7 +446,8 @@ describe('authenticateUser', () => {
     });
   });
 
-  it('throws InvalidCredentialsError for wrong password', async () => {
+  it('throws InvalidCredentialsError for wrong password',
+     async () => {
     await expect(
       authenticateUser('user@example.com', 'wrong')
     ).rejects.toThrow(InvalidCredentialsError);
@@ -434,26 +477,22 @@ describe('authenticateUser', () => {
 
 **Why this works:** Tests are executable specifications. They reduce entropy from millions of possible implementations to tens of correct ones.
 
-**The math:**
-- Without tests: LLM chooses from ~1,000,000 implementations, ~10 correct. Success rate: 0.001%
-- With 5 tests: LLM chooses from ~50 implementations, ~30 correct. Success rate: 60%
+**The math:** - Without tests: LLM chooses from \~1,000,000 implementations, \~10 correct. Success rate: 0.001% - With 5 tests: LLM chooses from \~50 implementations, \~30 correct. Success rate: 60%
 
 That's a 600x improvement.
 
 **The formula:**
 
-```
-S_constrained = S ∩ T₁ ∩ T₂ ∩ ... ∩ Tₙ ≈ C
+    S_constrained = S ∩ T₁ ∩ T₂ ∩ ... ∩ Tₙ ≈ C
 
-Where:
-S = All syntactically valid programs
-Tᵢ = Programs that pass test i
-C = Set of correct programs
-```
+    Where:
+    S = All syntactically valid programs
+    Tᵢ = Programs that pass test i
+    C = Set of correct programs
 
 Each test filters out invalid implementations. More tests means the constrained space gets closer to the correct set.
 
-## Trust But Verify Protocol
+## Trust But Verify Protocol {#_trust_but_verify_protocol}
 
 AI generates 100x faster than humans review. Manual code review becomes a bottleneck. The solution: ask AI to generate verification, not just code.
 
@@ -461,7 +500,7 @@ AI generates 100x faster than humans review. Manual code review becomes a bottle
 
 **Trust but verify:** AI writes code → AI writes verification → You review 10 lines of test output → Bugs caught automatically
 
-```typescript
+``` typescript
 // Prompt
 "Implement user authentication API endpoint.
 After implementation, create a verification script that:
@@ -487,24 +526,17 @@ Run the verification script and show me the output."
 
 This reduces review burden by 99% while improving bug detection.
 
-**Types of verification artifacts:**
-- Runtime verification scripts (test endpoints, verify outputs)
-- Visual verification (screenshots, UI states)
-- Data verification (migration scripts, integrity checks)
-- API verification (comprehensive endpoint testing)
+**Types of verification artifacts:** - Runtime verification scripts (test endpoints, verify outputs) - Visual verification (screenshots, UI states) - Data verification (migration scripts, integrity checks) - API verification (comprehensive endpoint testing)
 
-## Building Compound Quality Gates
+## Building Compound Quality Gates {#_building_compound_quality_gates}
 
 Individual verification levels catch individual bug types. Combined levels catch compound bugs.
 
-**The multiplicative effect:**
-- Level 1-3 catches 80% of bugs
-- Level 5 catches 80% of the remaining 20%
-- Combined: 80% + (80% × 20%) = 96% total catch rate
+**The multiplicative effect:** - Level 1-3 catches 80% of bugs - Level 5 catches 80% of the remaining 20% - Combined: 80% + (80% × 20%) = 96% total catch rate
 
-Layer your verification in CI/CD:
+Layer your verification in CI/CD (Continuous Integration/Continuous Deployment):
 
-```yaml
+``` yaml
 # .github/workflows/verify.yml
 jobs:
   level-1-types:
@@ -525,13 +557,9 @@ jobs:
     needs: [level-3-unit, level-4-integration]
 ```
 
-**Key patterns:**
-- Fast checks first (fail fast)
-- Parallel when independent
-- Skip slow checks if fast ones fail
-- Same gates locally and in CI
+**Key patterns:** - Fast checks first (fail fast) - Parallel when independent - Skip slow checks if fast ones fail - Same gates locally and in CI
 
-## Common Pitfalls
+## Common Pitfalls {#_common_pitfalls}
 
 **Pitfall 1: Choosing the wrong level**
 
@@ -563,26 +591,35 @@ Flaky tests that pass sometimes and fail others create false confidence or false
 
 **Why flaky tests are especially harmful with AI agents:**
 
-1. **Agents can't distinguish flaky from real failures.** They'll try to "fix" code that isn't broken.
-2. **Wasted API tokens.** The agent spends cycles analyzing false positives.
-3. **Context pollution.** Failed fix attempts add noise to conversation history.
-4. **Lost trust.** Developers stop trusting agent test feedback.
+1.  **Agents can't distinguish flaky from real failures.** They'll try to "fix" code that isn't broken.
+
+2.  **Wasted API tokens.** The agent spends cycles analyzing false positives.
+
+3.  **Context pollution.** Failed fix attempts add noise to conversation history.
+
+4.  **Lost trust.** Developers stop trusting agent test feedback.
 
 **Common causes and fixes:**
 
-| Category | Symptoms | Typical Fix |
-|----------|----------|-------------|
-| Timing | Async operations, race conditions, "timeout" in errors | Use `waitFor`/`waitForExpect`, increase timeouts, or use fake timers |
-| Order-dependent | Tests depend on previous test state | Reset state in `beforeEach`, ensure test isolation |
-| External service | Network calls fail with ECONNREFUSED, ETIMEDOUT | Mock with MSW or nock |
-| Random data | Value assertion mismatches on re-runs | Seed random generators or use fixed fixtures |
-| Date/time | Tests fail on certain days or after dates pass | Mock Date with vitest/sinon fake timers |
++---------------------+--------------------------------------------------------+----------------------------------------------------------------------+
+| Category            | Symptoms                                               | Typical Fix                                                          |
++=====================+========================================================+======================================================================+
+| Timing              | Async operations, race conditions, "timeout" in errors | Use `waitFor`/`waitForExpect`, increase timeouts, or use fake timers |
++---------------------+--------------------------------------------------------+----------------------------------------------------------------------+
+| Order-dependent     | Tests depend on previous test state                    | Reset state in `beforeEach`, ensure test isolation                   |
++---------------------+--------------------------------------------------------+----------------------------------------------------------------------+
+| External service    | Network calls fail with ECONNREFUSED, ETIMEDOUT        | Mock with MSW (Mock Service Worker) or nock                          |
++---------------------+--------------------------------------------------------+----------------------------------------------------------------------+
+| Random data         | Value assertion mismatches on re-runs                  | Seed random generators or use fixed fixtures                         |
++=====================+========================================================+======================================================================+
+| Date/time           | Tests fail on certain days or after dates pass         | Mock Date with vitest/sinon fake timers                              |
++=====================+========================================================+======================================================================+
 
 **Quick diagnosis approach:**
 
 When a test flakes, run it multiple times to understand the pattern:
 
-```bash
+``` bash
 # Run test 10 times, count failures
 for i in {1..10}; do
   npm test -- path/to/test.ts && echo PASS || echo FAIL
@@ -593,11 +630,11 @@ If the pass rate falls between 10% and 90%, you have a flaky test. Categorize by
 
 **Solution:** Fix flaky tests systematically by category. For timing issues, add explicit waits. For external services, mock them with MSW. For random data, seed your generators. Track flaky tests in a report rather than addressing them one at a time. When using AI agents, check known flaky tests before letting the agent investigate: if a test is known to flake, retry it before assuming the code is broken.
 
-## Practical Application
+## Practical Application {#_practical_application}
 
 Here's a complete verification stack for an API endpoint:
 
-```typescript
+``` typescript
 // Level 1: Types
 interface CreateUserRequest {
   email: string;
@@ -663,59 +700,78 @@ test.prop([
 
 Each level adds confidence. Together they catch bugs that any single level would miss.
 
-## Exercises
+## Exercises {#_exercises}
 
-### Exercise 1: Layer Verification for an API Endpoint
+### Exercise 1: Layer Verification for an API Endpoint {#_exercise_1:_layer_verification_for_an_api_endpoint}
 
-Create a simple `POST /api/users` endpoint and verify it at levels 1-4:
+Create a simple `POST` `/api/users` endpoint and verify it at levels 1-4:
 
-1. Define TypeScript interfaces for request and response
-2. Add Zod schema validation for the request body
-3. Write unit tests for email validation
-4. Write integration tests for the complete flow
+1.  Define TypeScript interfaces for request and response
+
+2.  Add Zod schema validation for the request body
+
+3.  Write unit tests for email validation
+
+4.  Write integration tests for the complete flow
 
 Run all verification before and after implementing the endpoint. Compare what each level catches.
 
-### Exercise 2: Test-Driven Prompting
+### Exercise 2: Test-Driven Prompting {#_exercise_2:_test_driven_prompting}
 
-Compare untested vs. test-driven code generation:
+Compare untested vs. test-driven code generation:
 
-**Part A:** Ask Claude to "implement validatePassword()" with no tests. Test the result with various inputs: "password", "Pass123", "pass😀", "Pass123\0". Count how many edge cases fail.
+**Part A:** Ask Claude to "implement validatePassword()" with no tests. Test the result with various inputs: "password", "Pass123", "pass😀", "Pass123++\\++0". Count how many edge cases fail.
 
 **Part B:** Write property-based tests first, then ask Claude to implement `validatePassword()` that passes the tests. Compare first-pass success rate and edge case handling.
 
-### Exercise 3: Verification Sandwich
+### Exercise 3: Verification Sandwich {#_exercise_3:_verification_sandwich}
 
-1. Create a verification script that runs type-check, lint, and tests
-2. Run it to establish baseline (should pass)
-3. Ask Claude to add a new feature
-4. Run verification again
-5. Identify which failures are from the new code vs. pre-existing
+1.  Create a verification script that runs type-check, lint, and tests
+
+2.  Run it to establish baseline (should pass)
+
+3.  Ask Claude to add a new feature
+
+4.  Run verification again
+
+5.  Identify which failures are from the new code vs. pre-existing
 
 Document your findings: How much debugging time did the sandwich pattern save?
 
-## Summary
+## Summary {#_summary}
 
 The verification ladder is your framework for building confidence in AI-generated code:
 
 - **Level 1: Types** catch shape errors at compile time
+
 - **Level 2: Schema** validates external data at boundaries
+
 - **Level 3: Unit tests** verify isolated function logic
+
 - **Level 4: Integration tests** verify component interactions
+
 - **Level 5: Property tests** discover edge cases automatically
+
 - **Level 6: Formal verification** proves mathematical correctness
 
 Layer verification based on risk. Use the verification sandwich to know your baseline. Write tests before prompting to reduce entropy. Generate verification alongside code to scale review.
 
 Each verification layer compounds with the others. Together they catch bugs that any single approach would miss. The result: code you can trust.
 
----
+'''''
 
-> **Companion Code**: All 3 code examples for this chapter are available at [examples/ch06/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch06)
+:::: note
+::: title
+Note
+:::
 
+**Companion Code**: All 3 code examples for this chapter are available at [examples/ch06/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch06)
+::::
 
 *Related chapters:*
 
-- **Chapter 5: The 12-Factor Agent** for the reliability principles that verification enforces
-- **Chapter 7: Quality Gates That Compound** for building verification systems that improve over time
-- **Chapter 3: Prompting Fundamentals** for structuring prompts that produce testable code
+- **[Chapter 5: The 12-Factor Agent](#_chapter_5_the_12_factor_agent){.cross-reference}** for the reliability principles that verification enforces
+
+- **[Chapter 7: Quality Gates That Compound](#_chapter_7_quality_gates_that_compound){.cross-reference}** for building verification systems that improve over time
+
+- **[Chapter 3: Prompting Fundamentals](#_chapter_3_prompting_fundamentals){.cross-reference}** for structuring prompts that produce testable code

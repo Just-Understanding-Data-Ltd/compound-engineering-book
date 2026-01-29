@@ -1,0 +1,719 @@
+# Chapter 16: Building Autonomous Systems {#_chapter_16:_building_autonomous_systems} {#ch16-building-autonomous-systems}
+
+[]{.index term="autonomous systems"} []{.index term="RALPH implementation"} []{.index term="task scoring"}
+
+This chapter documents how this book was built. Not as an abstract case study, but as a concrete walkthrough of the RALPH loop, task scoring, adversarial review agents, and custom skills that produced 47,000 words across 15 chapters. The infrastructure described here is real. The code excerpts come from the actual project repository. The metrics reflect genuine outcomes.
+
+By the end of this chapter, you will understand how autonomous development systems work at the implementation level. More importantly, you will have templates you can adapt for your own projects.
+
+## The Book That Built Itself {#_the_book_that_built_itself}
+
+The numbers tell the story:
+
++------------------------------------------------------------+-----------------------------------+
+| Metric                                                     | Value                             |
++============================================================+===================================+
+| Tasks completed                                            | 174                               |
++------------------------------------------------------------+-----------------------------------+
+| Words written                                              | 47,300                            |
++------------------------------------------------------------+-----------------------------------+
+| Diagrams created                                           | 66                                |
++------------------------------------------------------------+-----------------------------------+
+| Tests passing                                              | 787                               |
++------------------------------------------------------------+-----------------------------------+
+| Chapters from PRD (Product Requirements Document) to final | 15                                |
++============================================================+===================================+
+| Review agents running                                      | 7                                 |
++============================================================+===================================+
+
+These metrics came from a single loop running over several days. Each iteration started with a fresh context. Each iteration completed exactly one task. Each iteration committed its work before terminating.
+
+The compound effect became visible around the halfway point. Early chapters required manual intervention: checking code examples, fixing cross-references, verifying formatting. By Chapter 10, the review agents caught most issues automatically. By Chapter 15, the system was producing publication-ready content with minimal human oversight.
+
+This progression illustrates compound engineering in practice. The infrastructure built for early chapters paid dividends on later chapters. Scripts written to solve one problem solved similar problems automatically. Patterns discovered through iteration became codified knowledge that guided future work.
+
+### The Velocity Curve {#_the_velocity_curve}
+
+The data shows three distinct phases:
+
+**Phase 1 (Chapters 1-5)**: Manual verification dominated. Each chapter required 3-4 review cycles with human intervention. Average completion time: 4 hours per chapter. Infrastructure was being built alongside content.
+
+**Phase 2 (Chapters 6-10)**: Semi-autonomous operation. Review agents caught most issues. Human intervention dropped to edge cases. Average completion time: 2 hours per chapter. The queue management system reached maturity.
+
+**Phase 3 (Chapters 11-15)**: Near-autonomous production. The system generated publication-ready content with minimal oversight. Average completion time: 1.5 hours per chapter. Infrastructure investment began paying compound returns.
+
+The crossover point came around Chapter 8. Before that, infrastructure development consumed more time than it saved. After that, each chapter benefited from all previous infrastructure investments.
+
+::: {#fig-velocity-curve wrapper="1" align="center" width="700"}
+![Velocity Curve: How infrastructure compounds over time](ch16-velocity-curve.png){alt="Velocity Curve"}
+:::
+
+## The RALPH Loop Architecture {#_the_ralph_loop_architecture}
+
+The RALPH loop has three components: an orchestrator script that spawns iterations, an executor that completes one task per iteration, and a task manager that tracks progress.
+
+### The Orchestrator: ralph.sh {#_the_orchestrator:_ralph_sh}
+
+The orchestrator is a bash script that runs indefinitely until all tasks complete or a time limit expires. Its core responsibilities are iteration management, failure handling, and review scheduling.
+
+``` bash
+# Core configuration
+MAX_ITERATIONS=${MAX_ITERATIONS:-0}      # 0 = infinite
+MAX_HOURS=${MAX_HOURS:-3}                 # Time limit
+REVIEW_EVERY=${REVIEW_EVERY:-20}          # Adaptive starting point
+ITERATION_TIMEOUT=${ITERATION_TIMEOUT:-900}  # 15 minutes per task
+SLEEP_BETWEEN=${SLEEP_BETWEEN:-5}         # Breathing room
+```
+
+The main loop is straightforward:
+
+``` bash
+while true; do
+    iteration=$((iteration + 1))
+
+    # Check limits
+    check_circuit_breaker || break
+    [ "$MAX_ITERATIONS" -gt 0 ] && \
+      [ $iteration -gt $MAX_ITERATIONS ] && break
+    check_time_limit || break
+
+    # Run the coding agent
+    run_coding_agent $iteration
+
+    # Adaptive review cycle
+    if should_review $iteration; then
+        run_review_agents $iteration
+    fi
+
+    sleep $SLEEP_BETWEEN
+done
+```
+
+The circuit breaker prevents runaway failures. After three consecutive iterations without progress (no new commit), the loop stops:
+
+``` bash
+check_circuit_breaker() {
+    if [ $CONSECUTIVE_FAILURES -ge $MAX_CONSECUTIVE_FAILURES ]; then
+        echo "CIRCUIT BREAKER TRIGGERED"
+        echo "Too many consecutive failures: $CONSECUTIVE_FAILURES"
+        return 1
+    fi
+    return 0
+}
+```
+
+This safety mechanism proved essential. During development, a malformed task caused infinite retries. The circuit breaker stopped the loop, preserved the last known good state, and allowed human intervention.
+
+### The Executor: Claude Code {#_the_executor:_claude_code}
+
+Each iteration spawns a fresh Claude Code instance with a minimal prompt:
+
+``` bash
+run_coding_agent() {
+    local iteration=$1
+    cat > "$prompt_file" << EOF
+Iteration $iteration. Complete ONE task from tasks.json
+(highest score, pending, not blocked). Commit when done.
+EOF
+    run_claude "$prompt_file"
+}
+```
+
+The executor reads `CLAUDE.md` to inherit project knowledge, picks the highest-scored pending task, completes it, updates `tasks.json`, and commits. Then it terminates.
+
+Why fresh context per iteration? Long-running sessions accumulate context rot. Failed approaches, error messages, and dead-end explorations pollute the context window. After enough noise, the agent starts suggesting variations of things that already failed.
+
+Fresh context eliminates this problem. Each iteration starts clean. The agent reads only what it needs from files. Past failures exist only in git history, not in active context.
+
+### Task Management: tasks.json {#_task_management:_tasks_json}
+
+Tasks live in a flat JSON structure with dynamic scoring:
+
+``` json
+{
+  "tasks": [
+    {
+      "id": "task-461",
+      "type": "chapter",
+      "title": "Chapter 16: Write first draft",
+      "status": "pending",
+      "priority": "critical",
+      "score": 830,
+      "blockedBy": [],
+      "createdAt": "2026-01-29T12:22:11.833Z"
+    }
+  ],
+  "stats": { "pending": 38, "complete": 85 }
+}
+```
+
+The scoring algorithm ensures the most important work happens first:
+
+``` javascript
+// Scoring weights
+const PRIORITY_SCORES = {
+  critical: 1000,
+  high: 750,
+  medium: 500,
+  normal: 250,
+  low: 100
+};
+
+const TYPE_SCORES = {
+  blocker: 200,
+  chapter: 100,
+  fix: 80,
+  diagram: 40,
+  appendix: 20
+};
+
+function calculateScore(task, allTasks) {
+  let score = 0;
+
+  // Priority score
+  score += PRIORITY_SCORES[task.priority] || 250;
+
+  // Type score
+  score += TYPE_SCORES[task.type] || 0;
+
+  // Chapter sequence bonus (earlier chapters = higher)
+  const chapterNum = getChapterNumber(task);
+  score += (20 - chapterNum) * 5;
+
+  // Blocking bonus: if this task blocks others
+  const blocksCount = allTasks.filter(t =>
+    t.blockedBy?.includes(task.id)
+  ).length;
+  score += blocksCount * 25;
+
+  // Age bonus: prevent starvation
+  if (task.createdAt) {
+    const created = new Date(task.createdAt).getTime();
+    const ageHours = (Date.now() - created) / 3600000;
+    if (ageHours > 24) score += 50;
+    if (ageHours > 48) score += 50;
+  }
+
+  return Math.round(score);
+}
+```
+
+This scoring system produces a natural priority order: critical blockers first, then chapter work in sequence, then fixes and improvements. Age bonuses prevent tasks from starving at the bottom of the queue.
+
+### The Iteration Cadence {#_the_iteration_cadence}
+
+Different activities happen at different intervals:
+
++-----------------------------------+------------------------------------+
+| Interval                          | Activity                           |
++===================================+====================================+
+| Every iteration                   | Complete one task, commit          |
++-----------------------------------+------------------------------------+
+| Every 5 iterations                | Capture learning to \@LEARNINGS.md |
++-----------------------------------+------------------------------------+
+| Every N iterations (adaptive)     | Run all review agents              |
++===================================+====================================+
+| Triggered by 2000+ lines          | Compact claude-progress.txt        |
++===================================+====================================+
+
+The review interval adapts based on issue counts. The algorithm uses a convergence-based approach similar to TCP (Transmission Control Protocol) congestion control:
+
+``` bash
+# Adaptive interval calculation
+if [ "$new_issues" -lt "$prev_issues" ]; then
+    # Improving! Backoff (multiply by 1.3)
+    ADAPTIVE_INTERVAL=$(echo "$ADAPTIVE_INTERVAL * 13 / 10" | bc)
+    echo "Issues decreasing. Backing off to $ADAPTIVE_INTERVAL"
+elif [ "$new_issues" -gt "$prev_issues" ]; then
+    # Regressing! More pressure (multiply by 0.7)
+    ADAPTIVE_INTERVAL=$(echo "$ADAPTIVE_INTERVAL * 7 / 10" | bc)
+    echo "Issues increasing. Pressure to $ADAPTIVE_INTERVAL"
+fi
+
+# Clamp to bounds
+[ "$ADAPTIVE_INTERVAL" -lt 5 ] && ADAPTIVE_INTERVAL=5
+[ "$ADAPTIVE_INTERVAL" -gt 50 ] && ADAPTIVE_INTERVAL=50
+```
+
+When content quality improves, reviews become less frequent (interval expands by 30%). When quality degrades, reviews become more frequent (interval contracts by 30%). The 1.3/0.7 ratio produces a net 0.91 factor per oscillation cycle, preventing the interval from collapsing during normal fluctuation.
+
+A probe mechanism forces reviews every 25 iterations regardless of adaptive state. This catches blind spots where the quick scan misses issues that the full review agents would catch.
+
+## Auto-Compacting Memory Systems {#_auto_compacting_memory_systems}
+
+Long-running systems need memory that survives context boundaries without growing indefinitely. This project uses three tiers.
+
+### \@LEARNINGS.md: Accumulated Insights {#_@learnings_md:_accumulated_insights}
+
+Every fifth iteration, the agent captures a learning. The format emphasizes actionable knowledge:
+
+``` markdown
+### 2026-01-28 - Term Introduction vs AI Slop
+
+**Context**: Reviewing ch01 for the "reviewed" milestone.
+**Observation**: A chapter can pass AI slop checks while having
+undefined acronyms. In ch01, slop-checker found zero issues,
+but term-intro-checker found two undefined acronyms.
+**Implication**: Run multiple complementary review passes.
+**Action**: Always run both slop-checker AND term-intro-checker.
+```
+
+These learnings survive context compaction. When the conversation history gets summarized, the learnings file preserves specific insights that would otherwise be lost.
+
+### claude-progress.txt: Session State {#_claude_progress_txt:_session_state}
+
+This file tracks current status and recent activity:
+
+``` markdown
+## Current Status (Updated: 2026-01-29 12:45)
+- Phase: Chapter 16 Development
+- Active: task-461 (Chapter 16 first draft)
+- Last Completed: task-460 (PRD: Chapter 16)
+- Blockers: None
+- Queue Health: 38 pending, 85 complete
+
+## Recent Activity (Last 10 Entries)
+
+### 2026-01-29 12:45 - COMPLETED task-460
+- What: Created comprehensive PRD for capstone chapter
+- Files: prds/ch16.md
+- Outcome: PRD complete, ready for first draft
+```
+
+When the file exceeds 2000 lines, it compacts to 1000 lines. The compaction preserves recent detailed entries while summarizing older history by week. This prevents unbounded growth while maintaining useful context.
+
+### Git as External Memory {#_git_as_external_memory}
+
+Commits serve as checkpoints. Each iteration commits its work with a structured message:
+
+    [chapter]: Add first draft of ch07 context engineering
+
+    - 3,200 words covering information theory foundations
+    - 4 code examples for progressive disclosure
+    - Mermaid diagram for context window anatomy
+
+    Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+
+The commit message becomes documentation for future iterations. An agent can read `git` `log` `--oneline` `-10` to understand recent progress without parsing detailed files.
+
+Git also enables recovery. When the circuit breaker trips, the system records `lastGoodCommit`. Recovery means checking out that commit and resuming from a known stable state.
+
+### The Memory Hierarchy in Practice {#_the_memory_hierarchy_in_practice}
+
+The three tiers serve different temporal needs:
+
+ifdef
+
+:   backend-pdf\[\]
+
+    +--------------+------------------+----------------------+------------------------------------+
+    | Tier         | Lifetime         | Access Pattern       | Example Content                    |
+    +==============+==================+======================+====================================+
+    | Conversation | Single iteration | Immediate            | Current task context, tool results |
+    +--------------+------------------+----------------------+------------------------------------+
+    | Files        | Days to weeks    | Per-iteration read   | Progress state, learnings, queue   |
+    +==============+==================+======================+====================================+
+    | Git          | Permanent        | Occasional search    | Commit history, prior approaches   |
+    +==============+==================+======================+====================================+
+
+endif
+
+:   
+
+<!-- -->
+
+ifndef
+
+:   backend-pdf\[\]
+
+**Conversation tier**
+
+:   Lifetime: single iteration. Access: immediate. Stores current task context and tool results.
+
+**Files tier**
+
+:   Lifetime: days to weeks. Access: per-iteration read. Stores progress state, learnings, queue.
+
+**Git tier**
+
+:   Lifetime: permanent. Access: occasional search. Stores commit history and prior approaches.
+
+endif
+
+:   During this book's development, the file tier proved most valuable. Each iteration read `claude-progress.txt` to understand current state, `tasks.json` to pick the next task, and `@LEARNINGS.md` to inherit prior insights.
+
+The compaction trigger (2000 lines) fired three times during development. Each compaction reduced the progress file to 1000 lines while preserving essential state. Without compaction, the file would have grown to 8000+ lines, consuming excessive context on each read.
+
+## Adversarial Review Agents {#_adversarial_review_agents}
+
+The agent that writes content cannot objectively review it. Adversarial review agents solve this problem by specializing in different error categories.
+
+### The Seven Agents {#_the_seven_agents}
+
++---------------------+---------------------------+------------------------------------------+
+| Agent               | Focus                     | Detection Pattern                        |
++=====================+===========================+==========================================+
+| slop-checker        | AI-generated text tells   | "delve", "crucial", em dashes            |
++---------------------+---------------------------+------------------------------------------+
+| tech-accuracy       | Code and tool correctness | Syntax errors, wrong tool names          |
++---------------------+---------------------------+------------------------------------------+
+| term-intro-checker  | Undefined acronyms        | All-caps words without prior definition  |
++---------------------+---------------------------+------------------------------------------+
+| diagram-reviewer    | Missing visualizations    | Processes with 3+ steps without diagrams |
++---------------------+---------------------------+------------------------------------------+
+| oreilly-style       | Publishing conventions    | Heading case, terminology                |
++---------------------+---------------------------+------------------------------------------+
+| cross-ref-validator | Broken links              | Markdown links to nonexistent files      |
++=====================+===========================+==========================================+
+| progress-summarizer | Status synthesis          | Aggregate metrics, velocity              |
++=====================+===========================+==========================================+
+
+Each agent has a narrow scope. The slop-checker only looks for AI text patterns. The term-intro-checker only looks for acronym usage. This specialization produces focused, actionable findings.
+
+### Agent Definition Structure {#_agent_definition_structure}
+
+Agents are defined in `.claude/agents/` as markdown files:
+
+``` markdown
+---
+name: slop-checker
+description: Scan content for AI-generated text tells
+tools: Read, Grep, Glob, Write
+model: haiku
+---
+
+You are an expert editor who detects AI-generated text patterns.
+
+## Patterns to Flag
+
+### Critical (Must Fix)
+- The word "delve" in any form
+- Overuse of "crucial", "pivotal", "robust"
+
+### High Priority
+- Phrases: "Additionally,", "Furthermore,", "Moreover,"
+
+## Output
+
+Create a review file at: reviews/slop-check-{DATE}.md
+```
+
+The `model:` `haiku` directive uses a faster model for review tasks. Review agents don't need the full capability of the primary model. They need pattern matching and structured output.
+
+### Running Reviews in Parallel {#_running_reviews_in_parallel}
+
+The orchestrator spawns all seven review agents during each review cycle:
+
+``` bash
+run_review_agents() {
+    local iteration=$1
+    local review_file="reviews/review-$(date +%Y-%m-%d).md"
+
+    echo "Running review agents..."
+
+    # Agent 1: Slop checker
+    cat > "$prompt_file" << EOF
+Run the slop-checker agent on recent chapter changes.
+Append findings to $review_file.
+EOF
+    run_claude "$prompt_file" "no"  # No timeout for reviews
+
+    # Agent 2: Tech accuracy
+    # ...repeat for each agent
+}
+```
+
+Each agent runs as a separate Claude invocation. This avoids EPIPE (broken pipe) errors from large outputs and allows independent failure handling. If one agent fails, the others continue.
+
+Review findings become tasks. When slop-checker finds em dashes, a task appears in the queue. When term-intro-checker finds undefined acronyms, another task appears. The system continuously generates its own improvement work.
+
+## Custom Agentic Skills {#_custom_agentic_skills}
+
+Standard tools cannot handle every verification need. Custom skills extend Claude's capabilities for domain-specific work.
+
+### The epub-review Skill {#_the_epub_review_skill}
+
+EPUB (Electronic Publication) formatting is invisible to text-only agents. An agent can read the CSS file and the markdown source, but it cannot see how the book actually renders in a reader application.
+
+The epub-review skill solves this by combining Playwright (browser automation) with Gemini (vision API):
+
+``` markdown
+---
+name: epub-review
+description: Review EPUB formatting using Gemini vision API
+---
+
+# EPUB Visual Review
+
+## Quick Start
+
+source .env && GEMINI_API_KEY=$GEMINI_API_KEY \
+  npx tsx scripts/epub-review.ts
+
+## Workflow
+
+1. Extract EPUB (ZIP) to .epub-review/
+2. Open each XHTML chapter in headless Chromium
+3. Take full-page PNG screenshots
+4. Send screenshots to gemini-2.5-flash for analysis
+5. Save report to .epub-review-report.md
+```
+
+The skill gives Claude "eyes" for visual debugging. When the review cycle runs, epub-review captures screenshots, sends them to Gemini for analysis, and returns structured findings about code block formatting, table rendering, and typography issues.
+
+### When to Build a Skill {#_when_to_build_a_skill}
+
+Build a skill when:
+
+1.  You encounter a repetitive verification pattern
+
+2.  Standard tools cannot access the required information
+
+3.  Domain-specific knowledge improves detection quality
+
+4.  The skill will run multiple times
+
+The epub-review skill met all criteria. Visual formatting verification happened after every EPUB build. Standard text tools could not see rendered output. Understanding EPUB CSS conventions improved issue detection. The skill ran dozens of times during development.
+
+### The Verification Pipeline {#_the_verification_pipeline}
+
+The skill's output follows a structured format that enables automated task creation:
+
+``` markdown
+## Chapter 5 Analysis
+
+### Code Blocks
+- Status: PASS
+- Background: #f5f5f5 with 1px border
+- Syntax highlighting: Active for TypeScript
+- Line wrapping: Pre-wrap enabled
+
+### Tables
+- Status: PASS
+- Border style: Alternating row colors
+- Header: Source Sans 3, bold
+
+### Issues Found
+1. **Minor**: Inline code in blockquotes uses light background
+   - Location: Section 3, paragraph 2
+   - Suggested fix: Add rgba background for better contrast
+```
+
+This structured output allows follow-up iterations to parse issues and create tasks automatically. The skill doesn't just identify problems; it provides the information needed to fix them.
+
+### Skill Composition {#_skill_composition}
+
+Skills can reference other skills. The epub-review skill depends on the leanpub-build process to generate the EPUB. A hypothetical kindle-review skill could share the screenshot infrastructure while using different rendering parameters.
+
+This composition pattern mirrors the broader infrastructure philosophy: build small, focused tools that combine into larger capabilities.
+
+## Bespoke Infrastructure Examples {#_bespoke_infrastructure_examples}
+
+Beyond the core RALPH loop, several supporting scripts emerged from repeated needs.
+
+### Exercise Validator {#_exercise_validator}
+
+Code examples need testing. The exercise validator uses hash-based caching to avoid re-running unchanged code:
+
+``` bash
+# Run individual script
+bun infra/scripts/exercise-validator.ts run examples/ch04/agent.ts
+
+# Validate chapter code blocks
+bun infra/scripts/exercise-validator.ts validate chapters/ch04.md -v
+
+# Check cache status
+bun infra/scripts/exercise-validator.ts cache --stats
+```
+
+The validator computes a SHA256 hash of each script. If the hash matches a cached entry, execution is skipped. This optimization saved significant time during development: the same examples ran hundreds of times without recompilation.
+
+### Health Check Script {#_health_check_script}
+
+The health check runs during review cycles to verify system state:
+
+``` bash
+./scripts/health-check.sh
+
+# Checks:
+# - RALPH process running
+# - Recent git commits (within 2 hours)
+# - Task progress (pending count decreasing)
+# - Disk space (>1GB free)
+# - Progress file size (<3000 lines)
+```
+
+Health checks catch environmental problems before they cause failures. A full disk stops commits. A stale process indicates a hung iteration. Early detection prevents cascade failures.
+
+### Queue Update Script {#_queue_update_script}
+
+After each task completion, the queue needs recalculation:
+
+``` bash
+node scripts/update-queue.cjs
+
+# Updates:
+# - Recalculates all task scores
+# - Removes completed tasks from blockedBy arrays
+# - Updates tasks from blocked to pending when unblocked
+# - Sorts tasks by score
+# - Updates stats counts
+```
+
+Dynamic scoring means task priorities shift as work progresses. A task blocking five others gets a higher score. A task waiting 48 hours gets an age bonus. The queue constantly rebalances to surface the most valuable work.
+
+## The Meta-Engineering Mindset {#_the_meta_engineering_mindset}
+
+Building this infrastructure required a shift in thinking. Instead of "how do I write this chapter?", the question became "how do I build a system that writes chapters?"
+
+### The Infrastructure Investment Calculation {#_the_infrastructure_investment_calculation}
+
+Every script represents an investment. The break-even calculation:
+
+    Time to build tool: B hours
+    Time saved per use: S hours
+    Number of uses: N
+
+    Break-even when: N × S > B
+
+For this book: - Queue update script: 2 hours to build, 5 minutes per use, 170+ uses = 14 hours saved - EPUB review skill: 4 hours to build, 30 minutes per review, 20+ reviews = 6 hours saved - Slop-checker agent: 1 hour to build, 10 minutes per review, 30+ reviews = 4 hours saved
+
+Total infrastructure investment: approximately 15 hours. Total time saved: approximately 30 hours. The 2x return justified the investment, and the infrastructure remains available for future projects.
+
+### The Compound Effect {#_the_compound_effect}
+
+Infrastructure compounds. The queue update script made task management trivial. Easy task management enabled more granular task definitions. Granular tasks enabled better progress tracking. Better tracking improved the progress summarizer. The summarizer improved visibility. Better visibility enabled faster iteration.
+
+Each layer built on previous layers. By the end of the project, adding a new review agent took 15 minutes instead of hours. The pattern was established, the output format was standardized, and the integration points were clear.
+
+### Real Metrics from This Project {#_real_metrics_from_this_project}
+
+The infrastructure investment breakdown:
+
+ifdef
+
+:   backend-pdf\[\]
+
+    +--------------------+------------+---------+-------------+--------------+
+    | Component          | Build Time | Uses    | Time/Use    | Total Saved  |
+    +====================+============+=========+=============+==============+
+    | ralph.sh           | 6 hours    | 174     | 3 min       | 8.7 hours    |
+    +--------------------+------------+---------+-------------+--------------+
+    | update-queue.cjs   | 2 hours    | 170+    | 5 min       | 14 hours     |
+    +--------------------+------------+---------+-------------+--------------+
+    | slop-checker       | 1 hour     | 30+     | 10 min      | 4 hours      |
+    +--------------------+------------+---------+-------------+--------------+
+    | term-intro-checker | 1 hour     | 30+     | 8 min       | 3 hours      |
+    +--------------------+------------+---------+-------------+--------------+
+    | epub-review skill  | 4 hours    | 20+     | 30 min      | 6 hours      |
+    +====================+============+=========+=============+==============+
+    | exercise-validator | 3 hours    | 100+    | 2 min       | 3 hours      |
+    +====================+============+=========+=============+==============+
+
+endif
+
+:   
+
+<!-- -->
+
+ifndef
+
+:   backend-pdf\[\]
+
+**ralph.sh**
+
+:   Build: 6 hours \| Uses: 174 \| Time/use: 3 min \| Saved: 8.7 hours
+
+**update-queue.cjs**
+
+:   Build: 2 hours \| Uses: 170+ \| Time/use: 5 min \| Saved: 14 hours
+
+**slop-checker**
+
+:   Build: 1 hour \| Uses: 30+ \| Time/use: 10 min \| Saved: 4 hours
+
+**term-intro-checker**
+
+:   Build: 1 hour \| Uses: 30+ \| Time/use: 8 min \| Saved: 3 hours
+
+**epub-review skill**
+
+:   Build: 4 hours \| Uses: 20+ \| Time/use: 30 min \| Saved: 6 hours
+
+**exercise-validator**
+
+:   Build: 3 hours \| Uses: 100+ \| Time/use: 2 min \| Saved: 3 hours
+
+endif
+
+:   Total infrastructure investment: approximately 17 hours. Total time saved: approximately 38 hours. Return on investment: 2.2x.
+
+The ROI (Return on Investment) calculation underestimates the real value. Infrastructure remains available for future projects. The next book starts at phase 3 velocity, not phase 1.
+
+## Lessons Learned {#_lessons_learned}
+
+### What Worked Better Than Expected {#_what_worked_better_than_expected}
+
+**Fresh context per iteration** eliminated trajectory poisoning entirely. No iteration inherited failed approaches from previous iterations. Each task started with maximum cognitive clarity.
+
+**File-based memory** survived context compaction gracefully. Even when conversation summaries lost details, the files retained specific, actionable knowledge.
+
+**Adversarial review agents** caught real issues that writing agents missed. The slop-checker found em dashes the writing agent introduced. The term-intro-checker found acronyms the writing agent assumed were defined.
+
+**Git as checkpoint system** made recovery trivial. Rolling back to `lastGoodCommit` took seconds. No work was permanently lost.
+
+### What Didn't Work {#_what_didn’t_work}
+
+**Parallel tool calls** caused API concurrency errors in early Claude Code versions. The solution was sequential execution with a note in the prompt: "Execute tools ONE AT A TIME."
+
+**Gemini vision analysis** had a high false positive rate for formatting issues. Many "problems" were artifacts of screenshot timing, not actual rendering bugs. Manual verification became necessary before creating fix tasks.
+
+**Initial task estimates** were always wrong. A task estimated at 30 minutes might take 5 minutes or 2 hours. The system learned to ignore estimates and focus on completion rather than prediction.
+
+### What We Would Do Differently {#_what_we_would_do_differently}
+
+**Start with simpler task structure**. The initial task format was over-engineered with nested subtasks and complex dependencies. The flat structure with dynamic scoring emerged later but should have been the starting point.
+
+**Build epub-review skill earlier**. Visual verification caught issues that text analysis missed. Building this skill in week one would have prevented formatting problems that persisted for weeks.
+
+**More frequent queue curation**. Early queue curation happened every six iterations. This allowed duplicate tasks and stale priorities to accumulate. Moving to every three iterations improved queue health.
+
+## Your Autonomous System {#_your_autonomous_system}
+
+You don't need all this infrastructure on day one. Start with the minimal RALPH loop:
+
+``` bash
+#!/bin/bash
+iteration=0
+while [ $(jq '.stats.pending' tasks.json) -gt 0 ]; do
+    iteration=$((iteration + 1))
+    claude -p "Iteration $iteration. Complete ONE task. Commit."
+    sleep 5
+done
+```
+
+This 6-line script captures the essence: fresh context, single task, commit, repeat. Everything else is optimization.
+
+### The Compounding Timeline {#_the_compounding_timeline}
+
+Week 1: Basic loop with manual verification. You check each commit, fix issues manually, and learn what kinds of errors occur.
+
+Week 2: First review agent. Take the most common error type and automate its detection. For this book, that was AI slop phrases.
+
+Week 3: Auto-compacting memory. Add progress.txt and a compaction trigger. Now the system maintains its own state files.
+
+Week 4: Custom skills. Identify verification patterns that standard tools cannot handle. Build specialized skills for your domain.
+
+Week N: Autonomous operation. The system runs overnight, produces quality output, and generates its own improvement tasks.
+
+### Final Thought {#_final_thought}
+
+This book was written to teach you compound engineering. But it was also built to show you. The infrastructure lives in the repository. The scripts are real. The review agents actually run.
+
+Fork it, modify it, make it yours. The goal is not to replicate this exact system. The goal is to understand the principles: fresh context, file-based memory, adversarial review, and infrastructure that compounds. Apply those principles to your domain, and you will build systems that build systems.
+
+The 10x engineer was the floor. What comes next is up to you.
+
+'''''
+
+*Related chapters:* - [Chapter 10: The RALPH Loop](#_chapter_10_the_ralph_loop){.cross-reference} for loop fundamentals - [Chapter 11: Sub-Agent Architecture](#_chapter_11_sub_agent_architecture){.cross-reference} for agent orchestration - [Chapter 13: Building the Harness](#_chapter_13_building_the_harness){.cross-reference} for infrastructure layers

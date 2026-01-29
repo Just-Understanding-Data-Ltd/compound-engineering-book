@@ -1,4 +1,6 @@
-# Chapter 5: The 12-Factor Agent {#ch05-the-12-factor-agent}
+# Chapter 5: The 12-Factor Agent {#_chapter_5:_the_12_factor_agent} {#ch05-the-12-factor-agent}
+
+[]{.index term="12-factor agent"} []{.index term="reliability"}
 
 You built an agent that schedules emails. It worked flawlessly in testing. Fifty test cases, fifty successes. Then you deployed it to production. After 100 real requests, 47 of them failed. Not because your code was wrong, but because real workflows chain steps together, and each step introduces another chance for failure.
 
@@ -6,62 +8,83 @@ This is the reliability chasm between demo agents and production agents. Buildin
 
 This chapter teaches you the 12 factors with working TypeScript examples. You will understand why demo agents fail at scale, how to architect agents as deterministic software systems, and how to implement human-in-the-loop approvals that make production deployment safe.
 
-## The Reliability Chasm
+## The Reliability Chasm {#_the_reliability_chasm}
 
 Demo agents handle single requests. Production agents handle chains.
 
 Consider the math. If each action in your workflow succeeds 95% of the time, what happens as actions compound?
 
-| Actions | Per-Action Success | Overall Success |
-|---------|-------------------|-----------------|
-| 5 | 95% | 77% |
-| 10 | 95% | 60% |
-| 20 | 95% | 36% |
-| 30 | 95% | 21% |
++--------------------+------------------------+------------------------+
+| Actions            | Per-Action Success     | Overall Success        |
++====================+========================+========================+
+| 5                  | 95%                    | 77%                    |
++--------------------+------------------------+------------------------+
+| 10                 | 95%                    | 60%                    |
++--------------------+------------------------+------------------------+
+| 20                 | 95%                    | 36%                    |
++====================+========================+========================+
+| 30                 | 95%                    | 21%                    |
++====================+========================+========================+
 
 The formula is simple: `0.95^N`. A 10-step workflow has 60% reliability, worse than a coin flip for business-critical operations. Production workflows commonly require 15-25 steps.
 
+::: {#fig-reliability-chasm wrapper="1" align="center" width="600"}
+![The Reliability Chasm: How 95% per-action success compounds to failure](ch05-reliability-chasm.png){alt="Reliability Chasm"}
+:::
+
 This exponential failure explains why up to 95% of agent proof-of-concepts never reach production. Demo stakes are low, demo context is constrained, and demo verification happens manually. Humans catch errors in demos. Agents must catch their own errors in production.
 
-### The Four-Turn Framework
+### The Four-Turn Framework {#_the_four_turn_framework}
 
 Basic agents run a simple loop: Input, LLM, Action. Production agents need four turns:
 
-1. **Understand**: Verify context and requirements
-2. **Decide**: Choose the appropriate response
-3. **Execute**: Perform the task
-4. **Verify**: Confirm success
+1.  **Understand**: Verify context and requirements
+
+2.  **Decide**: Choose the appropriate response
+
+3.  **Execute**: Perform the task
+
+4.  **Verify**: Confirm success
 
 Most demo agents skip turns 1 and 4. They assume context is clear and trust API responses. This is exactly where 80% of production failures occur.
 
-### The Reliability Stack
+### The Reliability Stack {#_the_reliability_stack}
 
 To close the chasm, you build reliability in layers:
 
 - **Layer 1: Task decomposition**. Break 30-step workflows into focused agents handling 5-10 steps each.
+
 - **Layer 2: Pre-action validation**. Check prerequisites before acting.
+
 - **Layer 3: Post-action verification**. Confirm outcomes, not just responses.
+
 - **Layer 4: Human escalation**. Know when to stop and ask for help.
 
 The 12 factors implement these layers systematically.
 
-## The 12 Factors
+## The 12 Factors {#_the_12_factors}
 
 The factors organize into three phases: Foundation (factors 1-5), Reliability (factors 6-9), and Scale (factors 10-12).
 
-### Foundation: Factors 1-5
+### Foundation: Factors 1-5 {#_foundation:_factors_1_5}
 
 These factors establish the architectural baseline for debuggable, controllable agents.
 
-#### Factor 1: Natural Language to Tool Calls
+#### Factor 1: Natural Language to Tool Calls {#_factor_1:_natural_language_to_tool_calls}
 
 The LLM decides *what* to do. Your code controls *how* it executes.
 
-Instead of letting the LLM generate arbitrary code, constrain it to outputting structured JSON tool calls. Your deterministic code handles the actual execution.
+Instead of letting the LLM generate arbitrary code, constrain it to outputting structured JSON (JavaScript Object Notation) tool calls. Your deterministic code handles the actual execution.
 
-> **Beginner Tip**: If you are new to tool usage, start with `examples/ch05/tool-usage-basics.ts`. It provides a progressive introduction to defining tools, handling tool calls, and executing tool results. The file covers single-turn tool calls, multi-tool routing, looping patterns, and error handling with clear explanations at each step.
+:::: tip
+::: title
+Tip
+:::
 
-```typescript
+**Beginner**: If you are new to tool usage, start with `examples/ch05/tool-usage-basics.ts`. It provides a progressive introduction to defining tools, handling tool calls, and executing tool results. The file covers single-turn tool calls, multi-tool routing, looping patterns, and error handling with clear explanations at each step.
+::::
+
+``` typescript
 // User says: "Create a payment link for $750"
 // LLM outputs structured tool call:
 const toolCall = {
@@ -91,13 +114,14 @@ async function executeToolCall(toolCall: ToolCall) {
 
 This separation enables validation, testing, and auditing. You can replay tool calls, verify parameters, and understand exactly what the agent did.
 
-#### Factor 2: Own Your Prompts
+#### Factor 2: Own Your Prompts {#_factor_2:_own_your_prompts}
 
 Resist black-box framework abstractions. Treat prompts as first-class, version-controlled code.
 
-```typescript
+``` typescript
 const DEPLOYMENT_PROMPT = `
-You are a deployment assistant. You have access to the following tools:
+You are a deployment assistant. You have access to
+the following tools:
 - deploy_to_staging: Deploy the current branch to staging
 - run_tests: Execute the test suite
 - deploy_to_production: Deploy to production (requires approval)
@@ -120,11 +144,11 @@ function buildPrompt(context: DeploymentContext): string {
 
 When prompts hide inside frameworks, debugging becomes impossible. Owned prompts enable A/B testing, versioning, and domain specialization. As you observe failures, you iterate on prompts directly.
 
-#### Factor 3: Own Your Context Window
+#### Factor 3: Own Your Context Window {#_factor_3:_own_your_context_window}
 
 Context engineering matters more than model selection. Design custom formats optimized for your domain.
 
-```typescript
+``` typescript
 function buildContext(events: Event[]): string {
   return `
 <system_state>
@@ -149,11 +173,11 @@ ${events.map(e =>
 
 Long, unstructured contexts degrade LLM performance. Structured formats improve token efficiency. Domain-specific formats let the LLM reason better about your specific problem.
 
-#### Factor 4: Tools Are Just Structured Outputs
+#### Factor 4: Tools Are Just Structured Outputs {#_factor_4:_tools_are_just_structured_outputs}
 
 Tools are JSON outputs, not magic framework objects. This separation allows flexibility in how you implement the actual functionality.
 
-```typescript
+``` typescript
 const tools = [
   {
     name: "send_notification",
@@ -168,20 +192,23 @@ const tools = [
 function executeTool(toolCall: ToolCall) {
   const channel = toolCall.parameters.channel;
   switch (channel) {
-    case "slack": return slackClient.postMessage(toolCall.parameters.message);
-    case "email": return emailService.send(toolCall.parameters.message);
-    case "sms": return twilioClient.sendSms(toolCall.parameters.message);
+    case "slack":
+      return slackClient.postMessage(toolCall.parameters.message);
+    case "email":
+      return emailService.send(toolCall.parameters.message);
+    case "sms":
+      return twilioClient.sendSms(toolCall.parameters.message);
   }
 }
 ```
 
 The same tool definition can execute different backends. Test environments can use mocks. Production can use real services. Feature flags can route to new implementations.
 
-#### Factor 5: Unify Execution State and Business State
+#### Factor 5: Unify Execution State and Business State {#_factor_5:_unify_execution_state_and_business_state}
 
 Derive state from event history, not separate storage. A single event stream provides serialization, debugging transparency, and easy resumption.
 
-```typescript
+``` typescript
 interface AgentThread {
   id: string;
   events: Event[];
@@ -211,15 +238,15 @@ function replayState(events: Event[]): ExecutionState {
 
 When state derives from events, you get time-travel debugging for free. You can reconstruct the agent's state at any point in execution and understand exactly what happened.
 
-### Reliability: Factors 6-9
+### Reliability: Factors 6-9 {#_reliability:_factors_6_9}
 
 These factors add human control, verification loops, and error recovery.
 
-#### Factor 6: Launch/Pause/Resume with Simple APIs
+#### Factor 6: Launch/Pause/Resume with Simple APIs {#_factor_6:_launch/pause/resume_with_simple_apis}
 
 Agents need explicit state transitions, especially between tool selection and execution where humans intervene.
 
-```typescript
+``` typescript
 class Agent {
   async launch(input: string): Promise<AgentThread> {
     const thread = await this.createThread();
@@ -230,10 +257,14 @@ class Agent {
     await this.db.updateThread(threadId, { status: "paused" });
   }
 
-  async resume(threadId: string, feedback?: string): Promise<AgentThread> {
+  async resume(
+    threadId: string, feedback?: string
+  ): Promise<AgentThread> {
     const thread = await this.db.getThread(threadId);
     if (feedback) {
-      thread.events.push({ type: "human_feedback", content: feedback });
+      thread.events.push({
+        type: "human_feedback", content: feedback
+      });
     }
     return this.run(thread);
   }
@@ -249,25 +280,35 @@ app.post("/webhook/resume/:threadId", async (req, res) => {
 
 Pause points allow time for human reflection. Resume with feedback integrates human judgment into the workflow.
 
-#### Factor 7: Contact Humans with Tool Calls
+#### Factor 7: Contact Humans with Tool Calls {#_factor_7:_contact_humans_with_tool_calls}
 
 Human interaction follows the same structured pattern as other tools. This enables multi-channel communication and auditable workflows.
 
-```typescript
+``` typescript
 const humanTools = [
   {
     name: "request_human_approval",
     description: "Request approval from a human before proceeding",
     parameters: {
-      action: { type: "string", description: "What action needs approval" },
-      context: { type: "string", description: "Relevant context for decision" },
-      urgency: { type: "string", enum: ["low", "medium", "high"] },
+      action: {
+        type: "string",
+        description: "What action needs approval"
+      },
+      context: {
+        type: "string",
+        description: "Relevant context for decision"
+      },
+      urgency: {
+        type: "string", enum: ["low", "medium", "high"]
+      },
       channel: { type: "string", enum: ["slack", "email"] }
     }
   }
 ];
 
-async function executeHumanTool(toolCall: ToolCall, thread: AgentThread) {
+async function executeHumanTool(
+  toolCall: ToolCall, thread: AgentThread
+) {
   await notifyHuman(toolCall);
   thread.status = "paused";
   thread.events.push({
@@ -279,11 +320,11 @@ async function executeHumanTool(toolCall: ToolCall, thread: AgentThread) {
 }
 ```
 
-#### Factor 8: Own Your Control Flow
+#### Factor 8: Own Your Control Flow {#_factor_8:_own_your_control_flow}
 
 Different tool types need different handling. Build custom loops that classify tools and branch logic accordingly.
 
-```typescript
+``` typescript
 async function agentLoop(thread: AgentThread): Promise<AgentThread> {
   while (thread.status === "running") {
     const toolCall = await llm.getNextAction(thread);
@@ -323,16 +364,19 @@ async function agentLoop(thread: AgentThread): Promise<AgentThread> {
 
 Generic loops fail. Specialized loops with explicit handling for approval, termination, and error cases succeed.
 
-#### Factor 9: Compact Errors into Context Window
+#### Factor 9: Compact Errors into Context Window {#_factor_9:_compact_errors_into_context_window}
 
 Feed error messages back for self-healing, with thresholds to prevent spin-outs.
 
-```typescript
-async function handleError(error: Error, thread: AgentThread): Promise<void> {
+``` typescript
+async function handleError(
+  error: Error, thread: AgentThread
+): Promise<void> {
   thread.events.push({
     type: "error",
     message: error.message,
-    stack: error.stack?.slice(0, 500), // Truncate for context efficiency
+    // Truncate for context efficiency
+    stack: error.stack?.slice(0, 500),
     timestamp: Date.now()
   });
 
@@ -350,18 +394,21 @@ async function handleError(error: Error, thread: AgentThread): Promise<void> {
 
 The agent learns from recent errors and tries different approaches. The threshold triggers escalation rather than infinite retries.
 
-### Scale: Factors 10-12
+### Scale: Factors 10-12 {#_scale:_factors_10_12}
 
 These factors enable multi-agent systems and distributed execution.
 
-#### Factor 10: Small, Focused Agents
+#### Factor 10: Small, Focused Agents {#_factor_10:_small,_focused_agents}
 
 Scope agents to 3-20 steps maximum. As context grows, LLM performance degrades.
 
-```typescript
+``` typescript
 // Bad: Monolithic agent
 const megaAgent = new Agent({
-  capabilities: ["deploy", "test", "monitor", "rollback", "notify", "audit"]
+  capabilities: [
+    "deploy", "test", "monitor",
+    "rollback", "notify", "audit"
+  ]
 });
 
 // Good: Focused agents composed in a Directed Acyclic Graph (DAG)
@@ -392,11 +439,11 @@ async function deploymentWorkflow(pr: PullRequest) {
 
 The historical progression makes this clear: programs became DAGs, DAGs got orchestrators, orchestrators embedded Machine Learning (ML), and now agents serve as micro-optimized decision points within deterministic workflows.
 
-#### Factor 11: Trigger from Anywhere
+#### Factor 11: Trigger from Anywhere {#_factor_11:_trigger_from_anywhere}
 
 Enable agents to launch from events, crons, webhooks, and user actions.
 
-```typescript
+``` typescript
 // Webhook trigger
 app.post("/webhook/github", async (req, res) => {
   if (req.body.action === "closed" && req.body.pull_request.merged) {
@@ -421,11 +468,11 @@ slack.command("/deploy", async ({ command, ack }) => {
 
 Production agents run in response to many different events, not just manual invocation.
 
-#### Factor 12: Make Your Agent a Stateless Reducer
+#### Factor 12: Make Your Agent a Stateless Reducer {#_factor_12:_make_your_agent_a_stateless_reducer}
 
 Treat agents as pure functions transforming state. This enables determinism, replay, and distribution.
 
-```typescript
+``` typescript
 type AgentReducer = (state: AgentState, event: Event) => AgentState;
 
 const agentReducer: AgentReducer = (state, event) => {
@@ -459,111 +506,103 @@ function replayState(events: Event[]): AgentState {
 
 Same events always produce same output. You can test agents, debug failures, and distribute computation across processes.
 
-## Implementation Strategy
+## Implementation Strategy {#_implementation_strategy}
 
 Do not implement all 12 factors at once. Build incrementally based on what delivers value fastest.
 
-### Phase 1: Foundation (Week 1)
+### Phase 1: Foundation (Week 1) {#_phase_1:_foundation_(week_1)}
 
 Start with factors 1, 2, 3, and 5. Goal: a debuggable agent you can reason about.
 
 - Factor 1 gives you JSON tool calls for validation
+
 - Factor 2 gives you owned prompts for iteration
+
 - Factor 3 gives you structured context for signal
+
 - Factor 5 gives you event-driven state for replays
 
 Deliverable: An agent that handles 3-5 step workflows with full debugging visibility.
 
-### Phase 2: Reliability (Week 2)
+### Phase 2: Reliability (Week 2) {#_phase_2:_reliability_(week_2)}
 
 Add factors 6, 7, 8, and 9. Goal: production-safe with human oversight.
 
 - Factor 6 gives you pause/resume for intervention
+
 - Factor 7 gives you human tools for approval
+
 - Factor 8 gives you branching for risk-based routing
+
 - Factor 9 gives you error handling with escalation
 
 Deliverable: An agent ready for low-risk production use with human gates.
 
-### Phase 3: Scale (Week 3+)
+### Phase 3: Scale (Week 3+) {#_phase_3:_scale_(week_3+)}
 
 Add factors 10, 11, and 12. Goal: multi-trigger distributed execution.
 
 - Factor 10 reduces scope to 3-20 steps
+
 - Factor 11 enables event-driven triggers
+
 - Factor 12 enables stateless distribution
 
 Deliverable: A scalable system handling multiple workflows from multiple entry points.
 
-### Quick Wins
+### Quick Wins {#_quick_wins}
 
 These investments show the highest Return on Investment (ROI) earliest:
 
-1. **Factor 1 + Tool validation**: 10% effort, 40% reliability improvement
-2. **Factor 8 + Approval routing**: 20% effort, 50% reliability improvement
-3. **Factor 10 + Scope reduction**: 15% effort, 35% performance improvement
+1.  **Factor 1 + Tool validation**: 10% effort, 40% reliability improvement
 
-## Exercises
+2.  **Factor 8 + Approval routing**: 20% effort, 50% reliability improvement
+
+3.  **Factor 10 + Scope reduction**: 15% effort, 35% performance improvement
+
+## Exercises {#_exercises}
 
 **Prerequisite**: Before starting these exercises, review `examples/ch05/tool-usage-basics.ts` for a beginner-friendly introduction to tool definitions, tool calling patterns, and handling tool results. It covers the fundamentals you will build upon in these exercises.
 
-### Exercise 1: Build an Event-Sourced Agent Thread
+### Exercise 1: Build an Event-Sourced Agent Thread {#_exercise_1:_build_an_event_sourced_agent_thread}
 
 Create an agent thread that derives all state from events.
 
-1. Define an `Event` union type with at least these variants: `user_input`, `tool_call`, `tool_result`, `error`, `human_response`
-2. Implement a `deriveState` function that computes current step, pending approvals, and consecutive errors from events
-3. Implement a `replayState` function that reduces over events to reconstruct state
-4. Write tests that add events and verify state changes correctly
+1.  Define an `Event` union type with at least these variants: `user_input`, `tool_call`, `tool_result`, `error`, `human_response`
 
-Success criteria:
-- State is never stored separately from events
-- Calling `replayState` with the same events always produces identical state
-- You can "time travel" by replaying a subset of events
+2.  Implement a `deriveState` function that computes current step, pending approvals, and consecutive errors from events
 
-### Exercise 2: Implement an Approval Gate
+3.  Implement a `replayState` function that reduces over events to reconstruct state
+
+4.  Write tests that add events and verify state changes correctly
+
+Success criteria: - State is never stored separately from events - Calling `replayState` with the same events always produces identical state - You can "time travel" by replaying a subset of events
+
+### Exercise 2: Implement an Approval Gate {#_exercise_2:_implement_an_approval_gate}
 
 Build a workflow that pauses for human approval before a high-stakes action.
 
-1. Create a tool classification function that identifies tools as `immediate`, `requires_approval`, or `terminal`
-2. Implement the agent loop that pauses when approval is needed
-3. Create a resume endpoint that accepts human feedback
-4. Store the approval in the event stream
+1.  Create a tool classification function that identifies tools as `immediate`, `requires_approval`, or `terminal`
 
-Success criteria:
-- Agent automatically pauses before high-stakes tools
-- Human approval is recorded as an event
-- Resumed agent has full context from before the pause
+2.  Implement the agent loop that pauses when approval is needed
 
-### Exercise 3: Decompose a Monolithic Workflow
+3.  Create a resume endpoint that accepts human feedback
+
+4.  Store the approval in the event stream
+
+Success criteria: - Agent automatically pauses before high-stakes tools - Human approval is recorded as an event - Resumed agent has full context from before the pause
+
+### Exercise 3: Decompose a Monolithic Workflow {#_exercise_3:_decompose_a_monolithic_workflow}
 
 Take a 25-step email campaign workflow and break it into focused agents.
 
-Original workflow steps:
-1. Fetch subscriber list
-2. Filter by segment
-3. Load template
-4. Personalize for each recipient
-5. Validate email addresses
-6. Check against suppression list
-7. Queue emails
-8. Send in batches
-9. Track delivery
-10. Handle bounces
-... and 15 more steps
+Original workflow steps: 1. Fetch subscriber list 2. Filter by segment 3. Load template 4. Personalize for each recipient 5. Validate email addresses 6. Check against suppression list 7. Queue emails 8. Send in batches 9. Track delivery 10. Handle bounces ... and 15 more steps
 
-Your task:
-1. Group steps into logical agents (suggest 3-4 agents)
-2. Define clear interfaces between agents
-3. Design the deterministic orchestration that coordinates them
-4. Calculate reliability improvement using the 0.95^N formula
+Your task: 1. Group steps into logical agents (suggest 3-4 agents) 2. Define clear interfaces between agents 3. Design the deterministic orchestration that coordinates them 4. Calculate reliability improvement using the 0.95\^N formula
 
-Success criteria:
-- No agent exceeds 10 steps
-- Each agent has a single clear responsibility
-- Overall reliability improves from 0.95^25 (28%) to better than 80%
+Success criteria: - No agent exceeds 10 steps - Each agent has a single clear responsibility - Overall reliability improves from 0.95\^25 (28%) to better than 80%
 
-## Summary
+## Summary {#_summary}
 
 The reliability chasm explains why 95% of agent PoCs fail in production. Per-action reliability compounds exponentially across multi-step workflows.
 
@@ -573,13 +612,14 @@ Implement incrementally: foundation first, then reliability, then scale. The qui
 
 Production agents are not smarter than demo agents. They are more carefully architected. The difference between a demo that impresses and a system that delivers value lies in these 12 principles applied consistently.
 
----
+'''''
 
-> **Companion Code**: All 5 code examples for this chapter are available at [examples/ch05/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch05)
+:::: note
+::: title
+Note
+:::
 
+**Companion Code**: All 5 code examples for this chapter are available at [examples/ch05/](https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch05)
+::::
 
-*Related chapters:*
-- **Chapter 4: Writing Your First CLAUDE.md** for context engineering fundamentals that support Factor 3
-- **Chapter 6: The Verification Ladder** for building on the verification concepts in Factors 6-9
-- **Chapter 10: The RALPH Loop** for long-running agent patterns that apply the 12 factors
-- **Chapter 11: Sub-Agent Architecture** for expanding on Factor 10's focused agent approach
+*Related chapters:* - **[Chapter 4: Writing Your First CLAUDE.md](#_chapter_4_writing_your_first_claude_md){.cross-reference}** for context engineering fundamentals that support Factor 3 - **[Chapter 6: The Verification Ladder](#_chapter_6_the_verification_ladder){.cross-reference}** for building on the verification concepts in Factors 6-9 - **[Chapter 10: The RALPH Loop](#_chapter_10_the_ralph_loop){.cross-reference}** for long-running agent patterns that apply the 12 factors - **[Chapter 11: Sub-Agent Architecture](#_chapter_11_sub_agent_architecture){.cross-reference}** for expanding on Factor 10's focused agent approach
