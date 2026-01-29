@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T23:52:00Z",
+  "lastUpdated": "2026-01-29T18:14:58.577Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 23:30: Recalculated 9 pending task scores. Fixed blockedBy format (string→null). Task-448 marked blocked (AppleScript). Priority order: task-482 (830, cross-refs), task-473-479 (815 each, DALL-E diagrams), task-483 (580, terms). Blocked: 6 tasks. Complete: 126.",
@@ -2011,7 +2011,7 @@
       "type": "fix",
       "title": "Run Kindle Previewer review and fix issues",
       "description": "Use kindle-review skill to test EPUB on Kindle. Document any rendering issues. Fix in AsciiDoc source. Iterate until Kindle rendering is clean.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 460,
       "scoreBreakdown": "high:750 + fix:80 + blocks(1×25):25 = 855",
@@ -2020,7 +2020,7 @@
       ],
       "createdAt": "2026-01-29T12:19:01.156Z",
       "blockerNote": "Requires Kindle Previewer 3 (brew install --cask kindle-previewer with sudo)",
-      "blockedNote": "AppleScript accessibility permissions required: System Settings > Privacy & Security > Accessibility must grant Terminal access"
+      "blockedNote": "AppleScript automation permissions still failing (-1728 error)"
     },
     {
       "id": "task-465",
@@ -2251,8 +2251,8 @@
       "title": "Regenerate ch06 Verification Ladder diagram with DALL-E",
       "description": "Use image-generator MCP to create a professional pyramid diagram for the Verification Ladder. Prompt: Professional pyramid diagram with 5 levels (Syntax, Runtime, Logic, Integration, End-to-End), widest at bottom, each level a distinct shade of blue, modern flat design, no text. Save to assets/images/ch06-verification-ladder.png",
       "status": "complete",
-      "priority": "high",
-      "score": 420,
+      "priority": "critical",
+      "score": 1200,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "completedAt": "2026-01-29T23:52:00Z",
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
@@ -2263,8 +2263,8 @@
       "title": "Regenerate ch07 Quality Gates diagram with DALL-E",
       "description": "Use image-generator MCP to create a professional flow diagram for Quality Gates. Prompt: Horizontal pipeline with 5 gates/checkpoints, code flowing through each gate, gates as glowing portals or barriers, modern tech visualization, dark background with blue/green accents. Save to assets/images/ch07-quality-gates.png",
       "status": "pending",
-      "priority": "high",
-      "score": 420,
+      "priority": "critical",
+      "score": 1200,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
     },
@@ -2274,8 +2274,8 @@
       "title": "Regenerate Context Debugging Framework diagram with DALL-E",
       "description": "Use image-generator MCP to create a professional debugging flow diagram. Prompt: Circular debugging cycle with 4 stages (Observe, Hypothesize, Test, Fix), arrows connecting stages, magnifying glass and code symbols, clean professional style. Save to assets/images/ch08-context-debugging.png",
       "status": "pending",
-      "priority": "high",
-      "score": 420,
+      "priority": "critical",
+      "score": 1200,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
     },
@@ -2285,8 +2285,8 @@
       "title": "Regenerate Ratchet Effect diagram with DALL-E",
       "description": "Use image-generator MCP to create a professional ratchet mechanism diagram. Prompt: Mechanical ratchet gear showing one-way progress, with progress arrow, quality level indicator, clean technical illustration style. Save to assets/images/ch07-ratchet-effect.png",
       "status": "pending",
-      "priority": "high",
-      "score": 420,
+      "priority": "critical",
+      "score": 1200,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
     },
@@ -2296,8 +2296,8 @@
       "title": "Regenerate RALPH Loop architecture diagram with DALL-E",
       "description": "Use image-generator MCP to create the RALPH loop architecture. Prompt: Circular autonomous loop diagram with Orchestrator, Executor, Task Queue, Memory components, arrows showing flow, modern DevOps style visualization. Save to assets/images/ch10-ralph-architecture.png",
       "status": "pending",
-      "priority": "high",
-      "score": 420,
+      "priority": "critical",
+      "score": 1200,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedBy": null,
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
@@ -2308,8 +2308,8 @@
       "title": "Regenerate Context Window anatomy diagram with DALL-E",
       "description": "Use image-generator MCP to visualize context window. Prompt: Layered rectangular diagram showing context window with system prompt, conversation history, and available space sections, gradient fills, capacity meter on side. Save to assets/images/ch09-context-window.png",
       "status": "pending",
-      "priority": "high",
-      "score": 420,
+      "priority": "critical",
+      "score": 1200,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedBy": null,
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
@@ -2320,8 +2320,8 @@
       "title": "Regenerate Compound Flywheel diagram with DALL-E",
       "description": "Use image-generator MCP to create flywheel effect diagram. Prompt: Circular flywheel with momentum arrows, showing acceleration, compound growth spiral emanating outward, energy/speed visualization. Save to assets/images/ch01-compound-flywheel.png",
       "status": "pending",
-      "priority": "high",
-      "score": 420,
+      "priority": "critical",
+      "score": 1200,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedBy": null,
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
@@ -2437,7 +2437,6 @@
       "priority": "high",
       "score": 355,
       "blockedBy": [
-        "task-473",
         "task-474",
         "task-475",
         "task-476",
@@ -2923,16 +2922,16 @@
     ]
   },
   "stats": {
-    "pending": 8,
+    "pending": 7,
     "inProgress": 0,
     "complete": 218,
-    "blocked": 5,
+    "blocked": 6,
     "total": 231
   },
   "checkpoints": {
-    "lastGoodCommit": "d29a62da38815b81094526bd46c06a913f870ede",
-    "lastSuccessfulTask": "iteration-5",
-    "lastCheckpoint": "2026-01-29T18:09:32Z",
+    "lastGoodCommit": "53130d65e25d79ed8ad0779c586d09ea21d65dbc",
+    "lastSuccessfulTask": "iteration-6",
+    "lastCheckpoint": "2026-01-29T18:14:58Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,
