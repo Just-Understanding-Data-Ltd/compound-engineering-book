@@ -1,0 +1,280 @@
+# The Meta-Engineer - PDF Theme
+# Custom theme for asciidoctor-pdf matching EPUB styling
+# Colors match asciidoc/styles/_colors.scss
+
+# Font catalog
+font:
+  catalog:
+    # Use bundled Noto Serif for body (matches Source Serif 4 style)
+    Noto Serif:
+      normal: GEM_FONTS_DIR/notoserif-regular-subset.ttf
+      italic: GEM_FONTS_DIR/notoserif-italic-subset.ttf
+      bold: GEM_FONTS_DIR/notoserif-bold-subset.ttf
+      bold_italic: GEM_FONTS_DIR/notoserif-bold_italic-subset.ttf
+    # Use bundled Noto Sans for headings (matches Source Sans 3 style)
+    Noto Sans:
+      normal: GEM_FONTS_DIR/notosans-regular-subset.ttf
+      italic: GEM_FONTS_DIR/notosans-italic-subset.ttf
+      bold: GEM_FONTS_DIR/notosans-bold-subset.ttf
+      bold_italic: GEM_FONTS_DIR/notosans-bold_italic-subset.ttf
+    # Custom JetBrains Mono for code
+    JetBrains Mono:
+      normal: JetBrainsMono-Regular.ttf
+      italic: JetBrainsMono-Italic.ttf
+      bold: JetBrainsMono-Bold.ttf
+      bold_italic: JetBrainsMono-Bold.ttf
+    # Fallback for CJK characters
+    M+ 1p Fallback:
+      normal: GEM_FONTS_DIR/mplus1p-regular-fallback.ttf
+      italic: GEM_FONTS_DIR/mplus1p-regular-fallback.ttf
+      bold: GEM_FONTS_DIR/mplus1p-regular-fallback.ttf
+      bold_italic: GEM_FONTS_DIR/mplus1p-regular-fallback.ttf
+  fallbacks:
+    - M+ 1p Fallback
+
+# Page layout
+page:
+  background_color: ffffff
+  layout: portrait
+  initial_zoom: FitH
+  margin: [0.75in, 1in, 0.75in, 1in]
+  margin_inner: 0.75in
+  margin_outer: 0.5in
+  size: Letter
+
+# Base typography
+base:
+  font_family: Noto Serif
+  font_color: 1a1a1a
+  font_size: 10.5
+  line_height_length: 15
+  line_height: $base_line_height_length / $base_font_size
+  border_width: 0.5
+
+# Define horizontal rhythm (used in padding calculations)
+horizontal_rhythm: 12
+
+# Vertical rhythm
+vertical_rhythm: $base_line_height_length
+
+# Link styling
+link:
+  font_color: 2563eb
+
+# Literal/inline code
+codespan:
+  font_family: JetBrains Mono
+  font_color: 333333
+  font_size: 0.9em
+  background_color: f5f5f5
+  border_color: dddddd
+  border_radius: 3
+  border_width: 0.5
+
+# Heading styles
+heading:
+  font_family: Noto Sans
+  font_color: 1a1a1a
+  font_style: normal
+  h1_font_size: 24
+  h2_font_size: 20
+  h3_font_size: 16
+  h4_font_size: 14
+  h5_font_size: 12
+  h6_font_size: 10
+  line_height: 1.2
+  margin_top: $vertical_rhythm * 0.4
+  margin_bottom: $vertical_rhythm * 0.5
+  chapter:
+    break_before: always
+
+# Title page
+title_page:
+  align: center
+  logo:
+    top: 10%
+  title:
+    top: 35%
+    font_size: 36
+    font_family: Noto Sans
+    font_color: 1a1a1a
+    line_height: 1.2
+  subtitle:
+    font_size: 18
+    font_family: Noto Sans
+    font_color: 333333
+    font_style: normal
+    line_height: 1.5
+    margin_top: $base_font_size * 1.5
+  authors:
+    margin_top: $base_font_size * 2
+    font_size: 14
+    font_color: 333333
+  revision:
+    margin_top: $base_font_size
+    font_size: 12
+    font_color: 707070
+
+# Table of contents
+toc:
+  indent: $horizontal_rhythm
+  line_height: 1.4
+  dot_leader:
+    font_color: a0a0a0
+  h1_font_style: bold
+
+# Code blocks
+code:
+  font_family: JetBrains Mono
+  font_size: 9
+  font_color: 333333
+  background_color: f5f5f5
+  border_color: dddddd
+  border_radius: 3
+  border_width: 0.5
+  padding: [6, 8, 6, 8]
+  line_height: 1.4
+  line_gap: 3.8
+  highlight_background_color: ffffd0
+
+# Code callout numbers
+conum:
+  font_family: JetBrains Mono
+  font_color: 38a169
+  font_size: $base_font_size
+  line_height: 4 / 3
+
+# Quote (blockquote)
+quote:
+  font_color: 333333
+  font_size: $base_font_size * 1.1
+  font_style: italic
+  border_color: 2563eb
+  border_width: 3
+  padding: [0, $horizontal_rhythm, $vertical_rhythm * 0.75, $horizontal_rhythm + 1.5]
+  cite:
+    font_size: $base_font_size * 0.9
+    font_color: 707070
+
+# Sidebar
+sidebar:
+  background_color: fafafa
+  border_color: cccccc
+  border_radius: 4
+  border_width: 0.5
+  padding: [$vertical_rhythm, $vertical_rhythm * 1.25, $vertical_rhythm, $vertical_rhythm * 1.25]
+  title:
+    font_family: Noto Sans
+    font_color: 333333
+    font_size: 13
+    font_style: bold
+    align: center
+
+# Admonitions (notes, tips, warnings, etc.)
+admonition:
+  column_rule_color: cccccc
+  column_rule_width: 0.5
+  padding: [0, $horizontal_rhythm, 0, $horizontal_rhythm]
+  label:
+    text_transform: uppercase
+    font_style: bold
+  icon:
+    note:
+      name: fa-pencil-alt
+      stroke_color: 4a90d9
+    tip:
+      name: fa-lightbulb
+      stroke_color: 38a169
+    warning:
+      name: fa-bolt
+      stroke_color: dd6b20
+    caution:
+      name: fa-cloud
+      stroke_color: e53e3e
+    important:
+      name: fa-exclamation
+      stroke_color: 805ad5
+
+# Tables
+table:
+  background_color: ffffff
+  border_color: 999999
+  border_width: 0.5
+  grid_width: 0.5
+  grid_color: cccccc
+  head:
+    font_family: Noto Sans
+    font_style: bold
+    font_color: 1a1a1a
+    background_color: f5f5f5
+    border_bottom_width: 1.25
+  body:
+    stripe_background_color: fafafa
+  cell:
+    padding: [3, 6, 3, 6]
+  caption:
+    font_size: $base_font_size * 0.9
+    font_style: italic
+    font_color: 333333
+    end: bottom
+
+# Captions (figures, examples)
+caption:
+  font_size: $base_font_size * 0.9
+  font_style: italic
+  font_color: 333333
+  margin_inside: $vertical_rhythm / 3
+
+# Footnotes
+footnotes:
+  font_size: $base_font_size * 0.8
+  item_spacing: $vertical_rhythm / 2
+
+# Lists
+list:
+  indent: $horizontal_rhythm * 1.5
+  item_spacing: $vertical_rhythm / 2
+
+# Abstract/lead paragraph
+abstract:
+  font_color: 333333
+  font_size: $base_font_size * 1.05
+  line_height: 1.6
+  font_style: normal
+
+# Image styling
+image:
+  align: center
+
+# Running header/footer
+header:
+  height: 0.5in
+  line_height: 1
+  recto:
+    center:
+      content: '{chapter-title}'
+    right:
+      content: '{page-number}'
+  verso:
+    left:
+      content: '{page-number}'
+    center:
+      content: 'The Meta-Engineer'
+  font_size: $base_font_size * 0.8
+  font_color: 707070
+  border_color: cccccc
+  border_width: 0.25
+  vertical_align: middle
+
+footer:
+  height: 0.5in
+  line_height: 1
+  recto:
+    right:
+      content: '{page-number}'
+  verso:
+    left:
+      content: '{page-number}'
+  font_size: $base_font_size * 0.8
+  font_color: 707070
+  vertical_align: middle

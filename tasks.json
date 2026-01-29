@@ -2114,7 +2114,9 @@
       "priority": "high",
       "score": 805,
       "scoreBreakdown": "high:750 + infra:30 + blocking(1×25):25 = 805",
-      "blocks": ["task-447"],
+      "blocks": [
+        "task-447"
+      ],
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
@@ -2136,11 +2138,12 @@
       "type": "infra",
       "title": "Create AsciiDoc PDF theme with custom fonts",
       "description": "Create asciidoc/pdf-theme.yml with Source Serif 4, Source Sans 3, JetBrains Mono fonts. Match the styling from the current epub-style.css.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 880,
       "scoreBreakdown": "high:750 + infra:30 + blocking(4×25):100 = 880",
-      "createdAt": "2026-01-29T12:19:01.156Z"
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T14:52:00Z"
     },
     {
       "id": "task-445",
@@ -2686,9 +2689,9 @@
     ]
   },
   "stats": {
-    "pending": 11,
+    "pending": 10,
     "inProgress": 0,
-    "complete": 192,
+    "complete": 193,
     "blocked": 11,
     "total": 214
   },

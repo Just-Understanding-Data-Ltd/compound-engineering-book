@@ -55,12 +55,26 @@ fi
 
 # Build PDF
 build_pdf() {
-  echo "Building PDF..."
-  $ASCIIDOCTOR_PDF $VERBOSE \
-    -a pdf-theme=default \
-    -a pdf-fontsdir=/opt/homebrew/lib/ruby/gems/3.4.0/gems/asciidoctor-pdf-2.3.24/data/fonts \
-    -o "${OUTPUT_DIR}/the-meta-engineer.pdf" \
-    "$BOOK_FILE"
+  echo "Building PDF with custom theme..."
+  THEME_FILE="${ADOC_DIR}/themes/pdf-theme.yml"
+  FONTS_DIR="/opt/homebrew/lib/ruby/gems/3.4.0/gems/asciidoctor-pdf-2.3.24/data/fonts;${ADOC_DIR}/themes/fonts"
+
+  if [[ -f "$THEME_FILE" ]]; then
+    echo "  Using theme: ${THEME_FILE}"
+    $ASCIIDOCTOR_PDF $VERBOSE \
+      -a pdf-theme="${THEME_FILE}" \
+      -a pdf-fontsdir="${FONTS_DIR}" \
+      -a source-highlighter=rouge \
+      -o "${OUTPUT_DIR}/the-meta-engineer.pdf" \
+      "$BOOK_FILE"
+  else
+    echo "  Warning: Custom theme not found, using default"
+    $ASCIIDOCTOR_PDF $VERBOSE \
+      -a pdf-theme=default \
+      -a pdf-fontsdir=/opt/homebrew/lib/ruby/gems/3.4.0/gems/asciidoctor-pdf-2.3.24/data/fonts \
+      -o "${OUTPUT_DIR}/the-meta-engineer.pdf" \
+      "$BOOK_FILE"
+  fi
 
   if [[ -f "${OUTPUT_DIR}/the-meta-engineer.pdf" ]]; then
     size=$(ls -lh "${OUTPUT_DIR}/the-meta-engineer.pdf" | awk '{print $5}')

@@ -1,12 +1,12 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 15:00)
-- Phase: Infrastructure - Code Block Cleanup
-- Active: Iteration 14 - Code block line lengths
-- Last Completed: task-453 (Audit and fix code blocks for max line length)
+## Current Status (Updated: 2026-01-29 14:52)
+- Phase: Infrastructure - PDF Theme Complete
+- Active: Iteration 15 - PDF theme with custom fonts
+- Last Completed: task-443 (Create AsciiDoc PDF theme with custom fonts)
 - Blockers: None
-- Queue Health: 11 pending, 10 blocked, 192 complete
-- Publishing Readiness: 99% - All code blocks e-reader friendly
+- Queue Health: 10 pending, 10 blocked, 193 complete
+- Publishing Readiness: 99% - PDF/EPUB themes complete
 - Next: task-463/464 (ch16 diagrams) or task-446 (EPUB build)
 
 ## Project State Summary
@@ -17,7 +17,7 @@
 - Word Count: ~51,000 (target 45,000-57,000, 100% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
 - AsciiDoc Conversion: 16/16 chapters (100% complete) + book.adoc master file
-- Tasks Complete: 187/214 (87%)
+- Tasks Complete: 193/214 (90%)
 - Test Pass Rate: 100% across all chapters (787 tests total)
 - Exercises: 47 total (2-3 per chapter), ch16 exercises added ✓
 
@@ -30,6 +30,25 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 14:52 - COMPLETED task-443: Create AsciiDoc PDF theme with custom fonts
+- What: Created comprehensive PDF theme for asciidoctor-pdf matching EPUB styling
+- Files created:
+  - asciidoc/themes/pdf-theme.yml (281 lines) - Full PDF theme configuration
+  - asciidoc/themes/fonts/ - JetBrains Mono TTF files for code
+- Features:
+  - Three-font typography: Noto Serif (body), Noto Sans (headings), JetBrains Mono (code)
+  - Color palette matching EPUB: blue links, green tips, orange warnings, red cautions, purple important
+  - Professional page layout: Letter size, 0.75-1in margins, running headers/footers
+  - Table styling: alternating row colors, bold headers, proper cell padding
+  - Code blocks: gray background, rounded borders, monospace font
+  - Admonition icons with semantic colors
+- Build script updated: scripts/build-asciidoc.sh now uses custom theme with fonts
+- Test output: output/the-meta-engineer.pdf (5.8MB, 294 pages) generated successfully
+- Typography: Bundled Noto fonts match Source Serif/Sans style from EPUB
+- Iteration: 15
+- Stats: 10 pending, 10 blocked, 193 complete
+- Next: task-463/464 (ch16 diagrams) or task-446 (EPUB build)
 
 ### 2026-01-29 15:00 - COMPLETED task-453: Audit and fix code blocks for max line length
 - What: Fixed all code block lines over 70 characters to prevent overflow on e-readers
