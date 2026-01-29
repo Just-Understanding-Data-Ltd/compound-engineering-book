@@ -88,7 +88,7 @@ When implementing an API endpoint:
 
 2. **Design the endpoint**
    - Choose HTTP method (GET/POST/PUT/DELETE)
-   - Design URL following REST conventions
+   - Design URL following REST (Representational State Transfer) conventions
    - Define request/response schemas using Zod
 
 3. **Implement layers**
