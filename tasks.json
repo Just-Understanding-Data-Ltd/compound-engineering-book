@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T15:31:57.541Z",
+  "lastUpdated": "2026-01-29T20:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 19:30: Recalculated all task scores using formula: priority + type + blocking_bonus. Fixed 17 score mismatches. Pending priority order: task-447 (860, Kindle setup, blocks 2), task-445 (835, PDF build, blocks 1), task-469 (830, ch16 TOC), task-456 (810, overflow script). Blocked high-value: task-449 (1135, final build, blocks 3). No duplicates found. Stats: 10 pending, 7 blocked, 197 complete.",
@@ -2360,7 +2360,7 @@
       "description": "Review code examples. Add AsciiDoc callouts (numbered annotations) to complex code blocks that would benefit from inline explanations.",
       "status": "pending",
       "priority": "medium",
-      "score": 185,
+      "score": 580,
       "scoreBreakdown": "medium:500 + fix:80 = 580",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
@@ -2370,12 +2370,14 @@
       "type": "fix",
       "title": "Update cross-references to AsciiDoc format",
       "description": "Convert markdown links between chapters to AsciiDoc cross-references (<<chapter-id>>). Ensures proper linking in all output formats.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 185,
       "scoreBreakdown": "medium:500 + fix:80 = 580",
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:01.156Z"
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T17:07:00Z",
+      "note": "Completed as part of task-446 (EPUB cross-reference fixes)"
     },
     {
       "id": "task-455",
@@ -2384,7 +2386,7 @@
       "description": "Audit code blocks for missing language tags. Add proper language hints (typescript, bash, yaml, json, etc). Ensure Asciidoctor rouge/pygments highlights all blocks correctly.",
       "status": "pending",
       "priority": "medium",
-      "score": 185,
+      "score": 580,
       "scoreBreakdown": "medium:500 + fix:80 = 580",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
@@ -2495,8 +2497,8 @@
       "description": "Create enhanced TOC that includes 1-sentence summary per chapter. Improves navigation in EPUB readers. Use AsciiDoc preamble or custom attributes.",
       "status": "pending",
       "priority": "medium",
-      "score": 105,
-      "scoreBreakdown": "medium:500 + infra:60 = 560",
+      "score": 530,
+      "scoreBreakdown": "medium:500 + infra:30 = 530",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
     },
@@ -2665,8 +2667,8 @@
       "description": "Use AsciiDoc indexterm markup to create a proper book index. Tag key concepts: Claude Code, RALPH, context engineering, verification ladder, etc. Generate index in PDF output.",
       "status": "pending",
       "priority": "low",
-      "score": -295,
-      "scoreBreakdown": "low:100 + infra:60 = 160",
+      "score": 130,
+      "scoreBreakdown": "low:100 + infra:30 = 130",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
     },
@@ -2715,16 +2717,16 @@
     ]
   },
   "stats": {
-    "pending": 5,
+    "pending": 4,
     "inProgress": 0,
-    "complete": 114,
+    "complete": 115,
     "blocked": 5,
-    "total": 214
+    "total": 124
   },
   "checkpoints": {
-    "lastGoodCommit": "b7e6473227444859c5e81efd5145646eda5948df",
-    "lastSuccessfulTask": "iteration-23",
-    "lastCheckpoint": "2026-01-29T15:31:57Z",
+    "lastGoodCommit": "da6987ad0af526740aca835f4ec44446b315ca4d",
+    "lastSuccessfulTask": "iteration-24",
+    "lastCheckpoint": "2026-01-29T15:37:28Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,

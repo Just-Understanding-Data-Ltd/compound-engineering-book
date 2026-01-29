@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 20:15)
+## Current Status (Updated: 2026-01-29 20:30)
 - Phase: PDF BUILD COMPLETE - All formats ready
-- Active: Iteration 24 - AsciiDoc admonition conversion
-- Last Completed: task-440 (Convert blockquotes to AsciiDoc admonitions)
+- Active: Queue curation (iteration 25)
+- Last Completed: task-442 marked complete (redundant with task-446)
 - Blockers: task-448 requires Kindle Previewer manual install
-- Queue Health: 5 pending, 5 blocked, 114 complete
+- Queue Health: 4 pending, 5 blocked, 115 complete
 - Publishing Readiness: 100% CONTENT + EPUB + PDF COMPLETE
-- Next: task-441 (code block callouts) or task-442 (cross-references)
+- Next: task-441 (code block callouts, score 580) or task-455 (syntax highlighting, score 580)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -17,7 +17,7 @@
 - Word Count: ~51,000 (target 45,000-57,000, 100% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
 - AsciiDoc Conversion: 16/16 chapters (100% complete) + book.adoc master file
-- Tasks Complete: 114/124 (92%)
+- Tasks Complete: 115/124 (93%)
 - Test Pass Rate: 100% across all chapters (787 tests total)
 - Exercises: 47 total (2-3 per chapter), ch16 exercises added ✓
 
@@ -30,6 +30,16 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 20:30 - Queue Curation (Iteration 25)
+- What: Curated task queue per CLAUDE.md protocol
+- Changes:
+  - task-442 marked complete (redundant - cross-references already converted in task-446, EPUB validates with 0 errors)
+  - Recalculated scores: task-441/task-455 now 580, task-457 now 530, task-458 now 130
+  - Fixed stats.total (was 214, now 124 matching actual task count)
+- Queue health: 4 pending, 5 blocked, 115 complete
+- Next highest tasks: task-441 (callouts), task-455 (syntax) - both score 580
+- Blocked chain: task-448 → task-449 → task-459/454/470 (all waiting on manual Kindle Previewer install)
 
 ### 2026-01-29 20:15 - COMPLETED task-440: Convert blockquotes to AsciiDoc admonitions
 - What: Converted blockquotes to native AsciiDoc admonitions for better EPUB/PDF rendering
