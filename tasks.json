@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T19:30:00.000Z",
+  "lastUpdated": "2026-01-29T17:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 19:30: Recalculated all task scores using formula: priority + type + blocking_bonus. Fixed 17 score mismatches. Pending priority order: task-447 (860, Kindle setup, blocks 2), task-445 (835, PDF build, blocks 1), task-469 (830, ch16 TOC), task-456 (810, overflow script). Blocked high-value: task-449 (1135, final build, blocks 3). No duplicates found. Stats: 10 pending, 7 blocked, 197 complete.",
@@ -1379,7 +1379,11 @@
       "priority": "critical",
       "score": 1135,
       "scoreBreakdown": "critical:1000 + infra:60 + blocks(3×25):75 = 1135",
-      "blocks": ["task-459", "task-454", "task-470"],
+      "blocks": [
+        "task-459",
+        "task-454",
+        "task-470"
+      ],
       "blockedBy": [
         "task-445",
         "task-448"
@@ -1891,7 +1895,9 @@
       "priority": "high",
       "score": 855,
       "scoreBreakdown": "high:750 + fix:80 + blocks(1×25):25 = 855",
-      "blocks": ["task-449"],
+      "blocks": [
+        "task-449"
+      ],
       "blockedBy": [
         "task-447"
       ],
@@ -2140,13 +2146,17 @@
       "type": "infra",
       "title": "Install Kindle Previewer and create preview skill",
       "description": "Download and install Kindle Previewer 3. Create scripts/kindle-preview.ts that opens EPUB in Kindle Previewer, takes screenshots, and analyzes with Gemini. Create .claude/skills/kindle-review/SKILL.md.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 860,
       "scoreBreakdown": "high:750 + infra:60 + blocks(2×25):50 = 860",
-      "blocks": ["task-448", "task-450"],
+      "blocks": [
+        "task-448",
+        "task-450"
+      ],
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:01.156Z"
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T17:30:00Z"
     },
     {
       "id": "task-445",
@@ -2157,7 +2167,9 @@
       "priority": "high",
       "score": 835,
       "scoreBreakdown": "high:750 + infra:60 + blocks(1×25):25 = 835",
-      "blocks": ["task-449"],
+      "blocks": [
+        "task-449"
+      ],
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
@@ -2170,7 +2182,9 @@
       "priority": "high",
       "score": 835,
       "scoreBreakdown": "high:750 + infra:60 + blocks(1×25):25 = 835",
-      "blocks": ["task-451"],
+      "blocks": [
+        "task-451"
+      ],
       "blockedBy": [
         "task-447"
       ],
@@ -2698,9 +2712,9 @@
     ]
   },
   "stats": {
-    "pending": 10,
+    "pending": 9,
     "inProgress": 0,
-    "complete": 197,
+    "complete": 198,
     "blocked": 7,
     "total": 214
   },
