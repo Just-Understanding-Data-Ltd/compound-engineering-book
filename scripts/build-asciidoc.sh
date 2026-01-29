@@ -87,9 +87,24 @@ build_html() {
 
 # Build EPUB (requires asciidoctor-epub3)
 build_epub() {
-  if command -v asciidoctor-epub3 &> /dev/null; then
-    echo "Building EPUB..."
-    asciidoctor-epub3 $VERBOSE \
+  EPUB3="/opt/homebrew/lib/ruby/gems/3.4.0/bin/asciidoctor-epub3"
+  # Use absolute path for styles directory
+  STYLES_DIR="$(pwd)/${ADOC_DIR}/styles"
+
+  if [[ -x "$EPUB3" ]] || command -v asciidoctor-epub3 &> /dev/null; then
+    echo "Building EPUB with custom theme..."
+    echo "  Styles directory: ${STYLES_DIR}"
+
+    # Use full path if available, otherwise rely on PATH
+    if [[ -x "$EPUB3" ]]; then
+      EPUB_CMD="$EPUB3"
+    else
+      EPUB_CMD="asciidoctor-epub3"
+    fi
+
+    $EPUB_CMD $VERBOSE \
+      -a epub3-stylesdir="${STYLES_DIR}" \
+      -a source-highlighter=rouge \
       -o "${OUTPUT_DIR}/the-meta-engineer.epub" \
       "$BOOK_FILE"
 

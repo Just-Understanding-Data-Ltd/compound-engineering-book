@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 17:00)
-- Phase: Chapter 16 Completion
-- Active: Iteration 9 - Chapter 16 diagrams
-- Last Completed: task-462 (Chapter 16 RALPH architecture diagram)
+## Current Status (Updated: 2026-01-29 14:05)
+- Phase: Infrastructure - EPUB Theming
+- Active: Iteration 10 - AsciiDoc EPUB theme
+- Last Completed: task-444 (AsciiDoc EPUB theme/CSS)
 - Blockers: None
-- Queue Health: 14 pending, 11 blocked, 99 complete
-- Publishing Readiness: 97% - diagrams in progress
-- Next: Chapter 16 diagrams (task-463, 464)
+- Queue Health: 13 pending, 11 blocked, 100 complete
+- Publishing Readiness: 98% - EPUB theme complete
+- Next: task-443 (PDF theme) or chapter 16 diagrams (task-463, 464)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -30,6 +30,25 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 14:05 - COMPLETED task-444: Create AsciiDoc EPUB theme/CSS
+- What: Created comprehensive EPUB theme for asciidoctor-epub3 with custom styling
+- Files created:
+  - asciidoc/styles/epub3.scss (updated default with custom fonts)
+  - asciidoc/styles/epub3-fonts.scss (Source Serif 4, Source Sans 3, JetBrains Mono)
+  - asciidoc/styles/_colors.scss (custom color palette)
+  - asciidoc/styles/epub3-css3-only.scss (CSS3 features)
+  - asciidoc/styles/fonts/ (copied custom font files)
+- Build script updated: scripts/build-asciidoc.sh now uses custom styles directory
+- Features:
+  - Three-font typography: Source Serif 4 (body), Source Sans 3 (headings), JetBrains Mono (code)
+  - Custom admonition colors: blue notes, green tips, orange warnings, red cautions, purple important
+  - Professional color palette matching leanpub EPUB
+  - Installed asciidoctor-epub3 gem
+- Test output: output/the-meta-engineer.epub (710K) generated successfully
+- Iteration: 10
+- Stats: 13 pending, 11 blocked, 100 complete
+- Next: task-443 (PDF theme) or chapter 16 diagrams
 
 ### 2026-01-29 17:00 - COMPLETED task-462: Chapter 16 RALPH architecture diagram
 - What: Created comprehensive RALPH architecture diagram for Chapter 16

@@ -1938,7 +1938,9 @@
       "priority": "high",
       "score": 815,
       "scoreBreakdown": "high:750 + diagram:40 + blocking(1×25):25 = 815",
-      "blocks": ["task-468"],
+      "blocks": [
+        "task-468"
+      ],
       "createdAt": "2026-01-29T12:22:11.833Z"
     },
     {
@@ -1950,7 +1952,9 @@
       "priority": "high",
       "score": 815,
       "scoreBreakdown": "high:750 + diagram:40 + blocking(1×25):25 = 815",
-      "blocks": ["task-468"],
+      "blocks": [
+        "task-468"
+      ],
       "createdAt": "2026-01-29T12:22:11.833Z"
     },
     {
@@ -2129,11 +2133,12 @@
       "type": "infra",
       "title": "Create AsciiDoc EPUB theme/CSS",
       "description": "Create asciidoc/epub-style.css for EPUB output. Include dark mode support. Embed custom fonts.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 905,
       "scoreBreakdown": "high:750 + infra:30 + blocking(5×25):125 = 905",
-      "createdAt": "2026-01-29T12:19:01.156Z"
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T14:05:00Z"
     },
     {
       "id": "task-445",
@@ -2672,9 +2677,9 @@
     ]
   },
   "stats": {
-    "pending": 14,
+    "pending": 13,
     "inProgress": 0,
-    "complete": 189,
+    "complete": 100,
     "blocked": 11,
     "total": 214
   },

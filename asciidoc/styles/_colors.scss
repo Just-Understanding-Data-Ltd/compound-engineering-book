@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+// The Meta-Engineer - Custom Color Palette
+// Designed for professional technical content
+
+// === Base Colors ===
+$black: #000000;
+$off-black: #1a1a1a;
+$deep-gray: #2d3748;
+$dark-gray: #333333;
+$medium-gray: #707070;
+$gray: #999999;
+$light-gray: #cccccc;
+$off-white: #f5f5f5;
+$near-white: #fafafa;
+$white: #ffffff;
+
+// === Accent Colors ===
+$primary-blue: #2563eb;
+$light-blue: #4a90d9;
+$dark-blue: #1a2233;
+$pale-blue: #f0f6ff;
+
+$tip-green: #38a169;
+$dark-green: #1a2e1a;
+$pale-green: #f0fff4;
+
+$warning-orange: #dd6b20;
+$dark-orange: #2e1a0a;
+$pale-orange: #fffaf0;
+
+$caution-red: #e53e3e;
+$dark-red: #2a1515;
+$pale-red: #fff5f5;
+
+$important-purple: #805ad5;
+$dark-purple: #1f1a2e;
+$pale-purple: #faf5ff;
+
+// === Semantic Color Assignments ===
+
+$body-background: $white;
+$body-text: $off-black;
+
+$header-text: $off-black;
+$h4-header-text: $deep-gray;
+$h5-header-text: $dark-gray;
+
+$chapter-header-title-text: $dark-gray;
+$chapter-header-title-border: $light-gray;
+$chapter-header-em: $primary-blue;
+
+$link-border: $light-gray;
+$link-text: $primary-blue;
+
+$blockquote-text: $dark-gray;
+$para-first-text: $dark-gray;
+
+$list-lvl1: $dark-gray;
+$list-lvl2: $light-blue;
+$list-lvl3: $dark-gray;
+$list-lvl4: $light-blue;
+
+$footer-context: $dark-gray;
+
+$abstract-text: $dark-gray;
+$abstract-link: $dark-gray;
+
+$caption-text: $dark-gray;
+
+$aside-background: $near-white;
+$aside-border: $light-gray;
+
+$button-text: $off-black;
+$button-shadow: $gray;
+
+$pre-text: $dark-gray;
+$pre-background: $off-white;
+$pre-border: #ddd;
+
+$kbd-background: $off-white;
+$kbd-border: #e0e0e0;
+
+$mark-text: $black;
+$mark-background: #fff3cd;
+
+$last-mark-text: $tip-green;
+
+$i-conum-text: $tip-green;
+
+$table-border: $gray;
+$table-header-bg: $off-white;
+$table-stripe-bg: $near-white;
+
+// === Admonition Colors ===
+
+$note-border: $light-blue;
+$note-background: $pale-blue;
+
+$tip-border: $tip-green;
+$tip-background: $pale-green;
+
+$caution-border: $caution-red;
+$caution-background: $pale-red;
+
+$warning-border: $warning-orange;
+$warning-background: $pale-orange;
+
+$important-border: $important-purple;
+$important-background: $pale-purple;
+
+// === About Author ===
+$about-author-border: $gray;
+$headshot-border: $medium-gray;
