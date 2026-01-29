@@ -642,7 +642,7 @@ For reliable gates, reset these between cycles:
 |Build artifacts |`rm -rf dist/ build/` |Stale artifacts mask missing files
 |TypeScript cache |`rm -rf tsconfig.tsbuildinfo` |Stale cache hides type errors
 |Test database |`beforeEach: db.truncateAll()` |Leftover data causes false failures
-|Node module cache |`rm -rf node++_++modules/.cache/` |Cached modules hide dependency issues
+|Node module cache |`rm -rf node_modules/.cache/` |Cached modules hide dependency issues
 |Process state |`afterEach: server.close()` |Orphaned processes hold ports/locks
 |===
 

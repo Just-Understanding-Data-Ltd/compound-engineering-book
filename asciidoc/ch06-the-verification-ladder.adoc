@@ -274,7 +274,7 @@ test.prop([fc.array(fc.integer())])(
 );
 ----
 
-*What the framework generates:* - Empty inputs - Very large inputs - Unicode edge cases including emoji - Boundary values (0, -1, MAX++_++INT) - Null and undefined - Deeply nested structures - Adversarial inputs
+*What the framework generates:* - Empty inputs - Very large inputs - Unicode edge cases including emoji - Boundary values (0, -1, MAX_INT) - Null and undefined - Deeply nested structures - Adversarial inputs
 
 *Common property patterns:*
 

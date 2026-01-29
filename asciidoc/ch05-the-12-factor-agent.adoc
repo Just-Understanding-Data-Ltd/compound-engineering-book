@@ -554,7 +554,7 @@ These investments show the highest Return on Investment (ROI) earliest:
 Create an agent thread that derives all state from events.
 
 [arabic]
-. Define an `Event` union type with at least these variants: `user++_++input`, `tool++_++call`, `tool++_++result`, `error`, `human++_++response`
+. Define an `Event` union type with at least these variants: `user_input`, `tool_call`, `tool_result`, `error`, `human_response`
 . Implement a `deriveState` function that computes current step, pending approvals, and consecutive errors from events
 . Implement a `replayState` function that reduces over events to reconstruct state
 . Write tests that add events and verify state changes correctly
@@ -566,7 +566,7 @@ Success criteria: - State is never stored separately from events - Calling `repl
 Build a workflow that pauses for human approval before a high-stakes action.
 
 [arabic]
-. Create a tool classification function that identifies tools as `immediate`, `requires++_++approval`, or `terminal`
+. Create a tool classification function that identifies tools as `immediate`, `requires_approval`, or `terminal`
 . Implement the agent loop that pauses when approval is needed
 . Create a resume endpoint that accepts human feedback
 . Store the approval in the event stream
