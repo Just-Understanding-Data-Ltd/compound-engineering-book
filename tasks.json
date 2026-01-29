@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T17:25:21.916Z",
+  "lastUpdated": "2026-01-29T18:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 19:30: Recalculated all task scores using formula: priority + type + blocking_bonus. Fixed 17 score mismatches. Pending priority order: task-447 (860, Kindle setup, blocks 2), task-445 (835, PDF build, blocks 1), task-469 (830, ch16 TOC), task-456 (810, overflow script). Blocked high-value: task-449 (1135, final build, blocks 3). No duplicates found. Stats: 10 pending, 7 blocked, 197 complete.",
@@ -460,6 +460,17 @@
       "completedAt": "2026-01-28T20:00:00Z",
       "priority": "high",
       "score": 995
+    },
+    {
+      "id": "task-472",
+      "type": "fix",
+      "title": "Shorten TOC - remove excessive detail",
+      "description": "The table of contents is too long. Reduce it to show only: Part titles, Chapter titles, and major section headings (## level only). Remove subsections (### and below) from TOC. Update asciidoc/book.adoc with :toclevels: 2 setting.",
+      "status": "complete",
+      "priority": "high",
+      "score": 950,
+      "createdAt": "2026-01-29T17:25:21.916Z",
+      "completedAt": "2026-01-29T18:00:00Z"
     },
     {
       "id": "task-001",
@@ -2166,6 +2177,90 @@
       "completedAt": "2026-01-29T15:45:00Z"
     },
     {
+      "id": "task-473",
+      "type": "diagram",
+      "title": "Regenerate ch06 Verification Ladder diagram with DALL-E",
+      "description": "Use image-generator MCP to create a professional pyramid diagram for the Verification Ladder. Prompt: Professional pyramid diagram with 5 levels (Syntax, Runtime, Logic, Integration, End-to-End), widest at bottom, each level a distinct shade of blue, modern flat design, no text. Save to assets/images/ch06-verification-ladder.png",
+      "status": "blocked",
+      "priority": "high",
+      "score": 420,
+      "createdAt": "2026-01-29T17:25:21.916Z",
+      "blockedBy": "MCP-server-missing",
+      "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
+    },
+    {
+      "id": "task-474",
+      "type": "diagram",
+      "title": "Regenerate ch07 Quality Gates diagram with DALL-E",
+      "description": "Use image-generator MCP to create a professional flow diagram for Quality Gates. Prompt: Horizontal pipeline with 5 gates/checkpoints, code flowing through each gate, gates as glowing portals or barriers, modern tech visualization, dark background with blue/green accents. Save to assets/images/ch07-quality-gates.png",
+      "status": "blocked",
+      "priority": "high",
+      "score": 420,
+      "createdAt": "2026-01-29T17:25:21.916Z",
+      "blockedBy": "MCP-server-missing",
+      "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
+    },
+    {
+      "id": "task-475",
+      "type": "diagram",
+      "title": "Regenerate Context Debugging Framework diagram with DALL-E",
+      "description": "Use image-generator MCP to create a professional debugging flow diagram. Prompt: Circular debugging cycle with 4 stages (Observe, Hypothesize, Test, Fix), arrows connecting stages, magnifying glass and code symbols, clean professional style. Save to assets/images/ch08-context-debugging.png",
+      "status": "blocked",
+      "priority": "high",
+      "score": 420,
+      "createdAt": "2026-01-29T17:25:21.916Z",
+      "blockedBy": "MCP-server-missing",
+      "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
+    },
+    {
+      "id": "task-476",
+      "type": "diagram",
+      "title": "Regenerate Ratchet Effect diagram with DALL-E",
+      "description": "Use image-generator MCP to create a professional ratchet mechanism diagram. Prompt: Mechanical ratchet gear showing one-way progress, with progress arrow, quality level indicator, clean technical illustration style. Save to assets/images/ch07-ratchet-effect.png",
+      "status": "blocked",
+      "priority": "high",
+      "score": 420,
+      "createdAt": "2026-01-29T17:25:21.916Z",
+      "blockedBy": "MCP-server-missing",
+      "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
+    },
+    {
+      "id": "task-477",
+      "type": "diagram",
+      "title": "Regenerate RALPH Loop architecture diagram with DALL-E",
+      "description": "Use image-generator MCP to create the RALPH loop architecture. Prompt: Circular autonomous loop diagram with Orchestrator, Executor, Task Queue, Memory components, arrows showing flow, modern DevOps style visualization. Save to assets/images/ch10-ralph-architecture.png",
+      "status": "blocked",
+      "priority": "high",
+      "score": 420,
+      "createdAt": "2026-01-29T17:25:21.916Z",
+      "blockedBy": "MCP-server-missing",
+      "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
+    },
+    {
+      "id": "task-478",
+      "type": "diagram",
+      "title": "Regenerate Context Window anatomy diagram with DALL-E",
+      "description": "Use image-generator MCP to visualize context window. Prompt: Layered rectangular diagram showing context window with system prompt, conversation history, and available space sections, gradient fills, capacity meter on side. Save to assets/images/ch09-context-window.png",
+      "status": "blocked",
+      "priority": "high",
+      "score": 420,
+      "createdAt": "2026-01-29T17:25:21.916Z",
+      "blockedBy": "MCP-server-missing",
+      "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
+    },
+    {
+      "id": "task-479",
+      "type": "diagram",
+      "title": "Regenerate Compound Flywheel diagram with DALL-E",
+      "description": "Use image-generator MCP to create flywheel effect diagram. Prompt: Circular flywheel with momentum arrows, showing acceleration, compound growth spiral emanating outward, energy/speed visualization. Save to assets/images/ch01-compound-flywheel.png",
+      "status": "blocked",
+      "priority": "high",
+      "score": 420,
+      "createdAt": "2026-01-29T17:25:21.916Z",
+      "blockedBy": "MCP-server-missing",
+      "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
+    },
+    {
       "id": "task-446",
       "type": "infra",
       "title": "Build and validate AsciiDoc EPUB output",
@@ -2266,6 +2361,26 @@
         "task-449"
       ],
       "createdAt": "2026-01-29T12:19:33.572Z"
+    },
+    {
+      "id": "task-480",
+      "type": "infra",
+      "title": "Update AsciiDoc chapters to use new DALL-E generated images",
+      "description": "Replace Mermaid diagram references in all AsciiDoc chapters with the new DALL-E generated PNG images. Update image:: directives to point to assets/images/ folder.",
+      "status": "blocked",
+      "priority": "high",
+      "score": 355,
+      "blockedBy": [
+        "task-473",
+        "task-474",
+        "task-475",
+        "task-476",
+        "task-477",
+        "task-478",
+        "task-479"
+      ],
+      "createdAt": "2026-01-29T17:25:21.916Z",
+      "blockedReason": "Waiting on tasks 473-479 (DALL-E diagram generation) which require missing MCP server"
     },
     {
       "id": "task-403",
@@ -2699,106 +2814,6 @@
         "task-449"
       ],
       "createdAt": "2026-01-29T13:35:25.159Z"
-    },
-    {
-      "id": "task-472",
-      "type": "fix",
-      "title": "Shorten TOC - remove excessive detail",
-      "description": "The table of contents is too long. Reduce it to show only: Part titles, Chapter titles, and major section headings (## level only). Remove subsections (### and below) from TOC. Update asciidoc/book.adoc with :toclevels: 2 setting.",
-      "status": "complete",
-      "priority": "high",
-      "score": 950,
-      "createdAt": "2026-01-29T17:25:21.916Z",
-      "completedAt": "2026-01-29T18:00:00Z"
-    },
-    {
-      "id": "task-473",
-      "type": "diagram",
-      "title": "Regenerate ch06 Verification Ladder diagram with DALL-E",
-      "description": "Use image-generator MCP to create a professional pyramid diagram for the Verification Ladder. Prompt: Professional pyramid diagram with 5 levels (Syntax, Runtime, Logic, Integration, End-to-End), widest at bottom, each level a distinct shade of blue, modern flat design, no text. Save to assets/images/ch06-verification-ladder.png",
-      "status": "pending",
-      "priority": "high",
-      "score": 920,
-      "createdAt": "2026-01-29T17:25:21.916Z"
-    },
-    {
-      "id": "task-474",
-      "type": "diagram",
-      "title": "Regenerate ch07 Quality Gates diagram with DALL-E",
-      "description": "Use image-generator MCP to create a professional flow diagram for Quality Gates. Prompt: Horizontal pipeline with 5 gates/checkpoints, code flowing through each gate, gates as glowing portals or barriers, modern tech visualization, dark background with blue/green accents. Save to assets/images/ch07-quality-gates.png",
-      "status": "pending",
-      "priority": "high",
-      "score": 910,
-      "createdAt": "2026-01-29T17:25:21.916Z"
-    },
-    {
-      "id": "task-475",
-      "type": "diagram",
-      "title": "Regenerate Context Debugging Framework diagram with DALL-E",
-      "description": "Use image-generator MCP to create a professional debugging flow diagram. Prompt: Circular debugging cycle with 4 stages (Observe, Hypothesize, Test, Fix), arrows connecting stages, magnifying glass and code symbols, clean professional style. Save to assets/images/ch08-context-debugging.png",
-      "status": "pending",
-      "priority": "high",
-      "score": 900,
-      "createdAt": "2026-01-29T17:25:21.916Z"
-    },
-    {
-      "id": "task-476",
-      "type": "diagram",
-      "title": "Regenerate Ratchet Effect diagram with DALL-E",
-      "description": "Use image-generator MCP to create a professional ratchet mechanism diagram. Prompt: Mechanical ratchet gear showing one-way progress, with progress arrow, quality level indicator, clean technical illustration style. Save to assets/images/ch07-ratchet-effect.png",
-      "status": "pending",
-      "priority": "high",
-      "score": 890,
-      "createdAt": "2026-01-29T17:25:21.916Z"
-    },
-    {
-      "id": "task-477",
-      "type": "diagram",
-      "title": "Regenerate RALPH Loop architecture diagram with DALL-E",
-      "description": "Use image-generator MCP to create the RALPH loop architecture. Prompt: Circular autonomous loop diagram with Orchestrator, Executor, Task Queue, Memory components, arrows showing flow, modern DevOps style visualization. Save to assets/images/ch10-ralph-architecture.png",
-      "status": "pending",
-      "priority": "high",
-      "score": 880,
-      "createdAt": "2026-01-29T17:25:21.916Z"
-    },
-    {
-      "id": "task-478",
-      "type": "diagram",
-      "title": "Regenerate Context Window anatomy diagram with DALL-E",
-      "description": "Use image-generator MCP to visualize context window. Prompt: Layered rectangular diagram showing context window with system prompt, conversation history, and available space sections, gradient fills, capacity meter on side. Save to assets/images/ch09-context-window.png",
-      "status": "pending",
-      "priority": "high",
-      "score": 870,
-      "createdAt": "2026-01-29T17:25:21.916Z"
-    },
-    {
-      "id": "task-479",
-      "type": "diagram",
-      "title": "Regenerate Compound Flywheel diagram with DALL-E",
-      "description": "Use image-generator MCP to create flywheel effect diagram. Prompt: Circular flywheel with momentum arrows, showing acceleration, compound growth spiral emanating outward, energy/speed visualization. Save to assets/images/ch01-compound-flywheel.png",
-      "status": "pending",
-      "priority": "high",
-      "score": 860,
-      "createdAt": "2026-01-29T17:25:21.916Z"
-    },
-    {
-      "id": "task-480",
-      "type": "infra",
-      "title": "Update AsciiDoc chapters to use new DALL-E generated images",
-      "description": "Replace Mermaid diagram references in all AsciiDoc chapters with the new DALL-E generated PNG images. Update image:: directives to point to assets/images/ folder.",
-      "status": "pending",
-      "priority": "high",
-      "score": 800,
-      "blockedBy": [
-        "task-473",
-        "task-474",
-        "task-475",
-        "task-476",
-        "task-477",
-        "task-478",
-        "task-479"
-      ],
-      "createdAt": "2026-01-29T17:25:21.916Z"
     }
   ],
   "completed": {
@@ -2831,16 +2846,15 @@
     ]
   },
   "stats": {
-    "pending": 8,
-    "inProgress": 0,
-    "complete": 211,
-    "blocked": 5,
+    "pending": 0,
+    "blocked": 13,
+    "complete": 121,
     "total": 134
   },
   "checkpoints": {
-    "lastGoodCommit": "88ea8476c4cee9feb444adf110a33d2f65eff04a",
-    "lastSuccessfulTask": "interrupted-3",
-    "lastCheckpoint": "2026-01-29T17:18:36Z",
+    "lastGoodCommit": "d6cc21fed7df3098a7fd456b3f2974e3742376f5",
+    "lastSuccessfulTask": "iteration-1",
+    "lastCheckpoint": "2026-01-29T17:27:03Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,

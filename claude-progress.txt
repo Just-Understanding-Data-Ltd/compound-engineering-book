@@ -1,13 +1,15 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 18:00)
-- Phase: Content Refinement
-- Active: task-472 (Shorten TOC) COMPLETE
-- Last Completed: task-472 - Shorten TOC - remove excessive detail
-- Blockers: 5 tasks blocked on AppleScript permissions (Kindle testing)
-- Queue Health: 8 pending, 5 blocked, 211 complete
+## Current Status (Updated: 2026-01-29 18:30)
+- Phase: Content Complete - Awaiting Infrastructure
+- Active: None - All actionable tasks complete
+- Last Action: Marked DALL-E tasks blocked (image-generator MCP not connected)
+- Blockers:
+  - 5 tasks blocked on AppleScript permissions (Kindle testing)
+  - 8 tasks blocked on image-generator MCP server (DALL-E diagrams)
+- Queue Health: 0 pending, 13 blocked, 121 complete
 - Publishing Readiness: 100% CONTENT + EPUB + PDF + INDEX COMPLETE
-- Next: Diagram regeneration tasks (task-473 through task-476)
+- Next: Connect image-generator MCP server OR accept existing Mermaid diagrams
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -30,6 +32,27 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 18:30 - BLOCKED tasks 473-479: DALL-E diagram generation requires missing MCP server
+- What: Attempted to complete diagram regeneration tasks using DALL-E
+- Issue: image-generator MCP server (DALL-E 3) is not connected to this session
+- Tasks affected:
+  - task-473: ch06 Verification Ladder diagram
+  - task-474: ch07 Quality Gates diagram
+  - task-475: Context Debugging Framework diagram
+  - task-476: Ratchet Effect diagram
+  - task-477: RALPH Loop architecture diagram
+  - task-478: Context Window anatomy diagram
+  - task-479: Compound Flywheel diagram
+  - task-480: Update AsciiDoc to use new images (blocked by above)
+- Resolution options:
+  1. Connect image-generator MCP server in Claude settings
+  2. Accept existing Mermaid diagrams (already complete and functional)
+  3. Generate images manually using DALL-E web interface
+- Iteration: 2
+- Stats: 0 pending, 13 blocked, 121 complete
+- Impact: Book is STILL PUBLICATION READY with existing Mermaid diagrams
+- Next: User decision required on diagram upgrade path
 
 ### 2026-01-29 18:00 - COMPLETED task-472: Shorten TOC - remove excessive detail
 - What: Changed :toclevels: from 3 to 2 in asciidoc/book.adoc
