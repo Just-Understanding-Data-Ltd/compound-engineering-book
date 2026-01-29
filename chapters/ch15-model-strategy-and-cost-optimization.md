@@ -15,7 +15,8 @@ Consider a typical development day:
 Average 5,000 tokens of context per request
 Average 500 tokens of output per request
 
-At Claude Sonnet pricing ($3 per million tokens (MTok) input, $15/MTok output):
+Claude Sonnet pricing: $3/MTok input, $15/MTok output
+
 Input: 100 × 5,000 × $0.000003 = $1.50
 Output: 100 × 500 × $0.000015 = $0.75
 Total: $2.25/day = $49.50/month = $594/year
@@ -139,18 +140,27 @@ interface TaskAnalysis {
   multiStepPlan: boolean
 }
 
-function selectModel(task: string, analysis: TaskAnalysis): ModelTier {
+function selectModel(
+  task: string,
+  analysis: TaskAnalysis
+): ModelTier {
   // Security and performance always use Opus
   if (analysis.securityCritical) return 'opus'
 
   // Architecture decisions use Opus
-  if (analysis.requiresArchitecture || analysis.multiStepPlan) return 'opus'
+  if (analysis.requiresArchitecture || analysis.multiStepPlan) {
+    return 'opus'
+  }
 
   // Large changes use Opus
-  if (analysis.filesAffected > 5 || analysis.linesOfCode > 500) return 'opus'
+  if (analysis.filesAffected > 5 || analysis.linesOfCode > 500) {
+    return 'opus'
+  }
 
   // Multi-file work uses Sonnet
-  if (analysis.filesAffected > 1 || analysis.linesOfCode > 50) return 'sonnet'
+  if (analysis.filesAffected > 1 || analysis.linesOfCode > 50) {
+    return 'sonnet'
+  }
 
   // Simple patterns use Haiku
   const simplePatterns = [
@@ -266,7 +276,8 @@ Prevent agent requests from consuming excessive tokens by capping input size:
 
 ```typescript
 // skip-validation
-import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
+import { query, type SDKMessage }
+  from '@anthropic-ai/claude-agent-sdk';
 
 // Cap input to control costs (10K chars ≈ 2500 tokens)
 const truncatedCode = code.slice(0, 10000);
@@ -355,7 +366,8 @@ async function checkBudgetBeforeOperation(): Promise<boolean> {
   }
 
   if (usage.today >= BUDGET.dailyLimit * BUDGET.alertThreshold) {
-    console.warn(`Budget alert: $${usage.today} of $${BUDGET.dailyLimit}`)
+    const msg = `Budget alert: $${usage.today}/$${BUDGET.dailyLimit}`;
+    console.warn(msg);
   }
 
   return true
@@ -509,7 +521,7 @@ let status = await client.messages.batches.retrieve(batch.id);
 while (status.processing_status !== 'ended') {
   await sleep(30000); // Check every 30 seconds
   status = await client.messages.batches.retrieve(batch.id);
-  console.log(`Progress: ${status.request_counts.succeeded} complete`);
+  console.log(`Done: ${status.request_counts.succeeded}`);
 }
 
 // Step 3: Process results
@@ -843,7 +855,10 @@ Build abstraction layers:
 ```typescript
 // skip-validation
 interface AIProvider {
-  complete(prompt: string, options: CompletionOptions): Promise<string>
+  complete(
+    prompt: string,
+    options: CompletionOptions
+  ): Promise<string>
   model: string
   costs: { input: number; output: number }
 }
@@ -948,7 +963,9 @@ const BENCHMARKS: BenchmarkTask[] = [
   }
 ]
 
-async function evaluateModel(model: string): Promise<BenchmarkResult> {
+async function evaluateModel(
+  model: string
+): Promise<BenchmarkResult> {
   const results = await Promise.all(
     BENCHMARKS.map(b => runBenchmark(model, b))
   )
@@ -1021,7 +1038,9 @@ interface CostDashboard {
   topExpensiveTasks: Array<{ task: string; cost: number }>
 }
 
-async function generateDashboard(logs: UsageMetrics[]): Promise<CostDashboard> {
+async function generateDashboard(
+  logs: UsageMetrics[]
+): Promise<CostDashboard> {
   return {
     period: 'January 2026',
     totalCost: sumBy(logs, 'cost'),
@@ -1029,7 +1048,8 @@ async function generateDashboard(logs: UsageMetrics[]): Promise<CostDashboard> {
     costByTask: groupAndSum(logs, 'task', 'cost'),
     cacheHitRate: calculateCacheHitRate(logs),
     avgCostPerRequest: average(logs.map(l => l.cost)),
-    escalationRate: logs.filter(l => l.escalated).length / logs.length,
+    escalationRate:
+      logs.filter(l => l.escalated).length / logs.length,
     topExpensiveTasks: findTopExpensive(logs, 10)
   }
 }

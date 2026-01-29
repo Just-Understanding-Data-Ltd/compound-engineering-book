@@ -216,7 +216,8 @@ specs/
 When regenerating or modifying code, start with the spec:
 
 ```markdown
-Given the spec in `specs/features/auth-flow.md`, implement the login endpoint.
+Given the spec in `specs/features/auth-flow.md`,
+implement the login endpoint.
 ```
 
 The spec persists. The code can always be regenerated from it.
@@ -481,9 +482,9 @@ Not wishes. Not aspirations. Actual constraints that fail builds if violated.
 Loops that prove constraints are met:
 
 ```
-Code change → Tests → Load tests → Telemetry → Constraint check → Pass/Fail
-                                                              ↓
-                                                         Agent fixes → Retry
+Code → Tests → Load → Telemetry → Constraint → Pass/Fail
+                                      ↓
+                                 Agent fix → Retry
 ```
 
 If a constraint fails, the agent fixes the issue and retries. Closed-loop optimization.

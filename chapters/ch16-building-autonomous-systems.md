@@ -60,7 +60,8 @@ while true; do
 
     # Check limits
     check_circuit_breaker || break
-    [ "$MAX_ITERATIONS" -gt 0 ] && [ $iteration -gt $MAX_ITERATIONS ] && break
+    [ "$MAX_ITERATIONS" -gt 0 ] && \
+      [ $iteration -gt $MAX_ITERATIONS ] && break
     check_time_limit || break
 
     # Run the coding agent
@@ -174,7 +175,8 @@ function calculateScore(task, allTasks) {
 
   // Age bonus: prevent starvation
   if (task.createdAt) {
-    const ageHours = (Date.now() - new Date(task.createdAt)) / 3600000;
+    const created = new Date(task.createdAt).getTime();
+    const ageHours = (Date.now() - created) / 3600000;
     if (ageHours > 24) score += 50;
     if (ageHours > 48) score += 50;
   }
@@ -646,9 +648,9 @@ while [ $(jq '.stats.pending' tasks.json) -gt 0 ]; do
     # Get last commit hash before running
     before_commit=$(git rev-parse HEAD)
 
-    # Run Claude
-    claude -p "Iteration $iteration. Complete ONE task. Commit when done." \
-        2>&1 | tee "logs/iteration-$iteration.log"
+    # Run Claude with iteration-specific prompt
+    prompt="Iteration $iteration. Complete ONE task. Commit."
+    claude -p "$prompt" 2>&1 | tee "logs/iteration-$iteration.log"
 
     # Check if progress was made
     after_commit=$(git rev-parse HEAD)

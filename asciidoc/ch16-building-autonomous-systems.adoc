@@ -64,7 +64,8 @@ while true; do
 
     # Check limits
     check_circuit_breaker || break
-    [ "$MAX_ITERATIONS" -gt 0 ] && [ $iteration -gt $MAX_ITERATIONS ] && break
+    [ "$MAX_ITERATIONS" -gt 0 ] && \
+      [ $iteration -gt $MAX_ITERATIONS ] && break
     check_time_limit || break
 
     # Run the coding agent
@@ -182,7 +183,8 @@ function calculateScore(task, allTasks) {
 
   // Age bonus: prevent starvation
   if (task.createdAt) {
-    const ageHours = (Date.now() - new Date(task.createdAt)) / 3600000;
+    const created = new Date(task.createdAt).getTime();
+    const ageHours = (Date.now() - created) / 3600000;
     if (ageHours > 24) score += 50;
     if (ageHours > 48) score += 50;
   }

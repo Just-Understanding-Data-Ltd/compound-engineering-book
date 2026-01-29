@@ -185,7 +185,10 @@ If context doesn't fix the issue, refine your prompts:
 ```
 Format user data for display:
 
-Input: { email: 'test@example.com', createdAt: '2025-01-15T10:30:00Z' }
+Input: {
+  email: 'test@example.com',
+  createdAt: '2025-01-15T10:30:00Z'
+}
 Output: 'test@example.com (joined Jan 15, 2025)'
 ```
 
@@ -368,7 +371,7 @@ const UserSchema = z.object({
 })
 ```
 
-**Prevention**: Use z.coerce.date() for all timestamp fields by default.
+**Prevention**: Use z.coerce.date() for all timestamp fields.
 ````
 
 **Missing Null Checks**:
@@ -413,7 +416,7 @@ When using AI agents, flaky tests create a compounding problem. Agents can't dis
 // Flaky: Checks before async operation completes
 test('updates UI after fetch', async () => {
   render(<UserProfile userId="1" />)
-  expect(screen.getByText('John Doe')).toBeInTheDocument() // Might fail
+  expect(screen.getByText('John Doe')).toBeInTheDocument() // Flaky
 })
 
 // Fixed: Wait for element
@@ -626,7 +629,8 @@ Why two timeouts? The job timeout (15 min) catches everything including setup an
 Prevent agent requests from generating excessive output by capping input size:
 
 ```typescript
-import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
+import { query, type SDKMessage }
+  from '@anthropic-ai/claude-agent-sdk';
 
 // Cap input to prevent excessive context consumption
 const truncatedCode = code.slice(0, 10000);  // ~2500 tokens
@@ -689,7 +693,10 @@ const BUDGET: BudgetConfig = {
   alertThreshold: 0.8
 }
 
-async function checkBudget(): Promise<{ ok: boolean; remaining: number }> {
+async function checkBudget(): Promise<{
+  ok: boolean;
+  remaining: number
+}> {
   const usage = await getUsageFromTracking()
   const spent = usage.today
 
@@ -758,7 +765,8 @@ class CircuitBreaker {
 Use the circuit breaker to protect agent operations:
 
 ```typescript
-import { query, type SDKMessage } from '@anthropic-ai/claude-agent-sdk';
+import { query, type SDKMessage }
+  from '@anthropic-ai/claude-agent-sdk';
 
 const breaker = new CircuitBreaker()
 
@@ -766,7 +774,10 @@ async function reliableAgentCall(prompt: string): Promise<string> {
   return breaker.execute(async () => {
     const response = query({
       prompt,
-      options: { model: 'claude-sonnet-4-5-20250929', allowedTools: [] }
+      options: {
+        model: 'claude-sonnet-4-5-20250929',
+        allowedTools: []
+      }
     });
 
     // Collect streaming response
@@ -798,7 +809,7 @@ async function withRetry<T>(
       return await operation()
     } catch (error) {
       lastError = error as Error
-      console.log(`Attempt ${attempt + 1} failed: ${lastError.message}`)
+      console.log(`Attempt ${attempt + 1}: ${lastError.message}`)
 
       if (attempt < maxRetries - 1) {
         const delay = initialDelayMs * Math.pow(2, attempt)
@@ -909,10 +920,10 @@ Before any operation that might break things, create a safety checkpoint:
 
 ```bash
 # Before major refactoring
-git add -A && git commit -m "checkpoint: before refactoring auth module"
+git add -A && git commit -m "checkpoint: pre-auth-refactor"
 
 # Before running unfamiliar AI suggestions
-git add -A && git commit -m "checkpoint: before applying AI caching suggestion"
+git add -A && git commit -m "checkpoint: pre-AI-caching"
 ```
 
 If the risky operation fails, recovery is instant: `git checkout .`
@@ -995,7 +1006,7 @@ if (response.status === 200) {
   const verified = verifyChangesApplied(order, changes)
 
   if (!verified) {
-    return { success: false, reason: "Changes not reflected in order state" }
+    return { success: false, reason: "Changes not applied" }
   }
 
   return { success: true }
@@ -1017,10 +1028,11 @@ const ESCALATION_TRIGGERS = {
 }
 
 function shouldEscalate(state: AgentState): boolean {
+  const t = ESCALATION_TRIGGERS
   return (
-    state.consecutiveFailures >= ESCALATION_TRIGGERS.consecutiveFailures ||
-    state.currentConfidence < ESCALATION_TRIGGERS.confidenceThreshold ||
-    state.currentAction.riskLevel === ESCALATION_TRIGGERS.riskLevel ||
+    state.consecutiveFailures >= t.consecutiveFailures ||
+    state.currentConfidence < t.confidenceThreshold ||
+    state.currentAction.riskLevel === t.riskLevel ||
     state.requirementsClear === false
   )
 }

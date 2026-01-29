@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T14:03:58.745Z",
+  "lastUpdated": "2026-01-29T14:08:17.725Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 17:30: Fixed score mismatch for task-443 (380→880) and task-444 (380→905) to match scoreBreakdown. Added blocking bonus to task-463/464 (Ch16 diagrams block task-468, now 485 each). Next priorities: Ch16 diagrams (463, 464), then AsciiDoc themes (443, 444). Stats: 14 pending, 11 blocked, 189 complete.",
@@ -2057,11 +2057,12 @@
       "type": "fix",
       "title": "Audit and fix all code blocks for max line length",
       "description": "Scan all code blocks across 15 chapters. Any line over 65 characters risks overflow on small screens. Refactor long lines: break strings, add line continuations, or simplify. Target: 0 lines over 70 chars.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 435,
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:33.572Z"
+      "createdAt": "2026-01-29T12:19:33.572Z",
+      "completedAt": "2026-01-29T15:00:00Z"
     },
     {
       "id": "task-469",
@@ -2676,19 +2677,19 @@
     ]
   },
   "stats": {
-    "pending": 13,
+    "pending": 12,
     "inProgress": 0,
-    "complete": 101,
+    "complete": 192,
     "blocked": 10,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "773bdd312e17d9b0adcf01e98c256b47aa06c6f2",
-    "lastSuccessfulTask": "iteration-10",
-    "lastCheckpoint": "2026-01-29T14:03:58Z",
-    "consecutiveFailures": 0,
+    "lastGoodCommit": "fb9998734df281ecf8025eb5e54b84137188700e",
+    "lastSuccessfulTask": "iteration-11",
+    "lastCheckpoint": "2026-01-29T14:08:17Z",
+    "consecutiveFailures": 2,
     "circuitBreakerTripped": false,
-    "failedAttempts": 5,
+    "failedAttempts": 7,
     "lastQueueCuration": "2026-01-28T23:30:00Z"
   },
   "lastQueueCuration": "2026-01-28T23:30:00Z"
