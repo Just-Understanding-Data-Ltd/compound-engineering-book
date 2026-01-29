@@ -770,6 +770,39 @@ Post-processing was minimal: smart quote normalization (", ", ', ' to straight q
 
 ---
 
+### 2026-01-30 - MCP Image Generation Requires Guide Reading Before First Use
+
+**Context**: Generating the RALPH Loop diagram for Chapter 10 using the image-generator MCP server (task-477). Initial prompts failed with an error requiring the prompting guide to be read first.
+
+**Observation**: The image-generator MCP enforces a "read the guide first" pattern that dramatically improves generation quality. The GPT-Image-1.5 prompting guide prescribes a specific structure:
+
+| Step | Content | Example |
+|------|---------|---------|
+| 1. Background/scene | Setting and surface | "Clean white background with subtle gray grid lines" |
+| 2. Subject | Main element | "Circular diagram divided into 4 equal wedge segments" |
+| 3. Key details | Specifics | "Navy blue #1e3a5f with magnifying glass icon" |
+| 4. Constraints | What NOT to include | "No watermarks, no logos, no extra text" |
+
+For infographics specifically, the guide recommends starting with:
+```
+Create a detailed Infographic of [topic].
+Show [components/flow/process].
+I'd like to understand technically and visually the [subject].
+```
+
+Text in images must be quoted exactly (e.g., `"READ"`) with typography specified (font style, color, placement). The generation succeeded on the first attempt after following this structure, producing a professional-quality 4-phase cycle diagram with all labels correct.
+
+**Implication**: MCP tools may have "initialization gates" that require reading documentation before use. This prevents poor prompts that waste API calls and produce unusable results. The friction is intentional and valuable.
+
+**Action**: When using MCP tools for the first time in a session:
+1. Check if the tool has associated resources (e.g., `image-generator://prompting-guide`)
+2. Read the resource before attempting to use the tool
+3. Structure prompts according to the tool's recommended format
+4. For image generation specifically: scene → subject → details → constraints
+5. Quote literal text exactly and specify typography for labels
+
+---
+
 ### 2026-01-29 - Code Block Callouts as Inline Documentation Strategy
 
 **Context**: Adding AsciiDoc callouts to complex code blocks across chapters 6, 10, 11, and 13 (task-441). Callouts are numbered annotations that appear next to specific lines, with explanations listed below the code block.

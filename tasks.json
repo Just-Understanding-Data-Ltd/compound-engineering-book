@@ -1538,12 +1538,13 @@
       "type": "diagram",
       "title": "Regenerate RALPH Loop architecture diagram with DALL-E",
       "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing a 4-phase development cycle for a technical book.\n\nTOPIC: RALPH Loop - Autonomous Agent Iteration\nTYPE: Circular cycle\n\nCONTENT (4 phases, clockwise):\n- Phase 1: READ - Load context and state\n- Phase 2: ACT - Execute one task\n- Phase 3: LOG - Commit and document\n- Phase 4: PAUSE - Clean exit\n\nSTYLE: Circular diagram with 4 segments, arrows showing flow, each segment labeled, navy/teal colors, white background, professional cycle diagram.\n\nSave to: assets/images/ch10-ralph-loop.png",
-      "status": "pending",
+      "status": "complete",
       "priority": "critical",
       "score": 1065,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedBy": null,
-      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
+      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815",
+      "completedAt": "2026-01-30T02:31:00Z"
     },
     {
       "id": "task-478",
@@ -2922,9 +2923,9 @@
     ]
   },
   "stats": {
-    "pending": 5,
+    "pending": 4,
     "inProgress": 0,
-    "complete": 220,
+    "complete": 221,
     "blocked": 6,
     "total": 231
   },
