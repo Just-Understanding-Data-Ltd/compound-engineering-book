@@ -49,8 +49,8 @@ function processUser(user: User): void {
   console.log(user.name.toUpperCase());
 }
 
-processUser({ id: "1" });           // ✗ Error: Property 'name' is missing
-processUser(null);                   // ✗ Error: Argument cannot be null
+processUser({ id: "1" });           // ✗ Missing 'name'
+processUser(null);                   // ✗ Cannot be null
 processUser({ id: 1, name: "Kim" }); // ✗ Error: id should be string
 ```
 
@@ -147,7 +147,7 @@ describe('User Registration Flow', () => {
     // Verify user in database
     const user = await db.users.findByEmail('test@example.com');
     expect(user).toBeTruthy();
-    expect(user.passwordHash).not.toBe('secure123'); // Hashed, not plaintext
+    expect(user.passwordHash).not.toBe('secure123'); // Hashed
 
     // Verify email sent
     expect(emailService.sent).toContainEqual(
@@ -282,7 +282,7 @@ Property-based tests find the bugs that haunt production. The password validator
 
 Formal verification proves properties hold for all possible inputs. Not "probably correct" but "mathematically proven correct."
 
-```tla
+```text
 ---- MODULE RateLimiter ----
 VARIABLES requests, window_start, count
 
@@ -396,7 +396,9 @@ This is test-driven prompting: write tests before generating code.
 // Step 1: Write tests FIRST
 describe('authenticateUser', () => {
   it('returns user object for valid credentials', async () => {
-    const result = await authenticateUser('user@example.com', 'password123');
+    const result = await authenticateUser(
+      'user@example.com', 'password123'
+    );
     expect(result).toMatchObject({
       id: expect.any(String),
       email: 'user@example.com',
@@ -404,7 +406,7 @@ describe('authenticateUser', () => {
     });
   });
 
-  it('throws InvalidCredentialsError for wrong password', async () => {
+  it('throws InvalidCredentialsError for wrong pwd', async () => {
     await expect(
       authenticateUser('user@example.com', 'wrong')
     ).rejects.toThrow(InvalidCredentialsError);

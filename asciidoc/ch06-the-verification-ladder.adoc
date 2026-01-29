@@ -292,7 +292,7 @@ Property-based tests find the bugs that haunt production. The password validator
 
 Formal verification proves properties hold for all possible inputs. Not "`probably correct`" but "`mathematically proven correct.`"
 
-[source,tla]
+[source,plaintext]
 ----
 ---- MODULE RateLimiter ----
 VARIABLES requests, window_start, count

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T20:30:00Z",
+  "lastUpdated": "2026-01-29T15:45:11.603Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 19:30: Recalculated all task scores using formula: priority + type + blocking_bonus. Fixed 17 score mismatches. Pending priority order: task-447 (860, Kindle setup, blocks 2), task-445 (835, PDF build, blocks 1), task-469 (830, ch16 TOC), task-456 (810, overflow script). Blocked high-value: task-449 (1135, final build, blocks 3). No duplicates found. Stats: 10 pending, 7 blocked, 197 complete.",
@@ -1666,6 +1666,19 @@
       "completedAt": "2026-01-29T13:18:00Z"
     },
     {
+      "id": "task-441",
+      "type": "fix",
+      "title": "Add code block callouts where beneficial",
+      "description": "Review code examples. Add AsciiDoc callouts (numbered annotations) to complex code blocks that would benefit from inline explanations.",
+      "status": "complete",
+      "priority": "medium",
+      "score": 580,
+      "scoreBreakdown": "medium:500 + fix:80 = 580",
+      "blockedBy": [],
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T21:00:00Z"
+    },
+    {
       "id": "task-241",
       "type": "enhancement",
       "title": "ch13: Add doctrine harness component list",
@@ -2354,19 +2367,6 @@
       "completedAt": "2026-01-29T20:15:00Z"
     },
     {
-      "id": "task-441",
-      "type": "fix",
-      "title": "Add code block callouts where beneficial",
-      "description": "Review code examples. Add AsciiDoc callouts (numbered annotations) to complex code blocks that would benefit from inline explanations.",
-      "status": "complete",
-      "priority": "medium",
-      "score": 580,
-      "scoreBreakdown": "medium:500 + fix:80 = 580",
-      "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:01.156Z",
-      "completedAt": "2026-01-29T21:00:00Z"
-    },
-    {
       "id": "task-442",
       "type": "fix",
       "title": "Update cross-references to AsciiDoc format",
@@ -2385,12 +2385,13 @@
       "type": "fix",
       "title": "Add syntax highlighting for all languages in code blocks",
       "description": "Audit code blocks for missing language tags. Add proper language hints (typescript, bash, yaml, json, etc). Ensure Asciidoctor rouge/pygments highlights all blocks correctly.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
-      "score": 580,
+      "score": 185,
       "scoreBreakdown": "medium:500 + fix:80 = 580",
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:33.572Z"
+      "createdAt": "2026-01-29T12:19:33.572Z",
+      "completedAt": "2026-01-29T21:30:00Z"
     },
     {
       "id": "task-255",
@@ -2498,7 +2499,7 @@
       "description": "Create enhanced TOC that includes 1-sentence summary per chapter. Improves navigation in EPUB readers. Use AsciiDoc preamble or custom attributes.",
       "status": "pending",
       "priority": "medium",
-      "score": 530,
+      "score": 105,
       "scoreBreakdown": "medium:500 + infra:30 = 530",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
@@ -2668,7 +2669,7 @@
       "description": "Use AsciiDoc indexterm markup to create a proper book index. Tag key concepts: Claude Code, RALPH, context engineering, verification ladder, etc. Generate index in PDF output.",
       "status": "pending",
       "priority": "low",
-      "score": 130,
+      "score": -295,
       "scoreBreakdown": "low:100 + infra:30 = 130",
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
@@ -2718,16 +2719,16 @@
     ]
   },
   "stats": {
-    "pending": 3,
+    "pending": 2,
     "inProgress": 0,
-    "complete": 116,
+    "complete": 117,
     "blocked": 5,
     "total": 124
   },
   "checkpoints": {
-    "lastGoodCommit": "da6987ad0af526740aca835f4ec44446b315ca4d",
-    "lastSuccessfulTask": "iteration-24",
-    "lastCheckpoint": "2026-01-29T15:37:28Z",
+    "lastGoodCommit": "bad9f92d898a5fdcd5fba0971b75b2a6a6d559d2",
+    "lastSuccessfulTask": "iteration-25",
+    "lastCheckpoint": "2026-01-29T15:45:11Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,
