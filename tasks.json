@@ -1766,25 +1766,24 @@
       "type": "chapter",
       "title": "Convert ch07-ch09 to AsciiDoc",
       "description": "Convert chapters 7-9 from Markdown to AsciiDoc. Fix table column widths. Convert blockquotes to admonitions. Verify code blocks.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 480,
       "blockedBy": [
         "task-434"
       ],
-      "createdAt": "2026-01-29T12:19:01.156Z"
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T13:03:00Z"
     },
     {
       "id": "task-436",
       "type": "chapter",
       "title": "Convert ch10-ch12 to AsciiDoc",
       "description": "Convert chapters 10-12 from Markdown to AsciiDoc. Fix table column widths. Convert blockquotes to admonitions. Verify code blocks.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
       "score": 480,
-      "blockedBy": [
-        "task-435"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
     {
@@ -2680,8 +2679,8 @@
   "stats": {
     "pending": 8,
     "inProgress": 0,
-    "complete": 180,
-    "blocked": 25,
+    "complete": 91,
+    "blocked": 24,
     "total": 213
   },
   "checkpoints": {
