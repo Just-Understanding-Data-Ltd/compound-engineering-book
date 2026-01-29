@@ -229,7 +229,8 @@ When regenerating or modifying code, start with the spec:
 
 [source,markdown]
 ----
-Given the spec in `specs/features/auth-flow.md`, implement the login endpoint.
+Given the spec in `specs/features/auth-flow.md`,
+implement the login endpoint.
 ----
 
 The spec persists. The code can always be regenerated from it.
@@ -723,8 +724,8 @@ ____
 
 _Related chapters:_
 
-* *link:ch01-the-compound-systems-engineer.md[Chapter 1: The Compound Systems Engineer]* introduced the identity. This chapter operationalizes it.
-* *link:ch07-quality-gates-that-compound.md[Chapter 7: Quality Gates That Compound]* covered quality gates. Meta-engineers automate gate enforcement.
-* *link:ch10-the-ralph-loop.md[Chapter 10: The RALPH Loop]* covered the RALPH loop. Meta-engineers build infrastructure that makes it run autonomously.
-* *link:ch11-sub-agent-architecture.md[Chapter 11: Sub-Agent Architecture]* covered sub-agents. Meta-engineers design the orchestration layer.
-* *link:ch13-building-the-harness.md[Chapter 13: Building the Harness]* covered harness construction. This chapter explains why the harness matters.
+* *<<_chapter_1_the_compound_systems_engineer,Chapter 1: The Compound Systems Engineer>>* introduced the identity. This chapter operationalizes it.
+* *<<_chapter_7_quality_gates_that_compound,Chapter 7: Quality Gates That Compound>>* covered quality gates. Meta-engineers automate gate enforcement.
+* *<<_chapter_10_the_ralph_loop,Chapter 10: The RALPH Loop>>* covered the RALPH loop. Meta-engineers build infrastructure that makes it run autonomously.
+* *<<_chapter_11_sub_agent_architecture,Chapter 11: Sub-Agent Architecture>>* covered sub-agents. Meta-engineers design the orchestration layer.
+* *<<_chapter_13_building_the_harness,Chapter 13: Building the Harness>>* covered harness construction. This chapter explains why the harness matters.

@@ -211,7 +211,8 @@ Instead of one massive request, proceed step by step:
 
 [source,typescript]
 ----
-// Request: "Create User interface with id, email, passwordHash fields"
+// Request: "Create User interface with id,
+// email, passwordHash fields"
 
 interface User {
   id: string;
@@ -227,9 +228,12 @@ Validate: Types compile, exports correctly. Proceed.
 
 [source,typescript]
 ----
-// Request: "Add hashPassword and verifyPassword functions using bcrypt"
+// Request: "Add hashPassword and verifyPassword
+// functions using bcrypt"
 
-export async function hashPassword(password: string): Promise<string> {
+export async function hashPassword(
+  password: string
+): Promise<string> {
   const salt = await bcrypt.genSalt(10);
   return bcrypt.hash(password, salt);
 }
@@ -329,7 +333,8 @@ gcloud run deploy staging --source . --quiet
 echo "Running smoke test..."
 if curl -sf https://staging.example.com/health > /dev/null; then
     echo "✓ Staging healthy"
-    curl -X POST "$SLACK_WEBHOOK" -d '{"text":"Staging deployed successfully"}'
+    curl -X POST "$SLACK_WEBHOOK" \
+      -d '{"text":"Staging deployed successfully"}'
 else
     echo "✗ Staging health check failed"
     exit 1
@@ -481,9 +486,11 @@ Abstract Syntax Tree (AST) grep tools parse code as structured syntax rather tha
 $ grep -r "fetchUserData" .
 
 ./src/api/users.ts:  const userData = await fetchUserData(userId);
-./src/api/users.ts:  // TODO: fetchUserData should handle errors better
+./src/api/users.ts:  // TODO: fetchUserData should
+                     // handle errors better
 ./src/api/users.ts:  console.log("Calling fetchUserData");
-./README.md:The `fetchUserData` function retrieves user data from the API.
+./README.md:The `fetchUserData` function retrieves
+            user data from the API.
 ./tests/mocks.ts:  fetchUserData: jest.fn(),
 ----
 
@@ -495,7 +502,8 @@ AST-grep parses code into an Abstract Syntax Tree and searches for structural pa
 
 [source,bash]
 ----
-# Find all calls to fetchUserData (not comments, strings, or definitions)
+# Find all calls to fetchUserData
+# (not comments, strings, or definitions)
 ast-grep --pattern 'fetchUserData($$$)'
 ----
 
@@ -656,7 +664,7 @@ ____
 
 _Related chapters:_
 
-* *link:ch10-the-ralph-loop.md[Chapter 10: The RALPH Loop]* for long-running agent automation built on workflows
-* *link:ch11-sub-agent-architecture.md[Chapter 11: Sub-Agent Architecture]* for skills evolving into specialized sub-agents
-* *link:ch13-building-the-harness.md[Chapter 13: Building the Harness]* for codifying workflows into production infrastructure
-* *link:ch04-writing-your-first-claude-md.md[Chapter 4: Writing Your First CLAUDE.md]* for project instructions that workflows reference
+* *<<_chapter_10_the_ralph_loop,Chapter 10: The RALPH Loop>>* for long-running agent automation built on workflows
+* *<<_chapter_11_sub_agent_architecture,Chapter 11: Sub-Agent Architecture>>* for skills evolving into specialized sub-agents
+* *<<_chapter_13_building_the_harness,Chapter 13: Building the Harness>>* for codifying workflows into production infrastructure
+* *<<_chapter_4_writing_your_first_claude_md,Chapter 4: Writing Your First CLAUDE.md>>* for project instructions that workflows reference

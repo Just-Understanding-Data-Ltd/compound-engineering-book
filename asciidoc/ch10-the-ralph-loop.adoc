@@ -194,7 +194,8 @@ A repository-wide knowledge file (AGENTS.md or CLAUDE.md) stores codebase-specif
 
 ### API Endpoints
 - Use Server Actions in /app/actions/
-- Always validate input with zod (TypeScript schema validation library)
+- Always validate input with zod
+  (TypeScript schema validation library)
 - Return typed response objects
 
 ## Common Mistakes to Avoid
@@ -399,7 +400,8 @@ The solution is clean slate recovery:
 Task: Implement authentication that keeps users logged in.
 
 Context: Previous approach tried JWT refresh tokens but failed because
-our API doesn't expose refresh endpoints and we cannot modify the backend.
+our API doesn't expose refresh endpoints and we
+cannot modify the backend.
 
 Constraints:
 - Must use session-based auth (API provides session cookies)
@@ -537,9 +539,9 @@ ____
 
 _Related chapters:_
 
-* *link:ch04-writing-your-first-claude-md.md[Chapter 4: Writing Your First CLAUDE.md]* for the documentation layer in depth
-* *link:ch07-quality-gates-that-compound.md[Chapter 7: Quality Gates That Compound]* for the verification mechanisms
-* *link:ch08-error-handling-and-debugging.md[Chapter 8: Error Handling & Debugging]* for the clean slate recovery pattern
-* *link:ch09-context-engineering-deep-dive.md[Chapter 9: Context Engineering Deep Dive]* for context degradation theory
-* *link:ch11-sub-agent-architecture.md[Chapter 11: Sub-Agent Architecture]* for multi-agent coordination
-* *link:ch13-building-the-harness.md[Chapter 13: Building the Harness]* for the complete orchestration system
+* *<<_chapter_4_writing_your_first_claude_md,Chapter 4: Writing Your First CLAUDE.md>>* for the documentation layer in depth
+* *<<_chapter_7_quality_gates_that_compound,Chapter 7: Quality Gates That Compound>>* for the verification mechanisms
+* *<<_chapter_8_error_handling_and_debugging,Chapter 8: Error Handling & Debugging>>* for the clean slate recovery pattern
+* *<<_chapter_9_context_engineering_deep_dive,Chapter 9: Context Engineering Deep Dive>>* for context degradation theory
+* *<<_chapter_11_sub_agent_architecture,Chapter 11: Sub-Agent Architecture>>* for multi-agent coordination
+* *<<_chapter_13_building_the_harness,Chapter 13: Building the Harness>>* for the complete orchestration system

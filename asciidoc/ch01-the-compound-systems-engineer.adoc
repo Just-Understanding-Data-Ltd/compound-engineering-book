@@ -360,7 +360,7 @@ The path has risks. Infinite preparation, cognitive overfitting, isolation, and 
 
 You do not need permission to make this shift. You need deliberate practice, a multi-year horizon, and the willingness to think in systems instead of features.
 
-The next chapter covers getting started with Claude Code, the tool that makes Level 3 engineering practical for solo developers. See link:ch02-getting-started-with-claude-code.md[Chapter 2: Getting Started with Claude Code].
+The next chapter covers getting started with Claude Code, the tool that makes Level 3 engineering practical for solo developers. See <<_chapter_2_getting_started_with_claude_code,Chapter 2: Getting Started with Claude Code>>.
 
 '''''
 
@@ -368,4 +368,4 @@ ____
 *Companion Code*: All 2 code examples for this chapter are available at https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch01[examples/ch01/]
 ____
 
-_Related chapters:_ - link:ch09-context-engineering-deep-dive.md[Chapter 9: Context Engineering Deep Dive] for deep dives on constraints and observability - link:ch10-the-ralph-loop.md[Chapter 10: The RALPH Loop] for the practical execution system - link:ch13-building-the-harness.md[Chapter 13: Building the Harness] for implementing the four-layer infrastructure
+_Related chapters:_ - <<_chapter_9_context_engineering_deep_dive,Chapter 9: Context Engineering Deep Dive>> for deep dives on constraints and observability - <<_chapter_10_the_ralph_loop,Chapter 10: The RALPH Loop>> for the practical execution system - <<_chapter_13_building_the_harness,Chapter 13: Building the Harness>> for implementing the four-layer infrastructure

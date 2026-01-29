@@ -670,4 +670,4 @@ The 10x engineer was the floor. What comes next is up to you.
 
 '''''
 
-_Related chapters:_ - link:ch10-the-ralph-loop.md[Chapter 10: The RALPH Loop] for loop fundamentals - link:ch11-sub-agent-architecture.md[Chapter 11: Sub-Agent Architecture] for agent orchestration - link:ch13-building-the-harness.md[Chapter 13: Building the Harness] for infrastructure layers
+_Related chapters:_ - <<_chapter_10_the_ralph_loop,Chapter 10: The RALPH Loop>> for loop fundamentals - <<_chapter_11_sub_agent_architecture,Chapter 11: Sub-Agent Architecture>> for agent orchestration - <<_chapter_13_building_the_harness,Chapter 13: Building the Harness>> for infrastructure layers

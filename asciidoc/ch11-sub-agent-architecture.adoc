@@ -115,7 +115,8 @@ Express + tRPC (type-safe RPC framework)
 
 ## Route Structure
 All routes follow this pattern:
-router.post('/[resource]', validateSchema(schemas.create), handlers.create);
+router.post('/[resource]',
+  validateSchema(schemas.create), handlers.create);
 
 ## Authentication
 Use JSON Web Token (JWT) tokens with our custom middleware:
@@ -245,7 +246,9 @@ The frontend engineer receives the backend result plus its own context layers:
 ----
 // packages/ui/src/components/PaymentForm.tsx
 import { useState } from 'react';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import {
+  CardElement, useStripe, useElements
+} from '@stripe/react-stripe-js';
 import { Button } from './Button';
 import { usePayment } from '../hooks/usePayment';
 
@@ -273,7 +276,8 @@ export function PaymentForm({
     const cardElement = elements.getElement(CardElement);
     if (!cardElement) return;
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error, paymentMethod } =
+      await stripe.createPaymentMethod({
       type: 'card',
       card: cardElement,
     });
@@ -330,7 +334,8 @@ describe('POST /api/payments', () => {
     jest.clearAllMocks();
   });
 
-  it('should create payment successfully with valid data', async () => {
+  it('should create payment with valid data',
+     async () => {
     const token = generateAuthToken({ userId: 'user_123' });
     mockStripe.prototype.paymentIntents.create.mockResolvedValue({
       id: 'pi_123',
@@ -511,7 +516,9 @@ The actor-critic pattern uses two agents in an adversarial loop: one generates c
 [source,typescript]
 ----
 export async function authenticate(email: string, password: string) {
-  const user = await db.query(`SELECT * FROM users WHERE email = '${email}'`);
+  const user = await db.query(
+    `SELECT * FROM users WHERE email = '${email}'`
+  );
   if (!user || user.password !== password) {
     throw new Error('Invalid credentials');
   }
@@ -549,7 +556,8 @@ export const authenticate = rateLimit({
   const valid = await bcrypt.compare(password, user.passwordHash);
 
   if (!valid) {
-    auditLog.warn('auth:invalid-password', { email, userId: user.id });
+    auditLog.warn('auth:invalid-password',
+      { email, userId: user.id });
     return { success: false, error: 'Invalid credentials' };
   }
 
@@ -603,7 +611,9 @@ const agents = packages.map(packagePath =>
   })
 );
 
-const results = await Promise.all(agents.map(a => a.waitForCompletion()));
+const results = await Promise.all(
+  agents.map(a => a.waitForCompletion())
+);
 ----
 
 Parallel: Maximum of individual times equals 9 minutes (slowest agent)
@@ -710,8 +720,8 @@ ____
 
 _Related chapters:_
 
-* *link:ch04-writing-your-first-claude-md.md[Chapter 4: Writing Your First CLAUDE.md]* for the foundation of three-layer context hierarchy
-* *link:ch06-the-verification-ladder.md[Chapter 6: The Verification Ladder]* for the verification patterns sub-agents enforce
-* *link:ch07-quality-gates-that-compound.md[Chapter 7: Quality Gates That Compound]* for how sub-agent output flows through quality gates
-* *link:ch10-the-ralph-loop.md[Chapter 10: The RALPH Loop]* for how sub-agents integrate into the autonomous development cycle
-* *link:ch15-model-strategy-and-cost-optimization.md[Chapter 15: Model Strategy & Cost Optimization]* for using different model tiers for different agent roles
+* *<<_chapter_4_writing_your_first_claude_md,Chapter 4: Writing Your First CLAUDE.md>>* for the foundation of three-layer context hierarchy
+* *<<_chapter_6_the_verification_ladder,Chapter 6: The Verification Ladder>>* for the verification patterns sub-agents enforce
+* *<<_chapter_7_quality_gates_that_compound,Chapter 7: Quality Gates That Compound>>* for how sub-agent output flows through quality gates
+* *<<_chapter_10_the_ralph_loop,Chapter 10: The RALPH Loop>>* for how sub-agents integrate into the autonomous development cycle
+* *<<_chapter_15_model_strategy_and_cost_optimization,Chapter 15: Model Strategy & Cost Optimization>>* for using different model tiers for different agent roles

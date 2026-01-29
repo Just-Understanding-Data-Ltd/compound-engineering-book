@@ -50,8 +50,8 @@ function processUser(user: User): void {
   console.log(user.name.toUpperCase());
 }
 
-processUser({ id: "1" });           // ✗ Error: Property 'name' is missing
-processUser(null);                   // ✗ Error: Argument cannot be null
+processUser({ id: "1" });  // ✗ Error: 'name' missing
+processUser(null);         // ✗ Error: Cannot be null
 processUser({ id: 1, name: "Kim" }); // ✗ Error: id should be string
 ----
 
@@ -147,7 +147,8 @@ describe('User Registration Flow', () => {
     // Verify user in database
     const user = await db.users.findByEmail('test@example.com');
     expect(user).toBeTruthy();
-    expect(user.passwordHash).not.toBe('secure123'); // Hashed, not plaintext
+    // Hashed, not plaintext
+    expect(user.passwordHash).not.toBe('secure123');
 
     // Verify email sent
     expect(emailService.sent).toContainEqual(
@@ -401,7 +402,9 @@ This is test-driven prompting: write tests before generating code.
 // Step 1: Write tests FIRST
 describe('authenticateUser', () => {
   it('returns user object for valid credentials', async () => {
-    const result = await authenticateUser('user@example.com', 'password123');
+    const result = await authenticateUser(
+      'user@example.com', 'password123'
+    );
     expect(result).toMatchObject({
       id: expect.any(String),
       email: 'user@example.com',
@@ -409,7 +412,8 @@ describe('authenticateUser', () => {
     });
   });
 
-  it('throws InvalidCredentialsError for wrong password', async () => {
+  it('throws InvalidCredentialsError for wrong password',
+     async () => {
     await expect(
       authenticateUser('user@example.com', 'wrong')
     ).rejects.toThrow(InvalidCredentialsError);
@@ -718,6 +722,6 @@ ____
 
 _Related chapters:_
 
-* *link:ch05-the-12-factor-agent.md[Chapter 5: The 12-Factor Agent]* for the reliability principles that verification enforces
-* *link:ch07-quality-gates-that-compound.md[Chapter 7: Quality Gates That Compound]* for building verification systems that improve over time
-* *link:ch03-prompting-fundamentals.md[Chapter 3: Prompting Fundamentals]* for structuring prompts that produce testable code
+* *<<_chapter_5_the_12_factor_agent,Chapter 5: The 12-Factor Agent>>* for the reliability principles that verification enforces
+* *<<_chapter_7_quality_gates_that_compound,Chapter 7: Quality Gates That Compound>>* for building verification systems that improve over time
+* *<<_chapter_3_prompting_fundamentals,Chapter 3: Prompting Fundamentals>>* for structuring prompts that produce testable code

@@ -341,7 +341,9 @@ The key pattern for fault tolerance is checkpointing after each significant acti
 
 [source,typescript]
 ----
-async function runWithCheckpoints(thread: AgentThread): Promise<void> {
+async function runWithCheckpoints(
+  thread: AgentThread
+): Promise<void> {
   while (thread.status === "running") {
     const toolCall = await getNextAction(thread);
 
@@ -520,7 +522,10 @@ if (response.status === 200) {
   const verified = verifyChangesApplied(order, changes);
 
   if (!verified) {
-    return { success: false, reason: "Changes not reflected in order state" };
+    return {
+      success: false,
+      reason: "Changes not reflected in order state"
+    };
   }
 
   return { success: true };
@@ -590,7 +595,8 @@ function deriveState(thread: AgentThread): ExecutionState {
       !approvalGrants.find(grant => grant.requestId === req.id)
     ),
     errors: thread.events.filter(e => e.type === "error"),
-    canResume: thread.status !== "completed" && thread.status !== "failed",
+    canResume: thread.status !== "completed" &&
+      thread.status !== "failed",
   };
 }
 ----
@@ -607,8 +613,14 @@ const humanTools = [
   {
     name: "request_human_approval",
     parameters: {
-      action: { type: "string", description: "What action needs approval" },
-      context: { type: "string", description: "Relevant context for decision" },
+      action: {
+        type: "string",
+        description: "What action needs approval"
+      },
+      context: {
+        type: "string",
+        description: "Relevant context for decision"
+      },
       urgency: { type: "string", enum: ["low", "medium", "high"] },
       channel: { type: "string", enum: ["slack", "email"] },
     },
@@ -617,14 +629,21 @@ const humanTools = [
     name: "request_human_input",
     parameters: {
       question: { type: "string" },
-      options: { type: "array", items: { type: "string" }, optional: true },
+      options: {
+        type: "array",
+        items: { type: "string" },
+        optional: true
+      },
     },
   },
 ];
 
-async function executeHumanTool(toolCall: ToolCall, thread: AgentThread) {
+async function executeHumanTool(
+  toolCall: ToolCall, thread: AgentThread
+) {
   // Route to appropriate channel based on urgency
-  const channel = toolCall.parameters.urgency === "high" ? "slack" : "email";
+  const channel =
+    toolCall.parameters.urgency === "high" ? "slack" : "email";
   await notifyHuman(toolCall, channel);
 
   // Structured pause with clear awaiting state
@@ -649,7 +668,10 @@ Monolithic agents that handle "`deploy, test, monitor, rollback, notify, and aud
 ----
 // BAD: Monolithic agent
 const megaAgent = new Agent({
-  capabilities: ["deploy", "test", "monitor", "rollback", "notify", "audit"],
+  capabilities: [
+    "deploy", "test", "monitor",
+    "rollback", "notify", "audit"
+  ],
 });
 
 // GOOD: Focused agents composed in a DAG
@@ -864,7 +886,9 @@ jobs:
         run: ./scripts/capture-metrics.sh > metrics.json
 
       - name: Evaluate constraints
-        run: ./scripts/check-constraints.sh metrics.json constraints.yaml
+        run: |
+          ./scripts/check-constraints.sh \
+            metrics.json constraints.yaml
 
       - name: Agent optimization loop
         if: failure()
@@ -935,7 +959,8 @@ import { readFile, writeFile, existsSync } from 'fs';
 
 function hashPrompt(prompt: string, systemPrompt?: string): string {
   const content = `${systemPrompt || ''}|||${prompt}`;
-  return createHash('sha256').update(content).digest('hex').slice(0, 16);
+  return createHash('sha256')
+    .update(content).digest('hex').slice(0, 16);
 }
 
 export async function runWithCache(
@@ -970,7 +995,9 @@ class CostTracker {
   private entries: Array<{ name: string; cost: number }> = [];
   private budget: number;
 
-  private pricing: Record<string, { input: number; output: number }> = {
+  private pricing: Record<
+    string, { input: number; output: number }
+  > = {
     'claude-3-haiku': { input: 0.25, output: 1.25 },
     'claude-sonnet-4-5-20250929': { input: 3.00, output: 15.00 },
   };
@@ -1103,7 +1130,9 @@ async function safeAIOperation<T>(
   }
 
   if (spent >= BUDGET.dailyLimit * BUDGET.alertThreshold) {
-    console.warn(`Budget alert: $${spent.toFixed(2)} of $${BUDGET.dailyLimit}`);
+    console.warn(
+      `Budget alert: $${spent.toFixed(2)} of $${BUDGET.dailyLimit}`
+    );
   }
 
   return operation();
@@ -1221,7 +1250,8 @@ const server = new Server({
   capabilities: { resources: {} },
 });
 
-server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
+server.setRequestHandler(
+  ReadResourceRequestSchema, async (request) => {
   const uri = request.params.uri;
 
   if (uri.startsWith('architecture-graph://')) {
@@ -1353,8 +1383,8 @@ ____
 
 _Related chapters:_
 
-* *link:ch04-writing-your-first-claude-md.md[Chapter 4: Writing Your First CLAUDE.md]* for CLAUDE.md fundamentals
-* *link:ch07-quality-gates-that-compound.md[Chapter 7: Quality Gates That Compound]* for quality gates in depth
-* *link:ch09-context-engineering-deep-dive.md[Chapter 9: Context Engineering Deep Dive]* for context engineering principles
-* *link:ch10-the-ralph-loop.md[Chapter 10: The RALPH Loop]* for the RALPH loop in long-running work
-* *link:ch11-sub-agent-architecture.md[Chapter 11: Sub-Agent Architecture]* for sub-agent architecture patterns
+* *<<_chapter_4_writing_your_first_claude_md,Chapter 4: Writing Your First CLAUDE.md>>* for CLAUDE.md fundamentals
+* *<<_chapter_7_quality_gates_that_compound,Chapter 7: Quality Gates That Compound>>* for quality gates in depth
+* *<<_chapter_9_context_engineering_deep_dive,Chapter 9: Context Engineering Deep Dive>>* for context engineering principles
+* *<<_chapter_10_the_ralph_loop,Chapter 10: The RALPH Loop>>* for the RALPH loop in long-running work
+* *<<_chapter_11_sub_agent_architecture,Chapter 11: Sub-Agent Architecture>>* for sub-agent architecture patterns

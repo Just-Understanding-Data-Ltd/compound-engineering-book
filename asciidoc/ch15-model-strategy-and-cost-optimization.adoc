@@ -1139,6 +1139,6 @@ ____
 
 _Related chapters:_
 
-* *link:ch07-quality-gates-that-compound.md[Chapter 7: Quality Gates That Compound]* for automated gates that validate cheaper models
-* *link:ch10-the-ralph-loop.md[Chapter 10: The RALPH Loop]* for cost management in long-running agents
-* *link:ch13-building-the-harness.md[Chapter 13: Building the Harness]* for production cost optimization and telemetry
+* *<<_chapter_7_quality_gates_that_compound,Chapter 7: Quality Gates That Compound>>* for automated gates that validate cheaper models
+* *<<_chapter_10_the_ralph_loop,Chapter 10: The RALPH Loop>>* for cost management in long-running agents
+* *<<_chapter_13_building_the_harness,Chapter 13: Building the Harness>>* for production cost optimization and telemetry

@@ -136,7 +136,8 @@ Context:
 - Output format should match our other tools
 
 Success criteria:
-- Running 'npm run csv-reader data/test.csv' prints row count and column names
+- Running 'npm run csv-reader data/test.csv' prints
+  row count and column names
 - Include basic error handling for missing files"
 ----
 
@@ -499,11 +500,14 @@ Example workflow:
 
 [source,bash]
 ----
-claude -p "How does error handling work in this codebase? Show me 3 examples."
+claude -p "How does error handling work in this codebase? \
+  Show me 3 examples."
 # Greps for error patterns, shows Result<T, E> usage
 
-claude -p "Should I use Result<T, E> or exceptions for the new payment service?"
-# Claude Code analyzes codebase, shows you chose Result<T, E>, explains why
+claude -p "Should I use Result<T, E> or exceptions for \
+  the new payment service?"
+# Claude Code analyzes codebase, shows you chose
+# Result<T, E>, explains why
 ----
 
 Time invested: 5 minutes. Understanding gained: enough to implement correctly.
@@ -516,7 +520,8 @@ Key pattern: Reference discoveries from exploration in your implementation promp
 
 [source,bash]
 ----
-claude -p "Create PaymentService using these patterns from exploration:
+claude -p "Create PaymentService using these patterns \
+  from exploration:
 
 - Result<T, E> error type
 - Log all operations to AuditLog
@@ -702,7 +707,7 @@ The key insights:
 
 The agent mindset is: every prompt should reference what exists, specify where changes go, and define how success is measured. Five minutes of exploration saves thirty minutes of iteration.
 
-The next chapter covers prompting fundamentals in depth. You will learn information theory concepts that explain why some prompts work better than others, and you will develop techniques for maximizing the value per token. See link:ch03-prompting-fundamentals.md[Chapter 3: Prompting Fundamentals].
+The next chapter covers prompting fundamentals in depth. You will learn information theory concepts that explain why some prompts work better than others, and you will develop techniques for maximizing the value per token. See <<_chapter_3_prompting_fundamentals,Chapter 3: Prompting Fundamentals>>.
 
 '''''
 
@@ -710,4 +715,4 @@ ____
 *Companion Code*: All 3 code examples for this chapter are available at https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch02[examples/ch02/]
 ____
 
-_Related chapters:_ - link:ch01-the-compound-systems-engineer.md[Chapter 1: The Compound Systems Engineer] for the meta-engineering philosophy - link:ch04-writing-your-first-claude-md.md[Chapter 4: Writing Your First CLAUDE.md] for deep dives on project context files - link:ch06-the-verification-ladder.md[Chapter 6: The Verification Ladder] for test-driven agent workflows
+_Related chapters:_ - <<_chapter_1_the_compound_systems_engineer,Chapter 1: The Compound Systems Engineer>> for the meta-engineering philosophy - <<_chapter_4_writing_your_first_claude_md,Chapter 4: Writing Your First CLAUDE.md>> for deep dives on project context files - <<_chapter_6_the_verification_ladder,Chapter 6: The Verification Ladder>> for test-driven agent workflows
