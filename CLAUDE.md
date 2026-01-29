@@ -1100,118 +1100,202 @@ Claude API returns HTTP 400 with message about "tool use concurrency issues" or 
 
 ## Image Generation for Book Figures
 
-Use the **image-generator MCP server** (GPT Image gpt-image-1.5) for professional book diagrams. This replaces ASCII art and poorly-rendered Mermaid diagrams with polished visuals.
+Use the **image-generator MCP server** (GPT Image) for professional book infographics. This replaces ASCII art and Mermaid diagrams with polished O'Reilly-style visuals.
+
+### Design Philosophy: O'Reilly Technical Infographics
+
+**CRITICAL STYLE RULES:**
+
+1. **Infographic style** - NOT cartoon, NOT photo-realistic
+2. **Include text labels** - Clear, readable labels on diagram elements
+3. **Minimal background** - White or very light, clean, uncluttered
+4. **Tech vibes** - Modern, professional, technical illustration feel
+5. **O'Reilly aesthetic** - Think Manning, Pragmatic Programmers, technical book quality
+
+**DO NOT:**
+- Cartoon/childish graphics (rainbow colors, rounded bubbly shapes)
+- Photo-realistic renders
+- Dark/busy backgrounds
+- Abstract art without clear meaning
+- Generic stock illustration style
 
 ### MCP Server Setup
 
-The image-generator MCP server is configured in `.mcp.json`. Requires `OPENAI_API_KEY` environment variable.
+Configured in `.mcp.json`. Requires `OPENAI_API_KEY` environment variable.
 
-**Available tools:**
-- `generate_image` - Create images from text prompts
-- `edit_image` - Edit existing images with text prompts
-
-### When to Generate Images
-
-| Use Image Generation | Keep as Text/Mermaid |
-|---------------------|---------------------|
-| Architecture diagrams | Simple flowcharts (<5 nodes) |
-| Conceptual illustrations | Code snippets |
-| Process flows with visual appeal | Sequence diagrams |
-| Metaphorical visuals (pyramid, ladder) | Tables |
-| Comparison visuals | Bullet lists |
-
-### Standardized Prompting Strategy
-
-**CRITICAL: Always include these elements in every prompt:**
-
-1. **Subject clarity** - What exactly the diagram shows
-2. **Visual style** - Modern, clean, professional technical illustration
-3. **Color scheme** - Consistent with book theme (blues, grays, accent colors)
-4. **Layout direction** - Horizontal, vertical, circular, or grid
-5. **NO TEXT requirement** - Text will be added via AsciiDoc captions
-
-**Master Template:**
-
-```
-Create a professional technical diagram for a software engineering book about AI-assisted development.
-
-CONCEPT: [Specific concept being visualized]
-VISUAL METAPHOR: [Physical object or familiar pattern that represents the concept]
-STYLE: Modern flat design, clean lines, professional technical illustration
-COLORS: Deep blue (#1a365d) primary, teal (#0d9488) accent, light gray (#f8fafc) background
-LAYOUT: [Horizontal flow | Vertical stack | Pyramid | Circular cycle | Layered architecture]
-
-SPECIFIC ELEMENTS:
-- [Element 1 with visual description]
-- [Element 2 with visual description]
-- [Element 3 with visual description]
-
-REQUIREMENTS:
-- NO text, labels, or words in the image
-- White or very light background for print compatibility
-- Clear visual hierarchy with size and color contrast
-- Professional, corporate presentation style
-- Suitable for both screen and print at 1024x1024
+```bash
+# Test the MCP server
+claude mcp get image-generator
 ```
 
-### Diagram Type Templates
+### Master Prompt Template
 
-**Verification Ladder / Pyramid:**
 ```
-Create a professional pyramid diagram for a technical book.
+Create a professional INFOGRAPHIC for an O'Reilly-style technical book about software engineering.
 
-CONCEPT: Verification ladder with 5 testing levels
-VISUAL METAPHOR: A 3D pyramid with distinct horizontal layers
-STYLE: Modern isometric view, clean geometric shapes
-COLORS: Gradient from light blue (bottom) to deep blue (top), each layer distinct
-LAYOUT: Vertical pyramid, widest at base
+TOPIC: [What the diagram explains]
+TYPE: [Pyramid | Pipeline | Cycle | Layers | Comparison | Flow]
 
-SPECIFIC ELEMENTS:
-- 5 distinct horizontal layers/tiers
-- Each layer slightly smaller than the one below
-- Subtle shadows for depth
-- Glowing highlight on top tier to show progression
+CONTENT (include these exact labels):
+- [Label 1]: [Brief description]
+- [Label 2]: [Brief description]
+- [Label 3]: [Brief description]
+- [Label 4]: [Brief description]
+- [Label 5]: [Brief description]
 
-REQUIREMENTS: NO text, clean edges, professional corporate style
-```
-
-**Quality Gates / Pipeline:**
-```
-Create a professional pipeline diagram for a technical book.
-
-CONCEPT: Code flowing through quality checkpoints
-VISUAL METAPHOR: Industrial pipeline with glowing gates/barriers
-STYLE: Modern tech visualization, subtle glow effects
-COLORS: Dark slate background, blue pipeline, green/amber gate indicators
-LAYOUT: Horizontal left-to-right flow
-
-SPECIFIC ELEMENTS:
-- 5 distinct checkpoint gates along a pipeline
-- Particles or data flowing through the pipeline
-- Each gate as a glowing portal or barrier
-- Progress indicators showing pass/fail states
-
-REQUIREMENTS: NO text, futuristic but professional, clean composition
+STYLE REQUIREMENTS:
+- Professional tech infographic, NOT cartoon or photo-realistic
+- Clean white or very light gray background
+- Modern sans-serif text labels (dark gray or navy text)
+- Color palette: Navy blue (#1e3a5f), Steel blue (#4682b4), Teal accent (#0d9488)
+- Clean lines, subtle shadows, flat design with minimal depth
+- Corporate presentation quality, suitable for print
+- 1024x1024 resolution, landscape orientation preferred for flows
 ```
 
-**Ratchet Effect / One-Way Progress:**
+### Diagram Templates by Type
+
+**Verification Ladder (5-Level Pyramid):**
 ```
-Create a professional mechanical diagram for a technical book.
+Create a professional INFOGRAPHIC showing a 5-level verification pyramid for a technical book.
 
-CONCEPT: Ratchet mechanism showing one-way quality improvement
-VISUAL METAPHOR: Mechanical gear ratchet that only turns one direction
-STYLE: Technical illustration, blueprint aesthetic with modern colors
-COLORS: Steel gray mechanism, blue accent for progress direction
-LAYOUT: Centered mechanical view
+TOPIC: Software Testing Verification Ladder
+TYPE: Pyramid/Staircase
 
-SPECIFIC ELEMENTS:
-- Circular ratchet gear with visible teeth
-- Pawl mechanism preventing backward motion
-- Arrow indicating forward-only direction
-- Quality level indicator (like a gauge)
+CONTENT (label each level clearly):
+- Level 1 (bottom, widest): "SYNTAX" - Code compiles
+- Level 2: "RUNTIME" - Executes without crashes
+- Level 3: "LOGIC" - Correct behavior
+- Level 4: "INTEGRATION" - Components work together
+- Level 5 (top, smallest): "E2E" - Full workflows pass
 
-REQUIREMENTS: NO text, clear mechanical logic, professional technical drawing style
+STYLE:
+- Vertical staircase or pyramid, ascending left-to-right or bottom-to-top
+- Each level a distinct horizontal bar with clear label
+- Gradient from light blue (bottom) to dark navy (top)
+- Small icons optional: checkmark, gear, brain, puzzle, user
+- White background, clean professional infographic style
+- NOT cartoon - think McKinsey or Gartner report quality
 ```
+
+**Quality Gates Pipeline:**
+```
+Create a professional INFOGRAPHIC showing a quality gates pipeline for a technical book.
+
+TOPIC: Code Quality Gates Pipeline
+TYPE: Horizontal flow/pipeline
+
+CONTENT (5 gates, left to right):
+- Gate 1: "LINT" - Style checks
+- Gate 2: "TYPE" - Type safety
+- Gate 3: "TEST" - Unit tests
+- Gate 4: "BUILD" - Compilation
+- Gate 5: "DEPLOY" - Production ready
+
+STYLE:
+- Horizontal pipeline flowing left to right
+- Each gate as a distinct checkpoint/barrier
+- Code/data particles flowing through
+- Green checkmarks for passed gates
+- Clean white background
+- Professional tech infographic, modern flat design
+```
+
+**Ratchet Effect (One-Way Progress):**
+```
+Create a professional INFOGRAPHIC showing a ratchet mechanism for a technical book.
+
+TOPIC: Quality Ratchet - Progress Cannot Reverse
+TYPE: Mechanical diagram
+
+CONTENT (labeled components):
+- "QUALITY LEVEL" - Current position indicator
+- "RATCHET GEAR" - Main progress wheel
+- "PAWL" - Prevents backward motion
+- "FORWARD ONLY" - Direction arrow
+- "BASELINE" - Minimum quality floor
+
+STYLE:
+- Technical illustration, blueprint-inspired
+- Clean mechanical drawing with labels
+- Blue/gray color scheme
+- White background with subtle grid lines optional
+- Professional engineering diagram quality
+```
+
+**RALPH Loop (4-Phase Cycle):**
+```
+Create a professional INFOGRAPHIC showing a 4-phase development cycle for a technical book.
+
+TOPIC: RALPH Loop - Autonomous Agent Iteration Cycle
+TYPE: Circular cycle
+
+CONTENT (4 phases, clockwise):
+- Phase 1: "READ" - Load context and state
+- Phase 2: "ACT" - Execute one task
+- Phase 3: "LOG" - Commit and document
+- Phase 4: "PAUSE" - Clean exit for next iteration
+
+STYLE:
+- Circular diagram with 4 distinct segments
+- Arrows showing clockwise flow
+- Each segment clearly labeled
+- Center could show "RALPH" or iteration icon
+- Professional cycle diagram, not cartoon
+- Navy/teal color scheme on white background
+```
+
+**Architecture Layers:**
+```
+Create a professional INFOGRAPHIC showing layered architecture for a technical book.
+
+TOPIC: [Specific architecture name]
+TYPE: Layered stack
+
+CONTENT (layers, top to bottom or bottom to top):
+- Layer 1: "[Name]" - [Purpose]
+- Layer 2: "[Name]" - [Purpose]
+- Layer 3: "[Name]" - [Purpose]
+- Layer 4: "[Name]" - [Purpose]
+
+STYLE:
+- Horizontal stacked layers
+- Clear boundaries between layers
+- Arrows showing data/control flow direction
+- Each layer labeled with name
+- Professional architecture diagram
+- Clean white background
+```
+
+### File Naming & Storage
+
+```
+assets/images/ch[XX]-[concept-name].png
+
+Examples:
+- assets/images/ch06-verification-ladder.png
+- assets/images/ch07-quality-gates-pipeline.png
+- assets/images/ch07-ratchet-effect.png
+- assets/images/ch10-ralph-loop-cycle.png
+```
+
+### Quality Checklist
+
+Before accepting a generated image:
+- [ ] Has clear, readable text labels
+- [ ] White/light minimal background
+- [ ] NOT cartoon or photo-realistic
+- [ ] Professional infographic quality (O'Reilly/Manning level)
+- [ ] Colors are professional (navy, steel blue, teal, gray)
+- [ ] Would look good printed in a technical book
+- [ ] Conveys the concept clearly without additional explanation
+
+### Regeneration
+
+If an image looks wrong:
+1. Delete the bad image: `rm assets/images/ch[XX]-[name].png`
+2. Refine the prompt with more specific style guidance
+3. Regenerate with emphasis on "NOT cartoon, infographic style, O'Reilly quality"
 
 **Circular Process / Cycle:**
 ```
