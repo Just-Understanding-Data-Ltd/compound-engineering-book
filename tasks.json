@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T13:23:00.000Z",
+  "lastUpdated": "2026-01-29T14:30:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle: Updated blocking scores. task-439 (table widths) blocks 10+ tasks, now score 1080. task-443 (PDF theme) blocks 4 tasks, now score 880. task-444 (EPUB theme) blocks 5 tasks, now score 905. 16 pending, 13 blocked, 184 complete.",
@@ -1728,12 +1728,13 @@
       "type": "fix",
       "title": "Fix all table column widths in AsciiDoc chapters",
       "description": "Review all tables across 15 chapters. Add cols attribute with appropriate widths. Ensure no table exceeds page width. Test in both PDF and EPUB output.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 1080,
       "scoreBreakdown": "high:750 + fix:80 + blocking(10×25):250 = 1080",
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:01.156Z"
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T14:30:00.000Z"
     },
     {
       "id": "task-433",
@@ -2659,9 +2660,9 @@
     ]
   },
   "stats": {
-    "pending": 16,
+    "pending": 15,
     "inProgress": 0,
-    "complete": 184,
+    "complete": 185,
     "blocked": 13,
     "total": 213
   },

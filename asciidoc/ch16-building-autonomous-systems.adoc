@@ -8,7 +8,7 @@ By the end of this chapter, you will understand how autonomous development syste
 
 The numbers tell the story:
 
-[cols=",",options="header",]
+[width="100%",cols="50%,50%",options="header"]
 |===
 |Metric |Value
 |Tasks completed |174
@@ -197,7 +197,7 @@ This scoring system produces a natural priority order: critical blockers first, 
 
 Different activities happen at different intervals:
 
-[cols=",",options="header",]
+[width="100%",cols="50%,50%",options="header"]
 |===
 |Interval |Activity
 |Every iteration |Complete one task, commit
@@ -556,7 +556,7 @@ Each layer built on previous layers. By the end of the project, adding a new rev
 
 The infrastructure investment breakdown:
 
-[cols=",,,,",options="header",]
+[width="100%",cols="25%,18%,15%,20%,22%",options="header"]
 |===
 |Component |Build Time |Uses |Time/Use |Total Saved
 |ralph.sh |6 hours |174 |3 min |8.7 hours

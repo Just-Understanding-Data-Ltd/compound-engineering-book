@@ -524,7 +524,7 @@ The quality gate becomes a teaching mechanism. Over time, the LLM internalizes y
 
 ==== Metrics That Matter
 
-[cols=",,",options="header",]
+[width="100%",cols="30%,35%,35%",options="header"]
 |===
 |Metric |Manual Review |Trust But Verify
 |Review time |2-4 hours |30 seconds

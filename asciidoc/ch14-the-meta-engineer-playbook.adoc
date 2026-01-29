@@ -146,7 +146,7 @@ If you lose the code, you can regenerate it from the prompts. If you lose the pr
 
 When a conversation vanishes, you lose:
 
-[cols=",",options="header",]
+[width="100%",cols="40%,60%",options="header"]
 |===
 |What’s Lost |Impact
 |Intent |The "`why`" behind decisions
@@ -331,7 +331,7 @@ Level 4 is the minimum for long-term career safety. AI does not eliminate the ne
 
 AI-powered coding agents represent a paradigm shift. Each wave arrives faster than its predecessor. Each provides roughly 5x productivity gains over the previous.
 
-[cols=",,,",options="header",]
+[width="100%",cols="15%,25%,25%,35%",options="header"]
 |===
 |Wave |Mode |Status |Key Characteristic
 |1 |Traditional coding |Declining |You type everything
@@ -399,7 +399,7 @@ Each individual contributor effectively manages a hierarchical AI workforce. You
 
 The infrastructure for this transition is not free:
 
-[cols=",",options="header",]
+[width="100%",cols="40%,60%",options="header"]
 |===
 |Metric |Value
 |Current LLM spend |$10-12 per developer per hour
@@ -417,7 +417,7 @@ This creates a potential inversion where experience becomes a liability when pai
 
 ==== Timeline Pressure
 
-[cols=",,",options="header",]
+[width="100%",cols="30%,35%,35%",options="header"]
 |===
 |Wave |Timing |Preparation
 |Wave 4 |Q1 2025 |Experiment with agents now
@@ -638,7 +638,7 @@ If the ROI is positive within two weeks, build the tool. If not, keep the workfl
 
 ==== What You Are Actually Building
 
-[cols=",",options="header",]
+[width="100%",cols="40%,60%",options="header"]
 |===
 |Surface Level |Meta Level
 |A Software as a Service (SaaS) product |A product-building system

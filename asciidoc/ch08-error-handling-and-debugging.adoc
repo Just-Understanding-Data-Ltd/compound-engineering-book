@@ -587,7 +587,7 @@ Building a demo agent is easy. Building a reliable agent is exponentially harder
 
 Individual action reliability compounds catastrophically across multi-step tasks. Even with 95% success per action, the overall success rate drops dramatically:
 
-[cols=",,",options="header",]
+[width="100%",cols="33%,34%,33%",options="header"]
 |===
 |Actions |Per-Action Success |Overall Success
 |5 |95% |77%
@@ -824,7 +824,7 @@ The exponential backoff pattern (1s, 2s, 4s, 8s…) gives temporary issues time 
 
 The key to compound reliability is improving per-action success rate:
 
-[cols=",,",options="header",]
+[width="100%",cols="33%,34%,33%",options="header"]
 |===
 |Current |Target |10-Action Workflow
 |95% |99% |60% → 90%
@@ -853,7 +853,7 @@ Encode the answer
 
 ==== Where Knowledge Goes
 
-[cols=",,",options="header",]
+[width="100%",cols="33%,34%,33%",options="header"]
 |===
 |Problem Type |Destination |Example
 |Coding pattern |CLAUDE.md |"`Use bun, not npm`"

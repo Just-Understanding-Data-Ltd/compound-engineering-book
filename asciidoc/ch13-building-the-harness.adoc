@@ -142,7 +142,7 @@ fi
 
 Multiple test levels provide different kinds of signal:
 
-[cols=",",options="header",]
+[width="100%",cols="40%,60%",options="header"]
 |===
 |Test Level |Signal
 |Unit tests |Fast feedback on individual functions
@@ -405,7 +405,7 @@ Building a demo agent is easy. Building a reliable agent is exponentially harder
 
 Individual action reliability compounds catastrophically across multi-step tasks:
 
-[cols=",,",options="header",]
+[width="100%",cols="33%,34%,33%",options="header"]
 |===
 |Actions |Per-Action Success |Overall Success
 |5 |95% |77%
@@ -537,7 +537,7 @@ Layer these defenses to improve overall reliability:
 
 Every 1% improvement in per-action reliability compounds dramatically:
 
-[cols=",,",options="header",]
+[width="100%",cols="33%,34%,33%",options="header"]
 |===
 |Current |Target |10-Action Workflow
 |95% |99% |60% → 90%

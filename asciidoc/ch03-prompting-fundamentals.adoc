@@ -343,7 +343,7 @@ The search space collapsed from hundreds of combinations to one clear path. Impl
 
 ==== When to Use Upfront Questioning
 
-[cols=",",options="header",]
+[width="100%",cols="60%,40%",options="header"]
 |===
 |Scenario |Use Upfront Questioning?
 |Vague feature request |Yes

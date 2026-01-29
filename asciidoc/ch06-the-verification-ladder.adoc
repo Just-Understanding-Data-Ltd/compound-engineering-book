@@ -178,7 +178,7 @@ Unit tests don’t catch these failures. Only integration tests do.
 
 *The signal-to-noise comparison:*
 
-[cols=",,,",options="header",]
+[width="100%",cols="25%,25%,25%,25%",options="header"]
 |===
 |Test Type |Tests Needed |Lines Verified |Signal per Test
 |Unit tests |47 tests |5-10 lines each |Low
@@ -310,7 +310,7 @@ For most code, levels 1-5 provide sufficient confidence. Reserve formal verifica
 
 Here’s the decision framework:
 
-[cols=",",options="header",]
+[width="100%",cols="60%,40%",options="header"]
 |===
 |Scenario |Minimum Level
 |Internal utility function |Level 3 (Unit tests)

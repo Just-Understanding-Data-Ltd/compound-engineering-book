@@ -12,7 +12,7 @@ Demo agents handle single requests. Production agents handle chains.
 
 Consider the math. If each action in your workflow succeeds 95% of the time, what happens as actions compound?
 
-[cols=",,",options="header",]
+[width="100%",cols="30%,35%,35%",options="header"]
 |===
 |Actions |Per-Action Success |Overall Success
 |5 |95% |77%

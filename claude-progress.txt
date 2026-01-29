@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 13:23)
+## Current Status (Updated: 2026-01-29 14:30)
 - Phase: AsciiDoc Publishing Pipeline + Chapter 16 Completion
-- Active: AsciiDoc conversion COMPLETE, Ch16 finalization pending
-- Last Completed: Queue curation (adjusted blocking scores)
+- Active: Table widths FIXED, PDF/EPUB theming next
+- Last Completed: task-439 - Fixed all table column widths in AsciiDoc chapters
 - Blockers: None
-- Queue Health: 16 pending, 13 blocked, 184 complete
-- Publishing Readiness: ALL 16 chapters converted to AsciiDoc, book.adoc master file created
-- Next Task: task-439 (Fix table widths, score 1080, blocks 10+ tasks)
+- Queue Health: 15 pending, 13 blocked, 185 complete
+- Publishing Readiness: ALL 16 chapters converted to AsciiDoc, tables properly formatted
+- Next Task: task-443 or task-444 (PDF/EPUB theming, now unblocked)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -30,6 +30,31 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 14:30 - COMPLETED task-439: Fix all table column widths in AsciiDoc chapters
+- What: Fixed 26 tables across 12 AsciiDoc files that had comma-only cols attributes
+- Files modified:
+  - ch03-prompting-fundamentals.adoc (1 table)
+  - ch04-writing-your-first-claude-md.adoc (1 table)
+  - ch05-the-12-factor-agent.adoc (1 table)
+  - ch06-the-verification-ladder.adoc (2 tables)
+  - ch07-quality-gates-that-compound.adoc (1 table)
+  - ch08-error-handling-and-debugging.adoc (3 tables)
+  - ch10-the-ralph-loop.adoc (2 tables)
+  - ch13-building-the-harness.adoc (3 tables)
+  - ch14-the-meta-engineer-playbook.adoc (5 tables)
+  - ch15-model-strategy-and-cost-optimization.adoc (4 tables)
+  - ch16-building-autonomous-systems.adoc (3 tables)
+  - backmatter.adoc (1 table)
+- Changes applied:
+  - Added width="100%" to all tables
+  - 2-column tables: cols="40%,60%" or cols="50%,50%"
+  - 3-column tables: cols="33%,34%,33%" or similar
+  - 4-column tables: cols="25%,25%,25%,25%" or context-appropriate
+  - 5-column tables: cols="25%,18%,15%,20%,22%"
+- Verification: grep for comma-only cols patterns returns no matches
+- Unblocks: 10+ dependent tasks (PDF theming, EPUB theming, etc.)
+- Stats: 15 pending, 13 blocked, 185 complete
 
 ### 2026-01-29 13:23 - Queue Curation: Adjusted blocking scores
 - What: Curated task queue, recalculated scores based on blocking chains

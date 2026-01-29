@@ -54,7 +54,7 @@ Continuing a broken trajectory has real costs. Each failed iteration takes 2-5 m
 
 After 3 failed attempts (15{plus} minutes), you’ve likely spent more time than starting fresh would take. The math favors clean breaks:
 
-[cols=",,,",options="header",]
+[width="100%",cols="25%,25%,25%,25%",options="header"]
 |===
 |Scenario |Time |Tokens |Success Rate
 |Continue broken trajectory |~40 min |~40K |~30%
@@ -264,7 +264,7 @@ Tasks with ambiguous requirements or architectural decisions don’t belong in a
 
 The RALPH Loop shifts how you think about software economics.
 
-[cols=",,",options="header",]
+[width="100%",cols="25%,40%,35%",options="header"]
 |===
 |Dimension |Old Model |New Model
 |Core bottleneck |Expensive human typing |Cheap AI inference cycles

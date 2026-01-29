@@ -198,7 +198,7 @@ The hierarchical approach achieves 70-90% context reduction with 80-95% relevanc
 
 Follow these guidelines for file sizes at each level:
 
-[cols=",,",options="header",]
+[width="100%",cols="33%,34%,33%",options="header"]
 |===
 |Level |Target |Maximum
 |Root |20-50 lines |100 lines

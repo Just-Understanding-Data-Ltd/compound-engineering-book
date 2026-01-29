@@ -19,7 +19,7 @@ claude --resume
 
 === Key Patterns
 
-[cols=",",options="header",]
+[width="100%",cols="40%,60%",options="header"]
 |===
 |Pattern |Use Case
 |Progressive Disclosure |Load context on demand
