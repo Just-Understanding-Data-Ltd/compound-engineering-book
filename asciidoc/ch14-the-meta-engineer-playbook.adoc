@@ -268,6 +268,10 @@ This is where quality lives. Agents are confidently wrong. Verification catches 
 
 ==== The Leverage Stack
 
+[[fig-leverage-stack]]
+.The Leverage Stack: What to keep sharp vs what to safely delegate or forget
+image::ch14-leverage-stack.png[Leverage Stack,width=600,align=center]
+
 ....
 ┌─────────────────────────────────────────────────────────┐
 │  Understanding the problem          KEEP SHARP         │
@@ -301,6 +305,10 @@ If the answer to any is "`no,`" slow down. You do not own that code yet.
 ==== The Atrophy Ladder
 
 Where you fall determines your career ceiling:
+
+[[fig-atrophy-ladder]]
+.The Atrophy Ladder: Level 4 is the minimum for career safety
+image::ch14-atrophy-ladder.png[Atrophy Ladder,width=600,align=center]
 
 ....
 Level 5: Can specify, verify, AND derive solutions from scratch
@@ -597,6 +605,10 @@ Most engineers only develop the bottom layers. Meta-engineers develop the full s
 ==== The Four Levels of Automation
 
 Think like a Factorio player. Do not mine ore by hand. Build miners. Do not place miners by hand. Build systems that place miners.
+
+[[fig-four-automation-levels]]
+.The Four Levels of Automation: From 1x to 100-500x productivity
+image::ch14-four-automation-levels.png[Four Automation Levels,width=600,align=center]
 
 *Level 0: Manual Coding*
 

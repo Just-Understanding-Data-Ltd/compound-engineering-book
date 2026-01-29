@@ -1,6 +1,7 @@
 # OS files
 .DS_Store
 Thumbs.db
+.mcp.json
 
 # Editor files
 *.swp
@@ -48,6 +49,7 @@ kb-scan-results.md
 
 # Secrets
 .env
+.mcp.json
 
 # Build artifacts
 the-meta-engineer.epub

@@ -40,6 +40,10 @@ The data shows three distinct phases:
 
 The crossover point came around Chapter 8. Before that, infrastructure development consumed more time than it saved. After that, each chapter benefited from all previous infrastructure investments.
 
+[[fig-velocity-curve]]
+.Velocity Curve: How infrastructure compounds over time
+image::ch16-velocity-curve.png[Velocity Curve,width=700,align=center]
+
 === The RALPH Loop Architecture
 
 The RALPH loop has three components: an orchestrator script that spawns iterations, an executor that completes one task per iteration, and a task manager that tracks progress.

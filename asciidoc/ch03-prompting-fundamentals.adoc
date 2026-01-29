@@ -220,6 +220,10 @@ Batch processing MUST handle 10,000 records per minute.
 
 Think of constraints as a funnel. Each constraint eliminates possible outputs:
 
+[[fig-constraint-funnel]]
+.The Constraint Funnel: Each layer reduces possibilities by an order of magnitude
+image::ch03-constraint-funnel.png[Constraint Funnel,width=600,align=center]
+
 ....
 All syntactically valid programs         [1,000,000 possibilities]
     ↓ Type constraints

@@ -33,11 +33,19 @@ S3 = S2 ∩ G3  (lint-clean AND pass tests)
 
 The key property is monotonic reduction. Each intersection reduces the size of the set:
 
+[[fig-state-space-reduction]]
+.State Space Reduction: Each gate intersection shrinks the set of valid programs
+image::ch07-state-space-reduction.png[State Space Reduction,width=600,align=center]
+
 ....
 |S0| > |S1| > |S2| > |S3| > ... > |Sn|
 ....
 
 Each gate eliminates invalid states without adding new ones. We are filtering out bad implementations, not creating new possibilities.
+
+[[fig-quality-gates-filters]]
+.Quality Gates as Information Filters: Progressive state space reduction
+image::ch07-quality-gates-filters.png[Quality Gates as Filters,width=700,align=center]
 
 ==== A Concrete Example
 
@@ -181,6 +189,10 @@ Linear thinking would predict: 10% {plus} 15% {plus} 20% {plus} 15% {plus} 20% {
 Compounding reality gives you: 165%
 
 The bonus from compounding: 60% additional improvement.
+
+[[fig-compounding-effect]]
+.The Compounding Effect: Quality gates multiply, not add
+image::ch07-compounding-effect.png[Compounding Effect,width=700,align=center]
 
 ==== Why Multiplication is Correct
 
@@ -328,6 +340,10 @@ Example workflow:
 ....
 
 ==== Real-World Impact
+
+[[fig-manual-vs-auto-verification]]
+.Manual vs Automated Verification: Hooks deliver 60-70% time savings
+image::ch07-manual-vs-auto-verification.png[Manual vs Auto Verification,width=600,align=center]
 
 Without hooks: - 8-10 minutes per feature - 6 manual commands - Multiple back-and-forth cycles
 

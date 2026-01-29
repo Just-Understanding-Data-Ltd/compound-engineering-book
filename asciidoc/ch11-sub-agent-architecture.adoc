@@ -39,6 +39,10 @@ Each specialist receives focused context about their domain. The backend enginee
 
 Sub-agents derive their expertise from a three-layer context hierarchy:
 
+[[fig-context-hierarchy]]
+.Context Hierarchy: How sub-agents inherit and specialize context
+image::ch11-context-hierarchy.png[Context Hierarchy,width=600,align=center]
+
 ==== Layer 1: Root CLAUDE.md (Shared Patterns)
 
 The root configuration establishes patterns all agents must follow:

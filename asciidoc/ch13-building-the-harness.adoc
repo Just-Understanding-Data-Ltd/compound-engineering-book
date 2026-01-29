@@ -17,7 +17,15 @@ Each layer of harness you add filters noise and amplifies signal. The first laye
 
 The key insight is this: the LLM is the least controllable part of the system. Everything else is engineering. You cannot make the model fundamentally smarter, but you can control everything around it. Resources spent on harness construction outperform resources spent on prompt tweaking by an order of magnitude.
 
+[[fig-signal-processing]]
+.Signal Processing Model: How harness layers filter noise from intent to output
+image::ch13-signal-processing.png[Signal Processing Model,width=700,align=center]
+
 If something fails 30% of the time, do not write 100 different prompts hoping one works. Build one layer of infrastructure that constrains the system to success.
+
+[[fig-harness-architecture]]
+.Harness Architecture: Four layers of control building on the raw LLM
+image::ch13-harness-architecture.png[Harness Architecture,width=600,align=center]
 
 === Layer 1: Configuring Claude Code
 
@@ -789,6 +797,10 @@ The outermost layer uses telemetry as active feedback control. Instead of passiv
 ==== Telemetry as Control Input
 
 The traditional model is reactive: write code, measure performance, debug if problems appear. The closed-loop model is proactive: define constraints, let the system alter code until constraints are satisfied.
+
+[[fig-closed-loop-optimization]]
+.Closed-Loop Optimization: Telemetry-driven automatic fixing until constraints satisfied
+image::ch13-closed-loop-optimization.png[Closed-Loop Optimization,width=600,align=center]
 
 ....
 Service under load

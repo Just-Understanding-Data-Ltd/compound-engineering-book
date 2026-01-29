@@ -78,6 +78,10 @@ Each tier has distinct strengths that inform task routing:
 
 Understanding these strengths helps you route tasks accurately. A task like "`find all usages of getUserById`" maps to Haiku. A task like "`redesign the authentication system to support OAuth`" maps to Opus.
 
+[[fig-model-escalation]]
+.Model Escalation: Cost-optimized selection flow from Haiku to Opus
+image::ch15-model-escalation.png[Model Escalation,width=500,align=center]
+
 ==== Latency Considerations
 
 Speed matters for interactive development:
@@ -214,6 +218,10 @@ For aggressive Haiku usage (80% Haiku, 15% Sonnet, 5% Opus), savings reach 53%.
 === Cost Protection with Multi-Layer Timeouts
 
 Runaway costs happen. An agent enters an infinite loop. A task processes more files than expected. A verbose response generates 50K tokens. Without limits, a single job can consume your monthly budget in hours.
+
+[[fig-cost-protection-layers]]
+.Four-Layer Cost Protection: Defense in depth against runaway API costs
+image::ch15-cost-protection-layers.png[Cost Protection Layers,width=500,align=center]
 
 Build protection in layers:
 

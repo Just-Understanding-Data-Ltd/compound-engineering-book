@@ -50,6 +50,10 @@ function processData(
 
 Quality gates work by filtering the state space:
 
+[[fig-entropy-reduction-pipeline]]
+.Entropy Reduction Pipeline: From 20 bits (1M+ programs) to 5 bits (32 programs)
+image::ch09-entropy-reduction-pipeline.png[Entropy Reduction Pipeline,width=600,align=center]
+
 ....
 All syntactically valid programs:  H = 20 bits  (1M+ programs)
                 ↓

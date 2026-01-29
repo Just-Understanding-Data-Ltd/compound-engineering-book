@@ -35,6 +35,10 @@ Tests don’t catch the error type. Symptoms include: - Code passes tests but fa
 
 No automated check enforces the requirement. Symptoms include: - Code compiles but violates architecture - Linting passes but conventions break - Subtle bugs slip through
 
+[[fig-debugging-hierarchy]]
+.The Debugging Hierarchy: Where to look first when diagnosing AI agent errors
+image::ch08-debugging-hierarchy.png[Debugging Hierarchy,width=600,align=center]
+
 ==== Applying the Framework
 
 When you encounter an error, diagnose the root cause before fixing:
@@ -910,6 +914,10 @@ Git commits serve as checkpoints in AI-assisted development. Frequent, atomic co
 *The Ratchet Effect*
 
 Commit after every successful change to lock in progress:
+
+[[fig-ratchet-effect-flow]]
+.The Ratchet Effect: Commit on success locks in progress, fix on failure before proceeding
+image::ch08-ratchet-effect-flow.png[Ratchet Effect Flow,width=600,align=center]
 
 ....
 ┌────────────────────────────────────────────────────────────┐

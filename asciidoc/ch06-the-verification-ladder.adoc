@@ -210,6 +210,10 @@ Integration tests verify 10-20x more code per test. When reviewing LLM-generated
 
 *The inverted pyramid for LLM code:*
 
+[[fig-test-pyramid-inversion]]
+.Test Pyramid Inversion: LLM-optimized testing emphasizes integration tests
+image::ch06-test-pyramid-inversion.png[Test Pyramid Inversion,width=600,align=center]
+
 ....
 Traditional (human development):
     /\
@@ -353,6 +357,10 @@ When you ask Claude to add a feature and tests fail afterward, you face a questi
 Without knowing the baseline, you can’t tell. This ambiguity wastes hours debugging pre-existing issues.
 
 The verification sandwich solves this.
+
+[[fig-verification-sandwich]]
+.The Verification Sandwich: Establish baseline before generation, detect delta after
+image::ch06-verification-sandwich.png[Verification Sandwich,width=600,align=center]
 
 ....
 ┌─────────────────────────────────────────┐

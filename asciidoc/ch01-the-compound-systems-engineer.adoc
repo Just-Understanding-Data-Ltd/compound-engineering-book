@@ -258,6 +258,10 @@ export const SystemConstraints = {
 
 *3. Feedback loops* that prove constraints are met:
 
+[[fig-feedback-loop-pipeline]]
+.The AI-Assisted Development Feedback Loop: Continuous verification and automatic correction
+image::ch01-feedback-loop-pipeline.png[Feedback Loop Pipeline,width=600,align=center]
+
 ....
 Code change → Automated tests → Load tests → Telemetry capture
     → Constraint evaluation → Pass/Fail → Agent fixes if needed → Retry

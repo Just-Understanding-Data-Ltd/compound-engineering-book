@@ -114,6 +114,10 @@ Each RALPH iteration follows a four-phase cycle. The time allocation might surpr
 
 Most developers expect coding to dominate. In compound engineering, planning and review consume 80% of effort. The actual implementation phase is brief because thorough preparation reduces iteration.
 
+[[fig-ralph-cycle-time]]
+.RALPH Cycle Time: Only 20% of each iteration is actual coding
+image::ch10-ralph-cycle-time.png[RALPH Cycle Time,width=500,align=center]
+
 ==== Phase 1: Plan (40%)
 
 Before writing code, the agent gathers context:
@@ -316,6 +320,10 @@ You get 3x more output for 5% more cost. That’s compound leverage.
 === Multi-Agent Coordination
 
 The natural extension of the RALPH Loop is parallel agents working on independent tasks.
+
+[[fig-multi-agent-coordination]]
+.Multi-Agent Coordination: Human architect directs parallel agents sharing Git memory
+image::ch10-multi-agent-coordination.png[Multi-Agent Coordination,width=600,align=center]
 
 ....
         Human Engineer

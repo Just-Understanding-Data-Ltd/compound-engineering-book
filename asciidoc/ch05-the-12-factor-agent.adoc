@@ -25,6 +25,10 @@ Consider the math. If each action in your workflow succeeds 95% of the time, wha
 
 The formula is simple: `0.95^N`. A 10-step workflow has 60% reliability, worse than a coin flip for business-critical operations. Production workflows commonly require 15-25 steps.
 
+[[fig-reliability-chasm]]
+.The Reliability Chasm: How 95% per-action success compounds to failure
+image::ch05-reliability-chasm.png[Reliability Chasm,width=600,align=center]
+
 This exponential failure explains why up to 95% of agent proof-of-concepts never reach production. Demo stakes are low, demo context is constrained, and demo verification happens manually. Humans catch errors in demos. Agents must catch their own errors in production.
 
 ==== The Four-Turn Framework
