@@ -57,7 +57,7 @@ These factors establish the architectural baseline for debuggable, controllable 
 
 The LLM decides *what* to do. Your code controls *how* it executes.
 
-Instead of letting the LLM generate arbitrary code, constrain it to outputting structured JSON tool calls. Your deterministic code handles the actual execution.
+Instead of letting the LLM generate arbitrary code, constrain it to outputting structured JSON (JavaScript Object Notation) tool calls. Your deterministic code handles the actual execution.
 
 > **Beginner Tip**: If you are new to tool usage, start with `examples/ch05/tool-usage-basics.ts`. It provides a progressive introduction to defining tools, handling tool calls, and executing tool results. The file covers single-turn tool calls, multi-tool routing, looping patterns, and error handling with clear explanations at each step.
 
@@ -97,7 +97,7 @@ Resist black-box framework abstractions. Treat prompts as first-class, version-c
 
 ```typescript
 const DEPLOYMENT_PROMPT = `
-You are a deployment assistant. You have access to the following tools:
+You are a deployment assistant. Available tools:
 - deploy_to_staging: Deploy the current branch to staging
 - run_tests: Execute the test suite
 - deploy_to_production: Deploy to production (requires approval)
@@ -167,10 +167,11 @@ const tools = [
 
 function executeTool(toolCall: ToolCall) {
   const channel = toolCall.parameters.channel;
+  const msg = toolCall.parameters.message;
   switch (channel) {
-    case "slack": return slackClient.postMessage(toolCall.parameters.message);
-    case "email": return emailService.send(toolCall.parameters.message);
-    case "sms": return twilioClient.sendSms(toolCall.parameters.message);
+    case "slack": return slackClient.postMessage(msg);
+    case "email": return emailService.send(msg);
+    case "sms":   return twilioClient.sendSms(msg);
   }
 }
 ```
@@ -230,10 +231,16 @@ class Agent {
     await this.db.updateThread(threadId, { status: "paused" });
   }
 
-  async resume(threadId: string, feedback?: string): Promise<AgentThread> {
+  async resume(
+    threadId: string,
+    feedback?: string
+  ): Promise<AgentThread> {
     const thread = await this.db.getThread(threadId);
     if (feedback) {
-      thread.events.push({ type: "human_feedback", content: feedback });
+      thread.events.push({
+        type: "human_feedback",
+        content: feedback
+      });
     }
     return this.run(thread);
   }
@@ -259,15 +266,24 @@ const humanTools = [
     name: "request_human_approval",
     description: "Request approval from a human before proceeding",
     parameters: {
-      action: { type: "string", description: "What action needs approval" },
-      context: { type: "string", description: "Relevant context for decision" },
+      action: {
+        type: "string",
+        description: "What action needs approval"
+      },
+      context: {
+        type: "string",
+        description: "Relevant context for decision"
+      },
       urgency: { type: "string", enum: ["low", "medium", "high"] },
       channel: { type: "string", enum: ["slack", "email"] }
     }
   }
 ];
 
-async function executeHumanTool(toolCall: ToolCall, thread: AgentThread) {
+async function executeHumanTool(
+  toolCall: ToolCall,
+  thread: AgentThread
+) {
   await notifyHuman(toolCall);
   thread.status = "paused";
   thread.events.push({
@@ -328,11 +344,14 @@ Generic loops fail. Specialized loops with explicit handling for approval, termi
 Feed error messages back for self-healing, with thresholds to prevent spin-outs.
 
 ```typescript
-async function handleError(error: Error, thread: AgentThread): Promise<void> {
+async function handleError(
+  error: Error,
+  thread: AgentThread
+): Promise<void> {
   thread.events.push({
     type: "error",
     message: error.message,
-    stack: error.stack?.slice(0, 500), // Truncate for context efficiency
+    stack: error.stack?.slice(0, 500), // Truncate
     timestamp: Date.now()
   });
 
@@ -361,7 +380,10 @@ Scope agents to 3-20 steps maximum. As context grows, LLM performance degrades.
 ```typescript
 // Bad: Monolithic agent
 const megaAgent = new Agent({
-  capabilities: ["deploy", "test", "monitor", "rollback", "notify", "audit"]
+  capabilities: [
+    "deploy", "test", "monitor",
+    "rollback", "notify", "audit"
+  ]
 });
 
 // Good: Focused agents composed in a Directed Acyclic Graph (DAG)

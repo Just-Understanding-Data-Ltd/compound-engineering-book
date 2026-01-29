@@ -62,7 +62,7 @@ These factors establish the architectural baseline for debuggable, controllable 
 
 The LLM decides _what_ to do. Your code controls _how_ it executes.
 
-Instead of letting the LLM generate arbitrary code, constrain it to outputting structured JSON tool calls. Your deterministic code handles the actual execution.
+Instead of letting the LLM generate arbitrary code, constrain it to outputting structured JSON (JavaScript Object Notation) tool calls. Your deterministic code handles the actual execution.
 
 TIP: *Beginner*: If you are new to tool usage, start with `examples/ch05/tool-usage-basics.ts`. It provides a progressive introduction to defining tools, handling tool calls, and executing tool results. The file covers single-turn tool calls, multi-tool routing, looping patterns, and error handling with clear explanations at each step.
 

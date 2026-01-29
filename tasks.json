@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T18:30:00Z",
+  "lastUpdated": "2026-01-29T22:00:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 19:30: Recalculated all task scores using formula: priority + type + blocking_bonus. Fixed 17 score mismatches. Pending priority order: task-447 (860, Kindle setup, blocks 2), task-445 (835, PDF build, blocks 1), task-469 (830, ch16 TOC), task-456 (810, overflow script). Blocked high-value: task-449 (1135, final build, blocks 3). No duplicates found. Stats: 10 pending, 7 blocked, 197 complete.",
@@ -2229,11 +2229,11 @@
       "type": "diagram",
       "title": "Regenerate RALPH Loop architecture diagram with DALL-E",
       "description": "Use image-generator MCP to create the RALPH loop architecture. Prompt: Circular autonomous loop diagram with Orchestrator, Executor, Task Queue, Memory components, arrows showing flow, modern DevOps style visualization. Save to assets/images/ch10-ralph-architecture.png",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
       "score": 420,
       "createdAt": "2026-01-29T17:25:21.916Z",
-      "blockedBy": "MCP-server-missing",
+      "blockedBy": null,
       "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
     },
     {
@@ -2241,11 +2241,11 @@
       "type": "diagram",
       "title": "Regenerate Context Window anatomy diagram with DALL-E",
       "description": "Use image-generator MCP to visualize context window. Prompt: Layered rectangular diagram showing context window with system prompt, conversation history, and available space sections, gradient fills, capacity meter on side. Save to assets/images/ch09-context-window.png",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
       "score": 420,
       "createdAt": "2026-01-29T17:25:21.916Z",
-      "blockedBy": "MCP-server-missing",
+      "blockedBy": null,
       "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
     },
     {
@@ -2253,11 +2253,11 @@
       "type": "diagram",
       "title": "Regenerate Compound Flywheel diagram with DALL-E",
       "description": "Use image-generator MCP to create flywheel effect diagram. Prompt: Circular flywheel with momentum arrows, showing acceleration, compound growth spiral emanating outward, energy/speed visualization. Save to assets/images/ch01-compound-flywheel.png",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
       "score": 420,
       "createdAt": "2026-01-29T17:25:21.916Z",
-      "blockedBy": "MCP-server-missing",
+      "blockedBy": null,
       "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
     },
     {
@@ -2874,10 +2874,11 @@
       "type": "fix",
       "title": "Define undefined acronyms in ch05-08",
       "description": "Add parenthetical definitions:\n- ch05:7 LLM, ch05:40 API, ch05:65 JSON\n- ch06:35 TLA+, Z3 context\n- ch07:5 CI/CD early definition",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 940,
-      "createdAt": "2026-01-29T18:00:00Z"
+      "createdAt": "2026-01-29T18:00:00Z",
+      "completedAt": "2026-01-29T22:00:00Z"
     },
     {
       "id": "task-487",
@@ -2920,15 +2921,15 @@
     ]
   },
   "stats": {
-    "pending": 8,
-    "complete": 124,
-    "blocked": 9,
+    "pending": 10,
+    "complete": 125,
+    "blocked": 6,
     "total": 141
   },
   "checkpoints": {
-    "lastGoodCommit": "d813bf8d13c7bdbc11f0a8c6e2007598f06f36c6",
-    "lastSuccessfulTask": "iteration-1",
-    "lastCheckpoint": "2026-01-29T17:45:10Z",
+    "lastGoodCommit": "86f6cc3456289cb57b401bcc5e619d2b28e3abac",
+    "lastSuccessfulTask": "iteration-2",
+    "lastCheckpoint": "2026-01-29T17:49:00Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,

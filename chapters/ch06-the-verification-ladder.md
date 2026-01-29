@@ -504,7 +504,7 @@ Individual verification levels catch individual bug types. Combined levels catch
 - Level 5 catches 80% of the remaining 20%
 - Combined: 80% + (80% × 20%) = 96% total catch rate
 
-Layer your verification in CI/CD:
+Layer your verification in CI/CD (Continuous Integration/Continuous Deployment):
 
 ```yaml
 # .github/workflows/verify.yml
@@ -576,7 +576,7 @@ Flaky tests that pass sometimes and fail others create false confidence or false
 |----------|----------|-------------|
 | Timing | Async operations, race conditions, "timeout" in errors | Use `waitFor`/`waitForExpect`, increase timeouts, or use fake timers |
 | Order-dependent | Tests depend on previous test state | Reset state in `beforeEach`, ensure test isolation |
-| External service | Network calls fail with ECONNREFUSED, ETIMEDOUT | Mock with MSW or nock |
+| External service | Network calls fail with ECONNREFUSED, ETIMEDOUT | Mock with MSW (Mock Service Worker) or nock |
 | Random data | Value assertion mismatches on re-runs | Seed random generators or use fixed fixtures |
 | Date/time | Tests fail on certain days or after dates pass | Mock Date with vitest/sinon fake timers |
 

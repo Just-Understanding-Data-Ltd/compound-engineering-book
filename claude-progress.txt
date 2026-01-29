@@ -1,14 +1,14 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 21:45)
+## Current Status (Updated: 2026-01-29 22:00)
 - Phase: AsciiDoc Quality Validation
-- Active: task-486 (acronym definitions ch05-08)
-- Last Action: Defined acronyms in ch01-04 (task-485)
+- Active: task-487 (acronym definitions ch09-13)
+- Last Action: Defined acronyms in ch05-08 (task-486) + queue curation
 - Blockers:
-  - 5 tasks blocked on AppleScript permissions (Kindle testing)
-- Queue Health: 8 pending, 9 blocked, 124 complete
+  - 6 tasks blocked on AppleScript permissions (Kindle testing chain)
+- Queue Health: 10 pending, 6 blocked, 125 complete
 - Publishing Readiness: 100% CONTENT COMPLETE - AsciiDoc validation in progress
-- Next: Define undefined acronyms in ch05-08 (task-486)
+- Next: Define undefined acronyms in ch09-13 (task-487)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -18,7 +18,7 @@
 - Word Count: ~51,000 (target 45,000-57,000, 100% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
 - AsciiDoc Conversion: 16/16 chapters (100% complete) + book.adoc master file
-- Tasks Complete: 119/124 (96%)
+- Tasks Complete: 125/141 (89%)
 - Test Pass Rate: 100% across all chapters (787 tests total)
 - Exercises: 47 total (2-3 per chapter), ch16 exercises added ✓
 
@@ -31,6 +31,26 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 22:00 - Defined undefined acronyms in ch05-08 (task-486) + Queue Curation
+- What: Added parenthetical definitions for acronyms on first use
+- Acronyms defined:
+  - ch05:60 JSON (JavaScript Object Notation) - first use in book
+  - ch06:507 CI/CD (Continuous Integration/Continuous Deployment) - first use before ch07 definition
+  - ch06:579 MSW (Mock Service Worker) - testing library acronym
+- Acronyms already defined (no action needed):
+  - ch05 LLM: already defined in ch03:3
+  - ch05 API: already defined in ch01:73
+  - ch05 DAG, ROI, ML: defined on first use in ch05
+  - ch06 TLA+, Z3: explained in context on line 33
+  - ch07 CI/CD: properly defined on line 3
+  - ch07 DDD, LOC: defined on first use
+  - ch08 LLM, AST, JWT, CI/CD: all defined on first use in ch08
+- Files modified: ch05, ch06 (both Markdown and AsciiDoc versions)
+- Queue curation: Unblocked task-477, 478, 479 (MCP server now connected)
+- Iteration: 3
+- Stats: 10 pending, 6 blocked, 125 complete
+- Next: task-487 (define acronyms in ch09-13)
 
 ### 2026-01-29 21:45 - Defined undefined acronyms in ch01-04 (task-485)
 - What: Added parenthetical definitions for acronyms on first use
