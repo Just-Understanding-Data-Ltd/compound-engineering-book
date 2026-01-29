@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 22:15)
-- Phase: ALL PENDING TASKS COMPLETE - Only blocked tasks remain
-- Active: task-458 complete (iteration 28)
-- Last Completed: task-458 - Add index generation for key terms
+## Current Status (Updated: 2026-01-29 22:45)
+- Phase: Content enhancement
+- Active: task-471 complete (iteration 29)
+- Last Completed: task-471 - Add section on dev/staging/prod importance
 - Blockers: task-448 requires Kindle Previewer manual install
-- Queue Health: 0 pending, 5 blocked, 119 complete
+- Queue Health: 1 pending, 4 blocked, 210 complete
 - Publishing Readiness: 100% CONTENT + EPUB + PDF + INDEX COMPLETE
-- Next: Blocked tasks only (Kindle Previewer chain)
+- Next: task-448 (Kindle Previewer) or remaining pending task
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -30,6 +30,22 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 22:45 - COMPLETED task-471: Add section on dev/staging/prod importance
+- What: Added new section "Environment Gates: Dev, Staging, Production" to Chapter 7
+- Files modified: chapters/ch07-quality-gates-that-compound.md
+- Content added (~500 words):
+  - Why environments matter more with agents (speed amplifies mistakes)
+  - Risk factor comparison table (manual vs agent-assisted)
+  - Three-environment pattern (dev: experiment, staging: verify, prod: gate)
+  - Feature flags as agent safety valves with code example
+  - Monitoring catches what tests miss (error rate, latency, memory, API calls)
+  - Rollback as first-class concern (blue-green, automate triggers)
+- Chapter word count: 4,389 (slightly above 4,000 target, acceptable)
+- Placement: After "Common Pitfalls" section, before "Stateless Verification"
+- Iteration: 29
+- Stats: 1 pending, 4 blocked, 210 complete
+- Next: task-448 (Kindle Previewer review) or remaining pending task
 
 ### 2026-01-29 22:15 - COMPLETED task-458: Add index generation for key terms
 - What: Added AsciiDoc indexterm markup to all 16 chapters for proper book index

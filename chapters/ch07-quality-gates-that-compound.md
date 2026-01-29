@@ -103,7 +103,7 @@ describe('authenticate', () => {
     expect(result.user).toBeDefined();
   });
 
-  it('returns success=false with error for invalid email', async () => {
+  it('returns error for invalid email', async () => {
     const result = await authenticate('invalid', 'password');
     expect(result.success).toBe(false);
     expect(result.error).toContain('Invalid email format');
@@ -288,8 +288,9 @@ Run multiple quality gates in sequence:
 ```json
 // .claude/hooks/post-write.json
 {
-  "command": "eslint {file} --fix && tsc --noEmit && npm t -- --related {file}",
-  "description": "Lint, type check, and test in one pass",
+  "command": "eslint {file} --fix && tsc --noEmit \
+    && npm t -- --related {file}",
+  "description": "Lint, type check, and test",
   "continueOnError": false
 }
 ```
@@ -398,7 +399,8 @@ npm init -y
 npm install --save-dev eslint \
   @typescript-eslint/parser \
   @typescript-eslint/eslint-plugin
-npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
+npm install --save-dev prettier \
+  eslint-config-prettier eslint-plugin-prettier
 
 # Generate config
 npx eslint --init
@@ -564,6 +566,68 @@ Track these metrics:
 
 **Late Linting Introduction**: Try to add linting to 3-month-old codebase with 847 violations. Solution: enable day 0, prevent accumulation (30 min upfront cost, save 60 hours later).
 
+## Environment Gates: Dev, Staging, Production
+
+Environments are quality gates too. With manual development, a bug in staging is annoying. With agent-assisted development, a bug can propagate at machine speed. The separation between dev, staging, and production becomes more critical, not less.
+
+### Why Environments Matter More With Agents
+
+Agents work fast. A human might push 3-5 commits per day. An agent in a RALPH loop can push 20-50 commits per session. Speed amplifies both productivity and mistakes.
+
+Consider this scenario: an agent refactors the authentication module to improve performance. The refactor looks correct. Types pass. Tests pass. But there is an edge case with expired tokens that only manifests under production load patterns. Without staging, this bug goes directly to production and affects every user within minutes.
+
+| Risk Factor | Manual Development | Agent-Assisted Development |
+|-------------|-------------------|---------------------------|
+| Commits per day | 3-5 | 20-50 |
+| Time to propagate bug | Hours (code review) | Minutes (automated) |
+| Blast radius | One feature | Multiple features |
+| Rollback urgency | Low | High |
+
+### The Three-Environment Pattern
+
+**Development**: Let agents experiment freely. No restrictions. Fast iteration. This is where Claude Code makes 10 attempts to fix a bug, learns from failures, and eventually succeeds. Breaking things is expected.
+
+**Staging**: Run production-like traffic against agent changes. Staging catches the bugs that passed unit tests but fail under realistic conditions. Monitor for regressions before they reach users.
+
+**Production**: Gate strictly. Require human approval for deploys. Even if an agent produced the code and all tests pass, a human verifies the diff before production release.
+
+### Feature Flags as Agent Safety Valves
+
+Feature flags combined with staging create safe experimentation:
+
+```typescript
+// Agent-generated feature behind a flag
+if (featureFlags.isEnabled('new-auth-flow', user)) {
+  return newAuthFlow(credentials);  // Agent's new implementation
+}
+return legacyAuthFlow(credentials);  // Proven stable path
+```
+
+Deploy agent code to 5% of staging traffic. Monitor error rates. If errors spike, the flag automatically disables the new code path. The agent learns from the failure without affecting all users.
+
+### Monitoring Catches What Tests Miss
+
+Tests verify expected behavior. Monitoring catches unexpected behavior.
+
+An agent might write code that passes all tests but introduces a memory leak. Tests do not run long enough to detect it. Staging with production-like duration (hours, not seconds) reveals the leak before production.
+
+Key staging metrics for agent-generated code:
+- **Error rate delta**: Compare before/after the agent's changes
+- **P99 latency**: Agents sometimes introduce hidden N+1 queries
+- **Memory growth**: Detect leaks that short test runs miss
+- **External API calls**: Agents sometimes add unnecessary service calls
+
+### Rollback as a First-Class Concern
+
+With agents generating code quickly, rollback strategies become essential:
+
+1. **Every deploy is reversible**: Use blue-green or canary deployments
+2. **Keep previous artifacts**: Do not delete the last working build
+3. **Automate rollback triggers**: If error rate exceeds threshold, rollback automatically
+4. **Test rollback regularly**: An untested rollback is not a rollback
+
+The pattern: trust agents in dev, verify in staging, gate production. Speed is an asset only when paired with environment-based protection.
+
 ## Stateless Verification: Preventing Ghost Failures
 
 Quality gates that depend on accumulated state produce ghost failures. Tests pass locally but fail in CI. Tests fail on first run but pass on third. Tests that passed yesterday fail today without code changes. These ghosts waste hours debugging environment differences when the problem is state accumulation.
@@ -587,7 +651,9 @@ Every verification run should be indistinguishable from the first run ever execu
 If Test Run 1 and Test Run 100 behave differently, you have state accumulation. The fix is simple: reset state before each verification cycle, not just at the start of the session.
 
 ```typescript
-async function verifyWithCleanSlate(code: string): Promise<VerifyResult> {
+async function verifyWithCleanSlate(
+  code: string
+): Promise<VerifyResult> {
   // 1. Reset environment (clean slate)
   await resetEnvironment();
 
@@ -604,7 +670,11 @@ async function verifyWithCleanSlate(code: string): Promise<VerifyResult> {
 
   return {
     success: buildResult.ok && testResult.ok && lintResult.ok,
-    errors: [...buildResult.errors, ...testResult.errors, ...lintResult.errors],
+    errors: [
+      ...buildResult.errors,
+      ...testResult.errors,
+      ...lintResult.errors
+    ],
   };
 }
 ```
