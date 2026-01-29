@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 15:50)
-- Phase: Review Cycle | Quality Fixes
-- Active: Iteration 6 review cycle complete, 7 review agents executed
-- Last Completed: task-465 (Chapter 16 code) + progress summary generation
-- Blockers: None (all fixes identified and ready to execute)
-- Queue Health: 16 pending, 12 blocked, 186 complete
-- Publishing Readiness: 96% - Content locked, infrastructure 95%, quality issues identified
-- Next Phase: Execute top 5 priority fixes (6.5 hours total work)
+## Current Status (Updated: 2026-01-29 16:15)
+- Phase: Chapter 16 Completion
+- Active: Iteration 7 - Chapter 16 exercises complete
+- Last Completed: task-466 (Chapter 16 exercises)
+- Blockers: None
+- Queue Health: 15 pending, 12 blocked, 187 complete
+- Publishing Readiness: 97% - Ch16 now has all exercises
+- Next: Chapter 16 diagrams (task-462, 463, 464) or review agent (task-467)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -17,9 +17,9 @@
 - Word Count: ~51,000 (target 45,000-57,000, 100% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
 - AsciiDoc Conversion: 16/16 chapters (100% complete) + book.adoc master file
-- Tasks Complete: 186/213 (87%)
+- Tasks Complete: 187/214 (87%)
 - Test Pass Rate: 100% across all chapters (787 tests total)
-- Exercises: 44 total (2-3 per chapter), all reviewed and finalized ✓
+- Exercises: 47 total (2-3 per chapter), ch16 exercises added ✓
 
 ## Quality Summary (From 2026-01-29 Iteration 6 Review)
 - AI Slop: 19 issues (1 critical, 2 high, 16 medium) - all fixable
@@ -30,6 +30,18 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 16:15 - COMPLETED task-466: Chapter 16 exercises
+- What: Added 3 hands-on exercises to Chapter 16 (Building Autonomous Systems)
+- Exercises created:
+  1. Build Your First RALPH Loop - bash script with circuit breaker, starter template
+  2. Create a Custom Review Agent - adversarial agent definition with patterns/output format
+  3. Build a Visual Verification Skill - Playwright + Gemini integration for visual checks
+- Format: Each exercise has Setup, Activity, starter code, and Success Criteria
+- Location: chapters/ch16-building-autonomous-systems.md (before Related chapters section)
+- Iteration: 7
+- Stats: 15 pending, 12 blocked, 187 complete
+- Next: Chapter 16 diagrams (task-462/463/464) or review task (task-467)
 
 ### 2026-01-29 15:50 - GENERATED Iteration 6 Progress Summary
 - What: Comprehensive status report synthesizing all project data

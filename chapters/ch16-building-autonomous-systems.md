@@ -613,6 +613,190 @@ Fork it, modify it, make it yours. The goal is not to replicate this exact syste
 
 The 10x engineer was the floor. What comes next is up to you.
 
+## Exercises
+
+### Exercise 1: Build Your First RALPH Loop
+
+Create a minimal RALPH loop orchestrator for a personal project.
+
+**Setup:**
+1. Create a small project with 5-7 well-defined tasks in `tasks.json`
+2. Write a basic CLAUDE.md with project context
+3. Initialize git and create an initial commit
+
+**Activity:**
+1. Write a bash script that:
+   - Checks for pending tasks using `jq`
+   - Spawns Claude Code in print mode with iteration number
+   - Logs output to a file
+   - Implements a simple circuit breaker (stop after 2 consecutive failures)
+2. Run the loop for 5 iterations
+3. Review the commits produced by each iteration
+
+**Starter template:**
+```bash
+#!/bin/bash
+iteration=0
+failures=0
+
+while [ $(jq '.stats.pending' tasks.json) -gt 0 ]; do
+    iteration=$((iteration + 1))
+    echo "=== Iteration $iteration ==="
+
+    # Get last commit hash before running
+    before_commit=$(git rev-parse HEAD)
+
+    # Run Claude
+    claude -p "Iteration $iteration. Complete ONE task. Commit when done." \
+        2>&1 | tee "logs/iteration-$iteration.log"
+
+    # Check if progress was made
+    after_commit=$(git rev-parse HEAD)
+    if [ "$before_commit" = "$after_commit" ]; then
+        failures=$((failures + 1))
+        echo "No commit made. Failure count: $failures"
+        [ $failures -ge 2 ] && echo "Circuit breaker!" && break
+    else
+        failures=0
+    fi
+
+    sleep 5
+done
+```
+
+**Success criteria:**
+- Script runs at least 3 iterations without manual intervention
+- Each successful iteration produces a commit
+- Circuit breaker triggers correctly on simulated failure (create an impossible task)
+- Log files capture iteration output
+
+### Exercise 2: Create a Custom Review Agent
+
+Build an adversarial review agent that catches issues specific to your codebase.
+
+**Setup:**
+1. Identify a category of recurring issues in your project (examples: console.log statements left in code, TODOs without ticket numbers, magic numbers without constants)
+2. Gather 5 examples of the issue from your codebase history
+
+**Activity:**
+1. Create an agent definition file at `.claude/agents/my-reviewer.md`:
+```markdown
+---
+name: my-reviewer
+description: Catches [your issue category]
+tools: Read, Grep, Glob
+model: haiku
+---
+
+You are a code reviewer specializing in finding [issue category].
+
+## Patterns to Flag
+
+### Critical
+- [Exact pattern 1]
+- [Exact pattern 2]
+
+### Warning
+- [Less severe pattern]
+
+## Scope
+- Focus on: [file patterns to check]
+- Ignore: [files to skip, e.g., tests, generated code]
+
+## Output Format
+Create a file at: reviews/[agent-name]-{DATE}.md
+
+For each issue found:
+- File: [path]
+- Line: [number]
+- Severity: Critical/Warning
+- Pattern: [which pattern matched]
+- Suggested fix: [how to resolve]
+```
+
+2. Test the agent on known problem files
+3. Test on clean files to verify no false positives
+4. Run as part of a review cycle
+
+**Success criteria:**
+- Agent finds all planted issues in test files
+- Zero false positives on clean files
+- Output is actionable (specific file, line, fix suggestion)
+- Agent integrates with Task tool for automated execution
+
+### Exercise 3: Build a Visual Verification Skill
+
+Create a skill that gives Claude vision capabilities for your domain.
+
+**Setup:**
+1. Install Playwright: `npm install playwright`
+2. Obtain a Gemini API key from Google AI Studio
+3. Identify a visual verification need (examples: UI component rendering, documentation screenshots, diagram accuracy)
+
+**Activity:**
+1. Create a skill directory at `.claude/skills/visual-check/`
+2. Write the skill definition (`skill.md`):
+```markdown
+---
+name: visual-check
+description: Visual verification using screenshots + Gemini
+---
+
+# Visual Check Skill
+
+## Usage
+```bash
+GEMINI_API_KEY=$GEMINI_API_KEY npx tsx scripts/visual-check.ts [target]
+```
+
+## Workflow
+1. Launch headless browser with Playwright
+2. Navigate to target (URL or local file)
+3. Capture screenshot
+4. Send to Gemini 2.5 Flash for analysis
+5. Return structured findings
+```
+
+3. Write the verification script (`scripts/visual-check.ts`):
+```typescript
+import { chromium } from 'playwright';
+
+async function captureAndAnalyze(target: string) {
+  // Launch browser
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+
+  // Navigate and screenshot
+  await page.goto(target);
+  const screenshot = await page.screenshot({ fullPage: true });
+
+  // Send to Gemini (implement based on your API setup)
+  const analysis = await analyzeWithGemini(screenshot);
+
+  // Output structured results
+  console.log(JSON.stringify(analysis, null, 2));
+
+  await browser.close();
+}
+
+async function analyzeWithGemini(image: Buffer) {
+  // Your Gemini API integration here
+  // Return structured findings
+}
+
+captureAndAnalyze(process.argv[2]);
+```
+
+4. Test on a known good and known bad example
+5. Integrate into your review workflow
+
+**Success criteria:**
+- Skill captures screenshots successfully
+- Gemini returns meaningful analysis
+- False positive rate is documented (expect some)
+- Manual verification process is defined for flagged issues
+- Skill can be invoked from Claude using `/visual-check [target]`
+
 ---
 
 *Related chapters:*

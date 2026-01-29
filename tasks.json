@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T13:35:25.160Z",
+  "lastUpdated": "2026-01-29T13:43:17.234Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle: Updated blocking scores. task-439 (table widths) blocks 10+ tasks, now score 1080. task-443 (PDF theme) blocks 4 tasks, now score 880. task-444 (EPUB theme) blocks 5 tasks, now score 905. 16 pending, 13 blocked, 184 complete.",
@@ -1353,7 +1353,7 @@
       "description": "Full build of all formats. Run epubcheck on EPUB. Visual review of PDF. Kindle Previewer check. Copy final files to Desktop. Update build scripts in CI.",
       "status": "blocked",
       "priority": "critical",
-      "score": 655,
+      "score": 680,
       "blockedBy": [
         "task-445",
         "task-446",
@@ -1886,10 +1886,11 @@
       "type": "fix",
       "title": "Chapter 16: Add exercises for building autonomous systems",
       "description": "Create 3 exercises: (1) Build a simple RALPH loop for a personal project, (2) Create a custom review agent for your codebase, (3) Build a visual verification skill using Gemini. Include starter templates.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 460,
-      "createdAt": "2026-01-29T12:22:11.833Z"
+      "createdAt": "2026-01-29T12:22:11.833Z",
+      "completedAt": "2026-01-29T16:15:00Z"
     },
     {
       "id": "task-467",
@@ -1900,7 +1901,6 @@
       "priority": "high",
       "score": 460,
       "blockedBy": [
-        "task-465",
         "task-466"
       ],
       "createdAt": "2026-01-29T12:22:11.833Z"
@@ -2633,7 +2633,7 @@
       "description": "After AsciiDoc pipeline is validated and working: (1) Create archive/markdown-chapters/ folder, (2) Move chapters/*.md to archive, (3) Move leanpub/ to archive, (4) Update .gitignore if needed. Only do this after task-449 (final validation) confirms AsciiDoc output is good.",
       "status": "pending",
       "priority": "low",
-      "score": 200,
+      "score": -295,
       "blockedBy": [
         "task-449"
       ],
@@ -2670,16 +2670,16 @@
     ]
   },
   "stats": {
-    "pending": 16,
+    "pending": 15,
     "inProgress": 0,
-    "complete": 186,
+    "complete": 187,
     "blocked": 12,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "c1c10bd47213cb98d00c6f303d4a960badc45274",
-    "lastSuccessfulTask": "iteration-5",
-    "lastCheckpoint": "2026-01-29T13:31:48Z",
+    "lastGoodCommit": "ed1c80ae1054b2a4545748b5ae705c028f9a8021",
+    "lastSuccessfulTask": "iteration-6",
+    "lastCheckpoint": "2026-01-29T13:43:17Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 4,
