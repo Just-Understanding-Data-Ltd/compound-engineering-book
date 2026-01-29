@@ -1221,9 +1221,7 @@ Errors are inevitable. Repeated errors are a choice.
 
 '''''
 
-____
-*Companion Code*: All 7 code examples for this chapter are available at https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch08[examples/ch08/]
-____
+NOTE: *Companion Code*: All 7 code examples for this chapter are available at https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch08[examples/ch08/]
 
 _Related chapters:_
 

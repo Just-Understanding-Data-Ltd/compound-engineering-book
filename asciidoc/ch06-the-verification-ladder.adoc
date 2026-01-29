@@ -716,9 +716,7 @@ Each verification layer compounds with the others. Together they catch bugs that
 
 '''''
 
-____
-*Companion Code*: All 3 code examples for this chapter are available at https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch06[examples/ch06/]
-____
+NOTE: *Companion Code*: All 3 code examples for this chapter are available at https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch06[examples/ch06/]
 
 _Related chapters:_
 

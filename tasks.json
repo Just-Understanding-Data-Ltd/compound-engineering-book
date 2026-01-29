@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T19:45:00Z",
+  "lastUpdated": "2026-01-29T15:31:57.541Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 19:30: Recalculated all task scores using formula: priority + type + blocking_bonus. Fixed 17 score mismatches. Pending priority order: task-447 (860, Kindle setup, blocks 2), task-445 (835, PDF build, blocks 1), task-469 (830, ch16 TOC), task-456 (810, overflow script). Blocked high-value: task-449 (1135, final build, blocks 3). No duplicates found. Stats: 10 pending, 7 blocked, 197 complete.",
@@ -2210,14 +2210,13 @@
       "type": "infra",
       "title": "Create Claude skill for Kindle review (.claude/skills/kindle-review)",
       "description": "Create SKILL.md for Kindle visual review. Document workflow: run kindle-review.ts, analyze Gemini report, create fix tasks. Include device size options and common Kindle rendering issues to check.",
-      "status": "blocked",
+      "status": "complete",
       "priority": "high",
       "score": 355,
       "scoreBreakdown": "high:750 + infra:60 = 810",
-      "blockedBy": [
-        "task-450"
-      ],
-      "createdAt": "2026-01-29T12:19:33.572Z"
+      "blockedBy": [],
+      "createdAt": "2026-01-29T12:19:33.572Z",
+      "completedAt": "2026-01-29T20:00:00Z"
     },
     {
       "id": "task-456",
@@ -2346,12 +2345,13 @@
       "type": "fix",
       "title": "Convert blockquotes to AsciiDoc admonitions",
       "description": "Find all blockquotes that are tips, warnings, or notes. Convert to native AsciiDoc admonitions (NOTE:, TIP:, WARNING:, IMPORTANT:). Improves EPUB/PDF rendering.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 185,
       "scoreBreakdown": "medium:500 + fix:80 = 580",
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:01.156Z"
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T20:15:00Z"
     },
     {
       "id": "task-441",
@@ -2715,16 +2715,16 @@
     ]
   },
   "stats": {
-    "pending": 6,
+    "pending": 5,
     "inProgress": 0,
-    "complete": 112,
-    "blocked": 6,
+    "complete": 114,
+    "blocked": 5,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "01c52e8abf0aa4a0964f17b34c4e1aa587e613ef",
-    "lastSuccessfulTask": "iteration-22",
-    "lastCheckpoint": "2026-01-29T15:26:24Z",
+    "lastGoodCommit": "b7e6473227444859c5e81efd5145646eda5948df",
+    "lastSuccessfulTask": "iteration-23",
+    "lastCheckpoint": "2026-01-29T15:31:57Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,

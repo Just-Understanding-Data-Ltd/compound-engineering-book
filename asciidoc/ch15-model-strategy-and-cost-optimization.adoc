@@ -1133,9 +1133,7 @@ That is why this path compounds: not because any single idea is guaranteed to wi
 
 '''''
 
-____
-*Companion Code*: All 8 code examples for this chapter are available at https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch15[examples/ch15/]
-____
+NOTE: *Companion Code*: All 8 code examples for this chapter are available at https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch15[examples/ch15/]
 
 _Related chapters:_
 

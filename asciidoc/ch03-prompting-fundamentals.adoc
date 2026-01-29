@@ -483,8 +483,6 @@ The next chapter applies these prompting fundamentals to CLAUDE.md files. You wi
 
 '''''
 
-____
-*Companion Code*: All 3 code examples for this chapter are available at https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch03[examples/ch03/]
-____
+NOTE: *Companion Code*: All 3 code examples for this chapter are available at https://github.com/Just-Understanding-Data-Ltd/compound-engineering-book/tree/main/examples/ch03[examples/ch03/]
 
 _Related chapters:_ - <<_chapter_2_getting_started_with_claude_code,Chapter 2: Getting Started with Claude Code>> for tool usage and basic patterns - <<_chapter_4_writing_your_first_claude_md,Chapter 4: Writing Your First CLAUDE.md>> for project context configuration - <<_chapter_9_context_engineering_deep_dive,Chapter 9: Context Engineering Deep Dive>> for advanced information theory applications
