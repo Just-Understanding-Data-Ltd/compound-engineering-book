@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T19:01:55Z",
+  "lastUpdated": "2026-01-30T03:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation 2026-01-29: Recalculated all 6 non-complete task scores using formula (priority + type + blocking bonus). task-448 blocked on AppleScript permissions (external). Next actionable: task-483 (score 580).",
@@ -1522,7 +1522,7 @@
       "description": "Full build of all formats. Run epubcheck on EPUB. Visual review of PDF. Kindle Previewer check. Copy final files to Desktop. Update build scripts in CI.",
       "status": "blocked",
       "priority": "critical",
-      "score": 1105,
+      "score": 680,
       "scoreBreakdown": "critical:1000 + infra:60 + blocks(3×25):75 = 1135",
       "blocks": [
         "task-459",
@@ -2100,7 +2100,7 @@
       "description": "Use kindle-review skill to test EPUB on Kindle. Document any rendering issues. Fix in AsciiDoc source. Iterate until Kindle rendering is clean.",
       "status": "blocked",
       "priority": "high",
-      "score": 855,
+      "score": 460,
       "scoreBreakdown": "high:750 + fix:80 + blocks(1×25):25 = 855",
       "blocks": [
         "task-449"
@@ -2427,7 +2427,7 @@
       "description": "Create scripts/build-book.sh that accepts --format pdf|epub|kindle|all. Handles AsciiDoc toolchain, font embedding, validation, and copies output to Desktop. Single entry point for all builds.",
       "status": "blocked",
       "priority": "high",
-      "score": 780,
+      "score": 355,
       "scoreBreakdown": "high:750 + infra:60 = 810",
       "blockedBy": [
         "task-449"
@@ -2588,11 +2588,12 @@
       "type": "fix",
       "title": "Check for undefined terms and acronyms in AsciiDoc",
       "description": "Scan all AsciiDoc chapters for acronyms (3+ uppercase letters) and verify they are defined on first use. Focus on: LLM, MCP, API, CLI, DDD, OTEL, CI/CD, JWT, REST, CRUD.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
-      "score": 580,
+      "score": 185,
       "createdAt": "2026-01-29T19:10:00Z",
-      "scoreBreakdown": "medium:500 + fix:80 = 580"
+      "scoreBreakdown": "medium:500 + fix:80 = 580",
+      "completedAt": "2026-01-30T03:15:00Z"
     },
     {
       "id": "task-255",
@@ -2686,7 +2687,7 @@
       "description": "Build scripts/visual-regression.ts that renders book on multiple viewport sizes (phone, tablet, e-reader, desktop). Compare screenshots between builds to catch regressions. Store baseline images in .visual-baseline/.",
       "status": "blocked",
       "priority": "medium",
-      "score": 530,
+      "score": 105,
       "scoreBreakdown": "medium:500 + infra:60 = 560",
       "blockedBy": [
         "task-449"
@@ -2885,7 +2886,7 @@
       "description": "After AsciiDoc pipeline is validated and working: (1) Create archive/markdown-chapters/ folder, (2) Move chapters/*.md to archive, (3) Move leanpub/ to archive, (4) Update .gitignore if needed. Only do this after task-449 (final validation) confirms AsciiDoc output is good.",
       "status": "blocked",
       "priority": "low",
-      "score": 130,
+      "score": -295,
       "scoreBreakdown": "low:100 + infra:60 = 160",
       "blockedBy": [
         "task-449"
@@ -2923,16 +2924,16 @@
     ]
   },
   "stats": {
-    "pending": 1,
+    "pending": 0,
     "inProgress": 0,
-    "complete": 225,
+    "complete": 226,
     "blocked": 5,
     "total": 231
   },
   "checkpoints": {
-    "lastGoodCommit": "9c0de4e447a96c216add8d461691bd7e8acfb9b3",
-    "lastSuccessfulTask": "iteration-14",
-    "lastCheckpoint": "2026-01-29T18:59:44Z",
+    "lastGoodCommit": "d7829e0f59c8d55787db2b0ba45858b293d21861",
+    "lastSuccessfulTask": "iteration-15",
+    "lastCheckpoint": "2026-01-29T19:08:30Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 8,
