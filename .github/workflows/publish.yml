@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'chapters/**'
+      - 'asciidoc/**'
       - 'leanpub/**'
       - 'assets/**'
       - 'examples/**'
@@ -67,7 +67,7 @@ jobs:
             --css=leanpub/epub-style.css \
             --from markdown-yaml_metadata_block \
             --lua-filter=leanpub/filters/strip-md-links.lua \
-            --syntax-highlighting=tango \
+            --highlight-style=tango \
             --epub-embed-font=leanpub/fonts/JetBrainsMono-Regular.ttf \
             --epub-embed-font=leanpub/fonts/JetBrainsMono-Bold.ttf \
             --epub-embed-font=leanpub/fonts/JetBrainsMono-Italic.ttf \
