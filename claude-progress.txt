@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 13:30)
-- Phase: Chapter 16 Development
-- Active: Completing Chapter 16 milestones
-- Last Completed: task-461 (Chapter 16 first draft)
+## Current Status (Updated: 2026-01-29 12:46)
+- Phase: AsciiDoc Publishing Pipeline
+- Active: Setting up AsciiDoc toolchain for PDF generation
+- Last Completed: task-431 (AsciiDoc toolchain setup)
 - Blockers: None
-- Queue Health: 37 pending, 176 complete
-- Publishing Readiness: Ch01-Ch16 first drafts complete
-- Next Task: task-462 or related Ch16 milestone
+- Queue Health: 36 pending, 87 complete
+- Publishing Readiness: Ch01-Ch16 first drafts complete, EPUB done, AsciiDoc pipeline started
+- Next Task: task-449 or task-432 (AsciiDoc conversion)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -29,6 +29,23 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 12:46 - COMPLETED task-431: Set up AsciiDoc toolchain
+- What: Installed Asciidoctor and asciidoctor-pdf for PDF generation
+- Components installed:
+  - Asciidoctor 2.0.26 (document processor)
+  - asciidoctor-pdf 2.3.24 (PDF generator)
+  - rouge 4.7.0 (syntax highlighter)
+  - Ruby 3.4.7 via Homebrew (runtime)
+- Files created:
+  - scripts/build-asciidoc.sh (build script with --pdf, --html, --epub options)
+  - asciidoc/test.adoc (test document with code, tables, blockquotes)
+  - output/the-meta-engineer.pdf (72K test PDF)
+  - output/the-meta-engineer.html (36K test HTML)
+- Verification: PDF and HTML builds work, syntax highlighting enabled
+- Iteration: 3 (queue curation required)
+- Stats: 36 pending, 87 complete
+- Next: task-449 (Final AsciiDoc build) or task-432 (Markdown to AsciiDoc conversion)
 
 ### 2026-01-29 13:30 - COMPLETED task-461: Chapter 16 First Draft - Building Autonomous Systems
 - What: Wrote first draft of capstone chapter documenting how this book was built

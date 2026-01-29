@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T12:38:20.280Z",
+  "lastUpdated": "2026-01-29T12:39:22.338Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": {
@@ -1342,10 +1342,11 @@
       "type": "infra",
       "title": "Set up AsciiDoc toolchain (Asciidoctor, asciidoctor-pdf)",
       "description": "Install Asciidoctor and asciidoctor-pdf via brew/gem. Create scripts/build-asciidoc.sh for PDF and EPUB generation. Verify toolchain works with a test document.",
-      "status": "pending",
+      "status": "complete",
       "priority": "critical",
       "score": 680,
-      "createdAt": "2026-01-29T12:19:01.155Z"
+      "createdAt": "2026-01-29T12:19:01.155Z",
+      "completedAt": "2026-01-29T12:45:50Z"
     },
     {
       "id": "task-449",
@@ -2712,16 +2713,16 @@
     ]
   },
   "stats": {
-    "pending": 37,
+    "pending": 36,
     "inProgress": 0,
-    "complete": 176,
+    "complete": 87,
     "blocked": 0,
     "total": 213
   },
   "checkpoints": {
-    "lastGoodCommit": "92491500a3a26c4d0a2d931accc9bf32a87dd5df",
-    "lastSuccessfulTask": "iteration-1",
-    "lastCheckpoint": "2026-01-29T12:32:07Z",
+    "lastGoodCommit": "e88615a61a62d701b16c811fc8c89d38b85811d4",
+    "lastSuccessfulTask": "iteration-2",
+    "lastCheckpoint": "2026-01-29T12:39:22Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 4,
