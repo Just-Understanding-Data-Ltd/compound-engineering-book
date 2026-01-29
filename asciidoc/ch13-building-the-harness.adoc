@@ -258,23 +258,27 @@ For large tasks, parallel agent execution multiplies throughput:
 [source,typescript]
 ----
 async function swarmImplementation(spec: Spec) {
-  const tasks = breakdownSpec(spec);
+  const tasks = breakdownSpec(spec);  // <1>
 
   // Launch agents in parallel
-  const results = await Promise.all(
+  const results = await Promise.all(  // <2>
     tasks.map((task) =>
       spawnAgent({
         prompt: task.prompt,
-        scope: task.files,
+        scope: task.files,  // <3>
         constraints: task.constraints,
       })
     )
   );
 
   // Merge and resolve conflicts
-  return mergeResults(results);
+  return mergeResults(results);  // <4>
 }
 ----
+<1> Decompose spec into independent, non-overlapping tasks
+<2> `Promise.all` runs all agents concurrently (5x speedup for 5 agents)
+<3> Scoped file paths prevent agents from conflicting on same files
+<4> Merge step resolves any conflicts and combines outputs
 
 Five agents implementing different modules simultaneously can complete work five times faster than a single agent. The key is breaking tasks into independent units with clear boundaries.
 
@@ -286,22 +290,26 @@ Automate repeating tasks that agents can handle:
 ----
 // nightly-jobs.config.ts
 export default {
-  schedule: '0 2 * * *', // 2 AM daily
+  schedule: '0 2 * * *',  // <1>
   jobs: [
     {
       name: 'update-dependencies',
-      command: 'npm update && npm test',
-      onSuccess: 'create-pr',
+      command: 'npm update && npm test',  // <2>
+      onSuccess: 'create-pr',  // <3>
       onFailure: 'notify-slack',
     },
     {
       name: 'security-audit',
       command: 'npm audit --audit-level=moderate',
-      onFailure: 'create-issue',
+      onFailure: 'create-issue',  // <4>
     },
   ],
 };
 ----
+<1> Cron syntax: runs at 2 AM daily during low-traffic hours
+<2> Chained commands: update dependencies then verify tests still pass
+<3> Success creates PR for human review (agent doesn't merge)
+<4> Security issues create GitHub issue with audit details
 
 Dependency updates, performance benchmarks, and security audits happen automatically. When something fails, the system creates issues or notifications. Work continues while you sleep.
 

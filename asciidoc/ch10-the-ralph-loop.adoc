@@ -176,20 +176,20 @@ A repository-wide knowledge file (AGENTS.md or CLAUDE.md) stores codebase-specif
 ----
 # AGENTS.md - Accumulated Knowledge
 
-## Tech Stack
+## Tech Stack  <1>
 - Runtime: Bun (use `bun`, not `npm`)
 - Framework: Next.js 15 (app router)
 - Database: PostgreSQL (migrations in /db/migrations)
 - Testing: Vitest (unit testing) + Playwright (end-to-end testing)
 
-## Key Patterns
+## Key Patterns  <2>
 
 ### Database Migrations
 - Use the pattern in /db/migrations/*.sql
 - Always test migration up AND down
 - Migrations must be idempotent
   (safe to run multiple times with same result)
-- Common error: forgetting null handling
+- Common error: forgetting null handling  <3>
   in new NOT NULL columns
 
 ### API Endpoints
@@ -198,15 +198,20 @@ A repository-wide knowledge file (AGENTS.md or CLAUDE.md) stores codebase-specif
   (TypeScript schema validation library)
 - Return typed response objects
 
-## Common Mistakes to Avoid
+## Common Mistakes to Avoid  <4>
 - Using npm instead of bun (causes dependency mismatches)
 - Forgetting type-check before commit (CI fails after test pass)
 - Migrations without backward compatibility
 
-## Decision Log
+## Decision Log  <5>
 - [2025-01-15] Chose Server Actions over API routes for auth
 - [2025-01-12] Switched to Playwright from Cypress (cost, speed)
 ----
+<1> Tech Stack: What tools to use (prevents wrong package manager)
+<2> Key Patterns: Domain-specific conventions the agent must follow
+<3> Gotchas: Learned from past failures, prevents repeat mistakes
+<4> Common Mistakes: Explicit anti-patterns compound into curriculum
+<5> Decision Log: Records WHY, not just WHAT, for future context
 
 Agents read this file at the start of each iteration and update it with learnings at the end. AI coding tools automatically load these files when they exist.
 

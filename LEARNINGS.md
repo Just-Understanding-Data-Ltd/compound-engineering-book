@@ -769,3 +769,42 @@ Post-processing was minimal: smart quote normalization (", ", ', ' to straight q
 5. Test PDF generation on at least one file to catch rendering issues early
 
 ---
+
+### 2026-01-29 - Code Block Callouts as Inline Documentation Strategy
+
+**Context**: Adding AsciiDoc callouts to complex code blocks across chapters 6, 10, 11, and 13 (task-441). Callouts are numbered annotations that appear next to specific lines, with explanations listed below the code block.
+
+**Observation**: Code block callouts serve a different pedagogical purpose than surrounding prose. The prose explains the WHY and WHEN. The callouts explain the WHAT and HOW at the exact moment the reader sees the code.
+
+The most effective callout patterns:
+
+| Callout Type | Purpose | Example |
+|--------------|---------|---------|
+| Pattern identification | Name what the reader sees | "Result pattern: explicit success/error states" |
+| Constraint explanation | Why this specific choice | "Scoped file paths prevent agents from conflicting" |
+| Chain explanation | How parts connect | "Validation runs second: rejects malformed payloads before business logic" |
+| Critical emphasis | Highlight non-obvious importance | "Critical: reviewer is read-only to prevent 'helpful' fixes" |
+
+The key insight: callouts work best when they answer questions the reader would naturally ask while scanning the code. A reader seeing `canWrite: false` naturally wonders "why?" The callout answers immediately.
+
+Code blocks benefit most from callouts when they:
+1. Introduce a new pattern (Result type, permission model, validation chain)
+2. Have multiple important concepts in a single block
+3. Show configuration with non-obvious implications
+4. Demonstrate a complete workflow with distinct phases
+
+Code blocks that DON'T need callouts:
+1. Simple examples demonstrating basic syntax
+2. Single-concept illustrations where prose suffices
+3. Code that mirrors a pattern already explained with callouts earlier
+
+**Implication**: Callouts are particularly valuable in technical books teaching new patterns because they create point-of-need documentation. The reader doesn't need to hold the prose in working memory while parsing code. The explanation is right there.
+
+**Action**: When adding callouts to code blocks:
+1. Target blocks introducing new patterns or architectural concepts
+2. Limit to 4-6 callouts per block (more dilutes attention)
+3. Use verb phrases for actions ("Chain validators"), noun phrases for identification ("Route layer")
+4. Place callout markers at the END of the line they explain (after any code)
+5. Ensure callout explanations are concise (under 15 words) and standalone
+
+---

@@ -137,29 +137,35 @@ A critical aspect of sub-agent architecture is restricting tools based on role. 
 const agentPermissions = {
   backendEngineer: {
     canWrite: true,
-    allowedPaths: ['packages/api/**', 'packages/domain/**'],
-    tools: ['Read', 'Write', 'Edit', 'Bash'],
+    allowedPaths: ['packages/api/**', 'packages/domain/**'],  // <1>
+    tools: ['Read', 'Write', 'Edit', 'Bash'],  // <2>
   },
 
   frontendEngineer: {
     canWrite: true,
     allowedPaths: ['packages/ui/**', 'apps/web/**'],
-    tools: ['Read', 'Write', 'Edit'],
+    tools: ['Read', 'Write', 'Edit'],  // <3>
   },
 
   qaEngineer: {
     canWrite: true,
-    allowedPaths: ['**/*.test.ts', '**/*.spec.ts', 'tests/**'],
+    allowedPaths: ['**/*.test.ts', '**/*.spec.ts', 'tests/**'],  // <4>
     tools: ['Read', 'Write', 'Edit', 'Bash'],
   },
 
   codeReviewer: {
-    canWrite: false,  // READ-ONLY
+    canWrite: false,  // <5>
     allowedPaths: ['**/*'],
-    tools: ['Read', 'Grep', 'Glob'],
+    tools: ['Read', 'Grep', 'Glob'],  // <6>
   },
 };
 ----
+<1> Glob patterns restrict which files the agent can modify
+<2> Backend gets Bash for running migrations and API tests
+<3> Frontend omits Bash: no need for shell commands
+<4> QA can only modify test files, preventing production bugs
+<5> Critical: reviewer is read-only to prevent "helpful" fixes
+<6> Search-only tools: identify issues without introducing new ones
 
 The code reviewer being read-only deserves emphasis. A reviewer with edit permissions will often "`helpfully`" fix issues, potentially introducing new bugs. A read-only reviewer can only identify problems, forcing fixes through proper channels with appropriate expertise.
 
@@ -175,7 +181,7 @@ The backend engineer receives context from all three layers: root patterns, back
 
 [source,typescript]
 ----
-// packages/api/src/routes/payments.ts
+// packages/api/src/routes/payments.ts  <1>
 import { Router } from 'express';
 import { validateSchema } from '../middleware/validation';
 import { authenticate } from '../middleware/auth';
@@ -186,8 +192,8 @@ const router = Router();
 
 router.post(
   '/payments',
-  authenticate,
-  validateSchema(createPaymentSchema),
+  authenticate,  // <2>
+  validateSchema(createPaymentSchema),  // <3>
   createPaymentHandler
 );
 
@@ -202,7 +208,7 @@ export const createPaymentSchema = z.object({
   paymentMethodId: z.string(),
 });
 
-// packages/application/src/services/payment-service.ts
+// packages/application/src/services/payment-service.ts  <4>
 import Stripe from 'stripe';
 import { Result } from '../types';
 
@@ -210,7 +216,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function createPayment(
   data: CreatePaymentDTO
-): Promise<Result<Payment>> {
+): Promise<Result<Payment>> {  // <5>
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: data.amount,
@@ -230,11 +236,17 @@ export async function createPayment(
   } catch (error) {
     return {
       success: false,
-      error: `Payment failed: ${error.message}`,
+      error: `Payment failed: ${error.message}`,  // <6>
     };
   }
 }
 ----
+<1> Route layer: HTTP concerns only (routing, middleware chain)
+<2> Auth middleware runs first: rejects unauthenticated requests
+<3> Validation runs second: rejects malformed payloads before business logic
+<4> Service layer in separate package: business logic isolated from HTTP
+<5> Result pattern: explicit success/error states, never throws in business logic
+<6> Error transformed to user-friendly message, original error logged separately
 
 Output: "`Backend complete. Endpoint: POST /api/payments. Schema defined. Ready for frontend.`"
 

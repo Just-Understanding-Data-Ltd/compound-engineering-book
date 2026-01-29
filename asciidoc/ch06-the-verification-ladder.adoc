@@ -71,23 +71,28 @@ External data is always untrusted. User input, API payloads, database results, w
 ----
 import { z } from 'zod';
 
-const UserSchema = z.object({
-  id: z.string().uuid(),
+const UserSchema = z.object({  // <1>
+  id: z.string().uuid(),  // <2>
   email: z.string().email(),
-  age: z.number().int().min(0).max(150),
+  age: z.number().int().min(0).max(150),  // <3>
   role: z.enum(['admin', 'user', 'guest']),
 });
 
 // At your API boundary
 app.post('/users', (req, res) => {
-  const result = UserSchema.safeParse(req.body);
+  const result = UserSchema.safeParse(req.body);  // <4>
   if (!result.success) {
     return res.status(400).json({ errors: result.error.issues });
   }
   // result.data is now typed AND validated
-  createUser(result.data);
+  createUser(result.data);  // <5>
 });
 ----
+<1> Define schema shape with `z.object()`
+<2> Chain validators: `string()` then `uuid()` format
+<3> Numeric constraints: integer, min 0, max 150
+<4> `safeParse` returns `{ success, data, error }` instead of throwing
+<5> After validation, `result.data` is fully typed
 
 *What runtime validation catches:* Malformed input. Invalid email formats. Out-of-range numbers. Unexpected enum values. Injection attempts hidden in strings.
 

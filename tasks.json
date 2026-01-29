@@ -2358,12 +2358,13 @@
       "type": "fix",
       "title": "Add code block callouts where beneficial",
       "description": "Review code examples. Add AsciiDoc callouts (numbered annotations) to complex code blocks that would benefit from inline explanations.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 580,
       "scoreBreakdown": "medium:500 + fix:80 = 580",
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:01.156Z"
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T21:00:00Z"
     },
     {
       "id": "task-442",
@@ -2717,9 +2718,9 @@
     ]
   },
   "stats": {
-    "pending": 4,
+    "pending": 3,
     "inProgress": 0,
-    "complete": 115,
+    "complete": 116,
     "blocked": 5,
     "total": 124
   },

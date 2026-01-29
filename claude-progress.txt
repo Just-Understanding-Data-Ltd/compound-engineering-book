@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 20:30)
+## Current Status (Updated: 2026-01-29 21:00)
 - Phase: PDF BUILD COMPLETE - All formats ready
-- Active: Queue curation (iteration 25)
-- Last Completed: task-442 marked complete (redundant with task-446)
+- Active: task-441 complete (iteration 25)
+- Last Completed: task-441 - Added code block callouts to 4 chapters
 - Blockers: task-448 requires Kindle Previewer manual install
-- Queue Health: 4 pending, 5 blocked, 115 complete
+- Queue Health: 3 pending, 5 blocked, 116 complete
 - Publishing Readiness: 100% CONTENT + EPUB + PDF COMPLETE
-- Next: task-441 (code block callouts, score 580) or task-455 (syntax highlighting, score 580)
+- Next: task-455 (syntax highlighting, score 580) or task-457 (TOC summaries, score 530)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -17,7 +17,7 @@
 - Word Count: ~51,000 (target 45,000-57,000, 100% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
 - AsciiDoc Conversion: 16/16 chapters (100% complete) + book.adoc master file
-- Tasks Complete: 115/124 (93%)
+- Tasks Complete: 116/124 (94%)
 - Test Pass Rate: 100% across all chapters (787 tests total)
 - Exercises: 47 total (2-3 per chapter), ch16 exercises added ✓
 
@@ -30,6 +30,26 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 21:00 - COMPLETED task-441: Add code block callouts
+- What: Added AsciiDoc callouts to complex code blocks for inline explanations
+- Files modified:
+  - asciidoc/ch06-the-verification-ladder.adoc (Zod validation - 5 callouts)
+  - asciidoc/ch10-the-ralph-loop.adoc (AGENTS.md structure - 5 callouts)
+  - asciidoc/ch11-sub-agent-architecture.adoc (permissions config + payment service - 12 callouts)
+  - asciidoc/ch13-building-the-harness.adoc (swarm + nightly jobs - 8 callouts)
+- Total: 30 callouts across 6 code blocks in 4 chapters
+- Key patterns annotated:
+  - Zod schema validation with chained validators
+  - AGENTS.md memory architecture sections
+  - Agent permissions and tool access control
+  - Result pattern for error handling
+  - Parallel agent swarm execution
+  - Nightly job orchestration
+- Validation: All 4 AsciiDoc files pass asciidoctor validation
+- Iteration: 25
+- Stats: 3 pending, 5 blocked, 116 complete
+- Next: task-455 (syntax highlighting) or task-457 (TOC summaries)
 
 ### 2026-01-29 20:30 - Queue Curation (Iteration 25)
 - What: Curated task queue per CLAUDE.md protocol
