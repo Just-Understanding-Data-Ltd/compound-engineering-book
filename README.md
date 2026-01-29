@@ -68,10 +68,10 @@ npx tsx examples/ch13/agent-swarm.ts
 ## Book Structure
 
 ```
-chapters/          # Book content (15 chapters)
+asciidoc/          # Book content (16 chapters in AsciiDoc)
 examples/          # Runnable TypeScript code examples
 exercises/         # Try It Yourself exercises
-assets/diagrams/   # Mermaid diagrams
+assets/images/     # 26 O'Reilly-style infographic diagrams
 prds/              # Product requirement documents
 ```
 
@@ -81,11 +81,17 @@ prds/              # Product requirement documents
 
 **Part III: Advanced Patterns** (Ch 7-9) - Deep dives for power users
 
-**Part IV: Production Systems** (Ch 10-15) - Building autonomous systems
+**Part IV: Production Systems** (Ch 10-16) - Building autonomous systems
 
 ## How This Book Was Written
 
-This book was written using the techniques it teaches. A RALPH loop (Ch10) ran autonomously, picking tasks from a scored queue, writing content, running reviews, and committing. 151 tasks were completed across 60+ iterations.
+This book was written using the techniques it teaches. A RALPH loop (Ch10) ran autonomously, picking tasks from a scored queue, writing content, running reviews, and committing.
+
+**By the numbers:**
+- **115 tasks** completed from a scored priority queue
+- **430 commits** over 100+ iterations
+- **26 diagrams** generated with AI image tools
+- **16 chapters** totaling 54,000+ words
 
 The meta-engineering approach (Ch14) meant the author spent time directing agents rather than typing content. The book is proof that the patterns work.
 
