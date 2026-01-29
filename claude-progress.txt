@@ -1,22 +1,22 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 12:45)
+## Current Status (Updated: 2026-01-29 13:30)
 - Phase: Chapter 16 Development
-- Active: task-461 (Chapter 16 first draft)
-- Last Completed: task-460 (PRD: Chapter 16 - Building Autonomous Systems)
+- Active: Completing Chapter 16 milestones
+- Last Completed: task-461 (Chapter 16 first draft)
 - Blockers: None
-- Queue Health: 38 pending, 85 complete
-- Publishing Readiness: Ch01-Ch15 complete, adding Ch16 capstone
-- Next Task: task-461 (Write first draft of Chapter 16)
+- Queue Health: 37 pending, 176 complete
+- Publishing Readiness: Ch01-Ch16 first drafts complete
+- Next Task: task-462 or related Ch16 milestone
 
 ## Project State Summary
-- PRDs: 16/16 complete (100%) - Ch16 PRD added
-- Chapter Drafts: 15/16 complete (94%)
-- Chapters Complete: 15/16 (ch01-ch15, 94%)
+- PRDs: 16/16 complete (100%)
+- Chapter Drafts: 16/16 complete (100%) - Ch16 first draft added
+- Chapters Complete: 15/16 (ch01-ch15 finalized, ch16 in progress)
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
-- Word Count: ~47,300 (target 45,000-57,000, 95% complete)
+- Word Count: ~51,000 (target 45,000-57,000, 100% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 174/174 (100%) - ALL TASKS DONE
+- Tasks Complete: 176/213 (83%)
 - Test Pass Rate: 100% across all chapters (787 tests total)
 - Exercises: 44 total (2-3 per chapter), all reviewed and finalized ✓
 
@@ -29,6 +29,26 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 13:30 - COMPLETED task-461: Chapter 16 First Draft - Building Autonomous Systems
+- What: Wrote first draft of capstone chapter documenting how this book was built
+- Word count: 3,673 words (target 3,500-4,500)
+- Sections covered:
+  - The Book That Built Itself (metrics, velocity curve)
+  - RALPH Loop Architecture (orchestrator, executor, task management, adaptive review)
+  - Auto-Compacting Memory Systems (LEARNINGS.md, progress.txt, git)
+  - Adversarial Review Agents (7 agents, definition structure, parallel execution)
+  - Custom Agentic Skills (epub-review, when to build, verification pipeline)
+  - Bespoke Infrastructure Examples (exercise validator, health check, queue update)
+  - Meta-Engineering Mindset (ROI calculation, compound effect, real metrics)
+  - Lessons Learned (what worked, what didn't, what we'd do differently)
+  - Your Autonomous System (starting point, compounding timeline)
+- Code examples: Real excerpts from ralph.sh, update-queue.cjs, slop-checker.md
+- Quality checks: No em dashes, no AI slop phrases in prose
+- Files: chapters/ch16-building-autonomous-systems.md
+- Outcome: First draft complete, ready for code testing and review
+- Stats: 37 pending, 176 complete
+- Next: Ch16 code testing or other milestones
 
 ### 2026-01-29 12:45 - COMPLETED task-460: PRD for Chapter 16 - Building Autonomous Systems
 - What: Created comprehensive PRD for the capstone chapter documenting how this book was built
