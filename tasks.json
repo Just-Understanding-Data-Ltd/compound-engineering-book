@@ -2814,6 +2814,36 @@
         "task-449"
       ],
       "createdAt": "2026-01-29T13:35:25.159Z"
+    },
+    {
+      "id": "task-481",
+      "type": "fix",
+      "title": "Scan AsciiDoc chapters for formatting errors",
+      "description": "Run asciidoctor on each chapter to check for syntax errors, broken links, and malformed markup. Check all 16 chapters in asciidoc/ directory. Log any errors found.",
+      "status": "pending",
+      "priority": "high",
+      "score": 900,
+      "createdAt": "2026-01-29T19:10:00Z"
+    },
+    {
+      "id": "task-482",
+      "type": "fix",
+      "title": "Verify all cross-references in AsciiDoc chapters",
+      "description": "Check all internal links, chapter references, and figure references across the 16 AsciiDoc chapter files. Ensure xref syntax is correct and targets exist.",
+      "status": "pending",
+      "priority": "high",
+      "score": 890,
+      "createdAt": "2026-01-29T19:10:00Z"
+    },
+    {
+      "id": "task-483",
+      "type": "fix",
+      "title": "Check for undefined terms and acronyms in AsciiDoc",
+      "description": "Scan all AsciiDoc chapters for acronyms (3+ uppercase letters) and verify they are defined on first use. Focus on: LLM, MCP, API, CLI, DDD, OTEL, CI/CD, JWT, REST, CRUD.",
+      "status": "pending",
+      "priority": "medium",
+      "score": 850,
+      "createdAt": "2026-01-29T19:10:00Z"
     }
   ],
   "completed": {
