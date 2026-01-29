@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T13:01:00Z",
+  "lastUpdated": "2026-01-29T13:05:20.888Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Iteration 5: Completed task-433 (ch01-ch03 AsciiDoc conversion). 7 tasks pending, 27 blocked, 179 complete.",
@@ -1769,9 +1769,7 @@
       "status": "complete",
       "priority": "high",
       "score": 480,
-      "blockedBy": [
-        "task-434"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z",
       "completedAt": "2026-01-29T13:03:00Z"
     },
@@ -1780,23 +1778,22 @@
       "type": "chapter",
       "title": "Convert ch10-ch12 to AsciiDoc",
       "description": "Convert chapters 10-12 from Markdown to AsciiDoc. Fix table column widths. Convert blockquotes to admonitions. Verify code blocks.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 480,
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:01.156Z"
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T13:06:00Z"
     },
     {
       "id": "task-437",
       "type": "chapter",
       "title": "Convert ch13-ch15 to AsciiDoc",
       "description": "Convert chapters 13-15 from Markdown to AsciiDoc. Fix table column widths. Convert blockquotes to admonitions. Verify code blocks.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
       "score": 480,
-      "blockedBy": [
-        "task-436"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
     {
@@ -2679,14 +2676,14 @@
   "stats": {
     "pending": 8,
     "inProgress": 0,
-    "complete": 91,
-    "blocked": 24,
+    "complete": 182,
+    "blocked": 23,
     "total": 213
   },
   "checkpoints": {
-    "lastGoodCommit": "c296ab9019afe2566d1905ff1ada6cdcbc329b25",
-    "lastSuccessfulTask": "iteration-5",
-    "lastCheckpoint": "2026-01-29T13:00:05Z",
+    "lastGoodCommit": "709a0c82882cedd9af8b01f3f61e54e851c38a23",
+    "lastSuccessfulTask": "iteration-1",
+    "lastCheckpoint": "2026-01-29T13:05:20Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 4,
