@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-01-29T18:23:00.746Z",
+  "lastUpdated": "2026-01-29T18:28:20.836Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
-  "curatorNotes": "Curation cycle 2026-01-29 23:30: Recalculated 9 pending task scores. Fixed blockedBy format (string→null). Task-448 marked blocked (AppleScript). Priority order: task-482 (830, cross-refs), task-473-479 (815 each, DALL-E diagrams), task-483 (580, terms). Blocked: 6 tasks. Complete: 126.",
+  "curatorNotes": "Curation cycle 2026-01-29: Recalculated 5 pending task scores using documented formula (priority + type + blocking bonus). Stats corrected. Complete count includes compacted tasks.",
   "prds": {
     "index": {
       "status": "complete",
@@ -1540,7 +1540,7 @@
       "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing a 4-phase development cycle for a technical book.\n\nTOPIC: RALPH Loop - Autonomous Agent Iteration\nTYPE: Circular cycle\n\nCONTENT (4 phases, clockwise):\n- Phase 1: READ - Load context and state\n- Phase 2: ACT - Execute one task\n- Phase 3: LOG - Commit and document\n- Phase 4: PAUSE - Clean exit\n\nSTYLE: Circular diagram with 4 segments, arrows showing flow, each segment labeled, navy/teal colors, white background, professional cycle diagram.\n\nSave to: assets/images/ch10-ralph-loop.png",
       "status": "pending",
       "priority": "critical",
-      "score": 670,
+      "score": 1065,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedBy": null,
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
@@ -1552,7 +1552,7 @@
       "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing context window anatomy for a technical book.\n\nTOPIC: LLM Context Window Structure\nTYPE: Layered diagram\n\nCONTENT (sections):\n- SYSTEM PROMPT - Instructions and rules\n- CONVERSATION HISTORY - Previous messages\n- CURRENT TASK - Active request\n- AVAILABLE TOKENS - Remaining capacity\n\nSTYLE: Vertical stack showing context sections, each labeled with size indicators, professional infographic, white background.\n\nSave to: assets/images/ch09-context-window.png",
       "status": "pending",
       "priority": "critical",
-      "score": 670,
+      "score": 1065,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedBy": null,
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
@@ -1564,7 +1564,7 @@
       "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing a compound flywheel for a technical book.\n\nTOPIC: Compound Engineering Flywheel\nTYPE: Circular flywheel\n\nCONTENT (flywheel segments):\n- BUILD - Create systems\n- LEARN - Capture insights\n- AUTOMATE - Reduce friction\n- COMPOUND - Multiply output\n\nSTYLE: Circular flywheel with momentum arrows, each segment labeled, shows acceleration, navy/teal colors, white background, professional infographic.\n\nSave to: assets/images/ch01-compound-flywheel.png",
       "status": "pending",
       "priority": "critical",
-      "score": 670,
+      "score": 1065,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedBy": null,
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
@@ -1576,7 +1576,7 @@
       "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing a 5-level verification pyramid for a technical book.\n\nTOPIC: Software Testing Verification Ladder\nTYPE: Pyramid/Staircase\n\nCONTENT (label each level clearly):\n- Level 1 (bottom): SYNTAX - Code compiles\n- Level 2: RUNTIME - Executes without crashes\n- Level 3: LOGIC - Correct behavior\n- Level 4: INTEGRATION - Components work together\n- Level 5 (top): E2E - Full workflows pass\n\nSTYLE: Vertical staircase ascending, each level a distinct bar with label, gradient blue (light to dark), white background, professional infographic NOT cartoon.\n\nSave to: assets/images/ch06-verification-ladder.png",
       "status": "pending",
       "priority": "critical",
-      "score": 645,
+      "score": 1040,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "completedAt": "2026-01-29T23:52:00Z",
       "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
@@ -2440,7 +2440,6 @@
       "priority": "high",
       "score": 355,
       "blockedBy": [
-        "task-476",
         "task-477",
         "task-478",
         "task-479"
@@ -2590,7 +2589,7 @@
       "description": "Scan all AsciiDoc chapters for acronyms (3+ uppercase letters) and verify they are defined on first use. Focus on: LLM, MCP, API, CLI, DDD, OTEL, CI/CD, JWT, REST, CRUD.",
       "status": "pending",
       "priority": "medium",
-      "score": 185,
+      "score": 580,
       "createdAt": "2026-01-29T19:10:00Z",
       "scoreBreakdown": "medium:500 + fix:80 = 580"
     },
@@ -2923,16 +2922,16 @@
     ]
   },
   "stats": {
-    "pending": 4,
+    "pending": 5,
     "inProgress": 0,
-    "complete": 131,
+    "complete": 220,
     "blocked": 6,
     "total": 231
   },
   "checkpoints": {
-    "lastGoodCommit": "9c78c221359f65c778749defa08d7945a35589c3",
-    "lastSuccessfulTask": "iteration-8",
-    "lastCheckpoint": "2026-01-29T18:23:00Z",
+    "lastGoodCommit": "3144cf26448e15553db0963abf1cc42e16730666",
+    "lastSuccessfulTask": "iteration-9",
+    "lastCheckpoint": "2026-01-29T18:26:34Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,
