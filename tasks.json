@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-01-29T22:00:00Z",
+  "lastUpdated": "2026-01-29T23:30:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
-  "curatorNotes": "Curation cycle 2026-01-29 19:30: Recalculated all task scores using formula: priority + type + blocking_bonus. Fixed 17 score mismatches. Pending priority order: task-447 (860, Kindle setup, blocks 2), task-445 (835, PDF build, blocks 1), task-469 (830, ch16 TOC), task-456 (810, overflow script). Blocked high-value: task-449 (1135, final build, blocks 3). No duplicates found. Stats: 10 pending, 7 blocked, 197 complete.",
+  "curatorNotes": "Curation cycle 2026-01-29 23:30: Recalculated 9 pending task scores. Fixed blockedBy format (string→null). Task-448 marked blocked (AppleScript). Priority order: task-482 (830, cross-refs), task-473-479 (815 each, DALL-E diagrams), task-483 (580, terms). Blocked: 6 tasks. Complete: 126.",
   "prds": {
     "index": {
       "status": "complete",
@@ -1942,7 +1942,7 @@
       "type": "fix",
       "title": "Run Kindle Previewer review and fix issues",
       "description": "Use kindle-review skill to test EPUB on Kindle. Document any rendering issues. Fix in AsciiDoc source. Iterate until Kindle rendering is clean.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 460,
       "scoreBreakdown": "high:750 + fix:80 + blocks(1×25):25 = 855",
@@ -1951,7 +1951,10 @@
       ],
       "createdAt": "2026-01-29T12:19:01.156Z",
       "blockerNote": "Requires Kindle Previewer 3 (brew install --cask kindle-previewer with sudo)",
-      "blockedNote": "AppleScript accessibility permissions required: System Settings > Privacy & Security > Accessibility must grant Terminal access"
+      "blockedNote": "AppleScript accessibility permissions required: System Settings > Privacy & Security > Accessibility must grant Terminal access",
+      "blockedBy": [
+        "AppleScript-permissions"
+      ]
     },
     {
       "id": "task-465",
@@ -2183,10 +2186,9 @@
       "description": "Use image-generator MCP to create a professional pyramid diagram for the Verification Ladder. Prompt: Professional pyramid diagram with 5 levels (Syntax, Runtime, Logic, Integration, End-to-End), widest at bottom, each level a distinct shade of blue, modern flat design, no text. Save to assets/images/ch06-verification-ladder.png",
       "status": "pending",
       "priority": "high",
-      "score": 420,
+      "score": 815,
       "createdAt": "2026-01-29T17:25:21.916Z",
-      "blockedBy": "MCP-server-missing",
-      "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
+      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
     },
     {
       "id": "task-474",
@@ -2195,10 +2197,9 @@
       "description": "Use image-generator MCP to create a professional flow diagram for Quality Gates. Prompt: Horizontal pipeline with 5 gates/checkpoints, code flowing through each gate, gates as glowing portals or barriers, modern tech visualization, dark background with blue/green accents. Save to assets/images/ch07-quality-gates.png",
       "status": "pending",
       "priority": "high",
-      "score": 420,
+      "score": 815,
       "createdAt": "2026-01-29T17:25:21.916Z",
-      "blockedBy": "MCP-server-missing",
-      "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
+      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
     },
     {
       "id": "task-475",
@@ -2207,10 +2208,9 @@
       "description": "Use image-generator MCP to create a professional debugging flow diagram. Prompt: Circular debugging cycle with 4 stages (Observe, Hypothesize, Test, Fix), arrows connecting stages, magnifying glass and code symbols, clean professional style. Save to assets/images/ch08-context-debugging.png",
       "status": "pending",
       "priority": "high",
-      "score": 420,
+      "score": 815,
       "createdAt": "2026-01-29T17:25:21.916Z",
-      "blockedBy": "MCP-server-missing",
-      "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
+      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
     },
     {
       "id": "task-476",
@@ -2219,10 +2219,9 @@
       "description": "Use image-generator MCP to create a professional ratchet mechanism diagram. Prompt: Mechanical ratchet gear showing one-way progress, with progress arrow, quality level indicator, clean technical illustration style. Save to assets/images/ch07-ratchet-effect.png",
       "status": "pending",
       "priority": "high",
-      "score": 420,
+      "score": 815,
       "createdAt": "2026-01-29T17:25:21.916Z",
-      "blockedBy": "MCP-server-missing",
-      "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
+      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
     },
     {
       "id": "task-477",
@@ -2231,10 +2230,10 @@
       "description": "Use image-generator MCP to create the RALPH loop architecture. Prompt: Circular autonomous loop diagram with Orchestrator, Executor, Task Queue, Memory components, arrows showing flow, modern DevOps style visualization. Save to assets/images/ch10-ralph-architecture.png",
       "status": "pending",
       "priority": "high",
-      "score": 420,
+      "score": 815,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedBy": null,
-      "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
+      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
     },
     {
       "id": "task-478",
@@ -2243,10 +2242,10 @@
       "description": "Use image-generator MCP to visualize context window. Prompt: Layered rectangular diagram showing context window with system prompt, conversation history, and available space sections, gradient fills, capacity meter on side. Save to assets/images/ch09-context-window.png",
       "status": "pending",
       "priority": "high",
-      "score": 420,
+      "score": 815,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedBy": null,
-      "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
+      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
     },
     {
       "id": "task-479",
@@ -2255,10 +2254,10 @@
       "description": "Use image-generator MCP to create flywheel effect diagram. Prompt: Circular flywheel with momentum arrows, showing acceleration, compound growth spiral emanating outward, energy/speed visualization. Save to assets/images/ch01-compound-flywheel.png",
       "status": "pending",
       "priority": "high",
-      "score": 420,
+      "score": 815,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedBy": null,
-      "blockedReason": "image-generator MCP server (DALL-E 3) not connected to session"
+      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
     },
     {
       "id": "task-446",
@@ -2834,8 +2833,9 @@
       "description": "Check all internal links, chapter references, and figure references across the 16 AsciiDoc chapter files. Ensure xref syntax is correct and targets exist.",
       "status": "pending",
       "priority": "high",
-      "score": 890,
-      "createdAt": "2026-01-29T19:10:00Z"
+      "score": 830,
+      "createdAt": "2026-01-29T19:10:00Z",
+      "scoreBreakdown": "high:750 + fix:80 = 830"
     },
     {
       "id": "task-483",
@@ -2844,8 +2844,9 @@
       "description": "Scan all AsciiDoc chapters for acronyms (3+ uppercase letters) and verify they are defined on first use. Focus on: LLM, MCP, API, CLI, DDD, OTEL, CI/CD, JWT, REST, CRUD.",
       "status": "pending",
       "priority": "medium",
-      "score": 850,
-      "createdAt": "2026-01-29T19:10:00Z"
+      "score": 580,
+      "createdAt": "2026-01-29T19:10:00Z",
+      "scoreBreakdown": "medium:500 + fix:80 = 580"
     },
     {
       "id": "task-484",
@@ -2923,15 +2924,15 @@
     ]
   },
   "stats": {
-    "pending": 10,
+    "pending": 9,
     "complete": 126,
-    "blocked": 5,
+    "blocked": 6,
     "total": 141
   },
   "checkpoints": {
-    "lastGoodCommit": "cdd88af5c3482ea05b909bb1a8c9760b2647698d",
-    "lastSuccessfulTask": "iteration-3",
-    "lastCheckpoint": "2026-01-29T17:55:20Z",
+    "lastGoodCommit": "b38218371e3aa0f1745baf3f7f304728064bf77b",
+    "lastSuccessfulTask": "iteration-4",
+    "lastCheckpoint": "2026-01-29T18:02:45Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,
