@@ -297,6 +297,8 @@ Git also enables recovery. When the circuit breaker trips, the system records `l
 
 The three tiers serve different temporal needs:
 
+// PDF: Full table
+ifdef::backend-pdf[]
 [width="100%",cols="14%,20%,32%,34%",options="header",]
 |===
 |Tier |Lifetime |Access Pattern |Example Content
@@ -304,6 +306,16 @@ The three tiers serve different temporal needs:
 |Files |Days to weeks |Per-iteration read |Progress state, learnings, queue
 |Git |Permanent |Occasional search |Commit history, prior approaches
 |===
+endif::[]
+
+// EPUB: Definition list
+ifndef::backend-pdf[]
+*Conversation tier*:: Lifetime: single iteration. Access: immediate. Stores current task context and tool results.
+
+*Files tier*:: Lifetime: days to weeks. Access: per-iteration read. Stores progress state, learnings, queue.
+
+*Git tier*:: Lifetime: permanent. Access: occasional search. Stores commit history and prior approaches.
+endif::[]
 
 During this book’s development, the file tier proved most valuable. Each iteration read `claude-progress.txt` to understand current state, `tasks.json` to pick the next task, and `@LEARNINGS.md` to inherit prior insights.
 
@@ -556,6 +568,8 @@ Each layer built on previous layers. By the end of the project, adding a new rev
 
 The infrastructure investment breakdown:
 
+// PDF: Full table
+ifdef::backend-pdf[]
 [width="100%",cols="25%,18%,15%,20%,22%",options="header"]
 |===
 |Component |Build Time |Uses |Time/Use |Total Saved
@@ -566,6 +580,22 @@ The infrastructure investment breakdown:
 |epub-review skill |4 hours |20{plus} |30 min |6 hours
 |exercise-validator |3 hours |100{plus} |2 min |3 hours
 |===
+endif::[]
+
+// EPUB: Definition list with inline metrics
+ifndef::backend-pdf[]
+*ralph.sh*:: Build: 6 hours | Uses: 174 | Time/use: 3 min | Saved: 8.7 hours
+
+*update-queue.cjs*:: Build: 2 hours | Uses: 170{plus} | Time/use: 5 min | Saved: 14 hours
+
+*slop-checker*:: Build: 1 hour | Uses: 30{plus} | Time/use: 10 min | Saved: 4 hours
+
+*term-intro-checker*:: Build: 1 hour | Uses: 30{plus} | Time/use: 8 min | Saved: 3 hours
+
+*epub-review skill*:: Build: 4 hours | Uses: 20{plus} | Time/use: 30 min | Saved: 6 hours
+
+*exercise-validator*:: Build: 3 hours | Uses: 100{plus} | Time/use: 2 min | Saved: 3 hours
+endif::[]
 
 Total infrastructure investment: approximately 17 hours. Total time saved: approximately 38 hours. Return on investment: 2.2x.
 

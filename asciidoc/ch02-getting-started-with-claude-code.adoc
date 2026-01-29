@@ -449,6 +449,8 @@ If an increment feels large, split it further. The cost of additional prompts is
 
 Each tool excels in different contexts. Knowing when to use each saves time.
 
+// PDF: Full comparison table
+ifdef::backend-pdf[]
 [width="99%",cols="28%,30%,20%,22%",options="header",]
 |===
 |Dimension |Claude Code |Cursor |ChatGPT
@@ -458,6 +460,16 @@ Each tool excels in different contexts. Knowing when to use each saves time.
 |Verification |Runs tests, builds, linters |Limited |None
 |Cost |Token-based |Subscription |Subscription
 |===
+endif::[]
+
+// EPUB: Definition list for narrow screens
+ifndef::backend-pdf[]
+*Claude Code*:: Best for multi-file workflows and automation. Full repo context via CLAUDE.md. Speed: ~30s per turn. Runs tests, builds, linters. Token-based cost.
+
+*Cursor*:: Best for quick edits and real-time coding. Context from open files plus search. Speed: <1s inline. Limited verification. Subscription cost.
+
+*ChatGPT*:: Best for concepts and brainstorming. Paste-based, limited codebase context. Speed: ~5s API. No verification. Subscription cost.
+endif::[]
 
 *Use Claude Code when:* - Task spans 3{plus} files - You need to run tests or builds - Full codebase context is essential - You are building automation
 

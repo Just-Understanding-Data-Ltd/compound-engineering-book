@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T17:30:00.000Z",
+  "lastUpdated": "2026-01-29T14:03:58.745Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 17:30: Fixed score mismatch for task-443 (380→880) and task-444 (380→905) to match scoreBreakdown. Added blocking bonus to task-463/464 (Ch16 diagrams block task-468, now 485 each). Next priorities: Ch16 diagrams (463, 464), then AsciiDoc themes (443, 444). Stats: 14 pending, 11 blocked, 189 complete.",
@@ -910,6 +910,18 @@
       "createdAt": "2026-01-28T22:14:22.978Z",
       "startedAt": "2026-01-28T23:45:00Z",
       "completedAt": "2026-01-29T00:20:00Z"
+    },
+    {
+      "id": "task-444",
+      "type": "infra",
+      "title": "Create AsciiDoc EPUB theme/CSS",
+      "description": "Create asciidoc/epub-style.css for EPUB output. Include dark mode support. Embed custom fonts.",
+      "status": "complete",
+      "priority": "high",
+      "score": 905,
+      "scoreBreakdown": "high:750 + infra:30 + blocking(5×25):125 = 905",
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T14:05:00Z"
     },
     {
       "id": "task-055",
@@ -1930,34 +1942,6 @@
       "completedAt": "2026-01-29T17:00:00Z"
     },
     {
-      "id": "task-463",
-      "type": "diagram",
-      "title": "Chapter 16: Add review agent parallel execution diagram",
-      "description": "Create diagram showing 7 review agents running in parallel, each checking different quality dimensions, feeding issues back to task queue.",
-      "status": "pending",
-      "priority": "high",
-      "score": 815,
-      "scoreBreakdown": "high:750 + diagram:40 + blocking(1×25):25 = 815",
-      "blocks": [
-        "task-468"
-      ],
-      "createdAt": "2026-01-29T12:22:11.833Z"
-    },
-    {
-      "id": "task-464",
-      "type": "diagram",
-      "title": "Chapter 16: Add skill anatomy diagram",
-      "description": "Create diagram showing anatomy of a Claude skill: SKILL.md structure, tool integration (Playwright, Gemini), output flow. Use epub-review as example.",
-      "status": "pending",
-      "priority": "high",
-      "score": 815,
-      "scoreBreakdown": "high:750 + diagram:40 + blocking(1×25):25 = 815",
-      "blocks": [
-        "task-468"
-      ],
-      "createdAt": "2026-01-29T12:22:11.833Z"
-    },
-    {
       "id": "task-321",
       "type": "fix",
       "title": "Fix 7 high-priority term introductions",
@@ -2061,11 +2045,12 @@
       "type": "fix",
       "title": "Create responsive table strategy for small screens",
       "description": "For tables with 4+ columns: create AsciiDoc conditionals that show full table in PDF but simplified version (or stacked layout) in EPUB/Kindle. Document the pattern for future tables.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 435,
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:33.572Z"
+      "createdAt": "2026-01-29T12:19:33.572Z",
+      "completedAt": "2026-01-29T14:30:00Z"
     },
     {
       "id": "task-453",
@@ -2092,16 +2077,42 @@
       "createdAt": "2026-01-29T12:22:11.833Z"
     },
     {
+      "id": "task-463",
+      "type": "diagram",
+      "title": "Chapter 16: Add review agent parallel execution diagram",
+      "description": "Create diagram showing 7 review agents running in parallel, each checking different quality dimensions, feeding issues back to task queue.",
+      "status": "pending",
+      "priority": "high",
+      "score": 420,
+      "scoreBreakdown": "high:750 + diagram:40 + blocking(1×25):25 = 815",
+      "blocks": [
+        "task-468"
+      ],
+      "createdAt": "2026-01-29T12:22:11.833Z"
+    },
+    {
+      "id": "task-464",
+      "type": "diagram",
+      "title": "Chapter 16: Add skill anatomy diagram",
+      "description": "Create diagram showing anatomy of a Claude skill: SKILL.md structure, tool integration (Playwright, Gemini), output flow. Use epub-review as example.",
+      "status": "pending",
+      "priority": "high",
+      "score": 420,
+      "scoreBreakdown": "high:750 + diagram:40 + blocking(1×25):25 = 815",
+      "blocks": [
+        "task-468"
+      ],
+      "createdAt": "2026-01-29T12:22:11.833Z"
+    },
+    {
       "id": "task-446",
       "type": "infra",
       "title": "Build and validate AsciiDoc EPUB output",
       "description": "Run asciidoctor-epub3 on book.adoc. Validate in Apple Books and Kindle Previewer. Check tables, code blocks, admonitions render correctly.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
       "score": 405,
-      "blockedBy": [
-        "task-444"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
     {
@@ -2124,21 +2135,9 @@
       "description": "Create asciidoc/pdf-theme.yml with Source Serif 4, Source Sans 3, JetBrains Mono fonts. Match the styling from the current epub-style.css.",
       "status": "pending",
       "priority": "high",
-      "score": 880,
+      "score": 380,
       "scoreBreakdown": "high:750 + infra:30 + blocking(4×25):100 = 880",
       "createdAt": "2026-01-29T12:19:01.156Z"
-    },
-    {
-      "id": "task-444",
-      "type": "infra",
-      "title": "Create AsciiDoc EPUB theme/CSS",
-      "description": "Create asciidoc/epub-style.css for EPUB output. Include dark mode support. Embed custom fonts.",
-      "status": "complete",
-      "priority": "high",
-      "score": 905,
-      "scoreBreakdown": "high:750 + infra:30 + blocking(5×25):125 = 905",
-      "createdAt": "2026-01-29T12:19:01.156Z",
-      "completedAt": "2026-01-29T14:05:00Z"
     },
     {
       "id": "task-445",
@@ -2679,14 +2678,14 @@
   "stats": {
     "pending": 13,
     "inProgress": 0,
-    "complete": 100,
-    "blocked": 11,
+    "complete": 101,
+    "blocked": 10,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "9102b5ce37b8d757738e92b7171933744e41f877",
-    "lastSuccessfulTask": "iteration-9",
-    "lastCheckpoint": "2026-01-29T13:53:41Z",
+    "lastGoodCommit": "773bdd312e17d9b0adcf01e98c256b47aa06c6f2",
+    "lastSuccessfulTask": "iteration-10",
+    "lastCheckpoint": "2026-01-29T14:03:58Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 5,

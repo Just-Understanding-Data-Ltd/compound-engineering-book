@@ -509,6 +509,8 @@ Each request needs a `custom++_++id` to correlate results with inputs. The batch
 
 The economics are straightforward: batch requests cost 50% less per token.
 
+// PDF: Full pricing table with all columns
+ifdef::backend-pdf[]
 [width="100%",cols="13%,22%,19%,25%,21%",options="header",]
 |===
 |Model |Standard Input |Batch Input |Standard Output |Batch Output
@@ -516,6 +518,37 @@ The economics are straightforward: batch requests cost 50% less per token.
 |Sonnet |$3/MTok |$1.50/MTok |$15/MTok |$7.50/MTok
 |Opus |$15/MTok |$7.50/MTok |$75/MTok |$37.50/MTok
 |===
+endif::[]
+
+// EPUB: Rotated format for narrow screens
+ifndef::backend-pdf[]
+*Haiku Pricing:*
+[width="100%",cols="50%,50%"]
+|===
+|Standard Input |$0.25/MTok
+|Batch Input |$0.125/MTok
+|Standard Output |$1.25/MTok
+|Batch Output |$0.625/MTok
+|===
+
+*Sonnet Pricing:*
+[width="100%",cols="50%,50%"]
+|===
+|Standard Input |$3/MTok
+|Batch Input |$1.50/MTok
+|Standard Output |$15/MTok
+|Batch Output |$7.50/MTok
+|===
+
+*Opus Pricing:*
+[width="100%",cols="50%,50%"]
+|===
+|Standard Input |$15/MTok
+|Batch Input |$7.50/MTok
+|Standard Output |$75/MTok
+|Batch Output |$37.50/MTok
+|===
+endif::[]
 
 For a 100-file code review (estimated 500K input tokens, 250K output tokens with Sonnet):
 

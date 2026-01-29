@@ -54,12 +54,22 @@ Continuing a broken trajectory has real costs. Each failed iteration takes 2-5 m
 
 After 3 failed attempts (15{plus} minutes), you’ve likely spent more time than starting fresh would take. The math favors clean breaks:
 
+// PDF: Full table
+ifdef::backend-pdf[]
 [width="100%",cols="25%,25%,25%,25%",options="header"]
 |===
 |Scenario |Time |Tokens |Success Rate
 |Continue broken trajectory |~40 min |~40K |~30%
 |Clean slate recovery |~25 min |~20K |~80%
 |===
+endif::[]
+
+// EPUB: Definition list
+ifndef::backend-pdf[]
+*Continue broken trajectory*:: ~40 min, ~40K tokens, ~30% success rate.
+
+*Clean slate recovery*:: ~25 min, ~20K tokens, ~80% success rate.
+endif::[]
 
 Fresh context isn’t just about saving resources. It’s about giving your AI agent maximum cognitive clarity for each task.
 

@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 14:05)
-- Phase: Infrastructure - EPUB Theming
-- Active: Iteration 10 - AsciiDoc EPUB theme
-- Last Completed: task-444 (AsciiDoc EPUB theme/CSS)
+## Current Status (Updated: 2026-01-29 14:30)
+- Phase: Infrastructure - Responsive Tables
+- Active: Iteration 11 - Responsive table strategy
+- Last Completed: task-452 (Responsive table strategy for small screens)
 - Blockers: None
-- Queue Health: 13 pending, 11 blocked, 100 complete
-- Publishing Readiness: 98% - EPUB theme complete
-- Next: task-443 (PDF theme) or chapter 16 diagrams (task-463, 464)
+- Queue Health: 12 pending, 10 blocked, 101 complete
+- Publishing Readiness: 98% - EPUB responsive tables complete
+- Next: task-453 (code block line lengths) or task-463/464 (ch16 diagrams)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -30,6 +30,26 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 14:30 - COMPLETED task-452: Create responsive table strategy for small screens
+- What: Created AsciiDoc conditional rendering for 9 tables with 4+ columns
+- Pattern: PDF shows full tables, EPUB shows definition lists (more readable on narrow screens)
+- Files modified:
+  - asciidoc/ch02-getting-started-with-claude-code.adoc (1 table)
+  - asciidoc/ch06-the-verification-ladder.adoc (1 table)
+  - asciidoc/ch10-the-ralph-loop.adoc (1 table)
+  - asciidoc/ch13-building-the-harness.adoc (2 tables)
+  - asciidoc/ch14-the-meta-engineer-playbook.adoc (1 table)
+  - asciidoc/ch15-model-strategy-and-cost-optimization.adoc (1 table - 5-column pricing)
+  - asciidoc/ch16-building-autonomous-systems.adoc (2 tables)
+- Documentation: Created asciidoc/README-responsive-tables.md with 3 patterns:
+  1. Conditional full vs simplified table
+  2. Table in PDF, definition list in EPUB
+  3. Rotated table (long headers, short values)
+- Verification: All 6 modified files validate with asciidoctor (0 errors)
+- Iteration: 11
+- Stats: 12 pending, 10 blocked, 101 complete
+- Next: task-453 (code block line lengths) or task-463/464 (ch16 diagrams)
 
 ### 2026-01-29 14:05 - COMPLETED task-444: Create AsciiDoc EPUB theme/CSS
 - What: Created comprehensive EPUB theme for asciidoctor-epub3 with custom styling

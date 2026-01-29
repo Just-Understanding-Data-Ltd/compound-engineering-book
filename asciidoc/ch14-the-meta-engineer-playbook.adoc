@@ -331,6 +331,8 @@ Level 4 is the minimum for long-term career safety. AI does not eliminate the ne
 
 AI-powered coding agents represent a paradigm shift. Each wave arrives faster than its predecessor. Each provides roughly 5x productivity gains over the previous.
 
+// PDF: Full table
+ifdef::backend-pdf[]
 [width="100%",cols="15%,25%,25%,35%",options="header"]
 |===
 |Wave |Mode |Status |Key Characteristic
@@ -341,6 +343,22 @@ AI-powered coding agents represent a paradigm shift. Each wave arrives faster th
 |5 |Agent clusters |Q2-Q3 2025 |Parallel agents, human coordinates
 |6 |Agent fleets |Early 2026 |Supervisor agents manage pods
 |===
+endif::[]
+
+// EPUB: Definition list
+ifndef::backend-pdf[]
+*Wave 1 - Traditional coding*:: Status: Declining. You type everything.
+
+*Wave 2 - Code completions*:: Status: Declining. Copilot-style autocomplete.
+
+*Wave 3 - Chat-based coding*:: Status: Current. Back-and-forth dialogue.
+
+*Wave 4 - Coding agents*:: Status: Q1 2025. Autonomous multi-step execution.
+
+*Wave 5 - Agent clusters*:: Status: Q2-Q3 2025. Parallel agents, human coordinates.
+
+*Wave 6 - Agent fleets*:: Status: Early 2026. Supervisor agents manage pods.
+endif::[]
 
 ==== The Wave 3 to Wave 4 Transition
 

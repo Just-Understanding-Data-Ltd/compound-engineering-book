@@ -313,6 +313,8 @@ Long-running agents face three challenges: human-in-the-loop workflows requiring
 
 Agent memory operates across three complementary tiers:
 
+// PDF: Full table
+ifdef::backend-pdf[]
 [width="100%",cols="17%,24%,32%,27%",options="header",]
 |===
 |Tier |Storage |Durability |Use Case
@@ -320,6 +322,16 @@ Agent memory operates across three complementary tiers:
 |File-based |TASKS.md, progress.txt |Survives process boundaries |RALPH loop iterations
 |Event-sourced |Append-only event log |Full history reconstruction |Production agents with audit needs
 |===
+endif::[]
+
+// EPUB: Definition list
+ifndef::backend-pdf[]
+*Session tier*:: In-memory storage. Lost on termination. Use for quick sub-agent tasks.
+
+*File-based tier*:: TASKS.md, progress.txt. Survives process boundaries. Use for RALPH loop iterations.
+
+*Event-sourced tier*:: Append-only event log. Full history reconstruction. Use for production agents with audit needs.
+endif::[]
 
 Most production agents combine file-based memory (human-readable, git-tracked) with event-sourcing (complete audit trail, time-travel debugging). The RALPH loop uses file-based memory because each iteration spawns a fresh agent that needs cross-session continuity.
 
@@ -1040,6 +1052,8 @@ Autonomous LLM workflows can enter infinite loops, process excessive files, or g
 
 Cost protection requires defense in depth. No single layer is sufficient; each catches failures the others miss:
 
+// PDF: Full table
+ifdef::backend-pdf[]
 [width="100%",cols="18%,26%,35%,21%",options="header",]
 |===
 |Layer |Protection |Example Limit |Catches
@@ -1049,6 +1063,20 @@ Cost protection requires defense in depth. No single layer is sufficient; each c
 |4. Budget alerts |Daily and monthly caps |$10/day, $100/month |Sustained overuse
 |5. Model selection |Use cheaper models for simple tasks |Haiku for grep/rename |Unnecessary expense
 |===
+endif::[]
+
+// EPUB: Definition list
+ifndef::backend-pdf[]
+*Layer 1 - Job timeout*:: GitHub Actions `timeout-minutes`. Limit: 15 minutes. Catches infinite loops.
+
+*Layer 2 - Request tokens*:: API `max_tokens` parameter. Limit: 4,096 tokens. Catches verbose responses.
+
+*Layer 3 - Input size*:: File count, lines per file. Limit: 50 files, 500 lines each. Catches file explosions.
+
+*Layer 4 - Budget alerts*:: Daily and monthly caps. Limit: $10/day, $100/month. Catches sustained overuse.
+
+*Layer 5 - Model selection*:: Use cheaper models for simple tasks. Haiku for grep/rename. Catches unnecessary expense.
+endif::[]
 
 The outer layers (job timeout) catch catastrophic failures. The inner layers (model selection) optimize normal operations. Together, they make costs predictable.
 

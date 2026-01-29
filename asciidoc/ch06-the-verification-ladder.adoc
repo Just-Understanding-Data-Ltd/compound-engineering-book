@@ -178,12 +178,22 @@ Unit tests don’t catch these failures. Only integration tests do.
 
 *The signal-to-noise comparison:*
 
+// PDF: Full table
+ifdef::backend-pdf[]
 [width="100%",cols="25%,25%,25%,25%",options="header"]
 |===
 |Test Type |Tests Needed |Lines Verified |Signal per Test
 |Unit tests |47 tests |5-10 lines each |Low
 |Integration tests |3 tests |50-100 lines each |High
 |===
+endif::[]
+
+// EPUB: Definition list
+ifndef::backend-pdf[]
+*Unit tests*:: 47 tests needed, verifying 5-10 lines each. Signal per test: Low.
+
+*Integration tests*:: 3 tests needed, verifying 50-100 lines each. Signal per test: High.
+endif::[]
 
 Integration tests verify 10-20x more code per test. When reviewing LLM-generated code, you can check 3 integration test results in 2 minutes instead of reviewing 47 unit tests in 30 minutes.
 
