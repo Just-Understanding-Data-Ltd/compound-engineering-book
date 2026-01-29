@@ -1942,7 +1942,7 @@
       "type": "fix",
       "title": "Run Kindle Previewer review and fix issues",
       "description": "Use kindle-review skill to test EPUB on Kindle. Document any rendering issues. Fix in AsciiDoc source. Iterate until Kindle rendering is clean.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
       "score": 460,
       "scoreBreakdown": "high:750 + fix:80 + blocks(1×25):25 = 855",
@@ -1951,10 +1951,7 @@
       ],
       "createdAt": "2026-01-29T12:19:01.156Z",
       "blockerNote": "Requires Kindle Previewer 3 (brew install --cask kindle-previewer with sudo)",
-      "blockedNote": "AppleScript accessibility permissions required: System Settings > Privacy & Security > Accessibility must grant Terminal access",
-      "blockedBy": [
-        "AppleScript-permissions"
-      ]
+      "blockedNote": "AppleScript accessibility permissions required: System Settings > Privacy & Security > Accessibility must grant Terminal access"
     },
     {
       "id": "task-465",
