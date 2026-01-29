@@ -1098,6 +1098,203 @@ Claude API returns HTTP 400 with message about "tool use concurrency issues" or 
 
 ---
 
+## Image Generation for Book Figures
+
+Use the **image-generator MCP server** (GPT Image gpt-image-1.5) for professional book diagrams. This replaces ASCII art and poorly-rendered Mermaid diagrams with polished visuals.
+
+### MCP Server Setup
+
+The image-generator MCP server is configured in `.mcp.json`. Requires `OPENAI_API_KEY` environment variable.
+
+**Available tools:**
+- `generate_image` - Create images from text prompts
+- `edit_image` - Edit existing images with text prompts
+
+### When to Generate Images
+
+| Use Image Generation | Keep as Text/Mermaid |
+|---------------------|---------------------|
+| Architecture diagrams | Simple flowcharts (<5 nodes) |
+| Conceptual illustrations | Code snippets |
+| Process flows with visual appeal | Sequence diagrams |
+| Metaphorical visuals (pyramid, ladder) | Tables |
+| Comparison visuals | Bullet lists |
+
+### Standardized Prompting Strategy
+
+**CRITICAL: Always include these elements in every prompt:**
+
+1. **Subject clarity** - What exactly the diagram shows
+2. **Visual style** - Modern, clean, professional technical illustration
+3. **Color scheme** - Consistent with book theme (blues, grays, accent colors)
+4. **Layout direction** - Horizontal, vertical, circular, or grid
+5. **NO TEXT requirement** - Text will be added via AsciiDoc captions
+
+**Master Template:**
+
+```
+Create a professional technical diagram for a software engineering book about AI-assisted development.
+
+CONCEPT: [Specific concept being visualized]
+VISUAL METAPHOR: [Physical object or familiar pattern that represents the concept]
+STYLE: Modern flat design, clean lines, professional technical illustration
+COLORS: Deep blue (#1a365d) primary, teal (#0d9488) accent, light gray (#f8fafc) background
+LAYOUT: [Horizontal flow | Vertical stack | Pyramid | Circular cycle | Layered architecture]
+
+SPECIFIC ELEMENTS:
+- [Element 1 with visual description]
+- [Element 2 with visual description]
+- [Element 3 with visual description]
+
+REQUIREMENTS:
+- NO text, labels, or words in the image
+- White or very light background for print compatibility
+- Clear visual hierarchy with size and color contrast
+- Professional, corporate presentation style
+- Suitable for both screen and print at 1024x1024
+```
+
+### Diagram Type Templates
+
+**Verification Ladder / Pyramid:**
+```
+Create a professional pyramid diagram for a technical book.
+
+CONCEPT: Verification ladder with 5 testing levels
+VISUAL METAPHOR: A 3D pyramid with distinct horizontal layers
+STYLE: Modern isometric view, clean geometric shapes
+COLORS: Gradient from light blue (bottom) to deep blue (top), each layer distinct
+LAYOUT: Vertical pyramid, widest at base
+
+SPECIFIC ELEMENTS:
+- 5 distinct horizontal layers/tiers
+- Each layer slightly smaller than the one below
+- Subtle shadows for depth
+- Glowing highlight on top tier to show progression
+
+REQUIREMENTS: NO text, clean edges, professional corporate style
+```
+
+**Quality Gates / Pipeline:**
+```
+Create a professional pipeline diagram for a technical book.
+
+CONCEPT: Code flowing through quality checkpoints
+VISUAL METAPHOR: Industrial pipeline with glowing gates/barriers
+STYLE: Modern tech visualization, subtle glow effects
+COLORS: Dark slate background, blue pipeline, green/amber gate indicators
+LAYOUT: Horizontal left-to-right flow
+
+SPECIFIC ELEMENTS:
+- 5 distinct checkpoint gates along a pipeline
+- Particles or data flowing through the pipeline
+- Each gate as a glowing portal or barrier
+- Progress indicators showing pass/fail states
+
+REQUIREMENTS: NO text, futuristic but professional, clean composition
+```
+
+**Ratchet Effect / One-Way Progress:**
+```
+Create a professional mechanical diagram for a technical book.
+
+CONCEPT: Ratchet mechanism showing one-way quality improvement
+VISUAL METAPHOR: Mechanical gear ratchet that only turns one direction
+STYLE: Technical illustration, blueprint aesthetic with modern colors
+COLORS: Steel gray mechanism, blue accent for progress direction
+LAYOUT: Centered mechanical view
+
+SPECIFIC ELEMENTS:
+- Circular ratchet gear with visible teeth
+- Pawl mechanism preventing backward motion
+- Arrow indicating forward-only direction
+- Quality level indicator (like a gauge)
+
+REQUIREMENTS: NO text, clear mechanical logic, professional technical drawing style
+```
+
+**Circular Process / Cycle:**
+```
+Create a professional cycle diagram for a technical book.
+
+CONCEPT: [Specific cycle, e.g., debugging cycle]
+VISUAL METAPHOR: Continuous loop with distinct phases
+STYLE: Modern infographic, clean geometric shapes
+COLORS: Each phase a different shade in the blue-teal spectrum
+LAYOUT: Circular with clockwise flow
+
+SPECIFIC ELEMENTS:
+- 4 distinct segments arranged in a circle
+- Curved arrows connecting each segment
+- Central hub connecting all phases
+- Subtle icons representing each phase (no text)
+
+REQUIREMENTS: NO text, balanced composition, professional presentation
+```
+
+**Architecture Layers:**
+```
+Create a professional layered architecture diagram for a technical book.
+
+CONCEPT: [Specific architecture, e.g., agent memory tiers]
+VISUAL METAPHOR: Stacked horizontal layers with connections
+STYLE: Modern flat design, clean separation between layers
+COLORS: Each layer a distinct shade, darker at bottom
+LAYOUT: Vertical stack with clear boundaries
+
+SPECIFIC ELEMENTS:
+- [N] distinct horizontal layers
+- Vertical connectors showing data flow between layers
+- Each layer with subtle texture or pattern
+- Clear visual separation with shadows or lines
+
+REQUIREMENTS: NO text, clear hierarchy, professional corporate style
+```
+
+### File Naming Convention
+
+```
+assets/images/ch[XX]-[concept-name].png
+
+Examples:
+- assets/images/ch06-verification-ladder.png
+- assets/images/ch07-quality-gates.png
+- assets/images/ch07-ratchet-effect.png
+- assets/images/ch08-debugging-cycle.png
+- assets/images/ch09-context-window.png
+```
+
+### Usage with MCP Tool
+
+```typescript
+// Example: Generate verification ladder diagram
+mcp__image_generator__generate_image({
+  prompt: "Create a professional pyramid diagram...", // Use template above
+  outputPath: "/absolute/path/to/assets/images/ch06-verification-ladder",
+  size: "1024x1024"
+})
+```
+
+### Integration with AsciiDoc
+
+```asciidoc
+[[fig-verification-ladder]]
+.The Verification Ladder: Five levels of testing confidence
+image::ch06-verification-ladder.png[Verification Ladder,width=600,align=center]
+```
+
+### Quality Checklist for Generated Images
+
+- [ ] Clear visual hierarchy and focal point
+- [ ] NO embedded text (verify before saving)
+- [ ] Professional color palette (blues, grays, teal accents)
+- [ ] Works on both light and dark backgrounds
+- [ ] 1024x1024 resolution minimum
+- [ ] Consistent style with other book diagrams
+- [ ] Saved as PNG in assets/images/
+
+---
+
 ## External References
 
 - [Anthropic: Effective Harnesses for Long-Running Agents](https://anthropic.com/engineering/effective-harnesses-for-long-running-agents)

@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "image-generator": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@singularity2045/image-generator-mcp-server"
+      ],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}"
+      }
+    }
+  }
+}

@@ -1,15 +1,14 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 18:30)
-- Phase: Content Complete - Awaiting Infrastructure
-- Active: None - All actionable tasks complete
-- Last Action: Marked DALL-E tasks blocked (image-generator MCP not connected)
+## Current Status (Updated: 2026-01-29 19:00)
+- Phase: Diagram Regeneration with DALL-E
+- Active: task-473 (ch06 Verification Ladder diagram)
+- Last Action: Connected image-generator MCP server, unblocked DALL-E tasks
 - Blockers:
   - 5 tasks blocked on AppleScript permissions (Kindle testing)
-  - 8 tasks blocked on image-generator MCP server (DALL-E diagrams)
-- Queue Health: 0 pending, 13 blocked, 121 complete
-- Publishing Readiness: 100% CONTENT + EPUB + PDF + INDEX COMPLETE
-- Next: Connect image-generator MCP server OR accept existing Mermaid diagrams
+- Queue Health: 4 pending (DALL-E diagrams), 5 blocked, 122 complete
+- Publishing Readiness: 100% CONTENT COMPLETE - Diagram polish in progress
+- Next: Generate professional diagrams with image-generator MCP
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -32,6 +31,15 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 19:00 - Connected image-generator MCP server, unblocked DALL-E tasks
+- What: Installed and configured image-generator MCP server for project
+- Files:
+  - .mcp.json: Created project-scope MCP configuration
+  - CLAUDE.md: Enhanced image generation prompting strategy
+  - tasks.json: Marked task-472 (TOC) complete, unblocked tasks 473-476
+- Outcome: SUCCESS - MCP server connected, ready for DALL-E diagram generation
+- Next: Run RALPH to generate diagrams with standardized prompts
 
 ### 2026-01-29 18:30 - BLOCKED tasks 473-479: DALL-E diagram generation requires missing MCP server
 - What: Attempted to complete diagram regeneration tasks using DALL-E
