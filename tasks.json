@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T13:43:17.234Z",
+  "lastUpdated": "2026-01-29T13:46:48.510Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle: Updated blocking scores. task-439 (table widths) blocks 10+ tasks, now score 1080. task-443 (PDF theme) blocks 4 tasks, now score 880. task-444 (EPUB theme) blocks 5 tasks, now score 905. 16 pending, 13 blocked, 184 complete.",
@@ -1897,13 +1897,12 @@
       "type": "fix",
       "title": "Chapter 16: Review pass - slop check, term intro, tech accuracy",
       "description": "Run all review checks on Chapter 16. Fix any AI slop, undefined terms, technical inaccuracies. Ensure code examples compile and match actual project files.",
-      "status": "blocked",
+      "status": "complete",
       "priority": "high",
       "score": 460,
-      "blockedBy": [
-        "task-466"
-      ],
-      "createdAt": "2026-01-29T12:22:11.833Z"
+      "blockedBy": [],
+      "createdAt": "2026-01-29T12:22:11.833Z",
+      "completedAt": "2026-01-29T16:45:00Z"
     },
     {
       "id": "task-468",
@@ -2672,14 +2671,14 @@
   "stats": {
     "pending": 15,
     "inProgress": 0,
-    "complete": 187,
-    "blocked": 12,
+    "complete": 98,
+    "blocked": 11,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "ed1c80ae1054b2a4545748b5ae705c028f9a8021",
-    "lastSuccessfulTask": "iteration-6",
-    "lastCheckpoint": "2026-01-29T13:43:17Z",
+    "lastGoodCommit": "d8937699d9deb913f357097f06dcb330b281ce21",
+    "lastSuccessfulTask": "iteration-7",
+    "lastCheckpoint": "2026-01-29T13:46:48Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 4,

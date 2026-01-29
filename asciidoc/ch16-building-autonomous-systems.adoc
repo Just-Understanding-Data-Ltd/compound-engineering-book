@@ -15,7 +15,7 @@ The numbers tell the story:
 |Words written |47,300
 |Diagrams created |66
 |Tests passing |787
-|Chapters from PRD to final |15
+|Chapters from PRD (Product Requirements Document) to final |15
 |Review agents running |7
 |===
 
@@ -206,7 +206,7 @@ Different activities happen at different intervals:
 |Triggered by 2000{plus} lines |Compact claude-progress.txt
 |===
 
-The review interval adapts based on issue counts. The algorithm uses a convergence-based approach similar to TCP congestion control:
+The review interval adapts based on issue counts. The algorithm uses a convergence-based approach similar to TCP (Transmission Control Protocol) congestion control:
 
 [source,bash]
 ----
@@ -384,7 +384,7 @@ EOF
 }
 ----
 
-Each agent runs as a separate Claude invocation. This avoids EPIPE errors from large outputs and allows independent failure handling. If one agent fails, the others continue.
+Each agent runs as a separate Claude invocation. This avoids EPIPE (broken pipe) errors from large outputs and allows independent failure handling. If one agent fails, the others continue.
 
 Review findings become tasks. When slop-checker finds em dashes, a task appears in the queue. When term-intro-checker finds undefined acronyms, another task appears. The system continuously generates its own improvement work.
 
@@ -394,7 +394,7 @@ Standard tools cannot handle every verification need. Custom skills extend Claud
 
 ==== The epub-review Skill
 
-EPUB formatting is invisible to text-only agents. An agent can read the CSS file and the markdown source, but it cannot see how the book actually renders in a reader application.
+EPUB (Electronic Publication) formatting is invisible to text-only agents. An agent can read the CSS file and the markdown source, but it cannot see how the book actually renders in a reader application.
 
 The epub-review skill solves this by combining Playwright (browser automation) with Gemini (vision API):
 
@@ -569,7 +569,7 @@ The infrastructure investment breakdown:
 
 Total infrastructure investment: approximately 17 hours. Total time saved: approximately 38 hours. Return on investment: 2.2x.
 
-The ROI calculation underestimates the real value. Infrastructure remains available for future projects. The next book starts at phase 3 velocity, not phase 1.
+The ROI (Return on Investment) calculation underestimates the real value. Infrastructure remains available for future projects. The next book starts at phase 3 velocity, not phase 1.
 
 === Lessons Learned
 

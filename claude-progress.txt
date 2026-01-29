@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 16:15)
+## Current Status (Updated: 2026-01-29 16:45)
 - Phase: Chapter 16 Completion
-- Active: Iteration 7 - Chapter 16 exercises complete
-- Last Completed: task-466 (Chapter 16 exercises)
+- Active: Iteration 8 - Chapter 16 review complete
+- Last Completed: task-467 (Chapter 16 review pass)
 - Blockers: None
-- Queue Health: 15 pending, 12 blocked, 187 complete
-- Publishing Readiness: 97% - Ch16 now has all exercises
-- Next: Chapter 16 diagrams (task-462, 463, 464) or review agent (task-467)
+- Queue Health: 15 pending, 11 blocked, 98 complete
+- Publishing Readiness: 97% - Ch16 review pass done, acronyms fixed
+- Next: Chapter 16 diagrams (task-462, 463, 464)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -30,6 +30,21 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 16:45 - COMPLETED task-467: Chapter 16 review pass
+- What: Performed slop check, term intro check, and tech accuracy review for Chapter 16
+- AI Slop: PASS - no em dashes, no blacklisted words (meta-references in agent docs OK)
+- Tech Accuracy: PASS - model names correct (haiku for review agents), CLI syntax correct
+- Term Introductions: Fixed 5 undefined acronyms:
+  1. PRD (Product Requirements Document) - line 17
+  2. EPUB (Electronic Publication) - line 378
+  3. TCP (Transmission Control Protocol) - line 199
+  4. ROI (Return on Investment) - line 550
+  5. EPIPE (broken pipe) - line 368
+- Files modified: chapters/ch16-building-autonomous-systems.md, asciidoc/ch16-building-autonomous-systems.adoc
+- Iteration: 8
+- Stats: 15 pending, 11 blocked, 98 complete
+- Next: Chapter 16 diagrams (task-462, 463, 464)
 
 ### 2026-01-29 16:15 - COMPLETED task-466: Chapter 16 exercises
 - What: Added 3 hands-on exercises to Chapter 16 (Building Autonomous Systems)
