@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 12:58)
+## Current Status (Updated: 2026-01-29 13:01)
 - Phase: AsciiDoc Publishing Pipeline + Chapter 16 Completion
 - Active: AsciiDoc conversion and Ch16 finalization running in parallel
-- Last Completed: task-433 (Convert ch01-ch03 to AsciiDoc)
+- Last Completed: task-434 (Convert ch04-ch06 to AsciiDoc)
 - Blockers: None
-- Queue Health: 7 pending, 27 blocked, 179 complete
-- Publishing Readiness: Ch01-Ch16 first drafts complete, EPUB done, ch01-03 converted to AsciiDoc
-- Next Task: task-434 (Convert ch04-ch06 to AsciiDoc) or any Ch16 task (462-466)
+- Queue Health: 8 pending, 25 blocked, 180 complete
+- Publishing Readiness: Ch01-Ch16 first drafts complete, EPUB done, ch01-06 converted to AsciiDoc
+- Next Task: task-435 (Convert ch07-ch09 to AsciiDoc) or any Ch16 task (462-466)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -16,7 +16,7 @@
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~51,000 (target 45,000-57,000, 100% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
-- Tasks Complete: 176/213 (83%)
+- Tasks Complete: 180/213 (85%)
 - Test Pass Rate: 100% across all chapters (787 tests total)
 - Exercises: 44 total (2-3 per chapter), all reviewed and finalized ✓
 
@@ -29,6 +29,22 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 13:01 - COMPLETED task-434: Convert ch04-ch06 to AsciiDoc
+- What: Converted chapters 4-6 from Markdown to AsciiDoc format
+- Files created:
+  - asciidoc/ch04-writing-your-first-claude-md.adoc (421 lines, 2825 words)
+  - asciidoc/ch05-the-12-factor-agent.adoc (578 lines, 2659 words)
+  - asciidoc/ch06-the-verification-ladder.adoc (713 lines, 3487 words)
+- Verification:
+  - All three files validated with asciidoctor (0 errors)
+  - Test PDF generated from ch04 (163K)
+  - Code blocks correctly converted with [source,language] syntax
+  - Headings properly leveled (== for chapters, === for sections)
+- Unblocked: task-435 (Convert ch07-ch09 to AsciiDoc)
+- Iteration: 6 (6 % 6 == 0: review cycle required)
+- Stats: 8 pending, 25 blocked, 180 complete
+- Next: task-435 or any Ch16 task
 
 ### 2026-01-29 12:58 - COMPLETED task-433: Convert ch01-ch03 to AsciiDoc
 - What: Converted first three chapters from Markdown to AsciiDoc format

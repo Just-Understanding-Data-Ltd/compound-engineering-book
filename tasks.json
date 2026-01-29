@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T12:58:00Z",
+  "lastUpdated": "2026-01-29T13:01:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Iteration 5: Completed task-433 (ch01-ch03 AsciiDoc conversion). 7 tasks pending, 27 blocked, 179 complete.",
@@ -1754,20 +1754,19 @@
       "type": "chapter",
       "title": "Convert ch04-ch06 to AsciiDoc",
       "description": "Convert chapters 4-6 from Markdown to AsciiDoc. Fix table column widths. Convert blockquotes to admonitions. Verify code blocks.",
-      "status": "blocked",
+      "status": "complete",
       "priority": "high",
       "score": 480,
-      "blockedBy": [
-        "task-433"
-      ],
-      "createdAt": "2026-01-29T12:19:01.156Z"
+      "blockedBy": [],
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T13:01:00Z"
     },
     {
       "id": "task-435",
       "type": "chapter",
       "title": "Convert ch07-ch09 to AsciiDoc",
       "description": "Convert chapters 7-9 from Markdown to AsciiDoc. Fix table column widths. Convert blockquotes to admonitions. Verify code blocks.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
       "score": 480,
       "blockedBy": [
@@ -1926,6 +1925,36 @@
       "createdAt": "2026-01-29T12:22:11.833Z"
     },
     {
+      "id": "task-462",
+      "type": "fix",
+      "title": "Chapter 16: Add RALPH architecture diagram",
+      "description": "Create Mermaid diagram showing RALPH loop: Orchestrator → Executor → Task Queue → Git → back to Orchestrator. Show circuit breaker, review cycle triggers, and memory systems.",
+      "status": "pending",
+      "priority": "high",
+      "score": 460,
+      "createdAt": "2026-01-29T12:22:11.833Z"
+    },
+    {
+      "id": "task-463",
+      "type": "fix",
+      "title": "Chapter 16: Add review agent parallel execution diagram",
+      "description": "Create diagram showing 7 review agents running in parallel, each checking different quality dimensions, feeding issues back to task queue.",
+      "status": "pending",
+      "priority": "high",
+      "score": 460,
+      "createdAt": "2026-01-29T12:22:11.833Z"
+    },
+    {
+      "id": "task-464",
+      "type": "fix",
+      "title": "Chapter 16: Add skill anatomy diagram",
+      "description": "Create diagram showing anatomy of a Claude skill: SKILL.md structure, tool integration (Playwright, Gemini), output flow. Use epub-review as example.",
+      "status": "pending",
+      "priority": "high",
+      "score": 460,
+      "createdAt": "2026-01-29T12:22:11.833Z"
+    },
+    {
       "id": "task-321",
       "type": "fix",
       "title": "Fix 7 high-priority term introductions",
@@ -2049,36 +2078,6 @@
         "task-438"
       ],
       "createdAt": "2026-01-29T12:19:33.572Z"
-    },
-    {
-      "id": "task-462",
-      "type": "fix",
-      "title": "Chapter 16: Add RALPH architecture diagram",
-      "description": "Create Mermaid diagram showing RALPH loop: Orchestrator → Executor → Task Queue → Git → back to Orchestrator. Show circuit breaker, review cycle triggers, and memory systems.",
-      "status": "pending",
-      "priority": "high",
-      "score": 435,
-      "createdAt": "2026-01-29T12:22:11.833Z"
-    },
-    {
-      "id": "task-463",
-      "type": "fix",
-      "title": "Chapter 16: Add review agent parallel execution diagram",
-      "description": "Create diagram showing 7 review agents running in parallel, each checking different quality dimensions, feeding issues back to task queue.",
-      "status": "pending",
-      "priority": "high",
-      "score": 435,
-      "createdAt": "2026-01-29T12:22:11.833Z"
-    },
-    {
-      "id": "task-464",
-      "type": "fix",
-      "title": "Chapter 16: Add skill anatomy diagram",
-      "description": "Create diagram showing anatomy of a Claude skill: SKILL.md structure, tool integration (Playwright, Gemini), output flow. Use epub-review as example.",
-      "status": "pending",
-      "priority": "high",
-      "score": 435,
-      "createdAt": "2026-01-29T12:22:11.833Z"
     },
     {
       "id": "task-469",
@@ -2679,16 +2678,16 @@
     ]
   },
   "stats": {
-    "pending": 7,
+    "pending": 8,
     "inProgress": 0,
-    "complete": 179,
-    "blocked": 27,
+    "complete": 180,
+    "blocked": 25,
     "total": 213
   },
   "checkpoints": {
-    "lastGoodCommit": "630cbea68bae23d33638827a08e17db3e01fa2ef",
-    "lastSuccessfulTask": "iteration-4",
-    "lastCheckpoint": "2026-01-29T12:51:51Z",
+    "lastGoodCommit": "c296ab9019afe2566d1905ff1ada6cdcbc329b25",
+    "lastSuccessfulTask": "iteration-5",
+    "lastCheckpoint": "2026-01-29T13:00:05Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 4,
