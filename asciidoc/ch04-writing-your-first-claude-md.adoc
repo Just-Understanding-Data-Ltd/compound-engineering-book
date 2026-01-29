@@ -1,4 +1,6 @@
 == Chapter 4: Writing Your First CLAUDE.md
+(((CLAUDE.md, writing)))
+(((context, project)))
 
 You ask Claude to implement a Temporal workflow, but it generates API patterns instead. You need database migration code, but it produces React components. Every session starts with a correction: "`No, we use factory functions here, not classes.`"
 

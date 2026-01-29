@@ -1,4 +1,7 @@
 == Chapter 14: The Meta-Engineer Playbook
+(((meta-engineer playbook)))
+(((automation)))
+(((scripts)))
 
 You have learned the principles of compound systems engineering. You understand context windows, verification ladders, and quality gates. You can orchestrate sub-agents and run RALPH loops overnight. Now comes the final transition: from understanding these concepts to embodying them as an identity.
 

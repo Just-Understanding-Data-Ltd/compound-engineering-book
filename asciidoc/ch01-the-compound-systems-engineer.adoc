@@ -1,4 +1,6 @@
 == Chapter 1: The Compound Systems Engineer
+(((Compound Systems Engineer)))
+(((meta-engineering)))
 
 Most career advice collapses everything into binary choices. Job versus startup. Employee versus founder. Ship fast versus overthink. Success versus failure.
 
@@ -35,6 +37,8 @@ The game you play determines which moves are rational. If you do not know what g
 === The Compound Systems Engineer Archetype
 
 ==== What Is Compound Engineering?
+(((leverage)))
+(((systems thinking)))
 
 Three statements capture the core philosophy:
 
@@ -65,6 +69,7 @@ Consider where engineers operate:
 Here is the realization: You have probably been operating at Level 1. You can reach Level 2 within a few years. Level 3 is where the game fundamentally changes.
 
 ==== The Meta-Engineer Identity
+(((meta-engineer)))
 
 The shift from builder to meta-builder looks like this:
 

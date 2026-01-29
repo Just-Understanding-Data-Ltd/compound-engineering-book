@@ -1,4 +1,6 @@
 == Chapter 7: Quality Gates That Compound
+(((quality gates)))
+(((CI/CD)))
 
 Quality gates seem like bureaucracy. Type checkers, linters, tests, Continuous Integration/Continuous Deployment (CI/CD) pipelines. Checkpoints that slow you down and block progress. This intuition is wrong.
 

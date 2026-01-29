@@ -1,4 +1,6 @@
 == Chapter 2: Getting Started with Claude Code
+(((Claude Code)))
+(((agent)))
 
 Claude Code is not ChatGPT in a terminal. It is an agent: a tool that reads your codebase, makes changes, runs commands, and reasons iteratively about what to do next. Understanding this distinction matters because it changes how you work.
 
@@ -9,6 +11,7 @@ This represents a fundamental shift in AI-assisted development. Industry observe
 This chapter teaches you to install Claude Code, run your first conversation, understand the tool ecosystem, and apply basic prompting patterns. By the end, you will know when to use Claude Code versus Cursor versus ChatGPT, and you will understand the two-mode mental model that separates beginners from productive practitioners.
 
 === The Agent Mindset
+(((agent mindset)))
 
 The shift in thinking is this: instead of asking Claude Code to write code, ask it to solve a problem given context. The difference sounds subtle but produces dramatically different results.
 
@@ -57,6 +60,7 @@ cd your-project
 . Create a CLAUDE.md file in your project root. This file provides context about your project: what language you use, how to run tests, what patterns to follow. Claude Code reads it automatically at the start of every conversation.
 
 ==== Your First CLAUDE.md
+(((CLAUDE.md)))
 
 Here is a minimal starter template:
 
@@ -157,6 +161,7 @@ Claude Code reads its previous work, understands what needs to change, makes the
 The pattern: Explore first to understand context. Implement with specific references to existing patterns. Iterate based on concrete feedback.
 
 === The Tool Ecosystem
+(((tool use)))
 
 Claude Code has six core tools. Understanding when to use each one makes your prompts more effective.
 

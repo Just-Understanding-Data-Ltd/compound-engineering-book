@@ -1,4 +1,6 @@
 == Chapter 5: The 12-Factor Agent
+(((12-factor agent)))
+(((reliability)))
 
 You built an agent that schedules emails. It worked flawlessly in testing. Fifty test cases, fifty successes. Then you deployed it to production. After 100 real requests, 47 of them failed. Not because your code was wrong, but because real workflows chain steps together, and each step introduces another chance for failure.
 

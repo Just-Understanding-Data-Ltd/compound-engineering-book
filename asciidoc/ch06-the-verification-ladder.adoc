@@ -1,4 +1,6 @@
 == Chapter 6: The Verification Ladder
+(((verification ladder)))
+(((testing)))
 
 AI generates code that compiles and runs. It also generates code that’s wrong. The syntax is perfect. The logic is broken. A password validator passes "`12345678`" but crashes on emoji. An API endpoint returns the right data in tests but fails on unicode input. The types check. The behavior doesn’t.
 

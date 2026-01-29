@@ -1,4 +1,7 @@
 == Chapter 11: Sub-Agent Architecture
+(((sub-agent)))
+(((orchestration)))
+(((specialization)))
 
 When you ask a single AI agent to "`add user authentication to the application,`" something predictable happens. The agent generates backend code with hardcoded tokens, frontend components missing validation, superficial tests covering only the happy path, and a review that misses obvious security flaws. This is the generalist trap. A single agent handling backend, frontend, testing, and code review produces mediocre results across all domains because context switching destroys focus.
 

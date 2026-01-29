@@ -1,4 +1,7 @@
 == Chapter 9: Context Engineering Deep Dive
+(((context engineering)))
+(((context window)))
+(((information theory)))
 
 Context windows are the most constrained resource in AI-assisted development. You have 200,000 tokens at most, and everything the model knows about your task must fit within that space. This chapter treats context windows as information channels governed by mathematical principles. By understanding how information flows through these channels, you can predictably control model behavior, scale agent capabilities beyond context limits, and debug generation failures systematically.
 

@@ -17,6 +17,9 @@ James Phoenix
 :keywords: Claude Code, AI, agents, software engineering, automation
 :revnumber: 1.0
 :revdate: 2026-01-29
+:index-options: disable-links
+
+// Enable index generation for PDF output
 
 // Frontmatter (preface content)
 include::frontmatter.adoc[]
@@ -79,3 +82,7 @@ include::ch16-building-autonomous-systems.adoc[]
 
 // Backmatter (appendices)
 include::backmatter.adoc[]
+
+// Index (auto-generated from indexterms)
+[index]
+== Index

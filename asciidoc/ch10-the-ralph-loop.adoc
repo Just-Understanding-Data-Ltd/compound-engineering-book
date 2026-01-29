@@ -1,4 +1,7 @@
 == Chapter 10: The RALPH Loop
+(((RALPH loop)))
+(((context degradation)))
+(((fresh context)))
 
 The RALPH Loop solves a problem every developer using AI tools eventually encounters: context degradation. After extended conversations, your AI agent starts suggesting variations of approaches that already failed, references prior mistakes as potential solutions, and generally performs worse than it did at the beginning of the session.
 

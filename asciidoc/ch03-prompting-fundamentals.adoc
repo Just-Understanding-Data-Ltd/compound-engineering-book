@@ -1,4 +1,6 @@
 == Chapter 3: Prompting Fundamentals
+(((prompting)))
+(((entropy reduction)))
 
 Prompting is how you communicate intent to a Large Language Model (LLM). The difference between a good prompt and a bad one determines whether Claude Code generates working code on the first try or requires five iterations of refinement. This chapter teaches you four techniques that dramatically improve results: chain-of-thought prompting, constraint-based prompting, few-shot examples, and upfront questioning.
 
@@ -49,6 +51,7 @@ Success criteria:
 This prompt eliminates thousands of possible implementations. The LLM knows exactly what technology to use, what patterns to follow, and how to verify success. The result: working code on the first try.
 
 === Chain-of-Thought Prompting
+(((chain-of-thought)))
 
 LLMs have a tendency to jump straight to implementation. You ask for a function, they generate code. The problem: they skip the reasoning that catches edge cases, error handling, and state management issues.
 
@@ -150,6 +153,7 @@ The implementation that follows handles all these cases. The code is 10x longer 
 The mental model: chain-of-thought converts runtime bugs into compile-time requirements. Instead of discovering edge cases through crashes, you discover them during planning.
 
 === Constraint-Based Prompting
+(((constraints)))
 
 Constraints are rules that eliminate invalid outputs. Every constraint you add reduces entropy by narrowing the valid solution space.
 

@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 21:45)
-- Phase: PDF BUILD COMPLETE - All formats ready
-- Active: task-457 complete (iteration 27)
-- Last Completed: task-457 - Generated table of contents with chapter summaries
+## Current Status (Updated: 2026-01-29 22:15)
+- Phase: ALL PENDING TASKS COMPLETE - Only blocked tasks remain
+- Active: task-458 complete (iteration 28)
+- Last Completed: task-458 - Add index generation for key terms
 - Blockers: task-448 requires Kindle Previewer manual install
-- Queue Health: 1 pending, 5 blocked, 118 complete
-- Publishing Readiness: 100% CONTENT + EPUB + PDF COMPLETE
-- Next: task-458 (index generation, score -295) or blocked tasks
+- Queue Health: 0 pending, 5 blocked, 119 complete
+- Publishing Readiness: 100% CONTENT + EPUB + PDF + INDEX COMPLETE
+- Next: Blocked tasks only (Kindle Previewer chain)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -17,7 +17,7 @@
 - Word Count: ~51,000 (target 45,000-57,000, 100% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
 - AsciiDoc Conversion: 16/16 chapters (100% complete) + book.adoc master file
-- Tasks Complete: 118/124 (95%)
+- Tasks Complete: 119/124 (96%)
 - Test Pass Rate: 100% across all chapters (787 tests total)
 - Exercises: 47 total (2-3 per chapter), ch16 exercises added ✓
 
@@ -30,6 +30,24 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 22:15 - COMPLETED task-458: Add index generation for key terms
+- What: Added AsciiDoc indexterm markup to all 16 chapters for proper book index
+- Files modified:
+  - asciidoc/book.adoc (added index section and :index-options: attribute)
+  - asciidoc/ch01-ch16*.adoc (added indexterm markup to each chapter)
+- Index terms added: 49 total across 16 chapters
+- Key concepts indexed:
+  - Core: Claude Code, RALPH loop, meta-engineering, Compound Systems Engineer
+  - Techniques: verification ladder, context engineering, 12-factor agent, quality gates
+  - Infrastructure: harness, hooks, sub-agent, orchestration
+  - Workflows: prompting, constraints, chain-of-thought, plan mode
+  - Economics: model strategy, cost optimization, token pricing
+- PDF rebuilt: output/the-meta-engineer.pdf (5.9M) - builds successfully with index
+- AsciiDoc validation: 0 errors
+- Iteration: 28
+- Stats: 0 pending, 5 blocked, 119 complete
+- Next: All pending tasks complete. Only blocked tasks remain (Kindle Previewer chain).
 
 ### 2026-01-29 21:45 - COMPLETED task-457: Generate table of contents with chapter summaries
 - What: Added enhanced "Chapter Guide" section to frontmatter with 1-sentence summary per chapter

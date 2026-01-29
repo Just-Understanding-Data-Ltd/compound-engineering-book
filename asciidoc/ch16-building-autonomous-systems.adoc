@@ -1,4 +1,7 @@
 == Chapter 16: Building Autonomous Systems
+(((autonomous systems)))
+(((RALPH implementation)))
+(((task scoring)))
 
 This chapter documents how this book was built. Not as an abstract case study, but as a concrete walkthrough of the RALPH loop, task scoring, adversarial review agents, and custom skills that produced 47,000 words across 15 chapters. The infrastructure described here is real. The code excerpts come from the actual project repository. The metrics reflect genuine outcomes.
 

@@ -1,4 +1,7 @@
 == Chapter 12: Development Workflows
+(((workflows)))
+(((plan mode)))
+(((git worktrees)))
 
 Individual techniques are powerful, but workflows tie them together. This chapter covers the practical patterns that professional AI-assisted developers use daily: plan mode for strategic thinking, git worktrees for parallel development, incremental development patterns, automation scripts, and specialized tools like Playwright and AST-grep. These workflows compound your productivity by reducing friction and eliminating repetitive cognitive overhead.
 

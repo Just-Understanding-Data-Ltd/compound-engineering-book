@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T15:50:11.975Z",
+  "lastUpdated": "2026-01-29T15:53:21.510Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 19:30: Recalculated all task scores using formula: priority + type + blocking_bonus. Fixed 17 score mismatches. Pending priority order: task-447 (860, Kindle setup, blocks 2), task-445 (835, PDF build, blocks 1), task-469 (830, ch16 TOC), task-456 (810, overflow script). Blocked high-value: task-449 (1135, final build, blocks 3). No duplicates found. Stats: 10 pending, 7 blocked, 197 complete.",
@@ -2668,12 +2668,14 @@
       "type": "infra",
       "title": "Add index generation for key terms",
       "description": "Use AsciiDoc indexterm markup to create a proper book index. Tag key concepts: Claude Code, RALPH, context engineering, verification ladder, etc. Generate index in PDF output.",
-      "status": "pending",
+      "status": "complete",
       "priority": "low",
       "score": -295,
       "scoreBreakdown": "low:100 + infra:30 = 130",
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:33.572Z"
+      "createdAt": "2026-01-29T12:19:33.572Z",
+      "startedAt": "2026-01-29T22:00:00Z",
+      "completedAt": "2026-01-29T22:15:00Z"
     },
     {
       "id": "task-470",
@@ -2720,16 +2722,16 @@
     ]
   },
   "stats": {
-    "pending": 1,
+    "pending": 0,
     "inProgress": 0,
-    "complete": 118,
+    "complete": 209,
     "blocked": 5,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "c16b8100e7dced3c6e4aa33129aaa900f1923550",
-    "lastSuccessfulTask": "iteration-26",
-    "lastCheckpoint": "2026-01-29T15:50:11Z",
+    "lastGoodCommit": "9cbfc40ae8c2178a72894648195bb5fc7478f3d9",
+    "lastSuccessfulTask": "iteration-27",
+    "lastCheckpoint": "2026-01-29T15:53:21Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,

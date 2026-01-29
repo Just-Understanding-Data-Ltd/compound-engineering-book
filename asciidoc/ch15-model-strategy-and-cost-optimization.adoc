@@ -1,4 +1,7 @@
 == Chapter 15: Model Strategy and Cost Optimization
+(((model strategy)))
+(((cost optimization)))
+(((token pricing)))
 
 Using a single model for everything is wasteful. Most teams default to mid-tier models out of habit, then wonder why their AI bills keep climbing. The economics of AI-assisted development reward strategic thinking. Match model capabilities to task complexity, and you can cut costs by 40-70% while maintaining or improving quality.
 

@@ -1,4 +1,7 @@
 == Chapter 13: Building the Harness
+(((harness)))
+(((signal processing)))
+(((hooks)))
 
 Claude Code is a harness around a Large Language Model (LLM). Your job is to build a harness around Claude Code.
 

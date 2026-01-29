@@ -1,4 +1,7 @@
 == Chapter 8: Error Handling and Debugging
+(((error handling)))
+(((debugging)))
+(((ERRORS.md)))
 
 Errors are inevitable. Repeated errors are a choice.
 
