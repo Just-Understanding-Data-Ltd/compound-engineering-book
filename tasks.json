@@ -1577,11 +1577,11 @@
       "type": "diagram",
       "title": "Regenerate ch06 Verification Ladder diagram with DALL-E",
       "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing a 5-level verification pyramid for a technical book.\n\nTOPIC: Software Testing Verification Ladder\nTYPE: Pyramid/Staircase\n\nCONTENT (label each level clearly):\n- Level 1 (bottom): SYNTAX - Code compiles\n- Level 2: RUNTIME - Executes without crashes\n- Level 3: LOGIC - Correct behavior\n- Level 4: INTEGRATION - Components work together\n- Level 5 (top): E2E - Full workflows pass\n\nSTYLE: Vertical staircase ascending, each level a distinct bar with label, gradient blue (light to dark), white background, professional infographic NOT cartoon.\n\nSave to: assets/images/ch06-verification-ladder.png",
-      "status": "pending",
+      "status": "complete",
       "priority": "critical",
       "score": 1040,
       "createdAt": "2026-01-29T17:25:21.916Z",
-      "completedAt": "2026-01-29T23:52:00Z",
+      "completedAt": "2026-01-30T02:53:00Z",
       "scoreBreakdown": "critical:1000 + diagram:40 = 1040"
     },
     {
@@ -2922,9 +2922,9 @@
     ]
   },
   "stats": {
-    "pending": 3,
+    "pending": 2,
     "inProgress": 0,
-    "complete": 133,
+    "complete": 134,
     "blocked": 5,
     "total": 231
   },
@@ -2932,9 +2932,9 @@
     "lastGoodCommit": "22d2684fee5b4b569175946a6d8572a365fbfd9d",
     "lastSuccessfulTask": "iteration-11",
     "lastCheckpoint": "2026-01-29T18:37:03Z",
-    "consecutiveFailures": 0,
+    "consecutiveFailures": 1,
     "circuitBreakerTripped": false,
-    "failedAttempts": 7,
+    "failedAttempts": 8,
     "lastQueueCuration": "2026-01-28T23:30:00Z"
   },
   "lastQueueCuration": "2026-01-28T23:30:00Z"
