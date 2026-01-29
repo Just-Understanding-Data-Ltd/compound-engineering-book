@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T15:30:00.000Z",
+  "lastUpdated": "2026-01-29T15:45:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 18:00: Fixed score mismatches for task-463 (420→815), task-464 (420→815), task-443 (380→880), task-446 (405→780). Fixed task-470 status (pending→blocked). Priority order: task-443 (PDF theme, 880), task-463/464 (ch16 diagrams, 815 each), task-446 (EPUB build, 780). Stats: 11 pending, 11 blocked, 192 complete.",
@@ -1933,13 +1933,10 @@
       "type": "fix",
       "title": "Chapter 16: Final quality gate and milestone completion",
       "description": "Run full quality gate: word count (3500-4500), no em dashes, no AI slop, diagrams exist, exercises exist, cross-refs valid. Mark chapter complete.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
       "score": 460,
-      "blockedBy": [
-        "task-463",
-        "task-464"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:22:11.833Z"
     },
     {
@@ -2109,14 +2106,15 @@
       "type": "diagram",
       "title": "Chapter 16: Add skill anatomy diagram",
       "description": "Create diagram showing anatomy of a Claude skill: SKILL.md structure, tool integration (Playwright, Gemini), output flow. Use epub-review as example.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 420,
       "scoreBreakdown": "high:750 + diagram:40 + blocking(1×25):25 = 815",
       "blocks": [
         "task-468"
       ],
-      "createdAt": "2026-01-29T12:22:11.833Z"
+      "createdAt": "2026-01-29T12:22:11.833Z",
+      "completedAt": "2026-01-29T15:45:00Z"
     },
     {
       "id": "task-446",
@@ -2690,14 +2688,14 @@
   "stats": {
     "pending": 10,
     "inProgress": 0,
-    "complete": 194,
-    "blocked": 10,
+    "complete": 105,
+    "blocked": 9,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "7e836a503eb4530e6fdc4204373b9a7e634d8fd5",
-    "lastSuccessfulTask": "iteration-15",
-    "lastCheckpoint": "2026-01-29T14:54:03Z",
+    "lastGoodCommit": "56b72c334cc99ceb00ef7727d41e4d2f3bab605c",
+    "lastSuccessfulTask": "iteration-16",
+    "lastCheckpoint": "2026-01-29T14:57:29Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,

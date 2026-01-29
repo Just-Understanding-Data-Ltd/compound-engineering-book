@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 15:30)
-- Phase: Infrastructure - Chapter 16 Diagrams
-- Active: Iteration 16 - Review agent parallel execution diagram
-- Last Completed: task-463 (Chapter 16: Add review agent parallel execution diagram)
+## Current Status (Updated: 2026-01-29 15:45)
+- Phase: Infrastructure - Chapter 16 Diagrams Complete
+- Active: Iteration 17 - Skill anatomy diagram
+- Last Completed: task-464 (Chapter 16: Add skill anatomy diagram)
 - Blockers: None
-- Queue Health: 10 pending, 10 blocked, 194 complete
-- Publishing Readiness: 99% - PDF/EPUB themes complete, ch16 diagrams progressing
-- Next: task-464 (skill anatomy diagram) or task-446 (EPUB build)
+- Queue Health: 10 pending, 9 blocked, 105 complete
+- Publishing Readiness: 99% - All ch16 diagrams complete, unblocked task-468 (final QA)
+- Next: task-468 (ch16 final quality gate) or task-446 (EPUB build)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -17,7 +17,7 @@
 - Word Count: ~51,000 (target 45,000-57,000, 100% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
 - AsciiDoc Conversion: 16/16 chapters (100% complete) + book.adoc master file
-- Tasks Complete: 193/214 (90%)
+- Tasks Complete: 105/124 (85%)
 - Test Pass Rate: 100% across all chapters (787 tests total)
 - Exercises: 47 total (2-3 per chapter), ch16 exercises added ✓
 
@@ -30,6 +30,25 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 15:45 - COMPLETED task-464: Add skill anatomy diagram
+- What: Created comprehensive diagram showing anatomy of Claude skills using epub-review as example
+- File created: assets/diagrams/ch16-skill-anatomy.md
+- Views included:
+  1. Primary: Skill architecture flowchart (definition → invocation → tools → execution → output)
+  2. SKILL.md file structure (frontmatter + instruction body)
+  3. Tool integration sequence diagram (Playwright + Gemini workflow)
+  4. Skill decision flowchart (when to build a skill)
+  5. epub-review breakdown table (components and implementation)
+  6. Skill composition pattern (shared base capabilities)
+  7. Output to task pipeline flowchart
+  8. Skill elements summary table
+- Format: Multi-view Mermaid diagrams with usage notes and related diagram references
+- Chapter reference: Lines 374-449, "Custom Agentic Skills" section
+- Unblocked: task-468 (ch16 final quality gate) now pending
+- Iteration: 17
+- Stats: 10 pending, 9 blocked, 105 complete
+- Next: task-468 (ch16 final quality gate) or task-446 (EPUB build)
 
 ### 2026-01-29 15:30 - COMPLETED task-463: Add review agent parallel execution diagram
 - What: Created comprehensive diagram showing 7 adversarial review agents running in parallel
