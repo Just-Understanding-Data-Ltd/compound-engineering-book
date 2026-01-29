@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-30T03:30:00Z",
+  "lastUpdated": "2026-01-29T19:10:13.147Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation 2026-01-29: Recalculated all 6 non-complete task scores using formula (priority + type + blocking bonus). task-448 blocked on AppleScript permissions (external). Next actionable: task-483 (score 580).",
@@ -267,18 +267,6 @@
       "completedAt": "2026-01-28T22:00:00Z"
     },
     {
-      "id": "task-474",
-      "type": "diagram",
-      "title": "Regenerate ch07 Quality Gates diagram with DALL-E",
-      "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing a quality gates pipeline for a technical book.\n\nTOPIC: Code Quality Gates Pipeline\nTYPE: Horizontal flow\n\nCONTENT (5 gates, left to right):\n- Gate 1: LINT - Style checks\n- Gate 2: TYPE - Type safety\n- Gate 3: TEST - Unit tests\n- Gate 4: BUILD - Compilation\n- Gate 5: DEPLOY - Production ready\n\nSTYLE: Horizontal pipeline, each gate a checkpoint with label, green checkmarks, white background, professional tech infographic.\n\nSave to: assets/images/ch07-quality-gates.png",
-      "status": "complete",
-      "priority": "critical",
-      "score": 1200,
-      "createdAt": "2026-01-29T17:25:21.916Z",
-      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815",
-      "completedAt": "2026-01-29T18:18:00Z"
-    },
-    {
       "id": "task-421",
       "type": "fix",
       "title": "EPUB CSS: Typography overhaul with embedded fonts",
@@ -343,31 +331,6 @@
       "completedAt": "2026-01-29T14:30:00.000Z"
     },
     {
-      "id": "task-477",
-      "type": "diagram",
-      "title": "Regenerate RALPH Loop architecture diagram with DALL-E",
-      "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing a 4-phase development cycle for a technical book.\n\nTOPIC: RALPH Loop - Autonomous Agent Iteration\nTYPE: Circular cycle\n\nCONTENT (4 phases, clockwise):\n- Phase 1: READ - Load context and state\n- Phase 2: ACT - Execute one task\n- Phase 3: LOG - Commit and document\n- Phase 4: PAUSE - Clean exit\n\nSTYLE: Circular diagram with 4 segments, arrows showing flow, each segment labeled, navy/teal colors, white background, professional cycle diagram.\n\nSave to: assets/images/ch10-ralph-loop.png",
-      "status": "complete",
-      "priority": "critical",
-      "score": 1065,
-      "createdAt": "2026-01-29T17:25:21.916Z",
-      "blockedBy": null,
-      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815",
-      "completedAt": "2026-01-30T02:31:00Z"
-    },
-    {
-      "id": "task-473",
-      "type": "diagram",
-      "title": "Regenerate ch06 Verification Ladder diagram with DALL-E",
-      "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing a 5-level verification pyramid for a technical book.\n\nTOPIC: Software Testing Verification Ladder\nTYPE: Pyramid/Staircase\n\nCONTENT (label each level clearly):\n- Level 1 (bottom): SYNTAX - Code compiles\n- Level 2: RUNTIME - Executes without crashes\n- Level 3: LOGIC - Correct behavior\n- Level 4: INTEGRATION - Components work together\n- Level 5 (top): E2E - Full workflows pass\n\nSTYLE: Vertical staircase ascending, each level a distinct bar with label, gradient blue (light to dark), white background, professional infographic NOT cartoon.\n\nSave to: assets/images/ch06-verification-ladder.png",
-      "status": "complete",
-      "priority": "critical",
-      "score": 1040,
-      "createdAt": "2026-01-29T17:25:21.916Z",
-      "completedAt": "2026-01-30T02:53:00Z",
-      "scoreBreakdown": "critical:1000 + diagram:40 = 1040"
-    },
-    {
       "id": "task-320",
       "type": "fix",
       "title": "Fix 13 critical PRD em dashes",
@@ -396,118 +359,6 @@
       "priority": "critical",
       "score": 1000,
       "outcome": "Created 15 chapter folders (ch01-ch15), each with README.md and solutions/ subfolder. Main exercises/README.md already existed."
-    },
-    {
-      "id": "task-207",
-      "type": "diagram",
-      "chapter": "ch13",
-      "title": "Create Signal Processing Harness diagram",
-      "description": "Visualize the four-layer harness model as a signal processing system that filters noise and amplifies signal. Shows noise reduction at each layer with failure rate improvements (30-50% → <1%). Lines 7-17 in chapter.",
-      "status": "complete",
-      "priority": "high",
-      "score": 1000,
-      "flaggedByReview": "diagram-review-2026-01-28",
-      "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch13-signal-processing-harness.mmd",
-      "scoreBreakdown": "high:750 + diagram:40 + ch13:10 + reviewFlagged:200 = 1000",
-      "completedAt": "2026-01-28T01:00:00Z"
-    },
-    {
-      "id": "task-208",
-      "type": "diagram",
-      "chapter": "ch13",
-      "title": "Create Four Levels of Automation diagram",
-      "description": "Visualization of productivity progression from Level 0 (manual, 1x) through Level 3 (meta-infrastructure, 100-500x). Shows ROI and where most developers stop. Lines 433-441 in chapter.",
-      "status": "complete",
-      "completedAt": "2026-01-28T01:30:00Z",
-      "priority": "high",
-      "score": 1000,
-      "flaggedByReview": "diagram-review-2026-01-28",
-      "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch13-four-automation-levels.md",
-      "scoreBreakdown": "high:750 + diagram:40 + ch13:10 + reviewFlagged:200 = 1000",
-      "outcome": "Created multi-view diagram: productivity staircase (primary), multiplier ladder, ROI table, opportunity cost visualization, and 'why developers stop' analysis"
-    },
-    {
-      "id": "task-209",
-      "type": "diagram",
-      "chapter": "ch14",
-      "title": "Create Leverage Stack pyramid diagram",
-      "description": "Stacked pyramid showing what to keep sharp (understanding, design, verification), what to delegate (implementation patterns), and what to forget (syntax, boilerplate). Lines 250-266 in chapter. Already exists as ASCII art.",
-      "status": "complete",
-      "completedAt": "2026-01-28T02:00:00Z",
-      "priority": "high",
-      "score": 995,
-      "flaggedByReview": "diagram-review-2026-01-28",
-      "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch14-leverage-stack.md",
-      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
-      "outcome": "Created multi-view diagram: skill pyramid (primary), action-oriented categories, self-check questions table, atrophy consequences, investment vs returns table, three pillars visualization"
-    },
-    {
-      "id": "task-210",
-      "type": "diagram",
-      "chapter": "ch14",
-      "title": "Create Atrophy Ladder career ceiling diagram",
-      "description": "Ladder showing 5 career levels based on skill retention during AI-assisted development. Shows Level 4 (Senior Engineer) as minimum safe level, Level 5 (Architect) with no ceiling. Lines 281-300 in chapter. Already exists as ASCII art.",
-      "status": "complete",
-      "completedAt": "2026-01-28T03:00:00Z",
-      "priority": "high",
-      "score": 995,
-      "flaggedByReview": "diagram-review-2026-01-28",
-      "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch14-atrophy-ladder.md",
-      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
-      "outcome": "Created multi-view diagram: career ladder (primary), skill capability matrix, three core skills, career safety zone, self-assessment questions, what each level looks like, career trajectory over time"
-    },
-    {
-      "id": "task-211",
-      "type": "diagram",
-      "chapter": "ch14",
-      "title": "Create Task Decomposition comparison diagram",
-      "description": "Before/after comparison: monolithic task (agent fails) vs decomposed tasks (agent succeeds). Shows 8 smaller tasks with clear boundaries vs one 15-step block. Lines 333-356 in chapter.",
-      "status": "complete",
-      "completedAt": "2026-01-28T04:00:00Z",
-      "priority": "high",
-      "score": 995,
-      "flaggedByReview": "diagram-review-2026-01-28",
-      "reviewReference": "reviews/diagram-review-2026-01-28.md",
-      "suggestedFilename": "assets/diagrams/ch14-task-decomposition.md",
-      "scoreBreakdown": "high:750 + diagram:40 + ch14:5 + reviewFlagged:200 = 995",
-      "outcome": "Created multi-view diagram: before/after comparison (primary), task sizing guidelines, decomposition decision tree, failure mode analysis table, 8-task migration example, why oversizing causes failure, task designer mindset table"
-    },
-    {
-      "id": "task-260",
-      "type": "diagram",
-      "chapter": "ch08",
-      "title": "Agent Reliability Compounding diagram",
-      "description": "Visualize reliability degradation in multi-step agent workflows",
-      "status": "complete",
-      "completedAt": "2026-01-28T18:00:00Z",
-      "priority": "high",
-      "score": 995
-    },
-    {
-      "id": "task-261",
-      "type": "diagram",
-      "chapter": "ch08",
-      "title": "Multi-Layer Timeout Protection diagram",
-      "description": "Visualize defense-in-depth cost protection for AI workflows",
-      "status": "complete",
-      "completedAt": "2026-01-28T19:00:00Z",
-      "priority": "high",
-      "score": 995
-    },
-    {
-      "id": "task-262",
-      "type": "diagram",
-      "chapter": "ch08",
-      "title": "Circuit Breaker State Machine diagram",
-      "description": "Visualize circuit breaker pattern for resilience in AI agent systems",
-      "status": "complete",
-      "completedAt": "2026-01-28T20:00:00Z",
-      "priority": "high",
-      "score": 995
     },
     {
       "id": "task-472",
@@ -1535,56 +1386,6 @@
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
     {
-      "id": "task-475",
-      "type": "diagram",
-      "title": "Regenerate Context Debugging Framework diagram with DALL-E",
-      "description": "Use image-generator MCP to create a professional debugging flow diagram. Prompt: Circular debugging cycle with 4 stages (Observe, Hypothesize, Test, Fix), arrows connecting stages, magnifying glass and code symbols, clean professional style. Save to assets/images/ch08-context-debugging.png",
-      "status": "complete",
-      "priority": "critical",
-      "score": 670,
-      "createdAt": "2026-01-29T17:25:21.916Z",
-      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815",
-      "completedAt": "2026-01-30T00:21:00Z"
-    },
-    {
-      "id": "task-476",
-      "type": "diagram",
-      "title": "Regenerate Ratchet Effect diagram with DALL-E",
-      "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing a ratchet mechanism for a technical book.\n\nTOPIC: Quality Ratchet - Progress Cannot Reverse\nTYPE: Mechanical diagram\n\nCONTENT (labeled components):\n- QUALITY LEVEL - Current position\n- RATCHET GEAR - Main wheel\n- PAWL - Prevents backward motion\n- FORWARD ONLY - Direction arrow\n\nSTYLE: Technical illustration, blueprint-inspired, labeled components, blue/gray colors, white background with subtle grid, professional engineering diagram.\n\nSave to: assets/images/ch07-ratchet-effect.png",
-      "status": "complete",
-      "priority": "critical",
-      "score": 670,
-      "createdAt": "2026-01-29T17:25:21.916Z",
-      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815",
-      "completedAt": "2026-01-30T00:30:00Z"
-    },
-    {
-      "id": "task-478",
-      "type": "diagram",
-      "title": "Regenerate Context Window anatomy diagram with DALL-E",
-      "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing context window anatomy for a technical book.\n\nTOPIC: LLM Context Window Structure\nTYPE: Layered diagram\n\nCONTENT (sections):\n- SYSTEM PROMPT - Instructions and rules\n- CONVERSATION HISTORY - Previous messages\n- CURRENT TASK - Active request\n- AVAILABLE TOKENS - Remaining capacity\n\nSTYLE: Vertical stack showing context sections, each labeled with size indicators, professional infographic, white background.\n\nSave to: assets/images/ch09-context-window.png",
-      "status": "complete",
-      "priority": "critical",
-      "score": 670,
-      "createdAt": "2026-01-29T17:25:21.916Z",
-      "blockedBy": null,
-      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815",
-      "completedAt": "2026-01-30T02:35:00Z"
-    },
-    {
-      "id": "task-479",
-      "type": "diagram",
-      "title": "Regenerate Compound Flywheel diagram with DALL-E",
-      "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing a compound flywheel for a technical book.\n\nTOPIC: Compound Engineering Flywheel\nTYPE: Circular flywheel\n\nCONTENT (flywheel segments):\n- BUILD - Create systems\n- LEARN - Capture insights\n- AUTOMATE - Reduce friction\n- COMPOUND - Multiply output\n\nSTYLE: Circular flywheel with momentum arrows, each segment labeled, shows acceleration, navy/teal colors, white background, professional infographic.\n\nSave to: assets/images/ch01-compound-flywheel.png",
-      "status": "complete",
-      "priority": "critical",
-      "score": 670,
-      "createdAt": "2026-01-29T17:25:21.916Z",
-      "blockedBy": null,
-      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815",
-      "completedAt": "2026-01-30T02:38:00Z"
-    },
-    {
       "id": "task-302",
       "type": "enhancement",
       "chapter": "ch07",
@@ -2156,17 +1957,6 @@
       "completedAt": "2026-01-29T16:00:00Z"
     },
     {
-      "id": "task-462",
-      "type": "fix",
-      "title": "Chapter 16: Add RALPH architecture diagram",
-      "description": "Create Mermaid diagram showing RALPH loop: Orchestrator → Executor → Task Queue → Git → back to Orchestrator. Show circuit breaker, review cycle triggers, and memory systems.",
-      "status": "complete",
-      "priority": "high",
-      "score": 460,
-      "createdAt": "2026-01-29T12:22:11.833Z",
-      "completedAt": "2026-01-29T17:00:00Z"
-    },
-    {
       "id": "task-321",
       "type": "fix",
       "title": "Fix 7 high-priority term introductions",
@@ -2303,36 +2093,6 @@
       "completedAt": "2026-01-29T18:00:00Z"
     },
     {
-      "id": "task-463",
-      "type": "diagram",
-      "title": "Chapter 16: Add review agent parallel execution diagram",
-      "description": "Create diagram showing 7 review agents running in parallel, each checking different quality dimensions, feeding issues back to task queue.",
-      "status": "complete",
-      "priority": "high",
-      "score": 420,
-      "scoreBreakdown": "high:750 + diagram:40 + blocking(1×25):25 = 815",
-      "blocks": [
-        "task-468"
-      ],
-      "createdAt": "2026-01-29T12:22:11.833Z",
-      "completedAt": "2026-01-29T15:30:00Z"
-    },
-    {
-      "id": "task-464",
-      "type": "diagram",
-      "title": "Chapter 16: Add skill anatomy diagram",
-      "description": "Create diagram showing anatomy of a Claude skill: SKILL.md structure, tool integration (Playwright, Gemini), output flow. Use epub-review as example.",
-      "status": "complete",
-      "priority": "high",
-      "score": 420,
-      "scoreBreakdown": "high:750 + diagram:40 + blocking(1×25):25 = 815",
-      "blocks": [
-        "task-468"
-      ],
-      "createdAt": "2026-01-29T12:22:11.833Z",
-      "completedAt": "2026-01-29T15:45:00Z"
-    },
-    {
       "id": "task-446",
       "type": "infra",
       "title": "Build and validate AsciiDoc EPUB output",
@@ -2433,20 +2193,6 @@
         "task-449"
       ],
       "createdAt": "2026-01-29T12:19:33.572Z"
-    },
-    {
-      "id": "task-480",
-      "type": "infra",
-      "title": "Update AsciiDoc chapters to use new DALL-E generated images",
-      "description": "Replace Mermaid diagram references in all AsciiDoc chapters with the new DALL-E generated PNG images. Update image:: directives to point to assets/images/ folder.",
-      "status": "complete",
-      "priority": "high",
-      "score": 355,
-      "blockedBy": null,
-      "createdAt": "2026-01-29T17:25:21.916Z",
-      "blockedReason": "Waiting on tasks 473-479 (DALL-E diagram generation) which require missing MCP server",
-      "scoreBreakdown": "high:750 + fix:80 = 830",
-      "completedAt": "2026-01-30T02:57:00Z"
     },
     {
       "id": "task-403",
@@ -2594,30 +2340,6 @@
       "createdAt": "2026-01-29T19:10:00Z",
       "scoreBreakdown": "medium:500 + fix:80 = 580",
       "completedAt": "2026-01-30T03:15:00Z"
-    },
-    {
-      "id": "task-255",
-      "type": "diagram",
-      "chapter": "ch13",
-      "title": "Create Agent Memory Tiers diagram",
-      "description": "Visualize three-tier memory hierarchy: session (ephemeral), file-based (TASKS.md/progress.txt), event-sourced (full audit trail).",
-      "status": "complete",
-      "priority": "low",
-      "score": 175,
-      "createdAt": "2026-01-28T14:30:00Z",
-      "completedAt": "2026-01-29T22:00:00Z"
-    },
-    {
-      "id": "task-256",
-      "type": "diagram",
-      "chapter": "ch13",
-      "title": "Create Cost Protection Layers diagram",
-      "description": "Visualize five-layer cost protection: job timeout (outer), step timeout, request token cap, input size limit, budget enforcement (inner).",
-      "status": "complete",
-      "priority": "low",
-      "score": 175,
-      "createdAt": "2026-01-28T14:30:00Z",
-      "completedAt": "2026-01-29T23:00:00Z"
     },
     {
       "id": "task-301",
@@ -2926,14 +2648,14 @@
   "stats": {
     "pending": 0,
     "inProgress": 0,
-    "complete": 226,
+    "complete": 115,
     "blocked": 5,
-    "total": 231
+    "total": 120
   },
   "checkpoints": {
-    "lastGoodCommit": "d7829e0f59c8d55787db2b0ba45858b293d21861",
-    "lastSuccessfulTask": "iteration-15",
-    "lastCheckpoint": "2026-01-29T19:08:30Z",
+    "lastGoodCommit": "fa424d538d4a3bbc061af84fa14b52b1e49b41af",
+    "lastSuccessfulTask": "interrupted-17",
+    "lastCheckpoint": "2026-01-29T19:10:18Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 8,

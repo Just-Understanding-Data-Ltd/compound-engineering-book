@@ -699,6 +699,29 @@ Every 5 iterations, capture learnings:
 
 Reference: @LEARNINGS.md
 
+**Auto-Compaction Trigger:**
+
+When `LEARNINGS.md` exceeds **40,000 characters**, immediately compact it to **~20,000 characters**:
+
+```bash
+# Check character count
+wc -c LEARNINGS.md
+
+# If > 40000 characters, compact by:
+# 1. Keep the header and format section (top ~30 lines)
+# 2. Keep the 10 most recent entries in full detail
+# 3. Summarize older entries by theme/category:
+#    - Group related learnings (e.g., "Typography", "Agent SDK", "Diagrams")
+#    - Preserve key insights and actions, drop verbose context
+# 4. Target: ~20,000 characters total
+```
+
+Compaction preserves:
+- Header and format documentation
+- Last 10 detailed learning entries
+- Thematic summaries of older learnings with key actions
+- Cross-references to git commits where full details live
+
 ---
 
 ## Reliability Features
@@ -1106,18 +1129,22 @@ Use the **image-generator MCP server** (GPT Image) for professional book infogra
 
 **CRITICAL STYLE RULES:**
 
-1. **Infographic style** - NOT cartoon, NOT photo-realistic
-2. **Include text labels** - Clear, readable labels on diagram elements
-3. **Minimal background** - White or very light, clean, uncluttered
-4. **Tech vibes** - Modern, professional, technical illustration feel
-5. **O'Reilly aesthetic** - Think Manning, Pragmatic Programmers, technical book quality
+1. **FLAT 2D ONLY** - Absolutely NO 3D effects, NO perspective, NO depth, NO shadows, NO gradients suggesting depth
+2. **Infographic style** - NOT cartoon, NOT photo-realistic, NOT isometric
+3. **Include text labels** - Clear, readable labels on diagram elements
+4. **Minimal background** - Pure white background, completely clean
+5. **Simple geometric shapes** - Rectangles, circles, arrows. No embellishments.
+6. **O'Reilly aesthetic** - Think textbook diagrams, not marketing graphics
 
 **DO NOT:**
+- 3D effects of any kind (perspective, depth, shadows, gradients)
+- Isometric or pseudo-3D illustrations
 - Cartoon/childish graphics (rainbow colors, rounded bubbly shapes)
 - Photo-realistic renders
 - Dark/busy backgrounds
 - Abstract art without clear meaning
 - Generic stock illustration style
+- Decorative elements that don't convey information
 
 ### MCP Server Setup
 
@@ -1144,13 +1171,14 @@ CONTENT (include these exact labels):
 - [Label 5]: [Brief description]
 
 STYLE REQUIREMENTS:
-- Professional tech infographic, NOT cartoon or photo-realistic
-- Clean white or very light gray background
-- Modern sans-serif text labels (dark gray or navy text)
+- FLAT 2D ONLY - absolutely NO 3D, NO perspective, NO depth, NO shadows
+- Pure white background, completely clean
+- Simple geometric shapes: rectangles, circles, lines, arrows
+- Modern sans-serif text labels (dark gray or black text)
 - Color palette: Navy blue (#1e3a5f), Steel blue (#4682b4), Teal accent (#0d9488)
-- Clean lines, subtle shadows, flat design with minimal depth
-- Corporate presentation quality, suitable for print
-- 1024x1024 resolution, landscape orientation preferred for flows
+- NO gradients, NO shadows, NO embossing, NO decorative elements
+- Textbook diagram quality - functional, not decorative
+- 1024x1024 resolution
 ```
 
 ### Diagram Templates by Type
@@ -1269,14 +1297,25 @@ STYLE:
 
 ### File Naming & Storage
 
+**Absolute path for image generation:**
 ```
-assets/images/ch[XX]-[concept-name].png
+/Users/jamesaphoenix/Desktop/projects/just_understanding_data/compound-engineering-book/assets/images/
+```
+
+**Naming convention:**
+```
+ch[XX]-[concept-name].png
 
 Examples:
-- assets/images/ch06-verification-ladder.png
-- assets/images/ch07-quality-gates-pipeline.png
-- assets/images/ch07-ratchet-effect.png
-- assets/images/ch10-ralph-loop-cycle.png
+- ch06-verification-ladder.png
+- ch07-quality-gates-pipeline.png
+- ch07-ratchet-effect.png
+- ch10-ralph-loop-cycle.png
+```
+
+**Full path example for MCP tool:**
+```
+/Users/jamesaphoenix/Desktop/projects/just_understanding_data/compound-engineering-book/assets/images/ch06-verification-ladder.png
 ```
 
 ### Quality Checklist
