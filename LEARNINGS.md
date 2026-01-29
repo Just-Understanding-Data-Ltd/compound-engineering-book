@@ -734,3 +734,38 @@ Manual verification found zero actionable issues across 4 chapters inspected in 
 5. Focus manual verification on the highest-risk elements: code blocks with comments (contrast), dark mode colors, inline code in blockquotes
 
 ---
+
+### 2026-01-29 - AsciiDoc Conversion Preserves Structure When Using Pandoc
+
+**Context**: Converting chapters 01-03 from Markdown to AsciiDoc format for the O'Reilly-compatible publishing pipeline (task-433).
+
+**Observation**: Pandoc's Markdown-to-AsciiDoc conversion is remarkably accurate for structured technical content. The key conversions happen automatically:
+
+| Markdown | AsciiDoc | Notes |
+|----------|----------|-------|
+| `# Chapter Title` | `== Chapter Title` | Level 2 for chapters in multi-doc books |
+| `## Section` | `=== Section` | Level 3 for sections |
+| `### Subsection` | `==== Subsection` | Level 4 for subsections |
+| `` ```typescript `` | `[source,typescript]` + `----` | Code blocks with language hints |
+| `> Blockquote` | Block quoted text | Can be converted to admonitions later |
+| `[text](link)` | `link[text]` | Link syntax inverted |
+
+The conversion preserved:
+- All heading hierarchy correctly
+- Code block language annotations
+- Table structure and alignment
+- List nesting and formatting
+- Inline code and emphasis
+
+Post-processing was minimal: smart quote normalization (", ", ', ' to straight quotes) and removal of any pandoc warnings. The output files validated with zero errors in asciidoctor.
+
+**Implication**: Batch Markdown-to-AsciiDoc conversion is viable for large documentation projects. The pandoc + asciidoctor pipeline provides a reliable path from Markdown source files to PDF output. The key is that both formats share structural semantics (headings, code blocks, lists, tables) even when syntax differs.
+
+**Action**: When converting Markdown documentation to AsciiDoc:
+1. Use pandoc with `-t asciidoc` (not asciidoctor format, which is deprecated)
+2. Add `--wrap=none` to prevent unwanted line wrapping
+3. Post-process smart quotes to avoid rendering issues
+4. Validate each output file with asciidoctor before proceeding
+5. Test PDF generation on at least one file to catch rendering issues early
+
+---

@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 12:54)
+## Current Status (Updated: 2026-01-29 12:58)
 - Phase: AsciiDoc Publishing Pipeline + Chapter 16 Completion
 - Active: AsciiDoc conversion and Ch16 finalization running in parallel
-- Last Completed: Queue curation iteration 4
+- Last Completed: task-433 (Convert ch01-ch03 to AsciiDoc)
 - Blockers: None
-- Queue Health: 8 pending, 27 blocked, 178 complete
-- Publishing Readiness: Ch01-Ch16 first drafts complete, EPUB done, AsciiDoc conversion script ready
-- Next Task: task-433 (Convert ch01-ch03 to AsciiDoc) or any Ch16 task (462-466)
+- Queue Health: 7 pending, 27 blocked, 179 complete
+- Publishing Readiness: Ch01-Ch16 first drafts complete, EPUB done, ch01-03 converted to AsciiDoc
+- Next Task: task-434 (Convert ch04-ch06 to AsciiDoc) or any Ch16 task (462-466)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -29,6 +29,22 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 12:58 - COMPLETED task-433: Convert ch01-ch03 to AsciiDoc
+- What: Converted first three chapters from Markdown to AsciiDoc format
+- Files created:
+  - asciidoc/ch01-the-compound-systems-engineer.adoc (371 lines, 2612 words)
+  - asciidoc/ch02-getting-started-with-claude-code.adoc (701 lines, 4127 words)
+  - asciidoc/ch03-prompting-fundamentals.adoc (489 lines, 2574 words)
+- Verification:
+  - All three files validated with asciidoctor (0 errors)
+  - Test PDF generated from ch01 (164K)
+  - Code blocks correctly converted with [source,language] syntax
+  - Headings properly leveled (== for chapters, === for sections)
+- Unblocked: task-434 (Convert ch04-ch06 to AsciiDoc)
+- Iteration: 5 (5 % 5 == 0: learning capture required)
+- Stats: 7 pending, 27 blocked, 179 complete
+- Next: task-434 or any Ch16 task
 
 ### 2026-01-29 12:54 - Queue Curation Iteration 4
 - What: Curated task queue - marked blocked tasks, fixed dependencies
