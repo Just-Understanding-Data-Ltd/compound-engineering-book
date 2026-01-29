@@ -2863,10 +2863,11 @@
       "type": "fix",
       "title": "Define undefined acronyms in ch01-04",
       "description": "Add parenthetical definitions for acronyms on first use:\n- ch01:79 API\n- ch02:115 CLI, ch02:138 JSON, ch02:198 API\n- ch03:24 API, ch03:40 RFC, ch03:85 CRUD, ch03:341 UX\n- ch04:165 LLM",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 950,
-      "createdAt": "2026-01-29T18:00:00Z"
+      "createdAt": "2026-01-29T18:00:00Z",
+      "completedAt": "2026-01-29T21:45:00Z"
     },
     {
       "id": "task-486",
@@ -2919,8 +2920,8 @@
     ]
   },
   "stats": {
-    "pending": 9,
-    "complete": 123,
+    "pending": 8,
+    "complete": 124,
     "blocked": 9,
     "total": 141
   },

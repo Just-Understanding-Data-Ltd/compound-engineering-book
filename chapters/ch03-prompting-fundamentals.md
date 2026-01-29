@@ -35,7 +35,7 @@ Context:
 - Return Result<T, ValidationError>, never throw
 
 Constraints:
-- Validate email format (RFC 5322)
+- Validate email format (RFC (Request for Comments) 5322)
 - Validate password (min 8 chars, requires number)
 - Include JSDoc comments
 - Add tests in tests/api/users.test.ts
@@ -273,7 +273,7 @@ Here are examples of how we implement services in this codebase:
 # Your Task
 
 Now create a Post Service following the same pattern:
-- Factory function: createPostService(deps: PostServiceDeps): PostService
+- Factory: createPostService(deps: PostServiceDeps)
 - Methods: createPost, publishPost, deletePost
 - Return Result<T, E> type (never throw)
 - Include JSDoc comments
@@ -335,7 +335,7 @@ The agent then interviews you about edge cases, preferences, and constraints. On
 4. Real-time (WebSocket) or polling?
 5. How long should notifications persist?
 6. Any grouping/batching of similar notifications?
-7. What is the read/unread UX?
+7. What is the read/unread UX (User Experience)?
 
 **User**: Just in-app, real-time, user actions only, persist 7 days, no grouping, simple dot indicator for unread.
 
@@ -376,7 +376,7 @@ Then implement with these constraints:
 Here are examples of how we implement notification handlers:
 [examples]
 
-Before implementing the new alert handler, what questions do you have about:
+Before implementing the alert handler, questions about:
 - Alert severity levels
 - Notification channels
 - Retry behavior
@@ -433,7 +433,7 @@ How does authentication work? Also implement a new login endpoint.
 
 Good:
 ```
-Step 1: How does authentication work in this codebase? Show me examples.
+Step 1: How does auth work in this codebase? Show examples.
 Step 2 (after understanding):
 Implement the login endpoint following these patterns.
 ```

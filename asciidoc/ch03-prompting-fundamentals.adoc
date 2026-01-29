@@ -37,7 +37,7 @@ Context:
 - Return Result<T, ValidationError>, never throw
 
 Constraints:
-- Validate email format (RFC 5322)
+- Validate email format (RFC (Request for Comments) 5322)
 - Validate password (min 8 chars, requires number)
 - Include JSDoc comments
 - Add tests in tests/api/users.test.ts
@@ -338,7 +338,7 @@ The agent then interviews you about edge cases, preferences, and constraints. On
 
 *User*: Add a notifications system to the app.
 
-*Claude Code*: Before implementing, I have some questions: 1. What types of notifications? (system alerts, user actions, reminders) 2. In-app only, or email/push as well? 3. Should users configure notification preferences? 4. Real-time (WebSocket) or polling? 5. How long should notifications persist? 6. Any grouping/batching of similar notifications? 7. What is the read/unread UX?
+*Claude Code*: Before implementing, I have some questions: 1. What types of notifications? (system alerts, user actions, reminders) 2. In-app only, or email/push as well? 3. Should users configure notification preferences? 4. Real-time (WebSocket) or polling? 5. How long should notifications persist? 6. Any grouping/batching of similar notifications? 7. What is the read/unread UX (User Experience)?
 
 *User*: Just in-app, real-time, user actions only, persist 7 days, no grouping, simple dot indicator for unread.
 

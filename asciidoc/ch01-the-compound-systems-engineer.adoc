@@ -76,7 +76,7 @@ The shift from builder to meta-builder looks like this:
 [width="100%",cols="40%,60%",options="header",]
 |===
 |Builder |Meta-Builder
-|Writes CRUD (Create, Read, Update, Delete) endpoints |Designs API generation systems
+|Writes CRUD (Create, Read, Update, Delete) endpoints |Designs API (Application Programming Interface) generation systems
 |Debugs issues |Builds observability that surfaces issues
 |Writes tests |Designs testing frameworks
 |Uses CI/CD (Continuous Integration/Continuous Deployment) |Designs CI/CD pipelines

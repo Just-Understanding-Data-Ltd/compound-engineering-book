@@ -70,7 +70,7 @@ The shift from builder to meta-builder looks like this:
 
 | Builder | Meta-Builder |
 |---------|--------------|
-| Writes CRUD (Create, Read, Update, Delete) endpoints | Designs API generation systems |
+| Writes CRUD (Create, Read, Update, Delete) endpoints | Designs API (Application Programming Interface) generation systems |
 | Debugs issues | Builds observability that surfaces issues |
 | Writes tests | Designs testing frameworks |
 | Uses CI/CD (Continuous Integration/Continuous Deployment) | Designs CI/CD pipelines |
@@ -183,7 +183,7 @@ The reframing that matters:
 
 ```
 Instead of thinking about:    Think about:
-Functions                  →  Bounded contexts (self-contained domain areas)
+Functions                  →  Bounded contexts (domain areas)
 Endpoints                  →  Service boundaries
 Databases                  →  Aggregate roots
 Tests                      →  Invariants
@@ -248,8 +248,8 @@ export const SystemConstraints = {
 **3. Feedback loops** that prove constraints are met:
 
 ```
-Code change → Automated tests → Load tests → Telemetry capture
-    → Constraint evaluation → Pass/Fail → Agent fixes if needed → Retry
+Code change → Tests → Load tests → Telemetry
+    → Evaluate → Pass/Fail → Agent fixes → Retry
 ```
 
 Build the constraint system once. Agents verify it forever.
