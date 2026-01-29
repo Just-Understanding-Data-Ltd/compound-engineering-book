@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-01-29T13:13:17.355Z",
+  "lastUpdated": "2026-01-29T13:23:00.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
-  "curatorNotes": "Iteration 5: Completed task-433 (ch01-ch03 AsciiDoc conversion). 7 tasks pending, 27 blocked, 179 complete.",
+  "curatorNotes": "Curation cycle: Updated blocking scores. task-439 (table widths) blocks 10+ tasks, now score 1080. task-443 (PDF theme) blocks 4 tasks, now score 880. task-444 (EPUB theme) blocks 5 tasks, now score 905. 16 pending, 13 blocked, 184 complete.",
   "prds": {
     "index": {
       "status": "complete",
@@ -1728,12 +1728,11 @@
       "type": "fix",
       "title": "Fix all table column widths in AsciiDoc chapters",
       "description": "Review all tables across 15 chapters. Add cols attribute with appropriate widths. Ensure no table exceeds page width. Test in both PDF and EPUB output.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
-      "score": 510,
-      "blockedBy": [
-        "task-438"
-      ],
+      "score": 1080,
+      "scoreBreakdown": "high:750 + fix:80 + blocking(10×25):250 = 1080",
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
     {
@@ -2067,12 +2066,10 @@
       "type": "fix",
       "title": "Audit and fix all code blocks for max line length",
       "description": "Scan all code blocks across 15 chapters. Any line over 65 characters risks overflow on small screens. Refactor long lines: break strings, add line continuations, or simplify. Target: 0 lines over 70 chars.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
       "score": 435,
-      "blockedBy": [
-        "task-438"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
     },
     {
@@ -2122,7 +2119,8 @@
       "description": "Create asciidoc/pdf-theme.yml with Source Serif 4, Source Sans 3, JetBrains Mono fonts. Match the styling from the current epub-style.css.",
       "status": "pending",
       "priority": "high",
-      "score": 380,
+      "score": 880,
+      "scoreBreakdown": "high:750 + infra:30 + blocking(4×25):100 = 880",
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
     {
@@ -2132,7 +2130,8 @@
       "description": "Create asciidoc/epub-style.css for EPUB output. Include dark mode support. Embed custom fonts.",
       "status": "pending",
       "priority": "high",
-      "score": 380,
+      "score": 905,
+      "scoreBreakdown": "high:750 + infra:30 + blocking(5×25):125 = 905",
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
     {
@@ -2193,12 +2192,10 @@
       "type": "infra",
       "title": "Create overflow detection script",
       "description": "Build scripts/detect-overflow.ts that parses AsciiDoc, measures table column content width, code line lengths, and flags potential overflow risks before build. Run as pre-commit hook.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
       "score": 355,
-      "blockedBy": [
-        "task-438"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
     },
     {
@@ -2314,12 +2311,10 @@
       "type": "fix",
       "title": "Convert blockquotes to AsciiDoc admonitions",
       "description": "Find all blockquotes that are tips, warnings, or notes. Convert to native AsciiDoc admonitions (NOTE:, TIP:, WARNING:, IMPORTANT:). Improves EPUB/PDF rendering.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "medium",
       "score": 185,
-      "blockedBy": [
-        "task-438"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
     {
@@ -2327,12 +2322,10 @@
       "type": "fix",
       "title": "Add code block callouts where beneficial",
       "description": "Review code examples. Add AsciiDoc callouts (numbered annotations) to complex code blocks that would benefit from inline explanations.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "medium",
       "score": 185,
-      "blockedBy": [
-        "task-438"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
     {
@@ -2340,12 +2333,10 @@
       "type": "fix",
       "title": "Update cross-references to AsciiDoc format",
       "description": "Convert markdown links between chapters to AsciiDoc cross-references (<<chapter-id>>). Ensures proper linking in all output formats.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "medium",
       "score": 185,
-      "blockedBy": [
-        "task-438"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
     {
@@ -2353,12 +2344,10 @@
       "type": "fix",
       "title": "Add syntax highlighting for all languages in code blocks",
       "description": "Audit code blocks for missing language tags. Add proper language hints (typescript, bash, yaml, json, etc). Ensure Asciidoctor rouge/pygments highlights all blocks correctly.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "medium",
       "score": 185,
-      "blockedBy": [
-        "task-438"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
     },
     {
@@ -2464,12 +2453,10 @@
       "type": "infra",
       "title": "Generate table of contents with chapter summaries",
       "description": "Create enhanced TOC that includes 1-sentence summary per chapter. Improves navigation in EPUB readers. Use AsciiDoc preamble or custom attributes.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "medium",
       "score": 105,
-      "blockedBy": [
-        "task-438"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
     },
     {
@@ -2635,12 +2622,10 @@
       "type": "infra",
       "title": "Add index generation for key terms",
       "description": "Use AsciiDoc indexterm markup to create a proper book index. Tag key concepts: Claude Code, RALPH, context engineering, verification ladder, etc. Generate index in PDF output.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "low",
       "score": -295,
-      "blockedBy": [
-        "task-438"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
     }
   ],
@@ -2674,16 +2659,16 @@
     ]
   },
   "stats": {
-    "pending": 7,
+    "pending": 16,
     "inProgress": 0,
-    "complete": 94,
-    "blocked": 22,
+    "complete": 184,
+    "blocked": 13,
     "total": 213
   },
   "checkpoints": {
-    "lastGoodCommit": "e3f6c91f09d261392c1191eec6308600a0e8d540",
-    "lastSuccessfulTask": "iteration-3",
-    "lastCheckpoint": "2026-01-29T13:13:17Z",
+    "lastGoodCommit": "ab85a230f4dd42a83d85574d95f6951b5e468dc2",
+    "lastSuccessfulTask": "iteration-4",
+    "lastCheckpoint": "2026-01-29T13:20:21Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 4,

@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 13:18)
+## Current Status (Updated: 2026-01-29 13:23)
 - Phase: AsciiDoc Publishing Pipeline + Chapter 16 Completion
 - Active: AsciiDoc conversion COMPLETE, Ch16 finalization pending
-- Last Completed: task-438 (Convert frontmatter and create book.adoc master file)
+- Last Completed: Queue curation (adjusted blocking scores)
 - Blockers: None
-- Queue Health: 7 pending, 22 blocked, 94 complete
+- Queue Health: 16 pending, 13 blocked, 184 complete
 - Publishing Readiness: ALL 16 chapters converted to AsciiDoc, book.adoc master file created
-- Next Task: task-465 (Ch16 code examples) or task-462/463/464 (Ch16 diagrams)
+- Next Task: task-439 (Fix table widths, score 1080, blocks 10+ tasks)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -30,6 +30,17 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 13:23 - Queue Curation: Adjusted blocking scores
+- What: Curated task queue, recalculated scores based on blocking chains
+- Changes:
+  - task-439 (table widths): 510 → 1080 (blocks 10+ tasks transitively)
+  - task-443 (PDF theme): 380 → 880 (blocks 4 tasks)
+  - task-444 (EPUB theme): 380 → 905 (blocks 5 tasks)
+- No duplicates found
+- No stale tasks identified
+- Prioritized tasks: task-439 is now clear top priority
+- Stats: 16 pending, 13 blocked, 184 complete
 
 ### 2026-01-29 13:18 - COMPLETED task-438: Convert frontmatter and create book.adoc master file
 - What: Completed final AsciiDoc conversion phase
