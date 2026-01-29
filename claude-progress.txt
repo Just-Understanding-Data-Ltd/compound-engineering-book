@@ -1,14 +1,14 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 22:15)
+## Current Status (Updated: 2026-01-29 23:30)
 - Phase: AsciiDoc Quality Validation
-- Active: None (task complete)
-- Last Action: Verified acronyms in ch09-13 - no changes needed (task-487)
+- Active: None (curation complete)
+- Last Action: Curated task queue - fixed scores, blockedBy, stats
 - Blockers:
   - 6 tasks blocked on AppleScript permissions (Kindle testing chain)
 - Queue Health: 9 pending, 6 blocked, 126 complete
 - Publishing Readiness: 100% CONTENT COMPLETE - AsciiDoc validation in progress
-- Next: Check next highest-scored pending task
+- Next: task-482 (830 score) - Verify all cross-references in AsciiDoc chapters
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -31,6 +31,25 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 23:30 - Task Queue Curation Cycle
+- What: Curated task queue, cleaned duplicates, fixed inconsistencies
+- Issues fixed:
+  - blockedBy format: Changed string "MCP-server-missing" to null for tasks 473-476 (MCP now connected)
+  - task-448 status: Changed from "pending" to "blocked" (AppleScript permissions required)
+  - Stats: Corrected to match actual counts (9 pending, 6 blocked, 126 complete)
+  - Scores: Recalculated 9 pending tasks using documented formula (priority + type + blocking)
+- Score corrections:
+  - task-482: 890 → 830 (high:750 + fix:80)
+  - task-483: 850 → 580 (medium:500 + fix:80)
+  - task-473-479: 420 → 815 each (high:750 + diagram:40 + blocking:25)
+- Priority order after curation:
+  1. task-482 (830) - Verify cross-references
+  2. task-473-479 (815 each) - DALL-E diagram regeneration
+  3. task-483 (580) - Check undefined terms
+- Files modified: tasks.json
+- Git: Committed ccfba5a
+- Stats: 9 pending, 6 blocked, 126 complete
 
 ### 2026-01-29 22:15 - Verified acronyms in ch09-13 - no changes needed (task-487)
 - What: Verified all flagged acronyms in chapters 9-13
