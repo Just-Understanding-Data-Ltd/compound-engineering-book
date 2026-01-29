@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T15:45:00Z",
+  "lastUpdated": "2026-01-29T15:00:38.701Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 18:00: Fixed score mismatches for task-463 (420→815), task-464 (420→815), task-443 (380→880), task-446 (405→780). Fixed task-470 status (pending→blocked). Priority order: task-443 (PDF theme, 880), task-463/464 (ch16 diagrams, 815 each), task-446 (EPUB build, 780). Stats: 11 pending, 11 blocked, 192 complete.",
@@ -2688,14 +2688,14 @@
   "stats": {
     "pending": 10,
     "inProgress": 0,
-    "complete": 105,
+    "complete": 195,
     "blocked": 9,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "56b72c334cc99ceb00ef7727d41e4d2f3bab605c",
-    "lastSuccessfulTask": "iteration-16",
-    "lastCheckpoint": "2026-01-29T14:57:29Z",
+    "lastGoodCommit": "72daf05e22ae767e98a9a098892614b01859e6cf",
+    "lastSuccessfulTask": "iteration-17",
+    "lastCheckpoint": "2026-01-29T15:00:38Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,
