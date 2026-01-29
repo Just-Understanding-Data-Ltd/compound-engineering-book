@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T17:11:17.579Z",
+  "lastUpdated": "2026-01-29T17:17:40.000Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 19:30: Recalculated all task scores using formula: priority + type + blocking_bonus. Fixed 17 score mismatches. Pending priority order: task-447 (860, Kindle setup, blocks 2), task-445 (835, PDF build, blocks 1), task-469 (830, ch16 TOC), task-456 (810, overflow script). Blocked high-value: task-449 (1135, final build, blocks 3). No duplicates found. Stats: 10 pending, 7 blocked, 197 complete.",
@@ -985,6 +985,17 @@
       "score": 900
     },
     {
+      "id": "task-471",
+      "type": "content",
+      "title": "Add section on dev/staging/prod importance for agent-assisted development",
+      "description": "Add content explaining why dev → staging → prod environments become MORE critical with agent-assisted development:\n\nKey points to cover:\n1. Agents make mistakes at machine speed - a bug can propagate faster\n2. Staging catches agent errors before they reach production\n3. Feature flags + staging = safe agent experimentation\n4. Rollback strategies become essential (agents can break things quickly)\n5. Monitoring in staging catches agent-introduced regressions\n6. \"Trust but verify\" - let agents work in dev/staging freely, gate production\n\nSuggested placement options:\n- Chapter 7 (Quality Gates That Compound) - fits with verification theme\n- Chapter 13 (Building the Harness) - fits with production systems\n- Chapter 12 (Development Workflows) - fits with workflow patterns\n\nAdd ~300-500 words with a concrete example of an agent accidentally pushing a breaking change, and how staging caught it.",
+      "status": "complete",
+      "priority": "high",
+      "score": 900,
+      "createdAt": "2026-01-29T17:10:49.123Z",
+      "completedAt": "2026-01-29T22:45:00Z"
+    },
+    {
       "id": "task-061",
       "type": "chapter",
       "chapter": "ch11",
@@ -1920,7 +1931,7 @@
       "type": "fix",
       "title": "Run Kindle Previewer review and fix issues",
       "description": "Use kindle-review skill to test EPUB on Kindle. Document any rendering issues. Fix in AsciiDoc source. Iterate until Kindle rendering is clean.",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "score": 460,
       "scoreBreakdown": "high:750 + fix:80 + blocks(1×25):25 = 855",
@@ -1928,7 +1939,8 @@
         "task-449"
       ],
       "createdAt": "2026-01-29T12:19:01.156Z",
-      "blockerNote": "Requires Kindle Previewer 3 (brew install --cask kindle-previewer with sudo)"
+      "blockerNote": "Requires Kindle Previewer 3 (brew install --cask kindle-previewer with sudo)",
+      "blockedNote": "AppleScript accessibility permissions required: System Settings > Privacy & Security > Accessibility must grant Terminal access"
     },
     {
       "id": "task-465",
@@ -2687,17 +2699,6 @@
         "task-449"
       ],
       "createdAt": "2026-01-29T13:35:25.159Z"
-    },
-    {
-      "id": "task-471",
-      "type": "content",
-      "title": "Add section on dev/staging/prod importance for agent-assisted development",
-      "description": "Add content explaining why dev → staging → prod environments become MORE critical with agent-assisted development:\n\nKey points to cover:\n1. Agents make mistakes at machine speed - a bug can propagate faster\n2. Staging catches agent errors before they reach production\n3. Feature flags + staging = safe agent experimentation\n4. Rollback strategies become essential (agents can break things quickly)\n5. Monitoring in staging catches agent-introduced regressions\n6. \"Trust but verify\" - let agents work in dev/staging freely, gate production\n\nSuggested placement options:\n- Chapter 7 (Quality Gates That Compound) - fits with verification theme\n- Chapter 13 (Building the Harness) - fits with production systems\n- Chapter 12 (Development Workflows) - fits with workflow patterns\n\nAdd ~300-500 words with a concrete example of an agent accidentally pushing a breaking change, and how staging caught it.",
-      "status": "complete",
-      "priority": "high",
-      "score": 900,
-      "createdAt": "2026-01-29T17:10:49.123Z",
-      "completedAt": "2026-01-29T22:45:00Z"
     }
   ],
   "completed": {
@@ -2730,16 +2731,16 @@
     ]
   },
   "stats": {
-    "pending": 1,
+    "pending": 0,
     "inProgress": 0,
     "complete": 120,
-    "blocked": 4,
+    "blocked": 5,
     "total": 125
   },
   "checkpoints": {
-    "lastGoodCommit": "a58936cc5b545dd2238ae717c32df6d2db0203b9",
-    "lastSuccessfulTask": "interrupted-29",
-    "lastCheckpoint": "2026-01-29T15:59:42Z",
+    "lastGoodCommit": "91f42b87e24c1d23cf57e0e3351911ed500f5eb5",
+    "lastSuccessfulTask": "iteration-1",
+    "lastCheckpoint": "2026-01-29T17:13:34Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,

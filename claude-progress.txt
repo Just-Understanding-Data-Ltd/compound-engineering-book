@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 22:45)
-- Phase: Content enhancement
-- Active: task-471 complete (iteration 29)
-- Last Completed: task-471 - Add section on dev/staging/prod importance
-- Blockers: task-448 requires Kindle Previewer manual install
-- Queue Health: 1 pending, 4 blocked, 210 complete
+## Current Status (Updated: 2026-01-29 23:00)
+- Phase: BLOCKED - Awaiting manual permissions
+- Active: All automated tasks complete
+- Last Attempted: task-448 - Kindle Previewer review (blocked by AppleScript permissions)
+- Blockers: AppleScript accessibility permissions required for automated Kindle testing
+- Queue Health: 0 pending, 5 blocked, 120 complete
 - Publishing Readiness: 100% CONTENT + EPUB + PDF + INDEX COMPLETE
-- Next: task-448 (Kindle Previewer) or remaining pending task
+- Next: User must grant Terminal accessibility permissions (System Settings > Privacy & Security > Accessibility)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -30,6 +30,21 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 23:00 - BLOCKED task-448: Kindle Previewer review requires AppleScript permissions
+- What: Attempted to run automated Kindle preview using scripts/kindle-preview.ts
+- Result: AppleScript errors (-1728, -609) due to missing accessibility permissions
+- Error details:
+  - "Can't get id of window 1" - window not accessible via AppleScript
+  - "Connection is invalid" - app connection failed
+- Manual workaround verified: `open -a "Kindle Previewer 3" output/the-meta-engineer.epub` works
+- Automated screenshot capture requires Terminal accessibility permissions
+- Required action: User must grant permissions in System Settings > Privacy & Security > Accessibility
+- Status: task-448 marked as blocked, all dependent tasks (449, 454, 459, 470) remain blocked
+- Queue health: 0 pending, 5 blocked, 120 complete
+- Iteration: 2
+- Publishing readiness: UNCHANGED - EPUB/PDF/Index are complete, Kindle validation is optional QA step
+- Next: Wait for permissions or accept epub-review validation as sufficient
 
 ### 2026-01-29 22:45 - COMPLETED task-471: Add section on dev/staging/prod importance
 - What: Added new section "Environment Gates: Dev, Staging, Production" to Chapter 7
