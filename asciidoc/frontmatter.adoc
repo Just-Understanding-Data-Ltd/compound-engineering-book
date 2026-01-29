@@ -42,7 +42,74 @@ npx tsx examples/ch04/agent.ts
 
 === How to Read This Book
 
-* *Part I (Chapters 1-3)*: Foundations - Start here if you’re new to Claude Code
+* *Part I (Chapters 1-3)*: Foundations - Start here if you're new to Claude Code
 * *Part II (Chapters 4-6)*: Core Techniques - Essential patterns for daily work
 * *Part III (Chapters 7-9)*: Advanced Patterns - Deep dives for power users
-* *Part IV (Chapters 10-15)*: Production Systems - Building autonomous systems
+* *Part IV (Chapters 10-16)*: Production Systems - Building autonomous systems
+
+=== Chapter Guide
+
+[cols="1,3",width="100%"]
+|===
+|Chapter |Summary
+
+|*Part I: Foundations*
+|
+
+|1. The Compound Systems Engineer
+|Meet the career archetype that treats engineering as portfolio management, building leverage that compounds rather than linear output.
+
+|2. Getting Started with Claude Code
+|Install the CLI, run your first conversation, and understand the complete tool ecosystem for AI-assisted development.
+
+|3. Prompting Fundamentals
+|Master chain-of-thought, constraint-based, and few-shot prompting patterns that form the foundation of effective agent communication.
+
+|*Part II: Core Techniques*
+|
+
+|4. Writing Your First CLAUDE.md
+|Configure Claude's behavior through project-specific instructions, hierarchical rules, and error documentation.
+
+|5. The 12-Factor Agent
+|Apply twelve production principles (structured outputs, tool selection, managed state) to build reliable LLM agents.
+
+|6. The Verification Ladder
+|Choose the right verification level (types, unit tests, property tests, formal specs) for each task using the verification sandwich pattern.
+
+|*Part III: Advanced Patterns*
+|
+
+|7. Quality Gates That Compound
+|Build automated gates (pre-commit hooks, CI reviews, type-driven development) that filter errors before they propagate.
+
+|8. Error Handling & Debugging
+|Apply the five-point diagnostic framework, encode errors into prevention, and recover from failed trajectories.
+
+|9. Context Engineering Deep Dive
+|Apply information theory to context windows: manage entropy, progressive disclosure, and context rot in long sessions.
+
+|*Part IV: Production Systems*
+|
+
+|10. The RALPH Loop
+|Implement fresh-context iteration: task queues, git-based memory, and overnight autonomous development.
+
+|11. Sub-Agent Architecture
+|Delegate to specialized agents, balance accuracy vs latency, and implement parallel swarm patterns.
+
+|12. Development Workflows
+|Use plan mode for strategic thinking, git worktrees for parallelism, and script capture for automation.
+
+|13. Building the Harness
+|Construct the four-layer architecture (Claude config, repo engineering, meta-engineering, closed-loop optimization).
+
+|14. The Meta-Engineer Playbook
+|Treat prompts as assets, manage skill atrophy, and navigate the six waves of AI-assisted coding.
+
+|15. Model Strategy & Cost Optimization
+|Switch between Haiku/Sonnet/Opus, implement cost protection layers, and measure AI spend ROI.
+
+|16. Building Autonomous Systems
+|Implement RALPH in practice: task scoring, adversarial review agents, custom skills, and memory architecture.
+|===

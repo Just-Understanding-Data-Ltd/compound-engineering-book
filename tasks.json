@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T15:45:11.603Z",
+  "lastUpdated": "2026-01-29T15:50:11.975Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 19:30: Recalculated all task scores using formula: priority + type + blocking_bonus. Fixed 17 score mismatches. Pending priority order: task-447 (860, Kindle setup, blocks 2), task-445 (835, PDF build, blocks 1), task-469 (830, ch16 TOC), task-456 (810, overflow script). Blocked high-value: task-449 (1135, final build, blocks 3). No duplicates found. Stats: 10 pending, 7 blocked, 197 complete.",
@@ -2497,12 +2497,13 @@
       "type": "infra",
       "title": "Generate table of contents with chapter summaries",
       "description": "Create enhanced TOC that includes 1-sentence summary per chapter. Improves navigation in EPUB readers. Use AsciiDoc preamble or custom attributes.",
-      "status": "pending",
+      "status": "complete",
       "priority": "medium",
       "score": 105,
       "scoreBreakdown": "medium:500 + infra:30 = 530",
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:33.572Z"
+      "createdAt": "2026-01-29T12:19:33.572Z",
+      "completedAt": "2026-01-29T21:45:00Z"
     },
     {
       "id": "task-091",
@@ -2719,16 +2720,16 @@
     ]
   },
   "stats": {
-    "pending": 2,
+    "pending": 1,
     "inProgress": 0,
-    "complete": 117,
+    "complete": 118,
     "blocked": 5,
-    "total": 124
+    "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "bad9f92d898a5fdcd5fba0971b75b2a6a6d559d2",
-    "lastSuccessfulTask": "iteration-25",
-    "lastCheckpoint": "2026-01-29T15:45:11Z",
+    "lastGoodCommit": "c16b8100e7dced3c6e4aa33129aaa900f1923550",
+    "lastSuccessfulTask": "iteration-26",
+    "lastCheckpoint": "2026-01-29T15:50:11Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,

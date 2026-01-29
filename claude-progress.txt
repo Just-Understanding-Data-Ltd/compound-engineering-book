@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 21:30)
+## Current Status (Updated: 2026-01-29 21:45)
 - Phase: PDF BUILD COMPLETE - All formats ready
-- Active: task-455 complete (iteration 26)
-- Last Completed: task-455 - Verified syntax highlighting for all code blocks
+- Active: task-457 complete (iteration 27)
+- Last Completed: task-457 - Generated table of contents with chapter summaries
 - Blockers: task-448 requires Kindle Previewer manual install
-- Queue Health: 2 pending, 5 blocked, 117 complete
+- Queue Health: 1 pending, 5 blocked, 118 complete
 - Publishing Readiness: 100% CONTENT + EPUB + PDF COMPLETE
-- Next: task-457 (TOC summaries, score 105)
+- Next: task-458 (index generation, score -295) or blocked tasks
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -17,7 +17,7 @@
 - Word Count: ~51,000 (target 45,000-57,000, 100% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
 - AsciiDoc Conversion: 16/16 chapters (100% complete) + book.adoc master file
-- Tasks Complete: 117/124 (94%)
+- Tasks Complete: 118/124 (95%)
 - Test Pass Rate: 100% across all chapters (787 tests total)
 - Exercises: 47 total (2-3 per chapter), ch16 exercises added ✓
 
@@ -30,6 +30,21 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 21:45 - COMPLETED task-457: Generate table of contents with chapter summaries
+- What: Added enhanced "Chapter Guide" section to frontmatter with 1-sentence summary per chapter
+- Files modified:
+  - asciidoc/frontmatter.adoc (added 2-column table with 16 chapter summaries)
+  - leanpub/frontmatter.md (matching Markdown table for Leanpub format)
+- Chapter summaries added for all 16 chapters organized by Part (I-IV)
+- Each summary captures the key learning outcome in one sentence
+- AsciiDoc validated via Ruby (no errors)
+- EPUB rebuilt: output/the-meta-engineer.epub (713K) - epubcheck: 0 errors, 0 warnings
+- Also fixed Part IV chapter range (was 10-15, now 10-16) in both files
+- Improves EPUB reader navigation by showing what each chapter covers
+- Iteration: 27
+- Stats: 1 pending, 5 blocked, 118 complete
+- Next: task-458 (index generation) is low-priority (-295 score), remaining tasks mostly blocked
 
 ### 2026-01-29 21:30 - COMPLETED task-455: Verify syntax highlighting for all code blocks
 - What: Audited all code blocks for proper language tags and Rouge syntax highlighting support
