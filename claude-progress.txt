@@ -1,19 +1,19 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 14:30)
-- Phase: AsciiDoc Publishing Pipeline + Chapter 16 Completion
-- Active: Table widths FIXED, PDF/EPUB theming next
-- Last Completed: task-439 - Fixed all table column widths in AsciiDoc chapters
+## Current Status (Updated: 2026-01-29 15:30)
+- Phase: Chapter 16 Completion + Review Cycle
+- Active: task-465 COMPLETE, running iteration 6 review cycle
+- Last Completed: task-465 - Chapter 16 code examples added
 - Blockers: None
-- Queue Health: 15 pending, 13 blocked, 185 complete
-- Publishing Readiness: ALL 16 chapters converted to AsciiDoc, tables properly formatted
-- Next Task: task-443 or task-444 (PDF/EPUB theming, now unblocked)
+- Queue Health: 16 pending, 12 blocked, 186 complete
+- Publishing Readiness: ALL 16 chapters converted to AsciiDoc, code examples complete
+- Next Task: task-466 (Chapter 16 exercises) or task-462-464 (diagrams)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
 - Chapter Drafts: 16/16 complete (100%) - Ch16 first draft added
-- Chapters Complete: 15/16 (ch01-ch15 finalized, ch16 in progress)
-- Code Examples: 15/15 with code (100%) - ALL TESTED ✓
+- Chapters Complete: 15/16 (ch01-ch15 finalized, ch16 code examples done)
+- Code Examples: 16/16 with code (100%) - ALL TESTED ✓ (ch16 added)
 - Word Count: ~51,000 (target 45,000-57,000, 100% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
 - AsciiDoc Conversion: 16/16 chapters (100% complete) + book.adoc master file
@@ -30,6 +30,22 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 15:30 - COMPLETED task-465: Chapter 16 code examples from actual project
+- What: Created 3 TypeScript example files demonstrating autonomous system patterns
+- Files created:
+  - examples/ch16/task-scoring.ts (511 lines) - Dynamic task scoring algorithm
+  - examples/ch16/epub-review-skill.ts (557 lines) - Visual review skill with Playwright/Gemini
+  - examples/ch16/progress-compaction.ts (680 lines) - Auto-compacting memory system
+- Key patterns demonstrated:
+  - Task scoring with priority, type, chapter sequence, blocking, and age bonuses
+  - EPUB screenshot capture with Playwright and vision API analysis
+  - Progress file parsing, compaction rules, and weekly summary generation
+- All examples use Claude Agent SDK (query, SDKMessage types)
+- Verified: All 3 examples run successfully with bun
+- Iteration: 6 (review cycle required)
+- Stats: 16 pending, 12 blocked, 186 complete
+- Next: Run 7 review agents in parallel
 
 ### 2026-01-29 14:30 - COMPLETED task-439: Fix all table column widths in AsciiDoc chapters
 - What: Fixed 26 tables across 12 AsciiDoc files that had comma-only cols attributes

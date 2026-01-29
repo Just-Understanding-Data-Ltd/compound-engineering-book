@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T14:30:00.000Z",
+  "lastUpdated": "2026-01-29T13:35:25.160Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle: Updated blocking scores. task-439 (table widths) blocks 10+ tasks, now score 1080. task-443 (PDF theme) blocks 4 tasks, now score 880. task-444 (EPUB theme) blocks 5 tasks, now score 905. 16 pending, 13 blocked, 184 complete.",
@@ -305,6 +305,19 @@
       "chapter": "ch15",
       "reviewReference": "reviews/term-intro-2026-01-27.md",
       "outcome": "Added definition 'million tokens (MTok)' at first use on line 18"
+    },
+    {
+      "id": "task-439",
+      "type": "fix",
+      "title": "Fix all table column widths in AsciiDoc chapters",
+      "description": "Review all tables across 15 chapters. Add cols attribute with appropriate widths. Ensure no table exceeds page width. Test in both PDF and EPUB output.",
+      "status": "complete",
+      "priority": "high",
+      "score": 1080,
+      "scoreBreakdown": "high:750 + fix:80 + blocking(10×25):250 = 1080",
+      "blockedBy": [],
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T14:30:00.000Z"
     },
     {
       "id": "task-320",
@@ -1724,19 +1737,6 @@
       "outcome": "Added doctrine insight to Summary section explaining why compound engineering compounds. Key message: cost optimization increases iteration velocity, cheap experiments enable more exploration, successes build on each other. Word count 4,533 (slightly over 4,000, acceptable)."
     },
     {
-      "id": "task-439",
-      "type": "fix",
-      "title": "Fix all table column widths in AsciiDoc chapters",
-      "description": "Review all tables across 15 chapters. Add cols attribute with appropriate widths. Ensure no table exceeds page width. Test in both PDF and EPUB output.",
-      "status": "complete",
-      "priority": "high",
-      "score": 1080,
-      "scoreBreakdown": "high:750 + fix:80 + blocking(10×25):250 = 1080",
-      "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:01.156Z",
-      "completedAt": "2026-01-29T14:30:00.000Z"
-    },
-    {
       "id": "task-433",
       "type": "chapter",
       "title": "Convert ch01-ch03 to AsciiDoc",
@@ -1875,10 +1875,11 @@
       "type": "fix",
       "title": "Chapter 16: Add code examples from actual project",
       "description": "Extract and annotate real code: (1) ralph.sh orchestrator loop, (2) tasks.json scoring calculation, (3) epub-review.ts Gemini integration, (4) SKILL.md template. All code must be from this actual project.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 460,
-      "createdAt": "2026-01-29T12:22:11.833Z"
+      "createdAt": "2026-01-29T12:22:11.833Z",
+      "completedAt": "2026-01-29T15:30:00Z"
     },
     {
       "id": "task-466",
@@ -2054,12 +2055,10 @@
       "type": "fix",
       "title": "Create responsive table strategy for small screens",
       "description": "For tables with 4+ columns: create AsciiDoc conditionals that show full table in PDF but simplified version (or stacked layout) in EPUB/Kindle. Document the pattern for future tables.",
-      "status": "blocked",
+      "status": "pending",
       "priority": "high",
       "score": 435,
-      "blockedBy": [
-        "task-439"
-      ],
+      "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
     },
     {
@@ -2095,7 +2094,6 @@
       "priority": "high",
       "score": 405,
       "blockedBy": [
-        "task-439",
         "task-444"
       ],
       "createdAt": "2026-01-29T12:19:01.156Z"
@@ -2120,7 +2118,7 @@
       "description": "Create asciidoc/pdf-theme.yml with Source Serif 4, Source Sans 3, JetBrains Mono fonts. Match the styling from the current epub-style.css.",
       "status": "pending",
       "priority": "high",
-      "score": 880,
+      "score": 380,
       "scoreBreakdown": "high:750 + infra:30 + blocking(4×25):100 = 880",
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
@@ -2131,7 +2129,7 @@
       "description": "Create asciidoc/epub-style.css for EPUB output. Include dark mode support. Embed custom fonts.",
       "status": "pending",
       "priority": "high",
-      "score": 905,
+      "score": 380,
       "scoreBreakdown": "high:750 + infra:30 + blocking(5×25):125 = 905",
       "createdAt": "2026-01-29T12:19:01.156Z"
     },
@@ -2144,7 +2142,6 @@
       "priority": "high",
       "score": 380,
       "blockedBy": [
-        "task-439",
         "task-443"
       ],
       "createdAt": "2026-01-29T12:19:01.156Z"
@@ -2628,6 +2625,19 @@
       "score": -295,
       "blockedBy": [],
       "createdAt": "2026-01-29T12:19:33.572Z"
+    },
+    {
+      "id": "task-470",
+      "type": "infra",
+      "title": "Clean up: Archive old Markdown chapters folder",
+      "description": "After AsciiDoc pipeline is validated and working: (1) Create archive/markdown-chapters/ folder, (2) Move chapters/*.md to archive, (3) Move leanpub/ to archive, (4) Update .gitignore if needed. Only do this after task-449 (final validation) confirms AsciiDoc output is good.",
+      "status": "pending",
+      "priority": "low",
+      "score": 200,
+      "blockedBy": [
+        "task-449"
+      ],
+      "createdAt": "2026-01-29T13:35:25.159Z"
     }
   ],
   "completed": {
@@ -2660,16 +2670,16 @@
     ]
   },
   "stats": {
-    "pending": 15,
+    "pending": 16,
     "inProgress": 0,
-    "complete": 185,
-    "blocked": 13,
-    "total": 213
+    "complete": 186,
+    "blocked": 12,
+    "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "ab85a230f4dd42a83d85574d95f6951b5e468dc2",
-    "lastSuccessfulTask": "iteration-4",
-    "lastCheckpoint": "2026-01-29T13:20:21Z",
+    "lastGoodCommit": "c1c10bd47213cb98d00c6f303d4a960badc45274",
+    "lastSuccessfulTask": "iteration-5",
+    "lastCheckpoint": "2026-01-29T13:31:48Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 4,
