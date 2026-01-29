@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T18:33:59.727Z",
+  "lastUpdated": "2026-01-30T02:38:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29: Recalculated 5 pending task scores using documented formula (priority + type + blocking bonus). Stats corrected. Complete count includes compacted tasks.",
@@ -1564,12 +1564,13 @@
       "type": "diagram",
       "title": "Regenerate Compound Flywheel diagram with DALL-E",
       "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing a compound flywheel for a technical book.\n\nTOPIC: Compound Engineering Flywheel\nTYPE: Circular flywheel\n\nCONTENT (flywheel segments):\n- BUILD - Create systems\n- LEARN - Capture insights\n- AUTOMATE - Reduce friction\n- COMPOUND - Multiply output\n\nSTYLE: Circular flywheel with momentum arrows, each segment labeled, shows acceleration, navy/teal colors, white background, professional infographic.\n\nSave to: assets/images/ch01-compound-flywheel.png",
-      "status": "pending",
+      "status": "complete",
       "priority": "critical",
       "score": 670,
       "createdAt": "2026-01-29T17:25:21.916Z",
       "blockedBy": null,
-      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
+      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815",
+      "completedAt": "2026-01-30T02:38:00Z"
     },
     {
       "id": "task-473",
@@ -2442,7 +2443,6 @@
       "priority": "high",
       "score": 355,
       "blockedBy": [
-        "task-478",
         "task-479"
       ],
       "createdAt": "2026-01-29T17:25:21.916Z",
@@ -2923,16 +2923,16 @@
     ]
   },
   "stats": {
-    "pending": 3,
+    "pending": 2,
     "inProgress": 0,
-    "complete": 132,
+    "complete": 133,
     "blocked": 6,
     "total": 231
   },
   "checkpoints": {
-    "lastGoodCommit": "9ed0918c62e4f85674f109a0c763b11fbfdfa9ab",
-    "lastSuccessfulTask": "iteration-10",
-    "lastCheckpoint": "2026-01-29T18:33:59Z",
+    "lastGoodCommit": "22d2684fee5b4b569175946a6d8572a365fbfd9d",
+    "lastSuccessfulTask": "iteration-11",
+    "lastCheckpoint": "2026-01-29T18:37:03Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,
