@@ -1526,11 +1526,12 @@
       "type": "diagram",
       "title": "Regenerate Ratchet Effect diagram with DALL-E",
       "description": "Use image-generator MCP to create O'Reilly-style infographic.\n\nPROMPT:\nCreate a professional INFOGRAPHIC showing a ratchet mechanism for a technical book.\n\nTOPIC: Quality Ratchet - Progress Cannot Reverse\nTYPE: Mechanical diagram\n\nCONTENT (labeled components):\n- QUALITY LEVEL - Current position\n- RATCHET GEAR - Main wheel\n- PAWL - Prevents backward motion\n- FORWARD ONLY - Direction arrow\n\nSTYLE: Technical illustration, blueprint-inspired, labeled components, blue/gray colors, white background with subtle grid, professional engineering diagram.\n\nSave to: assets/images/ch07-ratchet-effect.png",
-      "status": "pending",
+      "status": "complete",
       "priority": "critical",
       "score": 670,
       "createdAt": "2026-01-29T17:25:21.916Z",
-      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815"
+      "scoreBreakdown": "high:750 + diagram:40 + blocking:25 = 815",
+      "completedAt": "2026-01-30T00:30:00Z"
     },
     {
       "id": "task-477",
@@ -2922,9 +2923,9 @@
     ]
   },
   "stats": {
-    "pending": 6,
+    "pending": 4,
     "inProgress": 0,
-    "complete": 219,
+    "complete": 131,
     "blocked": 6,
     "total": 231
   },
