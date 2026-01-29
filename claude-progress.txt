@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 16:45)
+## Current Status (Updated: 2026-01-29 17:00)
 - Phase: Chapter 16 Completion
-- Active: Iteration 8 - Chapter 16 review complete
-- Last Completed: task-467 (Chapter 16 review pass)
+- Active: Iteration 9 - Chapter 16 diagrams
+- Last Completed: task-462 (Chapter 16 RALPH architecture diagram)
 - Blockers: None
-- Queue Health: 15 pending, 11 blocked, 98 complete
-- Publishing Readiness: 97% - Ch16 review pass done, acronyms fixed
-- Next: Chapter 16 diagrams (task-462, 463, 464)
+- Queue Health: 14 pending, 11 blocked, 99 complete
+- Publishing Readiness: 97% - diagrams in progress
+- Next: Chapter 16 diagrams (task-463, 464)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -30,6 +30,21 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 17:00 - COMPLETED task-462: Chapter 16 RALPH architecture diagram
+- What: Created comprehensive RALPH architecture diagram for Chapter 16
+- File: assets/diagrams/ch16-ralph-architecture.md
+- Views included:
+  1. Primary: System architecture (Orchestrator, Executor, Task Manager, Circuit Breaker)
+  2. Iteration flow sequence diagram showing runtime behavior
+  3. Memory tier system (Conversation, Files, Git)
+  4. Task scoring algorithm reference table
+  5. Adaptive review interval flowchart
+  6. Component summary table
+- Format: Multi-view Mermaid diagrams with usage notes and related diagrams
+- Iteration: 9
+- Stats: 14 pending, 11 blocked, 99 complete
+- Next: task-463 (review agent parallel execution diagram) or task-464 (skill anatomy diagram)
 
 ### 2026-01-29 16:45 - COMPLETED task-467: Chapter 16 review pass
 - What: Performed slop check, term intro check, and tech accuracy review for Chapter 16

@@ -1925,10 +1925,11 @@
       "type": "fix",
       "title": "Chapter 16: Add RALPH architecture diagram",
       "description": "Create Mermaid diagram showing RALPH loop: Orchestrator → Executor → Task Queue → Git → back to Orchestrator. Show circuit breaker, review cycle triggers, and memory systems.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 460,
-      "createdAt": "2026-01-29T12:22:11.833Z"
+      "createdAt": "2026-01-29T12:22:11.833Z",
+      "completedAt": "2026-01-29T17:00:00Z"
     },
     {
       "id": "task-463",
@@ -2669,9 +2670,9 @@
     ]
   },
   "stats": {
-    "pending": 15,
+    "pending": 14,
     "inProgress": 0,
-    "complete": 98,
+    "complete": 99,
     "blocked": 11,
     "total": 214
   },
@@ -2679,9 +2680,9 @@
     "lastGoodCommit": "d8937699d9deb913f357097f06dcb330b281ce21",
     "lastSuccessfulTask": "iteration-7",
     "lastCheckpoint": "2026-01-29T13:46:48Z",
-    "consecutiveFailures": 0,
+    "consecutiveFailures": 1,
     "circuitBreakerTripped": false,
-    "failedAttempts": 4,
+    "failedAttempts": 5,
     "lastQueueCuration": "2026-01-28T23:30:00Z"
   },
   "lastQueueCuration": "2026-01-28T23:30:00Z"
