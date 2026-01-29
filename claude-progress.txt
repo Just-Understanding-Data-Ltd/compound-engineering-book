@@ -1,13 +1,13 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 19:25)
+## Current Status (Updated: 2026-01-29 19:45)
 - Phase: PDF BUILD COMPLETE - All formats ready
-- Active: Iteration 22 - PDF build validation
-- Last Completed: task-445 (Build and validate AsciiDoc PDF output)
+- Active: Iteration 23 - Overflow detection tooling
+- Last Completed: task-456 (Create overflow detection script)
 - Blockers: task-448 requires Kindle Previewer manual install
-- Queue Health: 8 pending, 6 blocked, 110 complete
+- Queue Health: 6 pending, 6 blocked, 112 complete
 - Publishing Readiness: 100% CONTENT + EPUB + PDF COMPLETE
-- Next: task-450 (Kindle preview Gemini script) or task-456 (overflow detection)
+- Next: task-440 (blockquotes to admonitions) or task-441 (code block callouts)
 
 ## Project State Summary
 - PRDs: 16/16 complete (100%)
@@ -17,7 +17,7 @@
 - Word Count: ~51,000 (target 45,000-57,000, 100% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
 - AsciiDoc Conversion: 16/16 chapters (100% complete) + book.adoc master file
-- Tasks Complete: 110/124 (89%)
+- Tasks Complete: 112/124 (90%)
 - Test Pass Rate: 100% across all chapters (787 tests total)
 - Exercises: 47 total (2-3 per chapter), ch16 exercises added ✓
 
@@ -30,6 +30,22 @@
 - Diagrams: 100% complete (66/66) ✓
 
 ## Recent Activity
+
+### 2026-01-29 19:45 - COMPLETED task-456: Create overflow detection script
+- What: Built scripts/detect-overflow.ts for pre-build overflow detection
+- Features:
+  - Parses all AsciiDoc files for tables and code blocks
+  - Detects code lines over 70 chars (configurable)
+  - Detects long table cells (>80 chars error, >50 chars warning)
+  - Detects long inline code (>60 chars)
+  - Returns exit code 1 for errors (CI/pre-commit integration)
+  - Provides fix suggestions with --fix flag
+- Bug fixed: Improved code block boundary detection to handle TLA+ syntax (`---- MODULE ----`)
+- Results: 0 errors, 31 warnings across 20 AsciiDoc files
+- Also completed: task-450 (already done as part of task-447)
+- Iteration: 23
+- Stats: 6 pending, 6 blocked, 112 complete
+- Next: task-440 (blockquotes to admonitions) or task-441 (code block callouts)
 
 ### 2026-01-29 19:25 - COMPLETED task-445: Build and validate AsciiDoc PDF output
 - What: Built full PDF from AsciiDoc sources and validated quality

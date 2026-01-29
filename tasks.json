@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T19:25:00Z",
+  "lastUpdated": "2026-01-29T19:45:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 19:30: Recalculated all task scores using formula: priority + type + blocking_bonus. Fixed 17 score mismatches. Pending priority order: task-447 (860, Kindle setup, blocks 2), task-445 (835, PDF build, blocks 1), task-469 (830, ch16 TOC), task-456 (810, overflow script). Blocked high-value: task-449 (1135, final build, blocks 3). No duplicates found. Stats: 10 pending, 7 blocked, 197 complete.",
@@ -1402,7 +1402,6 @@
         "task-470"
       ],
       "blockedBy": [
-        "task-445",
         "task-448"
       ],
       "createdAt": "2026-01-29T12:19:01.156Z"
@@ -2181,7 +2180,7 @@
       "type": "infra",
       "title": "Create Kindle preview Gemini script (scripts/kindle-review.ts)",
       "description": "Build a script similar to epub-review.ts but for Kindle. Use Kindle Previewer CLI to export screenshots of each chapter on different device sizes (Kindle, Kindle Paperwhite, Kindle Fire). Send to Gemini for analysis of overflow, readability, font rendering.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 380,
       "scoreBreakdown": "high:750 + infra:60 + blocks(1×25):25 = 835",
@@ -2189,7 +2188,9 @@
         "task-451"
       ],
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:33.572Z"
+      "createdAt": "2026-01-29T12:19:33.572Z",
+      "completedAt": "2026-01-29T19:30:00Z",
+      "note": "Completed as part of task-447 (kindle-preview.ts exists with 364 lines)"
     },
     {
       "id": "task-229",
@@ -2223,12 +2224,13 @@
       "type": "infra",
       "title": "Create overflow detection script",
       "description": "Build scripts/detect-overflow.ts that parses AsciiDoc, measures table column content width, code line lengths, and flags potential overflow risks before build. Run as pre-commit hook.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 355,
       "scoreBreakdown": "high:750 + infra:60 = 810",
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:33.572Z"
+      "createdAt": "2026-01-29T12:19:33.572Z",
+      "completedAt": "2026-01-29T19:45:00Z"
     },
     {
       "id": "task-459",
@@ -2713,16 +2715,16 @@
     ]
   },
   "stats": {
-    "pending": 8,
+    "pending": 6,
     "inProgress": 0,
-    "complete": 110,
+    "complete": 112,
     "blocked": 6,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "2aa0f2cce2728c69a86d207dec1efe0221295740",
-    "lastSuccessfulTask": "iteration-21",
-    "lastCheckpoint": "2026-01-29T15:23:31Z",
+    "lastGoodCommit": "01c52e8abf0aa4a0964f17b34c4e1aa587e613ef",
+    "lastSuccessfulTask": "iteration-22",
+    "lastCheckpoint": "2026-01-29T15:26:24Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,
