@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-29T15:20:17.861Z",
+  "lastUpdated": "2026-01-29T19:25:00Z",
   "version": "2.0",
   "description": "Hierarchical task list with subtasks. PRDs preserved for reference.",
   "curatorNotes": "Curation cycle 2026-01-29 19:30: Recalculated all task scores using formula: priority + type + blocking_bonus. Fixed 17 score mismatches. Pending priority order: task-447 (860, Kindle setup, blocks 2), task-445 (835, PDF build, blocks 1), task-469 (830, ch16 TOC), task-456 (810, overflow script). Blocked high-value: task-449 (1135, final build, blocks 3). No duplicates found. Stats: 10 pending, 7 blocked, 197 complete.",
@@ -2165,7 +2165,7 @@
       "type": "infra",
       "title": "Build and validate AsciiDoc PDF output",
       "description": "Run asciidoctor-pdf on book.adoc. Validate all tables render without overflow. Check code blocks, fonts, page breaks. Compare quality to WeasyPrint PDF.",
-      "status": "pending",
+      "status": "complete",
       "priority": "high",
       "score": 380,
       "scoreBreakdown": "high:750 + infra:60 + blocks(1×25):25 = 835",
@@ -2173,7 +2173,8 @@
         "task-449"
       ],
       "blockedBy": [],
-      "createdAt": "2026-01-29T12:19:01.156Z"
+      "createdAt": "2026-01-29T12:19:01.156Z",
+      "completedAt": "2026-01-29T19:25:00Z"
     },
     {
       "id": "task-450",
@@ -2712,16 +2713,16 @@
     ]
   },
   "stats": {
-    "pending": 9,
+    "pending": 8,
     "inProgress": 0,
-    "complete": 109,
+    "complete": 110,
     "blocked": 6,
     "total": 214
   },
   "checkpoints": {
-    "lastGoodCommit": "f5306fced928c19e9ee47b03455963d53f4f19e4",
-    "lastSuccessfulTask": "iteration-20",
-    "lastCheckpoint": "2026-01-29T15:20:17Z",
+    "lastGoodCommit": "2aa0f2cce2728c69a86d207dec1efe0221295740",
+    "lastSuccessfulTask": "iteration-21",
+    "lastCheckpoint": "2026-01-29T15:23:31Z",
     "consecutiveFailures": 0,
     "circuitBreakerTripped": false,
     "failedAttempts": 7,
