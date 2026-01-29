@@ -1,19 +1,18 @@
 # Progress Log
 
-## Current Status (Updated: 2026-01-29 02:00)
-- Phase: COMPLETE - All Tasks Done
-- Active: None - ALL 174 TASKS COMPLETE
-- Last Completed: task-430 (Full Gemini audit - ALL PASS, zero actionable issues)
+## Current Status (Updated: 2026-01-29 12:45)
+- Phase: Chapter 16 Development
+- Active: task-461 (Chapter 16 first draft)
+- Last Completed: task-460 (PRD: Chapter 16 - Building Autonomous Systems)
 - Blockers: None
-- Queue Health: 0 pending, 174 complete (100%)
-- Publishing Readiness: 100% - All visual reviews pass, EPUB publication-ready
-- Next Task: None - ready for publication
-- Publication Target: 2026-01-30 morning
+- Queue Health: 38 pending, 85 complete
+- Publishing Readiness: Ch01-Ch15 complete, adding Ch16 capstone
+- Next Task: task-461 (Write first draft of Chapter 16)
 
 ## Project State Summary
-- PRDs: 15/15 complete (100%) - EM DASHES FIXED ✓
-- Chapter Drafts: 15/15 complete (100%)
-- Chapters Complete: 15/15 (ch01-ch15, 100%) ✓ ALL DONE
+- PRDs: 16/16 complete (100%) - Ch16 PRD added
+- Chapter Drafts: 15/16 complete (94%)
+- Chapters Complete: 15/16 (ch01-ch15, 94%)
 - Code Examples: 15/15 with code (100%) - ALL TESTED ✓
 - Word Count: ~47,300 (target 45,000-57,000, 95% complete)
 - Diagrams: 66/66 created (100%) - ALL COMPLETE ✓
@@ -30,6 +29,18 @@
 - Diagrams: 100% complete (66/66)
 
 ## Recent Activity
+
+### 2026-01-29 12:45 - COMPLETED task-460: PRD for Chapter 16 - Building Autonomous Systems
+- What: Created comprehensive PRD for the capstone chapter documenting how this book was built
+- Sections: RALPH architecture, auto-compacting memory, adversarial review agents, custom skills, meta-engineering mindset
+- Learning Objectives: 6 concrete outcomes covering autonomous loops, memory systems, review agents, custom skills, ROI measurement
+- Diagrams: 6 required (RALPH architecture, task scoring, memory hierarchy, review flow, skill anatomy, compound growth)
+- Exercises: 3 hands-on activities (build RALPH loop, implement task scoring, create review agent)
+- Word Target: 3,500-4,500 words (larger as capstone chapter)
+- Files: prds/ch16.md
+- Outcome: PRD complete, ready for first draft
+- Stats: 38 pending, 85 complete
+- Next: task-461 (Write first draft)
 
 ### 2026-01-29 02:00 - COMPLETED task-430: Full Gemini Audit with Manual Verification
 - What: Full Gemini 2.5 Flash visual review of all 23 XHTML files + comprehensive Playwright programmatic verification
